@@ -1,21 +1,20 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ApartmentService } from '../../../_services/apartments/apartment.service'
+import { ApartmentService } from '../../../_services/apartments/apartment.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
-import { DomSanitizer } from "@angular/platform-browser";
+import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';
 import * as FileSaver from 'file-saver';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-apartment-details',
   templateUrl: './apartment-details.component.html',
   styleUrls: ['./apartment-details.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
-
 export class ApartmentDetailsComponent implements OnInit {
-
   /** showSide */
   showSide: string = '';
   /** value */
@@ -29,9 +28,14 @@ export class ApartmentDetailsComponent implements OnInit {
   /** apt_UUID */
   apt_UUID: any;
 
-  constructor(public _ApartmentService: ApartmentService, public _ActivatedRoute: ActivatedRoute,private messageService: MessageService,
-    public _OnwerService :OnwerService,private sanitizer: DomSanitizer,public router: Router)
-   {
+  constructor(
+    public _ApartmentService: ApartmentService,
+    public _ActivatedRoute: ActivatedRoute,
+    private messageService: MessageService,
+    public _OnwerService: OnwerService,
+    private sanitizer: DomSanitizer,
+    public router: Router
+  ) {
     this.apt_UUID = _ActivatedRoute.snapshot.paramMap.get('id');
   }
 
@@ -41,104 +45,105 @@ export class ApartmentDetailsComponent implements OnInit {
     this.scrollTop();
     this.checkRole();
   }
-  ApartmentsRole:any
-  is_Super:any
-  checkRole(){
-    const data = localStorage.getItem("user");
-     if (data !== null) {
-
+  ApartmentsRole: any;
+  is_Super: any;
+  checkRole() {
+    const data = localStorage.getItem('user');
+    if (data !== null) {
       let parsedData = JSON.parse(data);
-       this.is_Super=parsedData.is_Super
-      if(parsedData.is_Super==false) {
-  for(let i=0; i<parsedData.permissions.length;i++){
-    if(parsedData.permissions[i].page_Name=="Apartments"){
-      this.ApartmentsRole=parsedData.permissions[i];
+      this.is_Super = parsedData.is_Super;
+      if (parsedData.is_Super == false) {
+        for (let i = 0; i < parsedData.permissions.length; i++) {
+          if (parsedData.permissions[i].page_Name == 'Apartments') {
+            this.ApartmentsRole = parsedData.permissions[i];
+          }
+        }
+        if (this.ApartmentsRole.p_View == false && this.is_Super == false) {
+          this.gotopage();
+        }
+      }
     }
   }
-  if(this.ApartmentsRole.p_View==false &&this.is_Super==false) {
-    this.gotopage( )
-  }
-}
-
-
-    }
-  }
-  gotopage( ){
-    let url: string = "unlegal";
-      this.router.navigateByUrl(url);
+  gotopage() {
+    let url: string = 'unlegal';
+    this.router.navigateByUrl(url);
   }
   /**
    * getApartmentDetails
    */
-  trasponrts:any=[]
-  roomsBedRoom:any=[]
-  roomsLiving:any=[]
-  roomsLivingTool:any=[]
-  roomsBedRoomTool:any=[]
-   OwnerDtail:any
-  rent_Rules:any
-  features:any
-  facilities:any
-  contract_Main:any
-  bath_Room:any
-  backup_Info:any
-  kitchen_Tools:any=[]
+  trasponrts: any = [];
+  roomsBedRoom: any = [];
+  roomsLiving: any = [];
+  roomsLivingTool: any = [];
+  roomsBedRoomTool: any = [];
+  OwnerDtail: any;
+  rent_Rules: any;
+  features: any;
+  facilities: any;
+  contract_Main: any;
+  bath_Room: any;
+  backup_Info: any;
+  kitchen_Tools: any = [];
+  tenant: any;
 
   getApartmentDetails() {
     this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
-      this._OnwerService.getOwner(res.general_Info["apt_Owner"]).subscribe((res) => {
-        this.OwnerDtail=res ;
-      })
-      this.aprt_details = res.general_Info
-      this.trasponrts=res.trasponrts
-      this.rent_Rules=res.rent_Rules
-      this.features=res.features
-      this.facilities=res.facilities
-      this.contract_Main=res.contract_Main
-      this.bath_Room=res.bath_Room
-      this.backup_Info=res.backup_Info
-      this.center={
-        lat: this.aprt_details["apt_Lat"],
-        lng: this.aprt_details["apt_Long"]
-      }
-      this.kitchen_Tools=res.kitchen_Tools
-
-       this.transform(res.general_Info["apt_VideoLink"])
-      for(let i=0;i<res.rooms.length;i++){
-        if(res.rooms[i].room_Type=="Bedroom"){
-          this.roomsBedRoom.push(res.rooms[i])
-         }else{
-          this.roomsLiving.push(res.rooms[i])
-
+      this._OnwerService
+        .getOwner(res.general_Info['apt_Owner'])
+        .subscribe((res) => {
+          this.OwnerDtail = res;
+        });
+      this.aprt_details = res.general_Info;
+      this.trasponrts = res.trasponrts;
+      this.rent_Rules = res.rent_Rules;
+      this.features = res.features;
+      this.facilities = res.facilities;
+      this.contract_Main = res.contract_Main;
+      this.bath_Room = res.bath_Room;
+      this.backup_Info = res.backup_Info;
+      this.center = {
+        lat: this.aprt_details['apt_Lat'],
+        lng: this.aprt_details['apt_Long'],
+      };
+      this.kitchen_Tools = res.kitchen_Tools;
+      this.tenant = res.tenant;
+      this.transform(res.general_Info['apt_VideoLink']);
+      for (let i = 0; i < res.rooms.length; i++) {
+        if (res.rooms[i].room_Type == 'Bedroom') {
+          this.roomsBedRoom.push(res.rooms[i]);
+        } else {
+          this.roomsLiving.push(res.rooms[i]);
         }
       }
-
-
-    })
+    });
+    console.log(this.tenant);
+  }
+  DownloadTenantContract() {
+    let ID = Guid.create();
+    let FileName = ID + '.pdf';
+    this._ApartmentService
+      .CreateContractPDF(this.tenant[0].req_ID)
+      .subscribe((data) => saveAs(data, FileName));
   }
   transform(videoURL: string) {
     let srclink = videoURL;
 
     if (srclink?.startsWith('https://www.youtube.com/watch?v=')) {
-
-      let embedlink = srclink?.replace('watch?v=', 'embed/')
+      let embedlink = srclink?.replace('watch?v=', 'embed/');
       return this.sanitizer.bypassSecurityTrustResourceUrl(embedlink);
-
     } else if (srclink?.startsWith('https://youtu.be')) {
-
-      let embedlink = srclink?.replace('https://youtu.be', 'https://www.youtube.com/embed/')
+      let embedlink = srclink?.replace(
+        'https://youtu.be',
+        'https://www.youtube.com/embed/'
+      );
       return this.sanitizer.bypassSecurityTrustResourceUrl(embedlink);
-
-    }
-    else {
-
+    } else {
       return this.sanitizer.bypassSecurityTrustResourceUrl(srclink);
-
     }
   }
-  transform2(url:any) {
+  transform2(url: any) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-     }
+  }
   /**
    * addItem
    * @param value
@@ -157,84 +162,116 @@ export class ApartmentDetailsComponent implements OnInit {
   }
 
   display1: any;
-  center : any;
+  center: any;
   zoom = 10;
   moveMap(event: google.maps.MapMouseEvent) {
-
-      if (event.latLng != null) this.display1 = (event.latLng.toJSON());
-      this.center.lat=this.display1.lat
-      this.center.lng=this.display1.lng
-
-
+    if (event.latLng != null) this.display1 = event.latLng.toJSON();
+    this.center.lat = this.display1.lat;
+    this.center.lng = this.display1.lng;
   }
-  imageSize:any
-  viewImage(image:any){
-    this.aprt_details["apt_ThumbImg"]=image;
+  imageSize: any;
+  viewImage(image: any) {
+    this.aprt_details['apt_ThumbImg'] = image;
   }
-  viewimageinModel(image:any){
-    this.display22="block"
-    this.imageSize=image
+  viewimageinModel(image: any) {
+    this.display22 = 'block';
+    this.imageSize = image;
   }
-  display22="none"
+  display22 = 'none';
 
   oncloseModal() {
-this.display22="none"
-
+    this.display22 = 'none';
   }
 
-
-  DownloadFile(path:any) {
-    debugger
-    this._ApartmentService.DownloadFile( path).subscribe((res) => {
-
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' Download   Successfuly'}` });
-
-    }, (error) => {
-      debugger
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: `${error}` });
-    })
+  DownloadFile(path: any) {
+    debugger;
+    this._ApartmentService.DownloadFile(path).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `${' Download   Successfuly'}`,
+        });
+      },
+      (error) => {
+        debugger;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${error}`,
+        });
+      }
+    );
   }
-
 
   MarkRented() {
-    this._ApartmentService.MarkRented( this.apt_UUID).subscribe((res) => {
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Rented Mark Successfuly'}` });
-
-    }, (error) => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-    })
+    this._ApartmentService.MarkRented(this.apt_UUID).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `${'Rented Mark Successfuly'}`,
+        });
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${'error'}`,
+        });
+      }
+    );
   }
   MarkAvaliablePublish() {
-    this._ApartmentService.MarkAvaliablePublish( this.apt_UUID).subscribe((res) => {
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Avaliable Mark Successfuly'}` });
-
-    }, (error) => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-    })
+    this._ApartmentService.MarkAvaliablePublish(this.apt_UUID).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `${'Avaliable Mark Successfuly'}`,
+        });
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${'error'}`,
+        });
+      }
+    );
   }
   MarkDraft() {
-    this._ApartmentService.MarkDraft( this.apt_UUID).subscribe((res) => {
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Draft Mark Successfuly'}` });
-
-    }, (error) => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-    })
+    this._ApartmentService.MarkDraft(this.apt_UUID).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `${'Draft Mark Successfuly'}`,
+        });
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${'error'}`,
+        });
+      }
+    );
   }
-    downloadImage(url:any) {
+  downloadImage(url: any) {
     fetch(url, {
-      mode : 'no-cors',
+      mode: 'no-cors',
     })
-      .then(response => response.blob())
-      .then(blob => {
-      let blobUrl = window.URL.createObjectURL(blob);
-      let a = document.createElement('a');
-      a.download = url.replace(/^.*[\\\/]/, '');
-      a.href = blobUrl;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    })
-
+      .then((response) => response.blob())
+      .then((blob) => {
+        let blobUrl = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.download = url.replace(/^.*[\\\/]/, '');
+        a.href = blobUrl;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
   }
   // download(){
   //   const a = document.createElement('a');
@@ -243,19 +280,14 @@ this.display22="none"
   //   document.body.appendChild(a);
   //   a.click();
   // }
-  DownloadProfilePic(downloadLink:any) {
-
-    FileSaver.saveAs(downloadLink, "image.jpg");
-
+  DownloadProfilePic(downloadLink: any) {
+    FileSaver.saveAs(downloadLink, 'image.jpg');
   }
-  downloadImage2(downloadLink:any) {
-
-
+  downloadImage2(downloadLink: any) {
     const a = document?.createElement('a');
     a.href = window.URL.createObjectURL(downloadLink);
-    a.download = "cc";
+    a.download = 'cc';
     document.body.appendChild(a);
     a.click();
-   }
-
+  }
 }

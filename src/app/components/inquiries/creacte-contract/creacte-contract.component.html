@@ -55,12 +55,12 @@
                 <div class="row">
                     <div class="mb-3 col-12 col-md-6">
                         <label for="exampleInputSecuritydeposit" style="width: 100%;" class="form-label gray fw-bold">Contract start date</label>
-                        <p-calendar  [readonlyInput]="true" [showIcon]="true" [minDate]="mindate" [(ngModel)]="contract_details.rC_StartRent" id="exampleInputSecuritydeposit"></p-calendar>
+                        <p-calendar   [showIcon]="true"  [readonlyInput]="true"  dateFormat="dd/mm/yy" [(ngModel)]="contract_details.rC_StartRent" id="exampleInputSecuritydeposit"></p-calendar>
 
                     </div>
                     <div class="mb-3 col-12 col-md-6">
                         <label class="form-label gray fw-bold" style="width: 100%;">Contract end date</label>
-                        <p-calendar [readonlyInput]="true" [showIcon]="true" [minDate]="mindate" [(ngModel)]="contract_details.rC_EndRent"></p-calendar>
+                        <p-calendar  [showIcon]="true" [readonlyInput]="true"  dateFormat="dd/mm/yy"[(ngModel)]="contract_details.rC_EndRent"></p-calendar>
                     </div>
                 </div>
                 <div>

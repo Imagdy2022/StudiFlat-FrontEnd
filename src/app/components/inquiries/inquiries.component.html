@@ -123,7 +123,7 @@
                             <!--   <img *ngIf="inquire.profileImg" [src]="inquire?.profileImg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;">
                             <img *ngIf="!inquire.profileImg" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{inquire?.userName}}
  -->
-                            <p-chip label="{{inquire?.userName}}" image="{{ inquire.profileImg}}" routerLink="/app-edite-user-details/{{ inquire.user_ID }}"></p-chip>
+                            <p-chip label="{{inquire?.userName}}" image="{{ inquire.profileImg!=null||inquire.profileImg!=''?inquire.profileImg:'../../../assets/images/Frame 1261154899.svg'}}" routerLink="/app-edite-user-details/{{ inquire.user_ID }}"></p-chip>
 
                         </td>
                         <td>
@@ -142,7 +142,7 @@
 
 
                                 <p-tag severity="danger" value="{{inquire?.status}}" [rounded]="true " *ngIf="inquire?.status=='Cancelled'"> </p-tag>
-                                <p-tag severity="danger" value="{{inquire?.status}}" [rounded]="true " *ngIf="inquire?.status=='Canelled'"> </p-tag>
+                                <p-tag severity="danger" value="{{inquire?.status}}" [rounded]="true " *ngIf="inquire?.status=='Rejected'"> </p-tag>
 
                                 <p-tag severity="warning" value="{{inquire?.status}}" [rounded]="true " *ngIf="inquire?.status=='Pending'"> </p-tag>
 

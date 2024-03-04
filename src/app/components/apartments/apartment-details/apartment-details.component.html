@@ -531,18 +531,18 @@
                             <p class="fw-bold m-0">About Tenant</p>
                             <div class="row p-2 mt-2 rounded-3" style="background-color: #f5f6f8">
                                 <div class="col-4">
-                                    <img src="assets/images/apartmentImages/Rectangle 34624164.svg" />
+                                    <img [src]="tenant[0]?.user_Photo!=''?tenant[0]?.user_Photo:'assets/images/apartmentImages/Rectangle 34624164.svg'" />
                                 </div>
                                 <div class="col-8">
-                                    <h6 class="fw-bold mt-2">Mohamed Ahmed</h6>
+                                    <h6 class="fw-bold mt-2">{{ tenant[0]?.user_Name }}</h6>
                                     <div class="mt-4">
                                         <div class="mb-2 d-flex">
                                             <img src="assets/images/apartmentImages/call.svg" />
-                                            <div class="gray ms-2">(+1)0123 1234566</div>
+                                            <div class="gray ms-2">{{ tenant[0]?.mobile_No }}</div>
                                         </div>
                                         <div>
                                             <img src="assets/images/apartmentImages/mail.svg" />
-                                            <span class="gray ms-2">username@mail.com</span>
+                                            <span class="gray ms-2">{{ tenant[0]?.email }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -555,10 +555,10 @@
                             </div>
                             <div class="col-12 col-md-7 d-flex align-items-center">
                                 <div class="mb-3">
-                                    <a class="me-3 cursor" routerLink="/apartments/contract/create-tenant-contract"><img src="assets/images/apartmentImages/edit1.svg" /></a>
-                                    <a class="me-3 cursor" routerLink="/apartments/{{ 'owner-contract' }}"><img src="assets/images/apartmentImages/delete.svg" /></a>
+                                    <!-- <a class="me-3 cursor" routerLink="/apartments/contract/create-tenant-contract"><img src="assets/images/apartmentImages/edit1.svg" /></a> -->
+                                    <a class="me-3 cursor" target="_blank" [href]="tenant[0]?.apt_Contract"><img src="assets/images/apartmentImages/delete.svg" /></a>
                                     <!-- <a class="me-3 cursor" routerLink=""><img src="assets/images/apartmentImages/share.svg" /></a> -->
-                                    <a class="me-3 cursor" routerLink=""><img src="assets/images/apartmentImages/move.svg" /></a>
+                                    <a class="me-3 cursor" (click)="DownloadTenantContract()"><img src="assets/images/apartmentImages/move.svg" /></a>
                                 </div>
                             </div>
                         </div>

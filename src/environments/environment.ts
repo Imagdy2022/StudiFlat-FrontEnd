@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  //apiUrl: 'https://devapi.studiflats.com/api',
-  apiUrl: 'https://localhost:57445/api',
+  apiUrl: 'https://devapi.studiflats.com/api',
+  //apiUrl: 'https://localhost:57445/api',
   firebase: {
     apiKey: 'AIzaSyDgIjUL-Kw0nadAqbZiy9_o0NSYPo_C3vg',
 

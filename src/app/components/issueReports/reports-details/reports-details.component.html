@@ -173,7 +173,7 @@
 
                     <div class="col-12 col-md-6 mb-4" *ngFor="let item of detialIssue.appointement;let i=index">
                         <label class="fw-bold" style="color: #605D62;">appointement ( {{i+1}} ) </label>
-                        <input class="form-control w-100" [(ngModel)]="item.appo_Date+' ' +item.appo_Time " type="text">
+                        <input class="form-control w-100" [ngModel]="item.appo_Date+' ' +item.appo_Time " type="text">
                     </div>
 
 
@@ -200,6 +200,8 @@
                     his document is confidential and intended for the recipient only. Any unauthorized distribution or reproduction is prohibited. his document is confidential and intended for the recipient only. Any unauthorized distribution or reproduction is prohibited.
                     his document is confidential and intended for the recipient only
                 </p>
+
+
                 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" style=" background-color: rgb(23 22 22 / 50%);;">
                   <div class="modal-dialog" role="document">
                       <div class="modal-content" style="    margin-top: 150px;">
@@ -266,6 +268,78 @@
                   <!-- /.modal-dialog -->
               </div>
             </div>
+
+            <!-- Start Solve Desc-->
+            <div id="OtherDetails" style="margin-top:20px" *ngIf="detialIssue.issue_Status=='Completed'">
+              <span class="fw-bold">Fix Report Results</span>
+              <p class="gray">a biref overview about solved the problem</p>
+
+              <div class="row ">
+                <div class="col-12 col-md-3 mb-4">
+                    <label class="fw-bold text-center" style="color: #605D62;">Who will Pay</label>
+                    <input readonly class="form-control w-100 mt-1" [(ngModel)]="detialIssue.costby" type="text">
+
+                    <!-- <input class="form-control w-100" [(ngModel)]="detialIssue.apt_FloorNo" type="number"> -->
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="fw-bold text-center" style="color: #605D62">Worker Cost</label>
+                    <input readonly class="form-control w-100 mt-1" [(ngModel)]="detialIssue.worker_Cost" type="text">
+
+                    <!-- <input class="form-control w-100" [(ngModel)]="detialIssue.side" type="text"> -->
+                </div>
+                <div class="col-12 col-md-3">
+                  <label class="fw-bold text-center" style="color: #605D62">Items Cost</label>
+                  <input readonly class="form-control w-100 mt-1" [(ngModel)]="detialIssue.item_Cost" type="text">
+
+                  <!-- <input class="form-control w-100" [(ngModel)]="detialIssue.side" type="text"> -->
+              </div>
+              <div class="col-12 col-md-3">
+                <label class="fw-bold text-center" style="color: #605D62">Total Cost</label>
+                <input readonly class="form-control w-100 mt-1" [(ngModel)]="detialIssue.issue_TotalCost" type="text">
+
+                <!-- <input class="form-control w-100" [(ngModel)]="detialIssue.side" type="text"> -->
+            </div>
+            <div class="row mt-2">
+              <div class="col-12">
+                <label class="fw-bold" style="color: #605D62">Fix Description</label>
+
+                <textarea class="border rounded-3 w-100 mt-1 p-2 " rows="5" [(ngModel)]="detialIssue.solve_Desc" style="resize: unset;" placeholder="Enter a description"></textarea>
+
+              </div>
+            <div class="row mt-2" *ngIf="detialIssue.fileType!=null">
+              <label class="fw-bold" style="color: #605D62">Attachments</label>
+              <div class="accordion-body mb-3">
+                <img *ngIf="detialIssue.fileType!='.pdf'" (click)="openmodel(detialIssue.fileUrl)" style="width: 100px;cursor: pointer;" [src]="detialIssue.fileUrl" class="me-2">
+
+            </div>
+            <div class="col-4 rounded-3 ms-3 my-2 py-2" style="border: 1px solid #8fa0b4">
+              <div class="row">
+                <div class="col-2 d-flex justify-content-center">
+                  <img width="48px" *ngIf="detialIssue.fileType=='.pdf'" src="assets/images/pdf-svgrepo-com.svg" />
+                  <img width="48px" *ngIf="detialIssue.fileType!='.pdf'" src="assets/images/jpg-svgrepo-com.svg" />
+
+                </div>
+                <div class="col-8">
+                  <h6>{{ detialIssue.fileName }}</h6>
+                  <span>{{ detialIssue.fileSize }}</span>
+              </div>
+              <div class="col-2 d-flex align-items-center justify-content-center">
+                  <div class="">
+                      <!-- <a class="me-3 cursor" routerLink="/apartments/contract/create-owner-contract"><img src="assets/images/apartmentImages/edit1.svg" /></a> -->
+                      <a class="me-3 cursor" *ngIf="detialIssue?.fileUrl" target="_blank" [href]="detialIssue?.fileUrl"><img width="32px" src="assets/images/download-minimalistic-svgrepo-com.svg" /></a>
+
+                  </div>
+              </div>
+              </div>
+            </div>
+
+            </div>
+            </div>
+            </div>
+
+            </div>
+
+            <!-- End Solve Desc-->
             <!-- </form> -->
         </div>
     </main>
@@ -323,7 +397,7 @@ close
                     <div class="mb-3 col-12 col-md-12">
                         <label class="form-label gray fw-bold"> date</label>
                         <!-- <p-calendar [(ngModel)]="Apointment3"></p-calendar> -->
-                        <p-calendar [(ngModel)]="Apointment3" [showTime]="true" [showSeconds]="true"></p-calendar>
+                        <p-calendar [(ngModel)]="Apointment3" [showTime]="true" dateFormat="dd/mm/yy" [showSeconds]="true"></p-calendar>
 
                     </div>
 
@@ -357,3 +431,5 @@ close
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+

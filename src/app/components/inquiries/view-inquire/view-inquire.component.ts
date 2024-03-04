@@ -85,7 +85,7 @@ export class ViewInquireComponent implements OnInit {
         this.inquire_details = res[0];
         this.selectedContractImg = res[0].contract_Path;
         this.prop_imgs = res[0].apt_Imgs;
-        this.hidepassport = res[0].contract_Created;
+        this.hidepassport = res[0].paid;
       },
       (error) => {
         console.error('Error fetching owners:', error);
@@ -141,6 +141,20 @@ export class ViewInquireComponent implements OnInit {
     this.Reason2 = '';
     this.display2 = 'block';
   }
+  ResignContract() {
+    this._inquiresService.ResginContract(this.param).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: res['status'] == 'Success' ? 'success' : 'error',
+          summary: res['status'],
+          detail: res['message'],
+        });
+      },
+      (error) => {
+        console.log(error.error);
+      }
+    );
+  }
   NewPassportsNotValidation() {
     this._inquiresService
       .NewPassportsNotValidation(this.itemPass.uuid, false, this.Reason)
@@ -152,6 +166,7 @@ export class ViewInquireComponent implements OnInit {
             detail: 'Passport has Marked as UnValid',
           });
           this.display1 = 'none';
+          this.GetRequestDetails();
         },
         (error) => {
           this.messageService.add({
@@ -170,6 +185,7 @@ export class ViewInquireComponent implements OnInit {
           summary: 'Success',
           detail: 'Passport has Marked as Valid',
         });
+        this.GetRequestDetails();
       },
       (error) => {
         this.messageService.add({
@@ -213,10 +229,11 @@ export class ViewInquireComponent implements OnInit {
         this.GetRequestDetails();
       },
       (error) => {
+        console.log(error);
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `error`,
+          detail: `${error.error['message']}`,
         });
       }
     );

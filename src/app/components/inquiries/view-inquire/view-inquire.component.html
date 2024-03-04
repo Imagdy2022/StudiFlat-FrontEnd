@@ -102,7 +102,7 @@
                     </div>
                     <div style="display: flex; align-items: center;" class="w-96 h-16 px-6 py-4 bg-white justify-start items-center gap-3 inline-flex">
 
-                        <img routerLink="/app-edite-user-details/{{inquire_details?.requested_user_ID}}" style="     width: 64px; height: 64px;  border-radius: 50%;cursor: pointer;" class="w-10 h-10 rounded-full" [src]="inquire_details?.requested_By_Img" />
+                        <img routerLink="/app-edite-user-details/{{inquire_details?.requested_user_ID}}" style="     width: 64px; height: 64px;  border-radius: 50%;cursor: pointer;" class="w-10 h-10 rounded-full" [src]="inquire_details?.requested_By_Img!=''?inquire_details?.requested_By_Img:'assets/images/Frame 1261154899.svg'" />
                         <div class="flex-col justify-start items-start inline-flex">
                             <div class="text-zinc-800 text-sm font-semibold font-['Montserrat'] leading-tight">{{ inquire_details?.requested_By }} </div>
                             <div class="text-neutral-400 text-sm font-normal font-['Montserrat'] leading-tight"></div>
@@ -214,7 +214,7 @@
                                         <div class="w-96 p-4 bg-white border-b border-gray-200 justify-start items-center gap-36 inline-flex" *ngIf="hidepassport==false">
                                             <div class="d-flex justify-content-center">
 
-                                                <a [hidden]="item.valid_Passport==false" (click)="onOpenModal1(item)" style="     border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
+                                                <a  (click)="onOpenModal1(item)" style="     border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
                                                   Not Valid
                               </a>
                                                 <button [hidden]="item.valid_Passport==true" (click)="NewPassportsValidation(item)" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
@@ -359,6 +359,9 @@
       </button>
                             <button *ngIf="inquire_details?.contract_Created==true" routerLink="/create-contract/{{param}}" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important;">
          &nbsp;&nbsp;   Edit Contract
+</button>
+<button  (click)="ResignContract()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4 mt-3" style="background-color: #1f4068 !important;">
+  &nbsp;&nbsp;   Re-Sign Contract
 </button>
                         </div>
                     </div>

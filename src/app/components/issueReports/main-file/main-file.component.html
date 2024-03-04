@@ -286,7 +286,7 @@
                     <div class="mb-3 col-12 col-md-12">
                         <label class="form-label gray fw-bold"> date</label>
                         <!-- <p-calendar [(ngModel)]="Apointment3"></p-calendar> -->
-                        <p-calendar [(ngModel)]="Apointment3" [showTime]="true" [showSeconds]="true"></p-calendar>
+                        <p-calendar [(ngModel)]="Apointment3" [showTime]="true" dateFormat="dd/mm/yy" [showSeconds]="true"></p-calendar>
 
                     </div>
 
@@ -344,37 +344,37 @@
                 <div class="row">
 
                     <div class="col-12 col-md-12 mb-4 cards">
-                        <p style="color: #605D62 !important;margin-bottom: 0px;"> who will pay
+                        <p style="color: #605D62 !important;margin-bottom: 0px;"> Who will Pay
                         </p>
 
-                        <input type="radio" name="drone" checked (change)="handleChange2('studiflats')">
+                        <input type="radio" name="drone" checked (change)="handleChange2('StudiFlats')">
 
                         <label class="fw-bold" style="color: #605D62; margin-left: 10px;"> StudiFlats
 
                            </label>
-                        <input type="radio" name="drone" (change)="handleChange2('tenant')">
+                        <input type="radio" name="drone" (change)="handleChange2('Tenant')">
 
                         <label class="fw-bold" style="color: #605D62; margin-left: 10px;"> Tenant
 
                            </label>
-                        <input type="radio" name="drone" (change)="handleChange2('owner')">
+                        <input type="radio" name="drone" (change)="handleChange2('Owner')">
 
                         <label class="fw-bold" style="color: #605D62; margin-left: 10px;"> Owner
 
                               </label>
                     </div>
                     <div class="mb-3 col-12 col-md-12">
-                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">worker cost</label>
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Worker Cost</label>
                         <input type="number" [(ngModel)]="worker_cost" (keyup)="onSearchChange($event)" class="form-control rounded-2 py-2 fs-6" id="exampleInputPricepermonth" />
 
                     </div>
                     <div class="mb-3 col-12 col-md-12">
-                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">item cost</label>
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Item Cost</label>
                         <input type="number" [(ngModel)]="item_Cost" (keyup)="onSearchChange($event)" class="form-control rounded-2 py-2 fs-6" id="exampleInputPricepermonth" />
 
                     </div>
                     <div class="mb-3 col-12 col-md-12">
-                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">total cost</label>
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Total Cost</label>
                         <input type="number" disabled="disabled" [(ngModel)]="Total_cost" class="form-control rounded-2 py-2 fs-6" id="exampleInputPricepermonth" />
 
                     </div>
@@ -383,6 +383,10 @@
                         <textarea class="border p-3 pt-3 rounded-2 w-100" [(ngModel)]="discerption" rows="3" style="resize: inherit"></textarea>
 
                     </div>
+                    <div class="mb-3 col-12 col-md-12">
+                      <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Attachments</label>
+
+                  </div>
                 </div>
 
             </div>

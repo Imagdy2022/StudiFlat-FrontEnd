@@ -1,7 +1,7 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://api.studiflats.com/api',
-  //apiUrl: 'https://localhost:57345/api',
+  production: false,
+
+  apiUrl: 'https://localhost:57345/api',
 
   outputPath: 'dist/Production',
   firebase: {

@@ -52,13 +52,13 @@
                         "production": {
                             "budgets": [{
                                     "type": "initial",
-                                    "maximumWarning": "5mb",
-                                    "maximumError": "5mb"
+                                    "maximumWarning": "1024mb",
+                                    "maximumError": "1024mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "1024kb",
+                                    "maximumError": "1024kb"
                                 }
                             ],
                             "fileReplacements": [{
@@ -68,6 +68,25 @@
                             "outputHashing": "all",
                             "outputPath": "dist/Prod"
                         },
+                        "local": {
+                          "budgets": [{
+                                  "type": "initial",
+                                  "maximumWarning": "1024mb",
+                                  "maximumError": "1024mb"
+                              },
+                              {
+                                  "type": "anyComponentStyle",
+                                  "maximumWarning": "1024kb",
+                                  "maximumError": "1024kb"
+                              }
+                          ],
+                          "fileReplacements": [{
+                              "replace": "src/environments/environment.ts",
+                              "with": "src/environments/environment.local.ts"
+                          }],
+                          "outputHashing": "all",
+                          "outputPath": "dist/local"
+                      },
                         "development": {
                             "buildOptimizer": false,
                             "optimization": false,
@@ -85,6 +104,9 @@
                         "production": {
                             "browserTarget": "StudiFlats:build:production"
                         },
+                        "local": {
+                          "browserTarget": "StudiFlats:build:local"
+                      },
                         "development": {
                             "browserTarget": "StudiFlats:build:development"
                         }

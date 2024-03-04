@@ -4,6 +4,8 @@ import { MessageService } from 'primeng/api';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
+import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
+
 @Component({
   selector: 'app-main-file',
   templateUrl: './main-file.component.html',
@@ -29,6 +31,7 @@ export class MainFileComponent {
   constructor(
     public _adminservices: AdminsService,
     private messageService: MessageService,
+    private uploadService: UploadFileService,
     public router: Router
   ) {}
   totalofPages = 0;
@@ -300,7 +303,7 @@ export class MainFileComponent {
     );
   }
   handleChange(item: any) {
-    this.Apointment = item.appo_Date + item.appo_Time;
+    this.Apointment = item.appo_Date + ' ' + item.appo_Time;
   }
   who_will_pay: any = 'StudiFlats';
   handleChange2(item: any) {
@@ -311,6 +314,8 @@ export class MainFileComponent {
   Total_cost: any = 0;
   discerption: any;
   item_Cost: any = 0;
+  issue_attach: any = '';
+
   MarkAsSolved() {
     this._adminservices
       .MarkAsSolved(
@@ -320,7 +325,8 @@ export class MainFileComponent {
         this.Total_cost,
         this.Company_gain,
         this.discerption,
-        this.item_Cost
+        this.item_Cost,
+        this.issue_attach
       )
       .subscribe(
         (res) => {
@@ -363,5 +369,47 @@ export class MainFileComponent {
     this.search = false;
     this.getAllIssues();
     this.searchText = '';
+  }
+  selectedContractImg: any;
+  afterUploadImage = 'true';
+
+  onUploadContract(event: any, fieldName: string): void {
+    // get the file
+    const file = event.target.files[0];
+    // convert the file to formdata
+    const formData = new FormData();
+    formData.append('fileData', file, file.name);
+    // check if the file has been uploaded
+    if (file) {
+      // call the onUpload function to get the link to the file
+      this.uploadService.uploadSingleFile(formData).subscribe(
+        (img: any) => {
+          console.log('img', img);
+          // create url to preview file
+          file.url = URL.createObjectURL(file);
+          // check wich file uploaded
+          fieldName == 'contract_Path'
+            ? (this.selectedContractImg = file)
+            : null;
+
+          // patch the fieldName in Form
+
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `Attachments has uploaded Successfuly`,
+          });
+
+          this.afterUploadImage = 'true';
+        },
+        (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `Please try again`,
+          });
+        }
+      );
+    }
   }
 }

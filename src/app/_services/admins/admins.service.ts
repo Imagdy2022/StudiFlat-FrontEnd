@@ -232,7 +232,8 @@ export class AdminsService {
     issue_Cost: any,
     company_Gain: any,
     solve_Desc: any,
-    item_Cost: any
+    item_Cost: any,
+    item_attach: any
   ): Observable<any> {
     let body = {
       issue_ID: Issue_ID,
@@ -242,6 +243,7 @@ export class AdminsService {
       worker_Gain: worker_Gain,
       company_Gain: company_Gain,
       solve_Desc: solve_Desc,
+      invoice_URL: item_attach,
     };
 
     const url = environment.apiUrl + '/Issues/MarkAsSolved';
