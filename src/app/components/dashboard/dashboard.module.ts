@@ -7,7 +7,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { KnobModule } from 'primeng/knob';
 import { ToastModule } from 'primeng/toast';
+import { ChartModule } from 'primeng/chart';
 
+import { IgxDoughnutChartModule, IgxRingSeriesModule, IgxLegendModule, IgxItemLegendModule } from "igniteui-angular-charts";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -16,12 +18,15 @@ const routes: Routes = [
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
-    CommonModule,
+    CommonModule,ChartModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
     KnobModule,
-    ToastModule,
+    ToastModule,   IgxDoughnutChartModule,
+    IgxRingSeriesModule,
+    IgxLegendModule,
+    IgxItemLegendModule,
     RouterModule.forChild(routes)
     ],
   exports:[RouterModule],

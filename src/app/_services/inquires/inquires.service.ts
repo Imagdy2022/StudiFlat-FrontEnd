@@ -153,4 +153,13 @@ export class InquiresService {
     const url = environment.apiUrl + '/Requests/CreateAptContract';
     return this.http.post<any>(url, body, { headers: this.headers });
   }
+  GetTerminationDetails(id: any): Observable<any> {
+    const url = environment.apiUrl + '/Termination/GetTerminationDetails?Term_ID=' + id;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+  TerminationApproval(id: any,Approval:any,Reason:any): Observable<any> {
+    const url = environment.apiUrl + '/Termination/TerminationApproval?Term_ID=' + id +'&Approval='+Approval+'&Reason='+Reason;
+    return this.http.put<any>(url,id, { headers: this.headers });
+  }
+ 
 }

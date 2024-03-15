@@ -1,0 +1,164 @@
+<!-- <app-edite-user-details></app-edite-user-details> -->
+<!-- start header  -->
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'termination'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'termination'"></app-sidebar>
+  <!-- end sidebar  -->
+
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10 ">
+      <div class="d-md-flex justify-content-between dashboard mt-2" style="margin-bottom: 24px;">
+          <p class="fw-bold ms-1" style="color: #6c6a6a;color: #6c6a6a;
+          margin-bottom: 0px;
+          margin-top: 9px;
+          text-align: center;
+          align-items: center;
+          display: flex;
+          justify-content: end;">cancelation Inquiries </p>
+          <div class="d-flex justify-content-lg-between ">
+              <div class="d-flex justify-content-between ">
+                
+              </div>
+          
+              <app-dropdown class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
+          </div>
+      </div>
+
+      <p-toast></p-toast>
+      <div class="card mt-2">
+          <div class="d-flex justify-content-between">
+              <!-- length Of person -->
+              <div class="d-flex mx-2 mt-4">
+                  <p class="me-2 fs-5 fw-bold ml-8">cancelation Inquiries</p>
+                  <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
+              {{fullRespone?.totalRecords}} {{pagePerson}}
+          </p> -->
+              </div>
+              <!-- search input -->
+              <div class="d-flex align-items-center mx-2 mt-2 w-50">
+                  <ng-container *ngIf="!search; else searchVisible">
+                      <!-- <i class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true"></i> -->
+                      <img class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true" src="../../../assets/images/search.svg">
+
+                  </ng-container>
+                  <ng-template #searchVisible>
+                      <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
+                      <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
+                  Search
+              </button>
+                  </ng-template>
+              </div>
+          </div>
+          <!-- <p-table #dt [value]="partners" [(selection)]="partners" dataKey="id" [filterDelay]="0" /> -->
+
+          <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="termination">
+              <ng-template pTemplate="header" class="text-center">
+                  <tr *ngIf="headerData">
+                      <ng-container>
+
+
+                          <th class="td-name">
+                            User name
+
+                          </th>
+                          <th class="td-name">
+                            Requested  apartment
+
+                          </th>
+                          <th class="td-name">
+                            Contact number
+
+                          </th>
+                          <th class="td-name">
+                            Time period
+
+                          </th>
+                          <th class="td-name">
+                            Status
+
+                          </th>
+                          
+                          <th class="td-name">
+
+                            actions
+                          </th>
+                      </ng-container>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-termina>
+
+                  <tr (click)="hidecard()">
+
+
+                      <td>
+                          <img *ngIf="termina.user_Photo"  [src]="termina?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;">
+                          <img *ngIf="!termina.user_Photo"   src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">      {{termina?.user_Name}}
+
+                      </td>
+                      <td>
+                          {{termina?.apt_Name}}
+                      </td>
+                      <td>
+                          {{termina?.user_Phone}}
+                      </td>
+
+                      <td>
+                          {{termina?.time_Period}}
+                      </td>
+                      <td>
+                        {{termina?.term_Status}}
+                    </td>
+                    
+
+
+                      <td class="cursor position-relative" style="text-align: center;">
+                          <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,termina.term_ID)">
+        <img src="assets/images/edit.svg">
+    </button>
+                          <div *ngIf="showEdit[termina.term_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+ 
+                              <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/view-cancel/{{termina.term_ID}}" > View Details  </button>
+ 
+                          </div>
+
+                      </td>
+
+                  </tr>
+
+              </ng-template>
+
+
+              <ng-template pTemplate="emptymessage">
+                  <div class="container text-center mt-4">
+                      <p class="mb-0">No data found.</p>
+                  </div>
+              </ng-template>
+
+          </p-table>
+          <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+
+          <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
+        <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
+
+            <button (click)="decreamentPage( )" [disabled]="disableperv" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
+          Previous
+</button>
+        </div>
+        <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{pageNumber}} of {{totalofPages}}</div>
+        <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
+
+            <button [disabled]="disablenext" (click)="   incrementpage( )" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
+              Next
+</button>
+        </div>
+    </div> -->
+      </div>
+  </main>
+  <!-- end content page  -->
+</div>

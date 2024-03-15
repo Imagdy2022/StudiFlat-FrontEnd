@@ -52,6 +52,10 @@ import { AdsComponent } from './components/configurations/ads/ads.component';
 import { FaqqComponent } from './components/configurations/faqq/faqq.component';
 import { AppMsgsComponent } from './components/appmsgs/appmsgs.component';
 import { PushmsgsComponent } from './components/pushmsgs/pushmsgs.component';
+import { CancelInquire2Component } from './components/cancel-inquire2/cancel-inquire2.component';
+ import { ViewCancelComponent } from './components/cancel-inquire2/view-cancel/view-cancel.component';
+import { CheckoutInqqComponent } from './components/checkout-inqq/checkout-inqq.component';
+import { CheckoutDetailsComponent } from './components/checkout-inqq/checkout-details/checkout-details.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
@@ -149,6 +153,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'add-admin', component: AddAdminComponent, canActivate: [AuthGuard] },
+  { path: 'cancel-inquire', component: CancelInquire2Component, canActivate: [AuthGuard] },
+  { path: 'view-inquire/:id', component: ViewInquireComponent, canActivate: [AuthGuard] },
+  { path: 'view-cancel/:id', component: ViewCancelComponent, canActivate: [AuthGuard] },
+
+  { path: 'checkout-inquire', component: CheckoutInqqComponent, canActivate: [AuthGuard] },
+  { path: 'checkout/:id', component: CheckoutDetailsComponent, canActivate: [AuthGuard] },
+
   {
     path: 'edit-admin/:id',
     component: EditAdminComponent,

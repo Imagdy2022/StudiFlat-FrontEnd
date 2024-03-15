@@ -1,0 +1,707 @@
+.active {
+    color: #1f4068 !important;
+    background-color: #fafcff;
+    border-left: 3px solid #1f4068;
+}
+
+.content-details {
+    @media (min-width: 992px) {
+        margin-left: 17%;
+        padding: 0 10% !important;
+    }
+}
+
+.top-icon-input {
+    top: 30px;
+}
+
+.rentedORavailable {
+    background-color: rgb(255 255 255 / 70%);
+    color: #1f4068 !important;
+}
+
+.rented {
+    color: #1f4068 !important;
+}
+
+.available {
+    color: #12b76a !important;
+}
+
+.p-dropdown {
+    width: 100% !important;
+}
+
+.h-124px {
+    height: 124px !important;
+}
+
+.w-145px {
+    width: 145px;
+}
+
+.file {
+    z-index: 3 !important;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.imageOfPerson {
+    height: 180px !important;
+    width: 180px !important;
+    overflow: hidden;
+    @media (max-width: 993px) {
+        height: 150px !important;
+        width: 150px !important;
+        margin: auto !important;
+    }
+}
+
+.delete {
+    margin-left: 10px;
+}
+
+.btn-container {
+    position: relative;
+    display: inline-block;
+    .btn-style {
+        background-color: #1f4068;
+        color: white;
+        border: none;
+        border-radius: 8px;
+    }
+    .sendDataPButton {
+        .p-button {
+            height: 36px !important;
+        }
+    }
+    /* Position the file input to cover the button */
+    input[type="file"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+}
+
+* {
+    font-family: 'Montserrat'
+}
+
+.Price {
+    color: #1F4068;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33.6px;
+    .time {
+        font-size: 16px;
+        line-height: 16px;
+        position: relative;
+        top: -2px;
+    }
+}
+
+.paroductApartment {
+    p {
+        color: #605d62;
+    }
+    .details {
+        border: 1px solid #dfdfdf;
+        max-height: 220px;
+    }
+    .apartmentImage {
+        border-radius: 8px 8px 0px 0px;
+        max-height: 184px;
+    }
+    .Price {
+        color: #1F4068;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 33.6px;
+        .time {
+            font-size: 16px;
+            line-height: 16px;
+            position: relative;
+            top: -2px;
+        }
+    }
+}
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px;
+    position: relative;
+    background-color: #edf4ff;
+    border-radius: 8px;
+}
+
+.frame .label {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Montserrat-SemiBold", Helvetica;
+    font-weight: 600;
+    color: var(--neutralneutral-40);
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.frame .div {
+    display: flex;
+    align-self: stretch;
+    width: 100%;
+    align-items: flex-start;
+    gap: 24px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.frame .div-2 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.frame .input-field {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    align-items: flex-start;
+    gap: 6px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.frame .input-with-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.frame .text-wrapper {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 20px;
+    white-space: nowrap;
+    font-style: normal;
+}
+
+.frame .input {
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+
+.frame .content {
+    display: flex;
+    width: 292px;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    top: 10px;
+}
+
+.frame .text {
+    position: relative;
+    flex: 1;
+    margin-top: -1px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 20px;
+    font-style: normal;
+}
+
+.frame .span {
+    font-weight: 400;
+    color: #313033;
+    letter-spacing: 0px;
+    line-height: 20px;
+    font-style: normal;
+}
+
+.frame .input-field-2 {
+    display: flex;
+    flex-direction: column;
+    height: 156px;
+    align-items: flex-start;
+    gap: 6px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+}
+
+.frame .input-with-label-2 {
+    display: flex;
+    flex-direction: column;
+    height: 156px;
+    align-items: flex-start;
+    gap: 6px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+}
+
+.frame .overlap-group-wrapper {
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    height: 130px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+
+.frame .overlap-group {
+    position: relative;
+    width: 310px;
+    height: 40px;
+    top: 10px;
+}
+
+.frame .div-wrapper {
+    display: flex;
+    width: 310px;
+    height: 40px;
+    align-items: flex-start;
+    gap: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.frame .p {
+    position: relative;
+    width: 314px;
+    margin-top: -1px;
+    margin-bottom: -59px;
+    margin-right: -4px;
+    letter-spacing: 0px;
+    line-height: 20px;
+}
+
+.frame .icon-expand-more {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 286px;
+}
+
+@media (min-width: 768px) {
+    .mnbvcx {
+        margin-left: 128px;
+    }
+}
+.classheadper{
+    width: 100%; height: 48px; justify-content: center; align-items: flex-start; gap: 40px; display: inline-flex
+}
+.caslshead2per{
+    width: 100px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex
+}
+.classper22deatil{
+    
+    justify-content: center; align-items: flex-start; gap: 12px; display: inline-flex
+}
+.bookind{
+    color: #787579; font-size: 14px; font-family: Montserrat; font-weight: 500; text-transform: capitalize; line-height: 20px; word-wrap: break-word
+}
+.bookingIdss{
+    width: 100px; height: 20px; color: #605D62; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 20px; word-wrap: break-word
+}
+.checkinnn{
+    width: 0px; height: 46.50px; border: 1px #CECECE solid
+}
+.checkindate{
+    flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex
+}
+.checkindate22{
+    width: 20px; height: 20px; position: relative
+}
+.imgcheckin{
+    width: 20px; height: 20px; left: 0px; top: 0px; position: absolute;
+}
+.imgcheckinndate{
+    color: #787579; font-size: 14px; font-family: Montserrat; font-weight: 500; text-transform: capitalize; line-height: 20px; word-wrap: break-word
+}
+.frist11 {
+    height: 879px;
+    position: relative;
+    background: white;
+     border-radius: 12px;
+    overflow: hidden
+}
+
+@media print {
+    .xxcprint {
+        margin-top: 0%;
+    }
+    .section33 {
+        float: right;
+        margin-left: 500px;
+    }
+    header {
+        display: none !important
+    }
+    .xprintt {
+        display: none !important
+    }
+    .zswed {
+        display: none !important
+    }
+    .prepheap {
+        margin-left: -150px !important
+    }
+    .pricinn {
+        margin-right: 150px !important
+    }
+}
+
+.ddfdffd {
+    text-align: right;
+    color: #60737D;
+    font-size: 16.50px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+@media (min-width: 768px) {
+    .frist11 {
+         width: 1050px;
+    }
+    .imgginv {
+        gap: 637.74px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section33 {
+        left: 180.24px !important
+    }
+}
+
+.frist22 {
+    width: 1020.24px;
+    height: 300.06px;
+    left: 15.07px;
+    top: 140.97px;
+    position: absolute;
+    background: #EAF0F7;
+    border-radius: 18px;
+    -webkit-border-radius: 18px;
+    -moz-border-radius: 18px;
+    -ms-border-radius: 18px;
+    -o-border-radius: 18px;
+}
+
+.frist33 {
+    width: 862.70px;
+    height: 1.50px;
+    left: 15px;
+    top: 795.01px;
+    position: absolute;
+    background: #F2F5F9;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+
+.frist44 {
+    left: 45.01px;
+    top: 276px;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex
+}
+
+.frist55 {
+    color: #121722;
+    font-size: 21px;
+    font-family: Inter;
+    font-weight: 600;
+    word-wrap: break-word
+}
+
+.frist66 {
+    color: #121722;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.invice1 {
+    left: 45.01px;
+    top: 170.97px;
+    position: absolute;
+    color: #121722;
+    font-size: 30.01px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.invoce2 {
+    left: 45.01px;
+    top: 462.04px;
+    position: absolute
+}
+
+.invoce3 {
+    color: #121722;
+    font-size: 24.01px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.invice4 {
+    color: #121722;
+    font-size: 19.50px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.invice5 {
+    color: #121722;
+    font-size: 18px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.invoce6 {
+    color: #121722;
+    font-size: 19.50px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.price11 {
+    left: 760.68px;
+    top: 465.04px;
+    position: absolute;
+    text-align: right;
+    color: #60737D;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.total22 {
+    left: 934.72px;
+    top: 465.04px;
+    position: absolute;
+    text-align: right;
+    color: #60737D;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.section33 {
+    width: 145px;
+    left: 860.24px;
+    top: 170.97px;
+    position: absolute;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    display: inline-flex
+}
+
+.class33 {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 6px;
+    display: flex
+}
+
+.invoicenu {
+    text-align: right;
+    color: #60737D;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.invocede {
+    text-align: right;
+    color: #121722;
+    font-size: 19.50px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.divclassss {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 18px;
+    display: flex
+}
+
+.ttott {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 3px;
+    display: flex
+}
+
+.issue33 {
+    text-align: right;
+    color: #60737D;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.datedes {
+    text-align: right;
+    color: #121722;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.phonein {
+    text-align: right;
+    color: #484649;
+    font-size: 13.91px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 18.09px;
+    word-wrap: break-word
+}
+
+.prpee {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 4.64px;
+    display: inline-flex
+}
+
+.prepheap {
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 6.96px;
+    display: flex
+}
+
+.imgginv {
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex
+}
+
+.imgheap {
+    left: 25.51px;
+    top: 30.15px;
+    position: absolute;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 637.74px;
+    display: inline-flex
+}
+
+.pricinn {
+    text-align: right;
+    color: #121722;
+    font-size: 24.01px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.ccarddinvice {
+    text-align: right;
+    color: #60737D;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.priceeins {
+    left: 934.72px;
+    top: 531.06px;
+    position: absolute;
+    text-align: right;
+    color: #121722;
+    font-size: 16.50px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+.stackkc {
+    width: 802.69px;
+    height: 19.50px;
+    left: 45.01px;
+    top: 531.06px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex
+}
+
+.stysda {
+    width: 364.59px;
+    height: 60.01px;
+    padding-left: 30.01px;
+    padding-right: 30.01px;
+    left: 670.66px;
+    top: 765px;
+    position: absolute;
+    background: #DEE7F2;
+    border-radius: 18px;
+    justify-content: space-between;
+    align-items: center;
+    display: inline-flex
+}
+.p-datatable-wrapper{
+    min-height: 19rem;
+}
+.diveinvoceder{
+    background-color: #EDF5FF;
+    padding: 25px;
+    border-radius: 13px;
+}

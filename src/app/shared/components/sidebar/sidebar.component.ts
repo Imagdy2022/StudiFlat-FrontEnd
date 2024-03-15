@@ -61,7 +61,9 @@ export class SidebarComponent implements OnInit {
     if(this.router.url=='/admins'||this.router.url=='/roles'){
       this.isFreeze=true
     }
-
+    if(this.router.url=='/inquiries'||this.router.url=='/cancel-inquire'||this.router.url=='/checkout-inquire'){
+      this.isFreeze2=true
+    }
 
    const data = localStorage.getItem("user");
    if (data !== null) {
@@ -155,8 +157,14 @@ for(let i=0; i<this.permissions.length;i++){
     this.color_image = true
   }
   isFreeze: boolean = false;
+  isFreeze2: boolean = false;
+
   setfraze(){
     this.isFreeze=true
+  }
+  
+  setfraze2(){
+    this.isFreeze2=true
   }
   onSubmitModal2(){
     this.authenticationService.logout() ;

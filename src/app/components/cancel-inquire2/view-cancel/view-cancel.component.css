@@ -1,0 +1,83 @@
+.blue {
+    color: #1f4068;
+}
+
+.file {
+    z-index: 3 !important;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.h-124px {
+    height: 124px !important;
+}
+
+* {
+    font-family: 'Montserrat'
+}
+
+.imgPreviewUploader {
+    max-width: 44%;
+}
+
+.uploadedContractBorder {
+    border: 1px solid #235a9e;
+}
+
+.backcancel {
+    border: 1px solid#798CA4 !important;
+    color: #0C1A2A !important;
+}
+
+.file {
+    z-index: 3 !important;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.h-124px {
+    height: 124px !important;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.maxImg {
+    max-width: 178px !important;
+    max-height: 134px !important;
+}
+
+.testimonial-group>.row {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.testimonial-group>.row>.col-md-4 {
+    display: inline-block;
+    float: none;
+}
+
+.vcrr {
+    display: block;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}

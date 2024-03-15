@@ -1,0 +1,425 @@
+<!-- start header  -->
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'booking'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'booking'"></app-sidebar>
+  <!-- end sidebar  -->
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10">
+    <div class="d-md-flex justify-content-between" style="margin-bottom:20px">
+      <div class="d-flex" style="align-items: center;">
+          <p class="fw-bold me-2" style="color: #6c6a6a;margin-bottom: 0px;"><a  style="color: #6c6a6a;"class="removeUnderLine" routerLink="/inquiries">Inquiries </a></p>
+
+          <p class="fw-bold me-2" style="margin-bottom: 0px; color: #605D62;">></p>
+          <p class="fw-bold" style="color: #6c6a6a;margin-bottom: 0px;"routerLink="/checkout-inquire"> Checkout </p>
+          <p class="fw-bold me-2" style="margin-bottom: 0px;color: #605D62;">></p>
+          <p class="fw-bold" style="color: #6c6a6a;margin-bottom: 0px;"routerLink="/checkout-inquire"> check out sheet details </p>
+
+
+      </div>
+      
+  </div>
+
+      <div class="mt-3   bg-white rounded-3 py-3 " style="padding: 35px;">
+          
+
+          <div class=" ">
+               
+              <div class="d-flex mb-5 d-md-block d-flex justify-content-center justify-md-content-start ">
+                  <div style="justify-content: center;" class=" d-md-flex  align-items-center justify-md-content-start ">
+                      <div class="rounded-circle imageOfPerson me-4" style="box-shadow: 0 2px 6px #d1d1d1;">
+                          <img class="imageOfPerson rounded-circle" style="border: 3px solid white;" [src]="CheckoutSheet.user_Img">
+                      </div>
+                      <div class="d-flex mt-4">
+                          <div class="d-flex  justify-content-between ">
+
+                          
+
+                              <!-- <button type="button" class="outline-none border-0 py-2 px-3 rounded-3 delete" *ngIf="titlePage!='Owner details'" (click)="uploadPic('delete')">Delete</button> -->
+                              <!-- <button class="me-3 outline-none border-0 text-white py-2 px-3 rounded-3" *ngIf="titlePage=='Owner details'" style="background-color: #1f4068;">Message</button> -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!--start General info form-->
+              <!-- <form> -->
+              <p-toast></p-toast>
+              <div class="row">
+                  <div class="classheadper">
+                      <div class="caslshead2per">
+                          <div class="classper22deatil">
+                              <div class="bookind">Booking ID</div>
+                          </div>
+                          <div class="bookingIdss">{{CheckoutSheet.req_Code}}</div>
+                      </div>
+                      <div class="checkinnn"></div>
+                      <div   class="checkindate">
+                          <div class="classper22deatil">
+                              <div class="checkindate22">
+                                  <div  class="imgcheckin"> <img src="../../../../assets/images/uiw_date.svg"> </div>
+                              </div>
+                              <div     class="imgcheckinndate">check in date</div>
+                          </div>
+                          <div style="width: 139px; height: 20px; color: #787579; font-size: 16px; font-family: Montserrat; font-weight: 400; line-height: 20px; word-wrap: break-word">{{CheckoutSheet.checkIn_Date}}</div>
+                      </div>
+                      <div class="checkinnn"></div>
+                      <div  class="checkindate">
+                          <div class="classper22deatil">
+                              <div class="checkindate22">
+                                  <div class="imgcheckin"><img src="../../../../assets/images/uiw_date.svg"></div>
+                              </div>
+                              <div   class="imgcheckinndate">check out date</div>
+                          </div>
+                          <div style="width: 139px; height: 20px; color: #787579; font-size: 14px; font-family: Montserrat; font-weight: 500; text-transform: capitalize; line-height: 20px; word-wrap: break-word">{{CheckoutSheet.checkout_Date}}</div>
+                      </div>
+                  </div>
+              </div>
+              <div style="margin-top: 20px;margin-bottom: 20px;   height: 1px; background: #EBEBEB"></div>
+
+<p></p>
+              <div class="  xxcprint" id="MyDIv">
+                <p style="margin-bottom: 0px; font-weight: 500;margin-left: 20px;">Check out sheet details</p>
+                <p style="margin-left: 20px;">check out details </p>
+<br>
+<p style=" font-size: 15px;;margin-left: 20px;">Paid Security Deposit  </p>
+<p style=" margin-left: 20px;font-weight: 800;">{{CheckoutSheet.paid_Secuirty}} €  </p>
+
+    
+            </div>        
+            <div *ngIf="CheckoutSheet.issue_Checkouts>0">
+                <div class="diveinvoceder" *ngFor="let item of CheckoutSheet.issue_Checkouts" >
+                    <div style="color: #605D62;font-weight: 600;">
+                        {{item.issue_Code}}
+                    </div>
+                    <br>
+                    <div style="color: #605D62;font-weight: 500;">
+                        Description of the problem
+                    </div>
+                    <div style="display: flex;">
+                        <div style=" width: 84%;"> 
+                            <p style=" text-wrap: balance; color: #605D62;  ">
+                                {{item.issue_Desc}}
+                            </p></div>
+                        <div>
+                           <p style="color: #605D62;font-weight: 500;"> cost of problem</p>
+                           <p style="color: #000000;font-weight:600; font-size: 15px;"> {{item.issue_Cost}}€ </p>
+    
+                        </div>
+    
+                    </div>
+                </div>   
+            </div>
+           
+            <div style="display: flex;align-items: end; justify-content: end;    margin-bottom: 22px; margin-top: 20px;">
+                <button  (click)="AddnewExpense()"  class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+                    Add  new expense
+            </button>
+            </div> 
+            
+ <div class="card mt-2">
+    <div class="d-flex justify-content-between">
+        <!-- length Of person -->
+        <div class="d-flex mx-2 mt-4">
+            <p class="me-2 fs-5  ml-8" style="font-weight: 500;">Apartment expenses during the rental period</p>
+        
+        </div>
+        
+    </div>
+    <!-- <p-table #dt [value]="partners" [(selection)]="partners" dataKey="id" [filterDelay]="0" /> -->
+
+    <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="CheckoutSheet.expense_Checkouts">
+        <ng-template pTemplate="header" class="text-center">
+            <tr  >
+                <ng-container>
+
+
+                    <th class="td-name">
+                        Expense type
+
+                    </th>
+                    <th class="td-name">
+                        Description of the expenses
+
+                    </th>
+                    <th class="td-name">
+                        Cost of Expense
+
+                    </th>
+                     
+                    <th class="td-name">
+
+                      actions
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-termina>
+
+            <tr (click)="hidecard()">
+
+
+                
+                <td>
+                    {{termina?.expense_Type}}
+                </td>
+                <td>
+                    {{termina?.expense_Desc}}
+                </td>
+
+                <td>
+                    {{termina?.expense_Amount}} €
+                </td>
+               
+              
+
+
+                <td class="cursor position-relative" style="text-align: center;">
+                    <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,termina.expense_ID)">
+  <img src="assets/images/edit.svg">
+</button>
+                    <div *ngIf="showEdit[termina.expense_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+
+                        <button (click)="OpenupdateExpene(termina)" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"  >update expense </button>
+                        <button (click)="DeleteExpene(termina )"class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"  >Delete expense </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </ng-template>
+
+
+        <ng-template pTemplate="emptymessage">
+            <div class="container text-center mt-4">
+                <p class="mb-0">No data found.</p>
+            </div>
+        </ng-template>
+
+    </p-table>
+ 
+     
+</div>   
+             
+
+          </div>
+          <div style="display: block;text-align: end;justify-content: end;    margin-bottom: 22px; margin-top: 20px;">
+             <p style="font-weight: 500;color: #6d6b6b;">The remaining refundable security deposit</p>
+             <p style="    margin-right: 260px;font-weight: 700;font-size: 15px;">{{CheckoutSheet.refunded_Deposit}} € </p>
+         </div> 
+        
+
+        <div style="display: flex;align-items: end;  margin-bottom: 22px; justify-content: space-between;">
+            <a (click)="gotoListCheckOut()" style=" margin-right: 271px !important;cursor: pointer;   border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
+                Cancel
+        </a>
+            <button  (click)="InsertCheckOut()"  class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+                send checkout
+        </button>
+         </div> 
+      </div>
+  </main>
+ </div>
+ <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" style=" background-color: rgb(23 22 22 / 50%);;">
+    <div class="modal-dialog" role="document" style="    max-width: 900px;">
+        <div class="modal-content" style="    margin-top:  50px;">
+            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
+                <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                    <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
+                        Add  new expense
+            </span>
+                </p>
+                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal1()">
+<span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+</button>
+
+
+
+            </div>
+
+            <div class="modal-body">
+
+
+                <div class="row">
+                    <div class="mb-3 col-6 col-md-6">
+                        <label class="fw-bold" style="color: #605D62">Expense type</label>
+                        <input [(ngModel)]="expense_type" class="form-control w-100" type="text">
+                    </div>
+                    <div class="mb-3 col-6 col-md-6">
+                        <label class="fw-bold" style="color: #605D62">Cost of Expense</label>
+                        <input [(ngModel)]="cost_expense" class="form-control w-100" type="number">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-12 col-md-12">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Description of the expenses</label>
+                        <textarea class="border p-3 pt-3 rounded-2 w-100" rows="4" style="resize: inherit" placeholder="please enter reason  " [(ngModel)]="Description_expense"></textarea>
+
+                    </div>
+                  
+                </div>
+
+                <div class="row">
+
+                    <label class="form-label gray fw-bold"> attachments
+          </label>
+                    <div class="position-relative h-124px mb-3">
+
+                        <input type="file" accept=" *" (change)="uploadPic2($event)" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
+                        <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute" width="96%">
+
+                    </div>
+
+                </div>
+
+                <div class="row" *ngIf="urls != null">
+                    <div class="col-md-3 card33">
+                        <a (click)="removeItem()" style="border: none;   margin-bottom: 10px; position: absolute;">
+                            <img class="imageRemove" src="../../../../../../assets/images/delete.svg" width="32px" height="32px;">
+                        </a>
+                        <img [src]="urls" alt="Avatar" style="width:380px;height:205px ; ">
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="modal-footer"style="display: flex; justify-content: space-between;">
+
+                          <a (click)=" onCloseModal1()" style="  cursor: pointer;   border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
+                      Cancel
+        </a>
+                        <button (click)="AddExpense()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+                      confirm
+        </button>
+                  <!-- Confirm -->
+
+            </div>
+
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" style=" background-color: rgb(23 22 22 / 50%);;">
+    <div class="modal-dialog" role="document" style="    max-width: 900px;">
+        <div class="modal-content" style="    margin-top:  50px;">
+            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
+                <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                    <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
+                        Edit new expense
+            </span>
+                </p>
+                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal2()">
+<span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+</button>
+
+
+
+            </div>
+
+            <div class="modal-body">
+
+
+                <div class="row">
+                    <div class="mb-3 col-6 col-md-6">
+                        <label class="fw-bold" style="color: #605D62">Expense type</label>
+                        <input [(ngModel)]="expense_type" class="form-control w-100" type="text">
+                    </div>
+                    <div class="mb-3 col-6 col-md-6">
+                        <label class="fw-bold" style="color: #605D62">Cost of Expense</label>
+                        <input [(ngModel)]="cost_expense" class="form-control w-100" type="number">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-12 col-md-12">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Description of the expenses</label>
+                        <textarea class="border p-3 pt-3 rounded-2 w-100" rows="4" style="resize: inherit" placeholder="please enter reason  " [(ngModel)]="Description_expense"></textarea>
+
+                    </div>
+                  
+                </div>
+
+                <div class="row">
+
+                    <label class="form-label gray fw-bold"> attachments
+          </label>
+                    <div class="position-relative h-124px mb-3">
+
+                        <input type="file" accept=" *" (change)="uploadPic2($event)" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
+                        <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute" width="96%">
+
+                    </div>
+
+                </div>
+
+                <div class="row" *ngIf="urls != null">
+                    <div class="col-md-3 card33">
+                        <a (click)="removeItem()" style="border: none;   margin-bottom: 10px; position: absolute;">
+                            <img class="imageRemove" src="../../../../../../assets/images/delete.svg" width="32px" height="32px;">
+                        </a>
+                        <img [src]="urls" alt="Avatar" style="width:380px;height:205px ; ">
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="modal-footer" style="display: flex; justify-content: space-between;">
+
+                         <a (click)=" onCloseModal2()" style=" cursor: pointer;   border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
+                      Cancel
+        </a>
+                        <button (click)="updateExpene()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+                      confirm
+        </button>
+ 
+            </div>
+
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" style=" background-color: rgb(23 22 22 / 50%);;">
+    <div class="modal-dialog" role="document" style="max-width: 416px;">
+        <div class="modal-content" style="margin-top: 150px;">
+            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;    padding-bottom: 0px;">
+                <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                    <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
+             </span>
+                </p>
+                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal4()">
+  <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+  </button>
+            </div>
+            <div class="modal-body"style="text-align: center;padding-top:0px">
+              <img src="../../../assets/images/confirmm.png">
+  
+   
+    <p style="margin-bottom: 0px;font-weight: 500;" >sent successfully!</p>
+    <p style="margin-bottom: 0px;"><b>check out sheet </b>has been sent successfully</p>
+    <button  (click)="gotoListCheckOut()"  class="rounded-2 text-white rounded-2 border-0 py-2 px-4 " style="background-color: #1f4068 !important ;    margin-top: 15px;
+    margin-bottom: 15px;">
+      ← Back
+  </button>
+            </div>
+  
+        </div>
+     </div>
+   </div>

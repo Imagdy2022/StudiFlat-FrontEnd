@@ -439,6 +439,29 @@ export class AdminsService {
     });
     return this.http.post<any>(url, AttachFile, { headers: headers1 });
   }
+
+  
+
+  
+  
+  AddExpense( data:any): Observable<any> {
+    const url = environment.apiUrl +"/Checkout/AddExpense"
+   
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
+   
+  UpdateExpense( data:any): Observable<any> {
+  const url = environment.apiUrl +"/Checkout/UpdateExpense"
+ 
+  return this.http.put<any>(url, data, { headers: this.headers });
+}
+ 
+ 
+DeleteExpense(Exp_ID: any): Observable<any[]> {
+  const url = environment.apiUrl + '/Checkout/DeleteExpense?Exp_ID='+Exp_ID;
+  const params = new HttpParams().set('Exp_ID', Exp_ID);
+  return this.http.delete<any>(url, { headers: this.headers });
+}
   DeleteAds(Ads_ID: any): Observable<any[]> {
     const url = environment.apiUrl + '/Basics/DeleteAds';
     const params = new HttpParams().set('Ads_ID', Ads_ID);
@@ -604,4 +627,85 @@ export class AdminsService {
     const url = environment.apiUrl + '/PushNotification/MarkAllRead';
     return this.http.put<any>(url, null, { headers: this.headers });
   }
+  
+  GetDashCards(): Observable<any[]> {
+    const url = environment.apiUrl + '/Dashboard/GetDashCards';
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
+   
+MonthlyRevenu(): Observable<any[]> {
+    const url = environment.apiUrl + '/Dashboard/MonthlyRevenu';
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
+  
+
+   
+  
+
+AptRentedFree(): Observable<any[]> {
+    const url = environment.apiUrl + '/Dashboard/AptRentedFree';
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
+  
+  PopularApt(): Observable<any[]> {
+    const url = environment.apiUrl + '/Dashboard/PopularApt';
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
+  
+RecentActivities(): Observable<any[]> {
+    const url = environment.apiUrl + '/Dashboard/RecentActivities';
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
+  GetCheckoutSheetDetails(Req_ID:any): Observable<any[]> {
+    const url = environment.apiUrl + '/Checkout/GetCheckoutSheetDetails?Req_ID='+Req_ID;
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
+    
+  GetTerminations(
+     PageNo: number,
+    PageSize: number,
+    SearchKey: any
+  ): Observable<any[]> {
+    const url = environment.apiUrl + '/Termination/GetTerminations';
+    const params = new HttpParams()
+      .set('PageNo', PageNo)
+      .set('PageSize', PageSize)
+      .set('SearchKey', SearchKey)
+ 
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+
+  
+ 
+  GetCheckoutList(
+    PageNo: number,
+   PageSize: number,
+   SearchKey: any,
+   status:any
+ ): Observable<any[]> {
+   const url = environment.apiUrl + '/Checkout/GetCheckoutList';
+   const params = new HttpParams()
+     .set('PageNo', PageNo)
+     .set('PageSize', PageSize)
+     .set('SearchKey', SearchKey)
+     .set('Status',status)
+
+   return this.http.get<any[]>(url, { headers: this.headers, params: params });
+ }
+ 
+
+ 
+ InsertCheckOut(Req_ID: any ): Observable<any> {
+  const url = environment.apiUrl + '/Checkout/InsertCheckOut?Req_ID='+Req_ID;
+  let body = {
+    Req_ID: Req_ID,
+  };
+  return this.http.post<any>(url, body, { headers: this.headers });
+}
 }

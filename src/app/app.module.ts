@@ -16,6 +16,8 @@ import { RolesModule } from './components/roles/roles.module';
 import { WorkersModule } from './components/workers/workers.module';
 
 import { AuthorizationModule } from './components/authorization/authorization.module';
+import { CancelInquire2Module } from './components/cancel-inquire2/cancel-inquire2.module';
+import { CheckoutInqqModule } from './components/checkout-inqq/checkout-inqq.module';
 
 import { OwnersModule } from './components/owners/owners.module';
 import { InquiriesModule } from './components/inquiries/inquiries.module';
@@ -36,6 +38,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { BlockUIHttpModule } from 'ng-block-ui/http';
 import { PushmsgsModule } from './components/pushmsgs/pushmsgs.module';
 import { BadgeModule } from 'primeng/badge';
+import { ChartModule } from 'primeng/chart';
 
 import { environment } from 'src/environments/environment';
 import { initializeApp } from 'firebase/app';
@@ -55,8 +58,9 @@ initializeApp(environment.firebase);
     AppRoutingModule,
     IssuReportsModule,
     ConfigurationsModule,
-    BrowserModule,
+    BrowserModule,CheckoutInqqModule,
     AuthorizationModule,
+    CancelInquire2Module,
     AdminsModule,
     UnlegalModule,
     AdsModule,
@@ -80,7 +84,7 @@ initializeApp(environment.firebase);
     GoogleMapsModule,
     BadgeModule,
     FontAwesomeModule,
-    AppMsgsModule,
+    AppMsgsModule,ChartModule,
     PushmsgsModule,
     BlockUIModule.forRoot({
       delayStart: 1,

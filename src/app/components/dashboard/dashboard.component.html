@@ -29,9 +29,63 @@
     <!-- start part 2 in page  -->
     <div class="mt-3 row ">
       <!-- start total details cards -->
-      <app-total-detail-dashboard class="col-12 col-md-6 col-lg-3"
-      *ngFor="let item of [0, 1, 2, 3]"></app-total-detail-dashboard>
-
+      <!-- <app-total-detail-dashboard class="col-12 col-md-6 col-lg-3"
+      *ngFor="let item of [0, 1, 2, 3]"></app-total-detail-dashboard> -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="total-detals">
+          <div class="d-flex">
+              <div class=" image-size"><img class="w-100 h-100 " src="../../../assets/images/users.svg"/></div>
+              <span class="mx-3 mt-2 fw-bold">Total Tenets</span>
+          </div>
+          <div>
+              <h3 class="my-2">   {{DashCards.total_Tenants}}</h3>
+              <div>
+                  <i class="fa fa-arrow-down red" *ngIf="DashCards.tentant_Up==false" aria-hidden="true"></i>
+                  <i class="fa fa-arrow-up green" *ngIf="DashCards.tentant_Up==true" aria-hidden="true"></i>
+                  <span class="ms-1 fw-bold" [class.red]="DashCards.tentant_Up==false" [class.green]="DashCards.tentant_Up==true"
+                  >{{DashCards.tenant_Perc}}%</span>
+                  <span class="mx-3">vs last month</span>
+              </div>
+          </div>
+      </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="total-detals">
+          <div class="d-flex">
+              <div class="  image-size"><img class="w-100 h-100 " src="../../../assets/images/apartment.svg"/></div>
+              <span class="mx-3 mt-2 fw-bold">Total Apartments</span>
+          </div>
+          <div>
+              <h3 class="my-2">   {{DashCards.total_Apartments}}</h3>
+              <div>
+                  <i class="fa fa-arrow-down red" *ngIf="DashCards.apartment_Up==false" aria-hidden="true"></i>
+                  <i class="fa fa-arrow-up green" *ngIf="DashCards.apartment_Up==true" aria-hidden="true"></i>
+                  <span class="ms-1 fw-bold" [class.red]="DashCards.apartment_Up==false" [class.green]="DashCards.apartment_Up==true"
+                  >{{DashCards.apartments_Perc}}%</span>
+                  <span class="mx-3">vs last month</span>
+              </div>
+          </div>
+      </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="total-detals">
+          <div class="d-flex">
+              <div class=" image-size"><img class="w-100 h-100 " src="../../../assets/images/reports.svg"></div>
+              <span class="mx-3 mt-2 fw-bold">Total Report Issues
+               </span>
+          </div>
+          <div>
+              <h3 class="my-2">   {{DashCards.total_Issues}}</h3>
+              <div>
+                  <i class="fa fa-arrow-down red" *ngIf="DashCards.issues_Up==false" aria-hidden="true"></i>
+                  <i class="fa fa-arrow-up green" *ngIf="DashCards.issues_Up==true" aria-hidden="true"></i>
+                  <span class="ms-1 fw-bold" [class.red]="DashCards.issues_Up==false" [class.green]="DashCards.issues_Up==true"
+                  >{{DashCards.issues_Perc}}%</span>
+                  <span class="mx-3">vs last month</span>
+              </div>
+          </div>
+      </div>
+      </div>
       <!-- end total details cards -->
     </div>
     <!-- end part 2 in page  -->
@@ -41,20 +95,33 @@
       <div class="p-3 table-abrtment  me-lg-4 rounded" >
         <div class="d-md-flex justify-content-md-between">
           <p class="fw-bold fs-16">Popular Apartments</p>
-          <app-dropdown  [list]="listDropDown" (selected)="selectedfromDropDownPopularApartments($event)"></app-dropdown>
+          <!-- <app-dropdown  [list]="listDropDown" (selected)="selectedfromDropDownPopularApartments($event)"></app-dropdown> -->
         </div>
-
+        <div  >
+          <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+      </div>
       </div>
       <!-- end Popular Apartments diagram  -->
 
       <!-- start Apartments Rented & Free diagram -->
       <div class=" p-3 recentActivity rounded">
-        <div class="d-flex justify-content-between ">
+        <!-- <div class="d-flex justify-content-between ">
           <p class="PopularApartments mt-0 w-25 fs-1rem fw-bold">Apartments Rented & Free</p>
           <app-dropdown  [list]="listDropDown" (selected)="selectedfromDropDownApartmentsRentedFree($event)"></app-dropdown>
-        </div>
+        </div> -->
         <div class="text-center">
-          <p-knob [(ngModel)]="apartmentsRentedDial" valueColor="#12B76A" [size]="150" rangeColor="#1F4068"></p-knob>
+          
+<div class="card  flex justify-content-center" style=" box-shadow: none;width: 80%;">
+  <p-chart type="doughnut" [data]="dataChart" [options]="options"></p-chart>
+
+  <div style="position: relative;margin-top: -140px;
+  ">
+    <p >Total  Apartments</p>
+    <h3  >{{AptRented.apt_Total}}</h3>
+  </div>
+
+ </div>
+          <!-- <p-knob [(ngModel)]="apartmentsRentedDial" valueColor="#12B76A" [size]="150" rangeColor="#1F4068"></p-knob> -->
         </div>
       </div>
       <!-- end Apartments Rented & Free diagram -->
@@ -66,29 +133,27 @@
       <div class="p-3 table-abrtment me-lg-4 rounded" style="overflow: overlay;">
         <div class="d-md-flex justify-content-between">
           <p class="fw-bold fs-16">Popular Apartments</p>
-          <app-dropdown  [list]="listDropDown" (selected)="selectedfromDropDownPopularApartmentstable($event)"></app-dropdown>
+          <!-- <app-dropdown  [list]="listDropDown" (selected)="selectedfromDropDownPopularApartmentstable($event)"></app-dropdown> -->
         </div>
-        <table class="table table-hover mt-2">
+        <table class="table  mt-2" style="height: 386px;overflow-y: scroll;display: block">
           <thead>
             <tr >
               <th  scope="col" style="font-size: .9rem;" *ngFor="let datahead of headTableList">{{datahead}}</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of rowDatalist">
+            <tr *ngFor="let data of PopularAptarr">
               <th scope="row" class="d-md-flex ">
-                <img [src]="data.img" class="me-3" />
-                <div>
-                  <h5 class="pf fw-bold mb-0">{{data.name}}</h5>
-                  <p class="color-gray mb-0 pf">{{data.title}}</p>
-                </div>
-              </th>
-              <td class="color-gray" style="width: 10px;">{{data.location}}</td>
-              <td class="color-gray">{{data.admin}}</td>
-              <td class="color-gray">{{data.amount}}</td>
+                <img style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;" [src]="data.apt_Img" class="me-3" />
+                {{data.apt_Name}} 
+                 
+               </th>
+              <td class="color-gray" style="width: 10px;">{{data.apt_Location}}</td>
+              <td class="color-gray"> €{{data.owner}}</td>
+              <td class="color-gray">{{data.apt_Price}}</td>
               <td><span class="rented rounded-5 px-2 py-1">{{data.status}}</span></td>
             </tr>
-
+             
           </tbody>
         </table>
       </div>
@@ -98,26 +163,26 @@
       <div class=" p-3 recentActivity rounded">
         <div class="d-flex justify-content-between mt-1">
           <p class="PopularApartments mt-2 fw-bold">Recent Activities</p>
-          <button class="month rounded px-3 py-1 blue viewAll-button">View All</button>
+          <!-- <button class="month rounded px-3 py-1 blue viewAll-button">View All</button> -->
         </div>
-        <table class="table">
+        <table class="table"style="height: 386px;overflow-y: scroll;display: block">
           <tbody>
-            <tr *ngFor="let data of RecentActivitiesList">
+            <tr *ngFor="let data of RecentActivitiesarr">
               <th scope="row" class="d-flex justify-content-between">
                 <div class="d-flex ">
-                  <img [src]="data.img" class="me-3" />
+                  <img  style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;"[src]="data.userImg" class="me-3" />
                   <div class="ml-3 d-flex justify-content-between">
                     <div>
-                      <p class="color-gray fs-12">{{data.status}}</p>
-                      <p class="line-height fw-bold">{{data.name}}</p>
+                      <p class="color-gray fs-12">{{data.act_Type}}</p>
+                      <p class="line-height fw-bold">{{data.userName}}</p>
                       <p class="color-gray fs-12">
                         <img src="../../../assets/images/tick_done.svg" alt="" srcset="">
-                        {{data.message}}
+                        {{data.act_Desc}}
                       </p>
                     </div>
                   </div>
                 </div>
-                <p class="color-gray fs-12">10:44PM</p>
+                <p class="color-gray fs-12">{{data.act_Date}}</p>
               </th>
 
 
