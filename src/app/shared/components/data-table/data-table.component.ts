@@ -35,7 +35,8 @@ export class DataTableComponent {
   searchText: string = '';
   /**dropdownOption */
   dropdownOption: Array<any> = [];
-
+  disablenext = false;
+  disableperv = false;
 
 
   constructor(public confirmationService: ConfirmationService) { }
@@ -154,6 +155,9 @@ export class DataTableComponent {
    */
   private deleteItem(product: string): void {
     this.deleteItemDetails.emit(product);
+  }
+  onCheckboxChange(e:any){
+
   }
 
 }
