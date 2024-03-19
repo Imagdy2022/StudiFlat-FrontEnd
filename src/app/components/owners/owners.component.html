@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="text-center">
-            <p-progressSpinner *ngIf="spinner == false"></p-progressSpinner>
+            <!-- <p-progressSpinner *ngIf="spinner == false"></p-progressSpinner> -->
 
             <app-data-table *ngIf="products && spinner != false" [fullRespone]="fullRespone" [pagePerson]="'Owners'" [selectedProducts]="selectedProducts" [headerData]="headerData" (searchTextChange)="searchInOwner($event)" (onPageChange)="updateDataPerPage($event)"
                 [products]="products" (deleteItemDetails)="deleteOwner($event)"></app-data-table>
