@@ -225,4 +225,10 @@ export class UserComponent {
     this.getAllTenants();
     this.searchText = '';
   }
+  selectAll(e:any){
+
+  }
+  onCheckboxChange(e:any){
+
+  }
 }
