@@ -1,11 +1,12 @@
 
+.month{
+  background-color: #1F4068;
+  padding: 5px 10px;
+}
+
 .week,.today , .filter {
   color: #605D62;
   border: 1px solid #ebebeb;
-  padding: 5px 10px;
-}
-.month{
-  background-color: #1F4068;
   padding: 5px 10px;
 }
 
@@ -54,13 +55,6 @@ th {
     .cvvvvvvv {
         margin-right: -898px;
     }
-}
-
-.month,
-.week {
-    color: #757a82;
-    background-color: white;
-    border: 1px solid #ebebeb;
 }
 
 @media (min-width: 768px) {
