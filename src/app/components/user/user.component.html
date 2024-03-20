@@ -88,10 +88,12 @@
                             </th>
                             <th class="td-name">
                                 Number of Rented
+                                <img src="./assets/images/arrow_downward.svg" alt="">
 
                             </th>
                             <th class="td-name">
                                 Behaviour
+                                <img src="./assets/images/arrow_downward.svg" alt="">
 
                             </th>
                             <!-- <th class="td-name">
@@ -114,7 +116,7 @@
                             <img *ngIf=" Tenant.user_Photo  " routerLink="/app-edite-user-details/{{Tenant.user_ID}}" [src]="Tenant?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
 
 
-                            <img *ngIf="!Tenant.user_Photo" routerLink="/app-edite-user-details/{{Tenant.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">                            {{Tenant?.user_Name}}
+                            <img *ngIf="!Tenant.user_Photo" routerLink="/app-edite-user-details/{{Tenant.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{Tenant?.user_Name}}
 
                         </td>
                         <td>

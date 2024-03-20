@@ -14,15 +14,18 @@
     <main class="p-4 col-lg-10">
         <div class="d-md-flex justify-content-between dashboard">
             <p class="fw-bold" style="color: #6c6a6a;">Issue Reports</p>
-            <div class="d-md-flex justify-content-lg-between  ">
-                <!-- <div class="d-flex mb-2 me-3">
-                    <button class="month rounded-start px-3 py-2 text-white border-0 outline-none">This Month</button>
-                    <button class="week rounded-end px-3 py-2 outline-none bg-white">Last Week</button>
-                </div> -->
-                <!-- start dropdown button  -->
-                <app-dropdown class="" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-                <!-- end dropdown button  -->
+            <div class="d-flex justify-content-lg-between  ">
+              <!-- <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
+              <div class="d-flex mb-2 me-3">
+                <button class="month rounded-start px-3 py-2 text-white border-0 outline-none">This Month</button>
+                <button class="week px-3 py-2 outline-none bg-white">Last Week</button>
+                <button class="today rounded-end px-3 py-2 outline-none bg-white">Today</button>
             </div>
+
+            <button class="filter rounded-3 px-3 py-0 outline-none bg-white  mb-2">
+             <img src="./assets/images/filter.svg" alt="">
+              Filter</button>
+          </div>
         </div>
 
         <p-toast></p-toast>
@@ -74,6 +77,7 @@
 
 
                             <th class="td-name">
+                              <input type="checkbox" class="mx-2" name="selectedContent" />
                                 Report ID
 
                             </th>
@@ -87,6 +91,7 @@
                             </th>
                             <th class="td-name">
                                 Date Reported
+                                <img src="./assets/images/arrow_downward.svg" alt="">
 
                             </th>
                             <th class="td-name">
@@ -95,11 +100,11 @@
                             </th>
                             <th class="td-name">
                                 Status
+                                <img src="./assets/images/arrow_downward.svg" alt="">
 
                             </th>
                             <th class="td-name">
 
-                                Operations
                             </th>
                         </ng-container>
                     </tr>
@@ -109,17 +114,16 @@
                     <tr style="cursor: pointer;" (click)="hidecard()">
 
 
-                        <td routerLink="/Report-view/{{issue.issue_ID}}">
+                        <td class="d-flex align-items-center" routerLink="/Report-view/{{issue.issue_ID}}">
+                          <input type="checkbox" id="selectedContent-{{ issue.user_ID}}" value="{{ issue.user_ID }}"
+                          name="selectedContent" (change)="onCheckboxChange($event)" class="mx-3"/>
                             {{issue?.issue_Code}}
                         </td>
-                        <td routerLink="/app-edite-user-details/{{issue?.user_ID}}">
-
-                            <p-chip label="{{ issue?.requsted_By }}" image="{{  issue?.user_Img}}"></p-chip>
-
-
-
+                        <td>
+                          {{issue?.requsted_By }}
 
                         </td>
+
                         <td>
                             {{issue?.apartment_Number}}
                         </td>
@@ -127,21 +131,37 @@
                         <td>
                             {{issue?.date_Reported | date:'medium' }}
                         </td>
-                        <td>
+                        <td style="width: 15vw;">
                             {{issue?.desc}}
                         </td>
-                        <td>
-                            <p-tag severity="info" *ngIf="issue?.issue_Status=='InProgress'" value="InProgress" [rounded]="true"></p-tag>
-                            <p-tag severity="success" *ngIf="issue?.issue_Status=='Completed'" value="Completed" [rounded]="true"></p-tag>
-                            <p-tag severity="warning" *ngIf="issue?.issue_Status=='Pending'" value="Pending" [rounded]="true"></p-tag>
-                            <p-tag severity="danger" *ngIf="issue?.issue_Status=='Cancelled'" value="Cancelled" [rounded]="true"></p-tag>
-
-
-
-
-
-
-                        </td>
+                        <td class="text-center">
+                          <div>
+                              <span class="rounded-5 px-3 badge Pending" *ngIf="issue?.issue_Status=='Pending'">
+                                {{issue?.issue_Status}}
+                                <span>
+                                  <img src="assets/images/greenArrow.svg" alt="">
+                                </span>
+                            </span>
+                            <span class="rounded-5 px-3 badge Cancelled" *ngIf="issue?.issue_Status=='Cancelled'">
+                              {{issue?.issue_Status}}
+                              <span>
+                                <img src="assets/images/redDot.svg" alt="">
+                              </span>
+                          </span>
+                          <span class="rounded-5 px-3 badge Completed"  *ngIf="issue?.issue_Status=='Completed'">
+                            {{issue?.issue_Status}}
+                            <span>
+                              <img src="assets/images/purbleArrow.svg" alt="">
+                            </span>
+                        </span>
+                      <span class="rounded-5 px-3  badge InProgress"  *ngIf="issue?.issue_Status=='InProgress'">
+                        {{issue?.issue_Status}}
+                        <span>
+                          <img src="assets/images/blueArrow.svg" alt="">
+                        </span>
+                    </span>
+                          </div>
+                      </td>
 
 
                         <td class="cursor position-relative" style="text-align: center;">

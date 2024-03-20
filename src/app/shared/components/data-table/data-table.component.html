@@ -63,6 +63,7 @@
                 <td *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'">{{product.gender}}</td> -->
                 <td *ngIf="pagePerson=='Owners'">{{product.owner_About}}</td>
+                <td *ngIf="pagePerson=='Owners'">{{product.owner_Status}}</td>
                 <td *ngIf="pagePerson=='Owners' " class="cursor position-relative">
                     <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,product.owner_ID)">
                   <img src="assets/images/edit.svg">

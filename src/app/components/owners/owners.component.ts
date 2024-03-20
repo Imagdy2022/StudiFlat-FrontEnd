@@ -149,6 +149,7 @@ export class OwnersComponent implements OnInit {
       { Name: 'Phone Number', SortableColumn: 'owner_Phone', sortIcon: true },
       // { Name: 'Gender', SortableColumn: 'gender', sortIcon: false },
       { Name: 'About', SortableColumn: 'owner_About', sortIcon: false },
+      { Name: 'Status', SortableColumn: 'owner_Status', sortIcon: false },
       { Name: ' ', SortableColumn: ' ', sortIcon: false },
 
 

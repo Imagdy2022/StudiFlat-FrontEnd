@@ -412,4 +412,7 @@ export class MainFileComponent {
       );
     }
   }
+  onCheckboxChange(e:any){
+    
+  }
 }

@@ -9,7 +9,7 @@
     text-align: center;
     color: #1019c6 !important;
     font-size: 16px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 500;
     line-height: 20px;
     word-wrap: break-word;
@@ -37,5 +37,5 @@ th {
 }
 
 * {
-    font-family: 'Montserrat'
+    font-family: 'Poppins'
 }

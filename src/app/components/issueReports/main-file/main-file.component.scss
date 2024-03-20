@@ -1,26 +1,25 @@
-.week {
-    color: #757a82;
-    border: 1px solid #ebebeb;
-}
 
-.month {
-    background-color: #1F4068;
+.week,.today , .filter {
+  color: #605D62;
+  border: 1px solid #ebebeb;
+  padding: 5px 10px;
 }
-
-.month,
-.week {
-    padding: 5px 10px;
+.month{
+  background-color: #1F4068;
+  padding: 5px 10px;
 }
 
 td {
     font-size: 14px !important;
     padding: 1.5rem .6rem !important;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
 }
 
 th {
     font-size: 14px !important;
-    font-family: 'Montserrat'
+    font-family: 'Poppins';
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
 }
 
 .cardss {
@@ -142,4 +141,53 @@ th {
 
 .p-fileupload-buttonbar .p-button {
     margin-bottom: 10px !important;
+}
+
+.badge{
+  font-size: 13px ;
+  padding: 4px 8px;
+  font-weight: 500;
+}
+.Pending {
+    color: #027A48;
+    background-color: #ECFDF3;
+}
+.Completed {
+    color: #DB00FF;
+    background-color: #FCEAFF
+}
+.InProgress {
+  color: #1F4068;
+  background-color: #D2D9E1
+}
+.Cancelled {
+  color: #EF2011;
+  background-color: #FCEEEE;
+}
+input[type="checkbox"]:after {
+  width: 16px;
+  height: 16px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  border-radius: 2px;
+  background-color: #fff;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid rgb(73, 80, 87);
+}
+input[type="checkbox"]:checked:after {
+  width: 16px;
+  height: 16px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  border-radius: 3px;
+  background-color: rgb(73, 80, 87);
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 3px solid #fff;
+  outline: 2px solid rgb(73, 80, 87);
 }
