@@ -199,8 +199,9 @@ export class EditeUserDetailsComponent {
 
       this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;
-        this.changeImageUrl.emit(img[0].file_Path);
+        this.changeImageUrl?.emit(img[0].file_Path);
         this.loadingButton = false;
+        console.log(this.imageUrl)
       });
     } else if (event == 'delete') {
       this.imageUrl = '';

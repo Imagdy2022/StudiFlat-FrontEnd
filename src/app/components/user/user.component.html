@@ -15,17 +15,19 @@
     <main class="p-4 col-lg-10 ">
       <div class="d-md-flex justify-content-between dashboard mt-2">
         <p class="fw-bold ms-1" style="color: #6c6a6a;">Users</p>
-        <div class="d-flex justify-content-lg-between ">
-          <div class="d-flex mb-2 me-3">
+        <div class="d-flex justify-content-lg-between flex-md-row flex-column">
+          <div class="d-flex mb-2 me-3 mb-2">
             <button class="month rounded-start px-3 py-2 outline-none bg-white">This Month</button>
             <button class="week rounded-end px-3 py-2 outline-none bg-white">Last Week</button>
         </div>
-            <!-- start dropdown button  -->
-            <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-            <!-- end dropdown button  -->
-            <!-- start add button (add new owner) in page  -->
-            <app-add-new-button  [id]="'/user/create_new'" class="mt-2"></app-add-new-button>
-            <!-- end add button (add new owner) in page  -->
+          <div class="d-flex mb-2">
+              <!-- start dropdown button  -->
+              <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+              <!-- end dropdown button  -->
+              <!-- start add button (add new owner) in page  -->
+              <app-add-new-button  [id]="'/user/create_new'" class="mt-2"></app-add-new-button>
+              <!-- end add button (add new owner) in page  -->
+          </div>
         </div>
     </div>
         <!-- <div class="row justify-content-center align-items-center" style="color: #6c6a6a">
@@ -74,7 +76,7 @@
 
 
                             <th class="td-name">
-                                <input type="checkbox" class="mx-2" name="selectedContent" (change)="selectAll($event)" />
+                                <input type="checkbox" class="mx-2" name="selectedContent" />
                                 Name
 
                             </th>
@@ -173,13 +175,13 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,Tenant.user_ID)">
               <img src="assets/images/edit.svg">
           </button>
-                            <div *ngIf="showEdit[Tenant.user_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <!-- <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/app-edite-user-details/{{Tenant.user_ID}}">view details</button> -->
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2">Edit </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2">deactivate </button>
+                            <div *ngIf="showEdit[Tenant.user_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                               <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/app-edite-user-details/{{Tenant.user_ID}}">view details</button>
+                                <!-- <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2">Edit </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2">deactivate </button> -->
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteUser(Tenant.user_ID)" *ngIf="TantsRole?.p_Delete==true || is_Super==true"> Delete </button>
-                                <!-- <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendUser(Tenant.user_ID)">Suspend User </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status==false" (click)="unSuspendUser(Tenant.user_ID)">UnSuspend User </button> -->
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendUser(Tenant.user_ID)">Suspend User </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status==false" (click)="unSuspendUser(Tenant.user_ID)">UnSuspend User </button>
 
                             </div>
 
@@ -198,7 +200,6 @@
 
             </p-table>
 
-            <!-- <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator> -->
             <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
               <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
                   <!-- <a style="cursor: pointer;">
