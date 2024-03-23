@@ -88,7 +88,7 @@
 }
 
 * {
-    font-family: 'Montserrat'
+    font-family: 'Poppins'
 }
 
 .Price {
@@ -145,7 +145,7 @@
     position: relative;
     width: fit-content;
     margin-top: -1px;
-    font-family: "Montserrat-SemiBold", Helvetica;
+    font-family: 'Poppins';
     font-weight: 600;
     color: var(--neutralneutral-40);
     font-size: 16px;
