@@ -1,12 +1,12 @@
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'App Config '"></app-head>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'ADS '"></app-head>
 </header>
 <!-- end header  -->
 
 <div class="row m-0">
 
     <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'App Config '"></app-sidebar>
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'ADS '"></app-sidebar>
     <!-- end sidebar  -->
 
     <!-- start content page  -->
@@ -16,7 +16,7 @@
 
         </div> -->
         <div class="fw-inquiries d-flex justify-content-between" style="color: #6c6a6a;">
-            <p style=" font-family: Montserrat;font-size: 16px;font-weight:600;color:black">Ads</p>
+            <p class="fw-bold ms-1" style="color: #6c6a6a;">ADS</p>
             <div class="d-flex justify-content-lg-between  ">
 
                 <!-- start dropdown button  -->
@@ -102,7 +102,7 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson2($event,ads.ads_ID)">
 <img src="assets/images/edit.svg">
 </button>
-                            <div *ngIf="showEdit2[ads.ads_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                            <div *ngIf="showEdit2[ads.ads_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="openmodupdateads(ads)">update</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteAds(ads.ads_ID)">Delete </button>

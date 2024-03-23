@@ -14,7 +14,7 @@
 
         <!-- <p class="fw-bold" style="color: #6c6a6a"></p> -->
         <div class="fw-inquiries d-flex justify-content-between" style="color: #6c6a6a;">
-            <p style=" font-family: Montserrat;font-size: 19px;font-weight:600;color:black">Tickets</p>
+            <p class="fw-bold ms-1" style="color: #6c6a6a;">Tickets</p>
             <div class="d-flex justify-content-lg-between  ">
                 <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
 
@@ -135,11 +135,11 @@
                             <button class="border-0 outlin-0 bg-transparent" *ngIf="inquire?.status=='Opened'" (click)="detailperson( $event,inquire.ticket_ID)">
                 <img src="assets/images/edit.svg">
             </button>
-                            <div *ngIf="showEdit[inquire.ticket_ID] " style="width: 216px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button *ngIf="inquire?.assigned_To=='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/assgin-tiket/{{inquire.ticket_ID}}">assign ticket to employee  </button>
-                                <button *ngIf="inquire?.assigned_To!='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/assgin-tiket/{{inquire.ticket_ID}}">reassign ticket to employee  </button>
+                            <div *ngIf="showEdit[inquire.ticket_ID] " style="width: 180px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button *ngIf="inquire?.assigned_To=='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/assgin-tiket/{{inquire.ticket_ID}}">Assign ticket to employee  </button>
+                                <button *ngIf="inquire?.assigned_To!='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/assgin-tiket/{{inquire.ticket_ID}}">Reassign ticket to employee  </button>
 
-                                <button style="margin-top:0px !important" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/message-tiket/{{inquire.ticket_ID}}">pickup ticket</button>
+                                <button style="margin-top:0px !important" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/message-tiket/{{inquire.ticket_ID}}">Pickup ticket</button>
 
 
 

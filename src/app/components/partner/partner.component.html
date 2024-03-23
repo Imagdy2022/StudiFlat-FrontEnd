@@ -128,7 +128,7 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,partners.partner_ID)">
           <img src="assets/images/edit.svg">
       </button>
-                            <div *ngIf="showEdit[partners.partner_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                            <div *ngIf="showEdit[partners.partner_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="partnersRole?.p_Update==true || is_Super==true" routerLink="/edit-partner/{{partners.partner_ID}}">update</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/view-partner/{{partners.partner_ID}}"> View Profile  </button>
