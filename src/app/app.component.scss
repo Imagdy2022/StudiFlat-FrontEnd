@@ -33,14 +33,18 @@
   position: fixed
 }
 
-.block-ui-spinner,
-.block-ui-template {
+::ng-deep .block-ui-spinner,
+::ng-deep .block-ui-template {
   position: absolute;
   top: 60% !important;
   margin: 0 auto;
   left: 0;
   right: 0;
-  transform: translateY(-30%);
+  transform: translateY(-40%);
+  -webkit-transform: translateY(-40%);
+  -moz-transform: translateY(-40%);
+  -ms-transform: translateY(-40%);
+  -o-transform: translateY(-40%);
 }
 
 .block-ui-spinner>.message {

@@ -35,7 +35,7 @@
                     </th>
                     <th *ngIf="!head.tableHeaderCheckbox && (head.Name && head.SortableColumn)" [pSortableColumn]="head.SortableColumn" class="td-name">
                         {{head.Name}}
-                        <!-- <p-sortIcon *ngIf="head.sortIcon == true" [field]="head.SortableColumn"></p-sortIcon> -->
+                         <p-sortIcon *ngIf="head.sortIcon == true" [field]="head.SortableColumn"></p-sortIcon>
                     </th>
                 </ng-container>
             </tr>
@@ -58,7 +58,7 @@
 
                 </td>
                 <td *ngIf="pagePerson =='Owners' && product.owner_BankAccoun">{{product.owner_BankAccoun}}</td>
-                <td *ngIf="pagePerson=='Owners'  ">{{product.owner_FirstName}} {{product.owner_LastName}}</td>
+                <td *ngIf="pagePerson=='Owners'  ">{{product.owner_CreatedBy}}</td>
                 <td *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>
                 <td *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'">{{product.gender}}</td> -->
