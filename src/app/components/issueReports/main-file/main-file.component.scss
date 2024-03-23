@@ -158,30 +158,3 @@ th {
   color: #EF2011;
   background-color: #FCEEEE;
 }
-input[type="checkbox"]:after {
-  width: 16px;
-  height: 16px;
-  top: -2px;
-  left: -1px;
-  position: relative;
-  border-radius: 2px;
-  background-color: #fff;
-  content: "";
-  display: inline-block;
-  visibility: visible;
-  border: 2px solid rgb(73, 80, 87);
-}
-input[type="checkbox"]:checked:after {
-  width: 16px;
-  height: 16px;
-  top: -2px;
-  left: -1px;
-  position: relative;
-  border-radius: 3px;
-  background-color: rgb(73, 80, 87);
-  content: "";
-  display: inline-block;
-  visibility: visible;
-  border: 3px solid #fff;
-  outline: 2px solid rgb(73, 80, 87);
-}

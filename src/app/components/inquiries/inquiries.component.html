@@ -86,7 +86,6 @@
 
                             </th> -->
                             <th class="td-name">
-                              <input type="checkbox" class="mx-2" name="selectedContent" (change)="selectAll($event)" />
                               User name
 
                             </th>
@@ -123,8 +122,6 @@
                             {{inquire?.request_Code}}
                         </td> -->
                         <td class="d-flex align-items-center">
-                          <input type="checkbox" id="selectedContent-{{ inquire.user_ID}}" value="{{ inquire.user_ID }}"
-                          name="selectedContent" (change)="onCheckboxChange($event)" class="mx-3"/>
 
                             <img *ngIf=" inquire.profileImg  " routerLink="/app-edite-user-details/{{inquire.user_ID}}" [src]="inquire?.profileImg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
 

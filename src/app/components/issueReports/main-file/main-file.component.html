@@ -77,7 +77,6 @@
 
 
                             <th class="td-name">
-                              <input type="checkbox" class="mx-2" name="selectedContent" />
                                 Report ID
 
                             </th>
@@ -115,8 +114,6 @@
 
 
                         <td class="d-flex align-items-center" routerLink="/Report-view/{{issue.issue_ID}}">
-                          <input type="checkbox" id="selectedContent-{{ issue.user_ID}}" value="{{ issue.user_ID }}"
-                          name="selectedContent" (change)="onCheckboxChange($event)" class="mx-3"/>
                             {{issue?.issue_Code}}
                         </td>
                         <td>

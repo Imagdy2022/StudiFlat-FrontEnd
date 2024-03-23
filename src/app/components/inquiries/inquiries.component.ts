@@ -248,10 +248,4 @@ event.stopPropagation()
     this.searchText =""
 
   }
-  selectAll(e:any){
-    
-  }
-  onCheckboxChange(e:any){
-
-  }
 }

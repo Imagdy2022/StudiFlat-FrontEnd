@@ -156,8 +156,5 @@ export class DataTableComponent {
   private deleteItem(product: string): void {
     this.deleteItemDetails.emit(product);
   }
-  onCheckboxChange(e:any){
-
-  }
 
 }
