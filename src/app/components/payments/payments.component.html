@@ -99,6 +99,7 @@
                             </th>
                             <th class="td-name">
                                 Date
+                                <img src="./assets/images/swap_sort 16px.svg" alt="">
 
                             </th>
                             <th class="td-name">
@@ -116,10 +117,10 @@
 
                             <th class="td-name">
                                 Status
+                                <img src="./assets/images/swap_sort 16px.svg" alt="">
 
                             </th>
                             <th class="td-name">
-                                actions
 
                             </th>
                         </ng-container>
@@ -146,28 +147,43 @@
                         <td>
                             {{payment?.inv_Total}}
                         </td>
-                        <td>
-                            {{payment?.payment_By}}
-                        </td>
+
+                        <td class="text-center">
+                          <div>
+                              <span class="rounded-5 px-3"*ngIf="payment?.payment_By==	'Stripe'">
+                                <span>
+                                  <img class="payment" src="assets/images/stripe.svg" alt="">
+                                </span>
+                            </span>
+                            <span class="rounded-5 px-3"*ngIf="payment?.payment_By==	'Visa'">
+                              <span>
+                                <img class="payment" src="assets/images/visa.svg" alt="">
+                              </span>
+                          </span>
+                            <span class="rounded-5 px-3" *ngIf="payment?.payment_By=='Cash'">
+                              Cash
+                          </span>
+                          </div>
+                      </td>
                         <td>
                             {{payment?.payment_Type}}
                         </td>
-
-                        <td>
-                            <div>
-                                <span class="rounded-5 px-3 py-1" style="background-color: #cfffcf;color: green;" *ngIf="payment?.inv_Paid==true">
-
-                         Paid
-                    </span>
-                                <span class="rounded-5 px-3 py-1" style="background-color: #ffc8c8;color: #930b0b;" *ngIf="payment?.inv_Paid==false">
-                    unPaid
-
-                       </span>
-
-
-
-                            </div>
-                        </td>
+                        <td class="text-center">
+                          <div>
+                              <span class="rounded-5 px-3 badge paid"*ngIf="payment?.inv_Paid==true">
+                                <span>
+                                  <img src="assets/images/greenDot.svg" alt="">
+                                </span>
+                                Paid
+                            </span>
+                            <span class="rounded-5 px-3 badge unPaid" *ngIf="payment?.inv_Paid==false">
+                              <span>
+                                <img src="assets/images/redDot.svg" alt="">
+                              </span>
+                              unPaid
+                          </span>
+                          </div>
+                      </td>
                         <td class="cursor position-relative" style="text-align: center;">
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson( $event,payment.inv_ID)">
                   <img src="assets/images/edit.svg">

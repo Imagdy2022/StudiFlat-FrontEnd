@@ -1,14 +1,14 @@
 <!-- <app-edite-user-details></app-edite-user-details> -->
 <!-- start header  -->
 <header>
-  <app-head (newItemEvent)="addItem($event)" [titleModule]="'termination'"></app-head>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Cancelation Inquiries'"></app-head>
 </header>
 <!-- end header  -->
 
 <div class="row m-0">
 
   <!-- start sidebar  -->
-  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'termination'"></app-sidebar>
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Cancelation Inquiries'"></app-sidebar>
   <!-- end sidebar  -->
 
   <!-- start content page  -->
@@ -20,12 +20,12 @@
           text-align: center;
           align-items: center;
           display: flex;
-          justify-content: end;">cancelation Inquiries </p>
+          justify-content: end;">Cancelation Inquiries </p>
           <div class="d-flex justify-content-lg-between ">
               <div class="d-flex justify-content-between ">
-                
+
               </div>
-          
+
               <app-dropdown class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
           </div>
       </div>
@@ -35,7 +35,7 @@
           <div class="d-flex justify-content-between">
               <!-- length Of person -->
               <div class="d-flex mx-2 mt-4">
-                  <p class="me-2 fs-5 fw-bold ml-8">cancelation Inquiries</p>
+                  <p class="me-2 fs-5 fw-bold ml-8">Cancelation Inquiries</p>
                   <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
               {{fullRespone?.totalRecords}} {{pagePerson}}
           </p> -->
@@ -83,10 +83,8 @@
                             Status
 
                           </th>
-                          
-                          <th class="td-name">
 
-                            actions
+                          <th class="td-name">
                           </th>
                       </ng-container>
                   </tr>
@@ -111,20 +109,33 @@
                       <td>
                           {{termina?.time_Period}}
                       </td>
-                      <td>
-                        {{termina?.term_Status}}
-                    </td>
-                    
+                    <td >
+                      <div>
+                          <span class="rounded-5 px-3 badge 	Accepted" *ngIf="termina?.term_Status=='Accepted'">
+                            <span>
+                              <img src="assets/images/greenDot.svg" alt="">
+                            </span>
+                            {{termina?.term_Status}}
+                        </span>
+                        <span class="rounded-5 px-3 badge Rejected" *ngIf="termina?.term_Status=='Rejected'">
+                          <span>
+                            <img src="assets/images/redDot.svg" alt="">
+                          </span>
+                          {{termina?.term_Status}}
+                      </span>
+                      </div>
+                  </td>
+
 
 
                       <td class="cursor position-relative" style="text-align: center;">
                           <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,termina.term_ID)">
         <img src="assets/images/edit.svg">
     </button>
-                          <div *ngIf="showEdit[termina.term_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
- 
+                          <div *ngIf="showEdit[termina.term_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+
                               <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/view-cancel/{{termina.term_ID}}" > View Details  </button>
- 
+
                           </div>
 
                       </td>

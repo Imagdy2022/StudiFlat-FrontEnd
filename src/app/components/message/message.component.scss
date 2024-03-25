@@ -138,11 +138,30 @@
         margin-right: -898px;
     }
 }
+.badge{
+  font-size: 13px ;
+  padding: 4px 8px;
+  font-weight: 500;
+}
+.Opened {
+    color: #027A48;
+    background-color: #ECFDF3;
+}
+.Closed {
+    color: #EF2011;
+    background-color: #FCEEEE;
+}
+.Resolved {
+    color: #FFB900;
+    background-color: #FFF9E6;
+}
 
 td {
     font-size: 14px !important;
-    padding: 1.5rem !important;
+    padding: 16px 24px !important;
     font-family: 'Poppins';
+    height: 72px;
+    border-bottom: 1px solid #F6F6F6 !important;
 
 }
 

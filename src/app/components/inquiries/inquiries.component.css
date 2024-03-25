@@ -113,13 +113,14 @@
         margin-right: -898px;
     }
 }
-
 td {
-    font-size: 14px !important;
-    padding: 1rem .6rem !important;
-    font-family: 'Poppins';
-}
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
 
+}
 th {
     font-size: 14px !important;
     font-family: 'Poppins';

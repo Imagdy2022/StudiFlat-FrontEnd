@@ -37,7 +37,7 @@
             <div class="d-flex justify-content-between">
                 <!-- length Of person -->
                 <div class="d-flex mx-2 mt-4">
-                    <p class="me-2 fs-5 fw-bold ml-8">advertisements : {{numberAds}}</p>
+                    <p class="me-2 fs-5 fw-bold ml-8">Advertisements : {{numberAds}}</p>
                     <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
             {{fullRespone?.totalRecords}} {{pagePerson}}
         </p> -->
@@ -70,15 +70,15 @@
                         <ng-container>
 
                             <th class="td-name">
-                                image
+                                Image
 
                             </th>
                             <th class="td-name">
-                                link
+                                Link
                             </th>
 
                             <th class="td-name">
-                                button name
+                                Button Name
 
                             </th>
                             <th class="td-name">
@@ -103,7 +103,7 @@
 <img src="assets/images/edit.svg">
 </button>
                             <div *ngIf="showEdit2[ads.ads_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="openmodupdateads(ads)">update</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="openmodupdateads(ads)">Update</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteAds(ads.ads_ID)">Delete </button>
 

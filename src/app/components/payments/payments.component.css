@@ -112,14 +112,35 @@
         margin-right: -898px;
     }
 }
-
+.badge{
+  font-size: 13px ;
+  padding: 4px 8px;
+  font-weight: 500;
+}
+.paid	 {
+    color: #027A48;
+    background-color: #ECFDF3;
+}
+.unPaid	 {
+    color: #EF2011;
+    background-color: #FCEEEE;
+}
 td {
-    font-size: 14px !important;
-    padding: 1rem .6rem !important;
-    font-family: 'Poppins'
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
+
 }
 
 th {
     font-size: 14px !important;
-    font-family: 'Poppins'
+    font-family: 'Poppins';
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
+}
+td span img.payment{
+  width: 40px;
+  height: 30px;
 }

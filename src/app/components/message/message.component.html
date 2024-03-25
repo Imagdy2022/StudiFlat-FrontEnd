@@ -65,7 +65,7 @@
                         <ng-container>
 
                             <th class="td-name">
-                                ticket number
+                                Ticket Number
 
                             </th>
                             <th class="td-name">
@@ -73,7 +73,7 @@
 
                             </th>
                             <th class="td-name">
-                                complaint details
+                                Complaint details
 
                             </th>
                             <th class="td-name">
@@ -81,7 +81,7 @@
 
                             </th>
                             <th class="td-name">
-                                status
+                                Status
                             </th>
 
 
@@ -113,24 +113,28 @@
                         <!-- <td>
                       <p class="d-flex align-items-center fw-bold mt-2">{{admin?.status}}</p>
                   </td> -->
-                        <td>
-                            <div>
-                                <span class="rounded-5 px-3 py-1" style="background-color: #cfffcf;color: green;" *ngIf="inquire?.status=='Opened'">
-
-                      {{inquire?.status}}
-                  </span>
-                                <span class="rounded-5 px-3 py-1" style="background-color: #ffc8c8;color: #930b0b;" *ngIf="inquire?.status=='Closed'">
-                    {{inquire?.status}}
-
-                     </span>
-                                <span class="rounded-5 px-3 py-1" style="background-color: #0f0b90;color: #ffffff;" *ngIf="inquire?.status=='Resolved'">
-                      {{inquire?.status}}
-
-                       </span>
-
-
-                            </div>
-                        </td>
+                        <td >
+                          <div>
+                              <span class="rounded-5 px-3 badge Opened"  *ngIf="inquire?.status=='Opened'">
+                                <span>
+                                  <img src="assets/images/greenDot.svg" alt="">
+                                </span>
+                                {{inquire?.status}}
+                            </span>
+                            <span class="rounded-5 px-3 badge Closed" *ngIf="inquire?.status=='Closed'">
+                              <span>
+                                <img src="assets/images/redDot.svg" alt="">
+                              </span>
+                              {{inquire?.status}}
+                          </span>
+                          <span class="rounded-5 px-3 badge Resolved"  *ngIf="inquire?.status=='Resolved'">
+                            <span>
+                              <img src="assets/images/yallowDot.svg" alt="">
+                            </span>
+                            {{inquire?.status}}
+                        </span>
+                          </div>
+                      </td>
                         <td class="cursor position-relative" style="text-align: center;">
                             <button class="border-0 outlin-0 bg-transparent" *ngIf="inquire?.status=='Opened'" (click)="detailperson( $event,inquire.ticket_ID)">
                 <img src="assets/images/edit.svg">
