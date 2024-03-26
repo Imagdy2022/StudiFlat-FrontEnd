@@ -71,7 +71,7 @@ export class DashboardComponent {
   }).catch(function (err) {
     return console.error(err.toString());
   });
-  this.GetDashCards() 
+  this.GetDashCards()
   this.AptRentedFree()
   this.MonthlyRevenu()
   this.PopularApt()
@@ -86,64 +86,14 @@ export class DashboardComponent {
   MonthlyRevenTotol:any=[]
   MonthlyRevenText:any=[]
 
-  basicData:any
-  basicOptions:any
   MonthlyRevenu() {
- 
+
     this._adminservices.MonthlyRevenu().subscribe(
       (res: any) => {
         for(let i=0;i<res.length;i++){
           this.MonthlyRevenTotol.push(res[i].total)
           this.MonthlyRevenText.push(res[i].monthly)
         }
-         this.basicData = {
-          labels:  this.MonthlyRevenText ,
-          datasets: [
-              {
-                label: 'Revenu',
-
-                   data:  this.MonthlyRevenTotol ,
-                  // backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-                  // borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
-                  borderWidth: 1,
-                  innerWidth:10,
-                  
-
-              }
-          ]
-      };
-
-      this.basicOptions = {
-        responsive: true,
-        legend: {
-            display:false,
-            labels: {
-                fontColor: '#86909C',
-                display:false
-            }
-        },
-          scales: {
-              y: {
-                  beginAtZero: true,
-                  ticks: {
-                      color: ''
-                  },
-                  grid: {
-                      color: '',
-                      drawBorder: false
-                  }
-              },
-              x: {
-                  ticks: {
-                      color: ''
-                  },
-                  grid: {
-                      color: '',
-                      drawBorder: false
-                  }
-              }
-          }
-      };
       },
       (error) => {
         console.error('Error fetching owners:', error);
@@ -152,7 +102,7 @@ export class DashboardComponent {
   }
   DashCards: any = {};
   GetDashCards() {
- 
+
     this._adminservices.GetDashCards().subscribe(
       (res: any) => {
         this.DashCards = res;
@@ -165,7 +115,7 @@ export class DashboardComponent {
 
   PopularAptarr: any = {};
   PopularApt() {
- 
+
     this._adminservices.PopularApt().subscribe(
       (res: any) => {
         this.PopularAptarr = res;
@@ -176,9 +126,9 @@ export class DashboardComponent {
     );
   }
 
-  RecentActivitiesarr: any = {};
+  RecentActivitiesarr: any[] = [];
   RecentActivities() {
- 
+
     this._adminservices.RecentActivities().subscribe(
       (res: any) => {
         this.RecentActivitiesarr = res;
@@ -190,24 +140,24 @@ export class DashboardComponent {
   }
   AptRented:any
   AptRentedFree() {
- 
+
     this._adminservices.AptRentedFree().subscribe(
       (res: any) => {
         this.AptRented = res;
         this.dataChart = {
-          labels: ['Free', 'Rented' ],
+          labels: ['apartments', 'beds', 'rooms'],
           datasets: [
               {
-                  data: [ this.AptRented.apt_Free,  this.AptRented.apt_Rented ],
-                  backgroundColor:  ['#12B76A','#1F4068'  ],
-                  hoverBackgroundColor: ['#12B76A','#1F4068'  ]
+                  data: [50, 20 ,30],
+                  backgroundColor:  ['#FECE72' ,'#BED4FF','#FF9B7A'],
+                  hoverBackgroundColor: [,'#FECE72' ,'#BED4FF','#FF9B7A']
               }
           ]
       };
 
 
       this.options = {
-          cutout: '70%',
+          cutout: '60%',
           plugins: {
               legend: {
                   labels: {
@@ -226,8 +176,8 @@ export class DashboardComponent {
 
    options  : any;
   appendcart(){
-       
-     
+
+
   }
   playAudio(){
     let audio = new Audio();
