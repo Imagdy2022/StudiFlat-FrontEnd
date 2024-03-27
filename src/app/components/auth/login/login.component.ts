@@ -49,14 +49,12 @@ export class LoginComponent {
     }
     this.error = '';
     this.loading = true;
-    console.log('this.f',this.f);
 
     this.authenticationService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value   )
       .pipe(first())
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          console.log('ssssssssssssssssssssssssucesssssssssssssss');
 
           // const returnUrl = this.route.dsnapshot.queryParams['returnUrl'] || '/';
           this.router.navigate(['/dashboard']);

@@ -36,7 +36,6 @@ export class WorkersComponent implements OnInit {
 
     this.Date=value.name;
     // this.getAllworkers()
-    console.log(value)
   }
   /**
    * addItem
@@ -82,7 +81,6 @@ tiggerPageChange(event: any) {
 
       const calcPageNumber = Math.floor(event.first / event.rows) + 1;
       this.pageNumber=calcPageNumber;
-      console.log(calcPageNumber);
       this.getAllworkers(  )
      }
   numberworkers=0;

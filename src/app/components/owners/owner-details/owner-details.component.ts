@@ -86,7 +86,6 @@ export class OwnerDetailsComponent {
   checkPage(): void {
     if (this.pageTitle == 'owner_details') {
       this.id = this.param;
-      console.log(this.param);
       this._OnwerService.getOwner(this.id).subscribe((res) => {
         this.createOwner.patchValue(res);
       });
@@ -100,7 +99,6 @@ export class OwnerDetailsComponent {
       ];
     } else if (this.pageTitle == 'edit_owner') {
       this.id = this.param;
-      console.log(this.param);
       this._OnwerService.getOwner(this.id).subscribe((res) => {
         this.createOwner.patchValue(res);
       });
@@ -183,7 +181,6 @@ export class OwnerDetailsComponent {
     this.viewportScroller.scrollToAnchor(elementId);
   }
   public selectCountry(value: any) {
-    console.log(value);
   }
   changeAnchor(index: number): void {
     this.link = this.link.map((el) => (el == true ? false : false));

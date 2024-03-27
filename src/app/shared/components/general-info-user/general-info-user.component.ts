@@ -18,7 +18,7 @@ export class GeneralInfoUserComponent {
 
   /**
    * to upload a file and conver as a link
-   * @param event 
+   * @param event
    */
   uploadPic(event: any) {
     this.loadingButton = true;
@@ -26,8 +26,7 @@ export class GeneralInfoUserComponent {
       const selectedFile = event.target.files[0];
       const formData = new FormData();
       formData.append('fileData', selectedFile, selectedFile.name);
-      console.log(formData);
-      
+
       this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;
         this.changeImageUrl.emit(img[0].file_Path);

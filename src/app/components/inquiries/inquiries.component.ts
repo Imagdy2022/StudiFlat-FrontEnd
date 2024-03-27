@@ -123,7 +123,6 @@ gotopage( ){
 
         const calcPageNumber = Math.floor(event.first / event.rows) + 1;
         this.pageNumber=calcPageNumber;
-        console.log(calcPageNumber);
         this.getAllInquires(this.statusinquire);
       }
       ids:any=[]
@@ -155,7 +154,7 @@ event.stopPropagation()
    selectedfromDropDown(value:any){
     this.date=value.name;
     this.getAllInquires(this.statusinquire)
-    console.log(value)  }
+ }
   checkindex=0;
   clickIquires(index:any){
     this.checkindex=index;

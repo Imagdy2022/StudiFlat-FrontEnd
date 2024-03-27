@@ -151,7 +151,6 @@ export class ViewInquireComponent implements OnInit {
         });
       },
       (error) => {
-        console.log(error.error);
       }
     );
   }
@@ -229,7 +228,6 @@ export class ViewInquireComponent implements OnInit {
         this.GetRequestDetails();
       },
       (error) => {
-        console.log(error);
         this.messageService.add({
           severity: 'error',
           summary: 'Error',

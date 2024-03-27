@@ -23,9 +23,9 @@ export class TableComponent implements OnInit, OnChanges {
   spinner: boolean = true;
 
   ngOnInit(): void {
-    console.log('childName', this.childName);
-  }
   
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['products'] && changes['products'].currentValue !== changes['products'].previousValue) {
       // Trigger the product has been loaded
@@ -38,7 +38,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   /**
    * getSeverity
-   * @param status 
+   * @param status
    * @returns string
    */
   getSeverity(status: string): string {
@@ -59,6 +59,5 @@ export class TableComponent implements OnInit, OnChanges {
    * @returns void
    */
   GetSelectedItem(product: object): void {
-    console.log(product);
   }
 }

@@ -104,7 +104,6 @@ tiggerPageChange(event: any) {
 
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber=calcPageNumber;
-    console.log(calcPageNumber);
     this.GetWorkerByid();
     }
 
@@ -238,7 +237,6 @@ createworkerpost(data: any) {
       if (file) {
         // call the onUpload function to get the link to the file
         this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
-          console.log('img', img);
           // create url to preview file
           file.url = URL.createObjectURL(file);
           this.selectedContractImg = file;

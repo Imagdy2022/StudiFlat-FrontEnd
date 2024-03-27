@@ -41,7 +41,6 @@ export class PushmsgsComponent implements OnInit {
   selectedfromDropDown(value: any) {
     this.UserID = value.value;
     // this.getAllpartners()
-    console.log(value.user_ID);
   }
   onUserSelected(value: string) {
     this.UserID = value;
@@ -61,7 +60,7 @@ export class PushmsgsComponent implements OnInit {
   }
 
   onOptionsSelected(value: string) {
-    console.log('the selected value is ' + value);
+
   }
   statusTenant: any = '';
   pageNumber = 1;
@@ -79,13 +78,12 @@ export class PushmsgsComponent implements OnInit {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber = calcPageNumber;
     this.pagesize = event.rows;
-    console.log(calcPageNumber);
+
     this.getAllMsgs();
   }
   tiggerPageChange2(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber2 = calcPageNumber;
-    console.log(calcPageNumber);
   }
   UserID: any;
   CreateFAQ() {

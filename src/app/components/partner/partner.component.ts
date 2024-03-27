@@ -36,7 +36,6 @@ export class PartnerComponent implements OnInit {
 
    this.Date=value.name;
    this.getAllpartners()
-   console.log(value)
 
  }
  /**
@@ -83,7 +82,6 @@ tiggerPageChange(event: any) {
 
      const calcPageNumber = Math.floor(event.first / event.rows) + 1;
      this.pageNumber=calcPageNumber;
-     console.log(calcPageNumber);
      this.getAllpartners(  )
     }
  numberpartners=0;

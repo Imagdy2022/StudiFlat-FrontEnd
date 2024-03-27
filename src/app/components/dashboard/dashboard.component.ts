@@ -214,18 +214,13 @@ export class DashboardComponent {
   }
   addItem(value: any) {
     this.showSide = value
-    console.log(value)
   }
   selectedfromDropDownPopularApartments(value:any){
-    console.log(value)
   }
   selectedfromDropDownApartmentsRentedFree(value:any){
-    console.log(value)
   }
   selectedfromDropDown(value:any){
-    console.log(value)
   }
   selectedfromDropDownPopularApartmentstable(value:any){
-    console.log(value)
   }
 }

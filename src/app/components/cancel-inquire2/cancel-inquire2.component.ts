@@ -35,7 +35,7 @@ export class CancelInquire2Component implements OnInit  {
 
    this.Date=value.name;
    this.getAlltermination()
-   console.log(value)
+
 
  }
  /**
@@ -54,14 +54,14 @@ export class CancelInquire2Component implements OnInit  {
  totalofPages=0;;
  disablenext=false;
  disableperv=false;
- 
+
 termination=[]
 totalRecords=0
 tiggerPageChange(event: any) {
 
      const calcPageNumber = Math.floor(event.first / event.rows) + 1;
      this.pageNumber=calcPageNumber;
-     console.log(calcPageNumber);
+
      this.getAlltermination(  )
     }
  numbertermination=0;
@@ -115,10 +115,10 @@ tiggerPageChange(event: any) {
    this.showEdit=[]
 
 }
- 
+
 terminationRole:any
 is_Super:any
- 
+
 gotopage( ){
  let url: string = "unlegal";
    this.router.navigateByUrl(url);

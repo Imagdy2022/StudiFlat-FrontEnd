@@ -87,7 +87,6 @@ export class ThirdStepComponent {
   aprt_details_Edit: any;
   ngOnInit() {
     debugger;
-    console.log(this.apt_imgs);
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
     this.listDropDownFloorNumber = this.rangefrom0to100();
     if (this.addApartment != 'add new apartments') {
@@ -263,13 +262,12 @@ export class ThirdStepComponent {
     this.create_Apart_contract.get('checkType')?.setValue(checkin);
   }
   selectedfromDropDownFloorNumber(value: any): void {
-    console.log(value);
+
   }
 
   ActionButtonContractSectionbutton() {
     this.ActionButtonContractSection = true;
     this.contractDetails.push({ sec_Name: '', sec_Desc: '' });
-    console.log(this.contractDetails);
   }
 
   saveActionButtonFieldrole(index: any) {
@@ -301,7 +299,6 @@ export class ThirdStepComponent {
       // call the onUpload function to get the link to the file
       this.uploadService.uploadSingleFile(formData).subscribe(
         (img: any) => {
-          console.log('img', img);
           // create url to preview file
           file.url = URL.createObjectURL(file);
           // check wich file uploaded
@@ -332,8 +329,6 @@ export class ThirdStepComponent {
             summary: 'Success',
             detail: `Attachments has uploaded Successfuly`,
           });
-          console.log('fieldName', fieldName);
-          console.log('create_Apart_contract', this.create_Apart_contract);
           this.afterUploadImage = 'true';
         },
         (err) => {
@@ -464,7 +459,6 @@ export class ThirdStepComponent {
         )
         .subscribe(
           (res) => {
-            console.log(res);
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
@@ -488,7 +482,6 @@ export class ThirdStepComponent {
         )
         .subscribe(
           (res) => {
-            console.log(res);
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
@@ -518,7 +511,6 @@ export class ThirdStepComponent {
   pushinputfields(value: any): void {
     this.apt_inputfields.push(value);
 
-    console.log(this.apt_inputfields);
   }
 
   saveActionButtonnewapt_rules() {
@@ -528,7 +520,6 @@ export class ThirdStepComponent {
     });
     this.descriptionOfrole = '';
     this.ActionButtonapt_roles = false;
-    console.log(this.apt_roles);
   }
 
   message: any;

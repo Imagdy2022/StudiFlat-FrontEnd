@@ -331,12 +331,10 @@ export class FirstStepComponent implements OnInit {
     this.CreateContract = value.target.value;
   }
   DoyouCreateapartmentcurre(value: any) {
-    console.log(value.target.value);
     this.Createapartmentcurre = value.target.value;
   }
 
   DoyouCreatebills(value: any) {
-    console.log(value.target.value);
     this.bills = value.target.value;
     this.billinclude = value.target.value == 'Yes' ? true : false;
   }
@@ -540,7 +538,6 @@ export class FirstStepComponent implements OnInit {
   }
 
   transport(value: any): void {
-    console.log(this.localapt_Transports);
     this.Createtransport.push(value);
   }
   RemoveActionButton(index: number) {

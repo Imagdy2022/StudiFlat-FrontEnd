@@ -12,7 +12,7 @@ export class StatisticsTable1Component {
   @Input() headTitle:string=''
   @Input() UserreportproblemsTable:Array<any>=[]
   selectedfromDropDown(value:any){
-    console.log(value)
+
   }
- 
+
 }

@@ -164,7 +164,6 @@ export class MainFileComponent {
   tiggerPageChange(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber = calcPageNumber;
-    console.log(calcPageNumber);
     this.getAllIssues();
   }
 
@@ -175,7 +174,6 @@ export class MainFileComponent {
   selectedfromDropDown(value: any) {
     this.Date = value.name;
     this.getAllIssues();
-    console.log(value);
   }
   cancelissue(id: any) {
     this._adminservices.CancelIssue(id).subscribe(
@@ -384,7 +382,6 @@ export class MainFileComponent {
       // call the onUpload function to get the link to the file
       this.uploadService.uploadSingleFile(formData).subscribe(
         (img: any) => {
-          console.log('img', img);
           // create url to preview file
           file.url = URL.createObjectURL(file);
           // check wich file uploaded

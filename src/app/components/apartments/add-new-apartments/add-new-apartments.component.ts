@@ -120,8 +120,6 @@ export class AddNewApartmentsComponent {
   changeItem(index: number) {
 
     this.activeIndex = index;
-    console.log('activeIndex', this.activeIndex);
-
     scrollTo(0, 0);
   }
   jumbToNextSteb2(value: any) {

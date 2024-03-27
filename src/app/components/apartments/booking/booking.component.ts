@@ -40,8 +40,7 @@ export class BookingComponent implements OnInit {
     this.search = false;
   }
   GetSelectedItem(): void {
-    console.log(this.selectedProducts);
-  }
+      }
     bokk:any=[]
     headerData: Array<any> = [];
     showEdit: Array<boolean> = [];
@@ -91,7 +90,6 @@ export class BookingComponent implements OnInit {
 
           const calcPageNumber = Math.floor(event.first / event.rows) + 1;
           this.pageNumber=calcPageNumber;
-          console.log(calcPageNumber);
           this.getAllbokk();
         }
         ids:any=[]
@@ -112,7 +110,7 @@ export class BookingComponent implements OnInit {
      selectedfromDropDown(value:any){
       this.date=value.name;
       this.getAllbokk();
-      console.log(value)
+
     }
 
 

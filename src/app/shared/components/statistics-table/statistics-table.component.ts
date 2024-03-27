@@ -11,5 +11,5 @@ export class StatisticsTableComponent {
 @Input() rowDatalist:Array<any>=[]
 @Input() headTitle:string=''
 selectedfromDropDown(value:any){
-  console.log(value)}
+ }
 }
