@@ -197,29 +197,7 @@
 
             </p-table>
 
-            <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-                  <!-- <a style="cursor: pointer;">
-                <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05); border-radius: 8px; overflow: hidden; border: 1px #8FA0B4 solid; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-
-                    <div style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">Previous</div>
-
-                </div>
-            </a> -->
-                  <button (click)="decreamentPage( )" [disabled]="disableperv" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-              Previous
-</button>
-              </div>
-              <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{pageNumber}} of {{totalofPages}}</div>
-              <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-                  <!-- <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05); border-radius: 8px; overflow: hidden; border: 1px #8FA0B4 solid; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-                    <div style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">Next</div>
-                </div> -->
-                  <button [disabled]="disablenext" (click)="   incrementpage( )" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                  Next
-    </button>
-              </div>
-          </div>
+            <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
         </div>
         <!-- <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="5" [totalRecords]="totalRecords"></p-paginator> -->
 
