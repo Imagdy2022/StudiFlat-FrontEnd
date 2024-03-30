@@ -53,7 +53,7 @@ export class LoginComponent {
     this.authenticationService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value   )
       .pipe(first())
       .subscribe({
-        next: () => {
+        next: (res) => {
           // get return url from route parameters or default to '/'
 
           // const returnUrl = this.route.dsnapshot.queryParams['returnUrl'] || '/';

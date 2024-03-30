@@ -440,23 +440,23 @@ export class AdminsService {
     return this.http.post<any>(url, AttachFile, { headers: headers1 });
   }
 
-  
 
-  
-  
+
+
+
   AddExpense( data:any): Observable<any> {
     const url = environment.apiUrl +"/Checkout/AddExpense"
-   
+
     return this.http.post<any>(url, data, { headers: this.headers });
   }
-   
+
   UpdateExpense( data:any): Observable<any> {
   const url = environment.apiUrl +"/Checkout/UpdateExpense"
- 
+
   return this.http.put<any>(url, data, { headers: this.headers });
 }
- 
- 
+
+
 DeleteExpense(Exp_ID: any): Observable<any[]> {
   const url = environment.apiUrl + '/Checkout/DeleteExpense?Exp_ID='+Exp_ID;
   const params = new HttpParams().set('Exp_ID', Exp_ID);
@@ -627,37 +627,37 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     const url = environment.apiUrl + '/PushNotification/MarkAllRead';
     return this.http.put<any>(url, null, { headers: this.headers });
   }
-  
+
   GetDashCards(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/GetDashCards';
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-   
+
 MonthlyRevenu(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/MonthlyRevenu';
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-  
 
-   
-  
+
+
+
 
 AptRentedFree(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/AptRentedFree';
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-  
+
   PopularApt(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/PopularApt';
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-  
-RecentActivities(): Observable<any[]> {
-    const url = environment.apiUrl + '/Dashboard/RecentActivities';
+
+RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
+    const url = environment.apiUrl + `/Dashboard/RecentActivities?PageNumber=${PageNumber}&PageSize=${PageSize}`;
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
@@ -666,7 +666,7 @@ RecentActivities(): Observable<any[]> {
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-    
+
   GetTerminations(
      PageNo: number,
     PageSize: number,
@@ -677,12 +677,12 @@ RecentActivities(): Observable<any[]> {
       .set('PageNo', PageNo)
       .set('PageSize', PageSize)
       .set('SearchKey', SearchKey)
- 
+
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
 
-  
- 
+
+
   GetCheckoutList(
     PageNo: number,
    PageSize: number,
@@ -698,9 +698,9 @@ RecentActivities(): Observable<any[]> {
 
    return this.http.get<any[]>(url, { headers: this.headers, params: params });
  }
- 
 
- 
+
+
  InsertCheckOut(Req_ID: any ): Observable<any> {
   const url = environment.apiUrl + '/Checkout/InsertCheckOut?Req_ID='+Req_ID;
   let body = {
