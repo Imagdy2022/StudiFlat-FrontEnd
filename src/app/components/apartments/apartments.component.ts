@@ -67,7 +67,6 @@ gotopage( ){
 
     this.Date=value.name;
     this.getAllApartment()
-    console.log(value)
   }
   initFakeData(): void {
     this.apartmentFillterLists = ["All Apartment", "Rented Apartment", "Available Apartment","Pending",'Draft',"Rent EndSoon" ];
@@ -168,7 +167,6 @@ gotopage( ){
 
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber=calcPageNumber;
-    console.log(calcPageNumber);
     this.getAllApartment()
   }
   // clickApartmentList(index: number) {

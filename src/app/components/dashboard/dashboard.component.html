@@ -37,12 +37,12 @@
               <span class="mx-3 fw-bold">Total Revenue</span>
           </div>
           <div>
-              <h3 class="my-2">205</h3>
+              <h3 class="my-2">{{DashCards.total_Revenue}}</h3>
               <div>
-                  <i class="fa fa-arrow-down red" *ngIf="DashCards.tentant_Up==false" aria-hidden="true"></i>
-                  <i class="fa fa-arrow-up green" *ngIf="DashCards.tentant_Up==true" aria-hidden="true"></i>
-                  <span class="ms-1 fw-bold" [class.red]="DashCards.tentant_Up==false" [class.green]="DashCards.tentant_Up==true"
-                  >10 %</span>
+                  <i class="fa fa-arrow-down red" *ngIf="DashCards.revenue_Up==false" aria-hidden="true"></i>
+                  <i class="fa fa-arrow-up green" *ngIf="DashCards.revenue_Up==true" aria-hidden="true"></i>
+                  <span class="ms-1 fw-bold" [class.red]="DashCards.revenue_Up==false" [class.green]="DashCards.revenue_Up==true"
+                  >{{DashCards.revenue_Perc}} %</span>
                   <span class="mx-3">vs last month</span>
               </div>
           </div>
@@ -55,12 +55,12 @@
               <span class="mx-3 fw-bold">Total expenses</span>
           </div>
           <div>
-              <h3 class="my-2">250</h3>
+              <h3 class="my-2">{{DashCards.total_Expenses}}</h3>
               <div>
-                  <i class="fa fa-arrow-down red" *ngIf="DashCards.apartment_Up==false" aria-hidden="true"></i>
-                  <i class="fa fa-arrow-up green" *ngIf="DashCards.apartment_Up==true" aria-hidden="true"></i>
-                  <span class="ms-1 fw-bold" [class.red]="DashCards.apartment_Up==false" [class.green]="DashCards.apartment_Up==true"
-                  >10 %</span>
+                  <i class="fa fa-arrow-down red" *ngIf="DashCards.expenses_Up==false" aria-hidden="true"></i>
+                  <i class="fa fa-arrow-up green" *ngIf="DashCards.expenses_Up==true" aria-hidden="true"></i>
+                  <span class="ms-1 fw-bold" [class.red]="DashCards.expenses_Up==false" [class.green]="DashCards.expenses_Up==true"
+                  >{{DashCards.expenses_Perc}} %</span>
                   <span class="mx-3">vs last month</span>
               </div>
           </div>
@@ -74,14 +74,16 @@
                </span>
           </div>
           <div>
-              <h3 class="my-2">1200</h3>
+              <h3 class="my-2">{{DashCards.net_Profit}}</h3>
               <div>
-                  <!-- <i class="fa fa-arrow-down red" *ngIf="DashCards.issues_Up==false" aria-hidden="true"></i> -->
-                  <i class="fa fa-arrow-up green"  aria-hidden="true"></i>
-                  <span class="ms-1 fw-bold green"
-                  >100 %</span>
-                  <span class="mx-3">vs last month</span>
-              </div>
+                <div>
+                    <i class="fa fa-arrow-down red" *ngIf="DashCards.net_Profit_Up==false" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up green" *ngIf="DashCards.net_Profit_Up==true" aria-hidden="true"></i>
+                    <span class="ms-1 fw-bold" [class.red]="DashCards.net_Profit_Up==false" [class.green]="DashCards.net_Profit_Up==true"
+                    >{{DashCards.net_Profit_Perc}} %</span>
+                    <span class="mx-3">vs last month</span>
+                </div>
+            </div>
           </div>
       </div>
       </div>
@@ -107,7 +109,7 @@
               </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of RecentActivitiesarr?.slice(0,4) ; let i =index ">
+                <tr *ngFor="let item of RecentActivitiesarr ; let i =index ">
                  <td>
                   <div>
                       <img src="{{item.userImg}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">
@@ -279,7 +281,7 @@
                   <span class="mx-3 fw-bold">Total Owners</span>
               </div>
               <div>
-                  <h3 class="my-2">80</h3>
+                  <h3 class="my-2">{{DashCards.total_Owners}}</h3>
 
               </div>
           </div>

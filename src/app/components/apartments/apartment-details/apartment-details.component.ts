@@ -116,7 +116,6 @@ export class ApartmentDetailsComponent implements OnInit {
         }
       }
     });
-    console.log(this.tenant);
   }
   DownloadTenantContract() {
     let ID = Guid.create();

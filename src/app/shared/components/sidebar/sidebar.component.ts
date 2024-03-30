@@ -115,7 +115,6 @@ for(let i=0; i<this.permissions.length;i++){
     this.listAnchors.concat(this.listAnchorsOther).forEach(element => {
       if (element.text === this.titlepage) { this.link[this.param] = true }
       else this.param++
-      console.log(this.titlepage)
     });
 
   }
@@ -144,7 +143,6 @@ for(let i=0; i<this.permissions.length;i++){
       this.link = this.link.map(el => el == true ? false : false)
       this.link[index] = true
       if (index == this.SideBarConstant.Logout) {
-        console.log('sssssssssssss');
 
         this.router.navigate(['/login']);
       }
@@ -162,7 +160,7 @@ for(let i=0; i<this.permissions.length;i++){
   setfraze(){
     this.isFreeze=true
   }
-  
+
   setfraze2(){
     this.isFreeze2=true
   }

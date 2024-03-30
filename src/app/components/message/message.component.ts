@@ -114,7 +114,6 @@ export class MessageComponent {
 
           const calcPageNumber = Math.floor(event.first / event.rows) + 1;
           this.pageNumber=calcPageNumber;
-          console.log(calcPageNumber);
           this.getAll_tickets();
         }
         ids:any=[]
@@ -135,7 +134,6 @@ export class MessageComponent {
      selectedfromDropDown(value:any){
       this.date=value.name;
       this.getAll_tickets();
-      console.log(value)
     }
 
 

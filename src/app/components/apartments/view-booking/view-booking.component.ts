@@ -125,7 +125,7 @@ User_ID: any;
       const formData = new FormData();
       formData.append('fileData', selectedFile, selectedFile.name);
       this.formData2.append('User_Img', selectedFile);
-      console.log(formData);
+
 
       this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;

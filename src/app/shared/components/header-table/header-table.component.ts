@@ -10,6 +10,6 @@ export class HeaderTableComponent {
 @Input() listDropDown:Array<object>=[]
 
 selectedfromDropDown(value:any){
-  console.log(value)
+
 }
 }

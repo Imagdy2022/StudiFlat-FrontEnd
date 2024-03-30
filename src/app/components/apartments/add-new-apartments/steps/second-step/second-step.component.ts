@@ -118,7 +118,6 @@ export class SecondStepComponent {
       // this.edit="EditForm"
       this.getApartmentDetails();
     } else {
-      console.log('n_ofLiving : ' + this.n_ofLiving);
       this.bindCreateApart_Equ();
       this.drowNumberOfEntries();
       this.getLocalStorage();
@@ -162,7 +161,6 @@ export class SecondStepComponent {
           arrRoom = [];
         }
       }
-      console.log(this.roomType);
       // section of bathroom
       this.arraynewFieldBathroom = [];
       let arrBathroom = [];
@@ -207,7 +205,6 @@ export class SecondStepComponent {
       // section of Feature
       this.newFieldSpecialFeatures = [];
       for (let i = 0; i < parsedData.apt_Feature.length; i++) {
-        console.log(parsedData.apt_Feature[i].description);
         this.newFieldSpecialFeatures.push({
           label: 'Feature ' + (i + 1),
           description: parsedData.apt_Feature[i].description,
@@ -217,7 +214,6 @@ export class SecondStepComponent {
       // section of Facility
       this.newFieldFacility = [];
       for (let i = 0; i < parsedData.apt_Facilities.length; i++) {
-        console.log(parsedData.apt_Facilities[i].description);
         this.newFieldFacility.push({
           label: 'Facility ' + (i + 1),
           description: parsedData.apt_Facilities[i].description,
@@ -227,7 +223,6 @@ export class SecondStepComponent {
       // section of kitchen
       this.newFieldkitchen = [];
       for (let i = 0; i < parsedData.kitchen_Tools.length; i++) {
-        console.log(parsedData.kitchen_Tools[i].description);
         this.newFieldkitchen.push({
           label: 'kitchen tool ' + (i + 1),
           description: parsedData.kitchen_Tools[i].description,
@@ -263,7 +258,6 @@ export class SecondStepComponent {
         arrRoom = [];
       }
     }
-    console.log(this.roomType);
     // section of bathroom
     this.arraynewFieldBathroom = [];
     let arrBathroom = [];

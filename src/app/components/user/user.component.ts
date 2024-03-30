@@ -67,7 +67,6 @@ export class UserComponent {
   selectedfromDropDown(value: any) {
     this.Date = value.name;
     this.getAllTenants();
-    console.log(value);
   }
   /**
    * addItem
@@ -135,7 +134,6 @@ export class UserComponent {
   tiggerPageChange(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber = calcPageNumber;
-    console.log(calcPageNumber);
     this.getAllTenants();
   }
   DeleteUser(id: any) {

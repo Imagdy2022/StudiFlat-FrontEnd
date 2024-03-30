@@ -79,11 +79,10 @@ dropdownOption: Array<any> = [];
 
         const calcPageNumber = Math.floor(event.first / event.rows) + 1;
         this.pageNumber=calcPageNumber;
-        console.log(calcPageNumber);
         this.ListAllInvoices( this.statuspayment)
        }
        selectedfromDropDown(value:any){
-        console.log(value)
+        this.ListAllInvoices(this.statuspayment);
       }
 
 

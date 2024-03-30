@@ -39,7 +39,7 @@ export class CheckoutInqqComponent implements OnInit{
   }
   checkOutRole:any
 is_Super:any
- 
+
 gotopage( ){
   let url: string = "unlegal";
     this.router.navigateByUrl(url);
@@ -104,7 +104,6 @@ gotopage( ){
 
         const calcPageNumber = Math.floor(event.first / event.rows) + 1;
         this.pageNumber=calcPageNumber;
-        console.log(calcPageNumber);
         this.getAllcheckOut(this.statusinquire);
       }
       ids:any=[]
@@ -131,7 +130,7 @@ event.stopPropagation()
    selectedfromDropDown(value:any){
     this.date=value.name;
     this.getAllcheckOut(this.statusinquire)
-    console.log(value)  }
+ }
   checkindex=0;
   clickIquires(index:any){
     this.checkindex=index;
@@ -159,7 +158,7 @@ event.stopPropagation()
       this.getAllcheckOut(this.statusinquire);
 
     }
-     
+
   }
   onCloseModal1(){
     this.display1="none"
@@ -190,8 +189,8 @@ event.stopPropagation()
         }
       );
   }
-   
- 
+
+
   hidecard(){
      this.showEdit=[]
 

@@ -206,7 +206,6 @@ this.gotopage( );
       if (file) {
         // call the onUpload function to get the link to the file
         this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
-          console.log('img', img);
           // create url to preview file
           file.url = URL.createObjectURL(file);
           this.selectedContractImg = file;

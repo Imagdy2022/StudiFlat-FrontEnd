@@ -47,7 +47,7 @@ export class ConfigurationsComponent implements OnInit {
    */
   selectedfromDropDown(value: any) {
     // this.getAllpartners()
-    console.log(value);
+
   }
   /**
    * addItem

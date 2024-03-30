@@ -1,15 +1,11 @@
-.month,
 .week {
-    color: #757a82;
-    background-color: white;
-    border: 1px solid #ebebeb;
+  color: #757a82;
+  border: 1px solid #ebebeb;
+}
+.month{
+  background-color: #1F4068;
 }
 
-@media (min-width: 768px) {
-    .xcvdd {
-        margin-right: 257px !important;
-    }
-}
 
 .buttomstyle {
     color: var(--Primary-40, #1F4068);

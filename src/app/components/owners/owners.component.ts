@@ -118,10 +118,8 @@ export class OwnersComponent implements OnInit {
   updateDataPerPage(PageNumber: any): void {
     this.pageNumber = PageNumber;
 
-    console.log('apl', this.pageNumber);
 
     this.getAllOwners(this.pageNumber, this.itemsPerPage, this.searchValue);
-    console.log('b3d', this.pageNumber);
 
   }
 

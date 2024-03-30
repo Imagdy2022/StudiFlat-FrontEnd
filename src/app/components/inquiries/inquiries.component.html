@@ -177,7 +177,7 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson( $event,inquire.request_ID)">
                     <img src="assets/images/edit.svg">
                 </button>
-                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1 && inquire?.status!='Approved' && inquire?.status!='Cancelled' && inquire?.status!='Waiting'" style="width: 150px;z-index: 999;right: 35px;top: 50px;"  class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1 && inquire?.status!='Approved' && inquire?.status!='Cancelled' && inquire?.status!='Waiting' && inquire?.status!='Rejected'" style="width: 150px;z-index: 999;right: 35px;top: 50px;"  class="position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/inquire-offer/{{inquire.request_ID}}">Send Offer  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/view-inquire/{{inquire.request_ID}}">View  inquire</button>
 
@@ -203,11 +203,8 @@
 
 
                             </div>
-                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex==1" style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1  && inquire?.status=='Rejected'" style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/view-inquire/{{inquire.request_ID}}">View  inquire</button>
-
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="AddWaitingList(inquire.request_ID)">add to waiting list  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="onOpenModal1(inquire.request_ID)">Reject </button>
 
                             </div>
                         </td>

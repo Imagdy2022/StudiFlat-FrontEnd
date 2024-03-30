@@ -78,7 +78,6 @@ export class DataTableComponent {
   }
 
   onActionSelected(action: any) {
-    console.log('Selected Action:', action.value);
     // Handle the selected action here
   }
 
@@ -101,7 +100,6 @@ export class DataTableComponent {
   tiggerPageChange(event: any) {
 
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
-    console.log(calcPageNumber);
     this.onPageChange.emit(calcPageNumber);
   }
 
@@ -110,7 +108,7 @@ export class DataTableComponent {
   * @returns void
   */
   GetSelectedItem(): void {
-    console.log(this.selectedProducts);
+
   }
 
   /**
@@ -133,7 +131,7 @@ export class DataTableComponent {
    * @param event
    */
   confirmDelete(event: any, product: any) {
-    console.log('product', product);
+   
 
     this.confirmationService.confirm({
       target: event.target,
