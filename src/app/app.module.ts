@@ -8,7 +8,6 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { AppartmentsModule } from './components/apartments/appartments.module';
-import { DashboardModule } from './components/dashboard/dashboard.module';
 import { MessageModule } from './components/message/message.module';
 import { PaymentsModule } from './components/payments/payments.module';
 import { AdminsModule } from './components/admins/admins.module';
@@ -76,7 +75,6 @@ initializeApp(environment.firebase);
     AppartmentsModule,
     ReactiveFormsModule,
     CalendarModule,
-    DashboardModule,
     MessageModule,
     AuthModule,
     UserModule,

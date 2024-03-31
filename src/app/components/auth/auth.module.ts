@@ -20,7 +20,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
-  ],exports: [ ],
+  ],exports: [ RouterModule],
   providers: [MessageService],
 })
 export class AuthModule { }

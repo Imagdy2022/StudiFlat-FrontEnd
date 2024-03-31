@@ -4,17 +4,12 @@ import {  NgModule } from '@angular/core';
 
 import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RouterModule, Routes } from '@angular/router';
 import { KnobModule } from 'primeng/knob';
 import { ToastModule } from 'primeng/toast';
 import { ChartModule } from 'primeng/chart';
 
 import { IgxDoughnutChartModule, IgxRingSeriesModule, IgxLegendModule, IgxItemLegendModule } from "igniteui-angular-charts";
-
-const routes: Routes = [
-  { path: '', component: DashboardComponent },
-];
-
+import { DashboardRoutingModule } from './dashboard-routing.module';
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
@@ -23,13 +18,11 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     KnobModule,
-    ToastModule,   IgxDoughnutChartModule,
+    ToastModule,IgxDoughnutChartModule,
     IgxRingSeriesModule,
     IgxLegendModule,
-    IgxItemLegendModule,
-    RouterModule.forChild(routes)
+    IgxItemLegendModule, 
+    DashboardRoutingModule
     ],
-  exports:[RouterModule],
-
 })
 export class DashboardModule { }

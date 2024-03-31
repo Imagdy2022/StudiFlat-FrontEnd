@@ -57,7 +57,7 @@ export class LoginComponent {
           // get return url from route parameters or default to '/'
 
           // const returnUrl = this.route.dsnapshot.queryParams['returnUrl'] || '/';
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/']);
         },
         error: error => {
 
