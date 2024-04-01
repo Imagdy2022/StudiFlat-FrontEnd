@@ -135,13 +135,13 @@ export class DashboardComponent {
       (res: any) => {
         this.AptRented = res;
         this.dataChart = {
-          // labels: ['apartments', 'beds', 'rooms'],
-          labels: ['Free', 'Rented'],
+           labels: ['apartments', 'beds', 'rooms'],
+          // labels: ['Free', 'Rented'],
           datasets: [
               {
-                  data: [this.AptRented?.apt_Free, this.AptRented?.apt_Rented],
-                  backgroundColor:  ['#FECE72' ,'#FF9B7A','#BED4FF',],
-                  hoverBackgroundColor: [,'#FECE72' ,'#FF9B7A','#BED4FF',]
+                  data: [50, 20 , 30],
+                  backgroundColor:  ['#FECE72' ,'#BED4FF','#FF9B7A'],
+                  hoverBackgroundColor: [,'#FECE72','#BED4FF' ,'#FF9B7A']
               }
           ]
       };

@@ -16,12 +16,14 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
+import { CreateNewPaymentComponent } from './create-new-payment/create-new-payment.component';
 
 const routes: Routes = [];
 
 @NgModule({
   declarations: [
     PaymentsComponent,
+    CreateNewPaymentComponent,
    ],
   imports: [
     CommonModule,

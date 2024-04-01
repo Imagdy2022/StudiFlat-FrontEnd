@@ -140,3 +140,71 @@ td span img.payment{
   width: 40px;
   height: 30px;
 }
+
+.total-detals {
+  padding: 16px;
+  border: 1px solid #EBEBEB;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  background-color: white;
+  h3 {
+      font-weight: 700;
+  }
+}
+
+span.icon{
+  color: #1F4068;
+  font-size: 22.78px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.red{
+  color:red
+}
+.green{
+  color: green;
+}
+.filterControls{
+  label{
+    font-size: 14px;
+    color: #6A6D70;
+  }
+}
+.modal-header
+{
+  border-bottom: unset;
+  background-color:#ffffff;
+  border-bottom: none !important;
+}
+.modal-footer,.modal-body{
+  border-top: unset;
+}
+.go .btn.btn-color{
+  background-color: #1F4068;
+  color: #fff;
+  font-size: 14px;
+}
+.cleraFilter{
+  .btn.btn-filter{
+    color: #1F4068 !important;
+    background-color: #fff !important;
+    font-size: 14px;
+
+  }
+}
+.form-switch .form-check-input{
+  width: 2.8rem;
+  height: 1.5rem;
+  margin-left: 1rem;
+}
+.form-switch .form-check-input:focus {
+  border-color: #1F4068;
+  box-shadow: 0 0 0 1px #1F4068;
+
+}
+.form-check-input:checked{
+  background-color: #1F4068;
+  border: 1px solid #1F4068;
+}
