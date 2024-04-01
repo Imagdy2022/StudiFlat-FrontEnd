@@ -1,4 +1,3 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -28,7 +27,6 @@ const routes: Routes = [];
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,

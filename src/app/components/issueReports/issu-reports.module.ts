@@ -10,7 +10,6 @@ import { AssginIssueComponent } from './assgin-issue/assgin-issue.component';
 import { ReportPrintComponent } from './report-print/report-print.component';
 
 import { DropdownModule } from 'primeng/dropdown';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/calendar';
 
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -34,7 +33,7 @@ const routes: Routes = [];
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
+    
     SharedModule,
     FormsModule,
     CalendarModule,

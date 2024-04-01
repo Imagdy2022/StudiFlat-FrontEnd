@@ -1,9 +1,6 @@
 import { ProgressSpinnerComponent } from './components/progressSpinner/progress-spinner/progress-spinner.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { BrowserModule } from '@angular/platform-browser';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { AppRoutingModule } from '../app-routing.module';
 import { PaginatorModule } from 'primeng/paginator';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmationService } from 'primeng/api';
@@ -40,6 +37,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeadComponent } from './components/head/head.component';
 
 import { BadgeModule } from 'primeng/badge';
+import { RouterModule } from '@angular/router';
 
 // import * as index from './../shared/models';
 
@@ -100,18 +98,16 @@ import { BadgeModule } from 'primeng/badge';
 
   imports: [
     CommonModule,
-    AppRoutingModule,
     FormsModule,
     SidebarModule,
     ButtonModule,
-    BrowserModule,
+    RouterModule,
     DropdownModule,
     TagModule,
     ProgressSpinnerModule,
     TableModule,
     PaginatorModule,
     ConfirmPopupModule,
-    BrowserAnimationsModule,
     BadgeModule,
   ],
   providers: [ConfirmationService],

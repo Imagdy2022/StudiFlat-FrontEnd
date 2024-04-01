@@ -2,7 +2,6 @@ import { AdminsComponent } from './admins.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { EditAdminComponent } from './edit-admin/edit-admin.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -24,7 +23,6 @@ const routes: Routes = [];
   declarations: [AdminsComponent, AddAdminComponent, EditAdminComponent],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,

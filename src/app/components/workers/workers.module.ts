@@ -7,7 +7,6 @@ import { WorkerProfileComponent } from './worker-profile/worker-profile.componen
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
  import { DropdownModule } from 'primeng/dropdown';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -31,7 +30,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,

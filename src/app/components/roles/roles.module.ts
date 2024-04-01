@@ -1,6 +1,5 @@
 import { RolesComponent } from './roles.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -23,7 +22,6 @@ const routes: Routes = [];
   declarations: [RolesComponent],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,

@@ -1,6 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UserComponent } from './user.component';
@@ -40,7 +39,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     PaginatorModule,
-    BrowserAnimationsModule,
     SharedModule,
     RatingModule,
     FormsModule,

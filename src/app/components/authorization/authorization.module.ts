@@ -1,6 +1,5 @@
 import { AuthorizationComponent } from './authorization.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -35,7 +34,6 @@ const routes: Routes = [];
     CalendarModule,
     StepsModule,
     RatingModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
