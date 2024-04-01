@@ -162,4 +162,17 @@ searchAction() {
     this.searchText =""
 
 }
+display2 = 'none';
+onCloseModal2() {
+  this.display2 = 'none';
+}
+idModal: any;
+openModal2(id: any) {
+  this.idModal = id;
+  this.display2 = 'block';
+}
+onSubmitModal2() {
+
+}
+
 }
