@@ -128,8 +128,10 @@
                         <td>
                             {{issue?.date_Reported | date:'medium' }}
                         </td>
-                        <td style="width: 15vw;">
-                            {{issue?.desc}}
+                        <td>
+                          <p style="width: 10vw; overflow: hidden; text-overflow: ellipsis;
+                          white-space: nowrap;"> {{issue?.desc}}
+                          </p>
                         </td>
                         <td class="text-center">
                           <div>
@@ -165,7 +167,7 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,issue.issue_ID)">
               <img src="assets/images/edit.svg">
           </button>
-                            <div *ngIf="showEdit[issue.issue_ID] " style="width: 180px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                            <div *ngIf="showEdit[issue.issue_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/Report-view/{{issue.issue_ID}}">View Details</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/assgin-issue/{{issue.issue_ID}}"> assign worker  </button>

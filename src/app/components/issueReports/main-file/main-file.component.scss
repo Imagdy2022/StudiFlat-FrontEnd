@@ -161,3 +161,35 @@ th {
   color: #EF2011;
   background-color: #FCEEEE;
 }
+tr{
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: 50px;
+  }
+}
+tr:nth-last-child(3){
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: -50px;
+  }
+}
+tr:nth-last-child(2){
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: -120px;
+  }
+}
+tr:last-child{
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: -200px;
+  }
+}
