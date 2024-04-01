@@ -5,7 +5,7 @@ const routes: Routes = [
   
 
   {
-    path: 'dashboard',canActivate: [AuthGuard], loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule), 
+    path: '',canActivate: [AuthGuard], loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule), 
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
    { path: 'login', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },

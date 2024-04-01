@@ -29,11 +29,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     IgxItemLegendModule, 
     DashboardRoutingModule
     ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [HttpClientModule, JwtInterceptor, PathLocationStrategy],
+    
 })
 export class DashboardModule {
-  constructor(library: FaIconLibrary) {
-    library.addIconPacks(fas, far);
-  }
+  
  }

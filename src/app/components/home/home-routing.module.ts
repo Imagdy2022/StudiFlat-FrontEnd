@@ -20,7 +20,6 @@ import { CheckoutInqqComponent } from '../checkout-inqq/checkout-inqq.component'
 import { AdsComponent } from '../configurations/ads/ads.component';
 import { ConfigurationsComponent } from '../configurations/configurations.component';
 import { FaqqComponent } from '../configurations/faqq/faqq.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
 import { CreacteContractComponent } from '../inquiries/creacte-contract/creacte-contract.component';
 import { InquireEditComponent } from '../inquiries/inquire-edit/inquire-edit.component';
 import { InquireOfferComponent } from '../inquiries/inquire-offer/inquire-offer.component';
@@ -58,12 +57,210 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  {
+    path: 'dashboard', canActivate: [AuthGuard],loadChildren: () => import('../../components/dashboard/dashboard.module').then(m => m.DashboardModule),
+   
+  },
+  {
+    path: 'apartments',
+    component: ApartmentsComponent,
+    canActivate: [AuthGuard],
+  },
 
   {
-    path: '', canActivate: [AuthGuard],loadChildren: () => import('../../components/dashboard/dashboard.module').then(m => m.DashboardModule),
-   
-  }
+    path: 'apartments/page/:id',
+    component: AddNewApartmentsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'apartments/apartments-details/:id',
+    component: ApartmentDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'apartments/:id',
+    component: ContractComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'apartments/contract/:id',
+    component: CreateContractComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'apartments/booking/:id',
+    component: BookingComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'apartments/view-booking/:id',
+    component: ViewBookingComponent,
+    canActivate: [AuthGuard],
+  },
 
+  { path: 'users', component: UserComponent, canActivate: [AuthGuard] },
+  {
+    path: 'configurations',
+    component: ConfigurationsComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'ads', component: AdsComponent, canActivate: [AuthGuard] },
+  { path: 'faq', component: FaqqComponent, canActivate: [AuthGuard] },
+
+  { path: 'owners', component: OwnersComponent, canActivate: [AuthGuard] },
+  {
+    path: 'owner/:id',
+    component: OwnerDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'owner/:page/:id',
+    component: OwnerDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'owner-profile/:id',
+    component: OwnerProfileComponent,
+    canActivate: [AuthGuard],
+  },
+
+  { path: 'messages', component: MessageComponent, canActivate: [AuthGuard] },
+  {
+    path: 'assgin-tiket/:id',
+    component: AssginTicketComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'message-tiket/:id',
+    component: MessResquestComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'statistics',
+    component: StatisticsComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuard] },
+  { path: 'admins', component: AdminsComponent, canActivate: [AuthGuard] },
+  { path: 'roles', component: RolesComponent, canActivate: [AuthGuard] },
+  {
+    path: 'authorization/:id',
+    component: AuthorizationComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'add-admin', component: AddAdminComponent, canActivate: [AuthGuard] },
+  { path: 'cancel-inquire', component: CancelInquire2Component, canActivate: [AuthGuard] },
+  { path: 'view-inquire/:id', component: ViewInquireComponent, canActivate: [AuthGuard] },
+  { path: 'view-cancel/:id', component: ViewCancelComponent, canActivate: [AuthGuard] },
+
+  { path: 'checkout-inquire', component: CheckoutInqqComponent, canActivate: [AuthGuard] },
+  { path: 'checkout/:id', component: CheckoutDetailsComponent, canActivate: [AuthGuard] },
+
+  {
+    path: 'edit-admin/:id',
+    component: EditAdminComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'inquiries',
+    component: InquiriesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'view-inquire/:id',
+    component: ViewInquireComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'inquire-offer/:id',
+    component: InquireOfferComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'inquire-edit/:id',
+    component: InquireEditComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'create-contract/:id',
+    component: CreacteContractComponent,
+    canActivate: [AuthGuard],
+  },
+
+  { path: 'workers', component: WorkersComponent, canActivate: [AuthGuard] },
+  {
+    path: 'add-workers',
+    component: AddWorkerComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-workers/:id',
+    component: EditWorkerComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'worker-profile/:id',
+    component: WorkerProfileComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'Issue_Reports',
+    component: MainFileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'Report-view/:id',
+    component: ReportsDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'Report-print/:id',
+    component: ReportPrintComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'assgin-issue/:id',
+    component: AssginIssueComponent,
+    canActivate: [AuthGuard],
+  },
+
+  { path: 'unlegal', component: UnlegalComponent, canActivate: [AuthGuard] },
+
+  { path: 'partner', component: PartnerComponent, canActivate: [AuthGuard] },
+  {
+    path: 'add-partner',
+    component: AddPartnerComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-partner/:id',
+    component: EditPartnerComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'view-partner/:id',
+    component: ViewPartnerComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'invoice/:id',
+    component: InvoiceComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'app-msgs',
+    component: AppMsgsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'push-msgs',
+    component: PushmsgsComponent,
+    canActivate: [AuthGuard],
+  },
 ]
 }
 ];

@@ -21,11 +21,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     CommonModule,
     HomeRoutingModule,SharedModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [HttpClientModule, JwtInterceptor, PathLocationStrategy],
+  
 })
 export class HomeModule { 
-  constructor(library: FaIconLibrary) {
-    library.addIconPacks(fas, far);
-  }
+  
 }
