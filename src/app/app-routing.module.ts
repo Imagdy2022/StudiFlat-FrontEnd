@@ -56,6 +56,7 @@ import { CancelInquire2Component } from './components/cancel-inquire2/cancel-inq
  import { ViewCancelComponent } from './components/cancel-inquire2/view-cancel/view-cancel.component';
 import { CheckoutInqqComponent } from './components/checkout-inqq/checkout-inqq.component';
 import { CheckoutDetailsComponent } from './components/checkout-inqq/checkout-details/checkout-details.component';
+import { CreateNewPaymentComponent } from './components/payments/create-new-payment/create-new-payment.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
@@ -145,6 +146,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuard] },
+  { path: 'payments/create_new', component: CreateNewPaymentComponent, canActivate: [AuthGuard] },
   { path: 'admins', component: AdminsComponent, canActivate: [AuthGuard] },
   { path: 'roles', component: RolesComponent, canActivate: [AuthGuard] },
   {
