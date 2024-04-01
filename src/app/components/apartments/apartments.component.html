@@ -52,9 +52,9 @@
             <ng-container *ngIf="apartmentList">
                 <ng-container *ngFor="let item of apartmentList;">
 
-                    <div class=" col-12 col-md-6 col-lg-3 mb-4  position-relative px-2 mb-4 h-100" style="height: 393px !important;">
+                    <div routerLink="/apartments/apartments-details/{{item.apt_UUID}}" class=" col-12 col-md-6 col-lg-3 mb-4  position-relative px-2 mb-4 h-100" style="height: 393px !important;cursor: pointer;">
 
-                        <a routerLink="/apartments/apartments-details/{{item.apt_UUID}}" style="height: 46% !important;" class="d-block">
+                        <a  style="height: 46% !important;" class="d-block">
                             <img [src]="item.apt_ThumbImg.includes('http') ? item.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'" class="w-100 h-100 apartmentImage">
                             <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3 " [class.available]="item.statusString != 'Rented'">{{item.statusString}}</p>
                         </a>
