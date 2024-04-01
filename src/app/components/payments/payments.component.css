@@ -208,3 +208,28 @@ span.icon{
   background-color: #1F4068;
   border: 1px solid #1F4068;
 }
+
+tr{
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: 50px;
+  }
+}
+tr:nth-last-child(2){
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: -10px;
+  }
+}
+tr:last-child{
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: -100px;
+  }
+}

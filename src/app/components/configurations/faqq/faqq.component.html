@@ -93,7 +93,7 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,fqq.faq_ID)">
     <img src="assets/images/edit.svg">
 </button>
-                            <div *ngIf="showEdit[fqq.faq_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                            <div *ngIf="showEdit[fqq.faq_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="openmodel2updatefaq(fqq)">update</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteFAQ(fqq.faq_ID)">Delete </button>

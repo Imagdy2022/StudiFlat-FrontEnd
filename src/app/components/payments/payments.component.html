@@ -301,7 +301,7 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson( $event,payment.inv_ID)">
                   <img src="assets/images/edit.svg">
               </button>
-                            <div *ngIf="showEdit[payment.inv_ID]  " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button px-3">
+                            <div *ngIf="showEdit[payment.inv_ID]  " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button px-3">
                                 <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/invoice/{{payment.inv_ID}}">View Invoice Details  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="MarkPaid(payment.inv_ID)" *ngIf="payment?.inv_Paid==true && payment.payment_By=='Cash'"> Mark As Unpaid    </button>
 

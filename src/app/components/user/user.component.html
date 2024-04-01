@@ -173,7 +173,7 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,Tenant.user_ID)">
               <img src="assets/images/edit.svg">
           </button>
-                            <div *ngIf="showEdit[Tenant.user_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                            <div *ngIf="showEdit[Tenant.user_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/app-edite-user-details/{{Tenant.user_ID}}">view details</button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteUser(Tenant.user_ID)" *ngIf="TantsRole?.p_Delete==true || is_Super==true"> Delete </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendUser(Tenant.user_ID)">Suspend User </button>
