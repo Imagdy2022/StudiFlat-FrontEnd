@@ -128,8 +128,10 @@
                         <td>
                             {{issue?.date_Reported | date:'medium' }}
                         </td>
-                        <td style="width: 15vw;">
-                            {{issue?.desc}}
+                        <td>
+                          <p style="width: 10vw; overflow: hidden; text-overflow: ellipsis;
+                          white-space: nowrap;"> {{issue?.desc}}
+                          </p>
                         </td>
                         <td class="text-center">
                           <div>
