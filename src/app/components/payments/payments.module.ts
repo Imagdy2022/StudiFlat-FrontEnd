@@ -25,6 +25,7 @@ const routes: Routes = [];
     PaymentsComponent,
     CreateNewPaymentComponent,
    ],
+   exports: [CreateNewPaymentComponent],
   imports: [
     CommonModule,
     PaginatorModule,
@@ -39,7 +40,6 @@ const routes: Routes = [];
     ToastModule,
     RouterModule.forChild(routes)
   ],
-  exports: [ ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
