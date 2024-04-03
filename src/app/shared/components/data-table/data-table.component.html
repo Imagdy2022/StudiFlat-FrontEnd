@@ -49,8 +49,8 @@
                 <!-- in owner case -->
                 <td *ngIf="pagePerson =='Owners'  ">
 
-                    <img *ngIf="product.owner_Photo" routerLink="/owner-profile/{{product.owner_ID}}" [src]="product?.owner_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;    margin-left: 9px;">
-                    <img *ngIf="!product.owner_Photo" routerLink="/owner-profile/{{product.owner_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;    margin-left: 9px;">                    {{product.owner_FirstName}} {{product.owner_LastName }}
+                    <img *ngIf="product.owner_Photo" routerLink="/owners/owner-profile/{{product.owner_ID}}" [src]="product?.owner_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;    margin-left: 9px;">
+                    <img *ngIf="!product.owner_Photo" routerLink="/owners/owner-profile/{{product.owner_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;    margin-left: 9px;">                    {{product.owner_FirstName}} {{product.owner_LastName }}
 
 
                 </td>
@@ -66,7 +66,7 @@
                   <img src="assets/images/edit.svg">
               </button>
                     <div *ngIf="showEdit[product.owner_ID]"  style="width: 150px;z-index: 999;right: 60px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                        <button *ngIf="OwnersRole?.p_View==true || is_Super==true" routerLink="/owner-profile/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">View Profile</button>
+                        <button *ngIf="OwnersRole?.p_View==true || is_Super==true" routerLink="/owners/owner-profile/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">View Profile</button>
 
                         <button *ngIf="OwnersRole?.p_Update==true || is_Super==true" routerLink="/owner/edit_owner/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100">Edit</button>
 

@@ -22,10 +22,9 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { UserRoutingModule } from './user-routing.module';
 const routes: Routes = [
-  { path: '', component: UserComponent },
-  { path: 'app-user-details/:id', component: UserDetailsComponent },
-  { path: 'app-edite-user-details/:id', component: EditeUserDetailsComponent },
+
 ];
 
 @NgModule({
@@ -50,7 +49,7 @@ const routes: Routes = [
     ButtonModule,
     ToastModule,
     BreadcrumbModule,
-    RouterModule.forChild(routes),
+    UserRoutingModule
   ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

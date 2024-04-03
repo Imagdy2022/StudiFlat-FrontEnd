@@ -30,7 +30,7 @@
                 <!-- start addUserButton  -->
                 <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
                 <!-- end addUserButton  -->
-                <a *ngIf="workersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/add-workers" style="background-color:#1F4068; cursor: pointer;    width: 53%;">
+                <a *ngIf="workersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/workers/add-workers" style="background-color:#1F4068; cursor: pointer;    width: 53%;">
                     <img src="assets/images/plus.svg" class="me-2 ">Add New
                 </a>
             </div>
@@ -110,9 +110,9 @@
             <img src="assets/images/edit.svg">
         </button>
                             <div *ngIf="showEdit[workers.worker_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="workersRole?.p_Update==true || is_Super==true" routerLink="/edit-workers/{{workers.worker_ID}}">update</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="workersRole?.p_Update==true || is_Super==true" routerLink="/workers/edit-workers/{{workers.worker_ID}}">update</button>
 
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/worker-profile/{{workers.worker_ID}}"> View Profile  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/workers/worker-profile/{{workers.worker_ID}}"> View Profile  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="workersRole?.p_Delete==true || is_Super==true" (click)="deleteworker(workers.worker_ID)">Delete </button>
 
                             </div>

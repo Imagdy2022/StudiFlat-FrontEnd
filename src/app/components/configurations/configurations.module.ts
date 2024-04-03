@@ -18,6 +18,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { PaginatorModule } from 'primeng/paginator';
 import { Breadcrumb } from 'primeng/breadcrumb';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ConfigurationsRoutingModule } from './configurations-routing.module';
 
 const routes: Routes = [];
 
@@ -36,7 +37,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     BreadcrumbModule,
-    RouterModule.forChild(routes),
+    ConfigurationsRoutingModule
   ],
   declarations: [ConfigurationsComponent],
   providers: [MessageService],

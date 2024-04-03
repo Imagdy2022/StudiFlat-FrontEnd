@@ -28,6 +28,7 @@ import { ChipModule } from 'primeng/chip';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { InquiriesoutingModule } from './inquiries-routing.module';
 const routes: Routes = [];
 
 @NgModule({
@@ -55,7 +56,7 @@ const routes: Routes = [];
     BreadcrumbModule,
     ChipModule,
     PdfViewerModule,
-    RouterModule.forChild(routes),
+    InquiriesoutingModule
   ],
   exports: [],
   providers: [MessageService],

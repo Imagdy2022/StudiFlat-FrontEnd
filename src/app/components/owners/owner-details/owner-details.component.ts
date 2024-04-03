@@ -134,7 +134,7 @@ export class OwnerDetailsComponent {
         if (
           this.OwnersRole.p_Add == false &&
           this.is_Super == false &&
-          this.param == 'owner/create_new'
+          this.param == 'owners/create_new'
         ) {
           this.gotopage();
         } else if (

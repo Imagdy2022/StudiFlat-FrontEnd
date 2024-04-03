@@ -88,9 +88,9 @@ export class CreateNewPaymentComponent {
     this.search = false;
     this.getAllpartners()
       this.searchText =""
-
   }
   selectUser(e: any ){
-    console.log(e)
+  }
+  SelectType(e:any){
   }
 }

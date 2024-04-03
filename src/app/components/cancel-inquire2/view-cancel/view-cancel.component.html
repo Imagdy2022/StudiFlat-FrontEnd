@@ -12,24 +12,24 @@
   <main class="p-4 col-lg-10">
     <div class="d-md-flex justify-content-between" style="margin-bottom:24px">
         <div class="d-flex" style="align-items: center;">
-            <p class="fw-bold me-2" style="color: #6c6a6a;margin-bottom: 0px;"><a  style="color: #6c6a6a;"class="removeUnderLine" routerLink="/cancel-inquire">cancelation Inquiries </a></p>
-  
+            <p class="fw-bold me-2" style="color: #6c6a6a;margin-bottom: 0px;"><a  style="color: #6c6a6a;"class="removeUnderLine" routerLink="/inquiries/cancel-inquire">cancelation Inquiries </a></p>
+
             <p class="fw-bold me-2" style="margin-bottom: 0px; color: #605D62;">></p>
             <p class="fw-bold" style="color: #6c6a6a;margin-bottom: 0px;" > Cancelation Details </p>
-            
-  
+
+
         </div>
-        
+
     </div>
-  
-       
+
+
       <p-toast></p-toast>
 
- 
+
       <div class="bg-white border rounded-3 mt-3 p-3">
           <div class="row">
               <div class="col-12 col-md-6 me-4">
-                 
+
                   <ng-container>
                       <div class="container testimonial-group">
                           <div class="row mb-3  vcrr" *ngIf="inquire_details">
@@ -131,7 +131,7 @@
                                   display: inline-block;
                                   text-wrap: balance;
                                   word-break: break-word;">
-                                  <p> {{ inquire_details?.cancel_Reason }} 
+                                  <p> {{ inquire_details?.cancel_Reason }}
                                     </p>
                                 </div>
                               </div>
@@ -141,7 +141,7 @@
                             </div>
                           </div>
                       </div>
-                  
+
                   </div>
                   <div   style="display: flex; justify-content: space-between;" >
                     <button  (click)="onOpenModal2( ) "    class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important; padding-right: 80px !important;
@@ -152,16 +152,16 @@
                         border: 1px solid #1f4068 !important;
                         padding-right: 80px !important;
                         padding-left: 80px !important;">
-                             
+
                             Reject
-    
+
           </button>
 
                   </div>
 
-                  
-                  
-                  
+
+
+
               </div>
           </div>
 
@@ -169,8 +169,8 @@
   </main>
   <!-- end content page  -->
 </div>
- 
- 
+
+
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" style=" background-color: rgb(23 22 22 / 50%);;">
     <div class="modal-dialog" role="document" style="    max-width: 800px;">
         <div class="modal-content" style="    margin-top:  100px;">
@@ -191,18 +191,18 @@
             <div class="modal-body">
 
 
-                
+
                 <div class="row">
                     <div class="mb-3 col-12 col-md-12">
                         <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Reason</label>
                         <textarea class="border p-3 pt-3 rounded-2 w-100" rows="4" style="resize: inherit" placeholder="please enter reason  " [(ngModel)]="Reason"></textarea>
 
                     </div>
-                  
+
                 </div>
 
-            
-              
+
+
 
             </div>
 
@@ -233,7 +233,7 @@
             <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
                 <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
                     <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
-                        
+
             </span>
                 </p>
                 <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal2()">
@@ -245,12 +245,12 @@
             </div>
 
             <div class="modal-body" style="text-align: center;padding-top: 0px;">
-<img style="    border: 20px solid #FCEEEE;border-radius: 36px;" src="../../../../assets/images/mingcute_warning-line.svg"> 
+<img style="    border: 20px solid #FCEEEE;border-radius: 36px;" src="../../../../assets/images/mingcute_warning-line.svg">
 <h5 style="font-weight: 600;
 margin-top: 10px;">Accept Cancelation inquire</h5>
 <p>Are you sure you want to accept cancel this inquire? This action is irreversible and will permanently effect all data associated with booking.</p>
-                
- 
+
+
             </div>
 
 
@@ -289,8 +289,8 @@ margin-top: 10px;">Accept Cancelation inquire</h5>
             </div>
             <div class="modal-body"style="text-align: center;padding-top:0px">
               <img src="../../../assets/images/confirmm.png">
-  
-   
+
+
     <p style="margin-bottom: 0px;font-weight: 500;" >sent successfully!</p>
     <p style="margin-bottom: 0px;"><b>check out sheet </b>has been sent successfully</p>
     <button  (click)="gotoListCancel()"  class="rounded-2 text-white rounded-2 border-0 py-2 px-4 " style="background-color: #1f4068 !important ;    margin-top: 15px;
@@ -298,7 +298,7 @@ margin-top: 10px;">Accept Cancelation inquire</h5>
       ← Back
   </button>
             </div>
-  
+
         </div>
      </div>
    </div>
@@ -317,8 +317,8 @@ margin-top: 10px;">Accept Cancelation inquire</h5>
             </div>
             <div class="modal-body"style="text-align: center;padding-top:0px">
               <img src="../../../assets/images/confirmm.png">
-  
-   
+
+
     <p style="margin-bottom: 0px;font-weight: 500;" >Rejected successfully!</p>
     <p style="margin-bottom: 0px;"><b>cancelation request</b> has been rejected successfully</p>
     <button  (click)="gotoListCancel()"  class="rounded-2 text-white rounded-2 border-0 py-2 px-4 " style="background-color: #1f4068 !important ;    margin-top: 15px;
@@ -326,7 +326,7 @@ margin-top: 10px;">Accept Cancelation inquire</h5>
       ← Back
   </button>
             </div>
-  
+
         </div>
      </div>
    </div>

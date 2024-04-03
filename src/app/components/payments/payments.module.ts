@@ -17,6 +17,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
 import { CreateNewPaymentComponent } from './create-new-payment/create-new-payment.component';
+import { PaymentsRoutingModule } from './payments-routing.module';
 
 const routes: Routes = [];
 
@@ -38,6 +39,7 @@ const routes: Routes = [];
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
+    PaymentsRoutingModule,
     RouterModule.forChild(routes)
   ],
   providers: [MessageService],

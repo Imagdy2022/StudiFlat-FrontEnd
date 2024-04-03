@@ -26,7 +26,7 @@
                 <!-- start addUserButton  -->
                 <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
                 <!-- end addUserButton  -->
-                <a *ngIf="partnersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/add-partner" style="background-color:#1F4068; cursor: pointer;">
+                <a *ngIf="partnersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/partner/add-partner" style="background-color:#1F4068; cursor: pointer;">
                     <img src="assets/images/plus.svg" class="me-2 ">Add New
                 </a>
             </div>
@@ -129,9 +129,9 @@
           <img src="assets/images/edit.svg">
       </button>
                             <div *ngIf="showEdit[partners.partner_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="partnersRole?.p_Update==true || is_Super==true" routerLink="/edit-partner/{{partners.partner_ID}}">update</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="partnersRole?.p_Update==true || is_Super==true" routerLink="/partner/edit-partner/{{partners.partner_ID}}">update</button>
 
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/view-partner/{{partners.partner_ID}}"> View Profile  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/partner/view-partner/{{partners.partner_ID}}"> View Profile  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="partnersRole?.p_Delete==true || is_Super==true" (click)="deletepartner(partners.partner_ID)">Delete </button>
 
                             </div>

@@ -23,6 +23,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { PaginatorModule } from 'primeng/paginator';
+import { MessageRoutingModule } from './message-routing.module';
 const routes: Routes = [
 ];
 @NgModule({
@@ -40,7 +41,7 @@ const routes: Routes = [
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
-    RouterModule.forChild(routes)
+    MessageRoutingModule
   ],
   exports: [ ],
   providers: [MessageService],

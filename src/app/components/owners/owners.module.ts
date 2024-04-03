@@ -16,6 +16,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { OwnersRoutingModule } from './owners-routing.module';
 
 
 const routes: Routes = [];
@@ -36,7 +37,7 @@ const routes: Routes = [];
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
-    RouterModule.forChild(routes)
+    OwnersRoutingModule
   ],
   exports: [OwnerDetailsComponent],
   providers: [MessageService],

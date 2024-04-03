@@ -22,6 +22,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
 import { ChipModule } from 'primeng/chip';
+import { IssuReportsRoutingModule } from './issu-reports-routing.module';
 const routes: Routes = [];
 
 @NgModule({
@@ -33,7 +34,7 @@ const routes: Routes = [];
   ],
   imports: [
     CommonModule,
-    
+
     SharedModule,
     FormsModule,
     CalendarModule,
@@ -46,7 +47,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     ChipModule,
-    RouterModule.forChild(routes),
+    IssuReportsRoutingModule
   ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

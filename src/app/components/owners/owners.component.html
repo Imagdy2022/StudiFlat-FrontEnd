@@ -20,7 +20,7 @@
                 <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
                 <!-- end dropdown button  -->
                 <!-- start add button (add new owner) in page  -->
-                <app-add-new-button *ngIf="OwnersRole?.p_Add==true || is_Super==true" [id]="'/owner/create_new'" class="mt-2"></app-add-new-button>
+                <app-add-new-button *ngIf="OwnersRole?.p_Add==true || is_Super==true" [id]="'/owners/create_new'" class="mt-2"></app-add-new-button>
                 <!-- end add button (add new owner) in page  -->
             </div>
         </div>

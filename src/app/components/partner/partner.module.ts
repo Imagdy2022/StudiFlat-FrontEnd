@@ -26,6 +26,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast'
 import { PaginatorModule } from 'primeng/paginator';
+import { PartnerRoutingModule } from './partner-routing.module';
 
 const routes: Routes = [
   ];
@@ -41,7 +42,7 @@ const routes: Routes = [
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
-    RouterModule.forChild(routes)
+    PartnerRoutingModule
   ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

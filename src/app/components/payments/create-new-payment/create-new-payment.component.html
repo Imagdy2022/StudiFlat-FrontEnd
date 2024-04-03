@@ -33,7 +33,7 @@
         <div class="row g-4 mb-3">
           <div class="col-md-6">
             <label class="form-label">Pay To</label>
-            <select class="form-select">
+            <select class="form-select" (change)="SelectType($event)">
               <option value="1">Owner</option>
               <option value="2">Apartment</option>
               <option value="3">Partner</option>
@@ -173,7 +173,7 @@
    </div>
 
    <div class="mt-4 d-flex justify-content-between ">
-        <button class="btn btn-black">cancel</button>
+        <button class="btn btn-black" routerLink="/payments">cancel</button>
         <button class="btn btn-color py-2 px-4">save</button>
 </div>
   </div>

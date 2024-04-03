@@ -113,7 +113,7 @@
                     <tr style="cursor: pointer;" (click)="hidecard()">
 
 
-                        <td class="d-flex align-items-center" routerLink="/Report-view/{{issue.issue_ID}}">
+                        <td class="d-flex align-items-center" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                             {{issue?.issue_Code}}
                         </td>
                         <td>
@@ -168,9 +168,9 @@
               <img src="assets/images/edit.svg">
           </button>
                             <div *ngIf="showEdit[issue.issue_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/Report-view/{{issue.issue_ID}}">View Details</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">View Details</button>
 
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/assgin-issue/{{issue.issue_ID}}"> assign worker  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/Issue_Reports/assgin-issue/{{issue.issue_ID}}"> assign worker  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="OpenModal1(issue.issue_ID) " *ngIf="issue.worker!='00000000-0000-0000-0000-000000000000'">Mark it as In-Progress
 
 
