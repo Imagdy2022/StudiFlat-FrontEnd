@@ -19,3 +19,14 @@ img{
     color: white;
     padding: 10px 0;
 }
+
+::ng-deep .form-check input[type="checkbox"],
+::ng-deep .radio input[type="radio"]{
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+::ng-deep .form-check .form-check-label{
+  padding-left: 6px !important;
+
+}

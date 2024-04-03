@@ -75,7 +75,6 @@ export class ForthStepComponent {
       this.aprt_details_Edit = res.backup_Info
       this.wifi = res.rent_Rules
 
-debugger
 
        this.PostBackupInfo.patchValue(res.backup_Info);
        this.inputField=res.backup_Info["inputFields"]

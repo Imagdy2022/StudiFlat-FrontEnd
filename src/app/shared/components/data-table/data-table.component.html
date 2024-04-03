@@ -68,7 +68,7 @@
                     <div *ngIf="showEdit[product.owner_ID]"  style="width: 150px;z-index: 999;right: 60px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
                         <button *ngIf="OwnersRole?.p_View==true || is_Super==true" routerLink="/owners/owner-profile/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">View Profile</button>
 
-                        <button *ngIf="OwnersRole?.p_Update==true || is_Super==true" routerLink="/owner/edit_owner/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100">Edit</button>
+                        <button *ngIf="OwnersRole?.p_Update==true || is_Super==true" routerLink="/owners/owner-details/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100">Edit</button>
 
                         <button *ngIf="OwnersRole?.p_Delete==true || is_Super==true" (click)="confirmDelete($event,product)" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">Delete</button>
 

@@ -7,7 +7,7 @@ import { OwnersComponent } from './owners.component';
 
 const routes: Routes = [
   { path: '', component: OwnersComponent },
-  { path: ':id', component: OwnerDetailsComponent },
+  { path: 'owner-details/:id', component: OwnerDetailsComponent },
   { path: 'owner-profile/:id', component: OwnerProfileComponent }
 ];
 

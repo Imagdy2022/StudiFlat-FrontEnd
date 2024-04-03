@@ -86,7 +86,6 @@ export class ThirdStepComponent {
   afterUploadImage = 'true';
   aprt_details_Edit: any;
   ngOnInit() {
-    debugger;
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
     this.listDropDownFloorNumber = this.rangefrom0to100();
     if (this.addApartment != 'add new apartments') {
@@ -223,7 +222,6 @@ export class ThirdStepComponent {
     });
   }
   DoyouCreateContract(value: any) {
-    debugger;
     this.CreateContract = value.target.value;
     this.CreateContract == 'Yes'
       ? (this.createcontractpage = true)
@@ -253,7 +251,6 @@ export class ThirdStepComponent {
     this.apt_roles.push({ label: 'Rule 1', rule_Desc: '' });
   }
   DoyouCreateacheckintype(value: any) {
-    debugger;
     this.Createcheckintype = value.target.value;
     let checkin;
     this.Createcheckintype == 'self check in'
@@ -366,7 +363,6 @@ export class ThirdStepComponent {
   idwner: any;
   // get  local storage
   getLocalStorage(): void {
-    debugger;
     this.storedImages = [];
 
     this.storedImages = JSON.parse(localStorage.getItem('imagesAPT12') || '{}');
@@ -429,7 +425,6 @@ export class ThirdStepComponent {
     return 'contract' in localStorage;
   }
   Create_Apart_Contract(data: any) {
-    debugger;
     let rules: any = [];
     this.apt_roles.forEach((element) => {
       rules.push({ rule_Desc: element.rule_Desc });
@@ -440,7 +435,6 @@ export class ThirdStepComponent {
       apt_rules: rules,
     };
 
-    console.log({ ...data.value, ...res });
 
     localStorage.setItem(
       'contract',
@@ -638,7 +632,6 @@ export class ThirdStepComponent {
         });
 
         for (let file of data) {
-          debugger;
           this.apt_imgs.push({ pic_URL: file.name });
         }
         // this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);

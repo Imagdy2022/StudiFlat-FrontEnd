@@ -114,7 +114,7 @@ export class OwnerProfileComponent implements OnInit{
       this.OwnersRole=parsedData.permissions[i];
     }
   }
-  if(this.OwnersRole.p_Add==false &&this.is_Super==false&&this.param == "owner/create_new") {
+  if(this.OwnersRole.p_Add==false &&this.is_Super==false&&this.param == "owners/create_new") {
     this.gotopage( )
   }
   else if(this.OwnersRole.p_Update==false &&this.is_Super==false&&this.pageTitle== "edit_owner") {

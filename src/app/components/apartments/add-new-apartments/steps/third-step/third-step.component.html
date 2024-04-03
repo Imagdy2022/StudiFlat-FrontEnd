@@ -98,7 +98,7 @@
                     <p-calendar formControlName="contractDate_End" dateFormat="dd/mm/yy"></p-calendar>
                 </div>
             </div>
-            <div class="mb-3 me-4 col-12 col-md-6" *ngIf="createcontractpage">
+            <div class="mb-3 pe-2 col-12 col-md-6" *ngIf="createcontractpage">
                 <label class="form-label gray fw-bold">price per month</label>
                 <input type="number" formControlName="rent_Fees" [class.is-invalid]="create_Apart_contract.get('rent_Fees')!.invalid && create_Apart_contract.get('rent_Fees')!.touched " class="form-control rounded-2 py-2 fs-6" />
                 <span class="text-danger d-block m-2 " *ngIf="create_Apart_contract.get('rent_Fees')!.invalid && create_Apart_contract.get('rent_Fees')!.touched ">
@@ -108,7 +108,7 @@
 
             <!--Sections-->
 
-            <div *ngFor="let data of contractDetails;let index=index">
+            <div *ngFor="let data of contractDetails;let index=index" class="pe-2">
                 <app-create-contract-sections [contractDetails]="data" [index]="index+1"></app-create-contract-sections>
                 <div class=" col-md-12 " style="margin-bottom: 50px;">
                     <div class="d-flex" style="float:right">
@@ -447,7 +447,7 @@
                 <p class="fw-bold mb-0">Rental Rules</p>
                 <p class="gray">Add rental rules for the apartment</p>
             </div>
-            <div class="row ">
+            <div class="row gx-0">
                 <ng-container *ngFor="let data of apt_roles">
 
                     <div class="mb-3 col-12 col-md-6 ">

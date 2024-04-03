@@ -56,6 +56,7 @@ export class DataTableComponent {
   for(let i=0; i<parsedData.permissions.length;i++){
     if(parsedData.permissions[i].page_Name=="Owners"){
       this.OwnersRole=parsedData.permissions[i];
+      console.log("Hello", this.OwnersRole)
     }
   }
   if(this.OwnersRole.p_View==false &&this.is_Super==false) {
@@ -131,7 +132,7 @@ export class DataTableComponent {
    * @param event
    */
   confirmDelete(event: any, product: any) {
-   
+
 
     this.confirmationService.confirm({
       target: event.target,
