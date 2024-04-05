@@ -9,6 +9,7 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
   styleUrls: ['./payments.component.css']
 })
 export class PaymentsComponent implements OnInit {
+  rangeDates: Date[] ;
 
   constructor(    private messageService: MessageService,
     public router: Router, public _adminservices:AdminsService ) { }

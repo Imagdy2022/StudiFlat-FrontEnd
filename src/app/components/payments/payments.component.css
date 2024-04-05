@@ -230,6 +230,13 @@ tr:last-child{
     width: 150px;
     z-index: 999;
     right: 35px;
-    top: -100px;
+    top: -80px;
   }
+}
+::ng-deep .p-calendar {
+  height: 36px;
+}
+::ng-deep .p-button{
+  background-color: #1F4068 !important;
+  border: 1px solid #1F4068 !important;
 }

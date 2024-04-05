@@ -18,6 +18,7 @@ import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
 import { CreateNewPaymentComponent } from './create-new-payment/create-new-payment.component';
 import { PaymentsRoutingModule } from './payments-routing.module';
+import { CalendarModule } from 'primeng/calendar';
 
 const routes: Routes = [];
 
@@ -40,7 +41,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     PaymentsRoutingModule,
-    RouterModule.forChild(routes)
+    CalendarModule
   ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

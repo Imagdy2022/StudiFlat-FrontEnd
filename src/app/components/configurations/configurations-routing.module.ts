@@ -5,7 +5,7 @@ import { ConfigurationsComponent } from './configurations.component';
 
 const routes: Routes = [
   {
-    path: 'configurations', component: ConfigurationsComponent,
+    path: '', component: ConfigurationsComponent,
   }];
 
 @NgModule({
