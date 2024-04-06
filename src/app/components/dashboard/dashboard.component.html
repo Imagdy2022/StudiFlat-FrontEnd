@@ -37,7 +37,7 @@
               <span class="mx-3 fw-bold">Total Revenue</span>
           </div>
           <div>
-              <h3 class="my-2">{{DashCards.total_Revenue}}</h3>
+              <h3 class="my-2">{{DashCards.total_Revenue ?? 0}}</h3>
               <div>
                   <i class="fa fa-arrow-down red" *ngIf="DashCards.revenue_Up==false" aria-hidden="true"></i>
                   <i class="fa fa-arrow-up green" *ngIf="DashCards.revenue_Up==true" aria-hidden="true"></i>
@@ -55,7 +55,7 @@
               <span class="mx-3 fw-bold">Total expenses</span>
           </div>
           <div>
-              <h3 class="my-2">{{DashCards.total_Expenses}}</h3>
+              <h3 class="my-2">{{DashCards.total_Expenses ?? 0}}</h3>
               <div>
                   <i class="fa fa-arrow-down red" *ngIf="DashCards.expenses_Up==false" aria-hidden="true"></i>
                   <i class="fa fa-arrow-up green" *ngIf="DashCards.expenses_Up==true" aria-hidden="true"></i>
@@ -74,7 +74,7 @@
                </span>
           </div>
           <div>
-              <h3 class="my-2">{{DashCards.net_Profit}}</h3>
+              <h3 class="my-2">{{DashCards.net_Profit ?? 0}}</h3>
               <div>
                 <div>
                     <i class="fa fa-arrow-down red" *ngIf="DashCards.net_Profit_Up==false" aria-hidden="true"></i>
@@ -317,7 +317,7 @@
                   <span class="mx-3 fw-bold">Total Apartments</span>
               </div>
               <div>
-                  <h3 class="my-2">{{DashCards.total_Apartments}}</h3>
+                  <h3 class="my-2">{{DashCards.total_Apartments ?? 0}}</h3>
 
               </div>
           </div>
@@ -329,7 +329,7 @@
                   <span class="mx-3 fw-bold">Total Tenants</span>
               </div>
               <div>
-                  <h3 class="my-2">{{DashCards.total_Tenants}}</h3>
+                  <h3 class="my-2">{{DashCards.total_Tenants ?? 0}}</h3>
 
               </div>
           </div>
@@ -341,7 +341,7 @@
                   <span class="mx-3 fw-bold">Total Owners</span>
               </div>
               <div>
-                  <h3 class="my-2">{{DashCards.total_Owners}}</h3>
+                  <h3 class="my-2">{{DashCards.total_Owners ?? 0}}</h3>
 
               </div>
           </div>
