@@ -153,9 +153,9 @@ export class MessageComponent {
   searchTextChange:any
   searchAction() {
     // this.searchTextChange.emit(this.searchText);
-    this.search = false;
+    // this.search = false;
     this.getAll_tickets();
-    this.searchText =""
+    // this.searchText =""
 
   }
   }

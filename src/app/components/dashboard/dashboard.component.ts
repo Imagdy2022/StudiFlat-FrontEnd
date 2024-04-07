@@ -120,8 +120,7 @@ export class DashboardComponent {
   RecentActivities() {
     this._adminservices.RecentActivities(1,4).subscribe({
       next:(res:any)=>{
-        this.RecentActivitiesarr = res;
-         console.log(res)
+        this.RecentActivitiesarr = res.data;
       },
       error:(err)=>{
         console.log(err)

@@ -133,9 +133,9 @@ searchKey(data: string) {
 searchTextChange:any
 searchAction() {
   // this.searchTextChange.emit(this.searchText);
-  this.search = false;
+  // this.search = false;
   this.getAlltermination()
-    this.searchText =""
+    // this.searchText =""
 
 }
 }

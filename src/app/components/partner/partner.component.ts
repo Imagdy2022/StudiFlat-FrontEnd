@@ -187,9 +187,9 @@ searchKey(data: string) {
 searchTextChange:any
 searchAction() {
   // this.searchTextChange.emit(this.searchText);
-  this.search = false;
+  // this.search = false;
   this.getAllpartners()
-    this.searchText =""
+    // this.searchText =""
 
 }
 }

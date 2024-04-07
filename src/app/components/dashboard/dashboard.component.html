@@ -109,10 +109,11 @@
               </tr>
               </thead>
               <tbody>
-                <!-- <tr *ngFor="let item of RecentActivitiesarr ; let i =index ">
+                <tr *ngFor="let item of RecentActivitiesarr.slice(0,4); let i =index ">
                  <td>
                   <div>
-                      <img src="{{item.userImg}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">
+                      <img *ngIf="item.userImg" src="{{item.userImg}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">
+                      <img *ngIf="!item.userImg" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
                       <span class="fw-bold">{{item.userName}}</span>
                   </div>
                  </td>
@@ -121,69 +122,7 @@
                  <td>
                   <button class="btn btn-color">View</button>
                  </td>
-
-
-                </tr> -->
-                <tr>
-                  <td>
-                   <div>
-                       <img src="./assets/images/Avatar.png" alt="">
-                       <span class="fw-bold ms-2">mido el gammal</span>
-                   </div>
-                  </td>
-                  <td>Paid rent</td>
-                  <td>Sunflower Ridge Condos</td>
-                  <td>
-                    <button class="btn btn-color">View</button>
-                  </td>
-
-
-                 </tr>
-                 <tr>
-                  <td>
-                   <div>
-                       <img src="./assets/images/Avatar.png" alt="">
-                       <span class="fw-bold ms-2">mido el gammal</span>
-                   </div>
-                  </td>
-                  <td>Paid rent</td>
-                  <td>Sunflower Ridge Condos</td>
-                  <td>
-                    <button class="btn btn-color">View</button>
-                  </td>
-
-
-                 </tr>
-                 <tr>
-                  <td>
-                   <div>
-                       <img src="./assets/images/Avatar.png" alt="">
-                       <span class="fw-bold ms-2">mido el gammal</span>
-                   </div>
-                  </td>
-                  <td>Paid rent</td>
-                  <td>Sunflower Ridge Condos</td>
-                  <td>
-                    <button class="btn btn-color">View</button>
-                  </td>
-
-
-                 </tr>
-                 <tr>
-                  <td>
-                   <div>
-                       <img src="./assets/images/Avatar.png" alt="">
-                       <span class="fw-bold ms-2">mido el gammal</span>
-                   </div>
-                  </td>
-                  <td>Paid rent</td>
-                  <td>Sunflower Ridge Condos</td>
-                  <td>
-                    <button class="btn btn-color">View</button>
-                  </td>
-
-
-                 </tr>
+                </tr>
               </tbody>
             </table>
           </div>

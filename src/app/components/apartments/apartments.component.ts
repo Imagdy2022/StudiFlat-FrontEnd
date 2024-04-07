@@ -69,7 +69,26 @@ gotopage( ){
     this.getAllApartment()
   }
   initFakeData(): void {
-    this.apartmentFillterLists = ["All Apartment", "Rented Apartment", "Available Apartment","Pending",'Draft',"Rent EndSoon" ];
+    this.apartmentFillterLists = [
+      {id:0,
+        name:"All"
+      },
+      {id:1,
+        name:"Rented Apartment"
+      },
+      {id:2,
+        name:"Available Apartment"
+      },
+      {id:3,
+        name:"Pending"
+      },
+      {id:4,
+        name:"Draft"
+      },
+      {id:5,
+        name:"Rent EndSoon"
+      },
+      ];
     // this.apartmentFillterLists = ["All ", "Rented Apartment", "Available Apartment","Pending Apartment","Delete Apartment","Draft Apartment"];
 
     this.apartmentFillterSelected = [true];
@@ -181,42 +200,42 @@ gotopage( ){
 
   checkindex=0;
   clickApartmentList(index:any){
-    this.checkindex=index;
+    this.checkindex=index?.target?.value;
     this.apartmentFillterSelected = this.apartmentFillterSelected.map((data) => data == true ? false : false)
-    this.apartmentFillterSelected[index] = true
+    this.apartmentFillterSelected[index?.target?.value] = true
     this.itemsPerPage=10;
     this.pageNumber=1;
-    if(index == 0){
+    if(index?.target?.value == 0){
       this.filterStatus="All"
       this.getAllApartment();
     }
-    if(index == 1){
+    if(index?.target?.value == 1){
       this.filterStatus="Rented"
 
       this.getAllApartment();
     }
 
-    if(index == 2){
+    if(index?.target?.value == 2){
       this.filterStatus="Available"
 
       this.getAllApartment();
 
     }
-    if(index == 3){
+    if(index?.target?.value == 3){
       this.filterStatus="Pending"
 
       this.getAllApartment();
 
     }
 
-    if(index == 5){
+    if(index?.target?.value == 5){
       this.filterStatus="RentEndSoon"
 
       this.getAllApartment();
 
     }
 
-    if(index == 4){
+    if(index?.target?.value == 4){
       this.filterStatus="Draft"
 
       this.getAllApartment();

@@ -118,37 +118,37 @@ export class MainFileComponent {
   InquireFillterSelected: Array<any> = [];
   initFakeData(): void {
     this.InquireFillterLists = [
-      'All Issues',
-      'Completed',
-      'Pending',
-      'Cancelled',
+      {id:0, name:"All"},
+      {id:1, name:"Completed"},
+      {id:2, name:"Pending"},
+      {id:3, name:"Cancelled"}
     ];
     this.InquireFillterSelected = [true];
   }
   checkindex = 0;
-  statusinquire: any = '';
+  statusinquire: any ;
   clickIquires(index: any) {
-    this.checkindex = index;
+    this.checkindex = index.target.value;
     this.InquireFillterSelected = this.InquireFillterSelected.map((data) =>
       data == true ? false : false
     );
 
-    this.InquireFillterSelected[index] = true;
-    if (index == 0) {
-      this.statusinquire = '';
+    this.InquireFillterSelected[index.target.value] = true;
+    if (index.target.value  == 0) {
+      this.statusinquire = 'All';
       this.getAllIssues();
     }
-    if (index == 1) {
+    if (index.target.value == 1) {
       this.statusinquire = 'Completed';
 
       this.getAllIssues();
     }
-    if (index == 2) {
+    if (index.target.value == 2) {
       this.statusinquire = 'Pending';
 
       this.getAllIssues();
     }
-    if (index == 3) {
+    if (index.target.value == 3) {
       this.statusinquire = 'Cancelled';
 
       this.getAllIssues();
@@ -364,9 +364,9 @@ export class MainFileComponent {
   searchTextChange: any;
   searchAction() {
     // this.searchTextChange.emit(this.searchText);
-    this.search = false;
+    // this.search = false;
     this.getAllIssues();
-    this.searchText = '';
+    // this.searchText = '';
   }
   selectedContractImg: any;
   afterUploadImage = 'true';

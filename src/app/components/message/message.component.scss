@@ -196,3 +196,15 @@ tr:last-child{
     top: -100px;
   }
 }
+.input{
+  position: relative;
+  img{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+}
+::placeholder{
+  font-size: 13px !important;
+}

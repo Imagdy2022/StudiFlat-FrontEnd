@@ -16,7 +16,7 @@ export class UserComponent {
   selectedProducts: Array<object> = [];
   headerData: Array<any> = [];
   loading: boolean = true;
-  search: boolean = false;
+  // search: boolean = false;
   listDropDown: Array<object> = [
     { name: 'Today' },
     { name: 'Last Week' },
@@ -218,8 +218,8 @@ export class UserComponent {
   searchTextChange: any;
   searchAction() {
     // this.searchTextChange.emit(this.searchText);
-    this.search = false;
+    // this.search = false;
     this.getAllTenants();
-    this.searchText = '';
+    // this.searchText = '';
   }
 }

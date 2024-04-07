@@ -28,3 +28,16 @@ th {
     background: #F6F6F6 !important  ;
 
 }
+
+.input{
+  position: relative;
+}
+.input img{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+::placeholder{
+  font-size: 13px !important;
+}
