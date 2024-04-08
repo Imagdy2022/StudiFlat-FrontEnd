@@ -15,8 +15,11 @@ import { JwtInterceptor } from 'src/app/_helpers/jwt.interceptor';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { RecentActivitiesComponent } from './recent-activities/recent-activities.component';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, RecentActivitiesComponent],
   imports: [
     CommonModule,ChartModule,
     SharedModule,
@@ -26,11 +29,13 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     ToastModule,IgxDoughnutChartModule,
     IgxRingSeriesModule,
     IgxLegendModule,
-    IgxItemLegendModule, 
-    DashboardRoutingModule
+    IgxItemLegendModule,
+    DashboardRoutingModule,
+    TableModule,
+    PaginatorModule
     ],
-    
+
 })
 export class DashboardModule {
-  
+
  }

@@ -1,0 +1,112 @@
+<!-- start header -->
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Dashboard'"></app-head>
+</header>
+<!-- end header -->
+<div class="row m-0">
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'dashboard'"></app-sidebar>
+  <!-- end sidebar  -->
+  <!-- start content page  -->
+
+
+  <main class=" p-4 col-lg-10">
+    <!-- start part 1 in page  -->
+    <div class="d-md-flex justify-content-between" style="margin-bottom:20px">
+      <div class="d-flex" style="align-items: center;">
+          <p class="fw-bold me-2" style="color: #6c6a6a;margin-bottom: 0px;"><a  style="color: #6c6a6a;"class="removeUnderLine" routerLink="/dashboard">Dashboard </a></p>
+
+          <p class="fw-bold me-2" style="margin-bottom: 0px;color: #605D62;">></p>
+          <p class="fw-bold" style="color: #6c6a6a;margin-bottom: 0px;">Recent Activities </p>
+      </div>
+      <div class="d-flex justify-content-lg-between ">
+        <div class="d-flex justify-content-between ">
+          <button class="month rounded-start px-3 py-1 outline-none">This Month</button>
+          <button class="week rounded-end px-3 py-1 outline-none">Last Week</button>
+        </div>
+        <!-- start dropdown button  -->
+        <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+        <!-- end dropdown button  -->
+      </div>
+  </div>
+
+  <p-toast></p-toast>
+  <div class="card mt-2">
+    <div class="row d-block d-md-flex justify-content-between my-2 p-3">
+      <div class="col-md-4">
+        <div class="d-flex align-items-center" style="font-size: 15px;">
+          <label for="" style="color: #313331;font-weight: 500;font-size: 16px;">Recent Activities </label>
+        </div>
+      </div>
+
+
+  </div>
+      <!-- <p-table #dt [value]="partners" [(selection)]="partners" dataKey="id" [filterDelay]="0" /> -->
+
+      <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="RecentActivitiesarr">
+          <ng-template pTemplate="header" class="text-center">
+              <tr *ngIf="headerData">
+                  <ng-container>
+
+
+                      <th class="td-name">
+                        user
+
+                      </th>
+
+                      <th class="td-name">
+                        activity
+
+                      </th>
+
+                      <th class="td-name">
+                        apartment
+
+                      </th>
+                      <th class="td-name">
+                        action
+
+                      </th>
+                  </ng-container>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+
+              <tr>
+                  <td>
+                    <div>
+                      <img *ngIf="item.userImg" src="{{item.userImg}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">
+                      <img *ngIf="!item.userImg" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                      <span class="fw-bold">{{item.userName}}</span>
+                  </div>
+
+                  </td>
+                  <td>
+                    {{item.act_Type}}
+                  </td>
+                  <td>
+                    {{item.act_Desc}}
+                  </td>
+
+                  <td>
+                    <button class="btn btn-color">View</button>
+                  </td>
+
+              </tr>
+
+          </ng-template>
+
+
+          <ng-template pTemplate="emptymessage">
+              <div class="container text-center mt-4">
+                  <p class="mb-0">No data found.</p>
+              </div>
+          </ng-template>
+
+      </p-table>
+      <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+  </div>
+
+  </main>
+  <!-- end content page  -->
+</div>

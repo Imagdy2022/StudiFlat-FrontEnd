@@ -12,7 +12,7 @@
 
   <main class=" p-4 col-lg-10">
     <!-- start part 1 in page  -->
-    <div class="d-md-flex justify-content-between dashboard">
+    <div class="d-md-flex justify-content-between align-items-center dashboard mt-2 mb-4">
       <p class="fw-bold" style="color: #6c6a6a;">Dashboard</p>
       <div class="d-flex justify-content-lg-between ">
         <div class="d-flex justify-content-between ">
@@ -27,7 +27,7 @@
     <!-- end part 1 in page  -->
     <p-toast></p-toast>
     <!-- start part 2 in page  -->
-    <div class="mt-3 row g-4">
+    <div class="row g-4">
       <!-- start total details cards -->
 
       <div class="col-12 col-md-6 col-lg-4">
@@ -91,13 +91,13 @@
     </div>
     <!-- end part 2 in page  -->
     <!-- start part 3 in page  -->
-    <div class=" row g-4">
+    <div class="row g-4 marginTop">
       <!-- start recent activities diagram  -->
-      <div class="col-12 col-md-6 col-lg-8">
-        <div class="card ">
+      <div class="col-12 col-md-6 col-lg-8 my-2">
+        <div class="card my-0">
           <div class="p-3 pb-3 d-flex justify-content-between align-items-center border-1">
             <h6  class="title pt-2">Recent activities</h6>
-            <button class="btn btn-color">View All</button>
+            <button class="btn btn-color" routerLink="/dashboard/veiwAll">View All</button>
           </div>
             <table class="table table-borderless align-middle table-fixed table-mobile-responsive ">
               <thead class="align-middle bg-light">
@@ -130,8 +130,8 @@
       <!-- end recent activities diagram  -->
 
       <!-- start Apartments Rented & Free diagram -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card py-3">
+      <div class="col-12 col-md-6 col-lg-4 my-2">
+        <div class="card py-3 my-0">
           <h5 class="fw-semibold px-3">Rented & Free</h5>
           <div class="text-center buttons">
             <button class="active">All</button>
@@ -139,7 +139,7 @@
             <button>Rooms</button>
             <button>Beds</button>
           </div>
-          <div class="d-flex justify-content-center align-items-center pt-3">
+          <div class="d-flex justify-content-center align-items-center pt-4">
             <div class="flex justify-content-center  position-relative" style=" box-shadow: none;">
               <p-chart type="doughnut" [data]="dataChart" [options]="options"></p-chart>
               <div class="position-absolute translate-middle top-50 start-50">
@@ -154,10 +154,10 @@
       <!-- end Apartments Rented & Free diagram -->
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 marginTop">
       <!-- start recent activities diagram  -->
-      <div class="col-12 col-md-6 col-lg-8">
-        <div class="card ">
+      <div class="col-12 col-md-6 col-lg-8 my-2">
+        <div class="card my-0">
           <div class="p-3 pb-3 d-flex justify-content-between align-items-center border-1">
             <h6  class="title pt-2">Popular Apartments</h6>
           </div>
@@ -247,8 +247,8 @@
       <!-- end recent activities diagram  -->
 
       <!-- start Apartments Rented & Free diagram -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="row g-3 mt-1">
+      <div class="col-12 col-md-6 col-lg-4 my-2">
+        <div class="row g-3">
           <div class="col-12">
             <div class="total-detals">
               <div class="d-flex align-items-center py-1">

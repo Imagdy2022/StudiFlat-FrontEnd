@@ -113,10 +113,10 @@ table{
 }
 }
 .btn.btn-color{
-  color: #1F4068;
+  color: #1F4068 !important;
   border-radius: 8px;
   font-weight: 500;
-  background-color: #fff;
+  background-color: #fff !important;
   border: 1px solid var(--Neutral-Neutral90, #EBEBEB);
 }
 .line-height {
@@ -157,4 +157,7 @@ span.icon{
 .image-size{
     width: 30px;
     height: 33px;
+}
+.marginTop{
+  margin-top: 6px !important;
 }
