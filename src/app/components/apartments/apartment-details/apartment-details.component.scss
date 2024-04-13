@@ -79,6 +79,93 @@
     display: inline-block;
     float: none;
 }
+.dataHeader{
+  h5{
+    color:  #313033;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 24px;
+  }
+  p{
+    color:  #605D62;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+}
+.rating{
+  .heading{
+    h5{
+      color:  #313033;
+      font-size: 20px !important;
+      font-weight: 600 !important;
+      line-height: 24px;
+    }
+    p{
+      color:  #605D62;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+  }
+  .card{
+    border-radius: 8px;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.15);
+    .card-title{
+      color:  #101828;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 32px;
+    }
+    .userInfo{
+      h5{
+        color:  #313033;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+      }
+      p{
+        color:  #605D62;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+    }
+    ul{
+      li{
+        span{
+          color: #475467;
+        }
+      }
+    }
+    .comment{
+      h5{
+        color:  #313033;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+      }
+      p{
+        color:  #605D62;
+        font-size: 15px;
+        font-weight: 400;
+      }
+
+    }
+  }
+}
+.btn.btn-color{
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 500;
+  background-color: #1F4068 !important;
+  border: 1px solid  #1F4068;
+}
+.btn.btn-outline{
+  color: #1F4068;
+  border-radius: 8px;
+  font-weight: 500;
+  background-color: #fff !important;
+  border: 1px solid  #1F4068;
+}
 
 .vcrr {
     display: block;
