@@ -163,7 +163,7 @@ gotopage( ){
 
   getAllApartment(): void {
     this.apartmentList=[];
-    this.apartmentSer.FilterApartmentsFront(this.Date,this.pageNumber, this.itemsPerPage,this.filterStatus).subscribe((res) => {
+    this.apartmentSer.FilterApartmentsFront(this.Date,this.pageNumber, this.itemsPerPage,this.filterStatus, this.searchText).subscribe((res) => {
       this.fullRespone=res;
       this.apartmentList = res["data"];
       this.totalofPages=res["totalPages"]
@@ -258,6 +258,16 @@ gotopage( ){
     this.xx=""
     this.showEdit=[]
 
+ }
+ searchText: any = '';
+
+ searchKey(data: string) {
+   this.searchText = data;
+   this.getAllApartment();
+ }
+ searchTextChange: any;
+ searchAction() {
+   this.getAllApartment();
  }
 }
 

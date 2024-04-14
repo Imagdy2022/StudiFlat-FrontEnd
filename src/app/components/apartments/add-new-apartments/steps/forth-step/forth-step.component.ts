@@ -281,6 +281,10 @@ this.display22="none"
     this.display22="block"
    this.imageSize=photo
       }
+      openModelImage(photo:any) {
+        this.display22="block"
+       this.imageSize=photo
+          }
       removeItem(imageName:any){
 
 

@@ -129,14 +129,14 @@
                         <td>
                             {{Tenant?.email}}
                         </td>
-                        <td class="text-center">
-                            {{Tenant?.rent_No}}
+                        <td >
+                          <span class="ms-3"> {{Tenant?.rent_No}} </span>
                         </td>
 
                         <!-- <td>
                     <p class="d-flex align-items-center fw-bold mt-2">{{admin?.status}}</p>
                 </td> -->
-                        <td class="text-center">
+                        <td>
                           <div>
                               <span class="rounded-5 px-3 badge active" *ngIf="Tenant?.user_Behavior=='Excellent'">
                                 <span>

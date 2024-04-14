@@ -144,8 +144,7 @@
 
                         <!-- <label for="st{{i}}"></label> -->
                         <a (click)="opencloseModal(image.pic_URL)">
-                            <img [src]="image.pic_URL" alt="Avatar" style="width:339px;height:205px ; ">
-
+                            <img [src]="image.pic_URL" alt="Avatar" style="width:339px;height:205px ;" class="cursor">
                         </a>
 
                     </div>
@@ -167,7 +166,7 @@
                     <div class="col-md-2 card33" *ngFor="let image of storedImages;  index as i ">
 
                         <a (click)="opencloseModal(image.apt_imgs)">
-                            <img [src]="image.apt_imgs" alt="Avatar" style="width:339px;height:205px ; ">
+                            <img [src]="image.apt_imgs" alt="Avatar" style="width:339px;height:205px ; " class="cursor">
 
                         </a>
 
@@ -177,7 +176,7 @@
                     <div class="col-md-2 card33" *ngFor="let image of aprt_details_Edit?.dmgs_Imgs;  index as i ">
 
                         <a (click)="opencloseModal(image.pic_URL)">
-                            <img [src]="image.pic_URL" alt="Avatar" style="width:339px;height:205px ; ">
+                            <img [src]="image.pic_URL" alt="Avatar" style="width:339px;height:205px ; " class="cursor">
 
                         </a>
 

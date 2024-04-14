@@ -43,7 +43,7 @@
               </div>
                <div class="col-md-5 col-8">
                 <div class="input">
-                  <input type="text" class="form-control py-2" placeholder=" Search by appartment location"  />
+                  <input type="text" class="form-control py-2" placeholder=" Search by appartment location" (keyup)="searchAction()" [(ngModel)]="searchText" />
                     <img src="../../../assets/images/search.svg" alt="">
                 </div>
                </div>

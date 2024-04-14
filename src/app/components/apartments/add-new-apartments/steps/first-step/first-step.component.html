@@ -50,10 +50,10 @@
         </div>
         <!--all bills included ?-->
         <div>
-            <p class="d-md-inline-block gray fw-bold mb-0 me-3">
+            <p class="d-md-inline-block gray fw-bold mb-0 me-3 pt-0 mt-0">
                 All Bills included ?
             </p>
-            <div class="form-check d-inline-block mb-2" *ngFor="let data of listRadiobutton">
+            <div class="form-check d-inline-block mb-3" *ngFor="let data of listRadiobutton">
                 <input class="form-check-input" [checked]="bills === data" type="radio" name="createbills" value="{{ data }}" id="createContract" (change)="DoyouCreatebills($event)" />
                 <label class="fw-bold me-3" for="createbills"> {{ data }} </label>
             </div>
@@ -66,7 +66,7 @@
       </span>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
             <div class="row " *ngIf="addApartment == 'add new apartments'">
                 <div class="mb-3 col-12 col-md">
                     <label class="form-label gray fw-bold">Street Name</label>
@@ -96,7 +96,7 @@
                     <!-- start dropdown button  -->
                     <div class="selectForm">
                         <!-- <app-dropdown [list]="listDropDownArea" [holder]="selectArea" (selected)="selectedfromDropDownArea($event,'insert')"></app-dropdown> -->
-                        <select class="s-cont form-select form-select-sm mb-3" name="apt_Area" id="apt_Area" formControlName="apt_Area">
+                        <select class="s-cont form-select form-select-sm" name="apt_Area" id="apt_Area" formControlName="apt_Area">
                           <option value="0" disabled  selected>Select Area</option>
 
                          <option *ngFor="let type of listDropDownArea" value="{{type.name}}"> {{type.name}} </option>
@@ -109,7 +109,7 @@
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Square Meters</label>
                     <input formControlName="apt_SquareMeters" type="number" [class.is-invalid]="generalInfoForm.get('apt_SquareMeters')!.invalid && generalInfoForm.get('apt_SquareMeters')!.touched " class="form-control rounded-2  fs-6" />
-                    <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_SquareMeters')!.invalid && generalInfoForm.get('apt_SquareMeters')!.touched ">
+                    <span class="text-danger d-block mx-2 " *ngIf="generalInfoForm.get('apt_SquareMeters')!.invalid && generalInfoForm.get('apt_SquareMeters')!.touched ">
             this field is required
           </span>
                 </div>
@@ -121,7 +121,7 @@
                     <label class="form-label gray fw-bold">Floor Number</label>
                     <!-- start dropdown button  -->
                     <!-- <app-dropdown [list]="listDropDownFloor" [holder]="selectFloor" (selected)="selectedfromDropDownFloor($event)"></app-dropdown> -->
-                    <select class="s-cont form-select form-select-sm mb-3" name="apt_FloorNo" id="apt_FloorNo" formControlName="apt_FloorNo">
+                    <select class="s-cont form-select form-select-sm" name="apt_FloorNo" id="apt_FloorNo" formControlName="apt_FloorNo">
                       <option value="0"    disabled  selected>  &nbsp; Select Floor Number   </option>
 
                     <option *ngFor="let type of listDropDownFloor" value="{{type.name}}"> {{type.name}} </option>
@@ -132,7 +132,7 @@
                     <label class="form-label gray fw-bold">Apartment Number</label>
                     <!-- start dropdown button  -->
                     <!-- <app-dropdown [list]="listDropDownApartmentnumber" [holder]="Apartmentnumber" (selected)="selectedfromDropDownApartmentnumber($event)"></app-dropdown> -->
-                    <select class="s-cont form-select form-select-sm mb-3" name="apt_AptNo" id="apt_AptNo" formControlName="apt_AptNo">
+                    <select class="s-cont form-select form-select-sm" name="apt_AptNo" id="apt_AptNo" formControlName="apt_AptNo">
                       <option value="0"   disabled  selected>Select Apartment Number   </option>
 
                     <option *ngFor="let type of listDropDownApartmentnumber" value="{{type.name}}"> {{type.name}} </option>
@@ -158,7 +158,7 @@
                     <!-- start dropdown button  -->
                     <!-- <app-dropdown [list]="listDropDownPropertyowner" [holder]="Propertyowner" (selected)="selectedfromDropDownPropertyowner($event)"></app-dropdown> -->
                     <!-- end dropdown button  -->
-                    <select class="s-cont form-select form-select-sm mb-3" name="apt_Owner" id="apt_Owner" formControlName="apt_Owner" (change)="SetOwnerName($event)">
+                    <select class="s-cont form-select form-select-sm" name="apt_Owner" id="apt_Owner" formControlName="apt_Owner" (change)="SetOwnerName($event)">
                       <option value="0" disabled selected>Select Property Owner</option>
 
                      <option *ngFor="let type of listDropDownPropertyowner" value="{{type.id}}"> {{type.name}} </option>
@@ -219,7 +219,7 @@
                 </div> -->
                 <div class="col-md-12 mb-3">
                   <label class="form-label gray fw-bold">Upload Images Of Damages</label>
-                  <div class="image-upload mainimage mt-2">
+                  <div class="image-upload mainimage">
                     <input type="file" accept="image/*" multiple="multiple" (change)="selectFile($event)">
                       <div class="image-uploads">
                         <div class="d-flex align-items-center justify-content-center text-center h-100" >
@@ -235,7 +235,7 @@
                   </div>
                 </div>
             </div>
-            <div class="row" style="margin-bottom: 13px;">
+            <div class="row">
                 <div class="col-8 bomar">
 
                     <!-- <button type="button" style="background-color: #1f4068 !important;margin-left: 10px;" class="rounded-2 text-white rounded-2 border-0 py-2 px-4  " [disabled]="!selectedFiles" (click)="upload()">
@@ -269,7 +269,7 @@
 
                         <label for="st{{i}}"></label>
                         <a (click)="opencloseModal(image.apt_imgs)">
-                            <img [src]="image.apt_imgs" alt="Avatar" style="width:339px;height:205px ; ">
+                            <img [src]="image.apt_imgs" alt="Avatar" style="width:339px;height:205px ; " class="cursor">
 
                         </a>
 
@@ -333,7 +333,7 @@
 
         </div>
         <div>
-            <div class="mb-3 mt-4">
+            <div class="mb-3">
                 <label class="form-label gray fw-bold">Add Video Link</label>
                 <input formControlName="apt_VideoLink" type="text" class="form-control rounded-2 py-2 fs-6" />
 
@@ -356,7 +356,7 @@
                 <!-- start dropdown button  -->
                 <!-- <app-dropdown [list]="listDropDownApartmentType" [holder]="apartmenttype" (selected)="selectedfromDropDownApartmentType($event)"></app-dropdown> -->
                 <!-- end dropdown button  -->
-                <select class="s-cont form-select form-select-sm mb-3" name="apt_types" id="apt_types" formControlName="apt_types" (ngModelChange)="onChange($event)">
+                <select class="s-cont form-select form-select-sm" name="apt_types" id="apt_types" formControlName="apt_types" (ngModelChange)="onChange($event)">
                   <option value="null" disabled hidden selected> Select Apartment Type  </option>
 
                  <option *ngFor="let type of listDropDownApartmentType" value="{{type.name}}"> {{type.name}} </option>

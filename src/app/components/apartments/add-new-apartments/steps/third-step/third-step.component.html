@@ -19,8 +19,10 @@
                     </ng-container>
                     <ng-container *ngIf="selectedContractImg">
                         <div *ngIf="selectedContractImg.type !== 'application/pdf'">
-                            <input type="file" accept=".pdf, image/*" (change)="onUploadContract($event,'contract_Path')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                            <img [src]="selectedContractImg.url" class="position-absolute imgPreviewUploader" width="100%">
+                            <!-- <input type="file" accept=".pdf, image/*" (change)="onUploadContract($event,'contract_Path')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                            <a (click)="opencloseModal(selectedContractImg.url)">
+                            <img [src]="selectedContractImg.url" class="position-absolute imgPreviewUploader cursor">
+                            </a>
 
                         </div>
                         <div *ngIf="selectedContractImg.type === 'application/pdf'">
@@ -34,7 +36,7 @@
                     <!-- end single img upload and preview -->
 
                 </div>
-                <img *ngIf="edit=='EditForm'&&afterUploadImage=='false'&&dataEdit.c_Type!='File'" [src]="passContract" style="margin-bottom: 25px;" class=" imgPreviewUploader" width="100%">
+                <img *ngIf="edit=='EditForm'&&afterUploadImage=='false'&&dataEdit.c_Type!='File'" [src]="passContract" style="margin-bottom: 25px;" class=" imgPreviewUploader cursor">
                 <a [href]="passContract" *ngIf="edit=='EditForm'&&afterUploadImage=='false'&&dataEdit.c_Type=='File'" style="font-size: large;" target="_blank">View PDF</a>
 
             </div>
@@ -309,14 +311,18 @@
                                     <img src="assets/images/apartmentImages/File upload.svg" class="position-absolute">
                                 </ng-container>
                                 <ng-container *ngIf="selectedSafeImg">
-                                    <input type="file" accept="image/*" (change)="onUploadContract($event,'safe_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                                    <img [src]="selectedSafeImg ? selectedSafeImg.url : null" class="position-absolute imgPreviewUploader" width="100%">
+                                    <!-- <input type="file" accept="image/*" (change)="onUploadContract($event,'safe_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                                    <a (click)="opencloseModal(selectedSafeImg.url)">
+                                      <img [src]="selectedSafeImg ? selectedSafeImg.url : null" class="position-absolute imgPreviewUploader cursor">
+                                    </a>
                                 </ng-container>
                                 <!-- end single img upload and preview -->
 
                             </div>
                             <div *ngIf="addApartment == 'Edit Apartment Name'" class="h-124px mb-3">
-                                <img [src]="safe_Img" *ngIf="issshowsafe=='safe'" class="position-absolute imgPreviewUploader">
+                              <a (click)="opencloseModal(safe_Img)">
+                                <img [src]="safe_Img" *ngIf="issshowsafe=='safe'" class="position-absolute imgPreviewUploader cursor">
+                              </a>
                             </div>
                         </div>
                     </div>
@@ -330,13 +336,15 @@
                                     <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute">
                                 </ng-container>
                                 <ng-container *ngIf="selectedDoorImg">
-                                    <input type="file" accept="image/*" (change)="onUploadContract($event,'door_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                                    <img [src]="selectedDoorImg ? selectedDoorImg.url : null" class="position-absolute imgPreviewUploader" width="100%">
+                                    <!-- <input type="file" accept="image/*" (change)="onUploadContract($event,'door_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                                    <a (click)="opencloseModal(selectedDoorImg.url)">
+                                    <img [src]="selectedDoorImg ? selectedDoorImg.url : null" class="position-absolute imgPreviewUploader cursor">
+                                    </a>
                                 </ng-container>
                                 <!-- end single img upload and preview -->
                             </div>
                             <div *ngIf="addApartment == 'Edit Apartment Name'" class="h-124px mb-3">
-                                <img [src]="door_Img" *ngIf="issshowdoor=='door'" class="position-absolute imgPreviewUploader">
+                                <img [src]="door_Img" *ngIf="issshowdoor=='door'" class="position-absolute imgPreviewUploader cursor">
                             </div>
                         </div>
 
@@ -407,8 +415,10 @@
                         <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute">
                     </ng-container>
                     <ng-container *ngIf="selectedBuildingImg">
-                        <input type="file" accept="image/*" (change)="onUploadContract($event,'building_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                        <img [src]="selectedBuildingImg ? selectedBuildingImg.url : null" class="position-absolute imgPreviewUploader" width="100%">
+                        <!-- <input type="file" accept="image/*" (change)="onUploadContract($event,'building_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                        <a (click)="openModelImage(selectedBuildingImg.url)">
+                          <img [src]="selectedBuildingImg ? selectedBuildingImg.url : null" class="position-absolute imgPreviewUploader cursor">
+                      </a>
                     </ng-container>
                     <!-- end single img upload and preview -->
                 </div>
