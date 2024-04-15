@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/_helpers/auth.guard';
-import { AddAdminComponent } from '../admins/add-admin/add-admin.component';
-import { AdminsComponent } from '../admins/admins.component';
-import { EditAdminComponent } from '../admins/edit-admin/edit-admin.component';
 import { AppMsgsComponent } from '../appmsgs/appmsgs.component';
 import { AuthorizationComponent } from '../authorization/authorization.component';
 import { AdsComponent } from '../configurations/ads/ads.component';
@@ -67,18 +64,20 @@ const routes: Routes = [
     component: StatisticsComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'admins', component: AdminsComponent, canActivate: [AuthGuard] },
-  { path: 'roles', component: RolesComponent, canActivate: [AuthGuard] },
+  {
+    path: 'admins', canActivate: [AuthGuard],loadChildren: () => import('../../components/admins/admins.module').then(a=>a.AdminsModule),
+    },
+  { path: 'roles', canActivate: [AuthGuard] ,loadChildren: () => import('../../components/roles/roles.module').then(r=>r.RolesModule) },
+  {
+    path: 'app-msgs', canActivate: [AuthGuard], loadChildren: () => import('../../components/appmsgs/appmsgs.module').then(m=>m.AppMsgsModule)
+  },
+  {
+    path: 'push-msgs',canActivate: [AuthGuard], loadChildren: () => import('../../components/pushmsgs/pushmsgs.module').then(p=>p.PushmsgsModule)
+  },
+  { path: 'unlegal', canActivate: [AuthGuard],  loadChildren: () => import('../../components/unlegal/unlegal.module').then(u=>u.UnlegalModule) },
   {
     path: 'authorization/:id',
     component: AuthorizationComponent,
-    canActivate: [AuthGuard],
-  },
-  { path: 'add-admin', component: AddAdminComponent, canActivate: [AuthGuard] },
-
-  {
-    path: 'edit-admin/:id',
-    component: EditAdminComponent,
     canActivate: [AuthGuard],
   },
 
@@ -88,24 +87,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
 
   },
-
-  { path: 'unlegal', component: UnlegalComponent, canActivate: [AuthGuard] },
-
   {
     path: 'invoice/:id',
     component: InvoiceComponent,
     canActivate: [AuthGuard],
-  },
-  {
-    path: 'app-msgs',
-    component: AppMsgsComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'push-msgs',
-    component: PushmsgsComponent,
-    canActivate: [AuthGuard],
-  },
+  }
 ]
 }
 ];

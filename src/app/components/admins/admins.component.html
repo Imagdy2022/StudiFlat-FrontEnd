@@ -20,7 +20,7 @@
 
             </div>
             <div class="col">
-                <a class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/add-admin" style="background-color:#1F4068; cursor: pointer;">
+                <a class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/admins/add-admin" style="background-color:#1F4068; cursor: pointer;">
                     <img src="assets/images/plus.svg" class="me-2 ">Add New
                 </a>
             </div>
@@ -126,7 +126,7 @@
                       <img src="assets/images/edit.svg">
                   </button>
                             <div *ngIf="showEdit[admin.user_ID]" style="width:200px;z-index:999 ; right:89px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/edit-admin/{{admin.user_ID}}">update  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/admins/edit-admin/{{admin.user_ID}}">update  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="admin?.status==true" (click)="sendToModel1(admin)">deactivate</button>
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="admin?.status==false" (click)="sendToModel1(admin)">Activate</button>
 

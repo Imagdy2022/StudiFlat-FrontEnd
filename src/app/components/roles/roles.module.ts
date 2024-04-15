@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { RolesRoutingModule } from './roles-routing.module';
 
 const routes: Routes = [];
 
@@ -32,7 +33,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     BreadcrumbModule,
-    RouterModule.forChild(routes),
+    RolesRoutingModule
   ],
   exports: [],
   providers: [MessageService],

@@ -17,6 +17,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { AdminsRoutingModule } from './admins-routing.module';
 const routes: Routes = [];
 
 @NgModule({
@@ -33,7 +34,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     BreadcrumbModule,
-    RouterModule.forChild(routes),
+    AdminsRoutingModule
   ],
   exports: [EditAdminComponent],
   providers: [MessageService],

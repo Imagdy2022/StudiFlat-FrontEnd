@@ -17,6 +17,7 @@ import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { PaginatorModule } from 'primeng/paginator';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { PushMsgsRoutingModule } from './pushmsgs-routing.module';
 const routes: Routes = [];
 
 @NgModule({
@@ -34,7 +35,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     BreadcrumbModule,
-    RouterModule.forChild(routes),
+    PushMsgsRoutingModule
   ],
   declarations: [PushmsgsComponent],
   providers: [MessageService],
