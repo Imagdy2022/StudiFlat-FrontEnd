@@ -121,7 +121,8 @@ export class MainFileComponent {
       {id:0, name:"All"},
       {id:1, name:"Completed"},
       {id:2, name:"Pending"},
-      {id:3, name:"Cancelled"}
+      {id:3, name:"InProgress"},
+      {id:4, name:"Cancelled"}
     ];
     this.InquireFillterSelected = [true];
   }
@@ -149,6 +150,11 @@ export class MainFileComponent {
       this.getAllIssues();
     }
     if (index.target.value == 3) {
+      this.statusinquire = 'InProgress';
+
+      this.getAllIssues();
+    }
+    if (index.target.value == 4) {
       this.statusinquire = 'Cancelled';
 
       this.getAllIssues();

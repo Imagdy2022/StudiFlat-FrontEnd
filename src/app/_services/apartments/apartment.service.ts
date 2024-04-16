@@ -220,4 +220,11 @@ export class ApartmentService {
 
     return this.http.delete(url, { headers: this.headers });
   }
+
+  GetApartmentReview(id: string): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/Apartment/GetApartmentReview?Apt_ID=${id}`,
+      { headers: this.headers }
+    );
+  }
 }

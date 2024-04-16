@@ -592,16 +592,17 @@
             <p>view tenant ratings </p>
         </div>
          <div class="row g-4 mt-3">
-          <div class="col-lg-4 col-md-6">
+          <!-- <div class="col-lg-4 col-md-6" *ngFor="let review of AllReviews">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Review</h5>
                 <div class="userData d-flex align-items-center my-2">
                   <div class="userImage">
-                    <img src="../../../../assets/images/AvatarRating.png" alt="">
+                    <img *ngIf="review.userPhoto" src="{{review.userPhoto}}" alt="">
+                    <img *ngIf="!review.userPhoto" src="../../../../assets/images/AvatarRating.png" alt="">
                   </div>
                   <div class="userInfo ms-3">
-                     <h5 class="py-0 my-0">Olivia Rhye</h5>
+                     <h5 class="py-0 my-0">{{review.userName}}</h5>
                      <p class="py-0 my-0">2 months ago</p>
                   </div>
                 </div>
@@ -610,42 +611,42 @@
                    <span>Apartment / Studio</span>
                   <div class="rate d-flex align-items-center">
                     <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">(4.0)</span>
+                    <span class="ms-1">({{review.rate_Apartment}})</span>
                   </div>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
                     <span>Safety</span>
                   <div class="rate d-flex align-items-center">
                     <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">(4.0)</span>
+                    <span class="ms-1">({{review.rate_Safety}})</span>
                   </div>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
                     <span>Location</span>
                   <div class="rate d-flex align-items-center">
                     <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">(4.0)</span>
+                    <span class="ms-1">({{review.rate_Location}})</span>
                   </div>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
                     <span>Our Service</span>
                   <div class="rate d-flex align-items-center">
                     <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">(4.0)</span>
+                    <span class="ms-1">({{review.rate_Service}})</span>
                   </div>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
                     <span>Cleanliness</span>
                   <div class="rate d-flex align-items-center">
                     <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">(4.0)</span>
+                    <span class="ms-1">({{review.rate_Cleanliness}})</span>
                   </div>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
                     <span>Communication</span>
                   <div class="rate d-flex align-items-center">
                     <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">(4.0)</span>
+                    <span class="ms-1">({{review.rate_Communication}})</span>
                   </div>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
@@ -658,7 +659,7 @@
                 </ul>
                <div class="comment">
                 <h5 class="mb-1">Additional comment (optional):</h5>
-                <p>Apartment was very clear and there service was very nice</p>
+                <p>{{review.review_Comment}}</p>
                </div>
                <div class="d-flex justify-content-between">
                 <button class="btn btn-outline">Hide From App</button>
@@ -666,7 +667,7 @@
                </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="col-lg-4 col-md-6">
             <div class="card">
               <div class="card-body">

@@ -108,7 +108,7 @@
                  <div class="row d-flex justify-content-between align-items-center gx-3 me-2 mb-2 mb-md-2">
                    <div class="col-6">
                     <div class="search pt-4">
-                      <input class="form-control fs-6 ps-3"  type="text" pInputText [(ngModel)]="searchText" placeholder="Search" />
+                      <input class="form-control fs-6 ps-3"  type="text" (keyup)="searchAction()" [(ngModel)]="searchText" placeholder="Search" />
                     </div>
                    </div>
                    <div class="col-6">
@@ -142,14 +142,15 @@
                     <div class="col-6">
                     <div class="Type">
                       <label for="">Type</label>
-                      <select class="form-select">
-                        <option value="1">All</option>
+                        <select class="form-select" (change)="clickPayment($event)">
+                        <!-- <option value="1">All</option>
                         <option value="2">Security Deposit</option>
                         <option value="3">Owner Rent</option>
                         <option value="4">Commission</option>
                         <option value="5">Apartment Expense</option>
                         <option value="6">Worker Pay Out</option>
-                        <option value="7">Monthly Rent</option>
+                        <option value="7">Monthly Rent</option> -->
+                        <option *ngFor="let data of paymentFillterLists; let index=index;" [value]="data.id" [selected]="paymentFillterSelected[index]">{{data.name}}</option>
 
                       </select>
                     </div>
@@ -322,7 +323,7 @@
                   <img src="assets/images/edit.svg">
               </button>
                             <div *ngIf="showEdit[payment.inv_ID]  " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button px-3">
-                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/invoice/{{payment.inv_ID}}">View Invoice Details  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/payments/invoice/{{payment.inv_ID}}">View Invoice Details  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="MarkPaid(payment.inv_ID)" *ngIf="payment?.inv_Paid==true && payment.payment_By=='Cash'"> Mark As Unpaid    </button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="MarkPaid(payment.inv_ID)" *ngIf="payment?.inv_Paid==false && payment.payment_By=='Cash'">Mark As Paid  </button>

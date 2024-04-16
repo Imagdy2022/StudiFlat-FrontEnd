@@ -87,11 +87,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
 
   },
-  {
-    path: 'invoice/:id',
-    component: InvoiceComponent,
-    canActivate: [AuthGuard],
-  }
 ]
 }
 ];
