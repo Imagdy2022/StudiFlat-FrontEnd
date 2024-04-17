@@ -13,7 +13,7 @@
 
     <!-- start content page  -->
     <main class="p-4 col-lg-10 ">
-        <div class="d-md-flex justify-content-between dashboard align-items-center mb-2">
+        <div class="d-md-flex justify-content-between dashboard align-items-center" style="margin-top: 8px; margin-bottom: 24px;">
             <p class="fw-bold ms-1" style="color: #6c6a6a;">workers : {{numberworkers}}</p>
 
             <div class="d-flex justify-content-lg-between ">
@@ -37,7 +37,7 @@
         </div>
 
         <p-toast></p-toast>
-        <div class="card mt-2">
+        <div class="card">
 
             <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="workers">
                 <ng-template pTemplate="header" class="text-center">
