@@ -31,17 +31,9 @@
         </div>
 
         <div class="mt-3 pt-4 row border bg-white rounded-3 py-3 ">
-            <aside class="col-2 p-0 ps-1 position-fixed d-none d-md-block">
-                <div class="ms-4">
-                    <p class="fw-bold mb-0 ">Issue report details</p>
-                    <p class="gray">Issue details user has reported</p>
-                </div>
-
-
-            </aside>
             <!-- <form [formGroup]="createissue" (ngSubmit)="createissuepost(createissue)"> -->
 
-            <div class="col-md-10 content-details ">
+            <div class="col-md-12 content-details ">
 
                 <div class="d-flex justify-content-between mb-4" *ngIf="param == 'Report_Details'">
                     <img src="assets/images/logo.svg" alt="">
@@ -50,6 +42,16 @@
                         <p class="mb-0">Prepared Date: 04/05/2023</p>
                         <p class="mb-0">Prepared Date: +123 236 236</p>
                     </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <div class="image">
+                    <img style="width: 169.17px; height: 72px" src="./assets/images/logo.svg" />
+                  </div>
+                   <div class="date">
+                        <div class="phonein" style="color: #484649;">Prepared Date: {{detialIssue?.date_Reported|date: 'dd/MM/yyyy' }}</div>
+                  <div>
+                  </div>
+                </div>
                 </div>
 
                 <div class="row ">
@@ -95,26 +97,24 @@
                         <input class="form-control w-100" [(ngModel)]="detialIssue.apt_FloorNo" type="number">
                     </div>
                     <div class="col-12 col-md-6">
-                        <label class="fw-bold" style="color: #605D62">Side</label>
+                        <label class="fw-bold" style="color: #605D62">The location of the apartment on the floor</label>
                         <input class="form-control w-100" [(ngModel)]="detialIssue.side" type="text">
                     </div>
 
                 </div>
-                <div class="row ">
+                <!-- <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">Worker Name</label>
                         <input readonly class="form-control w-100" [(ngModel)]="detialIssue.worker_name" type="text">
 
-                        <!-- <input class="form-control w-100" [(ngModel)]="detialIssue.apt_FloorNo" type="number"> -->
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="fw-bold" style="color: #605D62">cost by</label>
                         <input readonly class="form-control w-100" [(ngModel)]="detialIssue.costby" type="text">
 
-                        <!-- <input class="form-control w-100" [(ngModel)]="detialIssue.side" type="text"> -->
                     </div>
 
-                </div>
+                </div> -->
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold form-label d-block mb-0" style="color: #605D62;">Date reported</label>
@@ -140,15 +140,15 @@
                     <label class="fw-bold" style="color: #605D62;">Descriptions</label>
                     <textarea class="border rounded-3 w-100 p-2" rows="5" [(ngModel)]="detialIssue.desc" style="resize: unset;" placeholder="Enter a description"></textarea>
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label class="fw-bold" style="color: #605D62;">Notes</label>
                     <textarea class="border rounded-3 w-100 p-2" rows="5" [(ngModel)]="detialIssue.notes" style="resize: unset;" placeholder="Enter a Note"></textarea>
-                </div>
+                </div> -->
 
                 <div>
                     <p class="fw-bold mb-0" style="color: #605D62;">Pictures</p>
                     <div class="accordion-body mb-3">
-                        <img *ngFor="let item of detialIssue.issue_Images;let i=index" (click)="openmodel(item.img_Url)" style="width: 100px;cursor: pointer;" [src]="item.img_Url" class="me-2">
+                        <img *ngFor="let item of detialIssue.issue_Images;let i=index" (click)="openmodel(item.img_Url)" style="width:250px;height: 200px;cursor: pointer;" [src]="item.img_Url" class="me-2">
 
                     </div>
                 </div>
@@ -346,21 +346,24 @@
     <!-- end content page  -->
 </div>
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display22}" style="background-color: rgba(90,90,90,0.5);">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-
-            <div class="modal-body">
-                <img [src]="imageSize" style="width:80%" />
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="width:900px;">
+        <div class="modal-content position-relative">
+          <div class="modal-header p-0 m-0 d-flex justify-content-start">
+            <button type="button" class="close" aria-label="Close" (click)="oncloseModal()">
+              <img src="../../../../assets/images/ic_round-close.svg" alt="">
+            </button>
+              </div>
+            <div class="modal-body p-0 m-0">
+                <img [src]="imageSize" style="width:100%;height: 500px" />
 
             </div>
 
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-white bbtclose" (click)="oncloseModal()">
 close
 </button>
 
-            </div>
+            </div> -->
 
 
         </div>

@@ -158,6 +158,19 @@ th {
 i {
     font: normal normal normal 14px/1 FontAwesome !important;
 }
+.modal .modal-header{
+  position: absolute;
+  top: 0px !important;
+  z-index: 9999;
+}
+.modal .modal-header button{
+    background-color: #1F4068;
+    width: 40px;
+    height: 40px;
+    padding: 7.875px 8px 8.125px 8px;
+    border: none;
+    outline: none;
+  }
 
 .file {
     z-index: 3 !important;

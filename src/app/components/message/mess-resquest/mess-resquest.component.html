@@ -202,24 +202,28 @@
     </main>
     <!-- end content page  -->
 </div>
+
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display22}" style="background-color: rgba(90,90,90,0.5);">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-
-            <div class="modal-body">
-                <img [src]="imageSize" style="width:70%" />
-
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="width:900px;">
+      <div class="modal-content position-relative">
+        <div class="modal-header p-0 m-0 d-flex justify-content-start">
+          <button type="button" class="close" aria-label="Close" (click)="oncloseModal()">
+            <img src="../../../../assets/images/ic_round-close.svg" alt="">
+          </button>
             </div>
+          <div class="modal-body p-0 m-0">
+              <img [src]="imageSize" style="width:100%;height: 500px" />
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white bbtclose" (click)="oncloseModal()">
+          </div>
+
+          <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-white bbtclose" (click)="oncloseModal()">
 close
 </button>
 
-            </div>
+          </div> -->
 
 
-        </div>
-    </div>
+      </div>
+  </div>
 </div>

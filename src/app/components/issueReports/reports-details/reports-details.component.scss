@@ -4,12 +4,12 @@
     border-left: 3px solid #1f4068;
 }
 
-.content-details {
-    @media (min-width: 992px) {
-        margin-left: 17%;
-        padding: 0 10% !important;
-    }
-}
+// .content-details {
+//     @media (min-width: 992px) {
+//         margin-left: 17%;
+//         padding: 0 10% !important;
+//     }
+// }
 
 .top-icon-input {
     top: 30px;
@@ -80,4 +80,22 @@ option {
   .cardss {
       margin-left: 23px;
   }
+}
+.modal .modal-header{
+  position: absolute;
+  top: 0px !important;
+  z-index: 9999;
+  button{
+    background-color: #1F4068;
+    width: 40px;
+    height: 40px;
+    padding: 7.875px 8px 8.125px 8px;
+    border: none;
+    outline: none;
+  }
+}
+
+::ng-deep .form-control {
+  border: 1px solid #F6F6F6 !important;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05) !important;
 }

@@ -170,6 +170,19 @@
 .vcrr {
     display: block;
 }
+.modal .modal-header{
+  position: absolute;
+  top: 0px !important;
+  z-index: 9999;
+  button{
+    background-color: #1F4068;
+    width: 40px;
+    height: 40px;
+    padding: 7.875px 8px 8.125px 8px;
+    border: none;
+    outline: none;
+  }
+}
 
 * {
     font-family: 'Poppins'
