@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MessageComponent } from './message.component';
 import { AssginTicketComponent } from './assgin-ticket/assgin-ticket.component';
 import { MessResquestComponent } from './mess-resquest/mess-resquest.component';
+import { AddNewMessageComponent } from './add-new-message/add-new-message.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,9 @@ const routes: Routes = [
   },
   {
     path: 'message-tiket/:id', component: MessResquestComponent,
+  },
+  {
+    path: 'create-new', component: AddNewMessageComponent,
   }
 ];
 

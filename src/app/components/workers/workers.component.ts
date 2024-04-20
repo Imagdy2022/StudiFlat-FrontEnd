@@ -35,7 +35,7 @@ export class WorkersComponent implements OnInit {
   selectedfromDropDown(value:any){
 
     this.Date=value.name;
-    // this.getAllworkers()
+    this.getAllworkers()
   }
   /**
    * addItem
@@ -176,16 +176,15 @@ gotopage( ){
   let url: string = "unlegal";
     this.router.navigateByUrl(url);
 }
-searchText:any=""
+
+searchText: any = '';
 
 searchKey(data: string) {
-  debugger
   this.searchText = data;
   this.getAllworkers();
 }
-searchTextChange:any
+searchTextChange: any;
 searchAction() {
-  this.searchTextChange.emit(this.searchText);
-  this.search = false;
+  this.getAllworkers();
 }
 }

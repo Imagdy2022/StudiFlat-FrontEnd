@@ -457,15 +457,18 @@
                 </div>
                 <div class="mb-4">
                     <label class="fw-bold" style="color: #605D62;">User Image</label>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <img [src]="imageUrl!=''?imageUrl:'../../../../assets/images/avatardef.jpg'" class="imageOfPerson rounded-circle ng-star-inserted">
+                    <div class="d-flex align-items-center pt-3">
+                        <img [src]="imageUrl!=''?imageUrl:'../../../../assets/images/avatardef.jpg'" class="userImage  ng-star-inserted">
 
                     </div>
 
-                    <div class="position-relative h-124px mb-3">
+                    <div class="mb-3 py-2 px-2" style="width: 264px; background-color: #F6F6F6;">
 
-                        <input #fileInput (change)="uploadPic($event)" type="file" accept="image/*" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                        <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute w-100 h-100">
+                        <input #fileInput (change)="uploadPic($event)" type="file" accept="image/*" class="ng-star-inserted d-block file position-absolute">
+                        <div>
+                          <img src="../../../../assets/images/user/upload 1.svg">
+                          <span class="ms-3 text-dark">upload image</span>
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -473,43 +476,25 @@
                     <p class="fw-bold mb-0" id="userinformation">user rating </p>
                     <p style="color: #605D62 !important;">this section help you rating your tenants</p>
                 </div>
-                <div class="d-flex    d-flex justify-content-center justify-md-content-start ">
+                <div class="d-flex justify-content-center justify-md-content-start py-4">
+                  <div class="d-flex justify-content-between align-items-center">
                     <div class=" d-md-flex  align-items-center justify-md-content-start ">
-                        <div class="rounded-circle imageOfPerson me-4" style="box-shadow: 0 2px 6px #d1d1d1;">
-                            <img class="imageOfPerson rounded-circle" style="border: 3px solid white;" [src]="Tenant_details.user_Photo">
-                        </div>
+                      <div class="rounded-circle" style="box-shadow: 0 2px 6px #d1d1d1;">
+                          <img class="rounded-circle rateImage" style="border: 3px solid white;" [src]="Tenant_details.user_Photo">
+                      </div>
 
 
-                    </div>
-                </div>
-                <div style="text-align: center; margin-top:10px">
-                    <p>please rate this tenant</p>
-                </div>
-                <div class="stars-icon2" style="text-align: center;">
-                    <p-rating [(ngModel)]="ratingnumber" [cancel]="false"></p-rating>
+                  </div>
+                  <div class="ms-5">
+                    <div style="margin-top:10px">
+                      <p style="color: #605D62;font-size: 20px;">Please Rate This Tenant</p>
+                  </div>
+                  <div class="stars-icon2 mt-3">
+                      <p-rating [(ngModel)]="ratingnumber" [cancel]="false"></p-rating>
+                  </div>
+                  </div>
 
-                    <!-- <div class="rating rating-star">
-                        <div class="rate" ng-disabled="isRate=='true'">
-                            <input type="radio" id="q1-radio1" name="star-rating" value="1" [disabled]="isRate==true" />
-                            <label (click)="addreating(1)" for="q1-radio1">★</label>
-
-
-                            <input type="radio" id="q1-radio2" name="star-rating" value="2" [disabled]="isRate==true" />
-                            <label (click)="addreating(2)" for="q1-radio2">★</label>
-
-
-                            <input type="radio" id="q1-radio3" name="star-rating" value="3" [disabled]="isRate==true" />
-                            <label (click)="addreating(3)" for="q1-radio3">★</label>
-
-
-                            <input type="radio" id="q1-radio4" name="star-rating" value="4" [disabled]="isRate==true" />
-                            <label (click)="addreating(4)" for="q1-radio4">★</label>
-
-
-                            <input type="radio" id="q1-radio5" name="star-rating" value="5" [disabled]="isRate==true" />
-                            <label (click)="addreating(5)" for="q1-radio5">★</label>
-                        </div>
-                    </div> -->
+                  </div>
                 </div>
                 <div>
                     <div class="mb-4">

@@ -1,12 +1,12 @@
 <!-- start header  -->
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Tickets'"></app-head>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Messages'"></app-head>
 </header>
 <!-- end header  -->
 
 <div class="row m-0">
     <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Tickets'"></app-sidebar>
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Messages'"></app-sidebar>
     <!-- end sidebar  -->
     <!-- start content page  -->
     <main class="p-4 col-lg-10">
@@ -14,17 +14,19 @@
 
         <!-- <p class="fw-bold" style="color: #6c6a6a"></p> -->
         <div class="fw-inquiries d-flex justify-content-between align-items-center" style="color: #6c6a6a;margin-top: 7px; margin-bottom: 23px;">
-            <p class="fw-bold ms-1" style="color: #6c6a6a;">Tickets</p>
+            <p class="fw-bold ms-1" style="color: #6c6a6a;">Messages</p>
             <div class="d-flex justify-content-lg-between  ">
-                <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-
-                <!-- start dropdown button  -->
-                <!-- <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
-                <!-- end dropdown button  -->
-                <!-- start add button (add new owner) in page  -->
-                <!-- <app-add-new-button [id]="'/owner/create_new'" class="mt-2"></app-add-new-button> -->
-
-                <!-- end add button (add new owner) in page  -->
+              <div class="d-flex justify-content-lg-between flex-md-row flex-column">
+                <div class="d-flex mb-2 me-3 mb-2">
+                  <button class="month rounded-start px-3 py-2 outline-none bg-white">This Month</button>
+                  <button class="week rounded-end px-3 py-2 outline-none bg-white">Last Week</button>
+              </div>
+                <div class="d-flex mb-2">
+                    <!-- start dropdown button  -->
+                    <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+                </div>
+                <app-add-new-button *ngIf="StatisticsRole?.p_Add==true || is_Super==true" [id]="'/messages/create-new'" class="mt-2"></app-add-new-button>
+              </div>
             </div>
             <!-- start add button (add new apartment) in page  -->
             <!-- end add button (add new apartment) in page  -->
@@ -36,7 +38,7 @@
                 <!-- length Of person -->
                 <div class="col-md-4">
                   <div class="d-flex mx-2 mt-4">
-                    <p class="me-2 fs-5 fw-bold ml-8">Tickets</p>
+                    <p class="me-2 fs-5 fw-bold ml-8">Messages</p>
                 </div>
                 </div>
                 <!-- search input -->
@@ -132,10 +134,10 @@
                 <img src="assets/images/edit.svg">
             </button>
                             <div *ngIf="showEdit[inquire.ticket_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button *ngIf="inquire?.assigned_To=='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/message/assgin-tiket/{{inquire.ticket_ID}}">Assign ticket to employee  </button>
-                                <button *ngIf="inquire?.assigned_To!='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/message/assgin-tiket/{{inquire.ticket_ID}}">Reassign ticket to employee  </button>
+                                <button *ngIf="inquire?.assigned_To=='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{inquire.ticket_ID}}">Assign ticket to employee  </button>
+                                <button *ngIf="inquire?.assigned_To!='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{inquire.ticket_ID}}">Reassign ticket to employee  </button>
 
-                                <button style="margin-top:0px !important" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/message-tiket/{{inquire.ticket_ID}}">Pickup ticket</button>
+                                <button style="margin-top:0px !important" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/messages/message-tiket/{{inquire.ticket_ID}}">Pickup ticket</button>
 
 
 
