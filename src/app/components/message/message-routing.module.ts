@@ -4,6 +4,7 @@ import { MessageComponent } from './message.component';
 import { AssginTicketComponent } from './assgin-ticket/assgin-ticket.component';
 import { MessResquestComponent } from './mess-resquest/mess-resquest.component';
 import { AddNewMessageComponent } from './add-new-message/add-new-message.component';
+import { UserMessageComponent } from './user-message/user-message.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,9 @@ const routes: Routes = [
   },
   {
     path: 'create-new', component: AddNewMessageComponent,
+  },
+  {
+    path: 'user-message/:id', component: UserMessageComponent,
   }
 ];
 

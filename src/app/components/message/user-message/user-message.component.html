@@ -1,0 +1,116 @@
+<!-- start header  -->
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Messages'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'messages'"></app-sidebar>
+  <!-- end sidebar  -->
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10" (click)=" hidecard( )">
+      <div class="mt-3 row border bg-white rounded-3">
+          <p-toast></p-toast>
+
+          <div class="col-12 col-md-12 px-0">
+              <!-- start head in the chat-->
+              <div class="border py-2 px-3">
+
+                  <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                          <!-- <img style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;" [src]="deatail?.userPhoto" class="me-3" /> -->
+
+                          <img *ngIf="deatail?.tenant_photo" class="me-3" [src]="deatail?.tenant_photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
+
+
+                          <img *ngIf="!deatail?.tenant_photo" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;margin-top: 13px;">
+
+                          <div class="ml-3 d-flex justify-content-between">
+                              <div class="mt-3">
+                                  <p class="line-height fw-bold mb-0">{{deatail?.user_FullName}}</p>
+                                  <p class="color-gray fw-light">@{{deatail?.user_FullName}}</p>
+                              </div>
+                              <!-- <span class="d-flex align-items-center m-0 ms-4 rounded-4 px-2 mt-3" style="background-color: #ecfdf3; height: 20px; color: green">
+                <img src="assets/images/message/_Dot.svg" class="me-2" />
+                Online</span> -->
+                          </div>
+                      </div>
+
+                      <button  class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important;height: 34px;" routerLink="/messages">
+                        Cancel
+              </button>
+
+                  </div>
+
+              </div>
+              <!-- end head in the chat-->
+              <!-- start content in the chat-->
+              <div class="px-4">
+                  <div *ngFor=" let item of deatail?.reply">
+                      <!-- Reciver -->
+                      <div class="d-flex justify-content-between reciver mb-2 py-4" *ngIf="item?.reply_From==true">
+                          <div class="d-flex">
+                              <!-- <img src="assets/images/Avatar.svg" class="me-3 mb-3" /> -->
+                              <img *ngIf="deatail?.userPhoto" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;" [src]="deatail?.userPhoto" class="me-3" />
+                              <img *ngIf="!deatail?.userPhoto" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
+
+                              <div>
+                                  <div class="ml-3 d-flex justify-content-between">
+                                      <div>
+                                          <p class="mb-0">{{item?.reply_User}}</p>
+                                      </div>
+                                      <p class="mb-0 fw-light" style="margin-left: 70px;">{{item?.reply_Ago}}</p>
+                                  </div>
+                                  <p *ngIf="item?.reply_Desc!=null && item?.reply_Desc!=''" class="p-2 rounded-end rounded-bottom" style="background-color: #f6f6f6">
+                                      {{item?.reply_Desc}}
+                                  </p>
+                                  <img (click)="openmodel(item?.reply_Attach)" style="width: 70px;  height: 70px" *ngIf="item?.reply_Attach!=null && item?.reply_Attach!=''" [src]="item?.reply_Attach">
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Sender -->
+                      <div class="d-flex justify-content-end mb-2 py-4" *ngIf="item.reply_From!=true">
+                          <div style="margin-bottom: 20px;">
+                              <div class="ml-3 d-flex justify-content-between">
+                                  <div>
+                                      <p class="mb-0">{{item?.reply_User}}</p>
+                                  </div>
+                                  <p class="mb-0 fw-light" style="margin-left: 70px;">{{item?.reply_Ago}}</p>
+                              </div>
+                              <p *ngIf="item?.reply_Desc!=null && item?.reply_Desc!=''" class="p-2 rounded-start rounded-bottom text-white bg-blue">
+                                  {{item?.reply_Desc}}
+                              </p>
+                              <img (click)="openmodel(item?.reply_Attach)" style="width: 70px;  height:70px" *ngIf="item?.reply_Attach!=null && item?.reply_Attach!=''" [src]="item?.reply_Attach">
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="position-relative mb-2 h-25 m-auto" style="width: 98%">
+                      <textarea [(ngModel)]="reply_Desc" id="w3review" name="w3review" class="w-100 h-100 p-3 border rounded" placeholder="Send a message" style="resize: none; outline: none"></textarea>
+                      <div class="position-absolute d-flex justify-content-between" style="right: 6%; bottom: 15%">
+                          <!-- <button class="border-0 bg-transparent"> -->
+                          <input type="file" accept="image/*" (change)="selectFile($event)" style=" width: 28% !important;" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
+
+                          <img src="assets/images/message/attach_file.svg" />
+                          <!-- </button> -->
+                          <button class="border-0 bg-transparent">
+              <img src="assets/images/message/more.svg" />
+            </button>
+                          <button (click)="ReplyDash() " class="px-3 py-2 rounded border text-white text-decoration-none" style="background-color: #1F4068;">
+              <img src="assets/images/message/sendFill.svg" /> Send
+            </button>
+                      </div>
+                  </div>
+              </div>
+              <!-- end content in the chat-->
+              <!-- start send a message in the chat-->
+
+              <!-- end send a message in the chat-->
+          </div>
+          <!-- end the chat-->
+      </div>
+  </main>
+  <!-- end content page  -->
+</div>
+

@@ -25,10 +25,11 @@ import { CalendarModule } from 'primeng/calendar';
 import { PaginatorModule } from 'primeng/paginator';
 import { MessageRoutingModule } from './message-routing.module';
 import { AddNewMessageComponent } from './add-new-message/add-new-message.component';
+import { UserMessageComponent } from './user-message/user-message.component';
 const routes: Routes = [
 ];
 @NgModule({
-  declarations: [MessageComponent,AssginTicketComponent,MessResquestComponent, AddNewMessageComponent],
+  declarations: [MessageComponent,AssginTicketComponent,MessResquestComponent, AddNewMessageComponent, UserMessageComponent],
   imports: [
     CommonModule,
     PaginatorModule,

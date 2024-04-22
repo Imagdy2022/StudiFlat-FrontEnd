@@ -1,1 +1,116 @@
-<p>add-new-message works!</p>
+<!-- <app-edite-user-details></app-edite-user-details> -->
+<!-- start header  -->
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Messages'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Users'"></app-sidebar>
+  <!-- end sidebar  -->
+
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10 ">
+      <p-toast></p-toast>
+      <div class="card">
+
+          <div class="row d-flex justify-content-between align-items-center px-3">
+              <!-- length Of person -->
+             <div class="col-md-4">
+              <div class="d-flex mx-2 mt-4">
+                <p class="me-2 fs-5 fw-bold ml-8">
+                  <a routerLink="/messages">
+                    <img src="./../../../../assets/images/arrow_back.svg" alt="" class="me-2">
+                  </a>
+                  Select Tenants </p>
+            </div>
+             </div>
+              <!-- search input -->
+            <div class="col-md-5 col-8">
+
+                <div class="input">
+                  <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
+                    <img src="../../../assets/images/search.svg" alt="">
+                </div>
+            </div>
+          </div>
+          <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="Tenants">
+              <ng-template pTemplate="header" class="text-center">
+                  <tr *ngIf="headerData" class="tableHead">
+                      <ng-container>
+
+                          <th class="td-name">
+                            <input type="checkbox" name="selectedContent" class="me-2" (change)="selectAll($event)" />
+                              Name
+
+                          </th>
+                          <th class="td-name">
+                            Apartment Name
+
+                          </th>
+                          <th class="td-name">
+                              Email address
+
+                          </th>
+                          <th class="td-name">
+                            Phone number
+                          </th>
+                          <th class="td-name">
+                            WhatsApp
+                          </th>
+                      </ng-container>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-Tenant>
+
+                  <tr>
+
+                      <td class="d-flex align-items-center">
+                        <input type="checkbox" id="selectedUser-{{ Tenant.user_ID }}" value="{{ Tenant.user_ID }}"
+                        name="selectedContent" (change)="onCheckboxChange($event)" class="me-2"/>
+                           {{Tenant?.user_Name}}
+
+                      </td>
+                      <td>
+                        Salt Lake City, Apartment
+                      </td>
+                      <td>
+                          {{Tenant?.email}}
+                      </td>
+                      <td >
+                       (+49) 034 000 000
+                      </td>
+                      <td >
+                        (+49) 034 000 000
+                       </td>
+                  </tr>
+
+              </ng-template>
+
+
+              <ng-template pTemplate="emptymessage">
+                  <div class="container text-center mt-4">
+                      <p class="mb-0">No data found.</p>
+                  </div>
+              </ng-template>
+
+          </p-table>
+
+          <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+      </div>
+        <div class="d-flex justify-content-between">
+            <button  class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2" routerLink="/messages">
+              Cancel
+    </button>
+            <button type="submit" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important"
+            routerLink="/messages/user-message/{{userSelectId}}">
+              Next
+    </button>
+        </div>
+
+  </main>
+  <!-- end content page  -->
+</div>
+

@@ -14,8 +14,10 @@ import { environment } from 'src/environments/environment';
 export class MessageComponent {
 
   showSide:string = '';
-  value:any=''
-  activePerson:boolean=true
+  value:any='';
+  activePerson:boolean=true;
+  targetId:any;
+
 
   constructor(private _ticketService:AdminsService ,private messageService: MessageService,public router: Router) {
     this.checkRole();
@@ -119,6 +121,7 @@ export class MessageComponent {
         ids:any=[]
     detailperson(event:any, id: any){
       this.showEdit=[]
+      this.targetId = id;
   event.stopPropagation()
 
       this.showEdit[id] == true ? this.showEdit[id] = false : this.showEdit[id] = true
@@ -157,6 +160,15 @@ export class MessageComponent {
     this.getAll_tickets();
     // this.searchText =""
 
+  }
+  CloseTicket(status:any) {
+    let index = this.targetId
+    this._ticketService.CloseTicket(index,status  ).subscribe((res) => {
+       this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
+       this.getAll_tickets();
+       }, (error) => {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+    })
   }
   }
 

@@ -194,6 +194,13 @@ span.icon{
 
   }
 }
+.btn.btn-outline{
+  color: #1F4068 !important;
+  background-color: #fff !important;
+  border: 1px solid #1F4068;
+  border-radius: 6px;
+  font-size: 16px;
+}
 .form-switch .form-check-input{
   width: 2.8rem;
   height: 1.5rem;
