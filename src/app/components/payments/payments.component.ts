@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import jsPDF from 'jspdf';
 import { MessageService } from 'primeng/api';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
+import * as XLSX from 'xlsx'
 
 @Component({
   selector: 'app-payments',
@@ -9,6 +11,7 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
   styleUrls: ['./payments.component.css']
 })
 export class PaymentsComponent implements OnInit {
+  @ViewChild ('content',{static: false}) el! : ElementRef
   rangeDates: Date[] ;
 
   constructor(    private messageService: MessageService,
@@ -189,6 +192,21 @@ openModal2(id: any) {
   this.display2 = 'block';
 }
 onSubmitModal2() {
+
+}
+fileName= 'FinanceTable.xlsx'
+exportToExcel(){
+  // let pdf = new jsPDF();
+  // pdf.html(this.el.nativeElement, {
+  //   callback: (pdf) => {
+  //     pdf.save('FinanceTable.pdf');
+  //   },
+  // });
+  let data = document.getElementById("content");
+  const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+  const wb:XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Sheet1')
+  XLSX.writeFile(wb,this.fileName)
 
 }
 

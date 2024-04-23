@@ -99,7 +99,7 @@
         <!-- start part 3 in page  -->
         <div class="d-flex justify-content-end pb-2 align-items-center">
           <app-add-new-button  [id]="'/payments/create_new'" style="margin-top: 22px; margin-bottom: 24px;" class="me-2"></app-add-new-button>
-          <button class="btn btn-outline py-2 ms-2">
+          <button class="btn btn-outline py-2 ms-2"  (click)="exportToExcel()">
             <img src="../../../assets/images/pajamas_export.svg" alt="" class="me-1">
             Export</button>
         </div>
@@ -179,25 +179,8 @@
                   </div>
                 </div>
 
-                <!-- end apartmentLists button  -->
-                <!-- start dropdown button  -->
-                <!-- <div class="d-flex align-items-center mx-2 mt-2  ">
 
-                    <ng-container *ngIf="!search; else searchVisible">
-                        <img class="pi pi-search cursor ms-auto" (click)="search = true" src="../../../assets/images/search.svg">
-                    </ng-container>
-                    <ng-template #searchVisible>
-                        <br>
-                        <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
-                        <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
-            Search
-        </button>
-                    </ng-template>
-                </div> -->
-
-            <!-- <p-table #dt [value]="payments" [(selection)]="payments" dataKey="id" [filterDelay]="0" /> -->
-
-            <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="payments"  [scrollable]="true">
+            <p-table id="content" #content class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="payments"  [scrollable]="true">
                 <ng-template pTemplate="header" class="text-center">
                     <tr>
                         <ng-container>
@@ -348,22 +331,6 @@
 
             </p-table>
             <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
-
-            <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-                  <button (click)="decreamentPage( )" [disabled]="disableperv" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                    Previous
-      </button>
-              </div>
-              <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{pageNumber}} of {{totalofPages}}</div>
-              <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-                  <button [disabled]="disablenext" (click)="   incrementpage( )" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                        Next
-          </button>
-              </div>
-          </div> -->
 
         </div>
     </main>

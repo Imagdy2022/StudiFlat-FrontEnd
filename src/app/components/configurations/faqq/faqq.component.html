@@ -85,9 +85,11 @@
                         <td>
                             {{fqq?.faq_Quest}}
                         </td>
-                        <p style="width: 40vw; overflow: hidden; text-overflow: ellipsis;
-                        white-space: nowrap;">                             {{fqq?.faq_Ans}}
-                        </p>
+                         <td>
+                          <p style="width: 40vw; overflow: hidden; text-overflow: ellipsis;
+                          white-space: nowrap;"> {{fqq?.faq_Ans}}
+                          </p>
+                         </td>
 
                         <td class="cursor position-relative" style="text-align: center;">
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,fqq.faq_ID)">

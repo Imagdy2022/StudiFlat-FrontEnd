@@ -57,7 +57,7 @@
                     <label for="" style="color: #313331;font-weight: 500;font-size: 16px;">Inquiries</label>
                     <img src="assets/images/line.svg" class="mx-3" >
                     <select class="form-select" (change)="clickIquires($event)">
-                      <option *ngFor="let data of InquireFillterLists; let index=index;" [value]="data.id" [selected]="InquireFillterLists[index]">{{data.name}}</option>
+                      <option *ngFor="let data of InquireFillterLists; let index=index;" [value]="data.id" [selected]="InquireFillterSelected[index]">{{data.name}}</option>
                     </select>
                   </div>
                 </div>
