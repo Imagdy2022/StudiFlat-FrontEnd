@@ -70,6 +70,19 @@ export class AdminsService {
 
     return this.http.get<any>(url, { headers: this.headers, params: params });
   }
+  GetAllAppUsers(
+    PageNumber: number,
+    PageSize: number,
+    Search: any
+  ): Observable<any> {
+    const url = `${environment.apiUrl}/Chat/GetAllAppUsers`;
+    const params = new HttpParams()
+      .set('Page_No', PageNumber)
+      .set('Page_Size', PageSize)
+      .set('FilterKey', Search);
+
+    return this.http.get<any>(url, { headers: this.headers, params: params });
+  }
   public TenantDetails(id: any): Observable<any> {
     let url = environment.apiUrl + '/Users/TenantDetails?User_ID=' + id;
 

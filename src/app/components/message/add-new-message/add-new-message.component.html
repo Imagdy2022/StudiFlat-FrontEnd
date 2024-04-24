@@ -68,22 +68,22 @@
                   <tr>
 
                       <td class="d-flex align-items-center">
-                        <input type="checkbox" id="selectedUser-{{ Tenant.user_ID }}" value="{{ Tenant.user_ID }}"
+                        <input type="checkbox" id="selectedUser-{{ Tenant.tenant_ID }}" value="{{ Tenant.tenant_ID }}"
                         name="selectedContent" (change)="onCheckboxChange($event)" class="me-2"/>
-                           {{Tenant?.user_Name}}
+                           {{Tenant?.tenant_Name}}
 
                       </td>
                       <td>
-                        Salt Lake City, Apartment
+                       {{Tenant?.apartment_Name}}
                       </td>
                       <td>
-                          {{Tenant?.email}}
+                          {{Tenant?.tenant_Mail}}
                       </td>
                       <td >
-                       (+49) 034 000 000
+                       {{Tenant?.tenant_Phone}}
                       </td>
                       <td >
-                        (+49) 034 000 000
+                      {{Tenant?.tenant_WA}}
                        </td>
                   </tr>
 

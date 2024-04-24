@@ -62,7 +62,7 @@ export class AddNewMessageComponent {
     this.Tenants = [];
     this.numberTenants = 0;
     this._adminservices
-      .TenantList(this.pageNumber, this.pagesize, this.Date, this.searchText)
+      .GetAllAppUsers(this.pageNumber, this.pagesize, this.searchText)
       .subscribe(
         (res: any) => {
           this.Tenants = res['data'];
@@ -109,9 +109,9 @@ export class AddNewMessageComponent {
 
   }
   onCheckboxChange(e: any) {
-    this.userSelectId = e.target.value
-
-     console.log(this.userSelectId)
+    if(e.target.checked){
+      this.userSelectId = e.target.value
+    }
     }
 
 }

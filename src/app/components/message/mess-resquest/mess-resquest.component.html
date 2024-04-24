@@ -12,79 +12,7 @@
     <main class="p-4 col-lg-10" (click)=" hidecard( )">
         <p class="fw-bold" style="color: #6c6a6a">Ticket : {{deatail?.ticket_Code}}</p>
         <div class="mt-3 row border bg-white rounded-3">
-            <!-- persons active -->
-            <!-- <div class="col-12 col-md-4 border-end"> -->
-            <!-- <div class="d-flex justify-content-between">
 
-                    <div class="d-flex mx-2 mt-4">
-                        <p class="me-2 fs-5 fw-bold">Messages</p>
-                        <p class="mt-1 bg-gray rounded-5 px-1 d-flex align-items-center">
-                            16
-                        </p>
-                    </div>
-
-                    <div class="d-flex align-items-center">
-                        <img src="assets/images/message/Vector.svg" />
-                    </div>
-                </div> -->
-            <!-- start search button -->
-            <!-- <div class="p-input-icon-left w-100">
-                    <i *ngIf="value == ''" class="me-1"><img src="assets/images/message/search-lg.svg" /></i>
-                    <input class="form-control border rounded-3 mt-2 ps-35px" [class.ps-35px]="value == ''" type="text" pInputText placeholder="Search" [(ngModel)]="value" />
-                </div> -->
-            <!-- end search button -->
-            <!-- <table class="table">
-                    <tbody>
-                        <tr>
-                            <th scope="row">
-                                <button class="outline-0 border-0 bg-transparent ">
-                  <div class="d-flex justify-content-between">
-                    <div class="d-flex">
-                      <img *ngIf="activePerson" src="assets/images/message/Dot.svg" class="me-2" />
-                      <img src="assets/images/Avatar.svg" class="me-3" />
-                      <div class="ml-3 d-flex justify-content-between">
-                        <div class="mt-3">
-                          <p class="line-height fw-bold mb-0">Umar</p>
-                          <p class="color-gray fw-light">@umar</p>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="d-flex align-items-center fw-light">5min ago</p>
-                  </div>
-                  <p class="container fw-light">
-                    Hey Loram, Ipsum sent me over the latest doc. I just have a
-                    quick question about the...
-                  </p>
-                </button>
-
-                            </th>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <button class="outline-0 border-0 bg-transparent ">
-                  <div class="d-flex justify-content-between">
-                    <div class="d-flex">
-                      <img *ngIf="!activePerson" src="assets/images/message/Dot.svg" class="me-2" />
-                      <img src="assets/images/Avatar.svg" class="me-3" />
-                      <div class="ml-3 d-flex justify-content-between">
-                        <div class="mt-3">
-                          <p class="line-height fw-bold mb-0">Umar</p>
-                          <p class="color-gray fw-light">@umar</p>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="d-flex align-items-center fw-light">5min ago</p>
-                  </div>
-                  <p class="container fw-light">
-                    Hey Loram, Ipsum sent me over the latest doc. I just have a
-                    quick question about the...
-                  </p>
-                </button>
-                            </th>
-                        </tr>
-                    </tbody>
-                </table> -->
-            <!-- </div> -->
             <!-- start the chat -->
             <p-toast></p-toast>
 
@@ -94,7 +22,6 @@
 
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
-                            <!-- <img style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;" [src]="deatail?.userPhoto" class="me-3" /> -->
 
                             <img *ngIf="deatail?.userPhoto" class="me-3" [src]="deatail?.userPhoto" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
 
@@ -106,9 +33,6 @@
                                     <p class="line-height fw-bold mb-0">{{deatail?.userName}}</p>
                                     <p class="color-gray fw-light">@{{deatail?.userName}}</p>
                                 </div>
-                                <!-- <span class="d-flex align-items-center m-0 ms-4 rounded-4 px-2 mt-3" style="background-color: #ecfdf3; height: 20px; color: green">
-                  <img src="assets/images/message/_Dot.svg" class="me-2" />
-                  Online</span> -->
                             </div>
                         </div>
                         <div class="d-flex">
@@ -125,10 +49,6 @@
                                 </div>
 
                             </td>
-                            <!-- <a routerLink="" class="text-decoration-none bg-blue text-white h-35 d-none d-md-flex align-items-center rounded mt-3 py-2 px-3 text-center" style="color: #6c6a6a">View profile</a>
-                            <button class="bg-transparent mb-2 border-0">
-                <img src="assets/images/more_vert_FILL.svg " />
-              </button> -->
                         </div>
                     </div>
 
