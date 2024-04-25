@@ -9,7 +9,7 @@
   <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'messages'"></app-sidebar>
   <!-- end sidebar  -->
   <!-- start content page  -->
-  <main class="p-4 col-lg-10" (click)=" hidecard( )">
+  <main class="p-4 col-lg-10">
       <div class="mt-3 row border bg-white rounded-3">
           <p-toast></p-toast>
 
@@ -65,7 +65,9 @@
                                   <p *ngIf="item?.msg_Body!=null && item?.msg_Body!=''" class="p-2 rounded-end rounded-bottom" style="background-color: #f6f6f6">
                                       {{item?.msg_Body}}
                                   </p>
-                                  <img (click)="openmodel(item?.msg_Attachement)" style="width: 70px;  height: 70px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
+                                  <a (click)="openmodel(item?.msg_Attachement)">
+                                  <img style="width: 70px;  height: 70px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
+                                  </a>
                               </div>
                           </div>
                       </div>
@@ -81,7 +83,9 @@
                               <p *ngIf="item?.msg_Body!=null && item?.msg_Body!=''" class="p-2 rounded-start rounded-bottom text-white bg-blue">
                                   {{item?.msg_Body}}
                               </p>
-                              <img (click)="openmodel(item?.msg_Attachement)" style="width: 70px;  height:70px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
+                              <a (click)="openmodel(item?.msg_Attachement)">
+                                <img style="width: 70px;  height: 70px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
+                                </a>
 
                           </div>
                       </div>
@@ -114,3 +118,27 @@
   <!-- end content page  -->
 </div>
 
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display22}" style="background-color: rgba(90,90,90,0.5);">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="width:900px;">
+      <div class="modal-content position-relative">
+        <div class="modal-header p-0 m-0 d-flex justify-content-start">
+          <button type="button" class="close" aria-label="Close" (click)="oncloseModal()">
+            <img src="../../../../assets/images/ic_round-close.svg" alt="">
+          </button>
+            </div>
+          <div class="modal-body p-0 m-0">
+              <img [src]="imageSize" style="width:100%;height: 500px" />
+
+          </div>
+
+          <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-white bbtclose" (click)="oncloseModal()">
+close
+</button>
+
+          </div> -->
+
+
+      </div>
+  </div>
+</div>

@@ -31,7 +31,6 @@ export class UserMessageComponent {
       this.StartNewChatWithUser();
     }
   }
-  showEdit: Array<boolean> = [];
   addItem(value:any){
     this.showSide=value
   }
@@ -63,10 +62,7 @@ export class UserMessageComponent {
        console.error('Error fetching owners:', error);
     })
   }
-   hidecard( ){
-    this.showEdit=[]
-
- }message = '';preview = '';progress = 0;
+  message = '';preview = '';progress = 0;
  reply_Desc:any=""
  urls = new Array<string>();
  counter=0;
