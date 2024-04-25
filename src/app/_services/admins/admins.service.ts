@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -617,6 +618,19 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
   }
   PushNotification(): Observable<any[]> {
     const url = environment.apiUrl + '/PushNotification/NotiList';
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
+  StartNewChatWithUser(UserID: string): Observable<any> {
+    const url = environment.apiUrl + `/Chat/StartNewChatWithUser?UserID=${UserID}`;
+    return this.http.post<any>(url, UserID, { headers: this.headers });
+  }
+  SendMsg(data: any): Observable<any> {
+    const url = environment.apiUrl + `/Chat/SendMsg`;
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
+  GetChatHistory(Chat_ID:string): Observable<any[]> {
+    const url = environment.apiUrl + `/Chat/GetChatMessages?Chat_ID=${Chat_ID}`;
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }

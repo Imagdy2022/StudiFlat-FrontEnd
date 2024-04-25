@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
@@ -29,7 +29,8 @@ export class AddNewMessageComponent {
     public _adminservices: AdminsService,
     private messageService: MessageService,
     public router: Router
-  ) {}
+  ) {
+  }
   ngOnInit() {
 
     this.getAllTenants();

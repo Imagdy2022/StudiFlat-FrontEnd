@@ -47,41 +47,41 @@
               <!-- end head in the chat-->
               <!-- start content in the chat-->
               <div class="px-4">
-                  <div *ngFor=" let item of deatail?.reply">
+                  <div *ngFor=" let item of allChat">
                       <!-- Reciver -->
-                      <div class="d-flex justify-content-between reciver mb-2 py-4" *ngIf="item?.reply_From==true">
+                      <div class="d-flex justify-content-between reciver mb-2 py-4" *ngIf="!item.is_Dash">
                           <div class="d-flex">
                               <!-- <img src="assets/images/Avatar.svg" class="me-3 mb-3" /> -->
-                              <img *ngIf="deatail?.userPhoto" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;" [src]="deatail?.userPhoto" class="me-3" />
-                              <img *ngIf="!deatail?.userPhoto" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
+                              <img *ngIf="deatail?.tenant_photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;" [src]="deatail?.tenant_photo" class="me-3" />
+                              <img *ngIf="!deatail?.tenant_photo" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
 
                               <div>
                                   <div class="ml-3 d-flex justify-content-between">
                                       <div>
-                                          <p class="mb-0">{{item?.reply_User}}</p>
+                                          <p class="mb-0">{{deatail?.user_FullName}}</p>
                                       </div>
-                                      <p class="mb-0 fw-light" style="margin-left: 70px;">{{item?.reply_Ago}}</p>
+                                      <p class="mb-0 fw-light" style="margin-left: 70px;">{{item?.send_Time}}</p>
                                   </div>
-                                  <p *ngIf="item?.reply_Desc!=null && item?.reply_Desc!=''" class="p-2 rounded-end rounded-bottom" style="background-color: #f6f6f6">
-                                      {{item?.reply_Desc}}
+                                  <p *ngIf="item?.msg_Body!=null && item?.msg_Body!=''" class="p-2 rounded-end rounded-bottom" style="background-color: #f6f6f6">
+                                      {{item?.msg_Body}}
                                   </p>
-                                  <img (click)="openmodel(item?.reply_Attach)" style="width: 70px;  height: 70px" *ngIf="item?.reply_Attach!=null && item?.reply_Attach!=''" [src]="item?.reply_Attach">
+                                  <img (click)="openmodel(item?.msg_Attachement)" style="width: 70px;  height: 70px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
                               </div>
                           </div>
                       </div>
                       <!-- Sender -->
-                      <div class="d-flex justify-content-end mb-2 py-4" *ngIf="item.reply_From!=true">
+                      <div class="d-flex justify-content-end mb-2 py-4" *ngIf="item.is_Dash">
                           <div style="margin-bottom: 20px;">
                               <div class="ml-3 d-flex justify-content-between">
                                   <div>
-                                      <p class="mb-0">{{item?.reply_User}}</p>
+                                      <p class="mb-0">{{item?.user_Name}}</p>
                                   </div>
-                                  <p class="mb-0 fw-light" style="margin-left: 70px;">{{item?.reply_Ago}}</p>
+                                  <p class="mb-0 fw-light" style="margin-left: 70px;">{{item?.send_Time}}</p>
                               </div>
-                              <p *ngIf="item?.reply_Desc!=null && item?.reply_Desc!=''" class="p-2 rounded-start rounded-bottom text-white bg-blue">
-                                  {{item?.reply_Desc}}
+                              <p *ngIf="item?.msg_Body!=null && item?.msg_Body!=''" class="p-2 rounded-start rounded-bottom text-white bg-blue">
+                                  {{item?.msg_Body}}
                               </p>
-                              <img (click)="openmodel(item?.reply_Attach)" style="width: 70px;  height:70px" *ngIf="item?.reply_Attach!=null && item?.reply_Attach!=''" [src]="item?.reply_Attach">
+                              <img (click)="openmodel(item?.msg_Attachement)" style="width: 70px;  height:70px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
 
                           </div>
                       </div>
@@ -97,7 +97,7 @@
                           <button class="border-0 bg-transparent">
               <img src="assets/images/message/more.svg" />
             </button>
-                          <button (click)="ReplyDash() " class="px-3 py-2 rounded border text-white text-decoration-none" style="background-color: #1F4068;">
+                          <button (click)="SendMsg() " class="px-3 py-2 rounded border text-white text-decoration-none" style="background-color: #1F4068;">
               <img src="assets/images/message/sendFill.svg" /> Send
             </button>
                       </div>

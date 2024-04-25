@@ -16,55 +16,53 @@ export class UserMessageComponent {
   showSide:string = '';
   value:any=''
   paramid:any=""
+  chatID:any;
+  allChat :any[]=[]
+  deatail:any={}
   activePerson:boolean=true
    constructor(    private uploadService: UploadFileService,  public router: Router, private _ActivatedRoute:ActivatedRoute,public _ticketService:AdminsService ,private messageService: MessageService,) {
     this.paramid = _ActivatedRoute.snapshot.paramMap.get('id');
 
    }
-  ngOnInit() {
-    this. getAll_tickets(   )
-    const connection = new signalR.HubConnectionBuilder()
-
-    .withUrl(environment.apiUrl + '/notify',{ withCredentials: false})
-    .build();
-
-  connection.start().then(function () {
-  }).catch(function (err) {
-    return console.error(err.toString());
-  });
-
-  connection.on("AppReply", (result: any) => {
+   ngOnInit() {
+    this.GetChatHistory();
+    this.getUserDetails();
+    if(this.allChat.length == 0){
+      this.StartNewChatWithUser();
+    }
+  }
+  showEdit: Array<boolean> = [];
+  addItem(value:any){
+    this.showSide=value
+  }
+  getUserDetails(){
     this._ticketService.TenantDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
 
      }, (error) => {
        console.error('Error fetching owners:', error);
     });
-
-  });
   }
-  showEdit: Array<boolean> = [];
-  addItem(value:any){
-    this.showSide=value
-  }
-  deatail:any={}
-  getAll_tickets(   ) {
-     this._ticketService.TenantDetails(this.paramid).subscribe((res:any) => {
-      this.deatail = res;
 
+  StartNewChatWithUser(){
+    this._ticketService.StartNewChatWithUser(this.paramid).subscribe({
+      next:(data:any)=>{
+        this.chatID = data.uuid;
+        this.messageService.add({   severity: 'success', summary: 'Success', detail: data.message });
+      },
+      error:(err:any)=>{
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+      }
+    })
+
+  }
+  GetChatHistory(   ) {
+     this._ticketService.GetChatHistory(this.chatID).subscribe((res:any) => {
+      this.allChat = res;
      }, (error) => {
        console.error('Error fetching owners:', error);
     })
   }
-  detailperson(event:any,id: any): void {
-    this.showEdit=[]
-    event.stopPropagation()
-
-    this.showEdit[id] == true ? this.showEdit[id] = false : this.showEdit[id] = true
-
-
-
-   }
    hidecard( ){
     this.showEdit=[]
 
@@ -100,12 +98,17 @@ export class UserMessageComponent {
    }
   this.upload();
  }
- ReplyDash() {
-  this._ticketService.ReplyDash(this.paramid,this.reply_Desc,this.apt_imgs).subscribe((res) => {
-     this.messageService.add({   severity: 'success', summary: 'Success', detail:"send Success" });
-     this.getAll_tickets(   )
-     this.reply_Desc=""
-     this.apt_imgs=null
+ SendMsg() {
+  let data = {
+    chat_ID: this.chatID,
+    msg_Body: this.reply_Desc,
+    msg_Attachement: this.apt_imgs,
+  }
+  this._ticketService.SendMsg(data).subscribe((res) => {
+     this.messageService.add({ severity: 'success', summary: 'Success', detail:"send Success" });
+     this.GetChatHistory()
+     this.reply_Desc ="";
+     this.apt_imgs = null;
    }, (error) => {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
   })
