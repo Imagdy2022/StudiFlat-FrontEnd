@@ -551,6 +551,17 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
+  PaymentCards(): Observable<any[]> {
+    const url = environment.apiUrl + '/Payments/PaymentCards';
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
+  PaymentsReminder(data: any): Observable<any> {
+    const url = environment.apiUrl + '/Payments/AddReminder';
+
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
+
   GetAllEmp(PageNumber: number, PageSize: number): Observable<any[]> {
     const url = environment.apiUrl + '/Tickets/GetAllEmp';
     const params = new HttpParams()

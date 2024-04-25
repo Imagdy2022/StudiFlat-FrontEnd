@@ -201,20 +201,6 @@ span.icon{
   border-radius: 6px;
   font-size: 16px;
 }
-.form-switch .form-check-input{
-  width: 2.8rem;
-  height: 1.5rem;
-  margin-left: 1rem;
-}
-.form-switch .form-check-input:focus {
-  border-color: #1F4068;
-  box-shadow: 0 0 0 1px #1F4068;
-
-}
-.form-check-input:checked{
-  background-color: #1F4068;
-  border: 1px solid #1F4068;
-}
 
 tr{
   .Actions{
@@ -246,4 +232,46 @@ tr:last-child{
 ::ng-deep .p-button{
   background-color: #1F4068 !important;
   border: 1px solid #1F4068 !important;
+}
+
+.btn.btn-color{
+  background-color: #1f4068;
+  padding: 12px, 24px, 12px, 20px;
+  border-radius: 6px;
+  box-shadow: 0px 1px 0px 0px #0000000D;
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+}
+.btn.btn-black{
+  border: 1px solid #1f4068;
+  padding: 12px, 24px, 12px, 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  background-color: #fff;
+  color: #1f4068;
+  font-size: 15px;
+
+}
+::ng-deep .form-check input[type="checkbox"]{
+  opacity: 1 !important;
+  position: absolute;
+  visibility: unset;
+}
+::ng-deep .form-check .form-check-label{
+  padding-left: 10px !important;
+}
+
+.form-switch .form-check-input{
+  width: 2.5rem;
+  height: 1.2rem;
+}
+.form-switch .form-check-input:focus {
+  border-color: #1f4068 !important;
+  box-shadow: 0 0 0 1px #1f4068 !important;
+
+}
+.form-check-input:checked{
+  background-color: #1f4068 !important;
+  border: 1px solid #1f4068 !important;
 }

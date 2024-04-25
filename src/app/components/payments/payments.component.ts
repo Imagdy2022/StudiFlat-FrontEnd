@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { MessageService } from 'primeng/api';
@@ -13,6 +14,15 @@ import * as XLSX from 'xlsx'
 export class PaymentsComponent implements OnInit {
   @ViewChild ('content',{static: false}) el! : ElementRef
   rangeDates: Date[] ;
+  PaymentCards: any = {};
+  checked: boolean = false;
+
+  reminderForm: FormGroup = new FormGroup({
+    inv_ID: new FormControl(null),
+    rem_Desc: new FormControl(null),
+    rem_Date: new FormControl(null),
+    pushTypes: new FormControl(null),
+  })
 
   constructor(    private messageService: MessageService,
     public router: Router, public _adminservices:AdminsService ) { }
@@ -20,6 +30,7 @@ export class PaymentsComponent implements OnInit {
   ngOnInit() {
     this.initFakeData();
     this.checkRole();
+    this.GetPaymentCards();
     this.ListAllInvoices(this.statuspayment);
   }
 
@@ -93,6 +104,19 @@ dropdownOption: Array<any> = [];
 
 
    }
+
+   GetPaymentCards() {
+
+    this._adminservices.PaymentCards().subscribe(
+      (res: any) => {
+        this.PaymentCards = res;
+      },
+      (error) => {
+        console.error('Error fetching owners:', error);
+      }
+    );
+  }
+
    pageNumber=1;
   pagesize=10;
   totalofPages=1 ;
@@ -191,17 +215,35 @@ openModal2(id: any) {
   this.idModal = id;
   this.display2 = 'block';
 }
-onSubmitModal2() {
+selectedOptions: string[] = [];
+
+handleCheckboxChange(option: string) {
+  if (this.selectedOptions.includes(option)) {
+    this.selectedOptions = this.selectedOptions.filter(item => item !== option);
+  } else {
+    this.selectedOptions.push(option);
+  }
+  console.log(this.selectedOptions);
+}
+SendReminder() {
+  let data = {
+    inv_ID: this.idModal,
+    rem_Desc: this.reminderForm.value['rem_Desc'],
+    rem_Date: this.reminderForm.value['rem_Date'],
+    pushTypes: this.selectedOptions,
+  }
+  this._adminservices.PaymentsReminder(data).subscribe((res) => {
+     this.messageService.add({ severity: 'success', summary: 'Success', detail:res.message });
+     setTimeout(()=>{
+       this.onCloseModal2();
+     },1000)
+   }, (error) => {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+  })
 
 }
 fileName= 'FinanceTable.xlsx'
 exportToExcel(){
-  // let pdf = new jsPDF();
-  // pdf.html(this.el.nativeElement, {
-  //   callback: (pdf) => {
-  //     pdf.save('FinanceTable.pdf');
-  //   },
-  // });
   let data = document.getElementById("content");
   const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
   const wb:XLSX.WorkBook = XLSX.utils.book_new();

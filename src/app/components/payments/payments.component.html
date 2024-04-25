@@ -41,13 +41,12 @@
                   <span class="mx-3 fw-bold">Total Revenue</span>
               </div>
               <div>
-                  <h3 class="my-2">4,200</h3>
+                  <h3 class="my-2">{{PaymentCards?.total_Revenue}}</h3>
                   <div>
-                      <!-- <i class="fa fa-arrow-down red" *ngIf="DashCards.revenue_Up==false" aria-hidden="true"></i>
-                      <i class="fa fa-arrow-up green" *ngIf="DashCards.revenue_Up==true" aria-hidden="true"></i> -->
-                      <i class="fa fa-arrow-up green" aria-hidden="true"></i>
-                      <span class="ms-1 fw-bold green"
-                      >30 %</span>
+                      <i class="fa fa-arrow-down red" *ngIf="PaymentCards.revenue_Up==false" aria-hidden="true"></i>
+                      <i class="fa fa-arrow-up green" *ngIf="PaymentCards.revenue_Up==true" aria-hidden="true"></i>
+                      <span class="ms-1 fw-bold green" [class.red]="PaymentCards.revenue_Up==false" [class.green]="PaymentCards.revenue_Up==true"
+                      >{{PaymentCards?.revenue_Perc}} %</span>
                       <span class="mx-3">vs last month</span>
                   </div>
               </div>
@@ -60,13 +59,12 @@
                   <span class="mx-3 fw-bold">Total Expenses</span>
               </div>
               <div>
-                  <h3 class="my-2">205</h3>
+                  <h3 class="my-2">{{PaymentCards?.total_Expenses}}</h3>
                   <div>
-                      <!-- <i class="fa fa-arrow-down red" *ngIf="DashCards.expenses_Up==false" aria-hidden="true"></i>
-                      <i class="fa fa-arrow-up green" *ngIf="DashCards.expenses_Up==true" aria-hidden="true"></i> -->
-                      <i class="fa fa-arrow-down red" aria-hidden="true"></i>
-                      <span class="ms-1 fw-bold red"
-                      >12 %</span>
+                      <i class="fa fa-arrow-down red" *ngIf="PaymentCards.expenses_Up==false" aria-hidden="true"></i>
+                      <i class="fa fa-arrow-up green" *ngIf="PaymentCards.expenses_Up==true" aria-hidden="true"></i>
+                      <span class="ms-1 fw-bold red" [class.red]="PaymentCards.expenses_Up==false" [class.green]="PaymentCards.expenses_Up==true"
+                      >{{PaymentCards?.expenses_Perc}} %</span>
                       <span class="mx-3">vs last month</span>
                   </div>
               </div>
@@ -80,14 +78,13 @@
                    </span>
               </div>
               <div>
-                  <h3 class="my-2">1200</h3>
+                  <h3 class="my-2">{{PaymentCards?.net_Profit}}</h3>
                   <div>
                     <div>
-                        <!-- <i class="fa fa-arrow-down red" *ngIf="DashCards.net_Profit_Up==false" aria-hidden="true"></i>
-                        <i class="fa fa-arrow-up green" *ngIf="DashCards.net_Profit_Up==true" aria-hidden="true"></i> -->
-                        <i class="fa fa-arrow-up green" aria-hidden="true"></i>
-                        <span class="ms-1 fw-bold green"
-                        >100 %</span>
+                        <i class="fa fa-arrow-down red" *ngIf="PaymentCards.net_Profit_Up==false" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-up green" *ngIf="PaymentCards.net_Profit_Up==true" aria-hidden="true"></i>
+                        <span class="ms-1 fw-bold green" [class.red]="PaymentCards.net_Profit_Up==false" [class.green]="PaymentCards.net_Profit_Up==true"
+                        >{{PaymentCards?.net_Profit_Perc}} %</span>
                         <span class="mx-3">vs last month</span>
                     </div>
                 </div>
@@ -146,13 +143,6 @@
                     <div class="Type">
                       <label for="">Type</label>
                         <select class="form-select" (change)="clickPayment($event)">
-                        <!-- <option value="1">All</option>
-                        <option value="2">Security Deposit</option>
-                        <option value="3">Owner Rent</option>
-                        <option value="4">Commission</option>
-                        <option value="5">Apartment Expense</option>
-                        <option value="6">Worker Pay Out</option>
-                        <option value="7">Monthly Rent</option> -->
                         <option *ngFor="let data of paymentFillterLists; let index=index;" [value]="data.id" [selected]="paymentFillterSelected[index]">{{data.name}}</option>
 
                       </select>
@@ -340,63 +330,60 @@
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" style=" background-color: rgb(23 22 22 / 50%);;">
   <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-          <div class="modal-header d-flex justify-content-end">
+          <div class="modal-header d-flex justify-content-end mb-0 pb-0">
               <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal2()">
         <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
 </button>
 
           </div>
+        <form [formGroup]="reminderForm" (ngSubmit)="SendReminder()">
           <div class="modal-body pt-0">
-             <div class="mb-3">
-              <label class="form-label gray fw-bold"  style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
-                Select date
-               </label>
-            <input type="date" class="form-control">
-             </div>
-
             <div class="mb-3">
-              <label class="form-label gray fw-bold"  style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
-                Description
-               </label>
-               <textarea class="form-control" placeholder="Invoice #1234, which was due on May 01, 2023. As of today, the payment is still outstanding, and I wanted to remind you of this to ensure that we are both on the same page" rows="7"></textarea>
+             <label class="form-label gray fw-bold"  style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
+               Select date
+              </label>
+           <input type="date" class="form-control" style="font-size: 14px;" formControlName="rem_Date">
             </div>
-            <div class="mb-3">
-              <label class="form-label gray fw-bold"  style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
-                Reminders
-               </label>
+
+           <div class="mb-3">
+             <label class="form-label gray fw-bold"  style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
+               Description
+              </label>
+              <textarea class="form-control" placeholder="Enter Description" rows="5" style="font-size: 14px;" formControlName="rem_Desc"></textarea>
+           </div>
+           <div class="mb-3">
+             <label class="form-label gray fw-bold"  style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
+               Reminders
+              </label>
+              <p>These are notifications to remind you of updates you might have missed.</p>
               <div class="d-flex">
-                <div class="form-check form-switch form-check-reverse">
-                  <input class="form-check-input" type="checkbox" role="switch" id="status" checked>
-                  <label class="form-check-label mt-1" for="status"></label>
+                <div class="form-check form-switch d-flex  align-items-center">
+                  <input class="form-check-input" type="checkbox" role="switch" id="Push" value="Push" (change)="handleCheckboxChange('Push')">
+                  <label class="form-check-label" for="Push">Push</label>
+                </div>
+                <div class="form-check form-switch  align-items-center mx-5">
+                  <input class="form-check-input" type="checkbox" role="switch" id="Email" value="Email" (change)="handleCheckboxChange('Email')" >
+                  <label class="form-check-label" for="Email">Email</label>
+                </div>
+                <div class="form-check form-switch  align-items-center">
+                  <input class="form-check-input" type="checkbox" role="switch" id="WhatsApp" value="WhatsApp" (change)="handleCheckboxChange('WhatsApp')" >
+                  <label class="form-check-label" for="WhatsApp">WhatsApp</label>
                 </div>
               </div>
-            </div>
 
-          </div>
+           </div>
 
+         </div>
 
-
-
-          <div class="modal-footer">
-
-              <div class="d-flex justify-content-between">
-                  <div class="py-2 px-3 fw-bold"></div>
-                  <div class="d-flex justify-content-between">
-                      <a (click)="onCloseModal2()" style="   margin-right: 251px !important; border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
-                  Cancel
-    </a>
-                      <button (click)="onSubmitModal2()" class="rounded-2 text-white  border-0 py-2 px-4" style="background-color: #1f4068 !important">
-                        Add Reminder
-    </button>
-                  </div>
-              </div>
-              <!-- Confirm -->
-
-          </div>
-
-
+         <div class="modal-footer">
+           <div class="d-flex justify-content-between">
+             <div class="d-flex justify-content-between">
+                 <button type="button" (click)="onCloseModal2()" style="margin-right: 210px !important;" class="btn btn-black"> Cancel</button>
+                 <button type="submit" class="btn btn-color" >Add Reminder</button>
+             </div>
+         </div>
+         </div>
+        </form>
       </div>
-      <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
