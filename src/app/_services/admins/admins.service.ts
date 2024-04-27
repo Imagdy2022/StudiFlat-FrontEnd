@@ -150,7 +150,7 @@ export class AdminsService {
       PageNo +
       '&PageSize=' +
       PageSize +
-      '&search=' +
+      '&Key=' +
       search;
     return this.http.get<any[]>(url, { headers: this.headers });
   }
@@ -566,10 +566,11 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.post<any>(url, data, { headers: this.headers });
   }
-  GetPayToList(toType:string): Observable<any[]> {
+  GetPayToList(toType:string , FilterKey:string): Observable<any[]> {
     const url = environment.apiUrl + `/Payments/GetPayToList?to=${toType}`;
-
-    return this.http.get<any[]>(url, { headers: this.headers });
+    const params = new HttpParams()
+    .set('FilterKey', FilterKey)
+    return this.http.get<any[]>(url, { headers: this.headers , params: params });
   }
 
   GetAllEmp(PageNumber: number, PageSize: number): Observable<any[]> {

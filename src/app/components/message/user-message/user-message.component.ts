@@ -25,11 +25,9 @@ export class UserMessageComponent {
 
    }
    ngOnInit() {
-    this.GetChatHistory();
+    // this.GetChatHistory();
     this.getUserDetails();
-    if(this.allChat.length == 0){
-      this.StartNewChatWithUser();
-    }
+    this.StartNewChatWithUser();
   }
   addItem(value:any){
     this.showSide=value
@@ -47,6 +45,7 @@ export class UserMessageComponent {
     this._ticketService.StartNewChatWithUser(this.paramid).subscribe({
       next:(data:any)=>{
         this.chatID = data.uuid;
+        this.GetChatHistory();
         this.messageService.add({   severity: 'success', summary: 'Success', detail: data.message });
       },
       error:(err:any)=>{

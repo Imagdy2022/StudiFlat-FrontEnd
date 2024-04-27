@@ -127,7 +127,7 @@ export class MainFileComponent {
     this.InquireFillterSelected = [true];
   }
   checkindex = 0;
-  statusinquire: any ;
+  statusinquire: string = 'All' ;
   clickIquires(index: any) {
     this.checkindex = index.target.value;
     this.InquireFillterSelected = this.InquireFillterSelected.map((data) =>

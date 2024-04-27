@@ -255,7 +255,6 @@ event.stopPropagation()
   search:boolean=false
 
   searchKey(data: string) {
-    debugger
     this.searchText = data;
     this.getAllInquires(this.statusinquire)
   }

@@ -36,13 +36,13 @@ export class CreateNewPaymentComponent {
 
   ngOnInit() {
     this.GetPayToList();
-    this.getAllpartners(  )
+    this.GetPayToList(  )
   }
 
   selectedfromDropDown(value:any){
 
     this.Date=value.name;
-    this.getAllpartners()
+    this.GetPayToList()
 
   }
   addItem(value: string): void {
@@ -83,41 +83,47 @@ export class CreateNewPaymentComponent {
 
       const calcPageNumber = Math.floor(event.first / event.rows) + 1;
       this.pageNumber=calcPageNumber;
-      this.getAllpartners(  )
+      this.GetPayToList(  )
      }
   numberpartners=0;
   Date:any="All"
-   getAllpartners(  ) {
-    this.partners=[]
-    this.numberpartners=0
-    this._adminservices.ListPartners( this.pageNumber,this.pagesize,this.Date,this.searchText).subscribe((res:any) => {
-      this.partners = res["data"];
-      this.totalRecords=res["totalRecords"]
+  //  getAllpartners(  ) {
+  //   this.partners=[]
+  //   this.numberpartners=0
+  //   this._adminservices.ListPartners( this.pageNumber,this.pagesize,this.Date,this.searchText).subscribe((res:any) => {
+  //     this.partners = res["data"];
+  //     this.totalRecords=res["totalRecords"]
 
-      this.numberpartners = this.partners.length;
-      this.totalofPages=res["totalPages"]
+  //     this.numberpartners = this.partners.length;
+  //     this.totalofPages=res["totalPages"]
 
 
-     }, (error:any) => {
-       console.error('Error fetching owners:', error);
-    })
-  }
+  //    }, (error:any) => {
+  //      console.error('Error fetching owners:', error);
+  //   })
+  // }
 
   searchAction() {
-    this.search = false;
-    this.getAllpartners()
-      this.searchText =""
+    // this.search = false;
+    this.GetPayToList()
+      // this.searchText =""
   }
-  selectUser(data: any ){
-    console.log(data)
+  itemID: any;
+  selectUser(data:any ){
+    Object.keys(data).forEach(key => {
+      if (key.toLowerCase().includes('id')) {
+        this.itemID= data[key]
+      }
+    });
+    console.log(this.itemID)
+
   }
   SelectType(e:any){
-    console.log(e.target.value)
     this.toType = e.target.value;
     this.GetPayToList();
   }
   GetPayToList(){
-    this._adminservices.GetPayToList(this.toType).subscribe({
+    this._adminservices.GetPayToList(this.toType, this.searchText ).subscribe({
       next:(res:any)=>{
         this.allData = res
       },
@@ -142,7 +148,7 @@ export class CreateNewPaymentComponent {
   AddPayment(){
     const formData = new FormData();
     formData.append('Pay_To', this.paymentForm.value['Pay_To']);
-    formData.append('Pay_UUID', this.paymentForm.value['Pay_UUID']);
+    formData.append('Pay_UUID',this.itemID);
     formData.append('Apt_ID', this.paymentForm.value['Apt_ID']);
     formData.append('Pay_To_Type', this.paymentForm.value['Pay_To_Type']);
     formData.append('Payment_Desc', this.paymentForm.value['Payment_Desc']);

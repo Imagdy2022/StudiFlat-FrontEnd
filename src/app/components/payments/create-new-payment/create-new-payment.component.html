@@ -68,24 +68,16 @@
       </div>
 
       <div class="card mt-2">
-        <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="d-flex justify-content-between align-items-center mb-2 px-3">
 
             <div class="mx-2 mt-4">
                 <p class="me-2 fs-5 fw-bold ml-8">{{toType}}</p>
                 <span class="me-2">Please select the {{toType}} for whom you would like to make a payment</span>
             </div>
 
-            <div class="d-flex align-items-center mx-2 mt-2 w-50">
-                <ng-container *ngIf="!search; else searchVisible">
-                    <img class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true" src="../../../assets/images/search.svg">
-
-                </ng-container>
-                <ng-template #searchVisible>
-                    <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
-                    <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
-                Search
-            </button>
-                </ng-template>
+            <div class="input w-25">
+              <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
+                <img src="../../../assets/images/search.svg" alt="">
             </div>
         </div>
 
