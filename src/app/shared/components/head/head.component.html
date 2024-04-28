@@ -1,9 +1,11 @@
-<div class="d-lg-flex header border py-3 align-item-center  justify-content-between">
+<div class="d-lg-flex header border py-3 align-item-center justify-content-between">
 
-    <div class="header-logo col-md-2 d-none d-lg-block text-center"><img class="h-100" src="assets/images/logo.svg"></div>
-    <div class="col-lg-10 col-sm-12 row justify-content-between">
+    <div class="header-logo col-md-2 d-none d-lg-block px-3">
+      <img src="assets/images/logo.svg">
+    </div>
+    <div class="col-lg-10 col-sm-12 row justify-content-between headerTitle">
         <div class="col-lg-7 col-8 mt-2 ms-lg-0 row ">
-            <p class=" col-lg-3 pd d-none d-lg-block">{{titleModule}}</p>
+            <p class=" col-lg-6 pd d-none d-lg-block">{{titleModule}}</p>
             <div (click)="showSidebar()" class="d-lg-none col-1 ms-4 me-2 fs-4"><i class="fa fa-bars" aria-hidden="true"></i></div>
             <!-- start search button -->
           <!--   <div class="p-input-icon-left col-9 col-lg-8">
@@ -11,7 +13,7 @@
             </div> -->
             <!-- end search button -->
         </div>
-        <div class="col-4 mt-2 col-lg-3 d-flex justify-content-end align-items-center">
+        <div class="col-4 mb-2 col-lg-3 d-flex justify-content-end align-items-center mt-2">
             <div class="d-flex pe-lg-4 ">
                 <!-- start notification -->
                 <span (click)="shownot()" style="cursor: pointer; margin-right: 1.25rem;margin-top: 0.7rem;">
@@ -23,7 +25,7 @@
 
                 </span>
                 <!-- end notification -->
-                <div [ngStyle]="{ 'display':display1} " (click)="ClickedOut($event)" style=" z-index: 999 ; right: 7.4rem ; margin-top: 3.3rem;position: absolute; width: 26.75rem;" class=" z-3 rounded-3 bg-white cfresda ">
+                <div [ngStyle]="{ 'display':display1} " (click)="ClickedOut($event)" style=" z-index: 999 ; right: 7.4rem ; margin-top: 3.3rem;position: absolute; width: 26.75rem;" class=" z-3 rounded-3 bg-white cfresda">
                   <div class="arrow-up">
 
                   </div>
@@ -78,8 +80,8 @@
                     </div> -->
                 </div>
                 <div class="d-flex" style="margin-left: 1rem; margin-right: 1rem;">
-                    <div class="mt-2 me-1"><img src="assets/images/One.svg" /></div>
-                    <p class="pname mt-3">Umar</p>
+                    <div class="mb-1 me-1"><img src="assets/images/One.svg" /></div>
+                    <p class="pname mt-2">Umar</p>
                 </div>
             </div>
 

@@ -195,11 +195,10 @@ export class EditeUserDetailsComponent {
       const formData = new FormData();
       formData.append('fileData', selectedFile, selectedFile.name);
       this.formData2.append('User_Img', selectedFile);
-      console.log(formData);
 
       this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;
-        this.changeImageUrl.emit(img[0].file_Path);
+        this.changeImageUrl?.emit(img[0].file_Path);
         this.loadingButton = false;
       });
     } else if (event == 'delete') {
@@ -247,7 +246,6 @@ export class EditeUserDetailsComponent {
     const selectedFile = event.target.files[0];
     this.formData2 = new FormData();
     this.formData2.append('AttachFile', selectedFile, selectedFile.name);
-    console.log(this.formData2);
 
     // this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
     //   this.imageUrl = img[0].file_Path;

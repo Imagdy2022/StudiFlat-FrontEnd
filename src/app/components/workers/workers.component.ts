@@ -35,8 +35,7 @@ export class WorkersComponent implements OnInit {
   selectedfromDropDown(value:any){
 
     this.Date=value.name;
-    // this.getAllworkers()
-    console.log(value)
+    this.getAllworkers()
   }
   /**
    * addItem
@@ -82,7 +81,6 @@ tiggerPageChange(event: any) {
 
       const calcPageNumber = Math.floor(event.first / event.rows) + 1;
       this.pageNumber=calcPageNumber;
-      console.log(calcPageNumber);
       this.getAllworkers(  )
      }
   numberworkers=0;
@@ -178,16 +176,15 @@ gotopage( ){
   let url: string = "unlegal";
     this.router.navigateByUrl(url);
 }
-searchText:any=""
+
+searchText: any = '';
 
 searchKey(data: string) {
-  debugger
   this.searchText = data;
   this.getAllworkers();
 }
-searchTextChange:any
+searchTextChange: any;
 searchAction() {
-  this.searchTextChange.emit(this.searchText);
-  this.search = false;
+  this.getAllworkers();
 }
 }

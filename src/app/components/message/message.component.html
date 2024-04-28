@@ -1,58 +1,52 @@
 <!-- start header  -->
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Tickets'"></app-head>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Messages'"></app-head>
 </header>
 <!-- end header  -->
 
 <div class="row m-0">
     <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Tickets'"></app-sidebar>
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Messages'"></app-sidebar>
     <!-- end sidebar  -->
     <!-- start content page  -->
     <main class="p-4 col-lg-10">
         <p-toast></p-toast>
 
         <!-- <p class="fw-bold" style="color: #6c6a6a"></p> -->
-        <div class="fw-inquiries d-flex justify-content-between" style="color: #6c6a6a;">
-            <p style=" font-family: Montserrat;font-size: 19px;font-weight:600;color:black">Tickets</p>
+        <div class="fw-inquiries d-flex justify-content-between align-items-center" style="color: #6c6a6a;margin-top: 7px; margin-bottom: 23px;">
+            <p class="fw-bold ms-1" style="color: #6c6a6a;">Messages</p>
             <div class="d-flex justify-content-lg-between  ">
-                <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-
-                <!-- start dropdown button  -->
-                <!-- <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
-                <!-- end dropdown button  -->
-                <!-- start add button (add new owner) in page  -->
-                <!-- <app-add-new-button [id]="'/owner/create_new'" class="mt-2"></app-add-new-button> -->
-
-                <!-- end add button (add new owner) in page  -->
+              <div class="d-flex justify-content-lg-between flex-md-row flex-column">
+                <div class="d-flex mb-2 me-3 mb-2">
+                  <button class="month rounded-start px-3 py-2 outline-none bg-white">This Month</button>
+                  <button class="week rounded-end px-3 py-2 outline-none bg-white">Last Week</button>
+              </div>
+                <div class="d-flex mb-2">
+                    <!-- start dropdown button  -->
+                    <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+                </div>
+                <app-add-new-button *ngIf="StatisticsRole?.p_Add==true || is_Super==true" [id]="'/messages/create-new'" class="mt-2"></app-add-new-button>
+              </div>
             </div>
             <!-- start add button (add new apartment) in page  -->
             <!-- end add button (add new apartment) in page  -->
 
         </div>
-        <div class="card mt-2">
+        <div class="card">
 
-            <div class="d-flex justify-content-between">
+            <div class="row d-flex justify-content-between align-items-center px-3">
                 <!-- length Of person -->
-                <div class="d-flex mx-2 mt-4">
-                    <p class="me-2 fs-5 fw-bold ml-8">Tickets</p>
-                    <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
-              {{fullRespone?.totalRecords}} {{pagePerson}}
-          </p> -->
+                <div class="col-md-4">
+                  <div class="d-flex mx-2 mt-4">
+                    <p class="me-2 fs-5 fw-bold ml-8">Messages</p>
+                </div>
                 </div>
                 <!-- search input -->
-                <div class="d-flex align-items-center mx-2 mt-2 w-50">
-                    <ng-container *ngIf="!search; else searchVisible">
-                        <!-- <i class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true"></i> -->
-                        <img class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true" src="../../../assets/images/search.svg">
-
-                    </ng-container>
-                    <ng-template #searchVisible>
-                        <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
-                        <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
-                  Search
-              </button>
-                    </ng-template>
+                <div class="col-md-5">
+                  <div class="input">
+                    <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
+                      <img src="../../../assets/images/search.svg" alt="">
+                  </div>
                 </div>
             </div>
 
@@ -65,7 +59,7 @@
                         <ng-container>
 
                             <th class="td-name">
-                                ticket number
+                                Ticket Number
 
                             </th>
                             <th class="td-name">
@@ -73,7 +67,7 @@
 
                             </th>
                             <th class="td-name">
-                                complaint details
+                                Complaint details
 
                             </th>
                             <th class="td-name">
@@ -81,7 +75,7 @@
 
                             </th>
                             <th class="td-name">
-                                status
+                                Status
                             </th>
 
 
@@ -113,33 +107,38 @@
                         <!-- <td>
                       <p class="d-flex align-items-center fw-bold mt-2">{{admin?.status}}</p>
                   </td> -->
-                        <td>
-                            <div>
-                                <span class="rounded-5 px-3 py-1" style="background-color: #cfffcf;color: green;" *ngIf="inquire?.status=='Opened'">
-
-                      {{inquire?.status}}
-                  </span>
-                                <span class="rounded-5 px-3 py-1" style="background-color: #ffc8c8;color: #930b0b;" *ngIf="inquire?.status=='Closed'">
-                    {{inquire?.status}}
-
-                     </span>
-                                <span class="rounded-5 px-3 py-1" style="background-color: #0f0b90;color: #ffffff;" *ngIf="inquire?.status=='Resolved'">
-                      {{inquire?.status}}
-
-                       </span>
-
-
-                            </div>
-                        </td>
+                        <td >
+                          <div>
+                              <span class="rounded-5 px-3 badge Opened"  *ngIf="inquire?.status=='Opened'">
+                                <span>
+                                  <img src="assets/images/greenDot.svg" alt="">
+                                </span>
+                                {{inquire?.status}}
+                            </span>
+                            <span class="rounded-5 px-3 badge Closed" *ngIf="inquire?.status=='Closed'">
+                              <span>
+                                <img src="assets/images/redDot.svg" alt="">
+                              </span>
+                              {{inquire?.status}}
+                          </span>
+                          <span class="rounded-5 px-3 badge Resolved"  *ngIf="inquire?.status=='Resolved'">
+                            <span>
+                              <img src="assets/images/yallowDot.svg" alt="">
+                            </span>
+                            {{inquire?.status}}
+                        </span>
+                          </div>
+                      </td>
                         <td class="cursor position-relative" style="text-align: center;">
                             <button class="border-0 outlin-0 bg-transparent" *ngIf="inquire?.status=='Opened'" (click)="detailperson( $event,inquire.ticket_ID)">
                 <img src="assets/images/edit.svg">
             </button>
-                            <div *ngIf="showEdit[inquire.ticket_ID] " style="width: 216px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button *ngIf="inquire?.assigned_To=='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/assgin-tiket/{{inquire.ticket_ID}}">assign ticket to employee  </button>
-                                <button *ngIf="inquire?.assigned_To!='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/assgin-tiket/{{inquire.ticket_ID}}">reassign ticket to employee  </button>
+                            <div *ngIf="showEdit[inquire.ticket_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button *ngIf="inquire?.assigned_To=='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{inquire.ticket_ID}}">Assign ticket to employee  </button>
+                                <button *ngIf="inquire?.assigned_To!='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{inquire.ticket_ID}}">Reassign ticket to employee  </button>
 
-                                <button style="margin-top:0px !important" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/message-tiket/{{inquire.ticket_ID}}">pickup ticket</button>
+                                <button style="margin-top:0px !important" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/messages/message-tiket/{{inquire.ticket_ID}}">Pickup ticket</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="CloseTicket('Closed')">Close ticket  </button>
 
 
 
@@ -163,22 +162,6 @@
 
             </p-table>
             <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
-
-            <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
-            <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-                <button (click)="decreamentPage( )" [disabled]="disableperv" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                  Previous
-    </button>
-            </div>
-            <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{pageNumber}} of {{totalofPages}}</div>
-            <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-                <button [disabled]="disablenext" (click)="   incrementpage( )" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                      Next
-        </button>
-            </div>
-        </div> -->
 
         </div>
         <!-- persons active -->

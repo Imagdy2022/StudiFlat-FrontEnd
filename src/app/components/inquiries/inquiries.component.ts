@@ -123,7 +123,6 @@ gotopage( ){
 
         const calcPageNumber = Math.floor(event.first / event.rows) + 1;
         this.pageNumber=calcPageNumber;
-        console.log(calcPageNumber);
         this.getAllInquires(this.statusinquire);
       }
       ids:any=[]
@@ -149,47 +148,67 @@ event.stopPropagation()
   InquireFillterLists: Array<any> = [];
   InquireFillterSelected: Array<any> = [];
   initFakeData(): void {
-    this.InquireFillterLists = ["All Inquiries", "Waiting for Approve", "Waiting List","Confirmed Inquiries","Cancelled Booking","Terminated Booking"];
+    this.InquireFillterLists = [
+      {id:0,
+       name: "All"
+      },
+      {id:1,
+        name:"Waiting for Approve"
+      },
+      {id:2,
+        name: "Waiting List"
+      },
+      {id:3,
+      name:"Confirmed Inquiries"
+      },
+      {id:4,
+      name:"Cancelled Booking"
+      },
+      {
+        id:5,
+        name:"Terminated Booking"
+      }
+    ];
     this.InquireFillterSelected = [true];
    }
    selectedfromDropDown(value:any){
     this.date=value.name;
     this.getAllInquires(this.statusinquire)
-    console.log(value)  }
+ }
   checkindex=0;
   clickIquires(index:any){
-    this.checkindex=index;
+    this.checkindex=index?.target?.value;
     this.InquireFillterSelected = this.InquireFillterSelected.map((data) => data == true ? false : false)
 
-    this.InquireFillterSelected[index] = true
-    if(index == 0){
+    this.InquireFillterSelected[index?.target?.value] = true
+    if(index?.target?.value == 0){
       this.statusinquire=""
       this.getAllInquires(this.statusinquire);
     }
-    if(index == 1){
+    if(index?.target?.value == 1){
       this.statusinquire="Pending"
 
       this.getAllInquires(this.statusinquire);
     }
-    if(index == 2){
+    if(index?.target?.value == 2){
       this.statusinquire="Waiting"
 
       this.getAllInquires(this.statusinquire);
 
     }
-    if(index == 3){
+    if(index?.target?.value == 3){
       this.statusinquire="Approved"
 
       this.getAllInquires(this.statusinquire);
 
     }
-    if(index == 4){
+    if(index?.target?.value == 4){
       this.statusinquire="Cancelled"
 
       this.getAllInquires(this.statusinquire);
 
     }
-    if(index == 5){
+    if(index?.target?.value == 5){
       this.statusinquire="Terminated"
 
       this.getAllInquires(this.statusinquire);
@@ -236,16 +255,15 @@ event.stopPropagation()
   search:boolean=false
 
   searchKey(data: string) {
-    debugger
     this.searchText = data;
     this.getAllInquires(this.statusinquire)
   }
   searchTextChange:any
   searchAction() {
     // this.searchTextChange.emit(this.searchText);
-    this.search = false;
+    // this.search = false;
     this.getAllInquires(this.statusinquire)
-    this.searchText =""
+    // this.searchText =""
 
   }
 }

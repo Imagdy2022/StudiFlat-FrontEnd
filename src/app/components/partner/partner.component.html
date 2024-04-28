@@ -13,7 +13,7 @@
 
     <!-- start content page  -->
     <main class="p-4 col-lg-10 ">
-        <div class="d-md-flex justify-content-between dashboard mt-2">
+        <div class="d-md-flex justify-content-between align-items-center" style="margin-top: 6px; margin-bottom: 24px;">
             <p class="fw-bold ms-1" style="color: #6c6a6a;">partners : {{numberpartners}}</p>
             <div class="d-flex justify-content-lg-between ">
                 <div class="d-flex justify-content-between ">
@@ -26,36 +26,30 @@
                 <!-- start addUserButton  -->
                 <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
                 <!-- end addUserButton  -->
-                <a *ngIf="partnersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/add-partner" style="background-color:#1F4068; cursor: pointer;">
+                <a *ngIf="partnersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/partner/add-partner" style="background-color:#1F4068; cursor: pointer;">
                     <img src="assets/images/plus.svg" class="me-2 ">Add New
                 </a>
             </div>
         </div>
 
         <p-toast></p-toast>
-        <div class="card mt-2">
-            <div class="d-flex justify-content-between">
+        <div class="card">
+            <div class="row d-flex justify-content-between align-items-center px-3 py-2">
                 <!-- length Of person -->
-                <div class="d-flex mx-2 mt-4">
-                    <p class="me-2 fs-5 fw-bold ml-8">partners</p>
-                    <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
-                {{fullRespone?.totalRecords}} {{pagePerson}}
-            </p> -->
-                </div>
-                <!-- search input -->
-                <div class="d-flex align-items-center mx-2 mt-2 w-50">
-                    <ng-container *ngIf="!search; else searchVisible">
-                        <!-- <i class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true"></i> -->
-                        <img class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true" src="../../../assets/images/search.svg">
-
-                    </ng-container>
-                    <ng-template #searchVisible>
-                        <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
-                        <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
-                    Search
-                </button>
-                    </ng-template>
-                </div>
+               <div class="col-md-4">
+                <div class="d-flex mt-4">
+                  <p class="me-2 fs-5 fw-bold ml-8">partners</p>
+                  <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
+              {{fullRespone?.totalRecords}} {{pagePerson}}
+          </p> -->
+              </div>
+               </div>
+                <div class="col-md-5 col-8">
+                  <div class="input">
+                    <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
+                      <img src="../../../assets/images/search.svg" alt="">
+                  </div>
+              </div>
             </div>
             <!-- <p-table #dt [value]="partners" [(selection)]="partners" dataKey="id" [filterDelay]="0" /> -->
 
@@ -128,10 +122,10 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,partners.partner_ID)">
           <img src="assets/images/edit.svg">
       </button>
-                            <div *ngIf="showEdit[partners.partner_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="partnersRole?.p_Update==true || is_Super==true" routerLink="/edit-partner/{{partners.partner_ID}}">update</button>
+                            <div *ngIf="showEdit[partners.partner_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="partnersRole?.p_Update==true || is_Super==true" routerLink="/partner/edit-partner/{{partners.partner_ID}}">update</button>
 
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/view-partner/{{partners.partner_ID}}"> View Profile  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/partner/view-partner/{{partners.partner_ID}}"> View Profile  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="partnersRole?.p_Delete==true || is_Super==true" (click)="deletepartner(partners.partner_ID)">Delete </button>
 
                             </div>

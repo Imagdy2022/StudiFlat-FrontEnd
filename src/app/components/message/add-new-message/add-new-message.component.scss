@@ -1,0 +1,148 @@
+.month,
+.week {
+    color: #757a82;
+    background-color: white;
+    border: 1px solid #ebebeb;
+}
+
+.cursor {
+    cursor: pointer
+}
+
+.blue {
+    color: #326eb6;
+}
+
+.img-size {
+    width: 55px;
+    height: 55px;
+}
+
+.bvngd {
+    font-family: 'Poppins'
+}
+
+.edit-button {
+    top: 31px;
+    right: 88px;
+    padding: 20px 10px;
+    z-index: 2;
+    width: 150px;
+}
+
+.button:hover {
+    background-color: #f1f1f1 !important;
+}
+
+.z-3 {
+    z-index: 3;
+}
+
+.ui-confirm-dialog .ui-dialog-content {
+    background-color: red;
+}
+
+.cvxs {
+    text-align: center;
+    color: #1019c6 !important;
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-weight: 500;
+    line-height: 20px;
+    word-wrap: break-word;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px #8FA0B4 solid;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+}
+
+td {
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
+
+}
+
+th {
+    font-size: 14px !important;
+    font-family: 'Poppins';
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
+
+}
+
+tr{
+    padding-right: 24px !important;
+    padding-left: 24px !important;
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: 50px;
+  }
+}
+tr:nth-last-child(2){
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: -10px;
+  }
+}
+tr:last-child{
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: -100px;
+  }
+}
+.input{
+  position: relative;
+  img{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+}
+input[type="checkbox"]:after {
+  width: 15px;
+  height: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  border-radius: 4px;
+  background-color: #fff;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #1F4068;
+}
+input[type="checkbox"]:checked:after {
+  width: 15px;
+  height: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  border-radius: 4px;
+  background-color: #1F4068;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 3px solid #fff;
+  outline: 2px solid #1F4068;
+}
+::placeholder{
+  font-size: 13px !important;
+}

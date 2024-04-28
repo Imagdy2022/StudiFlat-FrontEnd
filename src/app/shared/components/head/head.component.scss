@@ -3,7 +3,10 @@
     background-color: white;
     z-index: 2;
     width: 100% !important;
-    height: 90px !important;
+    height: 80px !important;
+    .header-logo{
+      width: 155px;
+    }
     input {
         width: 100% !important;
     }
@@ -15,7 +18,8 @@
     }
     .pd {
         font-weight: 700;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+        margin-top:15px;
     }
     .pname {
         color: #313033;
@@ -29,7 +33,9 @@
         height: 38px
     }
 }
-
+.headerTitle{
+  padding-left: 14px;
+}
 .p {
     margin-top: 10px !important;
 }
@@ -92,7 +98,7 @@
     position: relative;
     width: 174px;
     margin-top: -1px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 400;
     color: #292929;
     font-size: 14px;
@@ -103,7 +109,7 @@
 .frame .element-jun {
     position: relative;
     width: 174px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 400;
     color: #8e8e8e;
     font-size: 12px;
@@ -114,7 +120,7 @@
 .frame .read {
     position: relative;
     width: fit-content;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 400;
     color: rgba(31, 64, 104, 1);
     font-size: 14px;
@@ -195,7 +201,7 @@
     position: absolute;
     top: 10px;
     left: 15px;
-    font-family: Montserrat;
+    font-family: Poppins;
     font-weight: 400;
     color: #000000;
     font-size: 16px;
@@ -280,7 +286,7 @@
     position: relative;
     width: 174px;
     margin-top: -1px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 500;
     color: #292929;
     font-size: 14px;
@@ -292,7 +298,7 @@
 .notifications .element-jun {
     position: relative;
     width: 174px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 400;
     color: #8e8e8e;
     font-size: 12px;
@@ -303,7 +309,7 @@
 .notifications .text-wrapper-2 {
     position: relative;
     width: fit-content;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 400;
     color: rgba(31, 64, 104, 1);
     font-size: 14px;

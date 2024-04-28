@@ -6,7 +6,6 @@ import { InquireEditComponent } from './inquire-edit/inquire-edit.component';
 
 import { CreacteContractComponent } from './creacte-contract/creacte-contract.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -26,10 +25,10 @@ import { PaginatorModule } from 'primeng/paginator';
 import { GalleriaModule } from 'primeng/galleria';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ChipModule } from 'primeng/chip';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { InquiriesoutingModule } from './inquiries-routing.module';
 const routes: Routes = [];
 
 @NgModule({
@@ -43,7 +42,6 @@ const routes: Routes = [];
   imports: [
     CommonModule,
     PaginatorModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
@@ -57,9 +55,8 @@ const routes: Routes = [];
     GalleriaModule,
     BreadcrumbModule,
     ChipModule,
-    BrowserModule,
     PdfViewerModule,
-    RouterModule.forChild(routes),
+    InquiriesoutingModule
   ],
   exports: [],
   providers: [MessageService],

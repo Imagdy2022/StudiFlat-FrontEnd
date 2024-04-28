@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 
 
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -24,14 +23,16 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { PaginatorModule } from 'primeng/paginator';
+import { MessageRoutingModule } from './message-routing.module';
+import { AddNewMessageComponent } from './add-new-message/add-new-message.component';
+import { UserMessageComponent } from './user-message/user-message.component';
 const routes: Routes = [
 ];
 @NgModule({
-  declarations: [MessageComponent,AssginTicketComponent,MessResquestComponent],
+  declarations: [MessageComponent,AssginTicketComponent,MessResquestComponent, AddNewMessageComponent, UserMessageComponent],
   imports: [
     CommonModule,
     PaginatorModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
@@ -42,7 +43,7 @@ const routes: Routes = [
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
-    RouterModule.forChild(routes)
+    MessageRoutingModule
   ],
   exports: [ ],
   providers: [MessageService],

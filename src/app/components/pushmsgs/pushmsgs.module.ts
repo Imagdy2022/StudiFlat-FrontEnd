@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { PushmsgsComponent } from './pushmsgs.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,13 +17,13 @@ import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { PaginatorModule } from 'primeng/paginator';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { PushMsgsRoutingModule } from './pushmsgs-routing.module';
 const routes: Routes = [];
 
 @NgModule({
   imports: [
     CommonModule,
     PaginatorModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
@@ -36,7 +35,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     BreadcrumbModule,
-    RouterModule.forChild(routes),
+    PushMsgsRoutingModule
   ],
   declarations: [PushmsgsComponent],
   providers: [MessageService],

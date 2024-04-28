@@ -1,4 +1,3 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -17,17 +16,21 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
+import { CreateNewPaymentComponent } from './create-new-payment/create-new-payment.component';
+import { PaymentsRoutingModule } from './payments-routing.module';
+import { CalendarModule } from 'primeng/calendar';
 
 const routes: Routes = [];
 
 @NgModule({
   declarations: [
     PaymentsComponent,
+    CreateNewPaymentComponent,
    ],
+   exports: [CreateNewPaymentComponent],
   imports: [
     CommonModule,
     PaginatorModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
@@ -37,9 +40,9 @@ const routes: Routes = [];
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
-    RouterModule.forChild(routes)
+    PaymentsRoutingModule,
+    CalendarModule
   ],
-  exports: [ ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 

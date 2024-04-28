@@ -13,8 +13,8 @@
 
     <!-- start content page  -->
     <main class="p-4 col-lg-10 ">
-        <div class="d-md-flex justify-content-between dashboard mt-2">
-            <p class="fw-bold ms-1" style="color: #6c6a6a;">workers : {{numberworkers}}</p>
+        <div class="d-md-flex justify-content-between dashboard align-items-center" style="margin-top: 6px; margin-bottom: 24px;">
+            <p class="fw-bold ms-1" style="color: #6c6a6a;">workers</p>
 
             <div class="d-flex justify-content-lg-between ">
 
@@ -22,7 +22,6 @@
                     <!-- <button class="month rounded-start px-3 py-1 outline-none">This Month</button>
                   <button class="week rounded-end px-3 py-1 outline-none">Last Week</button> -->
                 </div>
-                <input class="form-control fs-6 ps-3" type="text" (ngModelChange)="searchKey($event)" pInputText [(ngModel)]="searchText" placeholder="Skill Search" />
 
                 <!-- start dropdown button  -->
                 <app-dropdown class="ms-3" style=" margin-right: 14px;margin-top: 2px;" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
@@ -30,14 +29,32 @@
                 <!-- start addUserButton  -->
                 <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
                 <!-- end addUserButton  -->
-                <a *ngIf="workersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/add-workers" style="background-color:#1F4068; cursor: pointer;    width: 53%;">
+                <a *ngIf="workersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/workers/add-workers" style="background-color:#1F4068; cursor: pointer;    width: 53%;">
                     <img src="assets/images/plus.svg" class="me-2 ">Add New
                 </a>
             </div>
         </div>
 
         <p-toast></p-toast>
-        <div class="card mt-2">
+        <div class="card">
+          <div class="row d-flex justify-content-between align-items-center px-3">
+            <!-- length Of person -->
+           <div class="col-md-4">
+            <div class="d-flex mx-2 mt-4">
+              <p class="me-2 fs-5 fw-bold ml-8">Workers</p>
+              <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
+                  {{numberworkers}} Workers
+              </p>
+          </div>
+           </div>
+            <!-- search input -->
+          <div class="col-md-5 col-8">
+              <div class="input">
+                <input type="text" class="form-control py-2 w-100" (keyup)="searchAction()" [(ngModel)]="searchText" placeholder="Global Search"/>
+                  <img src="../../../assets/images/search.svg" alt="">
+              </div>
+          </div>
+        </div>
 
             <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="workers">
                 <ng-template pTemplate="header" class="text-center">
@@ -109,10 +126,10 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,workers.worker_ID)">
             <img src="assets/images/edit.svg">
         </button>
-                            <div *ngIf="showEdit[workers.worker_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="workersRole?.p_Update==true || is_Super==true" routerLink="/edit-workers/{{workers.worker_ID}}">update</button>
+                            <div *ngIf="showEdit[workers.worker_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="workersRole?.p_Update==true || is_Super==true" routerLink="/workers/edit-workers/{{workers.worker_ID}}">update</button>
 
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/worker-profile/{{workers.worker_ID}}"> View Profile  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/workers/worker-profile/{{workers.worker_ID}}"> View Profile  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="workersRole?.p_Delete==true || is_Super==true" (click)="deleteworker(workers.worker_ID)">Delete </button>
 
                             </div>

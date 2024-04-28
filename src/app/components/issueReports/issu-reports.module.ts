@@ -10,7 +10,6 @@ import { AssginIssueComponent } from './assgin-issue/assgin-issue.component';
 import { ReportPrintComponent } from './report-print/report-print.component';
 
 import { DropdownModule } from 'primeng/dropdown';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/calendar';
 
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -23,6 +22,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
 import { ChipModule } from 'primeng/chip';
+import { IssuReportsRoutingModule } from './issu-reports-routing.module';
 const routes: Routes = [];
 
 @NgModule({
@@ -34,7 +34,7 @@ const routes: Routes = [];
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
+
     SharedModule,
     FormsModule,
     CalendarModule,
@@ -47,7 +47,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     ChipModule,
-    RouterModule.forChild(routes),
+    IssuReportsRoutingModule
   ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

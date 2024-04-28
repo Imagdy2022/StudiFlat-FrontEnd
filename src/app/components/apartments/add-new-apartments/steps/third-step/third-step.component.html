@@ -19,14 +19,16 @@
                     </ng-container>
                     <ng-container *ngIf="selectedContractImg">
                         <div *ngIf="selectedContractImg.type !== 'application/pdf'">
-                            <input type="file" accept=".pdf, image/*" (change)="onUploadContract($event,'contract_Path')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                            <img [src]="selectedContractImg.url" class="position-absolute imgPreviewUploader" width="100%">
+                            <!-- <input type="file" accept=".pdf, image/*" (change)="onUploadContract($event,'contract_Path')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                            <a (click)="opencloseModal(selectedContractImg.url)">
+                            <img [src]="selectedContractImg.url" class="position-absolute imgPreviewUploader cursor">
+                            </a>
 
                         </div>
                         <div *ngIf="selectedContractImg.type === 'application/pdf'">
                             <a [href]="selectedContractImg.url" target="_blank" style="font-size: large;">View PDF</a>
                             <input type="file" accept=".pdf, image/*" (change)="onUploadContract($event,'contract_Path')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                            <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute h-100" width="90%" style="margin-left: 21px;">
+                            <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute h-100 cursor" width="90%" style="margin-left: 21px;">
 
                         </div>
 
@@ -34,7 +36,7 @@
                     <!-- end single img upload and preview -->
 
                 </div>
-                <img *ngIf="edit=='EditForm'&&afterUploadImage=='false'&&dataEdit.c_Type!='File'" [src]="passContract" style="margin-bottom: 25px;" class=" imgPreviewUploader" width="100%">
+                <img *ngIf="edit=='EditForm'&&afterUploadImage=='false'&&dataEdit.c_Type!='File'" [src]="passContract" style="margin-bottom: 25px;" class=" imgPreviewUploader cursor">
                 <a [href]="passContract" *ngIf="edit=='EditForm'&&afterUploadImage=='false'&&dataEdit.c_Type=='File'" style="font-size: large;" target="_blank">View PDF</a>
 
             </div>
@@ -98,7 +100,7 @@
                     <p-calendar formControlName="contractDate_End" dateFormat="dd/mm/yy"></p-calendar>
                 </div>
             </div>
-            <div class="mb-3 me-4 col-12 col-md-6" *ngIf="createcontractpage">
+            <div class="mb-3 pe-2 col-12 col-md-6" *ngIf="createcontractpage">
                 <label class="form-label gray fw-bold">price per month</label>
                 <input type="number" formControlName="rent_Fees" [class.is-invalid]="create_Apart_contract.get('rent_Fees')!.invalid && create_Apart_contract.get('rent_Fees')!.touched " class="form-control rounded-2 py-2 fs-6" />
                 <span class="text-danger d-block m-2 " *ngIf="create_Apart_contract.get('rent_Fees')!.invalid && create_Apart_contract.get('rent_Fees')!.touched ">
@@ -108,7 +110,7 @@
 
             <!--Sections-->
 
-            <div *ngFor="let data of contractDetails;let index=index">
+            <div *ngFor="let data of contractDetails;let index=index" class="pe-2">
                 <app-create-contract-sections [contractDetails]="data" [index]="index+1"></app-create-contract-sections>
                 <div class=" col-md-12 " style="margin-bottom: 50px;">
                     <div class="d-flex" style="float:right">
@@ -199,7 +201,7 @@
                     <div class="row">
                         <div>
                             <p class="gray fw-bold">Upload pictures for trash Location</p>
-                            <p-progressSpinner *ngIf="spinner == true"></p-progressSpinner>
+                            <!-- <p-progressSpinner *ngIf="spinner == true"></p-progressSpinner> -->
 
                             <div class="row">
                                 <div>
@@ -233,7 +235,7 @@
                                         <!--
                                         <label for="st{{i}}"></label> -->
                                         <a (click)="opencloseModal(image.pic_URL)">
-                                            <img [src]="image.pic_URL" alt="Avatar" style="width:339px;height:205px ; ">
+                                            <img [src]="image.pic_URL" alt="Avatar" style="width:339px;height:205px ; " class="cursor">
 
                                         </a>
 
@@ -265,7 +267,7 @@
                                     <div class="col-md-2 card33" *ngFor="let image of aprt_details_Edit?.tarsh_Pin_Imgs;  index as i ">
 
                                         <a (click)="opencloseModal(image.pic_URL)">
-                                            <img [src]="image.pic_URL" alt="Avatar" style="width:339px;height:205px ; ">
+                                            <img [src]="image.pic_URL" alt="Avatar" style="width:339px;height:205px ; " class="cursor">
 
                                         </a>
 
@@ -309,14 +311,18 @@
                                     <img src="assets/images/apartmentImages/File upload.svg" class="position-absolute">
                                 </ng-container>
                                 <ng-container *ngIf="selectedSafeImg">
-                                    <input type="file" accept="image/*" (change)="onUploadContract($event,'safe_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                                    <img [src]="selectedSafeImg ? selectedSafeImg.url : null" class="position-absolute imgPreviewUploader" width="100%">
+                                    <!-- <input type="file" accept="image/*" (change)="onUploadContract($event,'safe_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                                    <a (click)="opencloseModal(selectedSafeImg.url)">
+                                      <img [src]="selectedSafeImg ? selectedSafeImg.url : null" class="position-absolute cursor rounded-3" style="width:200px;height:124px ;">
+                                    </a>
                                 </ng-container>
                                 <!-- end single img upload and preview -->
 
                             </div>
                             <div *ngIf="addApartment == 'Edit Apartment Name'" class="h-124px mb-3">
-                                <img [src]="safe_Img" *ngIf="issshowsafe=='safe'" class="position-absolute imgPreviewUploader">
+                              <a (click)="opencloseModal(safe_Img)">
+                                <img [src]="safe_Img" *ngIf="issshowsafe=='safe'" class="position-absolute imgPreviewUploader cursor">
+                              </a>
                             </div>
                         </div>
                     </div>
@@ -330,13 +336,15 @@
                                     <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute">
                                 </ng-container>
                                 <ng-container *ngIf="selectedDoorImg">
-                                    <input type="file" accept="image/*" (change)="onUploadContract($event,'door_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                                    <img [src]="selectedDoorImg ? selectedDoorImg.url : null" class="position-absolute imgPreviewUploader" width="100%">
+                                    <!-- <input type="file" accept="image/*" (change)="onUploadContract($event,'door_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                                    <a (click)="opencloseModal(selectedDoorImg.url)">
+                                    <img [src]="selectedDoorImg ? selectedDoorImg.url : null" class="position-absolute cursor rounded-3" style="width:200px;height:124px ;">
+                                    </a>
                                 </ng-container>
                                 <!-- end single img upload and preview -->
                             </div>
                             <div *ngIf="addApartment == 'Edit Apartment Name'" class="h-124px mb-3">
-                                <img [src]="door_Img" *ngIf="issshowdoor=='door'" class="position-absolute imgPreviewUploader">
+                                <img [src]="door_Img" *ngIf="issshowdoor=='door'" class="position-absolute imgPreviewUploader cursor">
                             </div>
                         </div>
 
@@ -407,8 +415,10 @@
                         <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute">
                     </ng-container>
                     <ng-container *ngIf="selectedBuildingImg">
-                        <input type="file" accept="image/*" (change)="onUploadContract($event,'building_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                        <img [src]="selectedBuildingImg ? selectedBuildingImg.url : null" class="position-absolute imgPreviewUploader" width="100%">
+                        <!-- <input type="file" accept="image/*" (change)="onUploadContract($event,'building_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                        <a (click)="openModelImage(selectedBuildingImg.url)">
+                          <img [src]="selectedBuildingImg ? selectedBuildingImg.url : null" class="position-absolute cursor rounded-3" style="width:200px;height:124px ;">
+                      </a>
                     </ng-container>
                     <!-- end single img upload and preview -->
                 </div>
@@ -447,7 +457,7 @@
                 <p class="fw-bold mb-0">Rental Rules</p>
                 <p class="gray">Add rental rules for the apartment</p>
             </div>
-            <div class="row ">
+            <div class="row gx-0">
                 <ng-container *ngFor="let data of apt_roles">
 
                     <div class="mb-3 col-12 col-md-6 ">
@@ -493,23 +503,18 @@
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display22}" style="background-color: rgba(90,90,90,0.5);">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-
-            <div class="modal-body">
-                <img [src]="imageSize" style="width:100%" />
-
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="width:900px;">
+      <div class="modal-content position-relative">
+        <div class="modal-header p-0 m-0 d-flex justify-content-start">
+          <button type="button" class="close" aria-label="Close" (click)="oncloseModal()">
+            <img src="../../../../assets/images/ic_round-close.svg" alt="">
+          </button>
             </div>
+          <div class="modal-body p-0 m-0">
+              <img [src]="imageSize" style="width:100%;height: 500px" />
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white bbtclose" (click)="oncloseModal()">
-close
-</button>
+          </div>
 
-            </div>
-
-
-        </div>
-    </div>
+      </div>
+  </div>
 </div>

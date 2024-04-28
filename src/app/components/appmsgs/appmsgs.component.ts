@@ -40,7 +40,7 @@ export class AppMsgsComponent implements OnInit {
   selectedfromDropDown(value: any) {
     this.Date = value.name;
     // this.getAllpartners()
-    console.log(value);
+
   }
   /**
    * addItem
@@ -66,13 +66,13 @@ export class AppMsgsComponent implements OnInit {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber = calcPageNumber;
     this.pagesize = event.rows;
-    console.log(calcPageNumber);
+
     this.getAllMsgs();
   }
   tiggerPageChange2(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber2 = calcPageNumber;
-    console.log(calcPageNumber);
+
   }
   numberMsgs = 0;
   Date: any = 'All';

@@ -70,7 +70,7 @@
     text-align: center;
     color: #1019c6 !important;
     font-size: 16px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 500;
     line-height: 20px;
     word-wrap: break-word;
@@ -89,5 +89,18 @@
 }
 
 .CCCCFSMILY {
-    font-family: 'Montserrat'
+    font-family: 'Poppins'
+}
+
+.input{
+  position: relative;
+  img{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+}
+::placeholder{
+  font-size: 13px !important;
 }

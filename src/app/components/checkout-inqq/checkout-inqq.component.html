@@ -13,7 +13,7 @@
 
   <!-- start content page  -->
   <main class="p-4 col-lg-10 ">
-    <div class="d-md-flex justify-content-between" style="margin-bottom:20px">
+    <div class="d-md-flex justify-content-between" style="margin-top: 6px; margin-bottom: 24px;">
       <div class="d-flex" style="align-items: center;">
           <p class="fw-bold me-2" style="color: #6c6a6a;margin-bottom: 0px;"><a  style="color: #6c6a6a;"class="removeUnderLine" routerLink="/inquiries">Inquiries </a></p>
 
@@ -22,18 +22,18 @@
       </div>
       <div class="d-flex justify-content-lg-between ">
         <div class="d-flex justify-content-between ">
-           
+
         </div>
          <app-dropdown class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
-         
+
     </div>
   </div>
-       
+
 
       <p-toast></p-toast>
-      <div class="card mt-2">
-        <div class="d-block d-md-flex justify-content-between my-2 bg-white p-3">
-           <div class="d-flex align-items-center " style="overflow: auto;    font-size: 15px;">
+      <div class="card">
+        <div class="row d-block d-md-flex justify-content-between my-2 bg-white p-3">
+           <!-- <div class="d-flex align-items-center " style="overflow: auto;    font-size: 15px;">
               <div *ngFor="let data of InquireFillterLists;let index=index;">
                   <div class="d-flex ">
                       <button class="apartmentList border-0 bg-transparent pb-2 mx-2 buttomstyle" (click)="clickIquires(index)" [class.clickApartmentList]="InquireFillterSelected[index]==true">{{data}}</button>
@@ -45,10 +45,19 @@
 
               </div>
 
+          </div> -->
+          <div class="col-md-4">
+            <div class="d-flex align-items-center" style="font-size: 15px;">
+              <label for="" style="color: #313331;font-weight: 500;font-size: 16px;">CheckOut</label>
+              <img src="assets/images/line.svg" class="mx-3" >
+              <select class="form-select" (change)="clickIquires($event)">
+                <option *ngFor="let data of InquireFillterLists; let index=index;" [value]="data.id" [selected]="InquireFillterSelected[index]">{{data.name}}</option>
+              </select>
+            </div>
           </div>
 
-            
-      </div> 
+
+      </div>
           <!-- <p-table #dt [value]="partners" [(selection)]="partners" dataKey="id" [filterDelay]="0" /> -->
 
           <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="checkOut">
@@ -61,12 +70,12 @@
                             booking ID
 
                           </th>
-                          
+
                           <th class="td-name">
                             User name
 
                           </th>
-                         
+
                           <th class="td-name">
                             Requested  apartment
 
@@ -87,10 +96,8 @@
                             Status
 
                           </th>
-                          
-                          <th class="td-name">
 
-                            actions
+                          <th class="td-name">
                           </th>
                       </ng-container>
                   </tr>
@@ -118,7 +125,7 @@
                       <td>
                         {{check?.end_Date}}
                     </td>
-                    
+
 <td>
   <span class="spanready" *ngIf="check.status=='Ready'">
     <img src="../../../assets/images/ready.svg">
@@ -129,20 +136,20 @@
       <span class="spanready" style="background-color: #FFF4ED;" *ngIf="check.status==' end soon'">
         <img src="../../../assets/images/end.svg">
         {{check.status}}</span>
-     
+
   </td>
-  
+
 
                       <td class="cursor position-relative" style="text-align: center;">
                           <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,check.req_ID)">
         <img src="assets/images/edit.svg">
     </button>
                           <div *ngIf="showEdit[check.req_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
- 
-                              <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/checkout/{{check.req_ID}}" > View Details  </button>
+
+                              <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/inquiries/checkout/{{check.req_ID}}" > View Details  </button>
                               <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"(click)="InsertCheckOut(check.req_ID)"  > send check out sheet  </button>
 
-                              
+
                           </div>
 
                       </td>
@@ -195,7 +202,7 @@
           <div class="modal-body"style="text-align: center;padding-top:0px">
             <img src="../../../assets/images/confirmm.png">
 
- 
+
   <p style="margin-bottom: 0px;font-weight: 500;" >sent successfully!</p>
   <p style="margin-bottom: 0px;"><b>check out sheet </b>has been sent successfully</p>
   <button  (click)="onCloseModal1()"  class="rounded-2 text-white rounded-2 border-0 py-2 px-4 " style="background-color: #1f4068 !important ;    margin-top: 15px;

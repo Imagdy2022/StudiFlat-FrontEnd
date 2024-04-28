@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';
 import * as FileSaver from 'file-saver';
 import { Guid } from 'guid-typescript';
+import { Reviews } from 'src/app/models/reviews';
 
 @Component({
   selector: 'app-apartment-details',
@@ -41,6 +42,7 @@ export class ApartmentDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getApartmentDetails();
+    this.GetApartmentReview();
 
     this.scrollTop();
     this.checkRole();
@@ -84,6 +86,7 @@ export class ApartmentDetailsComponent implements OnInit {
   bath_Room: any;
   backup_Info: any;
   kitchen_Tools: any = [];
+  AllReviews: Reviews[] = [];
   tenant: any;
 
   getApartmentDetails() {
@@ -116,7 +119,15 @@ export class ApartmentDetailsComponent implements OnInit {
         }
       }
     });
-    console.log(this.tenant);
+  }
+
+  GetApartmentReview() {
+    this._ApartmentService.GetApartmentReview(this.apt_UUID).subscribe((res) => {
+      this.AllReviews = res;
+      console.log(res)
+
+     });
+
   }
   DownloadTenantContract() {
     let ID = Guid.create();

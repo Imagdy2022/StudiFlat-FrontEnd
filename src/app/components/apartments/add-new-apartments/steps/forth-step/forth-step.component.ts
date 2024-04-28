@@ -75,7 +75,6 @@ export class ForthStepComponent {
       this.aprt_details_Edit = res.backup_Info
       this.wifi = res.rent_Rules
 
-debugger
 
        this.PostBackupInfo.patchValue(res.backup_Info);
        this.inputField=res.backup_Info["inputFields"]
@@ -114,7 +113,6 @@ debugger
       // this.checkedPayPal = Boolean(parsedData.payment_Methods[1].payment_Method_Name);
       this.checkedCash = Boolean(parsedData.payment_Methods[1].payment_Method_Name);
 
-      console.log(this.checkedPayPal);
       console.log('parsedData.payment_Methods[2].payment_Method_Name', parsedData.payment_Methods);
 
 
@@ -127,7 +125,6 @@ debugger
     let check
     this.CreateapartmentCurrentlyExisting == 'Yes' ? check = true : check = false
     this.PostBackupInfo.get('apt_Exist_Dmg')?.setValue(check);
-    console.log(check)
   }
 
   /**
@@ -144,7 +141,6 @@ debugger
 
     if (file) {
       this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
-        console.log('img', img);
         file.url = URL.createObjectURL(file);
         this.selectedContract = file;
         this.PostBackupInfo.get('dmgs_Imgs')?.patchValue(
@@ -285,6 +281,10 @@ this.display22="none"
     this.display22="block"
    this.imageSize=photo
       }
+      openModelImage(photo:any) {
+        this.display22="block"
+       this.imageSize=photo
+          }
       removeItem(imageName:any){
 
 

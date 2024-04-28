@@ -114,7 +114,7 @@ export class OwnerProfileComponent implements OnInit{
       this.OwnersRole=parsedData.permissions[i];
     }
   }
-  if(this.OwnersRole.p_Add==false &&this.is_Super==false&&this.param == "owner/create_new") {
+  if(this.OwnersRole.p_Add==false &&this.is_Super==false&&this.param == "owners/create_new") {
     this.gotopage( )
   }
   else if(this.OwnersRole.p_Update==false &&this.is_Super==false&&this.pageTitle== "edit_owner") {
@@ -160,7 +160,6 @@ export class OwnerProfileComponent implements OnInit{
     this.viewportScroller.scrollToAnchor(elementId);
   }
   public selectCountry(value: any) {
-    console.log(value)
   }
   changeAnchor(index: number): void {
     this.link = this.link.map(el => el == true ? false : false)
@@ -238,7 +237,6 @@ export class OwnerProfileComponent implements OnInit{
       const selectedFile = event.target.files[0];
       const formData = new FormData();
       formData.append('fileData', selectedFile, selectedFile.name);
-      console.log(formData);
 
       this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;

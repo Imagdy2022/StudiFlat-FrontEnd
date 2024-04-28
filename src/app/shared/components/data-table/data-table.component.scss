@@ -12,7 +12,7 @@
 }
 
 .bvngd {
-    font-family: 'Montserrat'
+    font-family: 'Poppins'
 }
 
 .edit-button {
@@ -65,12 +65,31 @@
 }
 
 td {
-    padding: .5rem 0.5rem !important;
-    font-size: 14px !important;
-    font-family: 'Montserrat'
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
+
 }
 
 th {
     font-size: 14px !important;
-    font-family: 'Montserrat'
+    font-family: 'Poppins';
+    font-weight: 500 !important;
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
+}
+
+.input{
+  position: relative;
+  img{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+}
+::placeholder{
+  font-size: 13px !important;
 }

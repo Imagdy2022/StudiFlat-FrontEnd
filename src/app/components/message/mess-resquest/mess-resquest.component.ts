@@ -103,25 +103,20 @@ export class MessResquestComponent implements OnInit {
   this.upload();
  }
  ReplyDash() {
-  debugger
   this._ticketService.ReplyDash(this.paramid,this.reply_Desc,this.apt_imgs).subscribe((res) => {
      this.messageService.add({   severity: 'success', summary: 'Success', detail:"send Success" });
-     debugger
      this.getAll_tickets(   )
      this.reply_Desc=""
      this.apt_imgs=null
    }, (error) => {
-    debugger
     this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
   })
 }
 CloseTicket(status:any) {
-  debugger
   this._ticketService.CloseTicket(this.paramid,status  ).subscribe((res) => {
      this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
      this.gotopage();
      }, (error) => {
-    debugger
     this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
   })
 }

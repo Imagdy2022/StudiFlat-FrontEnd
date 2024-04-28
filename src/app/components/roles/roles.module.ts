@@ -1,6 +1,5 @@
 import { RolesComponent } from './roles.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { RolesRoutingModule } from './roles-routing.module';
 
 const routes: Routes = [];
 
@@ -23,7 +23,6 @@ const routes: Routes = [];
   declarations: [RolesComponent],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
@@ -34,7 +33,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     BreadcrumbModule,
-    RouterModule.forChild(routes),
+    RolesRoutingModule
   ],
   exports: [],
   providers: [MessageService],

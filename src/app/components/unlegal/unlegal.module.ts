@@ -3,7 +3,6 @@ import { UnlegalComponent } from './unlegal.component';
 
 
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,12 +17,12 @@ import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { UnLegalRoutingModule } from './unlegal-routing.module';
 const routes: Routes = [];
 
 @NgModule({
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
@@ -33,7 +32,7 @@ const routes: Routes = [];
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
-    RouterModule.forChild(routes)
+    UnLegalRoutingModule
   ],
   exports: [ ],
   providers: [MessageService],

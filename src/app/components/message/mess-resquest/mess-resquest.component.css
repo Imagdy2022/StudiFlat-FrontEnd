@@ -26,7 +26,7 @@
 }
 
 * {
-    font-family: 'Montserrat'
+    font-family: 'Poppins'
 }
 
 .month,
@@ -120,7 +120,7 @@
     text-align: center;
     color: #1019c6 !important;
     font-size: 16px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 500;
     line-height: 20px;
     word-wrap: break-word;
@@ -147,17 +147,30 @@
 td {
     font-size: 14px !important;
     padding: 1rem .6rem !important;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
 }
 
 th {
     font-size: 14px !important;
-    font-family: 'Montserrat'
+    font-family: 'Poppins'
 }
 
 i {
     font: normal normal normal 14px/1 FontAwesome !important;
 }
+.modal .modal-header{
+  position: absolute;
+  top: 0px !important;
+  z-index: 9999;
+}
+.modal .modal-header button{
+    background-color: #1F4068;
+    width: 40px;
+    height: 40px;
+    padding: 7.875px 8px 8.125px 8px;
+    border: none;
+    outline: none;
+  }
 
 .file {
     z-index: 3 !important;

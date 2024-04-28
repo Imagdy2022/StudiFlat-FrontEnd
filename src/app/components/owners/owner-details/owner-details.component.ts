@@ -86,7 +86,6 @@ export class OwnerDetailsComponent {
   checkPage(): void {
     if (this.pageTitle == 'owner_details') {
       this.id = this.param;
-      console.log(this.param);
       this._OnwerService.getOwner(this.id).subscribe((res) => {
         this.createOwner.patchValue(res);
       });
@@ -100,7 +99,6 @@ export class OwnerDetailsComponent {
       ];
     } else if (this.pageTitle == 'edit_owner') {
       this.id = this.param;
-      console.log(this.param);
       this._OnwerService.getOwner(this.id).subscribe((res) => {
         this.createOwner.patchValue(res);
       });
@@ -136,7 +134,7 @@ export class OwnerDetailsComponent {
         if (
           this.OwnersRole.p_Add == false &&
           this.is_Super == false &&
-          this.param == 'owner/create_new'
+          this.param == 'owners/create_new'
         ) {
           this.gotopage();
         } else if (
@@ -183,7 +181,6 @@ export class OwnerDetailsComponent {
     this.viewportScroller.scrollToAnchor(elementId);
   }
   public selectCountry(value: any) {
-    console.log(value);
   }
   changeAnchor(index: number): void {
     this.link = this.link.map((el) => (el == true ? false : false));

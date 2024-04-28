@@ -40,11 +40,8 @@ import { PaginatorModule } from 'primeng/paginator';
   import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
  import { ButtonModule } from 'primeng/button';
+import { ApartmentsRoutingModule } from './appartments-routing.module';
 
-const routes: Routes = [
-  { path: '', component: ApartmentsComponent },
-  { path: 'Add-NewApartments', component: AddNewApartmentsComponent }
-];
 
 @NgModule({
   declarations: [
@@ -76,8 +73,7 @@ const routes: Routes = [
     ProgressSpinnerModule,
     FieldsetModule,
     ToastModule,
-
-    RouterModule.forChild(routes)
+    ApartmentsRoutingModule,
   ],
   providers: [HttpClientModule, MessageService]
 })

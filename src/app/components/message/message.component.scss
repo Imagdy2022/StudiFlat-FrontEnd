@@ -115,7 +115,7 @@
     text-align: center;
     color: #1019c6 !important;
     font-size: 16px;
-    font-family: 'Montserrat';
+    font-family: 'Poppins';
     font-weight: 500;
     line-height: 20px;
     word-wrap: break-word;
@@ -138,14 +138,73 @@
         margin-right: -898px;
     }
 }
+.badge{
+  font-size: 13px ;
+  padding: 4px 8px;
+  font-weight: 500;
+}
+.Opened {
+    color: #027A48;
+    background-color: #ECFDF3;
+}
+.Closed {
+    color: #EF2011;
+    background-color: #FCEEEE;
+}
+.Resolved {
+    color: #FFB900;
+    background-color: #FFF9E6;
+}
 
 td {
     font-size: 14px !important;
-    padding: 1.5rem !important;
-    font-family: 'Montserrat';
+    padding: 16px 24px !important;
+    font-family: 'Poppins';
+    height: 72px;
+    border-bottom: 1px solid #F6F6F6 !important;
+
 }
 
 th {
     font-size: 14px !important;
-    font-family: 'Montserrat'
+    font-family: 'Poppins';
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
+}
+
+tr{
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: 50px;
+  }
+}
+tr:nth-last-child(2){
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: -10px;
+  }
+}
+tr:last-child{
+  .Actions{
+    width: 150px;
+    z-index: 999;
+    right: 35px;
+    top: -100px;
+  }
+}
+.input{
+  position: relative;
+  img{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+}
+::placeholder{
+  font-size: 13px !important;
 }

@@ -1,7 +1,7 @@
 .active {
     color: #1f4068 !important;
     background-color: #fafcff;
-    border-left: 3px solid #1f4068;
+    // border-left: 3px solid #1f4068;
 }
 
 .content-details {
@@ -56,6 +56,14 @@
         margin: auto !important;
     }
 }
+.userImage{
+  width: 264px;
+  height: 184px;
+}
+.rateImage{
+  width: 107px;
+  height: 107px;
+}
 
 .delete {
     margin-left: 10px;
@@ -88,7 +96,7 @@
 }
 
 * {
-    font-family: 'Montserrat'
+    font-family: 'Poppins'
 }
 
 .Price {
@@ -196,8 +204,6 @@
     color: #eee;
 }
 
-.stars-icon2 {}
-
 .mini-left2 {
     float: left;
 }
@@ -212,14 +218,18 @@
     align-items: center;
     border: 1px solid #ddd;
 }
+.p-rating .p-rating-icon {
+  color:  #7F7F7F;
+}
 
 .p-rating .p-rating-icon.p-rating-icon-active {
     color: #FFD600;
 }
 
 .p-rating .p-rating-icon.p-icon {
-    width: 2.543rem;
-    height: 2.143rem;
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
 }
 
 .Tenant-Img {

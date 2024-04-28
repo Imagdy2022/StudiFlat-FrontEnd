@@ -10,18 +10,19 @@
     <!-- end sidebar  -->
     <!-- start content page  -->
     <main class="p-4 col-lg-10 ">
-        <div class="fw-inquiries d-flex justify-content-between" style="color: #6c6a6a;">
-            <p style=" font-family: Montserrat;font-size: 19px;font-weight:600;color:black">inquiries</p>
+        <div class="fw-inquiries d-flex justify-content-between" style="color: #6c6a6a;margin-top: 8px; margin-bottom: 16px;">
+            <p class="fw-bold ms-1" style="color: #6c6a6a;">inquiries</p>
             <div class="d-flex justify-content-lg-between  ">
-                <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+                <!-- <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
+                <div class="d-flex mb-2 me-3">
+                  <button class="month rounded-start px-3 py-2 text-white border-0 outline-none">This Month</button>
+                  <button class="week px-3 py-2 outline-none bg-white">Last Week</button>
+                  <button class="today rounded-end px-3 py-2 outline-none bg-white">Today</button>
+              </div>
 
-                <!-- start dropdown button  -->
-                <!-- <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
-                <!-- end dropdown button  -->
-                <!-- start add button (add new owner) in page  -->
-                <!-- <app-add-new-button [id]="'/owner/create_new'" class="mt-2"></app-add-new-button> -->
-
-                <!-- end add button (add new owner) in page  -->
+              <button class="filter rounded-3 px-3 py-0 outline-none bg-white  mb-2">
+               <img src="./assets/images/filter.svg" alt="">
+                Filter</button>
             </div>
             <!-- start add button (add new apartment) in page  -->
             <!-- end add button (add new apartment) in page  -->
@@ -35,10 +36,10 @@
         <!-- end part 1 in page  -->
         <!-- start part 2 in page  -->
 
-        <div class="card mt-2">
-            <div class="d-block d-md-flex justify-content-between my-2 bg-white p-3">
+        <div class="card">
+            <div class="row d-block d-md-flex justify-content-between align-items-center my-2 bg-white p-3">
                 <!-- start apartmentLists button  -->
-                <div class="d-flex align-items-center " style="overflow: auto;    font-size: 15px;">
+                <!-- <div class="d-flex align-items-center " style="overflow: auto;    font-size: 15px;">
                     <div *ngFor="let data of InquireFillterLists;let index=index;">
                         <div class="d-flex ">
                             <button class="apartmentList border-0 bg-transparent pb-2 mx-2 buttomstyle" (click)="clickIquires(index)" [class.clickApartmentList]="InquireFillterSelected[index]==true">{{data}}</button>
@@ -50,25 +51,25 @@
 
                     </div>
 
+                </div> -->
+                <div class="col-md-4">
+                  <div class="d-flex align-items-center" style="font-size: 15px;">
+                    <label for="" style="color: #313331;font-weight: 500;font-size: 16px;">Inquiries</label>
+                    <img src="assets/images/line.svg" class="mx-3" >
+                    <select class="form-select" (change)="clickIquires($event)">
+                      <option *ngFor="let data of InquireFillterLists; let index=index;" [value]="data.id" [selected]="InquireFillterSelected[index]">{{data.name}}</option>
+                    </select>
+                  </div>
                 </div>
 
                 <!-- end apartmentLists button  -->
                 <!-- start dropdown button  -->
-                <div class="d-flex align-items-center mx-2 mt-2  ">
-
-                    <ng-container *ngIf="!search; else searchVisible">
-                        <img class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true" src="../../../assets/images/search.svg">
-                        <!-- <i class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true"></i> -->
-                    </ng-container>
-                    <ng-template #searchVisible>
-                        <br>
-                        <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
-                        <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
-            Search
-        </button>
-                    </ng-template>
-                    <!-- end dropdown button  -->
-                </div>
+                <div class="col-md-5 col-8">
+                  <div class="input">
+                    <input type="text" class="form-control py-2" placeholder=" Search by Inquires" (keyup)="searchAction()" [(ngModel)]="searchText"  />
+                      <img src="../../../assets/images/search.svg" alt="">
+                  </div>
+                 </div>
             </div>
 
             <!-- <p-table #dt [value]="Inquires" [(selection)]="Inquires" dataKey="id" [filterDelay]="0" /> -->
@@ -80,16 +81,16 @@
                     <tr *ngIf="headerData">
                         <ng-container>
 
-                            <th class="td-name">
+                            <!-- <th class="td-name">
                                 Request Code
 
-                            </th>
+                            </th> -->
                             <th class="td-name">
-                                User name
+                              User name
 
                             </th>
                             <th class="td-name">
-                                Requested apartment
+                              Requested  by
 
                             </th>
                             <th class="td-name">
@@ -97,16 +98,17 @@
 
                             </th>
                             <th class="td-name">
-                                rent duration
+                              Time period
+                              <img src="./assets/images/arrow_downward.svg" alt="">
 
                             </th>
                             <th class="td-name">
                                 Status
+                                <img src="./assets/images/arrow_downward.svg" alt="">
 
                             </th>
 
                             <th class="td-name">
-                                Operation
 
                             </th>
                         </ng-container>
@@ -115,15 +117,16 @@
                 <ng-template pTemplate="body" let-inquire>
 
                     <tr style="cursor: pointer;" (click)="hidecard(inquire.request_ID)">
-                        <td routerLink="/view-inquire/{{inquire.request_ID}}">
+                        <!-- <td routerLink="/view-inquire/{{inquire.request_ID}}">
 
                             {{inquire?.request_Code}}
-                        </td>
-                        <td>
-                            <!--   <img *ngIf="inquire.profileImg" [src]="inquire?.profileImg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;">
-                            <img *ngIf="!inquire.profileImg" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{inquire?.userName}}
- -->
-                            <p-chip label="{{inquire?.userName}}" image="{{ inquire.profileImg!=null||inquire.profileImg!=''?inquire.profileImg:'../../../assets/images/Frame 1261154899.svg'}}" routerLink="/app-edite-user-details/{{ inquire.user_ID }}"></p-chip>
+                        </td> -->
+                        <td class="d-flex align-items-center">
+
+                            <img *ngIf=" inquire.profileImg  " routerLink="/app-edite-user-details/{{inquire.user_ID}}" [src]="inquire?.profileImg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+
+
+                            <img *ngIf="!inquire.profileImg" routerLink="/app-edite-user-details/{{inquire.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{inquire?.userName}}
 
                         </td>
                         <td>
@@ -136,57 +139,72 @@
                             {{inquire?.rent_Duration}}
                         </td>
 
-                        <td>
-                            <div>
-                                <p-tag severity="success" value="{{inquire?.status}}" [rounded]="true " *ngIf="inquire?.status=='Approved'"> </p-tag>
-
-
-                                <p-tag severity="danger" value="{{inquire?.status}}" [rounded]="true " *ngIf="inquire?.status=='Cancelled'"> </p-tag>
-                                <p-tag severity="danger" value="{{inquire?.status}}" [rounded]="true " *ngIf="inquire?.status=='Rejected'"> </p-tag>
-
-                                <p-tag severity="warning" value="{{inquire?.status}}" [rounded]="true " *ngIf="inquire?.status=='Pending'"> </p-tag>
-
-
-                                <p-tag severity="info" value="{{inquire?.status}}" [rounded]="true " *ngIf="inquire?.status=='Waiting'"> </p-tag>
-
-
-                            </div>
-                        </td>
+                        <td >
+                          <div>
+                              <span class="rounded-5 px-3 badge Approved" *ngIf="inquire?.status=='Approved'">
+                                <span>
+                                  <img src="assets/images/greenDot.svg" alt="">
+                                </span>
+                                {{inquire?.status}}
+                            </span>
+                            <span class="rounded-5 px-3 badge Cancelled" *ngIf="inquire?.status=='Cancelled'">
+                              <span>
+                                <img src="assets/images/redDot.svg" alt="">
+                              </span>
+                              {{inquire?.status}}
+                          </span>
+                          <span class="rounded-5 px-3 badge Pending"  *ngIf="inquire?.status=='Pending'">
+                            <span>
+                              <img src="assets/images/yallowDot.svg" alt="">
+                            </span>
+                            {{inquire?.status}}
+                        </span>
+                        <span class="rounded-5 px-3  badge Rejected"  *ngIf="inquire?.status=='Rejected'">
+                          <span>
+                            <img src="assets/images/purbleDot.svg" alt="">
+                          </span>
+                          {{inquire?.status}}
+                      </span>
+                      <span class="rounded-5 px-3  badge Waiting"  *ngIf="inquire?.status=='Waiting'">
+                        <span>
+                          <img src="assets/images/blueDot.svg" alt="">
+                        </span>
+                        {{inquire?.status}}
+                    </span>
+                          </div>
+                      </td>
                         <td class="cursor position-relative" style="text-align: center;">
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson( $event,inquire.request_ID)">
                     <img src="assets/images/edit.svg">
                 </button>
-                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1 && inquire?.status!='Approved' && inquire?.status!='Cancelled' && inquire?.status!='Waiting'" style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/inquire-offer/{{inquire.request_ID}}">Send Offer  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/view-inquire/{{inquire.request_ID}}">View  inquire</button>
+                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1 && inquire?.status!='Approved' && inquire?.status!='Cancelled' && inquire?.status!='Waiting' && inquire?.status!='Rejected'"   class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/inquiries/inquire-offer/{{inquire.request_ID}}">Send Offer  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/inquiries/view-inquire/{{inquire.request_ID}}">View  inquire</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="AddWaitingList(inquire.request_ID)">Add to waiting list  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="onOpenModal1(inquire.request_ID)">Reject </button>
 
                             </div>
-                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1  && inquire?.status=='Waiting'" style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/inquire-offer/{{inquire.request_ID}}">Send Offer  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/view-inquire/{{inquire.request_ID}}">View  inquire</button>
+                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1  && inquire?.status=='Waiting'"  class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/inquiries/inquire-offer/{{inquire.request_ID}}">Send Offer  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/inquiries/view-inquire/{{inquire.request_ID}}">View  inquire</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="onOpenModal1(inquire.request_ID)">Reject </button>
 
                             </div>
-                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1 && inquire?.status=='Approved'  " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/view-inquire/{{inquire.request_ID}}">View  inquire</button>
+                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1 && inquire?.status=='Approved'  " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/inquiries/view-inquire/{{inquire.request_ID}}">View  inquire</button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="onOpenModal1(inquire.request_ID)">Reject </button>
 
 
                             </div>
-                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1   && inquire?.status=='Cancelled'" style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/view-inquire/{{inquire.request_ID}}">View  inquire</button>
+                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1   && inquire?.status=='Cancelled'" class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/inquiries/view-inquire/{{inquire.request_ID}}">View  inquire</button>
 
 
                             </div>
-                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex==1" style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/view-inquire/{{inquire.request_ID}}">View  inquire</button>
-
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="AddWaitingList(inquire.request_ID)">add to waiting list  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="onOpenModal1(inquire.request_ID)">Reject </button>
+                            <div *ngIf="showEdit[inquire.request_ID] &&checkindex!=1  && inquire?.status=='Rejected'"  class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/inquiries/view-inquire/{{inquire.request_ID}}">View  inquire</button>
 
                             </div>
                         </td>

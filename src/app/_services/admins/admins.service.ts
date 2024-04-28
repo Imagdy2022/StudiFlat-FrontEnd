@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -70,6 +71,19 @@ export class AdminsService {
 
     return this.http.get<any>(url, { headers: this.headers, params: params });
   }
+  GetAllAppUsers(
+    PageNumber: number,
+    PageSize: number,
+    Search: any
+  ): Observable<any> {
+    const url = `${environment.apiUrl}/Chat/GetAllAppUsers`;
+    const params = new HttpParams()
+      .set('Page_No', PageNumber)
+      .set('Page_Size', PageSize)
+      .set('FilterKey', Search);
+
+    return this.http.get<any>(url, { headers: this.headers, params: params });
+  }
   public TenantDetails(id: any): Observable<any> {
     let url = environment.apiUrl + '/Users/TenantDetails?User_ID=' + id;
 
@@ -136,7 +150,7 @@ export class AdminsService {
       PageNo +
       '&PageSize=' +
       PageSize +
-      '&search=' +
+      '&Key=' +
       search;
     return this.http.get<any[]>(url, { headers: this.headers });
   }
@@ -440,23 +454,23 @@ export class AdminsService {
     return this.http.post<any>(url, AttachFile, { headers: headers1 });
   }
 
-  
 
-  
-  
+
+
+
   AddExpense( data:any): Observable<any> {
     const url = environment.apiUrl +"/Checkout/AddExpense"
-   
+
     return this.http.post<any>(url, data, { headers: this.headers });
   }
-   
+
   UpdateExpense( data:any): Observable<any> {
   const url = environment.apiUrl +"/Checkout/UpdateExpense"
- 
+
   return this.http.put<any>(url, data, { headers: this.headers });
 }
- 
- 
+
+
 DeleteExpense(Exp_ID: any): Observable<any[]> {
   const url = environment.apiUrl + '/Checkout/DeleteExpense?Exp_ID='+Exp_ID;
   const params = new HttpParams().set('Exp_ID', Exp_ID);
@@ -537,6 +551,28 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
+  PaymentCards(): Observable<any[]> {
+    const url = environment.apiUrl + '/Payments/PaymentCards';
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
+  PaymentsReminder(data: any): Observable<any> {
+    const url = environment.apiUrl + '/Payments/AddReminder';
+
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
+  AddPayment(data: any): Observable<any> {
+    const url = environment.apiUrl + '/Payments/AddPayment';
+
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
+  GetPayToList(toType:string , FilterKey:string): Observable<any[]> {
+    const url = environment.apiUrl + `/Payments/GetPayToList?to=${toType}`;
+    const params = new HttpParams()
+    .set('FilterKey', FilterKey)
+    return this.http.get<any[]>(url, { headers: this.headers , params: params });
+  }
+
   GetAllEmp(PageNumber: number, PageSize: number): Observable<any[]> {
     const url = environment.apiUrl + '/Tickets/GetAllEmp';
     const params = new HttpParams()
@@ -607,6 +643,19 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
+  StartNewChatWithUser(UserID: string): Observable<any> {
+    const url = environment.apiUrl + `/Chat/StartNewChatWithUser?UserID=${UserID}`;
+    return this.http.post<any>(url, UserID, { headers: this.headers });
+  }
+  SendMsg(data: any): Observable<any> {
+    const url = environment.apiUrl + `/Chat/SendMsg`;
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
+  GetChatHistory(Chat_ID:string): Observable<any[]> {
+    const url = environment.apiUrl + `/Chat/GetChatMessages?Chat_ID=${Chat_ID}`;
+
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
   PushNotificationCount(): Observable<any[]> {
     const url = environment.apiUrl + '/PushNotification/NotiCount';
 
@@ -627,37 +676,37 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     const url = environment.apiUrl + '/PushNotification/MarkAllRead';
     return this.http.put<any>(url, null, { headers: this.headers });
   }
-  
+
   GetDashCards(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/GetDashCards';
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-   
+
 MonthlyRevenu(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/MonthlyRevenu';
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-  
 
-   
-  
+
+
+
 
 AptRentedFree(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/AptRentedFree';
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-  
+
   PopularApt(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/PopularApt';
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-  
-RecentActivities(): Observable<any[]> {
-    const url = environment.apiUrl + '/Dashboard/RecentActivities';
+
+RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
+    const url = environment.apiUrl + `/Dashboard/RecentActivities?PageNumber=${PageNumber}&PageSize=${PageSize}`;
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
@@ -666,7 +715,7 @@ RecentActivities(): Observable<any[]> {
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-    
+
   GetTerminations(
      PageNo: number,
     PageSize: number,
@@ -677,12 +726,12 @@ RecentActivities(): Observable<any[]> {
       .set('PageNo', PageNo)
       .set('PageSize', PageSize)
       .set('SearchKey', SearchKey)
- 
+
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
 
-  
- 
+
+
   GetCheckoutList(
     PageNo: number,
    PageSize: number,
@@ -698,9 +747,9 @@ RecentActivities(): Observable<any[]> {
 
    return this.http.get<any[]>(url, { headers: this.headers, params: params });
  }
- 
 
- 
+
+
  InsertCheckOut(Req_ID: any ): Observable<any> {
   const url = environment.apiUrl + '/Checkout/InsertCheckOut?Req_ID='+Req_ID;
   let body = {

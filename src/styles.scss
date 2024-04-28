@@ -3,15 +3,21 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "primeicons/primeicons.css";
 @import "~@fortawesome/fontawesome-free/css/all.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+body {
+  font-family: 'Poppins', sans-serif !important;
+}
 main {
-    margin-top: 90px !important;
+    margin-top: 72px !important;
     background-color: #FAFCFF;
 }
 
 .p-datatable-wrapper {
     display: flex;
-    min-height: 33rem;
+    min-height: 35rem;
     flex-direction: column;
 }
+
+
 

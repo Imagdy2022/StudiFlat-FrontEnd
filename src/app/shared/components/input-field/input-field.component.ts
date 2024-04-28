@@ -34,7 +34,6 @@ export class InputFieldComponent {
 
   }
   saveActionButton() {
-debugger
     if(this.content1==""||this.content2==""){
       this.messageService.add({ severity: 'error', summary: 'error', detail: `${'please fill inputs before save'}` });
 
@@ -52,6 +51,6 @@ debugger
 
   }
  removeitem(){
-  
+
  }
 }

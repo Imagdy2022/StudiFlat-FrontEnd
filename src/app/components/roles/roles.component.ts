@@ -150,7 +150,6 @@ export class RolesComponent implements OnInit {
     this.display2 = 'block';
   }
   selectedfromDropDown(value: any) {
-    console.log(value);
   }
   showSide: string = '';
 
@@ -166,7 +165,7 @@ export class RolesComponent implements OnInit {
   }
 
   onActionSelected(action: any) {
-    console.log('Selected Action:', action.value);
+
     // Handle the selected action here
   }
 

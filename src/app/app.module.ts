@@ -5,10 +5,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CalendarModule } from 'primeng/calendar';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { AppartmentsModule } from './components/apartments/appartments.module';
-import { DashboardModule } from './components/dashboard/dashboard.module';
 import { MessageModule } from './components/message/message.module';
 import { PaymentsModule } from './components/payments/payments.module';
 import { AdminsModule } from './components/admins/admins.module';
@@ -54,7 +53,7 @@ initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [AppComponent, StatisticsComponent],
-  imports: [
+  imports: [BrowserAnimationsModule,
     AppRoutingModule,
     IssuReportsModule,
     ConfigurationsModule,
@@ -76,7 +75,6 @@ initializeApp(environment.firebase);
     AppartmentsModule,
     ReactiveFormsModule,
     CalendarModule,
-    DashboardModule,
     MessageModule,
     AuthModule,
     UserModule,

@@ -2,27 +2,22 @@
 
 
     <!-- <p-table #dt [value]="products" [(selection)]="products" dataKey="id" [filterDelay]="0" /> -->
-    <div class="d-flex justify-content-between">
+    <div class="row d-flex justify-content-between align-items-center">
         <!-- length Of person -->
-        <div class="d-flex mx-2 mt-4">
+        <div class="col-md-4">
+          <div class="d-flex mx-2 mt-4">
             <p class="me-2 fs-5 fw-bold ml-8">{{pagePerson}}</p>
             <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
                 {{fullRespone?.totalRecords}} {{pagePerson}}
             </p>
         </div>
+        </div>
         <!-- search input -->
-        <div class="d-flex align-items-center mx-2 mt-2 w-50">
-            <ng-container *ngIf="!search; else searchVisible">
-                <img class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true" src="../../../assets/images/search.svg">
-
-                <!-- <i class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true"></i> -->
-            </ng-container>
-            <ng-template #searchVisible>
-                <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
-                <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
-                    Search
-                </button>
-            </ng-template>
+        <div class="col-md-5">
+          <div class="input">
+            <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
+              <img src="../../../assets/images/search.svg" alt="">
+          </div>
         </div>
     </div>
 
@@ -35,7 +30,7 @@
                     </th>
                     <th *ngIf="!head.tableHeaderCheckbox && (head.Name && head.SortableColumn)" [pSortableColumn]="head.SortableColumn" class="td-name">
                         {{head.Name}}
-                        <!-- <p-sortIcon *ngIf="head.sortIcon == true" [field]="head.SortableColumn"></p-sortIcon> -->
+                         <p-sortIcon *ngIf="head.sortIcon == true" [field]="head.SortableColumn"></p-sortIcon>
                     </th>
                 </ng-container>
             </tr>
@@ -49,24 +44,26 @@
                 <!-- in owner case -->
                 <td *ngIf="pagePerson =='Owners'  ">
 
-                    <img *ngIf="product.owner_Photo" routerLink="/owner-profile/{{product.owner_ID}}" [src]="product?.owner_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;    margin-left: 9px;">
-                    <img *ngIf="!product.owner_Photo" routerLink="/owner-profile/{{product.owner_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;    margin-left: 9px;">                    {{product.owner_FirstName}} {{product.owner_LastName }}
+                    <img *ngIf="product.owner_Photo" routerLink="/owners/owner-profile/{{product.owner_ID}}" [src]="product?.owner_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                    <img *ngIf="!product.owner_Photo" routerLink="/owners/owner-profile/{{product.owner_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">                    {{product.owner_FirstName}} {{product.owner_LastName }}
 
 
                 </td>
                 <td *ngIf="pagePerson =='Owners' && product.owner_BankAccoun">{{product.owner_BankAccoun}}</td>
+                <td *ngIf="pagePerson=='Owners'  ">{{product.owner_CreatedBy}}</td>
                 <td *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>
                 <td *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'">{{product.gender}}</td> -->
                 <td *ngIf="pagePerson=='Owners'">{{product.owner_About}}</td>
+                <td *ngIf="pagePerson=='Owners'">{{product.owner_Status}}</td>
                 <td *ngIf="pagePerson=='Owners' " class="cursor position-relative">
                     <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,product.owner_ID)">
                   <img src="assets/images/edit.svg">
               </button>
-                    <div *ngIf="showEdit[product.owner_ID]" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                        <button *ngIf="OwnersRole?.p_View==true || is_Super==true" routerLink="/owner-profile/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">View Profile</button>
+                    <div *ngIf="showEdit[product.owner_ID]"  style="width: 150px;z-index: 999;right: 60px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                        <button *ngIf="OwnersRole?.p_View==true || is_Super==true" routerLink="/owners/owner-profile/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">View Profile</button>
 
-                        <button *ngIf="OwnersRole?.p_Update==true || is_Super==true" routerLink="/owner/edit_owner/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100">Edit</button>
+                        <button *ngIf="OwnersRole?.p_Update==true || is_Super==true" routerLink="/owners/edit_owner/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100">Edit</button>
 
                         <button *ngIf="OwnersRole?.p_Delete==true || is_Super==true" (click)="confirmDelete($event,product)" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">Delete</button>
 
@@ -124,7 +121,7 @@
                     </button>
                     <div *ngIf="showEdit[product.id]" class="position-absolute z-3 rounded-3 bg-white border edit-button">
                         <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100">Edit</button>
-                        <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="pagePerson=='Reports'">Share</button>
+                        <!-- <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="pagePerson=='Reports'">Share</button> -->
                         <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">Delete</button>
                         <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="pagePerson=='Users'">Suspend User</button>
                     </div>

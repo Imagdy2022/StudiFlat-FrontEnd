@@ -118,10 +118,8 @@ export class OwnersComponent implements OnInit {
   updateDataPerPage(PageNumber: any): void {
     this.pageNumber = PageNumber;
 
-    console.log('apl', this.pageNumber);
 
     this.getAllOwners(this.pageNumber, this.itemsPerPage, this.searchValue);
-    console.log('b3d', this.pageNumber);
 
   }
 
@@ -143,13 +141,14 @@ export class OwnersComponent implements OnInit {
   initHeadersData(): Array<ITableHeader> {
     return [
       // { Name: '', SortableColumn: '', tableHeaderCheckbox: true, sortIcon: false },
-
       { Name: 'Name', SortableColumn: 'owner_FirstName', sortIcon: true },
+      { Name: 'Created by', SortableColumn: 'owner_CreatedBy', sortIcon: true },
       { Name: 'Email Address', SortableColumn: 'owner_Mail', sortIcon: true },
       { Name: 'Phone Number', SortableColumn: 'owner_Phone', sortIcon: true },
       // { Name: 'Gender', SortableColumn: 'gender', sortIcon: false },
       { Name: 'About', SortableColumn: 'owner_About', sortIcon: false },
-      { Name: 'Operations', SortableColumn: ' ', sortIcon: false },
+      { Name: 'Status', SortableColumn: 'owner_Status', sortIcon: false },
+      { Name: ' ', SortableColumn: ' ', sortIcon: false },
 
 
     ]

@@ -85,7 +85,7 @@
 }
 
 * {
-    font-family: 'Montserrat'
+    font-family: 'Poppins'
 }
 
 .profile1 {
@@ -231,7 +231,7 @@
     flex: 1 1 0;
     color: #060D15;
     font-size: 16px;
-    font-family: Montserrat;
+    font-family: Poppins;
     font-weight: 600;
     line-height: 24px;
     word-wrap: break-word
@@ -251,7 +251,7 @@
     align-self: stretch;
     color: #1F4068;
     font-size: 32px;
-    font-family: Montserrat;
+    font-family: Poppins;
     font-weight: 600;
     line-height: 40px;
     word-wrap: break-word

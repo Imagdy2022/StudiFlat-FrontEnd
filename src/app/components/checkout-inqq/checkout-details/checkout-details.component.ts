@@ -41,7 +41,7 @@ export class CheckoutDetailsComponent implements OnInit  {
   }
   TantsRole:any
   is_Super:any
- 
+
   gotopage( ){
     let url: string = "unlegal";
       this.router.navigateByUrl(url);
@@ -54,7 +54,7 @@ export class CheckoutDetailsComponent implements OnInit  {
    * initCities
    * @return void
    */
-  
+
   Tenant_details:any={}
   CheckoutSheet:any={}
   tenant_photo=""
@@ -94,7 +94,6 @@ User_ID: any;
       const formData = new FormData();
       formData.append('fileData', selectedFile, selectedFile.name);
       this.formData2.append('User_Img', selectedFile);
-      console.log(formData);
 
       this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;
@@ -140,7 +139,6 @@ uploadPic2(event: any) {
   const selectedFile = event.target.files[0];
   this.formData2 = new FormData();
   this.formData2.append('fileData', selectedFile, selectedFile.name);
-  console.log(this.formData2);
    this.uploadFile
     .uploadSingleFile(this.formData2)
     .subscribe((data) => {
@@ -174,7 +172,7 @@ progress = 0;
 
     let files = event.target.files;
     this.ListFiles = event.target.files;
- 
+
     if (files) {
       for (let file of files) {
         this.ListFiles = file;
@@ -204,7 +202,7 @@ progress = 0;
    expense_Desc : this.Description_expense,
    expense_File : this.urlimageadd,
  }
- 
+
     this._adminservices.AddExpense(data).subscribe(
       (res: any) => {
         this.messageService.add({
@@ -245,7 +243,7 @@ progress = 0;
       expense_Desc : this.Description_expense,
       expense_File : this.urlimageadd,
     }
-    
+
        this._adminservices.UpdateExpense(data).subscribe(
          (res: any) => {
            this.messageService.add({
@@ -283,7 +281,7 @@ progress = 0;
           summary: 'Success',
           detail: res['message'],
         });
-        
+
         this.expense_type = "";
         this.cost_expense=""
         this.Description_expense=""
@@ -306,15 +304,15 @@ progress = 0;
   detailperson(event:any,id: any): void {
     this.showEdit=[]
     event.stopPropagation()
- 
+
     this.showEdit[id] == true ? this.showEdit[id] = false : this.showEdit[id] = true
- 
- 
- 
+
+
+
    }
    hidecard( ){
     this.showEdit=[]
- 
+
  }
  display3:any="none"
  onCloseModal4(){
@@ -326,10 +324,10 @@ progress = 0;
     .subscribe(
       (res) => {
         this.display3="block"
-  
+
        },
       (error) => {
- 
+
         this.messageService.add({
           severity: 'error',
           summary: 'Error',

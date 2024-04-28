@@ -13,19 +13,19 @@
     <!-- start content page  -->
     <main class="p-4 col-lg-10">
 
-        <div class="d-md-flex justify-content-between dashboard mt-2">
+        <div class="d-md-flex justify-content-between align-content-center dashboard" style="margin-top: 8px; margin-bottom: 15px;">
             <p class="fw-bold ms-1" style="color: #6c6a6a;">Owners</p>
             <div class="d-flex justify-content-lg-between ">
                 <!-- start dropdown button  -->
                 <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
                 <!-- end dropdown button  -->
                 <!-- start add button (add new owner) in page  -->
-                <app-add-new-button *ngIf="OwnersRole?.p_Add==true || is_Super==true" [id]="'/owner/create_new'" class="mt-2"></app-add-new-button>
+                <app-add-new-button *ngIf="OwnersRole?.p_Add==true || is_Super==true" [id]="'/owners/create_new'" class="mt-2"></app-add-new-button>
                 <!-- end add button (add new owner) in page  -->
             </div>
         </div>
         <div class="text-center">
-            <p-progressSpinner *ngIf="spinner == false"></p-progressSpinner>
+            <!-- <p-progressSpinner *ngIf="spinner == false"></p-progressSpinner> -->
 
             <app-data-table *ngIf="products && spinner != false" [fullRespone]="fullRespone" [pagePerson]="'Owners'" [selectedProducts]="selectedProducts" [headerData]="headerData" (searchTextChange)="searchInOwner($event)" (onPageChange)="updateDataPerPage($event)"
                 [products]="products" (deleteItemDetails)="deleteOwner($event)"></app-data-table>

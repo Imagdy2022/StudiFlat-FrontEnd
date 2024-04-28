@@ -39,7 +39,7 @@ export class CheckoutInqqComponent implements OnInit{
   }
   checkOutRole:any
 is_Super:any
- 
+
 gotopage( ){
   let url: string = "unlegal";
     this.router.navigateByUrl(url);
@@ -104,7 +104,6 @@ gotopage( ){
 
         const calcPageNumber = Math.floor(event.first / event.rows) + 1;
         this.pageNumber=calcPageNumber;
-        console.log(calcPageNumber);
         this.getAllcheckOut(this.statusinquire);
       }
       ids:any=[]
@@ -125,41 +124,58 @@ event.stopPropagation()
   InquireFillterLists: Array<any> = [];
   InquireFillterSelected: Array<any> = [];
   initFakeData(): void {
-    this.InquireFillterLists = ["All", "completed", "Ready Checkout","end soon", ];
+    this.InquireFillterLists = [
+    {
+      id:0,
+      name:"All"
+    },
+    {
+      id:1,
+      name:"completed"
+    },
+    {
+      id:2,
+      name:"Ready Checkout"
+    },
+    {
+      id:3,
+      name:"end soon"
+    }
+     ];
     this.InquireFillterSelected = [true];
    }
    selectedfromDropDown(value:any){
     this.date=value.name;
     this.getAllcheckOut(this.statusinquire)
-    console.log(value)  }
+ }
   checkindex=0;
   clickIquires(index:any){
-    this.checkindex=index;
+    this.checkindex=index.target.value;
     this.InquireFillterSelected = this.InquireFillterSelected.map((data) => data == true ? false : false)
 
-    this.InquireFillterSelected[index] = true
-    if(index == 0){
+    this.InquireFillterSelected[index.target.value] = true
+    if(index.target.value == 0){
       this.statusinquire="All"
       this.getAllcheckOut(this.statusinquire);
     }
-    if(index == 1){
+    if(index.target.value == 1){
       this.statusinquire="completed"
 
       this.getAllcheckOut(this.statusinquire);
     }
-    if(index == 2){
+    if(index.target.value == 2){
       this.statusinquire="Ready Checkout"
 
       this.getAllcheckOut(this.statusinquire);
 
     }
-    if(index == 3){
+    if(index.target.value == 3){
       this.statusinquire="end soon"
 
       this.getAllcheckOut(this.statusinquire);
 
     }
-     
+
   }
   onCloseModal1(){
     this.display1="none"
@@ -190,8 +206,8 @@ event.stopPropagation()
         }
       );
   }
-   
- 
+
+
   hidecard(){
      this.showEdit=[]
 

@@ -16,9 +16,8 @@ export class UserComponent {
   selectedProducts: Array<object> = [];
   headerData: Array<any> = [];
   loading: boolean = true;
-  search: boolean = false;
+  // search: boolean = false;
   listDropDown: Array<object> = [
-    { name: 'All' },
     { name: 'Today' },
     { name: 'Last Week' },
     { name: 'This month' },
@@ -68,7 +67,6 @@ export class UserComponent {
   selectedfromDropDown(value: any) {
     this.Date = value.name;
     this.getAllTenants();
-    console.log(value);
   }
   /**
    * addItem
@@ -136,7 +134,6 @@ export class UserComponent {
   tiggerPageChange(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber = calcPageNumber;
-    console.log(calcPageNumber);
     this.getAllTenants();
   }
   DeleteUser(id: any) {
@@ -221,8 +218,8 @@ export class UserComponent {
   searchTextChange: any;
   searchAction() {
     // this.searchTextChange.emit(this.searchText);
-    this.search = false;
+    // this.search = false;
     this.getAllTenants();
-    this.searchText = '';
+    // this.searchText = '';
   }
 }

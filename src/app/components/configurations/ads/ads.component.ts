@@ -48,7 +48,7 @@ export class AdsComponent implements OnInit {
   selectedfromDropDown(value: any) {
     this.Date = value.name;
     // this.getAllpartners()
-    console.log(value);
+
   }
   /**
    * addItem
@@ -75,7 +75,6 @@ export class AdsComponent implements OnInit {
   tiggerPageChange2(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber2 = calcPageNumber;
-    console.log(calcPageNumber);
     this.GetAds();
   }
   numberFAQ = 0;

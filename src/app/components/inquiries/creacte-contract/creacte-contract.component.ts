@@ -101,7 +101,6 @@ export class CreacteContractComponent implements OnInit {
   ActionButtonContractSectionbutton() {
     this.ActionButtonContractSection = true;
     this.contract_details.rC_Sections.push({ sec_Name: '', sec_Desc: '' });
-    console.log(this.contract_details.rC_Sections);
   }
   gotopage2() {
     let url: string = 'inquiries';

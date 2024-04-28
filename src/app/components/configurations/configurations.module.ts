@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ConfigurationsComponent } from './configurations.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +18,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { PaginatorModule } from 'primeng/paginator';
 import { Breadcrumb } from 'primeng/breadcrumb';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ConfigurationsRoutingModule } from './configurations-routing.module';
 
 const routes: Routes = [];
 
@@ -26,7 +26,6 @@ const routes: Routes = [];
   imports: [
     CommonModule,
     PaginatorModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
@@ -38,7 +37,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     BreadcrumbModule,
-    RouterModule.forChild(routes),
+    ConfigurationsRoutingModule
   ],
   declarations: [ConfigurationsComponent],
   providers: [MessageService],

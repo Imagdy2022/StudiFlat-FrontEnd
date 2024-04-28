@@ -11,50 +11,58 @@
     <!-- start content page  -->
     <main class="p-4 col-lg-10 " (click)="hidecard()">
         <!-- start part 1 in page  -->
-        <div class="fw-bold d-flex justify-content-between" style="color: #6c6a6a;">
+        <div class="fw-bold d-flex justify-content-between align-items-center" style="color: #6c6a6a; margin-top: 7px; margin-bottom: 24px;">
             <p>Apartments</p>
             <!-- start add button (add new apartment) in page  -->
-            <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true || is_Super==true" [id]="'apartments/page/add-new-apartments'"></app-add-new-button>
+            <div class="d-flex justify-content-lg-between ">
+              <!-- start dropdown button  -->
+              <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+              <!-- end dropdown button  -->
+              <!-- start add button (add new owner) in page  -->
+              <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true  || is_Super==true"[id]="'apartments/page/add-new-apartments'" class="mt-2"></app-add-new-button>
+              <!-- end add button (add new owner) in page  -->
+          </div>
             <!-- end add button (add new apartment) in page  -->
         </div>
         <!-- end part 1 in page  -->
         <!-- start part 2 in page  -->
-        <div class="card mt-2">
+        <div class="card">
             <!-- <p-table #dt [value]="apartmentList" [(selection)]="apartmentList" dataKey="id" [filterDelay]="0" /> -->
 
-            <div class="d-block d-md-flex justify-content-between my-2 bg-white p-3">
+            <div class="row d-block d-md-flex justify-content-between my-2 px-3 py-2">
                 <!-- start apartmentLists button  -->
-                <div class="d-flex align-items-center " style="overflow: auto;    font-size: 15px;">
-                    <div *ngFor="let data of apartmentFillterLists;let index=index;">
-                        <div class="d-flex ">
-                            <button class="apartmentList border-0 bg-transparent pb-2 mx-2" [class.clickApartmentList]="apartmentFillterSelected[index]==true" (click)="clickApartmentList(index)">{{data}}</button>
-                            <div class="none">
-                                <img src="assets/images/line.svg" [class.d-none]=" index == apartmentFillterLists.length-1">
-                            </div>
 
-                        </div>
-
-                    </div>
-
+              <div class="col-md-4">
+                <div class="d-flex align-items-center" style="font-size: 15px;">
+                  <label for="" style="color: #313331;font-weight: 500;font-size: 16px;">Appartment</label>
+                  <img src="assets/images/line.svg" class="mx-3" >
+                  <select class="form-select" (change)="clickApartmentList($event)">
+                    <option *ngFor="let data of apartmentFillterLists; let index=index;" [value]="data.id" [selected]="apartmentFillterSelected[index]">{{data.name}}</option>
+                  </select>
                 </div>
+              </div>
+               <div class="col-md-5 col-8">
+                <div class="input">
+                  <input type="text" class="form-control py-2" placeholder=" Search by appartment location" (keyup)="searchAction()" [(ngModel)]="searchText" />
+                    <img src="../../../assets/images/search.svg" alt="">
+                </div>
+               </div>
+
                 <p-toast></p-toast>
 
                 <!-- end apartmentLists button  -->
-                <!-- start dropdown button  -->
-                <app-dropdown [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-                <!-- end dropdown button  -->
             </div>
         </div>
         <!-- start part 3 to display paroduct Apartment details in page  -->
-        <div class="row paroductApartment  px-1">
-            <p-progressSpinner *ngIf="spinner == true"></p-progressSpinner>
+        <div class="row paroductApartment px-1" style="margin-top: 5px;">
+            <!-- <p-progressSpinner *ngIf="spinner == true"></p-progressSpinner> -->
 
             <ng-container *ngIf="apartmentList">
                 <ng-container *ngFor="let item of apartmentList;">
 
-                    <div class=" col-12 col-md-6 col-lg-3 mb-4  position-relative px-2 mb-4 h-100" style="height: 393px !important;">
+                    <div routerLink="/apartments/apartments-details/{{item.apt_UUID}}" class=" col-12 col-md-6 col-lg-3 mb-2  position-relative px-2 h-100" style="height: 393px !important;cursor: pointer;">
 
-                        <a routerLink="/apartments/apartments-details/{{item.apt_UUID}}" style="height: 46% !important;" class="d-block">
+                        <a  style="height: 46% !important;" class="d-block">
                             <img [src]="item.apt_ThumbImg.includes('http') ? item.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'" class="w-100 h-100 apartmentImage">
                             <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3 " [class.available]="item.statusString != 'Rented'">{{item.statusString}}</p>
                         </a>
@@ -76,7 +84,7 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="Price">
-                                    ${{item.apt_Price}} <span class="time">/ month</span>
+                                  € {{item.apt_Price}} <span class="time">/ month</span>
                                 </div>
                                 <div>
                                     <div class="cursor position-relative">
@@ -103,30 +111,8 @@
 
                     </div>
                 </ng-container>
-                <!-- <p-paginator *ngIf="apartmentList" (onPageChange)="tiggerPageChange($event)" [rows]="itemsPerPage" [totalRecords]="fullRespone?.totalRecords"></p-paginator> -->
-                <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
-                    <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-                        <!-- <a style="cursor: pointer;">
-                      <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05); border-radius: 8px; overflow: hidden; border: 1px #8FA0B4 solid; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
+                <p-paginator *ngIf="apartmentList" (onPageChange)="tiggerPageChange($event)" [rows]="itemsPerPage" [totalRecords]="fullRespone?.totalRecords"></p-paginator>
 
-                          <div style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">Previous</div>
-
-                      </div>
-                  </a> -->
-                        <button (click)="decreamentPage( )" [disabled]="disableperv" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                    Previous
-      </button>
-                    </div>
-                    <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{pageNumber}} of {{totalofPages}}</div>
-                    <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-                        <!-- <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05); border-radius: 8px; overflow: hidden; border: 1px #8FA0B4 solid; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-                          <div style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">Next</div>
-                      </div> -->
-                        <button [disabled]="disablenext" (click)="   incrementpage( )" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                        Next
-          </button>
-                    </div>
-                </div>
             </ng-container>
 
 

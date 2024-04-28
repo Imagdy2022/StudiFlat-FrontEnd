@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
  import { DropdownModule } from 'primeng/dropdown';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -27,13 +26,13 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast'
 import { PaginatorModule } from 'primeng/paginator';
+import { PartnerRoutingModule } from './partner-routing.module';
 
 const routes: Routes = [
   ];
 @NgModule({
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
@@ -43,7 +42,7 @@ const routes: Routes = [
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
-    RouterModule.forChild(routes)
+    PartnerRoutingModule
   ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

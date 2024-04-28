@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { IgxDoughnutChartComponent } from "igniteui-angular-charts";
 import { IgxRingSeriesComponent } from "igniteui-angular-charts";
 import { IgxSliceClickEventArgs } from "igniteui-angular-charts";
+import { RecentActivities } from 'src/app/models/recent-activities';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -26,23 +27,12 @@ export class DashboardComponent {
   {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',admin:'Ben Ten',amount:'@€25,00/Mo',status:'Rented'},
   {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',admin:'Ben Ten',amount:'@€25,00/Mo',status:'Rented'}
 ]
-  RecentActivitiesList:Array<any>=[
-    {img:'assets/images/Avatar.svg',status:'Paid rent',name:'James Tobias',message:'Rental has been booked'},
-    {img:'assets/images/Avatar.svg',status:'Paid rent',name:'James Tobias',message:'Rental has been booked'},
-    {img:'assets/images/Avatar.svg',status:'Paid rent',name:'James Tobias',message:'Rental has been booked'}
-  ]
+
   listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
   DashboardRole:any
   is_Super:any
   constructor(private apartmentSer: ApartmentService,public router: Router,private messageService: MessageService, public _adminservices: AdminsService,
    ) {
-    this.dataChart2 = [
-      { Value: 37, Label: "Cooling", Summary: "Cooling 37%" },
-      { Value: 25, Label: "Residential", Summary: "Residential 25%"  },
-      { Value: 12, Label: "Heating", Summary: "Heating 12%" },
-      { Value: 11, Label: "Lighting", Summary: "Lighting 11%" },
-      { Value: 18, Label: "Other", Summary: "Other 18%" }
-  ];
     // this.checkRole();
 
   }
@@ -71,7 +61,7 @@ export class DashboardComponent {
   }).catch(function (err) {
     return console.error(err.toString());
   });
-  this.GetDashCards() 
+  this.GetDashCards()
   this.AptRentedFree()
   this.MonthlyRevenu()
   this.PopularApt()
@@ -86,64 +76,14 @@ export class DashboardComponent {
   MonthlyRevenTotol:any=[]
   MonthlyRevenText:any=[]
 
-  basicData:any
-  basicOptions:any
   MonthlyRevenu() {
- 
+
     this._adminservices.MonthlyRevenu().subscribe(
       (res: any) => {
         for(let i=0;i<res.length;i++){
           this.MonthlyRevenTotol.push(res[i].total)
           this.MonthlyRevenText.push(res[i].monthly)
         }
-         this.basicData = {
-          labels:  this.MonthlyRevenText ,
-          datasets: [
-              {
-                label: 'Revenu',
-
-                   data:  this.MonthlyRevenTotol ,
-                  // backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-                  // borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
-                  borderWidth: 1,
-                  innerWidth:10,
-                  
-
-              }
-          ]
-      };
-
-      this.basicOptions = {
-        responsive: true,
-        legend: {
-            display:false,
-            labels: {
-                fontColor: '#86909C',
-                display:false
-            }
-        },
-          scales: {
-              y: {
-                  beginAtZero: true,
-                  ticks: {
-                      color: ''
-                  },
-                  grid: {
-                      color: '',
-                      drawBorder: false
-                  }
-              },
-              x: {
-                  ticks: {
-                      color: ''
-                  },
-                  grid: {
-                      color: '',
-                      drawBorder: false
-                  }
-              }
-          }
-      };
       },
       (error) => {
         console.error('Error fetching owners:', error);
@@ -152,7 +92,7 @@ export class DashboardComponent {
   }
   DashCards: any = {};
   GetDashCards() {
- 
+
     this._adminservices.GetDashCards().subscribe(
       (res: any) => {
         this.DashCards = res;
@@ -165,7 +105,7 @@ export class DashboardComponent {
 
   PopularAptarr: any = {};
   PopularApt() {
- 
+
     this._adminservices.PopularApt().subscribe(
       (res: any) => {
         this.PopularAptarr = res;
@@ -176,38 +116,38 @@ export class DashboardComponent {
     );
   }
 
-  RecentActivitiesarr: any = {};
+  RecentActivitiesarr: RecentActivities[] = [];
   RecentActivities() {
- 
-    this._adminservices.RecentActivities().subscribe(
-      (res: any) => {
-        this.RecentActivitiesarr = res;
+    this._adminservices.RecentActivities(1,4).subscribe({
+      next:(res:any)=>{
+        this.RecentActivitiesarr = res.data;
       },
-      (error) => {
-        console.error('Error fetching owners:', error);
+      error:(err)=>{
+        console.log(err)
       }
-    );
+    })
   }
   AptRented:any
   AptRentedFree() {
- 
+
     this._adminservices.AptRentedFree().subscribe(
       (res: any) => {
         this.AptRented = res;
         this.dataChart = {
-          labels: ['Free', 'Rented' ],
+           labels: ['apartments', 'beds', 'rooms'],
+          // labels: ['Free', 'Rented'],
           datasets: [
               {
-                  data: [ this.AptRented.apt_Free,  this.AptRented.apt_Rented ],
-                  backgroundColor:  ['#12B76A','#1F4068'  ],
-                  hoverBackgroundColor: ['#12B76A','#1F4068'  ]
+                  data: [50, 20 , 30],
+                  backgroundColor:  ['#FECE72' ,'#BED4FF','#FF9B7A'],
+                  hoverBackgroundColor: [,'#FECE72','#BED4FF' ,'#FF9B7A']
               }
           ]
       };
 
 
       this.options = {
-          cutout: '70%',
+          cutout: '60%',
           plugins: {
               legend: {
                   labels: {
@@ -226,8 +166,8 @@ export class DashboardComponent {
 
    options  : any;
   appendcart(){
-       
-     
+
+
   }
   playAudio(){
     let audio = new Audio();
@@ -264,18 +204,13 @@ export class DashboardComponent {
   }
   addItem(value: any) {
     this.showSide = value
-    console.log(value)
   }
   selectedfromDropDownPopularApartments(value:any){
-    console.log(value)
   }
   selectedfromDropDownApartmentsRentedFree(value:any){
-    console.log(value)
   }
   selectedfromDropDown(value:any){
-    console.log(value)
   }
   selectedfromDropDownPopularApartmentstable(value:any){
-    console.log(value)
   }
 }

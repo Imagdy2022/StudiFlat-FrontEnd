@@ -87,9 +87,9 @@ export class StatisticsComponent {
 
   addItem(value: any) {
     this.showSide = value
-    console.log(value)
+
   }
   selectedfromDropDown(value:any){
-    console.log(value)
+
   }
 }

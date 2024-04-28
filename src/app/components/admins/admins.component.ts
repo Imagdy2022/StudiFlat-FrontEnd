@@ -113,11 +113,10 @@ export class AdminsComponent implements OnInit {
     this.showSide = value;
   }
   onActionSelected(action: any) {
-    console.log('Selected Action:', action.value);
     // Handle the selected action here
   }
   selectedfromDropDown(value: any) {
-    console.log(value);
+
   }
   openDropdown(event: Event) {
     event.stopPropagation(); // Prevents the dropdown from closing when clicking the button

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import jsPDF from 'jspdf';
 import { MessageService } from 'primeng/api';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
+import * as XLSX from 'xlsx'
 
 @Component({
   selector: 'app-payments',
@@ -9,6 +12,17 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
   styleUrls: ['./payments.component.css']
 })
 export class PaymentsComponent implements OnInit {
+  @ViewChild ('content',{static: false}) el! : ElementRef
+  rangeDates: Date[] ;
+  PaymentCards: any = {};
+  checked: boolean = false;
+
+  reminderForm: FormGroup = new FormGroup({
+    inv_ID: new FormControl(null),
+    rem_Desc: new FormControl(null),
+    rem_Date: new FormControl(null),
+    pushTypes: new FormControl(null),
+  })
 
   constructor(    private messageService: MessageService,
     public router: Router, public _adminservices:AdminsService ) { }
@@ -16,8 +30,10 @@ export class PaymentsComponent implements OnInit {
   ngOnInit() {
     this.initFakeData();
     this.checkRole();
+    this.GetPaymentCards();
     this.ListAllInvoices(this.statuspayment);
   }
+
   PaymentsRole:any
   is_Super:any
   checkRole(){
@@ -45,7 +61,24 @@ export class PaymentsComponent implements OnInit {
       this.router.navigateByUrl(url);
   }
   initFakeData(): void {
-    this.paymentFillterLists = ["All Payments", "Rent", "Security Deposit","Other payments"];
+    this.paymentFillterLists = [
+      {
+        id:0,
+        name: "All Payments"
+      },
+      {
+        id:1,
+        name: "Rent"
+      },
+      {
+        id:2,
+        name: "Security Deposit"
+      },
+      {
+        id:3,
+        name: "Other payments"
+      },
+      ];
     this.paymentFillterSelected = [true];
    }
   payments:any=[ ];
@@ -71,6 +104,19 @@ dropdownOption: Array<any> = [];
 
 
    }
+
+   GetPaymentCards() {
+
+    this._adminservices.PaymentCards().subscribe(
+      (res: any) => {
+        this.PaymentCards = res;
+      },
+      (error) => {
+        console.error('Error fetching owners:', error);
+      }
+    );
+  }
+
    pageNumber=1;
   pagesize=10;
   totalofPages=1 ;
@@ -79,11 +125,10 @@ dropdownOption: Array<any> = [];
 
         const calcPageNumber = Math.floor(event.first / event.rows) + 1;
         this.pageNumber=calcPageNumber;
-        console.log(calcPageNumber);
         this.ListAllInvoices( this.statuspayment)
        }
        selectedfromDropDown(value:any){
-        console.log(value)
+        this.ListAllInvoices(this.statuspayment);
       }
 
 
@@ -120,26 +165,26 @@ dropdownOption: Array<any> = [];
  statuspayment:any=""
 
  clickPayment(index:any){
-  this.checkindex=index;
+  this.checkindex=index?.target?.value;
   this.paymentFillterSelected = this.paymentFillterSelected.map((data) => data == true ? false : false)
 
-  this.paymentFillterSelected[index] = true
-  if(index == 0){
+  this.paymentFillterSelected[index?.target?.value] = true
+  if(index?.target?.value == 0){
     this.statuspayment=""
     this.ListAllInvoices(this.statuspayment);
   }
-  if(index == 1){
+  if(index?.target?.value == 1){
     this.statuspayment="Rent"
 
     this.ListAllInvoices(this.statuspayment);
   }
-  if(index == 2){
+  if(index?.target?.value == 2){
     this.statuspayment="Security"
 
     this.ListAllInvoices(this.statuspayment);
 
   }
-  if(index == 3){
+  if(index?.target?.value == 3){
     this.statuspayment="Other"
 
     this.ListAllInvoices(this.statuspayment);
@@ -158,9 +203,53 @@ searchTextChange:any
 search:boolean=false
 searchAction() {
   // this.searchTextChange.emit(this.searchText);
-  this.search = false;
   this.ListAllInvoices(this.statuspayment);
-    this.searchText =""
 
 }
+display2 = 'none';
+onCloseModal2() {
+  this.display2 = 'none';
+}
+idModal: any;
+openModal2(id: any) {
+  this.idModal = id;
+  this.display2 = 'block';
+}
+selectedOptions: string[] = [];
+
+handleCheckboxChange(option: string) {
+  if (this.selectedOptions.includes(option)) {
+    this.selectedOptions = this.selectedOptions.filter(item => item !== option);
+  } else {
+    this.selectedOptions.push(option);
+  }
+  console.log(this.selectedOptions);
+}
+SendReminder() {
+  let data = {
+    inv_ID: this.idModal,
+    rem_Desc: this.reminderForm.value['rem_Desc'],
+    rem_Date: this.reminderForm.value['rem_Date'],
+    pushTypes: this.selectedOptions,
+  }
+  this._adminservices.PaymentsReminder(data).subscribe((res) => {
+     this.messageService.add({ severity: 'success', summary: 'Success', detail:res.message });
+     setTimeout(()=>{
+       this.onCloseModal2();
+     },1000)
+   }, (error) => {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+  })
+
+}
+fileName= 'FinanceTable.xlsx'
+exportToExcel(){
+  let data = document.getElementById("content");
+  const ws:XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+  const wb:XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Sheet1')
+  XLSX.writeFile(wb,this.fileName)
+
+}
+
 }

@@ -1,4 +1,3 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -17,6 +16,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { OwnersRoutingModule } from './owners-routing.module';
 
 
 const routes: Routes = [];
@@ -28,7 +28,6 @@ const routes: Routes = [];
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     DropdownModule,
@@ -38,7 +37,7 @@ const routes: Routes = [];
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
-    RouterModule.forChild(routes)
+    OwnersRoutingModule
   ],
   exports: [OwnerDetailsComponent],
   providers: [MessageService],

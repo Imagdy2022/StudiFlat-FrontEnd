@@ -8,20 +8,20 @@
         <img src="../../../../assets/images/navigation/apartment.svg"> Apartments
     </a>
     <a tabindex="1" *ngIf="Users.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/users">
-        <img src="../../../../assets/images/navigation/users.svg"> Tenants
+        <img src="../../../../assets/images/navigation/users.svg"> Users
     </a>
     <a tabindex="1" *ngIf="Owners.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/owners">
         <img src="../../../../assets/images/navigation/owner 2.svg"> Owners
     </a>
     <a tabindex="1" *ngIf="Payments.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/payments">
-        <img src="../../../../assets/images/navigation/payments.svg"> Payments
+        <img src="../../../../assets/images/navigation/payments.svg"> Finance
     </a>
     <a tabindex="1" *ngIf="Messages.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/messages">
-        <img src="../../../../assets/images/navigation/messages.svg"> Tickets
+        <img src="../../../../assets/images/navigation/messages.svg"> Messages
     </a>
-    <a tabindex="1" *ngIf="Statistics.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/statistics">
+    <!-- <a tabindex="1" *ngIf="Statistics.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/statistics">
         <img src="../../../../assets/images/navigation/stats.svg"> Statistics
-    </a>
+    </a> -->
     <div>
         <a tabindex="1" *ngIf="Inquiries.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" :routerLink="/inquiries" routerLinkActive="active" (click)="isFreeze2 = !isFreeze2">
             <img src="../../../../assets/images/navigation/help.svg"> Inquiries
@@ -34,10 +34,10 @@
    </a>
                 </li>
                 <li class="list-none">
-                    <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active1" :routerLink="/cancel-inquire">Cancelation Inquires </a>
+                    <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active1" :routerLink="/inquiries/cancel-inquire">Cancelation Inquires </a>
                 </li>
                 <li class="list-none">
-                    <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active1" :routerLink="/checkout-inquire">Checkout</a>
+                    <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active1" :routerLink="/inquiries/checkout-inquire">Checkout</a>
                 </li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
         <img src="../../../../assets/images/navigation/owner 2.svg"> Workers
     </a>
     <a tabindex="1" *ngIf="partners.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/partner">
-        <img src="../../../../assets/images/navigation/owner 2.svg"> Partners
+        <img src="../../../../assets/images/navigation/star.svg"> Partners
     </a>
 
 
