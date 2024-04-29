@@ -4,19 +4,14 @@
       <img src="assets/images/logo.svg">
     </div>
     <div class="col-lg-10 col-sm-12 row justify-content-between headerTitle">
-        <div class="col-lg-7 col-8 mt-2 ms-lg-0 row ">
+        <div class="col-lg-7 col-8  ms-lg-0 row ">
             <p class=" col-lg-6 pd d-none d-lg-block">{{titleModule}}</p>
             <div (click)="showSidebar()" class="d-lg-none col-1 ms-4 me-2 fs-4"><i class="fa fa-bars" aria-hidden="true"></i></div>
-            <!-- start search button -->
-          <!--   <div class="p-input-icon-left col-9 col-lg-8">
-                <input class="form-control" [class.ps-35px]="value==''" type="text" pInputText placeholder="Search" [(ngModel)]="value" />
-            </div> -->
-            <!-- end search button -->
         </div>
-        <div class="col-4 mb-2 col-lg-3 d-flex justify-content-end align-items-center mt-2">
+        <div class="col-4  col-lg-3 d-flex justify-content-end align-items-center">
             <div class="d-flex pe-lg-4 ">
                 <!-- start notification -->
-                <span (click)="shownot()" style="cursor: pointer; margin-right: 1.25rem;margin-top: 0.7rem;">
+                <span (click)="shownot()" style="cursor: pointer; margin-right: 1.25rem;margin-top: 0.4rem;">
                    <!-- <img src="assets/images/notification.svg" /> -->
                    <i class="pi pi-bell mr-4 p-text-secondary"  pBadge [severity]="'danger'" style="font-size: 1.5rem"  [value]="NCount>0?NotiCount10:null"></i>
 
@@ -25,7 +20,7 @@
 
                 </span>
                 <!-- end notification -->
-                <div [ngStyle]="{ 'display':display1} " (click)="ClickedOut($event)" style=" z-index: 999 ; right: 7.4rem ; margin-top: 3.3rem;position: absolute; width: 26.75rem;" class=" z-3 rounded-3 bg-white cfresda">
+                <div [ngStyle]="{ 'display':display1} " (click)="ClickedOut($event)" style=" z-index: 999 ; right: 7.4rem ; margin-top: 3.3rem;position: absolute; width: 26.75rem;height: 200px" class=" z-3 rounded-3 bg-white cfresda">
                   <div class="arrow-up">
 
                   </div>
@@ -38,10 +33,10 @@
                           </div>
                             <div class="carbon-close"><img (click)="closenotifaction()" style="cursor: pointer;" class="vector" src="../../../../assets/images/carbon_close.svg" /></div>
                             <div class="text-wrapper">Notifications</div>
-                            <div class="div-2">
-                                <div class="frame border" [ngStyle]="{'background-color':item.iS_Readed==false ? '#e9e9e9':'#ffffff'}" *ngFor="let item of NotifiList">
+                            <div class="div-2 px-0 mx-0">
+                                <div class="frame" [ngStyle]="{'background-color':item.iS_Readed==false ? '#ffffff':'#ECF1F9'}" *ngFor="let item of NotifiList">
                                     <img class="studiflats" src="../../../../assets/images/Layer 2.svg" />
-                                    <div class="frame-wrapper" >
+                                    <div class="frame-wrapper ms-3" >
                                         <div class="div-wrapper">
 
                                             <div class="frame-2">
@@ -51,11 +46,11 @@
                                         </div>
                                     </div>
                                     <div *ngIf="item.iS_Readed==false" class="text-wrapper-2"><a style="cursor: pointer !important;" (click)="MarkReaded(item.id)">
-                                      <i class="fa-solid fa-eye"></i>
+                                      Unread
 
                                     </a></div>
                                     <div *ngIf="item.iS_Readed==true" class="text-wrapper-2"><a style="cursor: pointer !important;" (click)="MarkUnReaded(item.id)">
-                                      <i class="fa-solid fa-eye-slash"></i>
+                                     Readed
                                     </a></div>
 
                                 </div>
@@ -64,23 +59,9 @@
                         </div>
                     </div>
 
-
-
-                    <!-- <div class="frame">
-                        <img class="studiflats" src="img/studiflats-1.svg" />
-                        <div class="frame-wrapper">
-                            <div class="div-wrapper">
-                                <div class="div">
-                                    <div class="new-apartment">New Apartment Request</div>
-                                    <div class="element-jun">1 Jun 2024</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="read">Read</div>
-                    </div> -->
                 </div>
                 <div class="d-flex" style="margin-left: 1rem; margin-right: 1rem;">
-                    <div class="mb-1 me-1"><img src="assets/images/One.svg" /></div>
+                    <div class=" me-1"><img src="assets/images/One.svg" /></div>
                     <p class="pname mt-2">Umar</p>
                 </div>
             </div>
@@ -89,3 +70,4 @@
     </div>
 
 </div>
+

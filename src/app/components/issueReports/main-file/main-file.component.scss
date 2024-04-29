@@ -205,3 +205,20 @@ tr:last-child{
 ::placeholder{
   font-size: 13px !important;
 }
+.file {
+  z-index: 3 !important;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.h-124px {
+  height: 124px !important;
+}
+
+.cursor {
+  cursor: pointer;
+}
+::ng-deep .imgPreviewUploader {
+  width: 200px !important;
+  height: 200px !important;
+}
