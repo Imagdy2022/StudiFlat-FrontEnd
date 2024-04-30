@@ -59,17 +59,23 @@
                         <ng-container>
 
                             <th class="td-name">
-                                Ticket Number
+                              Message NO
+                            </th>
+                            <th  class="td-name">
+                              Tenant name
+                            </th>
+                            <th class="td-name">
+                               Type
 
                             </th>
                             <th class="td-name">
-                                Complaint type
+                               Description
 
                             </th>
                             <th class="td-name">
-                                Complaint details
+                             Date
 
-                            </th>
+                          </th>
                             <th class="td-name">
                                 Assignee
 
@@ -93,12 +99,18 @@
 
                             {{inquire?.ticket_Code}}
                         </td>
+                        <td>
+
+                        </td>
 
                         <td>
                             {{inquire?.ticket_Type}}
                         </td>
                         <td >
                             {{inquire?.ticket_Desc}}
+                        </td>
+                        <td>
+                          {{inquire?.created_At | date}}
                         </td>
                         <td >
                             {{inquire?.assigned_To}}

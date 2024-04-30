@@ -109,7 +109,7 @@ export class CreateNewPaymentComponent {
     this.GetPayToList();
   }
   GetPayToList(){
-    this._adminservices.GetPayToList(this.toType, this.searchText ).subscribe({
+    this._adminservices.GetPayToList(this.toType, this.searchText,this.pageNumber, this.pagesize ).subscribe({
       next:(res:any)=>{
         this.allData = res
       },

@@ -566,10 +566,12 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.post<any>(url, data, { headers: this.headers });
   }
-  GetPayToList(toType:string , FilterKey:string): Observable<any[]> {
+  GetPayToList(toType:string , Search:string ,Page_No:number,Page_Size:number ): Observable<any[]> {
     const url = environment.apiUrl + `/Payments/GetPayToList?to=${toType}`;
     const params = new HttpParams()
-    .set('FilterKey', FilterKey)
+    .set('Search', Search)
+    .set('Page_No', Page_No)
+    .set('Page_Size', Page_Size)
     return this.http.get<any[]>(url, { headers: this.headers , params: params });
   }
 

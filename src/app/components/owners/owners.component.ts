@@ -142,12 +142,12 @@ export class OwnersComponent implements OnInit {
     return [
       // { Name: '', SortableColumn: '', tableHeaderCheckbox: true, sortIcon: false },
       { Name: 'Name', SortableColumn: 'owner_FirstName', sortIcon: true },
-      { Name: 'Created by', SortableColumn: 'owner_CreatedBy', sortIcon: true },
+      // { Name: 'Created by', SortableColumn: 'owner_CreatedBy', sortIcon: true },
       { Name: 'Email Address', SortableColumn: 'owner_Mail', sortIcon: true },
       { Name: 'Phone Number', SortableColumn: 'owner_Phone', sortIcon: true },
       // { Name: 'Gender', SortableColumn: 'gender', sortIcon: false },
       { Name: 'About', SortableColumn: 'owner_About', sortIcon: false },
-      { Name: 'Status', SortableColumn: 'owner_Status', sortIcon: false },
+      // { Name: 'Status', SortableColumn: 'owner_Status', sortIcon: false },
       { Name: ' ', SortableColumn: ' ', sortIcon: false },
 
 
