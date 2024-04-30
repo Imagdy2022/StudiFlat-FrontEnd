@@ -88,8 +88,8 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-inquire>
 
-                    <tr (click)="hidecard(inquire.request_ID)">
-                        <td style="cursor: pointer;" routerLink="/message-tiket/{{inquire.ticket_ID}}">
+                    <tr (click)="hidecard(inquire.request_ID)" routerLink="/messages/message-tiket/{{inquire.ticket_ID}}"  style="cursor: pointer;">
+                        <td routerLink="/messages/message-tiket/{{inquire.ticket_ID}}">
 
                             {{inquire?.ticket_Code}}
                         </td>
@@ -97,17 +97,17 @@
                         <td>
                             {{inquire?.ticket_Type}}
                         </td>
-                        <td>
+                        <td >
                             {{inquire?.ticket_Desc}}
                         </td>
-                        <td>
+                        <td >
                             {{inquire?.assigned_To}}
                         </td>
 
                         <!-- <td>
                       <p class="d-flex align-items-center fw-bold mt-2">{{admin?.status}}</p>
                   </td> -->
-                        <td >
+                        <td>
                           <div>
                               <span class="rounded-5 px-3 badge Opened"  *ngIf="inquire?.status=='Opened'">
                                 <span>

@@ -339,7 +339,7 @@ progress = 0;
     );
 }
 gotoListCheckOut(){
-  let url: string = "checkout-inquire";
+  let url: string = "/inquiries/checkout-inquire";
   this.router.navigateByUrl(url);
 }
 }

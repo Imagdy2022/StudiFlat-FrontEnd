@@ -113,7 +113,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-Tenant>
 
-                    <tr (click)="hidecard(Tenant.request_ID)">
+                    <tr (click)="hidecard(Tenant.request_ID)"  routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}"  style="cursor: pointer;">
 
                         <td class="d-flex align-items-center">
 
@@ -129,7 +129,7 @@
                         <td>
                             {{Tenant?.email}}
                         </td>
-                        <td >
+                        <td>
                           <span class="ms-3"> {{Tenant?.rent_No}} </span>
                         </td>
 

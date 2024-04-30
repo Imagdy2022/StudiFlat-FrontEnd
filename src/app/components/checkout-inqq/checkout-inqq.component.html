@@ -104,7 +104,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-check>
 
-                  <tr (click)="hidecard()">
+                  <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/inquiries/checkout/{{check.req_ID}}">
 <td>{{check.req_Code}}</td>
 
                       <td>
