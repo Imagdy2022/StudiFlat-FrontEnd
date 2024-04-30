@@ -62,10 +62,11 @@ gotopage( ){
       localStorage.removeItem(key);
     }
   }
-  Date="Today"
+  Date="All"
   selectedfromDropDown(value:any){
 
     this.Date=value.name;
+    console.log(this.Date)
     this.getAllApartment()
   }
   initFakeData(): void {
@@ -92,7 +93,7 @@ gotopage( ){
     // this.apartmentFillterLists = ["All ", "Rented Apartment", "Available Apartment","Pending Apartment","Delete Apartment","Draft Apartment"];
 
     this.apartmentFillterSelected = [true];
-    this.listDropDown = [{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
+    this.listDropDown = [{ name: 'All' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
   }
 
   /**
