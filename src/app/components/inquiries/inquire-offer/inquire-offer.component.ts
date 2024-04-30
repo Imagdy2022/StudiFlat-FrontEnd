@@ -99,7 +99,7 @@ export class InquireOfferComponent implements OnInit {
   getAllApartment(): void {
     this.apartmentList = [];
     this.apartmentSer
-      .FilterApartmentsFront('', this.pageNumber, 10, 'All')
+      .FilterApartmentsFront('', this.pageNumber, 10, 'All', '')
       .subscribe((res) => {
         this.apartmentList = res['data'];
         this.numberInquires = this.Inquires.length;

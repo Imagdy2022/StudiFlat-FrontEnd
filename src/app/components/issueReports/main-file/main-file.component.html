@@ -168,7 +168,7 @@
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="OpenModal3(issue.issue_ID)">New Appointment
 
                                    </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="cancelissue(issue.issue_ID)">Cancel </button>
+                                <button *ngIf="issue?.issue_Status !='Cancelled'" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="cancelissue(issue.issue_ID)">Cancel </button>
 
                             </div>
 
@@ -391,6 +391,25 @@
                     </div>
                     <div class="mb-3 col-12 col-md-12">
                       <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Attachments</label>
+                      <div class="position-relative h-124px mb-3">
+                        <!-- start single img upload and preview -->
+                        <ng-container *ngIf="!selectedContractImg">
+                            <input type="file" accept=".pdf, image/*" (change)="onUploadContract($event,'contract_Path')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
+                            <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute h-100" width="100%">
+                        </ng-container>
+                        <ng-container *ngIf="selectedContractImg">
+                            <div *ngIf="selectedContractImg.type !== 'application/pdf'">
+                                <!-- <input type="file" accept=".pdf, image/*" (change)="onUploadContract($event,'contract_Path')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                                <a (click)="opencloseModal(selectedContractImg.url)">
+                                <img [src]="selectedContractImg.url" class="position-absolute imgPreviewUploader cursor">
+                                </a>
+
+                            </div>
+
+                        </ng-container>
+                        <!-- end single img upload and preview -->
+
+                    </div>
 
                   </div>
                 </div>

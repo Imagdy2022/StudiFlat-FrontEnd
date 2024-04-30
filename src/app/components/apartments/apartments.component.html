@@ -16,7 +16,7 @@
             <!-- start add button (add new apartment) in page  -->
             <div class="d-flex justify-content-lg-between ">
               <!-- start dropdown button  -->
-              <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+              <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)" [(ngModel)]="Date"></app-dropdown>
               <!-- end dropdown button  -->
               <!-- start add button (add new owner) in page  -->
               <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true  || is_Super==true"[id]="'apartments/page/add-new-apartments'" class="mt-2"></app-add-new-button>
