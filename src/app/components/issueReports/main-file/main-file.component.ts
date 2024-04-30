@@ -253,6 +253,13 @@ export class MainFileComponent {
   onCloseModal1() {
     this.display1 = 'none';
   }
+  imageSize: any;
+  display22 = 'none';
+
+  opencloseModal(photo: any) {
+    this.display22 = 'block';
+    this.imageSize = photo;
+  }
   onCloseModal3() {
     this.display3 = 'none';
     this.Apointment3 = '';
