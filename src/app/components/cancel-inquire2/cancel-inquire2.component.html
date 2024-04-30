@@ -84,7 +84,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-termina>
 
-                  <tr (click)="hidecard()">
+                  <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/inquiries/view-cancel/{{termina.term_ID}}">
 
 
                       <td>

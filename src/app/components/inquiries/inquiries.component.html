@@ -116,17 +116,17 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-inquire>
 
-                    <tr style="cursor: pointer;" (click)="hidecard(inquire.request_ID)">
+                    <tr style="cursor: pointer;" (click)="hidecard(inquire.request_ID)" routerLink="/inquiries/view-inquire/{{inquire.request_ID}}">
                         <!-- <td routerLink="/view-inquire/{{inquire.request_ID}}">
 
                             {{inquire?.request_Code}}
                         </td> -->
                         <td class="d-flex align-items-center">
 
-                            <img *ngIf=" inquire.profileImg  " routerLink="/app-edite-user-details/{{inquire.user_ID}}" [src]="inquire?.profileImg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                            <img *ngIf=" inquire.profileImg  " routerLink="/users/app-edite-user-details/{{inquire.user_ID}}" [src]="inquire?.profileImg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
 
 
-                            <img *ngIf="!inquire.profileImg" routerLink="/app-edite-user-details/{{inquire.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{inquire?.userName}}
+                            <img *ngIf="!inquire.profileImg" routerLink="/users/app-edite-user-details/{{inquire.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{inquire?.userName}}
 
                         </td>
                         <td>
