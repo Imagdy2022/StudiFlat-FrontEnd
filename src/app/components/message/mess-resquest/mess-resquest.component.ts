@@ -48,10 +48,12 @@ export class MessResquestComponent implements OnInit {
   addItem(value:any){
     this.showSide=value
   }
+  
   deatail:any={}
   getAll_tickets(   ) {
      this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
+      console.log(this.deatail)
 
      }, (error) => {
        console.error('Error fetching owners:', error);
@@ -103,7 +105,12 @@ export class MessResquestComponent implements OnInit {
   this.upload();
  }
  ReplyDash() {
-  this._ticketService.ReplyDash(this.paramid,this.reply_Desc,this.apt_imgs).subscribe((res) => {
+  let data = {
+    chat_ID: this.paramid,
+    msg_Body: this.reply_Desc,
+    msg_Attachement: this.apt_imgs,
+  }
+  this._ticketService.SendMsg(data).subscribe((res) => {
      this.messageService.add({   severity: 'success', summary: 'Success', detail:"send Success" });
      this.getAll_tickets(   )
      this.reply_Desc=""

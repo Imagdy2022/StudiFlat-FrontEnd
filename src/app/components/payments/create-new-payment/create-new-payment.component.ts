@@ -12,7 +12,6 @@ import { AdminsService } from "src/app/_services/admins/admins.service";
 })
 export class CreateNewPaymentComponent {
   showSide: string = '';
-  searchText:any=""
   search:boolean=false
   toType: string = 'Owner';
   allData : any[] =[];
@@ -36,7 +35,6 @@ export class CreateNewPaymentComponent {
 
   ngOnInit() {
     this.GetPayToList();
-    this.GetPayToList(  )
   }
 
   selectedfromDropDown(value:any){
@@ -55,29 +53,7 @@ export class CreateNewPaymentComponent {
   totalofPages=0;;
   disablenext=false;
   disableperv=false;
-  incrementpage(){
 
-    this.pageNumber+=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    if(this.pageNumber>= this.totalofPages){
-      this.pageNumber=this.totalofPages;
-
-    }
-    // this.getAllpartners( );
-  }
-  decreamentPage(){
-    this.pageNumber-=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    // this.getAllpartners( );
-
-  }
- partners=[]
  totalRecords=0
  tiggerPageChange(event: any) {
 
@@ -88,12 +64,6 @@ export class CreateNewPaymentComponent {
   numberpartners=0;
   Date:any="All"
 
-
-  searchAction() {
-    // this.search = false;
-    this.GetPayToList()
-      // this.searchText =""
-  }
   itemID: any;
   selectUser(data:any ){
     Object.keys(data).forEach(key => {
@@ -109,9 +79,23 @@ export class CreateNewPaymentComponent {
     this.GetPayToList();
   }
   GetPayToList(){
-    this._adminservices.GetPayToList(this.toType, this.searchText,this.pageNumber, this.pagesize ).subscribe({
+    this._adminservices.GetPayToList(this.toType,this.searchText,this.pageNumber, this.pagesize ).subscribe({
       next:(res:any)=>{
-        this.allData = res
+        this.allData = res.data
+        this.pageNumber = res.pageNumber;
+        this.pagesize = res.pageSize
+        this.totalofPages = res.totalPages;
+        this.totalRecords = res.totalRecords;
+        if (this.totalofPages == this.pageNumber) {
+          this.disablenext = true;
+        } else {
+          this.disablenext = false;
+        }
+        if (this.pageNumber == 1) {
+          this.disableperv = true;
+        } else {
+          this.disableperv = false;
+        }
       },
       error:(err)=>{
         console.log(err)
@@ -161,5 +145,12 @@ export class CreateNewPaymentComponent {
          this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
       }
      })
+  }
+
+
+  searchText: any = '';
+
+  searchAction() {
+    this.GetPayToList();
   }
 }
