@@ -122,17 +122,6 @@ export class CreateNewPaymentComponent {
     }
   }
   AddPayment(){
-    // const formData = new FormData();
-    // formData.append('Pay_To', this.paymentForm.value['Pay_To']);
-    // formData.append('Pay_UUID',this.itemID1);
-    // formData.append('Apt_ID', this.paymentForm.value['Apt_ID']);
-    // formData.append('Pay_To_Type', this.paymentForm.value['Pay_To_Type']);
-    // formData.append('Payment_Desc', this.paymentForm.value['Payment_Desc']);
-    // formData.append('Payment_Amount', this.paymentForm.value['Payment_Amount']);
-    // formData.append('Payment_Bouns', this.paymentForm.value['Payment_Bouns']);
-    // formData.append('Payment_Notes',this.paymentForm.value['Payment_Notes']);
-    // formData.append('Payment_Attachment', this.paymentForm.value['Payment_Attachment']);
-
     let data = {
     Pay_To: this.paymentForm.value['Pay_To'],
     Pay_UUID: this.itemID1,
