@@ -561,6 +561,11 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.post<any>(url, data, { headers: this.headers });
   }
+  AllPayments(data: any): Observable<any> {
+    const url = environment.apiUrl + '/Payments/AllPayments';
+
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
   AddPayment(data: any): Observable<any> {
     const url = environment.apiUrl + '/Payments/AddPayment';
 

@@ -17,6 +17,8 @@ export class CreateNewPaymentComponent {
   allData : any[] =[];
   imgUrl:any;
   imageFile:string='';
+ firstIDFound = false;
+  secondID:any;
 
   paymentForm : FormGroup = new FormGroup({
     Pay_To:new FormControl(null),
@@ -64,14 +66,20 @@ export class CreateNewPaymentComponent {
   numberpartners=0;
   Date:any="All"
 
-  itemID: any;
+  itemID1: any;
+  itemID2: any;
   selectUser(data:any ){
     Object.keys(data).forEach(key => {
       if (key.toLowerCase().includes('id')) {
-        this.itemID= data[key]
+        if (!this.firstIDFound) {
+          this.itemID1 = data[key];
+          this.firstIDFound = true;
+        }
+        if(key.toLowerCase().includes('id')){
+          this.itemID2 = data[key];
+        }
       }
     });
-    console.log(this.itemID)
 
   }
   SelectType(e:any){
@@ -116,7 +124,7 @@ export class CreateNewPaymentComponent {
   AddPayment(){
     // const formData = new FormData();
     // formData.append('Pay_To', this.paymentForm.value['Pay_To']);
-    // formData.append('Pay_UUID',this.itemID);
+    // formData.append('Pay_UUID',this.itemID1);
     // formData.append('Apt_ID', this.paymentForm.value['Apt_ID']);
     // formData.append('Pay_To_Type', this.paymentForm.value['Pay_To_Type']);
     // formData.append('Payment_Desc', this.paymentForm.value['Payment_Desc']);
@@ -127,8 +135,8 @@ export class CreateNewPaymentComponent {
 
     let data = {
     Pay_To: this.paymentForm.value['Pay_To'],
-    Pay_UUID: this.itemID,
-    Apt_ID :this.paymentForm.value['Apt_ID'],
+    Pay_UUID: this.itemID1,
+    Apt_ID : this.itemID2,
     Pay_To_Type:this.paymentForm.value['Pay_To_Type'],
     Payment_Desc :this.paymentForm.value['Payment_Desc'],
     Payment_Amount: this.paymentForm.value['Payment_Amount'],
