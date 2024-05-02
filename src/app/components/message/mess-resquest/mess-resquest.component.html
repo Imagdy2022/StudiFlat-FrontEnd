@@ -23,28 +23,28 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
 
-                            <img *ngIf="deatail?.user_Photo" class="me-3" [src]="deatail?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
+                            <img *ngIf="deatail[0]?.user_Photo" class="me-3" [src]="deatail[0]?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
 
 
-                            <img *ngIf="!deatail?.user_Photo" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;margin-top: 13px;">
+                            <img *ngIf="!deatail[0]?.user_Photo" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;margin-top: 13px;">
 
                             <div class="ml-3 d-flex justify-content-between">
                                 <div class="mt-3">
-                                    <p class="line-height fw-bold mb-0">{{deatail?.user_Name}}</p>
-                                    <p class="color-gray fw-light">@{{deatail?.user_Name}}</p>
+                                    <p class="line-height fw-bold mb-0">{{deatail[0]?.userName}}</p>
+                                    <p class="color-gray fw-light">@{{deatail[0]?.user_Name}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex">
                             <td class="cursor position-relative">
-                                <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,deatail?.chat_Message_ID)">
+                                <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,deatail[0]?.chat_Message_ID)">
           <img src="assets/images/edit.svg">
       </button>
                                 <div *ngIf="showEdit[deatail?.chat_Message_ID] " style="width: 220px; line-height: 10px;  z-index: 999;   right: 20px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                    <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{paramid}}">Reassign ticket to employee</button>
+                                    <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{paramid}}">Reassign Chat to employee</button>
 
-                                    <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="CloseTicket('Closed')">Close ticket  </button>
-                                    <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="CloseTicket('Resolved')"> Solved  ticket </button>
+                                    <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="CloseTicket('Closed')">Close Chat  </button>
+                                    <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="CloseTicket('Resolved')"> Solved  Chat </button>
 
                                 </div>
 
@@ -58,7 +58,7 @@
                 <div class="px-4">
                     <div *ngFor=" let item of deatail">
                         <!-- Reciver -->
-                        <div class="d-flex justify-content-between reciver mb-2 py-4" *ngIf="!item?.is_Dash">
+                        <div class="d-flex justify-content-between reciver mb-2 py-4" *ngIf="item?.is_Mobile">
                             <div class="d-flex">
                                 <!-- <img src="assets/images/Avatar.svg" class="me-3 mb-3" /> -->
                                 <img *ngIf="deatail?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;" [src]="deatail?.user_Photo" class="me-3" />
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <!-- Sender -->
-                        <div class="d-flex justify-content-end mb-2 py-4" *ngIf="item.is_Dash">
+                        <div class="d-flex justify-content-end mb-2 py-4" *ngIf="!item.is_Mobile">
                             <div style="margin-bottom: 20px;">
                                 <div class="ml-3 d-flex justify-content-between">
                                     <div>

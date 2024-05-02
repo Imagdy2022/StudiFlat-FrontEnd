@@ -618,18 +618,18 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.post<any>(url, body, { headers: this.headers });
   }
-  CloseTicket(Ticket_ID: any, Status: any): Observable<any> {
+  CloseTicket(Chat_ID: any, Status: any): Observable<any> {
     const url =
       environment.apiUrl +
-      '/Tickets/CloseTicket?Ticket_ID=' +
-      Ticket_ID +
+      '/Chat/CloseChat?Chat_ID=' +
+      Chat_ID +
       '&Status=' +
       Status;
     const params = new HttpParams()
-      .set('Ticket_ID', Ticket_ID)
+      .set('Chat_ID', Chat_ID)
       .set('Status', Status);
 
-    return this.http.put<any>(url, Ticket_ID, { headers: this.headers });
+    return this.http.post<any>(url, Chat_ID, { headers: this.headers });
   }
   GetBookingHistory(
     Apt_ID: any,

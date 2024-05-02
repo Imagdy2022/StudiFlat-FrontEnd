@@ -139,11 +139,11 @@
                 <img src="assets/images/edit.svg">
             </button>
                             <div *ngIf="showEdit[inquire.chat_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button *ngIf="inquire?.assigned_To=='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{inquire.chat_ID}}">Assign ticket to employee  </button>
-                                <button *ngIf="inquire?.assigned_To!='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{inquire.chat_ID}}">Reassign ticket to employee  </button>
+                                <button *ngIf="inquire?.assigned_To=='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{inquire.chat_ID}}">Assign Chat to employee  </button>
+                                <button *ngIf="inquire?.assigned_To!='Not Assigned'" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{inquire.chat_ID}}">Reassign Chat to employee  </button>
 
-                                <button style="margin-top:0px !important" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/messages/message-tiket/{{inquire.chat_ID}}">Pickup ticket</button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="CloseTicket('Closed')">Close ticket  </button>
+                                <button style="margin-top:0px !important" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/messages/message-tiket/{{inquire.chat_ID}}">Pickup Chat</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="CloseTicket('Closed')">Close Chat  </button>
 
 
 
