@@ -103,7 +103,7 @@ export class DashboardComponent {
     );
   }
 
-  PopularAptarr: any = {};
+  PopularAptarr: any[] = [];
   PopularApt() {
 
     this._adminservices.PopularApt().subscribe(
@@ -212,5 +212,37 @@ export class DashboardComponent {
   selectedfromDropDown(value:any){
   }
   selectedfromDropDownPopularApartmentstable(value:any){
+  }
+
+  navigateToRoute(actionRoute: string, actionID: string) {
+    switch (actionRoute) {
+      case 'Issues':
+        this.router.navigate([`/Issue_Reports/Report-view/${actionID}`]);
+        break;
+      case 'Owners':
+        this.router.navigate([`/owners/owner-profile/${actionID}`]);
+        break;
+      case 'Apartments':
+        this.router.navigate([`/apartments/apartments-details/${actionID}`]);
+        break;
+      case 'Workers':
+        this.router.navigate([`/workers/worker-profile/${actionID}`]);
+        break;
+      case 'Partners':
+        this.router.navigate([`/partner/view-partner/${actionID}`]);
+        break;
+        case 'Tenant':
+          this.router.navigate([`/users/app-edite-user-details/${actionID}`]);
+          break;
+        case 'Tickets':
+          this.router.navigate([`/messages/message-tiket/${actionID}`]);
+          break;
+        case 'Invoices':
+          this.router.navigate([`/payments/invoice/${actionID}`]);
+          break;
+        case 'Booking':
+          this.router.navigate([`/apartments/booking/${actionID}`]);
+          break;
+    }
   }
 }

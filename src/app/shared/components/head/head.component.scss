@@ -215,7 +215,7 @@ cursor: pointer;
   height: 634px;
   align-items: center;
   position: absolute;
-  top: 63px;
+  top: 45px;
   overflow-y: auto;
 }
 
@@ -358,4 +358,7 @@ top: -1rem;
       display: flex;
       width: 308px;
   }
+}
+.cursor{
+  cursor: pointer;
 }

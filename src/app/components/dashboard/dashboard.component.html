@@ -12,17 +12,15 @@
 
   <main class=" p-4 col-lg-10">
     <!-- start part 1 in page  -->
-    <div class="d-md-flex justify-content-between align-items-center dashboard" style="margin-top: 7px; margin-bottom: 23px;">
+    <div class="d-md-flex justify-content-between align-items-center dashboard" style="margin-top: 2px; margin-bottom: 3px;">
       <p class="fw-bold" style="color: #6c6a6a;">Dashboard</p>
-      <div class="d-flex justify-content-lg-between ">
+      <!-- <div class="d-flex justify-content-lg-between ">
         <div class="d-flex justify-content-between ">
           <button class="month rounded-start px-3 py-1 outline-none">This Month</button>
           <button class="week rounded-end px-3 py-1 outline-none">Last Week</button>
         </div>
-        <!-- start dropdown button  -->
         <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-        <!-- end dropdown button  -->
-      </div>
+      </div> -->
     </div>
     <!-- end part 1 in page  -->
     <p-toast></p-toast>
@@ -112,15 +110,15 @@
                 <tr *ngFor="let item of RecentActivitiesarr.slice(0,4); let i =index ">
                  <td>
                   <div>
-                      <img *ngIf="item.userImg" src="{{item.userImg}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">
-                      <img *ngIf="!item.userImg" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
-                      <span class="fw-bold">{{item.userName}}</span>
+                      <img *ngIf="item?.userImg" src="{{item?.userImg}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">
+                      <img *ngIf="!item?.userImg" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                      <span class="fw-bold">{{item?.userName}}</span>
                   </div>
                  </td>
-                 <td>{{item.act_Type}}</td>
-                 <td>{{item.act_Desc}}</td>
+                 <td>{{item?.act_Type}}</td>
+                 <td>{{item?.act_Desc}}</td>
                  <td>
-                  <button class="btn btn-color">View</button>
+                  <button class="btn btn-color" (click)="navigateToRoute(item?.action_Route, item?.action_ID)">View</button>
                  </td>
                 </tr>
               </tbody>
@@ -166,79 +164,34 @@
               <tr class="main border-1" >
                 <th >Apartment name</th>
                 <th >Locations</th>
+                <th>Ownar</th>
                 <th >Amount</th>
                 <th>Status</th>
               </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngFor=" let apt of PopularAptarr.slice(0,4); let i =index">
                  <td>
                   <div>
-                      <img src="./assets/images/Avatar2.png" alt="">
-                      <span class="fw-bold ms-2">Willow Creek Apartments</span>
-                  </div>
+                    <img *ngIf="apt?.apt_Img" src="{{apt?.apt_Img}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">
+                    <img *ngIf="!apt?.apt_Img" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                    <span class="fw-bold">{{apt?.apt_Name}}</span>
+                </div>
                  </td>
-                 <td>Alt-Moabit</td>
-                 <td>€25,00/mo</td>
+                 <td>{{apt?.apt_Location}}</td>
+                 <td>{{apt?.owner}}</td>
+                 <td>€ {{apt?.apt_Price}}</td>
                  <td>
-                  <span class="rounded-5 px-3 badge rented">
-                    Rented
+                  <span *ngIf="apt?.status == 'Rented'" class="rounded-5 px-3 badge rented">
+                    {{apt?.status}}
                 </span>
+                <span *ngIf="apt?.status == 'Pending'" class="rounded-5 px-3 badge Pending">
+                  {{apt?.status}}
+              </span>
                  </td>
 
 
                 </tr>
-                <tr>
-                  <td>
-                   <div>
-                       <img src="./assets/images/Avatar2.png" alt="">
-                       <span class="fw-bold ms-2">Willow Creek Apartments</span>
-                   </div>
-                  </td>
-                  <td>Alt-Moabit</td>
-                  <td>€25,00/mo</td>
-                  <td>
-                   <span class="rounded-5 px-3 badge rented">
-                     Rented
-                 </span>
-                  </td>
-
-
-                 </tr>
-                 <tr>
-                  <td>
-                   <div>
-                       <img src="./assets/images/Avatar2.png" alt="">
-                       <span class="fw-bold ms-2">Willow Creek Apartments</span>
-                   </div>
-                  </td>
-                  <td>Alt-Moabit</td>
-                  <td>€25,00/mo</td>
-                  <td>
-                   <span class="rounded-5 px-3 badge rented">
-                     Rented
-                 </span>
-                  </td>
-
-
-                 </tr>
-                 <tr>
-                  <td>
-                   <div>
-                       <img src="./assets/images/Avatar2.png" alt="">
-                       <span class="fw-bold ms-2">Willow Creek Apartments</span>
-                   </div>
-                  </td>
-                  <td>Alt-Moabit</td>
-                  <td>€25,00/mo</td>
-                  <td>
-                   <span class="rounded-5 px-3 badge rented">
-                     Rented
-                 </span>
-                  </td>
-
-
-                 </tr>
 
               </tbody>
             </table>

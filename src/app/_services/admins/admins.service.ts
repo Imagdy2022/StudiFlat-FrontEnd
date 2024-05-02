@@ -542,12 +542,12 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     PageSize: number,
     searchtext: any
   ): Observable<any[]> {
-    const url = environment.apiUrl + '/Tickets/AllTickets';
+    const url = environment.apiUrl + '/Chat/GetAllMsgsDashboard';
     const params = new HttpParams()
-      .set('PageNum', PageNumber)
-      .set('PageSize', PageSize)
-      .set('Type', type)
-      .set('Key', searchtext);
+      .set('Page_No', PageNumber)
+      .set('Page_Size', PageSize)
+      .set('FilterKey', type)
+      .set('SearchKey', searchtext);
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
@@ -561,42 +561,50 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.post<any>(url, data, { headers: this.headers });
   }
+  AllPayments(data: any): Observable<any> {
+    const url = environment.apiUrl + '/Payments/AllPayments';
+
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
   AddPayment(data: any): Observable<any> {
     const url = environment.apiUrl + '/Payments/AddPayment';
 
     return this.http.post<any>(url, data, { headers: this.headers });
   }
-  GetPayToList(toType:string , FilterKey:string): Observable<any[]> {
-    const url = environment.apiUrl + `/Payments/GetPayToList?to=${toType}`;
+  GetPayToList(toType:string ,Search:string ,Page_No:number,Page_Size:number): Observable<any[]> {
+    const url = environment.apiUrl + `/Payments/GetPayToList`;
     const params = new HttpParams()
-    .set('FilterKey', FilterKey)
+    .set('to', toType)
+    .set('Search', Search)
+    .set('Page_No', Page_No)
+    .set('Page_Size', Page_Size)
     return this.http.get<any[]>(url, { headers: this.headers , params: params });
   }
 
   GetAllEmp(PageNumber: number, PageSize: number): Observable<any[]> {
-    const url = environment.apiUrl + '/Tickets/GetAllEmp';
+    const url = environment.apiUrl + '/Chat/GetAllAppEmp';
     const params = new HttpParams()
       .set('PageNum', PageNumber)
       .set('PageSize', PageSize);
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
-  AssignTicket(Ticket_ID: any, User_ID: any): Observable<any> {
+  AssignTicket(Admin_ID: any, Chat_ID: any): Observable<any> {
     let body = {
-      Ticket_ID: Ticket_ID,
-      User_ID: User_ID,
+      Admin_ID: Admin_ID,
+      Chat_ID: Chat_ID,
     };
     const url =
       environment.apiUrl +
-      '/Tickets/AssignTicket?Ticket_ID=' +
-      Ticket_ID +
-      '&User_ID=' +
-      User_ID;
-    return this.http.put<any>(url, body, { headers: this.headers });
+      '/Chat/AssignAdminMessage?Admin_ID=' +
+      Admin_ID +
+      '&Chat_ID=' +
+      Chat_ID;
+    return this.http.post<any>(url, body, { headers: this.headers });
   }
   GetTicketDetails(Ticket_ID: any): Observable<any> {
-    const url = environment.apiUrl + '/Tickets/GetTicketDetails';
-    const params = new HttpParams().set('Ticket_ID', Ticket_ID);
+    const url = environment.apiUrl + '/Chat/GetChatMessages';
+    const params = new HttpParams().set('Chat_ID', Ticket_ID);
 
     return this.http.get<any>(url, { headers: this.headers, params: params });
   }
@@ -610,18 +618,18 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.post<any>(url, body, { headers: this.headers });
   }
-  CloseTicket(Ticket_ID: any, Status: any): Observable<any> {
+  CloseTicket(Chat_ID: any, Status: any): Observable<any> {
     const url =
       environment.apiUrl +
-      '/Tickets/CloseTicket?Ticket_ID=' +
-      Ticket_ID +
+      '/Chat/CloseChat?Chat_ID=' +
+      Chat_ID +
       '&Status=' +
       Status;
     const params = new HttpParams()
-      .set('Ticket_ID', Ticket_ID)
+      .set('Chat_ID', Chat_ID)
       .set('Status', Status);
 
-    return this.http.put<any>(url, Ticket_ID, { headers: this.headers });
+    return this.http.post<any>(url, Chat_ID, { headers: this.headers });
   }
   GetBookingHistory(
     Apt_ID: any,

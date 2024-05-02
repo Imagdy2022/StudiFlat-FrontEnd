@@ -39,8 +39,6 @@
                 <option value="Partner">Partner</option>
                 <option value="Worker">Worker</option>
                 <option value="Admins">Admins</option>
-                <option value="Employees">Employees</option>
-                <option value="Tenant">Tenant</option>
               </select>
 
             </div>
@@ -75,8 +73,8 @@
                 <span class="me-2">Please select the {{toType}} for whom you would like to make a payment</span>
             </div>
 
-            <div class="input w-25">
-              <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
+            <div class="input">
+              <input type="text" class="form-control py-2" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
                 <img src="../../../assets/images/search.svg" alt="">
             </div>
         </div>
@@ -115,7 +113,7 @@
                         <th *ngIf="toType == 'Owner'">
                           Rent
                         </th>
-                        <th *ngIf="toType == 'Worker'">
+                        <th *ngIf="toType == 'Worker' || toType == 'Partner'">
                           Profit
                         </th>
                         <th *ngIf="toType == 'Admins'">
@@ -131,11 +129,11 @@
 
                     <td>
                         <input type='radio' name="selectedUser" (change)="selectUser(data)"/>
-                        <span class="ms-2">  {{ data.owner_Name || data.apt_Name|| data.worker_Name || data.admin_Name }}</span>
+                        <span class="ms-2">  {{ data.owner_Name || data.apt_Name|| data.worker_Name || data.admin_Name || data?.partner_Name }}</span>
 
                     </td>
                    <td *ngIf="toType != 'Apartment'">
-                        {{data?.owner_Email || data?.worker_Email || data?.admin_Name}}
+                        {{data?.owner_Email || data?.worker_Email || data?.admin_Name || data?.partner_Email}}
                     </td>
                     <td *ngIf="toType == 'Apartment'">
                       {{data?.apt_Location}}
@@ -144,11 +142,11 @@
                     {{data?.worker_Type}}
                  </td>
                      <td>
-                        {{data?.owner_Phone || data?.owner_Phone || data?.worker_Phone || data?.admin_Phone}}
+                        {{data?.owner_Phone || data?.owner_Phone || data?.worker_Phone || data?.admin_Phone || data?.partner_Phone}}
                     </td>
 
                    <td>
-                    {{data?.owner_WA || data?.owner_WA || data?.worker_WA || data?.admin_WA}}
+                    {{data?.owner_WA || data?.owner_WA || data?.worker_WA || data?.admin_WA || data?.partner_WA}}
                     </td>
                     <td *ngIf="toType == 'Owner'">
                     {{data?.owner_Apartment}}
@@ -156,8 +154,8 @@
                     <td *ngIf="toType == 'Owner'">
                       {{data?.owner_Rent}}
                       </td>
-                      <td *ngIf="toType == 'Worker'">
-                        {{data?.worker_Profit}}
+                      <td *ngIf="toType == 'Worker' || toType == 'Partner'">
+                        {{data?.worker_Profit || data?.partner_Profit}}
                       </td>
                       <td *ngIf="toType == 'Admins'">
                         {{data?.salary}}

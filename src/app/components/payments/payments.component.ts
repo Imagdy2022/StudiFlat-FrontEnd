@@ -30,8 +30,7 @@ export class PaymentsComponent implements OnInit {
   ngOnInit() {
     this.initFakeData();
     this.checkRole();
-    this.GetPaymentCards();
-    this.ListAllInvoices(this.statuspayment);
+    this.GetAllPayments();
   }
 
   PaymentsRole:any
@@ -79,7 +78,57 @@ export class PaymentsComponent implements OnInit {
         name: "Other payments"
       },
       ];
+
+    this.TypeFillterLists = [
+      {
+        id:0,
+        name: "All"
+      },
+      {
+        id:1,
+        name: "Incoming Payments"
+      },
+      {
+        id:2,
+        name: "Outgoing Payments"
+      },
+      {
+        id:3,
+        name: "Pending Payments"
+      },
+      ];
+
+      this.userFillterLists = [
+        {
+          id:0,
+          name: "All"
+        },
+        {
+          id:1,
+          name: "Tenant"
+        },
+        {
+          id:2,
+          name: "Owner"
+        },
+        {
+          id:3,
+          name: "Partner"
+        },
+        {
+          id:4,
+          name: "Apartment"
+        },
+        {
+          id:5,
+          name: "Worker"
+        },
+        ];
     this.paymentFillterSelected = [true];
+    this.TypeFillterSelected = [true];
+    this.userFillterSelected = [true];
+
+
    }
   payments:any=[ ];
 dropdownOption: Array<any> = [];
@@ -87,6 +136,12 @@ dropdownOption: Array<any> = [];
 
   paymentFillterLists: Array<any> = [];
   paymentFillterSelected: Array<any> = [];
+
+  TypeFillterLists: Array<any> = [];
+  TypeFillterSelected: Array<any> = [];
+
+  userFillterLists: Array<any> = [];
+  userFillterSelected: Array<any> = [];
 
   showSide: string = '';
 
@@ -104,18 +159,13 @@ dropdownOption: Array<any> = [];
 
 
    }
+   Date="All"
+   selectedfromDropDown(value:any){
 
-   GetPaymentCards() {
+     this.Date=value.name;
+     this.GetAllPayments()
+   }
 
-    this._adminservices.PaymentCards().subscribe(
-      (res: any) => {
-        this.PaymentCards = res;
-      },
-      (error) => {
-        console.error('Error fetching owners:', error);
-      }
-    );
-  }
 
    pageNumber=1;
   pagesize=10;
@@ -125,20 +175,28 @@ dropdownOption: Array<any> = [];
 
         const calcPageNumber = Math.floor(event.first / event.rows) + 1;
         this.pageNumber=calcPageNumber;
-        this.ListAllInvoices( this.statuspayment)
+        this.GetAllPayments()
        }
-       selectedfromDropDown(value:any){
-        this.ListAllInvoices(this.statuspayment);
-      }
 
 
  numberInvoices=0;
-  ListAllInvoices(  statuspayments:any) {
+  GetAllPayments() {
     this.payments=[]
-    this.numberInvoices=0
-    this._adminservices.ListAllInvoices( statuspayments,this.pageNumber,this.pagesize ,this.searchText).subscribe((res:any) => {
-      this.payments = res["data"];
-      this.numberInvoices = this.payments.length;
+    let data ={
+      page_No :1,
+      page_Size: 10,
+      filterKey : this.Date,
+      searchKey:this.searchText,
+      payment_Type: this.paymentType,
+      user_Type: this.userType,
+      invoice_Type: this.statuspayment,
+      start_Date: this.rangeDates,
+      end_Date: new Date(),
+    }
+
+    this._adminservices.AllPayments(data).subscribe((res:any) => {
+      this.payments = res.data;
+      this.PaymentCards = res.cards;
       this.totalofPages=res["totalPages"]
       this.totalRecords=res["totalRecords"]
 
@@ -147,11 +205,12 @@ dropdownOption: Array<any> = [];
        console.error('Error fetching owners:', error);
     })
   }
+
   MarkPaid(id:any){
     this._adminservices.MarkPaid(id).subscribe((res) => {
       this.messageService.add({   severity: 'success', summary: 'Success', detail: 'marked Successfuly' });
 
-      this.ListAllInvoices( this.statuspayment) ;
+      this.GetAllPayments() ;
 
      }, (error) => {
       this.messageService.add({   severity: 'error', summary: 'error', detail: 'error' });
@@ -162,7 +221,9 @@ dropdownOption: Array<any> = [];
 
  }
  checkindex=0;
- statuspayment:any=""
+ statuspayment:any="All"
+ paymentType:any="All"
+ userType:any="All"
 
  clickPayment(index:any){
   this.checkindex=index?.target?.value;
@@ -170,40 +231,109 @@ dropdownOption: Array<any> = [];
 
   this.paymentFillterSelected[index?.target?.value] = true
   if(index?.target?.value == 0){
-    this.statuspayment=""
-    this.ListAllInvoices(this.statuspayment);
+    this.statuspayment="All"
+    this.GetAllPayments();
   }
   if(index?.target?.value == 1){
     this.statuspayment="Rent"
 
-    this.ListAllInvoices(this.statuspayment);
+    this.GetAllPayments();
   }
   if(index?.target?.value == 2){
     this.statuspayment="Security"
 
-    this.ListAllInvoices(this.statuspayment);
+    this.GetAllPayments();
 
   }
   if(index?.target?.value == 3){
     this.statuspayment="Other"
 
-    this.ListAllInvoices(this.statuspayment);
+    this.GetAllPayments();
 
   }
 
 }
+clickType(index:any){
+  this.checkindex=index?.target?.value;
+  this.TypeFillterSelected = this.TypeFillterSelected.map((data) => data == true ? false : false)
+
+  this.TypeFillterSelected[index?.target?.value] = true
+  if(index?.target?.value == 0){
+    this.paymentType="All"
+    this.GetAllPayments();
+  }
+  if(index?.target?.value == 1){
+    this.paymentType="Incoming Payments"
+
+    this.GetAllPayments();
+  }
+  if(index?.target?.value == 2){
+    this.paymentType="Outgoing Payments"
+
+    this.GetAllPayments();
+
+  }
+  if(index?.target?.value == 3){
+    this.paymentType="Pending Payments"
+
+    this.GetAllPayments();
+
+  }
+
+}
+clickUserType(index:any){
+  this.checkindex=index?.target?.value;
+  this.userFillterSelected = this.userFillterSelected.map((data) => data == true ? false : false)
+
+  this.userFillterSelected[index?.target?.value] = true
+  if(index?.target?.value == 0){
+    this.userType="All"
+    this.GetAllPayments();
+  }
+  if(index?.target?.value == 1){
+    this.userType="Tenant"
+
+    this.GetAllPayments();
+  }
+  if(index?.target?.value == 2){
+    this.userType="Owner"
+
+    this.GetAllPayments();
+
+  }
+  if(index?.target?.value == 3){
+    this.userType="Partner"
+
+    this.GetAllPayments();
+
+  }
+  if(index?.target?.Apartment == 4){
+    this.userType="Apartment"
+
+    this.GetAllPayments();
+
+  }
+  if(index?.target?.value == 5){
+    this.userType="Apartment"
+
+    this.GetAllPayments();
+
+  }
+
+}
+
 searchText:any=""
 
 searchKey(data: string) {
   debugger
   this.searchText = data;
-  this.ListAllInvoices(this.statuspayment);
+  this.GetAllPayments()
 }
 searchTextChange:any
 search:boolean=false
 searchAction() {
   // this.searchTextChange.emit(this.searchText);
-  this.ListAllInvoices(this.statuspayment);
+  this.GetAllPayments()
 
 }
 display2 = 'none';

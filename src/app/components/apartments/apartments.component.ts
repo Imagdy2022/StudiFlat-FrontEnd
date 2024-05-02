@@ -62,7 +62,7 @@ gotopage( ){
       localStorage.removeItem(key);
     }
   }
-  Date="Today"
+  Date="All"
   selectedfromDropDown(value:any){
 
     this.Date=value.name;
@@ -89,10 +89,10 @@ gotopage( ){
         name:"Rent EndSoon"
       },
       ];
-    // this.apartmentFillterLists = ["All ", "Rented Apartment", "Available Apartment","Pending Apartment","Delete Apartment","Draft Apartment"];
+
 
     this.apartmentFillterSelected = [true];
-    this.listDropDown = [{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
+    this.listDropDown = [{ name: 'All' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
   }
 
   /**
@@ -267,6 +267,7 @@ gotopage( ){
  }
  searchTextChange: any;
  searchAction() {
+  this.searchTextChange.emit(this.searchText);
    this.getAllApartment();
  }
 }
