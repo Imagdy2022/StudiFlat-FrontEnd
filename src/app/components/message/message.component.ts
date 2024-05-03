@@ -84,7 +84,7 @@ export class MessageComponent {
     disablenext=false;
     disableperv=false;
 
-    date=""
+    date="All"
     totalRecords=0;
     getAll_tickets(   ) {
       this._tickets=[]
@@ -129,7 +129,7 @@ export class MessageComponent {
      }
 
     dropdownOption: Array<any> = [];
-    listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
+    listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
     Inquiries=[]
     InquireFillterLists: Array<any> = [];
     InquireFillterSelected: Array<any> = [];

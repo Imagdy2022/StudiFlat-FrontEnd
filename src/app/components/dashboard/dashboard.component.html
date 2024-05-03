@@ -107,7 +107,7 @@
               </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of RecentActivitiesarr.slice(0,4); let i =index " (click)="navigateToRoute(item?.action_Route, item?.action_ID)">
+                <tr *ngFor="let item of RecentActivitiesarr.slice(0,4); let i =index " (click)="navigateToRoute(item?.action_Route, item?.action_ID)" style="cursor: pointer;">
                  <td>
                   <div>
                       <img *ngIf="item?.userImg" src="{{item?.userImg}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">
@@ -170,7 +170,7 @@
               </tr>
               </thead>
               <tbody>
-                <tr *ngFor=" let apt of PopularAptarr.slice(0,4); let i =index" routerLink="/apartments/apartments-details/{{apt.apt_ID}}">
+                <tr *ngFor=" let apt of PopularAptarr.slice(0,4); let i =index" routerLink="/apartments/apartments-details/{{apt.apt_ID}}" style="cursor: pointer;">
                  <td>
                   <div>
                     <img *ngIf="apt?.apt_Img" src="{{apt?.apt_Img}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">

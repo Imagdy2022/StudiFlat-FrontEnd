@@ -132,7 +132,7 @@ export class PaymentsComponent implements OnInit {
    }
   payments:any=[ ];
 dropdownOption: Array<any> = [];
-  listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
+  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
 
   paymentFillterLists: Array<any> = [];
   paymentFillterSelected: Array<any> = [];
