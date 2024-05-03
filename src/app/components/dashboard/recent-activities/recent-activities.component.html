@@ -72,7 +72,7 @@
           </ng-template>
           <ng-template pTemplate="body" let-item>
 
-              <tr>
+              <tr (click)="navigateToRoute(item?.action_Route, item?.action_ID)" style="cursor: pointer;">
                   <td>
                     <div>
                       <img *ngIf="item.userImg" src="{{item.userImg}}" alt="" style="width:50px ;height: 50px;" class="rounded-circle me-2">
@@ -89,7 +89,7 @@
                   </td>
 
                   <td>
-                    <button class="btn btn-color">View</button>
+                    <button class="btn btn-color" (click)="navigateToRoute(item?.action_Route, item?.action_ID)">View</button>
                   </td>
 
               </tr>

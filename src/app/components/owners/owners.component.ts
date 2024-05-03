@@ -40,7 +40,7 @@ export class OwnersComponent implements OnInit {
   /** searchValue */
   searchValue: string = '';
   /** listDropDown */
-  listDropDown: Array<object> = [{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
+  listDropDown: Array<object> = [{ name: 'All' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
 
   constructor(private ownerSer: OnwerService,public router: Router) {
   }
@@ -141,14 +141,13 @@ export class OwnersComponent implements OnInit {
   initHeadersData(): Array<ITableHeader> {
     return [
       // { Name: '', SortableColumn: '', tableHeaderCheckbox: true, sortIcon: false },
+
       { Name: 'Name', SortableColumn: 'owner_FirstName', sortIcon: true },
-      { Name: 'Created by', SortableColumn: 'owner_CreatedBy', sortIcon: true },
       { Name: 'Email Address', SortableColumn: 'owner_Mail', sortIcon: true },
       { Name: 'Phone Number', SortableColumn: 'owner_Phone', sortIcon: true },
       // { Name: 'Gender', SortableColumn: 'gender', sortIcon: false },
       { Name: 'About', SortableColumn: 'owner_About', sortIcon: false },
-      { Name: 'Status', SortableColumn: 'owner_Status', sortIcon: false },
-      { Name: ' ', SortableColumn: ' ', sortIcon: false },
+      { Name: 'Operations', SortableColumn: ' ', sortIcon: false },
 
 
     ]

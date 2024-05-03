@@ -21,12 +21,9 @@ export class AppComponent implements OnInit {
     getToken(messaging,{vapidKey:environment.firebase.vapidKey}).then(
       (currentToken)=>{
         if(currentToken){
-          console.log("Your Token");
           this.auth.FCMToken(currentToken).subscribe((response: any) => {});
-          console.log(currentToken);
         }
         else{
-          console.log("Token Excep");
         }
       }
     )

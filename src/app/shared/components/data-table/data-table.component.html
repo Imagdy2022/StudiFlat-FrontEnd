@@ -37,7 +37,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
 
-            <tr (click)="hidecard( )">
+            <tr (click)="hidecard( )" routerLink="/owners/owner-profile/{{product.owner_ID}}"  style="cursor: pointer;" >
                 <!-- <td>
                     <p-tableCheckbox [value]="product" (click)="GetSelectedItem()"></p-tableCheckbox>
                 </td> -->
@@ -49,18 +49,18 @@
 
 
                 </td>
-                <td *ngIf="pagePerson =='Owners' && product.owner_BankAccoun">{{product.owner_BankAccoun}}</td>
-                <td *ngIf="pagePerson=='Owners'  ">{{product.owner_CreatedBy}}</td>
-                <td *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>
-                <td *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
+                <td  *ngIf="pagePerson =='Owners' && product.owner_BankAccoun">{{product.owner_BankAccoun}}</td>
+                <!-- <td *ngIf="pagePerson=='Owners'  ">{{product.owner_CreatedBy}}</td> -->
+                <td  *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>
+                <td  *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'">{{product.gender}}</td> -->
-                <td *ngIf="pagePerson=='Owners'">{{product.owner_About}}</td>
-                <td *ngIf="pagePerson=='Owners'">{{product.owner_Status}}</td>
+                <td  *ngIf="pagePerson=='Owners'">{{product.owner_About}}</td>
+                <!-- <td  *ngIf="pagePerson=='Owners'">{{product.owner_Status}}</td> -->
                 <td *ngIf="pagePerson=='Owners' " class="cursor position-relative">
                     <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,product.owner_ID)">
                   <img src="assets/images/edit.svg">
               </button>
-                    <div *ngIf="showEdit[product.owner_ID]"  style="width: 150px;z-index: 999;right: 60px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                    <div *ngIf="showEdit[product.owner_ID]" class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                         <button *ngIf="OwnersRole?.p_View==true || is_Super==true" routerLink="/owners/owner-profile/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">View Profile</button>
 
                         <button *ngIf="OwnersRole?.p_Update==true || is_Super==true" routerLink="/owners/edit_owner/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100">Edit</button>

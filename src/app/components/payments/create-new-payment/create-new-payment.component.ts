@@ -12,12 +12,13 @@ import { AdminsService } from "src/app/_services/admins/admins.service";
 })
 export class CreateNewPaymentComponent {
   showSide: string = '';
-  searchText:any=""
   search:boolean=false
   toType: string = 'Owner';
   allData : any[] =[];
   imgUrl:any;
   imageFile:string='';
+ firstIDFound = false;
+  secondID:any;
 
   paymentForm : FormGroup = new FormGroup({
     Pay_To:new FormControl(null),
@@ -36,7 +37,6 @@ export class CreateNewPaymentComponent {
 
   ngOnInit() {
     this.GetPayToList();
-    this.GetPayToList(  )
   }
 
   selectedfromDropDown(value:any){
@@ -55,29 +55,7 @@ export class CreateNewPaymentComponent {
   totalofPages=0;;
   disablenext=false;
   disableperv=false;
-  incrementpage(){
 
-    this.pageNumber+=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    if(this.pageNumber>= this.totalofPages){
-      this.pageNumber=this.totalofPages;
-
-    }
-    // this.getAllpartners( );
-  }
-  decreamentPage(){
-    this.pageNumber-=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    // this.getAllpartners( );
-
-  }
- partners=[]
  totalRecords=0
  tiggerPageChange(event: any) {
 
@@ -88,20 +66,20 @@ export class CreateNewPaymentComponent {
   numberpartners=0;
   Date:any="All"
 
-
-  searchAction() {
-    // this.search = false;
-    this.GetPayToList()
-      // this.searchText =""
-  }
-  itemID: any;
+  itemID1: any;
+  itemID2: any;
   selectUser(data:any ){
     Object.keys(data).forEach(key => {
       if (key.toLowerCase().includes('id')) {
-        this.itemID= data[key]
+        if (!this.firstIDFound) {
+          this.itemID1 = data[key];
+          this.firstIDFound = true;
+        }
+        if(key.toLowerCase().includes('id')){
+          this.itemID2 = data[key];
+        }
       }
     });
-    console.log(this.itemID)
 
   }
   SelectType(e:any){
@@ -109,12 +87,25 @@ export class CreateNewPaymentComponent {
     this.GetPayToList();
   }
   GetPayToList(){
-    this._adminservices.GetPayToList(this.toType, this.searchText ).subscribe({
+    this._adminservices.GetPayToList(this.toType,this.searchText,this.pageNumber, this.pagesize ).subscribe({
       next:(res:any)=>{
-        this.allData = res
+        this.allData = res.data
+        this.pageNumber = res.pageNumber;
+        this.pagesize = res.pageSize
+        this.totalofPages = res.totalPages;
+        this.totalRecords = res.totalRecords;
+        if (this.totalofPages == this.pageNumber) {
+          this.disablenext = true;
+        } else {
+          this.disablenext = false;
+        }
+        if (this.pageNumber == 1) {
+          this.disableperv = true;
+        } else {
+          this.disableperv = false;
+        }
       },
       error:(err)=>{
-        console.log(err)
       }
     })
   }
@@ -130,21 +121,10 @@ export class CreateNewPaymentComponent {
     }
   }
   AddPayment(){
-    // const formData = new FormData();
-    // formData.append('Pay_To', this.paymentForm.value['Pay_To']);
-    // formData.append('Pay_UUID',this.itemID);
-    // formData.append('Apt_ID', this.paymentForm.value['Apt_ID']);
-    // formData.append('Pay_To_Type', this.paymentForm.value['Pay_To_Type']);
-    // formData.append('Payment_Desc', this.paymentForm.value['Payment_Desc']);
-    // formData.append('Payment_Amount', this.paymentForm.value['Payment_Amount']);
-    // formData.append('Payment_Bouns', this.paymentForm.value['Payment_Bouns']);
-    // formData.append('Payment_Notes',this.paymentForm.value['Payment_Notes']);
-    // formData.append('Payment_Attachment', this.paymentForm.value['Payment_Attachment']);
-
     let data = {
     Pay_To: this.paymentForm.value['Pay_To'],
-    Pay_UUID: this.itemID,
-    Apt_ID :this.paymentForm.value['Apt_ID'],
+    Pay_UUID: this.itemID1,
+    Apt_ID : this.itemID2,
     Pay_To_Type:this.paymentForm.value['Pay_To_Type'],
     Payment_Desc :this.paymentForm.value['Payment_Desc'],
     Payment_Amount: this.paymentForm.value['Payment_Amount'],
@@ -161,5 +141,12 @@ export class CreateNewPaymentComponent {
          this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
       }
      })
+  }
+
+
+  searchText: any = '';
+
+  searchAction() {
+    this.GetPayToList();
   }
 }

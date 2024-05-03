@@ -113,7 +113,6 @@ export class ForthStepComponent {
       // this.checkedPayPal = Boolean(parsedData.payment_Methods[1].payment_Method_Name);
       this.checkedCash = Boolean(parsedData.payment_Methods[1].payment_Method_Name);
 
-      console.log('parsedData.payment_Methods[2].payment_Method_Name', parsedData.payment_Methods);
 
 
 

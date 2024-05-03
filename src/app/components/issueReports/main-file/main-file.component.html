@@ -97,7 +97,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-issue style="height: 200px !important;">
 
-                    <tr style="cursor: pointer;" (click)="hidecard()">
+                    <tr style="cursor: pointer;" (click)="hidecard()" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
 
 
                         <td class="d-flex align-items-center" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">

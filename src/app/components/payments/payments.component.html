@@ -41,7 +41,7 @@
                   <span class="mx-3 fw-bold">Total Revenue</span>
               </div>
               <div>
-                  <h3 class="my-2">{{PaymentCards?.total_Revenue}}</h3>
+                  <h3 class="my-2">{{PaymentCards?.total_Revenue  ?? 0}}</h3>
                   <div>
                       <i class="fa fa-arrow-down red" *ngIf="PaymentCards.revenue_Up==false" aria-hidden="true"></i>
                       <i class="fa fa-arrow-up green" *ngIf="PaymentCards.revenue_Up==true" aria-hidden="true"></i>
@@ -59,7 +59,7 @@
                   <span class="mx-3 fw-bold">Total Expenses</span>
               </div>
               <div>
-                  <h3 class="my-2">{{PaymentCards?.total_Expenses}}</h3>
+                  <h3 class="my-2">{{PaymentCards?.total_Expenses ?? 0}}</h3>
                   <div>
                       <i class="fa fa-arrow-down red" *ngIf="PaymentCards.expenses_Up==false" aria-hidden="true"></i>
                       <i class="fa fa-arrow-up green" *ngIf="PaymentCards.expenses_Up==true" aria-hidden="true"></i>
@@ -78,7 +78,7 @@
                    </span>
               </div>
               <div>
-                  <h3 class="my-2">{{PaymentCards?.net_Profit}}</h3>
+                  <h3 class="my-2">{{PaymentCards?.net_Profit ?? 0}}</h3>
                   <div>
                     <div>
                         <i class="fa fa-arrow-down red" *ngIf="PaymentCards.net_Profit_Up==false" aria-hidden="true"></i>
@@ -114,11 +114,8 @@
                    <div class="col-6">
                   <div class="paymentType">
                     <label for="">Payment Type</label>
-                    <select class="form-select">
-                      <option value="1">All</option>
-                      <option value="2">Incoming Payments</option>
-                      <option value="3">Outgoing Payments</option>
-                      <option value="4">Pending Payments</option>
+                    <select class="form-select" (change)="clickType($event)">
+                      <option *ngFor="let data of TypeFillterLists; let index=index;" [value]="data.id" [selected]="TypeFillterSelected[index]">{{data.name}}</option>
 
                     </select>
                   </div>
@@ -128,13 +125,8 @@
                     <div class="col-6">
                     <div class="userType">
                       <label for="">User Type</label>
-                      <select class="form-select">
-                        <option value="1">All</option>
-                        <option value="2">Tenant</option>
-                        <option value="3">Owner</option>
-                        <option value="4">Partner</option>
-                        <option value="5">Apartment</option>
-                        <option value="6">Worker</option>
+                      <select class="form-select" (change)="clickUserType($event)">
+                        <option *ngFor="let data of userFillterLists; let index=index;" [value]="data.id" [selected]="userFillterSelected[index]">{{data.name}}</option>
 
                       </select>
                     </div>
@@ -236,41 +228,42 @@
 
                     <tr style="cursor: pointer;" (click)="hidecard()">
                         <td>
-                            {{payment?.inv_Code}}
+                            {{payment?.trans_No}}
                         </td>
                         <td>
-                          {{payment?.inv_Date}}
+                          {{payment?.trans_Date_Format | date}}
                       </td>
                         <td>
                             {{payment?.apt_Name}}
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td>{{payment?.userName}} </td>
+                        <td>{{payment?.payment}}</td>
+                        <td>{{payment?.user_Type}}</td>
+                        <td>{{payment?.userName}}</td>
 
                         <td>
-                            {{payment?.inv_Total}}
+                            {{payment?.amount}}
+                        </td>
+
+                        <td>
+                          {{payment?.service_Fee}}
                         </td>
                         <td>
-
-                      </td>
-                        <td>
-                          {{payment?.payment_Type}}
+                          {{payment?.type}}
                         </td>
 
                         <td >
                           <div>
-                              <span class="rounded-5 px-3"*ngIf="payment?.payment_By==	'Stripe'">
+                              <span class="rounded-5 px-3"*ngIf="payment?.method==	'Stripe'">
                                 <span>
                                   <img class="payment" src="assets/images/stripe.svg" alt="">
                                 </span>
                             </span>
-                            <span class="rounded-5 px-3"*ngIf="payment?.payment_By==	'Visa'">
+                            <span class="rounded-5 px-3"*ngIf="payment?.method==	'Visa'">
                               <span>
                                 <img class="payment" src="assets/images/visa.svg" alt="">
                               </span>
                           </span>
-                            <span class="rounded-5 px-3" *ngIf="payment?.payment_By=='Cash'">
+                            <span class="rounded-5 px-3" *ngIf="payment?.method=='Cash'">
                               Cash
                           </span>
                           </div>
@@ -280,15 +273,15 @@
                         </td>
                         <td >
                           <div>
-                              <span class="rounded-5 px-3 badge paid"*ngIf="payment?.inv_Paid==true">
+                              <span class="rounded-5 px-3 badge paid"*ngIf="payment?.status_Paid==true">
                                 <span>
-                                  Paid
+                                  {{payment?.status_String}}
                                 </span>
                                 <img src="assets/images/greenMore.svg" alt="">
                             </span>
-                            <span class="rounded-5 px-3 badge unPaid" *ngIf="payment?.inv_Paid==false">
+                            <span class="rounded-5 px-3 badge unPaid" *ngIf="payment?.status_Paid==false">
                               <span>
-                                Not Paid
+                                {{payment?.status_String}}
                               </span>
                               <img src="assets/images/redMore.svg" alt="">
                           </span>

@@ -35,7 +35,7 @@
                     (click)="changeAnchor(index)">{{listAnchor.link}}</a>
             </aside>
 
-            <div class="col-md-10 content-details ">
+            <div class="col-md-10 content-details "   [ngClass]="{'OwnerDetails': param === 'Owner details'}">
 
                 <div id="Generalinfo">
                     <p class="fw-bold mb-0">General info</p>
@@ -71,8 +71,8 @@
                 </div>
                 <div class="mb-4">
                     <label class="fw-bold" style="color: #605D62;">Email</label>
-                    <img src="assets/images/user/mail.svg" class="position-relative top-icon-input" style="right: 20px;">
-                    <input [(ngModel)]="OnwerDetail.owner_Mail" class="form-control w-100 ps-5" type="email">
+                    <img  *ngIf="param!='Owner details'" src="assets/images/user/mail.svg" class="position-relative top-icon-input" style="right: 20px;">
+                    <input [(ngModel)]="OnwerDetail.owner_Mail" class="form-control w-100" type="email">
                 </div>
                 <div class="mb-4">
                     <label class="fw-bold" style="color: #605D62;">Address</label>
@@ -81,7 +81,7 @@
                 </div>
                 <div>
                     <label class="fw-bold" style="color: #605D62;">About</label>
-                    <textarea [(ngModel)]="OnwerDetail.owner_About" class="border rounded-3 w-100 p-2" rows="5" style="resize: unset;"></textarea>
+                    <textarea [(ngModel)]="OnwerDetail.owner_About" class="form-control border rounded-3 w-100 p-2" rows="5" style="resize: unset;"></textarea>
                 </div>
 
                 <!--end General info form-->
@@ -95,11 +95,17 @@
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">Date of birth</label>
-                        <input [(ngModel)]="OnwerDetail.owner_DOB" class="form-control w-100" type="date">
+                        <ng-container *ngIf="param!='Owner details'">
+                          <input [(ngModel)]="OnwerDetail.owner_DOB" class="form-control w-100" type="date">
+                        </ng-container>
+                        <ng-container *ngIf="param =='Owner details'">
+                          <p class="form-control w-100">{{OnwerDetail.owner_DOB}}</p>
+                        </ng-container>
+
                     </div>
 
                     <div class="col-12 col-md-6 mb-4">
-                        <label class="fw-bold" style="color: #605D62;">nationality</label>
+                        <label class="fw-bold" style="color: #605D62;">Country</label>
                         <input [(ngModel)]="OnwerDetail.nationality" class="form-control w-100" type="text">
                     </div>
 

@@ -133,8 +133,6 @@ for(let i=0; i<this.permissions.length;i++){
     // this.link = this.link.map(el => el == true ? false : false)
     // this.link[index] = true
     // if (index == this.SideBarConstant.Logout) {
-    //   console.log('sssssssssssss');
-
     //   this.router.navigate(['/login']);
     // }
     }else{

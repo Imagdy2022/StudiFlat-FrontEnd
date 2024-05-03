@@ -157,15 +157,15 @@ gotopage( ){
     this.router.navigateByUrl(url);
 }
 AssignWorker(  ) {
-  debugger
   this._adminservices.AssignTicket( this.paramid,this.idworkerassigin ).subscribe((res) => {
-    debugger
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'The Tickets was Assigned  '}` });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });
+    setTimeout(()=>{
+       this.gotopage( );
+    }, 2000)
 
-    this.gotopage( );
+
 
   }, (err: any) => {
-    debugger
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
 
   })

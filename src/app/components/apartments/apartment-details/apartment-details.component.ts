@@ -8,6 +8,7 @@ import { saveAs } from 'file-saver';
 import * as FileSaver from 'file-saver';
 import { Guid } from 'guid-typescript';
 import { Reviews } from 'src/app/models/reviews';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-apartment-details',
@@ -28,6 +29,7 @@ export class ApartmentDetailsComponent implements OnInit {
   aprt_details: any;
   /** apt_UUID */
   apt_UUID: any;
+  subscriptions:Subscription[] = [];
 
   constructor(
     public _ApartmentService: ApartmentService,
@@ -90,12 +92,12 @@ export class ApartmentDetailsComponent implements OnInit {
   tenant: any;
 
   getApartmentDetails() {
-    this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
-      this._OnwerService
+    this.subscriptions.push( this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
+      this.subscriptions.push(this._OnwerService
         .getOwner(res.general_Info['apt_Owner'])
         .subscribe((res) => {
           this.OwnerDtail = res;
-        });
+        }));
       this.aprt_details = res.general_Info;
       this.trasponrts = res.trasponrts;
       this.rent_Rules = res.rent_Rules;
@@ -118,23 +120,21 @@ export class ApartmentDetailsComponent implements OnInit {
           this.roomsLiving.push(res.rooms[i]);
         }
       }
-    });
+    }));
   }
 
   GetApartmentReview() {
-    this._ApartmentService.GetApartmentReview(this.apt_UUID).subscribe((res) => {
+    this.subscriptions.push(  this._ApartmentService.GetApartmentReview(this.apt_UUID).subscribe((res) => {
       this.AllReviews = res;
-      console.log(res)
-
-     });
+     }));
 
   }
   DownloadTenantContract() {
     let ID = Guid.create();
     let FileName = ID + '.pdf';
-    this._ApartmentService
+    this.subscriptions.push( this._ApartmentService
       .CreateContractPDF(this.tenant[0].req_ID)
-      .subscribe((data) => saveAs(data, FileName));
+      .subscribe((data) => saveAs(data, FileName)));
   }
   transform(videoURL: string) {
     let srclink = videoURL;
@@ -196,7 +196,7 @@ export class ApartmentDetailsComponent implements OnInit {
 
   DownloadFile(path: any) {
     debugger;
-    this._ApartmentService.DownloadFile(path).subscribe(
+    this.subscriptions.push(this._ApartmentService.DownloadFile(path).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -212,11 +212,11 @@ export class ApartmentDetailsComponent implements OnInit {
           detail: `${error}`,
         });
       }
-    );
+    ));
   }
 
   MarkRented() {
-    this._ApartmentService.MarkRented(this.apt_UUID).subscribe(
+    this.subscriptions.push(this._ApartmentService.MarkRented(this.apt_UUID).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -231,10 +231,10 @@ export class ApartmentDetailsComponent implements OnInit {
           detail: `${'error'}`,
         });
       }
-    );
+    ));
   }
   MarkAvaliablePublish() {
-    this._ApartmentService.MarkAvaliablePublish(this.apt_UUID).subscribe(
+    this.subscriptions.push(this._ApartmentService.MarkAvaliablePublish(this.apt_UUID).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -249,10 +249,10 @@ export class ApartmentDetailsComponent implements OnInit {
           detail: `${'error'}`,
         });
       }
-    );
+    ));
   }
   MarkDraft() {
-    this._ApartmentService.MarkDraft(this.apt_UUID).subscribe(
+    this.subscriptions.push(this._ApartmentService.MarkDraft(this.apt_UUID).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -267,7 +267,7 @@ export class ApartmentDetailsComponent implements OnInit {
           detail: `${'error'}`,
         });
       }
-    );
+    ));
   }
   downloadImage(url: any) {
     fetch(url, {
@@ -300,5 +300,9 @@ export class ApartmentDetailsComponent implements OnInit {
     a.download = 'cc';
     document.body.appendChild(a);
     a.click();
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }
