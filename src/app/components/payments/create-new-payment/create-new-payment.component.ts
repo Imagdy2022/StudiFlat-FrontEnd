@@ -106,7 +106,6 @@ export class CreateNewPaymentComponent {
         }
       },
       error:(err)=>{
-        console.log(err)
       }
     })
   }

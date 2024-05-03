@@ -353,7 +353,6 @@ handleCheckboxChange(option: string) {
   } else {
     this.selectedOptions.push(option);
   }
-  console.log(this.selectedOptions);
 }
 SendReminder() {
   let data = {

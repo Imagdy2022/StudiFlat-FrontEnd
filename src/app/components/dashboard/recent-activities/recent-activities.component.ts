@@ -39,7 +39,6 @@ export class RecentActivitiesComponent implements OnInit{
         this.totalRecords=res.totalRecords
       },
       error:(err)=>{
-        console.log(err)
       }
     })
   }

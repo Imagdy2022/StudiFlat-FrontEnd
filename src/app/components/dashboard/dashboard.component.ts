@@ -15,7 +15,7 @@ import { RecentActivities } from 'src/app/models/recent-activities';
   styleUrls: ['./dashboard.component.scss'],
 
 
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent {
   @ViewChild("chart", { static: true })
@@ -123,7 +123,6 @@ export class DashboardComponent {
         this.RecentActivitiesarr = res.data;
       },
       error:(err)=>{
-        console.log(err)
       }
     })
   }

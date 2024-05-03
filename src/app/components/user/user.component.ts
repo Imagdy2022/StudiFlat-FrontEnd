@@ -17,7 +17,7 @@ export class UserComponent {
   headerData: Array<any> = [];
   loading: boolean = true;
   // search: boolean = false;
-  listDropDown: Array<object> = [
+  listDropDown: Array<object> = [{ name: 'All' },
     { name: 'Today' },
     { name: 'Last Week' },
     { name: 'This month' },

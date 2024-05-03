@@ -267,7 +267,7 @@ gotopage( ){
  }
  searchTextChange: any;
  searchAction() {
-  this.searchTextChange.emit(this.searchText);
+  // this.searchTextChange.emit(this.searchText);
    this.getAllApartment();
  }
 }

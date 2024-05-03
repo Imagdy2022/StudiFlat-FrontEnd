@@ -167,7 +167,6 @@ export class SecondStepComponent {
           j < parsedData.bathRoom_Tools[i].bath_Tool.length;
           j++
         ) {
-          // console.log(parsedData.bathRoom_Tools[i].bath_Tool[j].tool_Name)
 
           arrBathroom.push({
             label: 'bathroom Tool' + (j + 1),
@@ -259,7 +258,6 @@ export class SecondStepComponent {
     let arrBathroom = [];
     for (let i = 0; i < parsedData.bath_Room.length; i++) {
       for (let j = 0; j < parsedData.bath_Room[i].bath_Tools.length; j++) {
-        // console.log(parsedData.bathRoom_Tools[i].bath_Tool[j].tool_Name)
 
         arrBathroom.push({
           label: 'bathroom Tool' + (j + 1),

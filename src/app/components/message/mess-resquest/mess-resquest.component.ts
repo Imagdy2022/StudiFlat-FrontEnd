@@ -37,7 +37,6 @@ export class MessResquestComponent implements OnInit {
   connection.on("AppReply", (result: any) => {
     this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
-      console.log(this.deatail)
 
      }, (error) => {
        console.error('Error fetching owners:', error);
@@ -54,7 +53,6 @@ export class MessResquestComponent implements OnInit {
   getAll_tickets(   ) {
      this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
-      console.log(this.deatail)
 
      }, (error) => {
        console.error('Error fetching chat:', error);

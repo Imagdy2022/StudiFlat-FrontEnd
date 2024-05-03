@@ -127,7 +127,6 @@ export class AddAdminComponent implements OnInit {
       const selectedFile = event.target.files[0];
       const formData = new FormData();
       formData.append('fileData', selectedFile);
-      console.log(formData);
 
       this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;

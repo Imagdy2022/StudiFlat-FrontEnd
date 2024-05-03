@@ -40,7 +40,7 @@ export class OwnersComponent implements OnInit {
   /** searchValue */
   searchValue: string = '';
   /** listDropDown */
-  listDropDown: Array<object> = [{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
+  listDropDown: Array<object> = [{ name: 'All' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
 
   constructor(private ownerSer: OnwerService,public router: Router) {
   }
