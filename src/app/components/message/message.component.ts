@@ -138,7 +138,10 @@ export class MessageComponent {
       this.date=value.name;
       this.getAll_tickets();
     }
-
+    FilterButtons(value:any){
+      this.date=value;
+      this.getAll_tickets()
+    }
 
 
     hidecard(id:any){

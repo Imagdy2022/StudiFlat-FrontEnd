@@ -22,10 +22,11 @@ export class MainFileComponent {
   loading: boolean = true;
   search: boolean = false;
   listDropDown: Array<object> = [
+    { name: 'All' },
     { name: 'Today' },
-    { name: 'Last week' },
-    { name: 'This month' },
-    { name: 'This year' },
+    { name: 'Last Week' },
+    { name: 'This Month' },
+    { name: 'This Year' },
   ];
 
   constructor(
@@ -80,7 +81,7 @@ export class MainFileComponent {
     let url: string = 'unlegal';
     this.router.navigateByUrl(url);
   }
-  Date = '';
+  Date = 'All';
 
   getAllIssues() {
     this.issues = [];
@@ -180,6 +181,11 @@ export class MainFileComponent {
   selectedfromDropDown(value: any) {
     this.Date = value.name;
     this.getAllIssues();
+  }
+  FilterButtons(value:any){
+    this.Date=value;
+    this.getAllIssues();
+
   }
   cancelissue(id: any) {
     this._adminservices.CancelIssue(id).subscribe(

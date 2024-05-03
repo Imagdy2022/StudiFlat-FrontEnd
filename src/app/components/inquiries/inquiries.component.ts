@@ -91,7 +91,7 @@ gotopage( ){
     this.getAllInquires(this.statusinquire);
 
   }
-  date=""
+  date="All"
   totalRecords=0;
   getAllInquires(  statusinquires:any) {
     this.Inquires=[]
@@ -143,7 +143,7 @@ event.stopPropagation()
     this.showSide = value
   }
   dropdownOption: Array<any> = [];
-  listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
+  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
   Inquiries=[]
   InquireFillterLists: Array<any> = [];
   InquireFillterSelected: Array<any> = [];
@@ -175,6 +175,10 @@ event.stopPropagation()
     this.date=value.name;
     this.getAllInquires(this.statusinquire)
  }
+ FilterButtons(value:any){
+  this.date=value;
+  this.getAllInquires(this.statusinquire)
+}
   checkindex=0;
   clickIquires(index:any){
     this.checkindex=index?.target?.value;

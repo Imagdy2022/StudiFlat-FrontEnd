@@ -14,24 +14,20 @@
     <main class="p-4 col-lg-10">
         <div class="d-md-flex justify-content-between dashboard" style="margin-top: 8px; margin-bottom: 16px;">
             <p class="fw-bold" style="color: #6c6a6a;">Issue Reports</p>
-            <div class="d-flex justify-content-lg-between  ">
+            <div class="d-flex justify-content-lg-between pe-3 ">
               <!-- <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
-              <div class="d-flex mb-2 me-3">
-                <button class="month rounded-start px-3 py-2 text-white border-0 outline-none">This Month</button>
-                <button class="week px-3 py-2 outline-none bg-white">Last Week</button>
-                <button class="today rounded-end px-3 py-2 outline-none bg-white">Today</button>
+              <div class="d-flex mb-2 me-3 ">
+                <button class="month rounded-start px-3 py-2 text-white border-0 outline-none" (click)="FilterButtons('This Month')">This Month</button>
+                <button class="week px-3 py-2 outline-none bg-white" (click)="FilterButtons('Last Week')">Last Week</button>
             </div>
-
-            <button class="filter rounded-3 px-3 py-0 outline-none bg-white  mb-2">
-             <img src="./assets/images/filter.svg" alt="">
-              Filter</button>
+            <app-dropdown class="" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
           </div>
         </div>
 
         <p-toast></p-toast>
 
         <div class="card">
-            <div class="row d-block d-md-flex justify-content-between align-items-center my-2 bg-white px-3 py-3">
+            <div class="row d-block d-md-flex justify-content-between align-items-center my-2 px-3 py-3">
 
                 <div class="col-md-4">
                   <div class="d-flex align-items-center" style="font-size: 15px;">

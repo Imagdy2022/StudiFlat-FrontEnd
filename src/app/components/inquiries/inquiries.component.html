@@ -12,17 +12,13 @@
     <main class="p-4 col-lg-10 ">
         <div class="fw-inquiries d-flex justify-content-between" style="color: #6c6a6a;margin-top: 8px; margin-bottom: 16px;">
             <p class="fw-bold ms-1" style="color: #6c6a6a;">inquiries</p>
-            <div class="d-flex justify-content-lg-between  ">
+            <div class="d-flex justify-content-lg-between pe-3 ">
                 <!-- <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
-                <div class="d-flex mb-2 me-3">
-                  <button class="month rounded-start px-3 py-2 text-white border-0 outline-none">This Month</button>
-                  <button class="week px-3 py-2 outline-none bg-white">Last Week</button>
-                  <button class="today rounded-end px-3 py-2 outline-none bg-white">Today</button>
+                <div class="d-flex mb-2 me-3 ">
+                  <button class="month rounded-start px-3 py-2 text-white border-0 outline-none" (click)="FilterButtons('This Month')">This Month</button>
+                  <button class="week px-3 py-2 outline-none bg-white" (click)="FilterButtons('Last Week')">Last Week</button>
               </div>
-
-              <button class="filter rounded-3 px-3 py-0 outline-none bg-white  mb-2">
-               <img src="./assets/images/filter.svg" alt="">
-                Filter</button>
+              <app-dropdown class="" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
             </div>
             <!-- start add button (add new apartment) in page  -->
             <!-- end add button (add new apartment) in page  -->

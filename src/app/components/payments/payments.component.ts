@@ -165,6 +165,21 @@ dropdownOption: Array<any> = [];
      this.Date=value.name;
      this.GetAllPayments()
    }
+   FilterButton(){
+    this.GetAllPayments()
+   }
+   ClearButton(){
+    this.searchText="";
+    this.clickPayment(0);
+    this.clickType(0);
+    this.clickUserType(0);
+    this.GetAllPayments();
+   }
+   FilterButtons(value:any){
+    this.Date=value;
+    this.GetAllPayments();
+
+  }
 
 
    pageNumber=1;
