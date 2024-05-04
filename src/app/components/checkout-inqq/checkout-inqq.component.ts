@@ -72,12 +72,12 @@ gotopage( ){
     this.getAllcheckOut(this.statusinquire);
 
   }
-  date=""
+  date="All"
   totalRecords=0;
   getAllcheckOut(  statuscheckOut:any) {
     this.checkOut=[]
     this.numbercheckOut=0
-    this._checkOutService.GetCheckoutList(this.pageNumber,this.pagesize,this.searchText,statuscheckOut).subscribe((res:any) => {
+    this._checkOutService.GetCheckoutList(this.pageNumber,this.pagesize,this.searchText,statuscheckOut,this.date).subscribe((res:any) => {
       this.checkOut = res["data"];
       this.numbercheckOut = this.checkOut.length;
       this.totalofPages=res["totalPages"]
@@ -223,9 +223,7 @@ event.stopPropagation()
   searchTextChange:any
   searchAction() {
     // this.searchTextChange.emit(this.searchText);
-    this.search = false;
     this.getAllcheckOut(this.statusinquire)
-    this.searchText =""
 
   }
 }

@@ -727,13 +727,15 @@ RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
   GetTerminations(
      PageNo: number,
     PageSize: number,
-    SearchKey: any
+    SearchKey: any,
+    FilterKey:any
   ): Observable<any[]> {
     const url = environment.apiUrl + '/Termination/GetTerminations';
     const params = new HttpParams()
       .set('PageNo', PageNo)
       .set('PageSize', PageSize)
       .set('SearchKey', SearchKey)
+      .set('FilterKey', FilterKey)
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
@@ -744,7 +746,8 @@ RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
     PageNo: number,
    PageSize: number,
    SearchKey: any,
-   status:any
+   status:any,
+   FilterKey:any
  ): Observable<any[]> {
    const url = environment.apiUrl + '/Checkout/GetCheckoutList';
    const params = new HttpParams()
@@ -752,6 +755,7 @@ RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
      .set('PageSize', PageSize)
      .set('SearchKey', SearchKey)
      .set('Status',status)
+     .set('FilterKey',FilterKey)
 
    return this.http.get<any[]>(url, { headers: this.headers, params: params });
  }

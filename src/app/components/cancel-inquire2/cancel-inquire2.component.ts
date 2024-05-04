@@ -69,7 +69,7 @@ tiggerPageChange(event: any) {
   getAlltermination( ) {
    this.termination=[]
    this.numbertermination=0
-   this._adminservices.GetTerminations( this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
+   this._adminservices.GetTerminations( this.pageNumber,this.pagesize,this.searchText,this.Date).subscribe((res:any) => {
      this.termination = res["data"];
      this.totalRecords=res["totalRecords"]
 
@@ -126,7 +126,6 @@ gotopage( ){
 searchText:any=""
 
 searchKey(data: string) {
-  debugger
   this.searchText = data;
   this.getAlltermination()
 }
