@@ -28,12 +28,12 @@ export class ViewCancelComponent implements OnInit{
   }
 
   ngOnInit() {
-    
+
     this.GetRequestDetails()
    }
   inquiresRole: any;
   is_Super: any;
-  
+
   gotopage() {
     let url: string = 'unlegal';
     this.router.navigateByUrl(url);
@@ -61,7 +61,7 @@ export class ViewCancelComponent implements OnInit{
       }
     );
   }
-  
+
   TerminationApproval() {
     this._inquiresService.TerminationApproval(this.param,true,this.Reason).subscribe(
       (res) => {
@@ -99,20 +99,20 @@ export class ViewCancelComponent implements OnInit{
     );
   }
   gotoListCancel(){
-    let url: string = "cancel-inquire";
+    let url: string = "/cancel-inquire";
     this.router.navigateByUrl(url);
   }
   viewImage(image: any) {
     this.inquire_details['apt_thumb_Img'] = image;
   }
- 
+
   onCloseModal1() {
     this.display1 = 'none';
   }
   onCloseModal2() {
     this.display2 = 'none';
   }
-  
+
   display2 = 'none';
    onOpenModal1( ) {
     this.Reason = '';

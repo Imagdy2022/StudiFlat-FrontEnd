@@ -33,6 +33,12 @@ const routes: Routes = [
   {
     path: 'inquiries', canActivate: [AuthGuard],loadChildren: () => import('../../components/inquiries/inquiries.module').then(i => i.InquiriesModule),
   },
+  {
+    path: 'cancel-inquire', canActivate: [AuthGuard],loadChildren: () => import('../../components/cancel-inquire2/cancel-inquire2.module').then(i => i.CancelInquire2Module),
+  },
+  {
+    path: 'checkout-inquire', canActivate: [AuthGuard],loadChildren: () => import('../../components/checkout-inqq/checkout-inqq.module').then(i => i.CheckoutInqqModule),
+  },
 
   {
     path: 'workers', canActivate: [AuthGuard],loadChildren: () => import('../../components/workers/workers.module').then(w=>w.WorkersModule),

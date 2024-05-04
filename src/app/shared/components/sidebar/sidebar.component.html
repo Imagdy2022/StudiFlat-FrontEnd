@@ -23,27 +23,26 @@
         <img src="../../../../assets/images/navigation/stats.svg"> Statistics
     </a> -->
     <div>
-        <a tabindex="1" *ngIf="Inquiries.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" :routerLink="/inquiries" routerLinkActive="active" (click)="isFreeze2 = !isFreeze2">
-            <img src="../../../../assets/images/navigation/help.svg"> Inquiries
-        </a>
+      <a tabindex="1" *ngIf="Inquiries.p_View==true || is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" [routerLink]="'/inquiries'" routerLinkActive="active" (click)="isFreeze2 = !isFreeze2"   [ngClass]="{'active': isFreeze2 == true}">
+          <img src="../../../../assets/images/navigation/help.svg"> Inquiries
+      </a>
 
-        <div class="sidebar-submenu" *ngIf="isFreeze2">
-            <ul class="list-none">
-                <li class="list-none">
-                    <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" (click)="setfraze2()" routerLinkActive="active1" :routerLink="/inquiries">Booking Inquires
-   </a>
-                </li>
-                <li class="list-none">
-                    <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active1" :routerLink="/inquiries/cancel-inquire">Cancelation Inquires </a>
-                </li>
-                <li class="list-none">
-                    <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active1" :routerLink="/inquiries/checkout-inquire">Checkout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+      <div class="sidebar-submenu" *ngIf="isFreeze2">
+          <ul class="list-none">
+              <li class="list-none">
+                  <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" (click)="setfraze2()" [routerLink]="'/inquiries'" routerLinkActive="active1">Booking Inquires</a>
+              </li>
+              <li class="list-none">
+                  <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" [routerLink]="'/cancel-inquire'" routerLinkActive="active1">Cancelation Inquires</a>
+              </li>
+              <li class="list-none">
+                  <a class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" [routerLink]="'/checkout-inquire'" routerLinkActive="active1">Checkout</a>
+              </li>
+          </ul>
+      </div>
+  </div>
     <a tabindex="1" *ngIf="Issue.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/Issue_Reports">
-        <img src="../../../../assets/images/navigation/reports.svg"> Issue_Reports
+        <img src="../../../../assets/images/navigation/reports.svg"> Issue Reports
     </a>
     <a tabindex="1" *ngIf="workers.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/workers">
         <img src="../../../../assets/images/navigation/owner 2.svg"> Workers
@@ -75,7 +74,7 @@
             <img src="../../../../assets/images/navigation/help.svg"> Help
         </a>
         <div *ngIf="Settings.p_View==true||is_Super==true">
-            <a tabindex="1" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" :routerLink="/admins" routerLinkActive="active" (click)="isFreeze = !isFreeze">
+            <a tabindex="1" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" :routerLink="/admins" routerLinkActive="active" (click)="isFreeze = !isFreeze" [ngClass]="{'active': isFreeze == true}">
                 <img src="../../../../assets/images/navigation/setting.svg"> Settings
             </a>
             <div class="sidebar-submenu" *ngIf="isFreeze">

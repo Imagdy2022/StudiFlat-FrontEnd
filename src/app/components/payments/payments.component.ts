@@ -205,8 +205,8 @@ dropdownOption: Array<any> = [];
       payment_Type: this.paymentType,
       user_Type: this.userType,
       invoice_Type: this.statuspayment,
-      start_Date: this.rangeDates,
-      end_Date: new Date(),
+      start_Date: this.rangeDates[0],
+      end_Date:this.rangeDates[1]
     }
 
     this._adminservices.AllPayments(data).subscribe((res:any) => {

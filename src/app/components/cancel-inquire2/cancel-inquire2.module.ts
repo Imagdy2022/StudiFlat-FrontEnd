@@ -3,7 +3,7 @@ import { CancelInquire2Component } from './cancel-inquire2.component';
 import { ViewCancelComponent } from './view-cancel/view-cancel.component';
 
 import { RouterModule, Routes } from '@angular/router';
- 
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
@@ -25,6 +25,7 @@ import { ChipModule } from 'primeng/chip';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { cancelRoutingModule } from './cancel-inquire2-routing.module';
 const routes: Routes = [];
 
 @NgModule({
@@ -48,7 +49,7 @@ const routes: Routes = [];
     BreadcrumbModule,
     ChipModule,
     PdfViewerModule,
-    RouterModule.forChild(routes),
+    cancelRoutingModule
   ],
   exports: [],
   providers: [MessageService],

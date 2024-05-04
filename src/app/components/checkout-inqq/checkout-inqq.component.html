@@ -24,7 +24,7 @@
         <div class="d-flex justify-content-between ">
 
         </div>
-         <app-dropdown class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
+         <app-dropdown  [list]="listDropDown" style="margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
 
     </div>
   </div>
@@ -104,7 +104,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-check>
 
-                  <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/inquiries/checkout/{{check.req_ID}}">
+                  <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/checkout-inquire/checkout/{{check.req_ID}}">
 <td>{{check.req_Code}}</td>
 
                       <td>
@@ -146,7 +146,7 @@
     </button>
                           <div *ngIf="showEdit[check.req_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
 
-                              <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/inquiries/checkout/{{check.req_ID}}" > View Details  </button>
+                              <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/checkout-inquire/checkout/{{check.req_ID}}" > View Details  </button>
                               <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"(click)="InsertCheckOut(check.req_ID)"  > send check out sheet  </button>
 
 

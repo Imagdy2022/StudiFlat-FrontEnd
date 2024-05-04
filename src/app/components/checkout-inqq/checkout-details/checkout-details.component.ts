@@ -131,6 +131,12 @@ User_ID: any;
 {
   this.display1="none"
 }
+imageSize: any;
+opencloseModal(photo: any) {
+  this.display1 = 'block';
+  this.imageSize = photo;
+}
+
 cost_expense:any=""
 expense_type:any=""
 Description_expense:any=""
@@ -339,7 +345,7 @@ progress = 0;
     );
 }
 gotoListCheckOut(){
-  let url: string = "/inquiries/checkout-inquire";
+  let url: string = "/checkout-inquire";
   this.router.navigateByUrl(url);
 }
 }

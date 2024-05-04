@@ -24,7 +24,7 @@
 
               </div>
 
-              <app-dropdown class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
+              <app-dropdown  [list]="listDropDown" style="margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
           </div>
       </div>
 
@@ -84,7 +84,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-termina>
 
-                  <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/inquiries/view-cancel/{{termina.term_ID}}">
+                  <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/cancel-inquire/view-cancel/{{termina.term_ID}}">
 
 
                       <td>
@@ -127,7 +127,7 @@
     </button>
                           <div *ngIf="showEdit[termina.term_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
 
-                              <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/inquiries/view-cancel/{{termina.term_ID}}" > View Details  </button>
+                              <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/cancel-inquire/view-cancel/{{termina.term_ID}}" > View Details  </button>
 
                           </div>
 
