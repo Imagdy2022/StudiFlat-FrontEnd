@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 
@@ -34,6 +35,7 @@ export class OwnerProfileComponent implements OnInit{
   loadingButton: boolean = false;
   // param title page
   pageTitle:any
+  subscriptions:Subscription[] = [];
 
   ngOnInit() {
     this.initCities();
@@ -84,11 +86,12 @@ export class OwnerProfileComponent implements OnInit{
   OnwerDetail:any={}
   GetOwnerProfile(): void {
        this.id = this.param
-       this._OnwerService.GetOwnerProfile(this.id).subscribe((res) => {
+       this.subscriptions.push(this._OnwerService.GetOwnerProfile(this.id).subscribe((res) => {
         this.createOwner.patchValue(res);
         this.OnwerDetail=res
         this.imageUrl=res["owner_Photo"]
-      })
+      }));
+
       this.param = "Owner details";
       this.listAnchors = [
         { id: 'Generalinfo', link: 'General info' },
@@ -172,7 +175,7 @@ export class OwnerProfileComponent implements OnInit{
     data.value.owner_WA_Number = String(data.value.owner_WA_Number);
     this.loadingButton = true;
     if (this.param == "Create New") {
-      this._OnwerService.createOwner({
+      this.subscriptions.push(  this._OnwerService.createOwner({
         ...data.value, ...this.selectedCity, ...{ "nationality": "AF", "Gender": "UnSpecified", "Country": "UnSpecified", Status: "1" }
       }).subscribe((res) => {
         this.loadingButton = false;
@@ -181,13 +184,13 @@ export class OwnerProfileComponent implements OnInit{
         this.loadingButton = false;
         console.error('Error fetching CreateOwner:', err);
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.title}` });
-      })
+      }));
+
     }
 
     else {
       const editData = { ...data.value, ...{ "nationality": "AF", "owner_ID": this.id, "Gender": "UnSpecified", "Country": "UnSpecified" } }
-
-      this._OnwerService.editOwner(this.id, editData).subscribe((res) => {
+      this.subscriptions.push(this._OnwerService.editOwner(this.id, editData).subscribe((res) => {
         this.loadingButton = false;
         this.router.navigate(['/owners'])
       }, (err) => {
@@ -195,7 +198,8 @@ export class OwnerProfileComponent implements OnInit{
         console.error('Error fetching CreateOwner:', err);
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.title}` });
 
-      })
+      }));
+
     }
   }
 
@@ -237,12 +241,12 @@ export class OwnerProfileComponent implements OnInit{
       const selectedFile = event.target.files[0];
       const formData = new FormData();
       formData.append('fileData', selectedFile, selectedFile.name);
-
-      this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
+      this.subscriptions.push( this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;
         this.changeImageUrl.emit(img[0].file_Path);
         this.loadingButton = false;
-      })
+      }))
+
     } else if (event == 'delete') {
       this.imageUrl = '';
       this.changeImageUrl.emit(this.defaultImageUrl());
@@ -251,6 +255,10 @@ export class OwnerProfileComponent implements OnInit{
   }
   defaultImageUrl(): string {
     return 'https://t4.ftcdn.net/jpg/05/50/60/49/360_F_550604961_BZT4vo52ysIku2cQ3Zn8sAQg1rXHBKv0.jpg'
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 
 }
