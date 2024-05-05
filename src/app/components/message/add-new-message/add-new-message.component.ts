@@ -24,6 +24,8 @@ export class AddNewMessageComponent {
   disablenext = false;
   disableperv = false;
   userSelectId :any;
+  checkedUsers: any[] = [];
+  selectedUsersIds: number[] = [];
 
   constructor(
     public _adminservices: AdminsService,
@@ -107,7 +109,22 @@ export class AddNewMessageComponent {
     this.getAllTenants();
   }
   selectAll(ev: any) {
-
+    if (ev.target.checked) {
+      this.checkedUsers = [];
+      this.Tenants.forEach((user : any) => {
+        document.getElementById(`selectedUser-${user.tenant_ID}`)?.setAttribute('checked', 'true');
+        this.checkedUsers.push(user);
+        this.selectedUsersIds.push(user.tenant_ID);
+      });
+    }
+    else {
+      this.Tenants.forEach((user:any) => {
+        document
+          .getElementById(`selectedUser-${user.tenant_ID}`)
+          ?.removeAttribute('checked');
+      });
+      this.checkedUsers = [];
+    }
   }
   onCheckboxChange(e: any) {
     if(e.target.checked){

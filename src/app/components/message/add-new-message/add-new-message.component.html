@@ -68,8 +68,8 @@
                   <tr>
 
                       <td class="d-flex align-items-center">
-                        <input type="checkbox" id="selectedUser-{{ Tenant.tenant_ID }}" value="{{ Tenant.tenant_ID }}"
-                        name="selectedContent" (change)="onCheckboxChange($event)" class="me-2"/>
+                        <input type="checkbox" id="selectedUser-{{Tenant.tenant_ID}}" value="{{Tenant.tenant_ID}}"
+                        name="selectedUser" (change)="onCheckboxChange($event)" class="me-2"/>
                            {{Tenant?.tenant_Name}}
 
                       </td>
