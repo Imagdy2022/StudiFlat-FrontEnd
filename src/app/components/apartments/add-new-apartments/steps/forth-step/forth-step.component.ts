@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-forth-step',
   templateUrl: './forth-step.component.html',
@@ -32,6 +33,7 @@ export class ForthStepComponent {
   inputField: Array<any> = []
   /** selectedContract */
   selectedContract: any;
+  subscriptions:Subscription[] = [];
 
   /** addApartment */
   @Input() addApartment: string = '';
@@ -69,8 +71,7 @@ export class ForthStepComponent {
   aprt_details_Edit :any
   wifi:any
   getApartmentDetails() {
-
-    this._ApartmentService.getApartDetail(this.idParamterEdit).subscribe((res) => {
+    this.subscriptions.push(this._ApartmentService.getApartDetail(this.idParamterEdit).subscribe((res) => {
 
       this.aprt_details_Edit = res.backup_Info
       this.wifi = res.rent_Rules
@@ -93,7 +94,9 @@ export class ForthStepComponent {
       // this.checkedOnline = Boolean(res.backup_Info["payment_Methods"][0].payment_Method_Name)
       //  this.checkedPayPal =  Boolean(res.backup_Info["payment_Methods"][1].payment_Method_Name)
      //  this.checkedCash =  Boolean(res.backup_Info["payment_Methods"][1].payment_Method_Name)
-     })
+     }))
+
+
   }
   // get  local storage
   getLocalStorage(): void {
@@ -139,7 +142,7 @@ export class ForthStepComponent {
     formData.append('fileData', selectedFile, selectedFile.name);
 
     if (file) {
-      this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
+      this.subscriptions.push( this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
         file.url = URL.createObjectURL(file);
         this.selectedContract = file;
         this.PostBackupInfo.get('dmgs_Imgs')?.patchValue(
@@ -149,7 +152,8 @@ export class ForthStepComponent {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `damage Upload Successfuly` });
       }, (err) => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please try again` });
-      });
+      }));
+
     }
   }
 
@@ -226,12 +230,13 @@ export class ForthStepComponent {
     localStorage.setItem("PostBackupInfo", JSON.stringify({ ...payloadData, CreateapartmentCurrentlyExisting: this.CreateapartmentCurrentlyExisting }))
     this.checkValidData()
 
-    this._ApartmentService.createPostSec4(payloadData, this.id).subscribe((res) => {
+    this.subscriptions.push( this._ApartmentService.createPostSec4(payloadData, this.id).subscribe((res) => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Congrats! Success Creation'}` });
       this.router.navigate(['apartments']);
     }, (err: any) => {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-    })
+    }));
+
   }
   saveInputField(value: any): void {
     this.inputField.push(value)
@@ -328,18 +333,19 @@ storedImages:any
        upload(): void {
         this.spinner=true;
 
-                this.uploadService.uploadMultiFile(this.convertFileToFormData(this.ListFiles)).subscribe(data => {
-                  this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Images Upload Successfully'}` });
+        this.subscriptions.push(  this.uploadService.uploadMultiFile(this.convertFileToFormData(this.ListFiles)).subscribe(data => {
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Images Upload Successfully'}` });
 
-                  for (let file of data) {
-                    this.apt_imgs.push({ 'pic_URL': file.name });
-                  }
-                  // this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
-                  this.PostBackupInfo.get('dmgs_Imgs')?.patchValue(this.apt_imgs);
-                  localStorage.setItem("imagesAPT11", JSON.stringify(this.apt_imgs));
-                  this.spinner=false;
+          for (let file of data) {
+            this.apt_imgs.push({ 'pic_URL': file.name });
+          }
+          // this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
+          this.PostBackupInfo.get('dmgs_Imgs')?.patchValue(this.apt_imgs);
+          localStorage.setItem("imagesAPT11", JSON.stringify(this.apt_imgs));
+          this.spinner=false;
 
-                });
+        }));
+
               }
               convertFileToFormData(files: any[]) {
                 const formData = new FormData();
@@ -353,4 +359,9 @@ storedImages:any
               apt_imgs: Array<any> = [];
               /** uploadedFiles */
               uploadedFiles: any[] = [];
+
+              ngOnDestroy() {
+                for(let i=0;i<this.subscriptions.length;i++)
+                this.subscriptions[i].unsubscribe();
+              }
 }

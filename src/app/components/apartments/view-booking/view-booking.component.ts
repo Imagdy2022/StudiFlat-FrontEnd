@@ -2,6 +2,7 @@ import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { InquiresService } from 'src/app/_services/inquires/inquires.service';
@@ -18,6 +19,7 @@ export class ViewBookingComponent implements OnInit {
   selectedCity: Object = {};
   available: boolean = true;
   link: Array<boolean> = [true];
+  subscriptions:Subscription[] = [];
   listAnchors: any = [
     { id: 'Generalinfo', link: 'General info' },
     { id: 'OtherDetails', link: 'Other Details' },
@@ -90,12 +92,13 @@ export class ViewBookingComponent implements OnInit {
   tReqHistory:any={}
   tenant_photo=""
   GetReqHistory(  ) {
-    this._adminservices.GetReqHistory(this.param).subscribe((res) => {
-    this.tReqHistory = res ;
+    this.subscriptions.push( this._adminservices.GetReqHistory(this.param).subscribe((res) => {
+      this.tReqHistory = res ;
 
-    }, (error) => {
-     console.error('Error fetching owners:', error);
-  })
+      }, (error) => {
+       console.error('Error fetching owners:', error);
+    }));
+
 }
 User_ID: any;
  FName: any;
@@ -126,12 +129,12 @@ User_ID: any;
       formData.append('fileData', selectedFile, selectedFile.name);
       this.formData2.append('User_Img', selectedFile);
 
+    this.subscriptions.push(  this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
+      this.imageUrl = img[0].file_Path;
+      this.changeImageUrl.emit(img[0].file_Path);
+      this.loadingButton = false;
+    }));
 
-      this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
-        this.imageUrl = img[0].file_Path;
-        this.changeImageUrl.emit(img[0].file_Path);
-        this.loadingButton = false;
-      })
     } else if (event == 'delete') {
       this.imageUrl = '';
       this.changeImageUrl.emit(this.defaultImageUrl());
@@ -150,4 +153,10 @@ User_ID: any;
     let url: string = "invoice/"+id;
     this.router.navigateByUrl(url);
   }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
+  }
+  
 }

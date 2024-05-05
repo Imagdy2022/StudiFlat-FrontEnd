@@ -13,7 +13,7 @@ import { IOnwer } from 'src/app/models/onwer';
 import { MessageService } from 'primeng/api';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { FileUpload } from 'primeng/fileupload';
-import { Observable, concatMap, map, range } from 'rxjs';
+import { Observable, Subscription, concatMap, map, range } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
@@ -86,6 +86,7 @@ export class FirstStepComponent implements OnInit {
   apt_imgs: any = [];
   /** uploadedFiles */
   uploadedFiles: any[] = [];
+  subscriptions:Subscription[] = [];
   // transport in local storage
   localapt_Transports: Array<any> = [];
   // show none dropdown
@@ -146,7 +147,7 @@ export class FirstStepComponent implements OnInit {
   aprt_details_Edit: any = {};
   apt_types_show: any = '';
   getApartmentDetails() {
-    this._ApartmentService
+    this.subscriptions.push(this._ApartmentService
       .getApartDetail(this.idParamterEdit)
       .subscribe((res) => {
         this.aprt_details_Edit = res.general_Info;
@@ -155,17 +156,17 @@ export class FirstStepComponent implements OnInit {
         this.generalInfoForm
           .get('apt_Imgs')
           ?.patchValue(res.general_Info['property_Imgs']);
-
-        this._ApartmentService.getOwnerDropList().subscribe((res) => {
-          this.listDropDownPropertyowner = res.list;
-        });
+          this.subscriptions.push(this._ApartmentService.getOwnerDropList().subscribe((res) => {
+            this.listDropDownPropertyowner = res.list;
+          }))
 
         this.generalInfoForm.patchValue(res.general_Info);
         this.Address = res.general_Info['apt_Address'];
         //  this.localapt_Transports=res.trasponrts
 
         this.Createtransport = res.trasponrts;
-      });
+      }));
+
   }
   // get  local storage
   getLocalStorage(): void {
@@ -201,19 +202,20 @@ export class FirstStepComponent implements OnInit {
    * getApartmentCode
    */
   getApartmentCode() {
-    this._ApartmentService.getApartmentcode().subscribe((res) => {
-      this.apt_UUID = res;
-      localStorage.setItem('apt_UUID', this.apt_UUID);
-    });
+   this.subscriptions.push(  this._ApartmentService.getApartmentcode().subscribe((res) => {
+    this.apt_UUID = res;
+    localStorage.setItem('apt_UUID', this.apt_UUID);
+  }));
+
   }
 
   /**
    * getAowners
    */
   getAowners() {
-    this._ApartmentService.getOwnerDropList().subscribe((res) => {
+    this.subscriptions.push(this._ApartmentService.getOwnerDropList().subscribe((res) => {
       this.listDropDownPropertyowner = res.list;
-    });
+    }));
   }
 
   /**
@@ -229,9 +231,10 @@ export class FirstStepComponent implements OnInit {
    * getArea
    */
   getArea() {
-    this._ApartmentService.getAreaDropList().subscribe((res) => {
+    this.subscriptions.push(this._ApartmentService.getAreaDropList().subscribe((res) => {
       this.listDropDownArea = res.list;
-    });
+    }))
+
   }
 
   /**
@@ -295,7 +298,7 @@ export class FirstStepComponent implements OnInit {
   onUpload(event: any): void {
     this.uploadedFiles = event.files;
     this.convertFileToFormData(this.uploadedFiles);
-    this.uploadService
+    this.subscriptions.push( this.uploadService
       .uploadMultiFile(this.convertFileToFormData(this.uploadedFiles))
       .subscribe((data) => {
         this.messageService.add({
@@ -309,7 +312,7 @@ export class FirstStepComponent implements OnInit {
         }
         this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
         this.generalInfoForm.get('apt_Imgs')?.patchValue(this.apt_imgs);
-      });
+      }));
   }
 
   /**
@@ -464,7 +467,7 @@ export class FirstStepComponent implements OnInit {
     );
 
     if (this.addApartment != 'add new apartments') {
-      this._ApartmentService
+      this.subscriptions.push( this._ApartmentService
         .createPostSec1(
           { ...data.value, apt_Transports: this.Createtransport },
           this.idParamterEdit
@@ -493,9 +496,10 @@ export class FirstStepComponent implements OnInit {
               detail: `${err.error.message[0]}`,
             });
           }
-        );
+        ));
+
     } else {
-      this._ApartmentService
+      this.subscriptions.push(this._ApartmentService
         .createPostSec1(
           { ...data.value, apt_Transports: this.Createtransport },
           this.id
@@ -524,7 +528,8 @@ export class FirstStepComponent implements OnInit {
               detail: `${err.error.message[0]}`,
             });
           }
-        );
+        ));
+
     }
   }
 
@@ -615,7 +620,7 @@ export class FirstStepComponent implements OnInit {
 
   upload(): void {
     this.spinner = true;
-    this.uploadService
+    this.subscriptions.push( this.uploadService
       .uploadMultiFile(this.convertFileToFormData(this.ListFiles))
       .subscribe((data) => {
         this.messageService.add({
@@ -631,7 +636,8 @@ export class FirstStepComponent implements OnInit {
         this.generalInfoForm.get('apt_Imgs')?.patchValue(this.apt_imgs);
         localStorage.setItem('imagesAPT', JSON.stringify(this.apt_imgs));
         this.spinner = false;
-      });
+      }));
+
   }
 
   display22 = 'none';
@@ -694,5 +700,10 @@ export class FirstStepComponent implements OnInit {
   gotopage() {
     let url: string = 'apartments';
     this.router.navigateByUrl(url);
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

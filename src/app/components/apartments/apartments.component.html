@@ -60,13 +60,13 @@
             <ng-container *ngIf="apartmentList">
                 <ng-container *ngFor="let item of apartmentList;">
 
-                    <div routerLink="/apartments/apartments-details/{{item.apt_UUID}}" class=" col-12 col-md-6 col-lg-3 mb-2  position-relative px-2 h-100" style="height: 393px !important;cursor: pointer;">
+                    <div class=" col-12 col-md-6 col-lg-3 mb-2  position-relative px-2 h-100" style="height: 393px !important;cursor: pointer;">
 
-                        <a  style="height: 46% !important;" class="d-block">
+                        <a  style="height: 46% !important;" class="d-block" routerLink="/apartments/apartments-details/{{item.apt_UUID}}" >
                             <img [src]="item.apt_ThumbImg.includes('http') ? item.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'" class="w-100 h-100 apartmentImage">
                             <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3 " [class.available]="item.statusString != 'Rented'">{{item.statusString}}</p>
                         </a>
-                        <div class="bg-white p-3 details h-50 rounded-bottom">
+                        <div class="bg-white p-3 details h-50 rounded-bottom" >
                             <div class="fw-bold  ">{{item.apt_Name }}</div>
                             <div class="d-flex">
                                 <img src="assets/images/apartmentImages/location.svg" class="my-3">
