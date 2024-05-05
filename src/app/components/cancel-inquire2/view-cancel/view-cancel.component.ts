@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import saveAs from 'file-saver';
 import { Guid } from 'guid-typescript';
 import { MenuItem, MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { InquiresService } from 'src/app/_services/inquires/inquires.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class ViewCancelComponent implements OnInit{
   home: MenuItem | undefined;
   gfg: MenuItem[] | undefined;
   showPassportModal: any;
+  subscriptions:Subscription[] = [];
 
   param: any;
   constructor(
@@ -51,7 +52,7 @@ export class ViewCancelComponent implements OnInit{
     this.showSide = value;
   }
   GetRequestDetails() {
-    this._inquiresService.GetTerminationDetails(this.param).subscribe(
+    this.subscriptions.push(    this._inquiresService.GetTerminationDetails(this.param).subscribe(
       (res) => {
         this.inquire_details = res;
          this.prop_imgs = res.apt_Imgs;
@@ -59,11 +60,12 @@ export class ViewCancelComponent implements OnInit{
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
 
   TerminationApproval() {
-    this._inquiresService.TerminationApproval(this.param,true,this.Reason).subscribe(
+    this.subscriptions.push(  this._inquiresService.TerminationApproval(this.param,true,this.Reason).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -79,10 +81,11 @@ export class ViewCancelComponent implements OnInit{
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   TerminationNotApproval() {
-    this._inquiresService.TerminationApproval(this.param,false,this.Reason).subscribe(
+    this.subscriptions.push(    this._inquiresService.TerminationApproval(this.param,false,this.Reason).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -96,7 +99,8 @@ export class ViewCancelComponent implements OnInit{
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   gotoListCancel(){
     let url: string = "/cancel-inquire";
@@ -130,6 +134,11 @@ export class ViewCancelComponent implements OnInit{
   display4:any="none"
   onCloseModal4() {
     this.display4 = 'none';
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }
 

@@ -2,7 +2,7 @@ import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { InquiresService } from 'src/app/_services/inquires/inquires.service';
@@ -19,6 +19,7 @@ export class CheckoutDetailsComponent implements OnInit  {
   selectedCity: Object = {};
   available: boolean = true;
   link: Array<boolean> = [true];
+  subscriptions:Subscription[] = [];
   listAnchors: any = [
     { id: 'Generalinfo', link: 'General info' },
     { id: 'OtherDetails', link: 'Other Details' },
@@ -59,12 +60,13 @@ export class CheckoutDetailsComponent implements OnInit  {
   CheckoutSheet:any={}
   tenant_photo=""
   GeCheckoutSheet(  ) {
-    this._adminservices.GetCheckoutSheetDetails(this.param).subscribe((res) => {
-    this.CheckoutSheet = res ;
+    this.subscriptions.push(  this._adminservices.GetCheckoutSheetDetails(this.param).subscribe((res) => {
+      this.CheckoutSheet = res ;
 
-    }, (error) => {
-     console.error('Error fetching owners:', error);
-  })
+      }, (error) => {
+       console.error('Error fetching owners:', error);
+    }))
+
 }
 User_ID: any;
  FName: any;
@@ -94,12 +96,12 @@ User_ID: any;
       const formData = new FormData();
       formData.append('fileData', selectedFile, selectedFile.name);
       this.formData2.append('User_Img', selectedFile);
-
-      this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
+      this.subscriptions.push( this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;
         this.changeImageUrl.emit(img[0].file_Path);
         this.loadingButton = false;
-      })
+      }))
+
     } else if (event == 'delete') {
       this.imageUrl = '';
       this.changeImageUrl.emit(this.defaultImageUrl());
@@ -145,7 +147,7 @@ uploadPic2(event: any) {
   const selectedFile = event.target.files[0];
   this.formData2 = new FormData();
   this.formData2.append('fileData', selectedFile, selectedFile.name);
-   this.uploadFile
+  this.subscriptions.push(   this.uploadFile
     .uploadSingleFile(this.formData2)
     .subscribe((data) => {
       this.urlimageadd=data[0].file_Path
@@ -154,7 +156,8 @@ uploadPic2(event: any) {
         summary: 'Success',
         detail: `${'Images Upload Successfully'}`,
       });
-    });
+    }))
+
 }
 selectedFiles?: FileList;
 currentFile?: File;
@@ -208,8 +211,7 @@ progress = 0;
    expense_Desc : this.Description_expense,
    expense_File : this.urlimageadd,
  }
-
-    this._adminservices.AddExpense(data).subscribe(
+    this.subscriptions.push(    this._adminservices.AddExpense(data).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -230,7 +232,8 @@ progress = 0;
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
   idUpdat:any=""
   OpenupdateExpene(data:any){
@@ -249,38 +252,37 @@ progress = 0;
       expense_Desc : this.Description_expense,
       expense_File : this.urlimageadd,
     }
+       this.subscriptions.push(       this._adminservices.UpdateExpense(data).subscribe(
+        (res: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: res['message'],
+          });
+          this.display2 = 'none';
+          this.expense_type = "";
+          this.cost_expense=""
+          this.Description_expense=""
+          this.urlimageadd=""
+          this.GeCheckoutSheet();
 
-       this._adminservices.UpdateExpense(data).subscribe(
-         (res: any) => {
-           this.messageService.add({
-             severity: 'success',
-             summary: 'Success',
-             detail: res['message'],
-           });
-           this.display2 = 'none';
-           this.expense_type = "";
-           this.cost_expense=""
-           this.Description_expense=""
-           this.urlimageadd=""
-           this.GeCheckoutSheet();
+        },
+        (err: any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${err.error.message[0]}`,
+          });
+        }
+      ))
 
-         },
-         (err: any) => {
-           this.messageService.add({
-             severity: 'error',
-             summary: 'Error',
-             detail: `${err.error.message[0]}`,
-           });
-         }
-       );
   }
   display2="none"
   onCloseModal2(){
     this.display2="none"
   }
   DeleteExpene(termina:any){
-
-    this._adminservices.DeleteExpense(termina.expense_ID).subscribe(
+    this.subscriptions.push(    this._adminservices.DeleteExpense(termina.expense_ID).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -302,7 +304,7 @@ progress = 0;
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
 
   }
   showEdit: Array<boolean> = [];
@@ -325,7 +327,7 @@ progress = 0;
   this.display3="none"
  }
  InsertCheckOut( ) {
-  this._adminservices
+  this.subscriptions.push(  this._adminservices
     .InsertCheckOut( this.param)
     .subscribe(
       (res) => {
@@ -342,10 +344,15 @@ progress = 0;
         this.display3="none"
 
       }
-    );
+    ))
+
 }
 gotoListCheckOut(){
   let url: string = "/checkout-inquire";
   this.router.navigateByUrl(url);
+}
+ngOnDestroy() {
+  for(let i=0;i<this.subscriptions.length;i++)
+  this.subscriptions[i].unsubscribe();
 }
 }
