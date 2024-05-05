@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { InquiresService } from 'src/app/_services/inquires/inquires.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { InquiresService } from 'src/app/_services/inquires/inquires.service';
 export class CreacteContractComponent implements OnInit {
   mindate: any;
   param: any;
+  subscriptions:Subscription[] = [];
   constructor(
     private _inquiresService: InquiresService,
     private _ActivatedRoute: ActivatedRoute,
@@ -59,18 +61,19 @@ export class CreacteContractComponent implements OnInit {
   display1 = 'none';
 
   GetContract() {
-    this._inquiresService.GetContract(this.param).subscribe(
+    this.subscriptions.push(    this._inquiresService.GetContract(this.param).subscribe(
       (res) => {
         this.contract_details = res;
       },
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   messagemessage22: any;
   CreateAptContract() {
-    this._inquiresService.CreateAptContract(this.contract_details).subscribe(
+    this.subscriptions.push(  this._inquiresService.CreateAptContract(this.contract_details).subscribe(
       (res) => {
         this.messagemessage22 = res['message'];
         this.messageService.add({
@@ -86,7 +89,8 @@ export class CreacteContractComponent implements OnInit {
           detail: `${'error'}`,
         });
       }
-    );
+    ))
+
 
     this.gotopage2();
   }
@@ -105,5 +109,10 @@ export class CreacteContractComponent implements OnInit {
   gotopage2() {
     let url: string = 'inquiries';
     this.router.navigateByUrl(url);
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as signalR from '@microsoft/signalr';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { ApartmentService } from 'src/app/_services/apartments/apartment.service';
 import { environment } from 'src/environments/environment';
@@ -17,6 +18,7 @@ export class MessageComponent {
   value:any='';
   activePerson:boolean=true;
   targetId:any;
+  subscriptions:Subscription[] = [];
 
 
   constructor(private _ticketService:AdminsService ,private messageService: MessageService,public router: Router) {
@@ -89,7 +91,7 @@ export class MessageComponent {
     getAll_tickets(   ) {
       this._tickets=[]
       this.number_tickets=0
-      this._ticketService.AllTickets(this.date,this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
+      this.subscriptions.push( this._ticketService.AllTickets(this.date,this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
         this._tickets = res["data"];
         this.number_tickets = this._tickets.length;
         this.totalofPages=res["totalPages"]
@@ -110,7 +112,8 @@ export class MessageComponent {
 
        }, (error) => {
          console.error('Error fetching owners:', error);
-      })
+      }))
+
     }
     tiggerPageChange(event: any) {
 
@@ -166,12 +169,18 @@ export class MessageComponent {
   }
   CloseTicket(status:any) {
     let index = this.targetId
-    this._ticketService.CloseTicket(index,status  ).subscribe((res) => {
-       this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
-       this.getAll_tickets();
-       }, (error) => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
-    })
+    this.subscriptions.push( this._ticketService.CloseTicket(index,status  ).subscribe((res) => {
+      this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
+      this.getAll_tickets();
+      }, (error) => {
+     this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+   }))
+
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
   }
 

@@ -67,12 +67,12 @@
                             <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3 " [class.available]="item.statusString != 'Rented'">{{item.statusString}}</p>
                         </a>
                         <div class="bg-white p-3 details h-50 rounded-bottom" >
-                            <div class="fw-bold  ">{{item.apt_Name }}</div>
-                            <div class="d-flex">
+                            <div class="fw-bold  " routerLink="/apartments/apartments-details/{{item.apt_UUID}}">{{item.apt_Name }}</div>
+                            <div class="d-flex" routerLink="/apartments/apartments-details/{{item.apt_UUID}}">
                                 <img src="assets/images/apartmentImages/location.svg" class="my-3">
                                 <p class="fw-bold mt-3 text-left mx-1">{{item.apt_StName}}</p>
                             </div>
-                            <div class="d-flex" style="margin: -25px 0 -10px 0;">
+                            <div class="d-flex" style="margin: -25px 0 -10px 0;" routerLink="/apartments/apartments-details/{{item.apt_UUID}}">
                                 <div class="d-flex justify-content-between">
                                     <img src="assets/images/apartmentImages/room_bed.svg">
                                     <p class="fw-bold mt-4 mx-2">{{item.apt_Bedrooms}}</p>
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div class="Price">
+                                <div class="Price" routerLink="/apartments/apartments-details/{{item.apt_UUID}}">
                                   € {{item.apt_Price}} <span class="time">/ month</span>
                                 </div>
                                 <div>

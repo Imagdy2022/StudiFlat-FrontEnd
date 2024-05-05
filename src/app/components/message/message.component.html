@@ -90,29 +90,29 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-inquire>
 
-                    <tr (click)="hidecard(inquire.request_ID)" routerLink="/messages/message-tiket/{{inquire.chat_ID}}"  style="cursor: pointer;">
+                    <tr (click)="hidecard(inquire.request_ID)" style="cursor: pointer;">
                         <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}">
 
                             {{inquire?.chat_Code}}
                         </td>
-                        <td>
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                           {{inquire?.tenant_Name}}
                         </td>
 
-                        <td>
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                             {{inquire?.apartment_Name}}
                         </td>
-                        <td>
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                           {{inquire?.date_Applied}}
                         </td>
-                        <td >
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                             {{inquire?.asigned_To}}
                         </td>
 
                         <!-- <td>
                       <p class="d-flex align-items-center fw-bold mt-2">{{admin?.status}}</p>
                   </td> -->
-                        <td>
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                           <div>
                               <span class="rounded-5 px-3 badge Opened"  *ngIf="inquire?.chat_Status=='Opened'">
                                 <span>

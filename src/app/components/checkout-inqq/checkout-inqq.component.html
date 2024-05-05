@@ -110,29 +110,29 @@
               </ng-template>
               <ng-template pTemplate="body" let-check>
 
-                  <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/checkout-inquire/checkout/{{check.req_ID}}">
-<td>{{check.req_Code}}</td>
+                  <tr (click)="hidecard()" style="cursor: pointer;" >
+<td routerLink="/checkout-inquire/checkout/{{check.req_ID}}">{{check.req_Code}}</td>
 
-                      <td>
+                      <td routerLink="/checkout-inquire/checkout/{{check.req_ID}}">
                           <img *ngIf="check.user_Photo"  [src]="check?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;">
                           <img *ngIf="!check.user_Photo"   src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">      {{check?.user_Name}}
 
                       </td>
-                      <td>
+                      <td routerLink="/checkout-inquire/checkout/{{check.req_ID}}">
                           {{check?.rented_Apt}}
                       </td>
-                      <td>
+                      <td routerLink="/checkout-inquire/checkout/{{check.req_ID}}">
                           {{check?.rent_Deposit}}
                       </td>
 
-                      <td>
+                      <td routerLink="/checkout-inquire/checkout/{{check.req_ID}}">
                           {{check?.start_Date}}
                       </td>
-                      <td>
+                      <td routerLink="/checkout-inquire/checkout/{{check.req_ID}}">
                         {{check?.end_Date}}
                     </td>
 
-<td>
+<td routerLink="/checkout-inquire/checkout/{{check.req_ID}}">
   <span class="spanready" *ngIf="check.status=='Ready'">
     <img src="../../../assets/images/ready.svg">
     {{check.status}}</span>

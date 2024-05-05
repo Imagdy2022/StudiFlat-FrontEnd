@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -26,6 +27,7 @@ export class AddNewMessageComponent {
   userSelectId :any;
   checkedUsers: any[] = [];
   selectedUsersIds: number[] = [];
+  subscriptions:Subscription[] = [];
 
   constructor(
     public _adminservices: AdminsService,
@@ -64,7 +66,7 @@ export class AddNewMessageComponent {
   getAllTenants() {
     this.Tenants = [];
     this.numberTenants = 0;
-    this._adminservices
+    this.subscriptions.push( this._adminservices
       .GetAllAppUsers(this.pageNumber, this.pagesize, this.searchText)
       .subscribe(
         (res: any) => {
@@ -86,7 +88,8 @@ export class AddNewMessageComponent {
         (error) => {
           console.error('Error fetching owners:', error);
         }
-      );
+      ))
+
   }
   tiggerPageChange(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
@@ -130,6 +133,11 @@ export class AddNewMessageComponent {
     if(e.target.checked){
       this.userSelectId = e.target.value
     }
+    }
+
+    ngOnDestroy() {
+      for(let i=0;i<this.subscriptions.length;i++)
+      this.subscriptions[i].unsubscribe();
     }
 
 }

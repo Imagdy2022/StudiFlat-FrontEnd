@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class AssginTicketComponent implements OnInit {
  loading: boolean = true;
  search:boolean=false
  paramid:any
+ subscriptions:Subscription[] = [];
  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last Week'},{name:'This month'},{name:'This year'}]
 
  constructor(public router: Router, private _ActivatedRoute:ActivatedRoute,public _adminservices:AdminsService ,private messageService: MessageService,) {
@@ -125,17 +127,18 @@ tiggerPageChange(event: any) {
   getAllworkers(  ) {
    this.workers=[]
    this.numberworkers=0
-   this._adminservices.GetAllEmp( this.pageNumber,this.pagesize ).subscribe((res:any) => {
-     this.workers = res["data"];
-     this.totalRecords=res["totalRecords"]
+   this.subscriptions.push(   this._adminservices.GetAllEmp( this.pageNumber,this.pagesize ).subscribe((res:any) => {
+    this.workers = res["data"];
+    this.totalRecords=res["totalRecords"]
 
-     this.numberworkers = this.workers.length;
-     this.totalofPages=res["totalPages"]
+    this.numberworkers = this.workers.length;
+    this.totalofPages=res["totalPages"]
 
 
-    }, (error) => {
-      console.error('Error fetching owners:', error);
-   })
+   }, (error) => {
+     console.error('Error fetching owners:', error);
+  }))
+
  }
 
  detailperson(event:any,id: any): void {
@@ -157,7 +160,7 @@ gotopage( ){
     this.router.navigateByUrl(url);
 }
 AssignWorker(  ) {
-  this._adminservices.AssignTicket( this.paramid,this.idworkerassigin ).subscribe((res) => {
+  this.subscriptions.push(  this._adminservices.AssignTicket( this.paramid,this.idworkerassigin ).subscribe((res) => {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });
     setTimeout(()=>{
        this.gotopage( );
@@ -168,8 +171,10 @@ AssignWorker(  ) {
   }, (err: any) => {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
 
-  })
-
-
+  }))
  }
+ ngOnDestroy() {
+  for(let i=0;i<this.subscriptions.length;i++)
+  this.subscriptions[i].unsubscribe();
+}
 }

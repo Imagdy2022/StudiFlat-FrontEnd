@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-inquiries',
   templateUrl: './inquiries.component.html',
@@ -13,6 +14,7 @@ export class InquiriesComponent implements OnInit {
   Inquires:any=[]
   headerData: Array<any> = [];
   showEdit: Array<boolean> = [];
+  subscriptions:Subscription[] = [];
 
   numberInquires=0;
   constructor(private _inquiresService:InquiresService ,private messageService: MessageService,public router: Router) { }
@@ -96,7 +98,7 @@ gotopage( ){
   getAllInquires(  statusinquires:any) {
     this.Inquires=[]
     this.numberInquires=0
-    this._inquiresService.getAllInquires(statusinquires,this.pageNumber,this.pagesize,this.date,this.searchText).subscribe((res:any) => {
+    this.subscriptions.push(this._inquiresService.getAllInquires(statusinquires,this.pageNumber,this.pagesize,this.date,this.searchText).subscribe((res:any) => {
       this.Inquires = res["data"];
       this.numberInquires = this.Inquires.length;
       this.totalofPages=res["totalPages"]
@@ -117,7 +119,8 @@ gotopage( ){
 
      }, (error) => {
        console.error('Error fetching owners:', error);
-    })
+    }))
+
   }
   tiggerPageChange(event: any) {
 
@@ -220,14 +223,15 @@ event.stopPropagation()
     }
   }
   AddWaitingList(id:any){
-    this._inquiresService.AddWaitingList(id).subscribe((res) => {
+    this.subscriptions.push( this._inquiresService.AddWaitingList(id).subscribe((res) => {
       this.messageService.add({   severity: 'success', summary: 'Success', detail: 'Add Successfuly' });
 
       this.clickIquires( this.checkindex) ;
 
      }, (error) => {
       this.messageService.add({   severity: 'error', summary: 'error', detail: 'error' });
-    })
+    }))
+
   }
   display1="none";
   onCloseModal1(){
@@ -241,7 +245,7 @@ event.stopPropagation()
   }
   Reason=""
   CancelRequest( ){
-    this._inquiresService.CancelRequest(this.idRequest,this.Reason).subscribe((res) => {
+    this.subscriptions.push( this._inquiresService.CancelRequest(this.idRequest,this.Reason).subscribe((res) => {
       this.clickIquires( this.checkindex) ;
       this.display1="none"
       this.messageService.add({   severity: 'success', summary: 'Success', detail: 'Cancel Request Successfuly' });
@@ -249,7 +253,8 @@ event.stopPropagation()
 
      }, (error) => {
       this.messageService.add({   severity: 'error', summary: 'error', detail: 'error' });
-    })
+    }))
+
   }
   hidecard(id:any){
      this.showEdit=[]
@@ -269,5 +274,9 @@ event.stopPropagation()
     this.getAllInquires(this.statusinquire)
     // this.searchText =""
 
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { ApartmentService } from 'src/app/_services/apartments/apartment.service';
 
@@ -14,6 +15,7 @@ export class InquireEditComponent implements OnInit {
   generalInfoForm!: FormGroup;
 
   apt_UUID: any;
+  subscriptions:Subscription[] = [];
 
   constructor(public _ApartmentService: ApartmentService, public _ActivatedRoute: ActivatedRoute,
     public _OnwerService :OnwerService,private sanitizer: DomSanitizer,public router: Router)
@@ -70,14 +72,18 @@ gotopage( ){
   }
   aprt_details:any
   getApartmentDetails() {
-
-    this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
+    this.subscriptions.push(  this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
       this.aprt_details = res["general_Info"]
 
       this.generalInfoForm.get("apt_Price")?.setValue(res["general_Info"].apt_Price)
       this.generalInfoForm.get("apt_SecuirtyDep")?.setValue(res["general_Info"].apt_SecuirtyDep)
       this.generalInfoForm.get("apt_MaxGuest")?.setValue(res["general_Info"].apt_MaxGuest)
 
-    })
+    }))
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

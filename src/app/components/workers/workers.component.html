@@ -95,7 +95,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-workers>
 
-                    <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/workers/worker-profile/{{workers.worker_ID}}">
+                    <tr (click)="hidecard()" style="cursor: pointer;" >
 
 
                         <td>
@@ -104,20 +104,20 @@
                             {{workers?.worker_LName}}
 
                         </td>
-                        <td>
+                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
                             {{workers?.worker_Email}}
                         </td>
-                        <td>
+                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
                             {{workers?.worker_PhoneNum}}
                         </td>
 
-                        <td>
+                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
                             {{workers?.worker_WANum}}
                         </td>
-                        <td>
+                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
                             {{workers?.worker_Job}}
                         </td>
-                        <td>
+                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
                             {{workers?.worker_Type}}
                         </td>
 

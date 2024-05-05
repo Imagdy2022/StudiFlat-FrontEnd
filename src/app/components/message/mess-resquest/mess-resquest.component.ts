@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as signalR from '@microsoft/signalr';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { environment } from 'src/environments/environment';
@@ -18,6 +18,7 @@ export class MessResquestComponent implements OnInit {
   value:any=''
   paramid:any=""
   activePerson:boolean=true
+  subscriptions:Subscription[] = [];
    constructor(    private uploadService: UploadFileService,  public router: Router, private _ActivatedRoute:ActivatedRoute,public _ticketService:AdminsService ,private messageService: MessageService,) {
     this.paramid = _ActivatedRoute.snapshot.paramMap.get('id');
 
@@ -35,12 +36,12 @@ export class MessResquestComponent implements OnInit {
   });
 
   connection.on("AppReply", (result: any) => {
-    this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
+    this.subscriptions.push(    this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
 
      }, (error) => {
        console.error('Error fetching owners:', error);
-    });
+    }))
 
   });
   }
@@ -51,12 +52,13 @@ export class MessResquestComponent implements OnInit {
 
   deatail:any={}
   getAll_tickets(   ) {
-     this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
+    this.subscriptions.push(     this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
 
      }, (error) => {
        console.error('Error fetching chat:', error);
-    })
+    }))
+
   }
   detailperson(event:any,id: any): void {
     this.showEdit=[]
@@ -110,22 +112,24 @@ export class MessResquestComponent implements OnInit {
     msg_Body: this.reply_Desc,
     msg_Attachement: this.apt_imgs,
   }
-  this._ticketService.SendMsg(data).subscribe((res) => {
-     this.messageService.add({   severity: 'success', summary: 'Success', detail:"send Success" });
-     this.getAll_tickets(   )
-     this.reply_Desc=""
-     this.apt_imgs=null
-   }, (error) => {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
-  })
+  this.subscriptions.push(  this._ticketService.SendMsg(data).subscribe((res) => {
+    this.messageService.add({   severity: 'success', summary: 'Success', detail:"send Success" });
+    this.getAll_tickets(   )
+    this.reply_Desc=""
+    this.apt_imgs=null
+  }, (error) => {
+   this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+ }))
+
 }
 CloseTicket(status:any) {
-  this._ticketService.CloseTicket(this.paramid,status  ).subscribe((res) => {
-     this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
-     this.gotopage();
-     }, (error) => {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
-  })
+  this.subscriptions.push(  this._ticketService.CloseTicket(this.paramid,status  ).subscribe((res) => {
+    this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
+    this.gotopage();
+    }, (error) => {
+   this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+ }))
+
 }
 display22:any="none"
 imageSize:any=""
@@ -169,15 +173,19 @@ ListFiles:any=[]
 imageList:any={}
 apt_imgs:any
 upload(): void {
-debugger
-           this.uploadService.uploadSingleFile(this.convertFileToFormData(this.ListFiles )).subscribe(data => {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'attach Upload Successfully'}` });
-            debugger
+  this.subscriptions.push(  this.uploadService.uploadSingleFile(this.convertFileToFormData(this.ListFiles )).subscribe(data => {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'attach Upload Successfully'}` });
 
-              this.apt_imgs= data[0].file_Path  ;
+      this.apt_imgs= data[0].file_Path  ;
 
 
 
-          });
+  }))
+
+        }
+
+        ngOnDestroy() {
+          for(let i=0;i<this.subscriptions.length;i++)
+          this.subscriptions[i].unsubscribe();
         }
 }

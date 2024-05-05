@@ -113,7 +113,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-Tenant>
 
-                    <tr (click)="hidecard(Tenant.request_ID)"  routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}"  style="cursor: pointer;">
+                    <tr (click)="hidecard(Tenant.request_ID)"   style="cursor: pointer;">
 
                         <td class="d-flex align-items-center">
 
@@ -123,20 +123,20 @@
                             <img *ngIf="!Tenant.user_Photo" routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{Tenant?.user_Name}}
 
                         </td>
-                        <td>
+                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
                             {{Tenant?.reg_Time}}
                         </td>
-                        <td>
+                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
                             {{Tenant?.email}}
                         </td>
-                        <td>
+                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
                           <span class="ms-3"> {{Tenant?.rent_No}} </span>
                         </td>
 
                         <!-- <td>
                     <p class="d-flex align-items-center fw-bold mt-2">{{admin?.status}}</p>
                 </td> -->
-                        <td>
+                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
                           <div>
                               <span class="rounded-5 px-3 badge excellent" *ngIf="Tenant?.user_Behavior=='Excellent'">
                                 <span>
@@ -168,9 +168,6 @@
                             <div>
                                 <p-tag severity="success" value="Active" [rounded]="true " *ngIf="Tenant?.status==true"> </p-tag>
                                 <p-tag severity="danger" value="Suspended" [rounded]="true " *ngIf="Tenant?.status==false"> </p-tag>
-
-
-
                             </div>
                         </td> -->
 
@@ -179,7 +176,7 @@
               <img src="assets/images/edit.svg">
           </button>
                             <div *ngIf="showEdit[Tenant.user_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
-                               <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">Edit</button>
+                               <!-- <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">Edit</button> -->
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteUser(Tenant.user_ID)" *ngIf="TantsRole?.p_Delete==true || is_Super==true"> Delete </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendUser(Tenant.user_ID)">Suspend User </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status==false" (click)="unSuspendUser(Tenant.user_ID)">UnSuspend User </button>
