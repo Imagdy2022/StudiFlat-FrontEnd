@@ -1,21 +1,21 @@
 <!-- start header  -->
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Tenant'"></app-head>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'users'"></app-head>
 </header>
 <!-- end header  -->
 
 <div class="row m-0">
     <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Tenant'"></app-sidebar>
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'users'"></app-sidebar>
     <!-- end sidebar  -->
     <!-- start content page  -->
     <main class="p-4 col-lg-10">
         <div class="d-md-flex justify-content-between">
             <div class="d-flex">
-                <p class="fw-bold me-2"  style="color: #6c6a6a"><a  style="color: #6c6a6a" class="removeUnderLine" routerLink="/users">Tenant </a></p>
+                <p class="fw-bold me-2"  style="color: #6c6a6a"><a  style="color: #6c6a6a" class="removeUnderLine" routerLink="/users">Users </a></p>
 
                 <p class="fw-bold me-2">></p>
-                <p class="fw-bold"  style="color: #6c6a6a">view Tenant </p>
+                <p class="fw-bold"  style="color: #6c6a6a">View User Details</p>
             </div>
             <!-- <div>
                 <button class="outline-0 border-0 rounded-3 py-2 px-3 me-2 fw-bold" style="background-color: #EBEBEB; color:#1F4068"><img src="assets/images/user/share.png"> Share</button>
@@ -62,6 +62,7 @@
                             <img *ngIf="Tenant_details.user_Photo==null||Tenant_details.user_Photo==''" class="imageOfPerson rounded-circle" style="border: 3px solid white;" src="../../../../assets/images/avatardef.jpg">
 
                         </div>
+
 
                     </div>
 

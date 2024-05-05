@@ -8,6 +8,7 @@ import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.serv
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { InquiresService } from 'src/app/_services/inquires/inquires.service';
 import {Location} from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-invoice',
@@ -21,6 +22,7 @@ export class InvoiceComponent implements OnInit {
   selectedCity: Object = {};
   available: boolean = true;
   link: Array<boolean> = [true];
+  subscriptions:Subscription[] = [];
 
    titlePage: string = '';
    changeImageUrl:any;
@@ -76,12 +78,12 @@ export class InvoiceComponent implements OnInit {
 
   _details:any={}
   GetINVDetails(  ) {
-    this._adminservices.GetINVDetails(this.param).subscribe((res) => {
-    this._details = res ;
+    this.subscriptions.push(  this._adminservices.GetINVDetails(this.param).subscribe((res) => {
+      this._details = res ;
 
-    }, (error) => {
-     console.error('Error fetching owners:', error);
-  })
+      }, (error) => {
+       console.error('Error fetching Invoice Details:', error);
+    }));
 }
 
   /**
@@ -108,5 +110,9 @@ export class InvoiceComponent implements OnInit {
       pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
       pdf.save('Filename.pdf');
     });
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

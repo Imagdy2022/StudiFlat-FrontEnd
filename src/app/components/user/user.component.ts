@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class UserComponent {
   products!: Array<object>;
   selectedProducts: Array<object> = [];
   headerData: Array<any> = [];
+  subscriptions:Subscription[] = [];
   loading: boolean = true;
   // search: boolean = false;
   listDropDown: Array<object> = [{ name: 'All' },
@@ -83,23 +85,7 @@ export class UserComponent {
   totalofPages = 0;
   disablenext = false;
   disableperv = false;
-  incrementpage() {
-    this.pageNumber += 1;
-    if (this.pageNumber < 1) {
-      this.pageNumber = 1;
-    }
-    if (this.pageNumber >= this.totalofPages) {
-      this.pageNumber = this.totalofPages;
-    }
-    this.getAllTenants();
-  }
-  decreamentPage() {
-    this.pageNumber -= 1;
-    if (this.pageNumber < 1) {
-      this.pageNumber = 1;
-    }
-    this.getAllTenants();
-  }
+
   Tenants = [];
   numberTenants = 0;
   totalRecords = 0;
@@ -107,7 +93,7 @@ export class UserComponent {
   getAllTenants() {
     this.Tenants = [];
     this.numberTenants = 0;
-    this._adminservices
+    this.subscriptions.push( this._adminservices
       .TenantList(this.pageNumber, this.pagesize, this.Date, this.searchText)
       .subscribe(
         (res: any) => {
@@ -129,15 +115,20 @@ export class UserComponent {
         (error) => {
           console.error('Error fetching owners:', error);
         }
-      );
+      ));
+
   }
   tiggerPageChange(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber = calcPageNumber;
     this.getAllTenants();
   }
+  FilterButtons(value:any){
+    this.Date=value;
+    this.getAllTenants()
+  }
   DeleteUser(id: any) {
-    this._adminservices.DeleteTenant(id).subscribe(
+    this.subscriptions.push(this._adminservices.DeleteTenant(id).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -154,10 +145,11 @@ export class UserComponent {
           detail: `${'error'}`,
         });
       }
-    );
+    ));
+
   }
   SuspendUser(id: any) {
-    this._adminservices.SuspendTenant(id).subscribe(
+    this.subscriptions.push( this._adminservices.SuspendTenant(id).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -174,10 +166,10 @@ export class UserComponent {
           detail: `${'error'}`,
         });
       }
-    );
+    ));
   }
   unSuspendUser(id: any) {
-    this._adminservices.UnSuspendTenant(id).subscribe(
+    this.subscriptions.push(  this._adminservices.UnSuspendTenant(id).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -194,7 +186,7 @@ export class UserComponent {
           detail: `${'error'}`,
         });
       }
-    );
+    ));
   }
   detailperson(event: any, id: any): void {
     this.showEdit = [];
@@ -221,5 +213,9 @@ export class UserComponent {
     // this.search = false;
     this.getAllTenants();
     // this.searchText = '';
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }
