@@ -94,7 +94,7 @@ gotopage( ){
 
 
     this.apartmentFillterSelected = [true];
-    this.listDropDown = [{ name: 'All' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
+    this.listDropDown = [{ name: 'All  ' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
   }
 
   /**

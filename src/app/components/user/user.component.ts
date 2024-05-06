@@ -21,7 +21,7 @@ export class UserComponent {
   monthButton  : boolean= true;
   weekButton  : boolean= false;
   // search: boolean = false;
-  listDropDown: Array<object> = [{ name: 'All' },
+  listDropDown: Array<object> = [{ name: 'All  ' },
     { name: 'Today' },
     { name: 'Last Week' },
     { name: 'This month' },

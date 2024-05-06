@@ -26,7 +26,7 @@ export class MainFileComponent {
   monthButton  : boolean= true;
   weekButton  : boolean= false;
   listDropDown: Array<object> = [
-    { name: 'All' },
+    { name: 'All  ' },
     { name: 'Today' },
     { name: 'Last Week' },
     { name: 'This Month' },

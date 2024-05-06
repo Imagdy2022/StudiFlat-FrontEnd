@@ -217,6 +217,7 @@ export class AddNewMessageComponent {
       }
       this.subscriptions.push( this._ticketService.SendMsgtoMultiUsers(data).subscribe((res) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail:"send Success" });
+        this.onCloseModal1();
 
       }, (error) => {
        this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });

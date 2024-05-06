@@ -14,12 +14,12 @@
             <p class="fw-bold ms-1" style="color: #6c6a6a;">inquiries</p>
             <div class="d-flex justify-content-lg-between  ">
                 <!-- <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
-                <div class="d-flex mb-2 me-3 ">
+               
+              <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+            <div class="d-flex mb-2  ">
                   <button class="week rounded-start px-3 py-2 bg-w outline-none" (click)="FilterButtons('This Month')" [ngClass]="{'activeButton': monthButton == true}">This Month</button>
                   <button class="week px-3 py-2 outline-none rounded-end" (click)="FilterButtons('Last Week')" [ngClass]="{'activeButton': weekButton == true}">Last Week</button>
-              </div>
-              <app-dropdown class="" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-            </div>
+              </div> </div>
             <!-- start add button (add new apartment) in page  -->
             <!-- end add button (add new apartment) in page  -->
 

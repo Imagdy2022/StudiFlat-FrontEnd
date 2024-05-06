@@ -21,7 +21,7 @@ export class AdsComponent implements OnInit {
   search: boolean = false;
   subscriptions:Subscription[] = [];
   listDropDown: Array<object> = [
-    { name: 'All' },
+    { name: 'All  ' },
     { name: 'Today' },
     { name: 'Last Week' },
     { name: 'This month' },
