@@ -18,6 +18,8 @@ export class PaymentsComponent implements OnInit {
   PaymentCards: any = {};
   checked: boolean = false;
   subscriptions:Subscription[] = [];
+  monthButton  : boolean= true;
+  weekButton  : boolean= false;
 
   reminderForm: FormGroup = new FormGroup({
     inv_ID: new FormControl(null),
@@ -179,6 +181,13 @@ dropdownOption: Array<any> = [];
    }
    FilterButtons(value:any){
     this.Date=value;
+    if(this.Date == 'This Month'){
+      this.monthButton = true;
+      this.weekButton = false
+    }else{
+      this.monthButton = false;
+      this.weekButton = true;
+    }
     this.GetAllPayments();
 
   }

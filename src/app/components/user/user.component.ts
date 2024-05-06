@@ -18,6 +18,8 @@ export class UserComponent {
   headerData: Array<any> = [];
   subscriptions:Subscription[] = [];
   loading: boolean = true;
+  monthButton  : boolean= true;
+  weekButton  : boolean= false;
   // search: boolean = false;
   listDropDown: Array<object> = [{ name: 'All' },
     { name: 'Today' },
@@ -125,6 +127,13 @@ export class UserComponent {
   }
   FilterButtons(value:any){
     this.Date=value;
+    if(this.Date == 'This Month'){
+      this.monthButton = true;
+      this.weekButton = false
+    }else{
+      this.monthButton = false;
+      this.weekButton = true;
+    }
     this.getAllTenants()
   }
   DeleteUser(id: any) {

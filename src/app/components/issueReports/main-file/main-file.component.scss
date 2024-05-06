@@ -1,13 +1,11 @@
-
-.month{
-  background-color: #1F4068;
-  padding: 5px 10px;
-}
-
-.week,.today , .filter {
+.week {
   color: #605D62;
   border: 1px solid #ebebeb;
-  padding: 5px 10px;
+  background-color: #fff;
+}
+.activeButton{
+  background-color: #1F4068;
+  color: #fff
 }
 
 td {

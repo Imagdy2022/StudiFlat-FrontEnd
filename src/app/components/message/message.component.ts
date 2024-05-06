@@ -19,6 +19,8 @@ export class MessageComponent {
   activePerson:boolean=true;
   targetId:any;
   subscriptions:Subscription[] = [];
+  monthButton  : boolean= true;
+  weekButton  : boolean= false;
 
 
   constructor(private _ticketService:AdminsService ,private messageService: MessageService,public router: Router) {
@@ -143,6 +145,13 @@ export class MessageComponent {
     }
     FilterButtons(value:any){
       this.date=value;
+      if(this.date == 'This Month'){
+        this.monthButton = true;
+        this.weekButton = false
+      }else{
+        this.monthButton = false;
+        this.weekButton = true;
+      }
       this.getAll_tickets()
     }
 
