@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
@@ -47,6 +48,7 @@ export class EditPartnerComponent implements OnInit {
  selectedCity: any = '';
  /** loadingButton */
  loadingButton: boolean = false;
+ subscriptions:Subscription[] = [];
  // param title page
  pageTitle:any
  ngOnInit() {
@@ -58,26 +60,24 @@ export class EditPartnerComponent implements OnInit {
  }
  Countries:any=[]
 GetCountries( ) {
-
-  this._adminservices.GetCountries().subscribe((res) => {
+  this.subscriptions.push(this._adminservices.GetCountries().subscribe((res) => {
     this.Countries=res
   }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
 
-  })
+  }))
 
 }
 GetAgencyCode( ) {
-
-  this._adminservices.GetAgencyCode().subscribe((res) => {
+  this.subscriptions.push(this._adminservices.GetAgencyCode().subscribe((res) => {
     this.createpartner.get("partner_Code")?.patchValue(res);
 
   }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
 
-  })
+  }))
 
 }
  partnersRole:any
@@ -131,15 +131,12 @@ Skills(value: any): void {
 localapt_Transports : Array<any>=[];
 LabelTransport: object = { text1: 'skill 1', text2: 'skill 2' };
 GetPartnerProfile( ) {
-
-  this._adminservices.GetPartnerProfile(this.param ).subscribe((res) => {
+  this.subscriptions.push(this._adminservices.GetPartnerProfile(this.param ).subscribe((res) => {
     this.createpartner.patchValue(res);
       this.selectedContractImg = { 'url':res.partner_Passport};  }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-  })
-
-
+  }))
 }
 bindCreatepartner(): void {
   this.createpartner = new FormGroup({
@@ -197,15 +194,12 @@ public onClick(elementId: string): void {
 
 jobs:any=[]
 ListJobs( ) {
-
-  this._adminservices.ListJobs( ).subscribe((res) => {
+  this.subscriptions.push(this._adminservices.ListJobs( ).subscribe((res) => {
     this.jobs=res
   }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-  })
-
-
+  }))
 }
  spinner :boolean= false;
  gotopage( ){
@@ -218,8 +212,7 @@ UpdatePartner(data: any) {
   data.value.partner_WANumber = String(data.value.partner_WANumber);
 
   this.spinner = true;
-
-        this._adminservices.UpdatePartner({ ...data.value},this.param).subscribe((res) => {
+        this.subscriptions.push( this._adminservices.UpdatePartner({ ...data.value},this.param).subscribe((res) => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Your Data has been Successfully updated into DB  '}` });
 
           this.spinner = false;
@@ -230,9 +223,7 @@ UpdatePartner(data: any) {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
           this.spinner = false;
 
-        })
-
-
+        }))
     }
     formData2 = new FormData();
     selectedContractImg:any
@@ -248,7 +239,7 @@ UpdatePartner(data: any) {
         this.spinner = true;
 
         // call the onUpload function to get the link to the file
-        this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
+        this.subscriptions.push(this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
           // create url to preview file
           file.url = URL.createObjectURL(file);
           this.selectedContractImg = file;
@@ -263,7 +254,8 @@ UpdatePartner(data: any) {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please try again` });
           this.spinner = false;
 
-        });
+        }))
+
       }
     }
 
@@ -292,8 +284,7 @@ UpdatePartner(data: any) {
 
     }
     PostJob( ) {
-
-      this._adminservices.PostJob( this.Jobname).subscribe((res) => {
+      this.subscriptions.push(this._adminservices.PostJob( this.Jobname).subscribe((res) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' Job has been Successfully inserted into DB  '}` });
 
 
@@ -306,8 +297,11 @@ UpdatePartner(data: any) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
         this.Jobname=""
 
-      })
+      }))
+  }
 
-
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

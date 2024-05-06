@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -19,6 +19,7 @@ export class PushmsgsComponent implements OnInit {
   headerData: Array<any> = [];
   loading: boolean = true;
   search: boolean = false;
+  subscriptions:Subscription[] = [];
 
   constructor(
     public _adminservices: AdminsService,
@@ -54,9 +55,10 @@ export class PushmsgsComponent implements OnInit {
     this.showSide = value;
   }
   GetAppUsers() {
-    this._adminservices.GetAppUsers().subscribe((res) => {
+    this.subscriptions.push(  this._adminservices.GetAppUsers().subscribe((res) => {
       this.listDropDownArea = res;
-    });
+    }))
+
   }
 
   onOptionsSelected(value: string) {
@@ -87,7 +89,7 @@ export class PushmsgsComponent implements OnInit {
   }
   UserID: any;
   CreateFAQ() {
-    this._adminservices
+    this.subscriptions.push( this._adminservices
       .SendNotification(this.UserID, this.Question_title, this.question_answer)
       .subscribe(
         (res: any) => {
@@ -111,14 +113,15 @@ export class PushmsgsComponent implements OnInit {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ))
+
   }
   numberMsgs = 0;
   Date: any = 'All';
   getAllMsgs() {
     this.Msgs = [];
     this.numberMsgs = 0;
-    this._adminservices.GetPushMsgs(this.pageNumber, this.pagesize).subscribe(
+    this.subscriptions.push( this._adminservices.GetPushMsgs(this.pageNumber, this.pagesize).subscribe(
       (res: any) => {
         this.Msgs = res['data'];
         this.totalRecords = res['totalRecords'];
@@ -129,7 +132,8 @@ export class PushmsgsComponent implements OnInit {
       (error) => {
         console.error('Error fetching Messages:', error);
       }
-    );
+    ))
+
   }
 
   detailperson(event: any, id: any): void {
@@ -183,7 +187,7 @@ export class PushmsgsComponent implements OnInit {
     this.display2 = 'none';
   }
   AddNotification() {
-    this._adminservices
+    this.subscriptions.push( this._adminservices
       .SendNotification(
         this.idMsgs_updat,
         this.Question_title_update,
@@ -208,7 +212,8 @@ export class PushmsgsComponent implements OnInit {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ))
+
   }
 
   partnersRole: any;
@@ -306,5 +311,10 @@ export class PushmsgsComponent implements OnInit {
     this.search = false;
     this.getAllMsgs();
     this.searchText = '';
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

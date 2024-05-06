@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { RolesService } from 'src/app/_services/roles/roles.service';
@@ -16,6 +17,7 @@ export class AddAdminComponent implements OnInit {
   createAdmin!: FormGroup;
   home: MenuItem | undefined;
   gfg: MenuItem[] | undefined;
+  subscriptions:Subscription[] = [];
   constructor(
     private viewportScroller: ViewportScroller,
     private uploadfile: UploadFileService,
@@ -86,14 +88,15 @@ export class AddAdminComponent implements OnInit {
   roles: any = [];
   getAllRolles() {
     this.roles = [];
-    this._rolesService.getAllRolles().subscribe(
+    this.subscriptions.push( this._rolesService.getAllRolles().subscribe(
       (res) => {
         this.roles = res;
       },
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   bindCreateAdmin(): void {
     this.createAdmin = new FormGroup({
@@ -127,12 +130,12 @@ export class AddAdminComponent implements OnInit {
       const selectedFile = event.target.files[0];
       const formData = new FormData();
       formData.append('fileData', selectedFile);
-
-      this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
+      this.subscriptions.push(    this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;
         // this.changeImageUrl.emit(img[0].file_Path);
         this.loadingButton = false;
-      });
+      }))
+
     } else if (event == 'delete') {
       this.imageUrl = '';
       // this.changeImageUrl.emit(this.defaultImageUrl());
@@ -149,7 +152,7 @@ export class AddAdminComponent implements OnInit {
       data.value.phone = String(data.value.phone);
       data.value.user_Img = this.imageUrl;
       this.loadingButton = true;
-      this._adminservices
+      this.subscriptions.push(  this._adminservices
         .createAdmin({
           ...data.value,
         })
@@ -173,7 +176,8 @@ export class AddAdminComponent implements OnInit {
               detail: `${err.error.message[0]}`,
             });
           }
-        );
+        ))
+
     } else {
       this.showEror = 'true';
     }
@@ -196,5 +200,9 @@ export class AddAdminComponent implements OnInit {
     } else {
       this.showEror = 'true';
     }
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

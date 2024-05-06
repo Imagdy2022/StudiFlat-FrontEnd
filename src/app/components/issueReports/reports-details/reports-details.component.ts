@@ -6,6 +6,7 @@ import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-reports-details',
   templateUrl: './reports-details.component.html',
@@ -17,6 +18,7 @@ export class ReportsDetailsComponent {
   Apointment: any;
   display1: any;
   appointement: any = [];
+  subscriptions:Subscription[] = [];
 
   constructor(
     private viewportScroller: ViewportScroller,
@@ -79,7 +81,7 @@ export class ReportsDetailsComponent {
   }
   detialIssue: any = {};
   GetIssueByid() {
-    this._adminservices.GetIssueDetails(this.paramid).subscribe(
+    this.subscriptions.push(    this._adminservices.GetIssueDetails(this.paramid).subscribe(
       (res) => {
         this.detialIssue = res;
         this.appointement = res.appointement;
@@ -93,10 +95,11 @@ export class ReportsDetailsComponent {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
   UpdateIssue() {
-    this._adminservices.UpdateIssue(this.paramid, this.detialIssue).subscribe(
+    this.subscriptions.push(    this._adminservices.UpdateIssue(this.paramid, this.detialIssue).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -114,7 +117,8 @@ export class ReportsDetailsComponent {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
 
   createissue!: FormGroup;
@@ -145,7 +149,7 @@ export class ReportsDetailsComponent {
   onUpload(event: any): void {
     this.uploadedFiles = event.files;
     this.convertFileToFormData(this.uploadedFiles);
-    this.uploadService
+    this.subscriptions.push(    this.uploadService
       .uploadMultiFile(this.convertFileToFormData(this.uploadedFiles))
       .subscribe((data) => {
         this.messageService.add({
@@ -158,7 +162,8 @@ export class ReportsDetailsComponent {
           this.issue_Images.push({ apt_imgs: file.name });
         }
         this.createissue.get('img_Url')?.patchValue(this.issue_Images);
-      });
+      }))
+
   }
   convertFileToFormData(files: any[]) {
     const formData = new FormData();
@@ -216,7 +221,7 @@ export class ReportsDetailsComponent {
     this.Apointment = item.appo_Date + item.appo_Time;
   }
   MarkasProgress() {
-    this._adminservices.MarkasProgress(this.paramid, this.Apointment).subscribe(
+    this.subscriptions.push(    this._adminservices.MarkasProgress(this.paramid, this.Apointment).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -233,7 +238,8 @@ export class ReportsDetailsComponent {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
   display22: any = 'none';
   imageSize: any = '';
@@ -261,7 +267,7 @@ export class ReportsDetailsComponent {
     this.display1 = 'block';
   }
   MarkasProgress2() {
-    this._adminservices
+    this.subscriptions.push(    this._adminservices
       .NewAppointment(this.paramid, this.Apointment3.toLocaleString())
       .subscribe(
         (res) => {
@@ -280,6 +286,12 @@ export class ReportsDetailsComponent {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ));
+
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

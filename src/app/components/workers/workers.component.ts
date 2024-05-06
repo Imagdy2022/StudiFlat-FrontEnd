@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class WorkersComponent implements OnInit {
   selectedProducts: Array<object> = [];
   headerData: Array<any> = [];
   loading: boolean = true;
-  search:boolean=false
+  search:boolean=false;
+  subscriptions:Subscription[] = [];
   listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last Week'},{name:'This month'},{name:'This year'}]
 
   constructor( public _adminservices:AdminsService ,public router: Router,private messageService: MessageService,) { }
@@ -53,28 +55,7 @@ export class WorkersComponent implements OnInit {
   totalofPages=0;;
   disablenext=false;
   disableperv=false;
-  incrementpage(){
 
-    this.pageNumber+=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    if(this.pageNumber>= this.totalofPages){
-      this.pageNumber=this.totalofPages;
-
-    }
-    // this.getAllworkers( );
-  }
-  decreamentPage(){
-    this.pageNumber-=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    // this.getAllworkers( );
-
-  }
 workers=[]
 totalRecords=0
 tiggerPageChange(event: any) {
@@ -88,7 +69,7 @@ tiggerPageChange(event: any) {
    getAllworkers(  ) {
     this.workers=[]
     this.numberworkers=0
-    this._adminservices.GetAllWorkers( this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
+    this.subscriptions.push(this._adminservices.GetAllWorkers( this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
       this.workers = res["data"];
       this.totalRecords=res["totalRecords"]
 
@@ -98,7 +79,8 @@ tiggerPageChange(event: any) {
 
      }, (error) => {
        console.error('Error fetching owners:', error);
-    })
+    }));
+
   }
   // DeleteUser(id :any){
   //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
@@ -135,8 +117,7 @@ tiggerPageChange(event: any) {
 
  }
  deleteworker( id:any) {
-
-  this._adminservices.DeleteWorker(id ).subscribe((res) => {
+  this.subscriptions.push(this._adminservices.DeleteWorker(id ).subscribe((res) => {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' worker has been Successfully deleted into DB  '}` });
 
 
@@ -146,8 +127,7 @@ tiggerPageChange(event: any) {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
 
-  })
-
+  }))
 
 }
 workersRole:any
@@ -186,5 +166,9 @@ searchKey(data: string) {
 searchTextChange: any;
 searchAction() {
   this.getAllworkers();
+}
+ngOnDestroy() {
+  for(let i=0;i<this.subscriptions.length;i++)
+  this.subscriptions[i].unsubscribe();
 }
 }

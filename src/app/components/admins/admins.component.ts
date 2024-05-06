@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class AdminsComponent implements OnInit {
   search: boolean = false;
   /** searchText  */
   searchText: string = '';
+  subscriptions:Subscription[] = [];
   /**dropdownOption */
   searchTextChange: EventEmitter<string> = new EventEmitter<string>();
 
@@ -79,7 +81,7 @@ export class AdminsComponent implements OnInit {
   }
 
   onSubmitModal1() {
-    this._adminservices
+    this.subscriptions.push(this._adminservices
       .UpdateADminStatus(this.statusAdmin, this.idAdmin)
       .subscribe(
         (res) => {
@@ -94,12 +96,13 @@ export class AdminsComponent implements OnInit {
         (error) => {
           console.error('Error fetching owners:', error);
         }
-      );
+      ))
+
   }
   getAllRolles() {
     this.admins = [];
     this.numberadmins = 0;
-    this._adminservices.getAllAdmins().subscribe(
+    this.subscriptions.push( this._adminservices.getAllAdmins().subscribe(
       (res) => {
         this.admins = res;
         this.numberadmins = res.length;
@@ -107,7 +110,8 @@ export class AdminsComponent implements OnInit {
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   addItem(value: string): void {
     this.showSide = value;
@@ -148,7 +152,7 @@ export class AdminsComponent implements OnInit {
     this.display2 = 'block';
   }
   onSubmitModal2() {
-    this._adminservices.DeleteUser(this.idDeleted).subscribe(
+    this.subscriptions.push(   this._adminservices.DeleteUser(this.idDeleted).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -159,6 +163,12 @@ export class AdminsComponent implements OnInit {
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

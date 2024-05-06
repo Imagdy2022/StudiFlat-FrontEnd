@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class ConfigurationsComponent implements OnInit {
   headerData: Array<any> = [];
   loading: boolean = true;
   search: boolean = false;
+  subscriptions:Subscription[] = [];
   listDropDown: Array<object> = [
     { name: 'All' },
     { name: 'Today' },
@@ -58,7 +59,7 @@ export class ConfigurationsComponent implements OnInit {
     this.showSide = value;
   }
   AddConfig() {
-    this._adminservices.AddConfig(this.detailconfig).subscribe(
+    this.subscriptions.push(this._adminservices.AddConfig(this.detailconfig).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -73,19 +74,21 @@ export class ConfigurationsComponent implements OnInit {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
 
   detailconfig: any = {};
   GetAppConfig() {
-    this._adminservices.GetAppConfig().subscribe(
+    this.subscriptions.push(this._adminservices.GetAppConfig().subscribe(
       (res: any) => {
         this.detailconfig = res;
       },
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   partnersRole: any;
   is_Super: any;
@@ -109,5 +112,9 @@ export class ConfigurationsComponent implements OnInit {
   gotopage() {
     let url: string = 'unlegal';
     this.router.navigateByUrl(url);
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }
