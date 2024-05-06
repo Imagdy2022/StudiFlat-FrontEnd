@@ -23,6 +23,8 @@ export class MainFileComponent {
   headerData: Array<any> = [];
   loading: boolean = true;
   search: boolean = false;
+  monthButton  : boolean= true;
+  weekButton  : boolean= false;
   listDropDown: Array<object> = [
     { name: 'All' },
     { name: 'Today' },
@@ -187,6 +189,13 @@ export class MainFileComponent {
   }
   FilterButtons(value:any){
     this.Date=value;
+    if(this.Date == 'This Month'){
+      this.monthButton = true;
+      this.weekButton = false
+    }else{
+      this.monthButton = false;
+      this.weekButton = true;
+    }
     this.getAllIssues();
 
   }

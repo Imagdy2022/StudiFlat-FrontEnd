@@ -17,8 +17,8 @@
             <div class="d-flex justify-content-lg-between ">
               <!-- <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
               <div class="d-flex mb-2 me-3 ">
-                <button class="month rounded-start px-3 py-2 text-white border-0 outline-none" (click)="FilterButtons('This Month')">This Month</button>
-                <button class="week px-3 py-2 outline-none bg-white" (click)="FilterButtons('Last Week')">Last Week</button>
+                <button class="week rounded-start px-3 py-2 bg-w outline-none" (click)="FilterButtons('This Month')" [ngClass]="{'activeButton': monthButton == true}">This Month</button>
+                <button class="week px-3 py-2 outline-none rounded-end" (click)="FilterButtons('Last Week')" [ngClass]="{'activeButton': weekButton == true}">Last Week</button>
             </div>
             <app-dropdown class="" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
           </div>

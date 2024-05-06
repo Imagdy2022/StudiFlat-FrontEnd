@@ -15,6 +15,8 @@ export class InquiriesComponent implements OnInit {
   headerData: Array<any> = [];
   showEdit: Array<boolean> = [];
   subscriptions:Subscription[] = [];
+  monthButton  : boolean= true;
+  weekButton  : boolean= false;
 
   numberInquires=0;
   constructor(private _inquiresService:InquiresService ,private messageService: MessageService,public router: Router) { }
@@ -180,6 +182,13 @@ event.stopPropagation()
  }
  FilterButtons(value:any){
   this.date=value;
+  if(this.date == 'This Month'){
+    this.monthButton = true;
+    this.weekButton = false
+  }else{
+    this.monthButton = false;
+    this.weekButton = true;
+  }
   this.getAllInquires(this.statusinquire)
 }
   checkindex=0;
