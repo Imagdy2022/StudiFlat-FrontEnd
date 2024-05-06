@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
@@ -50,6 +51,7 @@ export class AddWorkerComponent implements OnInit {
   loadingButton: boolean = false;
   // param title page
   pageTitle: any;
+  subscriptions:Subscription[] = [];
   ngOnInit() {
     this.bindCreateworker();
     this.ListJobs();
@@ -153,7 +155,7 @@ export class AddWorkerComponent implements OnInit {
 
   jobs: any = [];
   ListJobs() {
-    this._adminservices.ListJobs().subscribe(
+    this.subscriptions.push(this._adminservices.ListJobs().subscribe(
       (res) => {
         this.jobs = res;
       },
@@ -164,7 +166,8 @@ export class AddWorkerComponent implements OnInit {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
   spinner: boolean = false;
   gotopage() {
@@ -177,7 +180,7 @@ export class AddWorkerComponent implements OnInit {
     data.value.worker_WANum = String(data.value.worker_WANum);
     this.spinner = true;
 
-    this._adminservices
+    this.subscriptions.push(this._adminservices
       .InsertWorker({ ...data.value, worker_Skills: this.worker_Skills })
       .subscribe(
         (res) => {
@@ -198,7 +201,8 @@ export class AddWorkerComponent implements OnInit {
           });
           this.spinner = false;
         }
-      );
+      ))
+
   }
   formData2 = new FormData();
   selectedContractImg: any;
@@ -214,7 +218,7 @@ export class AddWorkerComponent implements OnInit {
       this.spinner = true;
 
       // call the onUpload function to get the link to the file
-      this.uploadService.uploadSingleFile(formData).subscribe(
+      this.subscriptions.push(      this.uploadService.uploadSingleFile(formData).subscribe(
         (img: any) => {
           // create url to preview file
           file.url = URL.createObjectURL(file);
@@ -239,7 +243,8 @@ export class AddWorkerComponent implements OnInit {
           });
           this.spinner = false;
         }
-      );
+      ))
+
     }
   }
 
@@ -266,7 +271,7 @@ export class AddWorkerComponent implements OnInit {
     this.createworker.get('worker_Img')?.setValue(event);
   }
   PostJob() {
-    this._adminservices.PostJob(this.Jobname).subscribe(
+    this.subscriptions.push(this._adminservices.PostJob(this.Jobname).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -286,6 +291,7 @@ export class AddWorkerComponent implements OnInit {
         });
         this.Jobname = '';
       }
-    );
+    ))
+
   }
 }
