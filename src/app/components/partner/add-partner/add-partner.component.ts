@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
@@ -47,6 +48,7 @@ export class AddPartnerComponent implements OnInit {
  selectedCity: any = '';
  /** loadingButton */
  loadingButton: boolean = false;
+ subscriptions:Subscription[] = [];
  // param title page
  pageTitle:any
  ngOnInit() {
@@ -59,27 +61,24 @@ export class AddPartnerComponent implements OnInit {
 
  Countries:any=[]
 GetCountries( ) {
-
-  this._adminservices.GetCountries().subscribe((res) => {
+  this.subscriptions.push(  this._adminservices.GetCountries().subscribe((res) => {
     this.Countries=res
   }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
 
-  })
+  }))
 
 }
 GetAgencyCode( ) {
-  debugger
-  this._adminservices.GetAgencyCode().subscribe((res) => {
-debugger
-     this.createpartner.get("partner_Code")?.patchValue(res);
+  this.subscriptions.push(  this._adminservices.GetAgencyCode().subscribe((res) => {
+    this.createpartner.get("partner_Code")?.patchValue(res);
 
-  }, (err: any) => {
+ }, (err: any) => {
 
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
+   this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
 
-  })
+ }))
 
 }
  partnersRole:any
@@ -186,15 +185,12 @@ public onClick(elementId: string): void {
 
 jobs:any=[]
 ListJobs( ) {
-
-  this._adminservices.ListJobs( ).subscribe((res) => {
+  this.subscriptions.push(  this._adminservices.ListJobs( ).subscribe((res) => {
     this.jobs=res
   }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-  })
-
-
+  }))
 }
  spinner :boolean= false;
  gotopage( ){
@@ -208,7 +204,7 @@ createpartnerpost(data: any) {
 
   this.spinner = true;
 
-        this._adminservices.PostPartner({ ...data.value}).subscribe((res) => {
+        this.subscriptions.push(this._adminservices.PostPartner({ ...data.value}).subscribe((res) => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Your Data has been Successfully inserted into DB  '}` });
 
           this.spinner = false;
@@ -219,7 +215,7 @@ createpartnerpost(data: any) {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
           this.spinner = false;
 
-        })
+        }))
 
 
     }
@@ -237,7 +233,7 @@ createpartnerpost(data: any) {
         this.spinner = true;
 
         // call the onUpload function to get the link to the file
-        this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
+        this.subscriptions.push(this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
           // create url to preview file
           file.url = URL.createObjectURL(file);
           this.selectedContractImg = file;
@@ -252,7 +248,7 @@ createpartnerpost(data: any) {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please try again` });
           this.spinner = false;
 
-        });
+        }))
       }
     }
 
@@ -281,8 +277,7 @@ createpartnerpost(data: any) {
 
     }
     PostJob( ) {
-
-      this._adminservices.PostJob( this.Jobname).subscribe((res) => {
+      this.subscriptions.push(this._adminservices.PostJob( this.Jobname).subscribe((res) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' Job has been Successfully inserted into DB  '}` });
 
 
@@ -295,8 +290,13 @@ createpartnerpost(data: any) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
         this.Jobname=""
 
-      })
+      }))
 
 
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }
