@@ -116,26 +116,26 @@ tr:last-child{
     transform: translateY(-50%);
 }
 }
-input[type="radio"]:after {
+input[type="checkbox"]:after {
   width: 15px;
   height: 15px;
   top: -2px;
   left: -1px;
   position: relative;
-  border-radius: 50%;
+  border-radius: 4px;
   background-color: #fff;
   content: "";
   display: inline-block;
   visibility: visible;
   border: 2px solid #1F4068;
 }
-input[type="radio"]:checked:after {
+input[type="checkbox"]:checked:after {
   width: 15px;
   height: 15px;
   top: -2px;
   left: -1px;
   position: relative;
-  border-radius: 50%;
+  border-radius: 4px;
   background-color: #1F4068;
   content: "";
   display: inline-block;

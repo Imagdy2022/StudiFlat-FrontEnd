@@ -42,7 +42,7 @@
                       <ng-container>
 
                           <th class="td-name">
-                            <input type="radio" name="selectedContent" class="me-2" (change)="selectAll($event)" />
+                            <input type="checkbox" name="selectedContent" class="me-2" (change)="selectAll($event)" />
                               Name
 
                           </th>
@@ -68,7 +68,7 @@
                   <tr>
 
                       <td class="d-flex align-items-center">
-                        <input type="radio" id="selectedUser-{{Tenant.tenant_ID}}" value="{{Tenant.tenant_ID}}"
+                        <input type="checkbox" id="selectedUser-{{Tenant.tenant_ID}}" value="{{Tenant.tenant_ID}}"
                         name="selectedUser" (change)="onCheckboxChange($event)" class="me-2"/>
                            {{Tenant?.tenant_Name}}
 
