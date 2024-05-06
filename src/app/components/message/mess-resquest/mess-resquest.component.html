@@ -40,7 +40,7 @@
                                 <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,deatail[0]?.chat_Message_ID)">
           <img src="assets/images/edit.svg">
       </button>
-                                <div *ngIf="showEdit[deatail?.chat_Message_ID] " style="width: 220px; line-height: 10px;  z-index: 999;   right: 20px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <div *ngIf="showEdit[deatail[0]?.chat_Message_ID] " style="width: 220px; line-height: 10px;  z-index: 999;   right: 20px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
                                     <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/messages/assgin-tiket/{{paramid}}">Reassign Chat to employee</button>
 
                                     <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="CloseTicket('Closed')">Close Chat  </button>

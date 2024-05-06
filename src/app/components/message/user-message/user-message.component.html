@@ -18,13 +18,13 @@
               <div class="border py-2 px-3">
 
                   <div class="d-flex justify-content-between">
-                      <div class="d-flex">
+                      <div class="d-flex" routerLink="/users/app-edite-user-details/{{deatail?.user_ID}}" style="cursor:pointer;">
                           <!-- <img style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;" [src]="deatail?.userPhoto" class="me-3" /> -->
 
-                          <img *ngIf="deatail?.tenant_photo" class="me-3" [src]="deatail?.tenant_photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
+                          <img *ngIf="deatail?.user_Photo" class="me-3" [src]="deatail?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
 
 
-                          <img *ngIf="!deatail?.tenant_photo" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;margin-top: 13px;">
+                          <img *ngIf="!deatail?.user_Photo" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;margin-top: 13px;">
 
                           <div class="ml-3 d-flex justify-content-between">
                               <div class="mt-3">

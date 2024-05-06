@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class AddNewMessageComponent {
 
   showSide: string = '';
   headerData: Array<any> = [];
-  Tenants = [];
+  Tenants :any[] = [];
   numberTenants = 0;
   totalRecords = 0;
   Date: any = 'All';
@@ -28,11 +29,16 @@ export class AddNewMessageComponent {
   checkedUsers: any[] = [];
   selectedUsersIds: number[] = [];
   subscriptions:Subscription[] = [];
+  reply_Desc:any="";
+  apt_imgs:any;
+  isAllUser :boolean = false;
 
   constructor(
     public _adminservices: AdminsService,
     private messageService: MessageService,
-    public router: Router
+    public router: Router,
+    public _ticketService:AdminsService,
+    private uploadService: UploadFileService,
   ) {
   }
   ngOnInit() {
@@ -100,6 +106,14 @@ export class AddNewMessageComponent {
   addItem(value: string): void {
     this.showSide = value;
   }
+  convertFileToFormData(files: any ) {
+    const formData = new FormData();
+
+       formData.append('fileData', files , files.name);
+
+
+    return formData;
+  }
 
   searchText: any = '';
 
@@ -118,6 +132,7 @@ export class AddNewMessageComponent {
         document.getElementById(`selectedUser-${user.tenant_ID}`)?.setAttribute('checked', 'true');
         this.checkedUsers.push(user);
         this.selectedUsersIds.push(user.tenant_ID);
+        this.isAllUser = true;
       });
     }
     else {
@@ -127,12 +142,113 @@ export class AddNewMessageComponent {
           ?.removeAttribute('checked');
       });
       this.checkedUsers = [];
+      this.isAllUser = false;
     }
   }
   onCheckboxChange(e: any) {
     if(e.target.checked){
       this.userSelectId = e.target.value
     }
+    // this.selectedUsersIds.push(this.userSelectId);
+    // console.log(this.selectedUsersIds)
+    // this.checkedUsers = [];
+    // if (e.target.checked) {
+    //   console.log(this.Tenants)
+    //   let user = this.Tenants.find(
+    //     (sc) => sc.tenant_ID == e.target.value
+    //   );
+    //   if (user) {
+    //     this.checkedUsers.push(user);
+    //     this.selectedUsersIds.push(user.tenant_ID);
+
+    //     console.log(this.checkedUsers);
+    //     console.log(this.selectedUsersIds)
+
+    //   }
+    // } else {
+    //   this.checkedUsers.splice(
+    //     this.checkedUsers.findIndex(
+    //       (sc) => sc.tenant_ID == e.target.value
+    //     ),
+    //     1
+    //   );
+    //   console.log(this.checkedUsers);
+    //   console.log(this.selectedUsersIds)
+
+    // }
+    }
+    display1:any;
+    onOpenModal1( ) {
+       this.display1 = 'block';
+    }
+    onCloseModal1() {
+      this.display1 = 'none';
+    }
+    ListFiles:any=[];
+    urls = new Array<string>();
+    selectedFiles?: FileList;
+    currentFile?: File ;selectedContractImg:any;
+    message = '';preview = '';progress = 0;
+    selectFile(event: any): void {
+      this.ListFiles=null
+      this.message = '';
+      this.preview = '';
+      this.progress = 0;
+      this.selectedFiles = event.target.files;
+
+       let files = event.target.files;
+
+      if (files) {
+        this.selectedContractImg = files  ;
+
+        for (let file of files) {
+
+          this.ListFiles=file;
+           let reader = new FileReader();
+          reader.onload = (e: any) => {
+
+             this.urls.push(e.target.result);
+          }
+          reader.readAsDataURL(file);
+        }
+      }
+     this.upload();
+    }
+
+    upload(): void {
+      this.subscriptions.push( this.uploadService.uploadSingleFile(this.convertFileToFormData(this.ListFiles )).subscribe(data => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'attach Upload Successfully'}` });
+        debugger
+
+          this.apt_imgs= data[0].file_Path  ;
+
+
+
+      }))
+
+            }
+
+    SendMsgtoMultiUsers() {
+      let data = {
+        users_IDs: this.selectedUsersIds,
+        msg_Body: this.reply_Desc,
+        msg_Attachement: this.apt_imgs,
+        is_All : this.isAllUser
+      }
+      this.subscriptions.push( this._ticketService.SendMsgtoMultiUsers(data).subscribe((res) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail:"send Success" });
+
+      }, (error) => {
+       this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+     }))
+
+    }
+    NextButtons(){
+      if(this.checkedUsers.length != 0)
+        this.onOpenModal1();
+      else
+      this.router.navigate([`/messages/user-message/${this.userSelectId}`])
+
     }
 
     ngOnDestroy() {

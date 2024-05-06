@@ -659,6 +659,10 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     const url = environment.apiUrl + `/Chat/SendMsg`;
     return this.http.post<any>(url, data, { headers: this.headers });
   }
+  SendMsgtoMultiUsers(data: any): Observable<any> {
+    const url = environment.apiUrl + `/Chat/SendMsgtoMultiUsers`;
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
   GetChatHistory(Chat_ID:string): Observable<any[]> {
     const url = environment.apiUrl + `/Chat/GetChatMessages?Chat_ID=${Chat_ID}`;
 
