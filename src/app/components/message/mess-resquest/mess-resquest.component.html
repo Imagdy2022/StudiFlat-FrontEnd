@@ -23,10 +23,10 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
 
-                            <img *ngIf="deatail[0]?.user_Photo" class="me-3" [src]="deatail[0]?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;">
+                            <img *ngIf="deatail[0]?.user_Photo" class="me-3" [src]="deatail[0]?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;" routerLink="/users/app-edite-user-details/{{deatail[0]?.user_ID}}">
 
 
-                            <img *ngIf="!deatail[0]?.user_Photo" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;margin-top: 13px;">
+                            <img *ngIf="!deatail[0]?.user_Photo" class="me-3" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;margin-top: 13px;" routerLink="/users/app-edite-user-details/{{deatail[0]?.user_ID}}">
 
                             <div class="ml-3 d-flex justify-content-between">
                                 <div class="mt-3">
