@@ -105,7 +105,7 @@
               Cancel
     </button>
             <button type="submit" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important"
-            routerLink="/messages/user-message/{{userSelectId}}">
+         (click)="NextButtons()">
               Next
     </button>
         </div>
@@ -114,3 +114,78 @@
   <!-- end content page  -->
 </div>
 
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" style=" background-color: rgb(23 22 22 / 50%);;">
+  <div class="modal-dialog" role="document" style="    max-width: 800px;">
+      <div class="modal-content" style="    margin-top:  100px;">
+          <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
+              <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                  <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
+                     Send Message
+          </span>
+              </p>
+              <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal1()">
+<span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+</button>
+
+          </div>
+
+          <div class="modal-body">
+
+              <div class="row">
+                  <div class="mb-3 col-12 col-md-12">
+                      <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Message</label>
+                      <textarea class="border p-3 pt-3 rounded-2 w-100" rows="4" style="resize: inherit" placeholder="Please Enter Message"  [(ngModel)]="reply_Desc" ></textarea>
+
+                  </div>
+
+              </div>
+              <div class="row px-3">
+                <p class="gray fw-bold mb-2">Upload Attchement</p>
+
+                <div class="image-upload mainimage">
+                  <input type="file" accept="image/*" multiple="multiple" (change)="selectFile($event)">
+                    <div class="image-uploads">
+                      <div class="d-flex align-items-center justify-content-center text-center h-100" >
+                        <div *ngIf="!apt_imgs" class="text-center imageData pt-2" >
+                          <div class="icon m-auto">
+                            <img src="/assets/images/upload 1.svg" alt="img">
+                           </div>
+                           <p class="mb-0">Click to upload <span class="text-muted fw-normal"> or drag and drop</span></p>
+                           <p class="text-muted fw-normal">PNG, JPG, GIF, or MP4 (max. 8MB)</p>
+                        </div>
+                        <ng-container *ngIf="apt_imgs">
+                          <img  *ngIf="apt_imgs"  [src]="apt_imgs" alt="img"  style="height: 124px;width:150px;">
+                        </ng-container>
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+          </div>
+
+
+
+
+          <div class="modal-footer"style="display: flex; justify-content: space-between;">
+
+                        <a (click)=" onCloseModal1()" style="  cursor: pointer;   border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
+                    Cancel
+      </a>
+                      <button (click)="SendMsgtoMultiUsers()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+                    Send
+      </button>
+                <!-- Confirm -->
+
+          </div>
+
+
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
