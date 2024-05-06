@@ -199,17 +199,32 @@ dropdownOption: Array<any> = [];
  numberInvoices=0;
   GetAllPayments() {
     this.payments=[]
-    let data ={
-      page_No :1,
-      page_Size: 10,
-      filterKey : this.Date,
-      searchKey:this.searchText,
-      payment_Type: this.paymentType,
-      user_Type: this.userType,
-      invoice_Type: this.statuspayment,
-      start_Date: this.rangeDates[0],
-      end_Date:this.rangeDates[1]
-    }
+let data;
+    if(this?.rangeDates)
+      {data ={
+        page_No :1,
+        page_Size: 10,
+        filterKey : this.Date,
+        searchKey:this.searchText,
+        payment_Type: this.paymentType,
+        user_Type: this.userType,
+        invoice_Type: this.statuspayment,
+        start_Date:this?.rangeDates[0],
+        end_Date:this?.rangeDates[1]
+      }}
+      else {
+         data ={
+          page_No :1,
+          page_Size: 10,
+          filterKey : this.Date,
+          searchKey:this.searchText,
+          payment_Type: this.paymentType,
+          user_Type: this.userType,
+          invoice_Type: this.statuspayment,
+        }
+      }
+    
+    
     this.subscriptions.push( this._adminservices.AllPayments(data).subscribe((res:any) => {
       this.payments = res.data;
       this.PaymentCards = res.cards;
