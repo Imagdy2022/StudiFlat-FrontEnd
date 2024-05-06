@@ -14,24 +14,20 @@
     <main class="p-4 col-lg-10">
         <div class="d-md-flex justify-content-between dashboard" style="margin-top: 8px; margin-bottom: 16px;">
             <p class="fw-bold" style="color: #6c6a6a;">Issue Reports</p>
-            <div class="d-flex justify-content-lg-between  ">
+            <div class="d-flex justify-content-lg-between ">
               <!-- <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
-              <div class="d-flex mb-2 me-3">
-                <button class="month rounded-start px-3 py-2 text-white border-0 outline-none">This Month</button>
-                <button class="week px-3 py-2 outline-none bg-white">Last Week</button>
-                <button class="today rounded-end px-3 py-2 outline-none bg-white">Today</button>
-            </div>
-
-            <button class="filter rounded-3 px-3 py-0 outline-none bg-white  mb-2">
-             <img src="./assets/images/filter.svg" alt="">
-              Filter</button>
-          </div>
+             
+            <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+           <div class="d-flex mb-2  ">
+                <button class="week rounded-start px-3 py-2 bg-w outline-none" (click)="FilterButtons('This Month')" [ngClass]="{'activeButton': monthButton == true}">This Month</button>
+                <button class="week px-3 py-2 outline-none rounded-end" (click)="FilterButtons('Last Week')" [ngClass]="{'activeButton': weekButton == true}">Last Week</button>
+            </div></div>
         </div>
 
         <p-toast></p-toast>
 
         <div class="card">
-            <div class="row d-block d-md-flex justify-content-between align-items-center my-2 bg-white px-3 py-3">
+            <div class="row d-block d-md-flex justify-content-between align-items-center my-2 px-3 py-3">
 
                 <div class="col-md-4">
                   <div class="d-flex align-items-center" style="font-size: 15px;">
@@ -97,30 +93,30 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-issue style="height: 200px !important;">
 
-                    <tr style="cursor: pointer;" (click)="hidecard()" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
+                    <tr style="cursor: pointer;" (click)="hidecard()" >
 
 
                         <td class="d-flex align-items-center" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                             {{issue?.issue_Code}}
                         </td>
-                        <td>
+                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                           {{issue?.requsted_By }}
 
                         </td>
 
-                        <td>
+                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                             {{issue?.apartment_Number}}
                         </td>
 
-                        <td>
+                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                             {{issue?.date_Reported | date:'medium' }}
                         </td>
-                        <td>
+                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                           <p style="width: 10vw; overflow: hidden; text-overflow: ellipsis;
                           white-space: nowrap;"> {{issue?.desc}}
                           </p>
                         </td>
-                        <td class="text-center">
+                        <td class="text-center" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                           <div>
                               <span class="rounded-5 px-3 badge Pending" *ngIf="issue?.issue_Status=='Pending'">
                                 {{issue?.issue_Status}}

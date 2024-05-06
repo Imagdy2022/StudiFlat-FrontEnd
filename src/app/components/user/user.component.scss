@@ -1,8 +1,11 @@
-.month,
 .week {
-    color: #757a82;
-    background-color: white;
-    border: 1px solid #ebebeb;
+  color: #605D62;
+  border: 1px solid #ebebeb;
+  background-color: #fff;
+}
+.activeButton{
+  background-color: #1F4068;
+  color: #fff
 }
 
 .cursor {
@@ -151,4 +154,7 @@ tr:last-child{
 }
 ::placeholder{
   font-size: 13px !important;
+}
+.p-dropdown-items-wrapper {
+  max-height: 250px !important;
 }

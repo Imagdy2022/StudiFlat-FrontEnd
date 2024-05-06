@@ -17,14 +17,15 @@
             <p class="fw-bold ms-1" style="color: #6c6a6a;">Messages</p>
             <div class="d-flex justify-content-lg-between  ">
               <div class="d-flex justify-content-lg-between flex-md-row flex-column">
-                <div class="d-flex mb-2 me-3 mb-2">
-                  <button class="month rounded-start px-3 py-2 outline-none bg-white">This Month</button>
-                  <button class="week rounded-end px-3 py-2 outline-none bg-white">Last Week</button>
-              </div>
+                
                 <div class="d-flex mb-2">
                     <!-- start dropdown button  -->
                     <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
                 </div>
+                <div class="d-flex mb-2 me-3 mb-2">
+                  <button class="week rounded-start px-3 py-2 bg-w outline-none" (click)="FilterButtons('This Month')" [ngClass]="{'activeButton': monthButton == true}">This Month</button>
+                  <button class="week px-3 py-2 outline-none rounded-end" (click)="FilterButtons('Last Week')" [ngClass]="{'activeButton': weekButton == true}">Last Week</button>
+              </div>
                 <app-add-new-button *ngIf="StatisticsRole?.p_Add==true || is_Super==true" [id]="'/messages/create-new'" class="mt-2"></app-add-new-button>
               </div>
             </div>
@@ -90,29 +91,29 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-inquire>
 
-                    <tr (click)="hidecard(inquire.request_ID)" routerLink="/messages/message-tiket/{{inquire.chat_ID}}"  style="cursor: pointer;">
+                    <tr (click)="hidecard(inquire.request_ID)" style="cursor: pointer;">
                         <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}">
 
                             {{inquire?.chat_Code}}
                         </td>
-                        <td>
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                           {{inquire?.tenant_Name}}
                         </td>
 
-                        <td>
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                             {{inquire?.apartment_Name}}
                         </td>
-                        <td>
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                           {{inquire?.date_Applied}}
                         </td>
-                        <td >
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                             {{inquire?.asigned_To}}
                         </td>
 
                         <!-- <td>
                       <p class="d-flex align-items-center fw-bold mt-2">{{admin?.status}}</p>
                   </td> -->
-                        <td>
+                        <td routerLink="/messages/message-tiket/{{inquire.chat_ID}}" >
                           <div>
                               <span class="rounded-5 px-3 badge Opened"  *ngIf="inquire?.chat_Status=='Opened'">
                                 <span>

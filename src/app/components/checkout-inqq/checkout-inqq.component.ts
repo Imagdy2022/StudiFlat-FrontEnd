@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as signalR from '@microsoft/signalr';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,6 +15,7 @@ export class CheckoutInqqComponent implements OnInit{
   checkOut:any=[]
   headerData: Array<any> = [];
   showEdit: Array<boolean> = [];
+  subscriptions:Subscription[] = [];
 
   numbercheckOut=0;
   constructor(private _checkOutService:AdminsService ,private messageService: MessageService,public router: Router) { }
@@ -50,34 +52,13 @@ gotopage( ){
   totalofPages=0;;
   disablenext=false;
   disableperv=false;
-  incrementpage(){
 
-    this.pageNumber+=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    if(this.pageNumber>= this.totalofPages){
-      this.pageNumber=this.totalofPages;
-
-    }
-    this.getAllcheckOut(this.statusinquire);
-  }
-  decreamentPage(){
-    this.pageNumber-=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    this.getAllcheckOut(this.statusinquire);
-
-  }
-  date=""
+  date="All"
   totalRecords=0;
   getAllcheckOut(  statuscheckOut:any) {
     this.checkOut=[]
     this.numbercheckOut=0
-    this._checkOutService.GetCheckoutList(this.pageNumber,this.pagesize,this.searchText,statuscheckOut).subscribe((res:any) => {
+    this.subscriptions.push(    this._checkOutService.GetCheckoutList(this.pageNumber,this.pagesize,this.searchText,statuscheckOut,this.date).subscribe((res:any) => {
       this.checkOut = res["data"];
       this.numbercheckOut = this.checkOut.length;
       this.totalofPages=res["totalPages"]
@@ -98,7 +79,8 @@ gotopage( ){
 
      }, (error) => {
        console.error('Error fetching owners:', error);
-    })
+    }))
+
   }
   tiggerPageChange(event: any) {
 
@@ -119,7 +101,7 @@ event.stopPropagation()
     this.showSide = value
   }
   dropdownOption: Array<any> = [];
-  listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
+  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
   Inquiries=[]
   InquireFillterLists: Array<any> = [];
   InquireFillterSelected: Array<any> = [];
@@ -182,7 +164,7 @@ event.stopPropagation()
   }
   display1:any="none"
   InsertCheckOut(REQ_ID:any) {
-    this._checkOutService
+    this.subscriptions.push( this._checkOutService
       .InsertCheckOut(REQ_ID)
       .subscribe(
         (res) => {
@@ -204,7 +186,8 @@ event.stopPropagation()
             detail: 'error',
           });
         }
-      );
+      ))
+
   }
 
 
@@ -223,9 +206,12 @@ event.stopPropagation()
   searchTextChange:any
   searchAction() {
     // this.searchTextChange.emit(this.searchText);
-    this.search = false;
     this.getAllcheckOut(this.statusinquire)
-    this.searchText =""
 
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

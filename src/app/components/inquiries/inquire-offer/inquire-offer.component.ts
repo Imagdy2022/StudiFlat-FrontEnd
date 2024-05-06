@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { ApartmentService } from 'src/app/_services/apartments/apartment.service';
 import { InquiresService } from 'src/app/_services/inquires/inquires.service';
 
@@ -15,6 +16,7 @@ export class InquireOfferComponent implements OnInit {
   showEdit: Array<boolean> = [];
   InquireID: any;
   numberInquires = 0;
+  subscriptions:Subscription[] = [];
   constructor(
     public _ActivatedRoute: ActivatedRoute,
     private _inquiresService: InquiresService,
@@ -50,7 +52,7 @@ export class InquireOfferComponent implements OnInit {
   }
   messagemessage: any;
   AddtoBest(apt_UUID: any) {
-    this.apartmentSer.AddtoBest(apt_UUID).subscribe(
+    this.subscriptions.push(    this.apartmentSer.AddtoBest(apt_UUID).subscribe(
       (res) => {
         this.messagemessage = res['message'];
         this.messageService.add({
@@ -66,7 +68,8 @@ export class InquireOfferComponent implements OnInit {
           detail: `${'error'}`,
         });
       }
-    );
+    ))
+
   }
   gotopage() {
     let url: string = 'unlegal';
@@ -98,7 +101,7 @@ export class InquireOfferComponent implements OnInit {
   apartmentList: any = [];
   getAllApartment(): void {
     this.apartmentList = [];
-    this.apartmentSer
+    this.subscriptions.push(    this.apartmentSer
       .FilterApartmentsFront('', this.pageNumber, 10, 'All', '')
       .subscribe((res) => {
         this.apartmentList = res['data'];
@@ -114,7 +117,8 @@ export class InquireOfferComponent implements OnInit {
         } else {
           this.disableperv = false;
         }
-      });
+      }))
+
   }
   // getAllInquires(  statusinquires:any) {
   //   this.Inquires=[]
@@ -175,7 +179,7 @@ export class InquireOfferComponent implements OnInit {
   ServiceFees: any;
 
   SendOffer() {
-    this._inquiresService
+    this.subscriptions.push(    this._inquiresService
       .SendOffer(
         this.InquireID,
         this.apt_UUID1,
@@ -197,11 +201,16 @@ export class InquireOfferComponent implements OnInit {
             detail: `${'error'}`,
           });
         }
-      );
+      ))
+
   }
 
   gotopage2() {
     let url: string = 'inquiries';
     this.router.navigateByUrl(url);
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

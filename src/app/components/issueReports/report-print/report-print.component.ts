@@ -13,6 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import* as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import saveAs from 'file-saver';
+import { Subscription } from 'rxjs';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 // import * as htmlToPdfmake from 'html-to-pdfmake';
 
@@ -45,7 +46,8 @@ export class ReportPrintComponent implements OnInit {
   selectedCity: Object = {};
   available: boolean = true;
   link: Array<boolean> = [true];
-  param:any
+  param:any;
+  subscriptions:Subscription[] = [];
   listAnchors: any = [
     { id: 'Generalinfo', link: 'General info' },
     { id: 'OtherDetails', link: 'Other Details' },
@@ -94,24 +96,22 @@ export class ReportPrintComponent implements OnInit {
   }
   detialIssue:any={}
   GetIssueByid( ) {
+    this.subscriptions.push(this._adminservices.GetIssueDetails(this.paramid).subscribe((res) => {
+      this.detialIssue=res
 
-    this._adminservices.GetIssueDetails(this.paramid).subscribe((res) => {
-       this.detialIssue=res
+     //  this.createissue.patchValue(res);
+     //  this.createissue.get('issue_Images')?.setValue(res["issue_Images"]);
+    }, (err: any) => {
 
-      //  this.createissue.patchValue(res);
-      //  this.createissue.get('issue_Images')?.setValue(res["issue_Images"]);
-     }, (err: any) => {
-
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-    })
-
+     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
+   }))
 
   }
   blob:any
   CreateIssuePDF( ) {
     var mediaType = 'application/pdf';
+    this.subscriptions.push(this._adminservices.CreateIssuePDF(this.paramid).subscribe(data => saveAs(data, 'Example.pdf')))
 
-    this._adminservices.CreateIssuePDF(this.paramid).subscribe(data => saveAs(data, 'Example.pdf'));
 
       // this.blob = new Blob([res], {type: 'application/pdf'});
 
@@ -162,14 +162,15 @@ export class ReportPrintComponent implements OnInit {
   onUpload(event: any): void {
     this.uploadedFiles = event.files;
     this.convertFileToFormData(this.uploadedFiles);
-    this.uploadService.uploadMultiFile(this.convertFileToFormData(this.uploadedFiles)).subscribe(data => {
+    this.subscriptions.push(    this.uploadService.uploadMultiFile(this.convertFileToFormData(this.uploadedFiles)).subscribe(data => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Images Upload Successfully'}` });
 
       for (let file of data) {
         this.issue_Images.push({ 'apt_imgs': file.name });
       }
        this.createissue.get('img_Url')?.patchValue(this.issue_Images);
-    })
+    }))
+
   }
   convertFileToFormData(files: any[]) {
     const formData = new FormData();
@@ -355,5 +356,9 @@ public downloadAsPDF10() {
   const documentDefinition = { content: html };
   pdfMake.createPdf(documentDefinition).open();
 
+}
+ngOnDestroy() {
+  for(let i=0;i<this.subscriptions.length;i++)
+  this.subscriptions[i].unsubscribe();
 }
 }

@@ -11,22 +11,29 @@
     <!-- start content page  -->
     <main class="p-4 col-lg-10">
         <!-- start part 1 in page  -->
-        <div class="row" style="color: #6c6a6a">
+        <!-- <div class="row" style="color: #6c6a6a">
             <p-breadcrumb class="max-w-full" [model]="gfg" [home]="home"></p-breadcrumb>
 
-        </div>
+        </div> -->
+        <div class="d-md-flex justify-content-between dashboard mt-2">
+          <div class="d-flex">
+              <p routerLink="/inquiries" class="fw-bold me-2" style="color: #6c6a6a; cursor: pointer;">inquiries</p>
+              <img src="assets/images/user/right-arrow.svg" class="me-2" style="margin-top: -15px">
+              <p class="fw-bold" style="color: #6c6a6a">View inquiries</p>
+          </div>
+      </div>
         <p-toast></p-toast>
 
         <!-- end part 1 in page  -->
-        <div class="bg-white border rounded-3 mt-3 p-3">
+        <div class="bg-white border rounded-3 p-4">
             <div class="row">
-                <div class="col-12 col-md-6 me-4">
+                <div class="col-12 col-md-6">
                     <!--    <div class="rounded mb-3" style="overflow: hidde;height: 325px;">
                         <img [src]="inquire_details?.apt_thumb_Img" class="w-100 h-100" />
                     </div> -->
                     <ng-container>
-                        <div class="container testimonial-group">
-                            <div class="row mb-3  vcrr" *ngIf="inquire_details">
+                        <div class="container testimonial-group ">
+                            <div class="row mb-3 vcrr" *ngIf="inquire_details">
 
                                 <!--  <div class="col-md-4  " *ngFor="let img of inquire_details?.apt_Imgs">
 
@@ -34,7 +41,7 @@
                                         <img [src]="img?.apt_imgs && img?.apt_imgs.includes('https') ? img?.apt_imgs : '../../../assets/images/apartmentImages/default_apartment.jpg'" alt="Apartment Image" class="w-100 h-100 maxImg">
                                     </a>
                                 </div> -->
-                                <p-galleria [value]="prop_imgs" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5">
+                                <p-galleria [value]="prop_imgs" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5" class="px-0">
                                     <ng-template pTemplate="item" let-item>
                                         <a (click)="viewImage(item.apt_imgs)" style="cursor: pointer;">
 
@@ -100,9 +107,9 @@
 
                         <!-- <p class="gray mt-3 ms-2"> {{ inquire_details?.requested_By }} </p> -->
                     </div>
-                    <div style="display: flex; align-items: center;" class="w-96 h-16 px-6 py-4 bg-white justify-start items-center gap-3 inline-flex">
+                    <div style="display: flex; align-items: center;cursor: pointer;" routerLink="/users/app-edite-user-details/{{inquire_details?.requested_user_ID}}" class="w-96 h-16 px-6 py-4 bg-white justify-start items-center gap-3 inline-flex">
 
-                        <img routerLink="/app-edite-user-details/{{inquire_details?.requested_user_ID}}" style="     width: 64px; height: 64px;  border-radius: 50%;cursor: pointer;" class="w-10 h-10 rounded-full" [src]="inquire_details?.requested_By_Img!=''?inquire_details?.requested_By_Img:'assets/images/Frame 1261154899.svg'" />
+                        <img  style="     width: 64px; height: 64px;  border-radius: 50%" class="w-10 h-10 rounded-full" [src]="inquire_details?.requested_By_Img!=''?inquire_details?.requested_By_Img:'assets/images/Frame 1261154899.svg'" />
                         <div class="flex-col justify-start items-start inline-flex">
                             <div class="text-zinc-800 text-sm font-semibold font-['Montserrat'] leading-tight">{{ inquire_details?.requested_By }} </div>
                             <div class="text-neutral-400 text-sm font-normal font-['Montserrat'] leading-tight"></div>
@@ -232,7 +239,7 @@
 
                         </div>
 
-                        <div class="accordion-item" *ngIf="inquire_details.check_Date!=null">
+                        <div class="accordion-item" *ngIf="inquire_details?.check_Date!=null">
                             <h2 class="accordion-header" id="flush-headingOne1">
                                 <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1transport1" aria-expanded="false" aria-controls="flush-collapseOne1transport1">
                           Check in
@@ -279,7 +286,7 @@
 
 
                     </div>
-                    <div class="row" *ngIf="inquire_details.cancel_Side==null||inquire_details.cancel_Side=='Admin'||inquire_details.cancel_Side==''">
+                    <div class="row" *ngIf="inquire_details?.cancel_Side==null||inquire_details.cancel_Side=='Admin'||inquire_details.cancel_Side==''">
                         <button *ngIf="inquire_details?.approved==false" (click)="ApproveRequest()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
                         Confirm</button>
 
@@ -299,7 +306,7 @@
                         <div>
                             <div class="  position-relative h-124px mb-3" style="margin-top: 22px;padding:0px">
                                 <!-- start single img upload and preview -->
-                                <div *ngIf="inquire_details.paid==true">
+                                <div *ngIf="inquire_details?.paid==true">
                                     <ng-container>
 
                                         <div class="row rounded-3 my-4 p-2 pt-3 pb-0" style="border: 1px solid #8fa0b4">
@@ -352,12 +359,12 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="inquire_details.paid==true">
+                    <div *ngIf="inquire_details?.paid==true">
                         <div class="row" *ngIf="inquire_details?.approved!=false">
-                            <button *ngIf="inquire_details?.contract_Created==false" routerLink="/create-contract/{{param}}" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important;">
+                            <button *ngIf="inquire_details?.contract_Created==false" routerLink="/inquiries/create-contract/{{param}}" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important;">
                     &nbsp;&nbsp;   Create Contract
       </button>
-                            <button *ngIf="inquire_details?.contract_Created==true" routerLink="/create-contract/{{param}}" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important;">
+                            <button *ngIf="inquire_details?.contract_Created==true" routerLink="/inquiries/create-contract/{{param}}" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important;">
          &nbsp;&nbsp;   Edit Contract
 </button>
 <button  (click)="ResignContract()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4 mt-3" style="background-color: #1f4068 !important;">

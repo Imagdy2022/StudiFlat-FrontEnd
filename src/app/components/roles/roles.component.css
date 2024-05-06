@@ -15,14 +15,34 @@
 }
 
 td {
-    font-size: 14px !important;
-    padding: 1rem .6rem !important;
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
+
 }
 
 th {
-    font-size: 14px !important
+  font-size: 14px !important;
+  font-family: 'Poppins';
+  border-bottom: 1px solid #F6F6F6 !important;
+  background: #F6F6F6 !important  ;
+}
+.input{
+  position: relative;
+}
+ .input img{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
 }
 
 * {
-    font-family: 'Montserrat'
+    font-family: 'Poppins'
 }

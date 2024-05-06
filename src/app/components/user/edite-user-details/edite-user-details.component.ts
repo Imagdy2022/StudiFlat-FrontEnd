@@ -5,7 +5,7 @@ import { MessageService } from 'primeng/api';
 import { InquiresService } from 'src/app/_services/inquires/inquires.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-edite-user-details',
   templateUrl: './edite-user-details.component.html',
@@ -19,6 +19,7 @@ export class EditeUserDetailsComponent {
   selectedCity: Object = {};
   available: boolean = true;
   link: Array<boolean> = [true];
+  subscriptions:Subscription[] = [];
   listAnchors: any = [
     { id: 'Generalinfo', link: 'General info' },
     { id: 'OtherDetails', link: 'Other Details' },
@@ -118,7 +119,7 @@ export class EditeUserDetailsComponent {
   Tenant_Attach: any = {};
   tenant_photo = '';
   GetRequestDetails() {
-    this._adminservices.TenantDetails(this.param).subscribe(
+    this.subscriptions.push(this._adminservices.TenantDetails(this.param).subscribe(
       (res) => {
         this.Tenant_details = res;
         this.Tenant_Attach = res['documents'];
@@ -133,7 +134,8 @@ export class EditeUserDetailsComponent {
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ));
+
   }
   User_ID: any;
   FName: any;
@@ -143,7 +145,7 @@ export class EditeUserDetailsComponent {
   image: any;
   comment_leave: any = '';
   UpdateTenantInfo() {
-    this._adminservices
+    this.subscriptions.push( this._adminservices
       .UpdateTenantInfo(
         this.param,
         this.FName,
@@ -169,7 +171,8 @@ export class EditeUserDetailsComponent {
             detail: `${'error'}`,
           });
         }
-      );
+      ));
+
   }
   /**
    * addItem
@@ -196,11 +199,12 @@ export class EditeUserDetailsComponent {
       formData.append('fileData', selectedFile, selectedFile.name);
       this.formData2.append('User_Img', selectedFile);
 
-      this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
+      this.subscriptions.push( this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
         this.imageUrl = img[0].file_Path;
         this.changeImageUrl?.emit(img[0].file_Path);
         this.loadingButton = false;
-      });
+      }));
+
     } else if (event == 'delete') {
       this.imageUrl = '';
       this.changeImageUrl.emit(this.defaultImageUrl());
@@ -307,8 +311,7 @@ export class EditeUserDetailsComponent {
     const formData = new FormData();
 
     formData.append('AttachFile', this.ListFiles, this.ListFiles.name);
-
-    this._adminservices.AddAttach(this.param, this.desk, formData).subscribe(
+    this.subscriptions.push( this._adminservices.AddAttach(this.param, this.desk, formData).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -326,6 +329,12 @@ export class EditeUserDetailsComponent {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ));
+
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

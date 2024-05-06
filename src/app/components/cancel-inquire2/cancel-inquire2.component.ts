@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class CancelInquire2Component implements OnInit  {
  headerData: Array<any> = [];
  loading: boolean = true;
  search:boolean=false
+ subscriptions:Subscription[] = [];
  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last Week'},{name:'This month'},{name:'This year'}]
 
  constructor( public _adminservices:AdminsService ,public router: Router,private messageService: MessageService,) { }
@@ -69,17 +71,18 @@ tiggerPageChange(event: any) {
   getAlltermination( ) {
    this.termination=[]
    this.numbertermination=0
-   this._adminservices.GetTerminations( this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
-     this.termination = res["data"];
-     this.totalRecords=res["totalRecords"]
+   this.subscriptions.push(   this._adminservices.GetTerminations( this.pageNumber,this.pagesize,this.searchText,this.Date).subscribe((res:any) => {
+    this.termination = res["data"];
+    this.totalRecords=res["totalRecords"]
 
-     this.numbertermination = this.termination.length;
-     this.totalofPages=res["totalPages"]
+    this.numbertermination = this.termination.length;
+    this.totalofPages=res["totalPages"]
 
 
-    }, (error) => {
-      console.error('Error fetching owners:', error);
-   })
+   }, (error) => {
+     console.error('Error fetching owners:', error);
+  }))
+
  }
  // DeleteUser(id :any){
  //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
@@ -126,7 +129,6 @@ gotopage( ){
 searchText:any=""
 
 searchKey(data: string) {
-  debugger
   this.searchText = data;
   this.getAlltermination()
 }
@@ -137,5 +139,9 @@ searchAction() {
   this.getAlltermination()
     // this.searchText =""
 
+}
+ngOnDestroy() {
+  for(let i=0;i<this.subscriptions.length;i++)
+  this.subscriptions[i].unsubscribe();
 }
 }

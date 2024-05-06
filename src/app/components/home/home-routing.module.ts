@@ -1,16 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/_helpers/auth.guard';
-import { AppMsgsComponent } from '../appmsgs/appmsgs.component';
 import { AuthorizationComponent } from '../authorization/authorization.component';
-import { AdsComponent } from '../configurations/ads/ads.component';
-import { FaqqComponent } from '../configurations/faqq/faqq.component';
 import { ReportPrintComponent } from '../issueReports/report-print/report-print.component';
-import { PushmsgsComponent } from '../pushmsgs/pushmsgs.component';
-import { RolesComponent } from '../roles/roles.component';
 import { StatisticsComponent } from '../statistics/statistics.component';
-import { UnlegalComponent } from '../unlegal/unlegal.component';
-import { InvoiceComponent } from '../user/invoice/invoice.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -33,6 +26,12 @@ const routes: Routes = [
   {
     path: 'inquiries', canActivate: [AuthGuard],loadChildren: () => import('../../components/inquiries/inquiries.module').then(i => i.InquiriesModule),
   },
+  {
+    path: 'cancel-inquire', canActivate: [AuthGuard],loadChildren: () => import('../../components/cancel-inquire2/cancel-inquire2.module').then(i => i.CancelInquire2Module),
+  },
+  {
+    path: 'checkout-inquire', canActivate: [AuthGuard],loadChildren: () => import('../../components/checkout-inqq/checkout-inqq.module').then(i => i.CheckoutInqqModule),
+  },
 
   {
     path: 'workers', canActivate: [AuthGuard],loadChildren: () => import('../../components/workers/workers.module').then(w=>w.WorkersModule),
@@ -53,17 +52,16 @@ const routes: Routes = [
   {
     path: 'partner', canActivate: [AuthGuard],loadChildren: () => import('../../components/partner/partner.module').then(p=>p.PartnerModule),
   },
-  { path: 'ads', component: AdsComponent, canActivate: [AuthGuard] },
-  { path: 'faq', component: FaqqComponent, canActivate: [AuthGuard] },
-
+  {
+    path: 'faq', canActivate: [AuthGuard],loadChildren: () => import('../../components/configurations/faqq/faqq.module').then(p=>p.FaqqModule),
+  },
+  {
+    path: 'ads', canActivate: [AuthGuard],loadChildren: () => import('../../components/configurations/ads/ads.module').then(p=>p.AdsModule),
+  },
   {
   path: 'owners', canActivate: [AuthGuard],loadChildren: () => import('../../components/owners/owners.module').then(o=>o.OwnersModule),
   },
-  {
-    path: 'statistics',
-    component: StatisticsComponent,
-    canActivate: [AuthGuard],
-  },
+  { path: 'statistics',component: StatisticsComponent,canActivate: [AuthGuard] },
   {
     path: 'admins', canActivate: [AuthGuard],loadChildren: () => import('../../components/admins/admins.module').then(a=>a.AdminsModule),
     },

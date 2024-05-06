@@ -659,6 +659,10 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     const url = environment.apiUrl + `/Chat/SendMsg`;
     return this.http.post<any>(url, data, { headers: this.headers });
   }
+  SendMsgtoMultiUsers(data: any): Observable<any> {
+    const url = environment.apiUrl + `/Chat/SendMsgtoMultiUsers`;
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
   GetChatHistory(Chat_ID:string): Observable<any[]> {
     const url = environment.apiUrl + `/Chat/GetChatMessages?Chat_ID=${Chat_ID}`;
 
@@ -727,13 +731,15 @@ RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
   GetTerminations(
      PageNo: number,
     PageSize: number,
-    SearchKey: any
+    SearchKey: any,
+    FilterKey:any
   ): Observable<any[]> {
     const url = environment.apiUrl + '/Termination/GetTerminations';
     const params = new HttpParams()
       .set('PageNo', PageNo)
       .set('PageSize', PageSize)
       .set('SearchKey', SearchKey)
+      .set('FilterKey', FilterKey)
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
@@ -744,7 +750,8 @@ RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
     PageNo: number,
    PageSize: number,
    SearchKey: any,
-   status:any
+   status:any,
+   FilterKey:any
  ): Observable<any[]> {
    const url = environment.apiUrl + '/Checkout/GetCheckoutList';
    const params = new HttpParams()
@@ -752,6 +759,7 @@ RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
      .set('PageSize', PageSize)
      .set('SearchKey', SearchKey)
      .set('Status',status)
+     .set('FilterKey',FilterKey)
 
    return this.http.get<any[]>(url, { headers: this.headers, params: params });
  }

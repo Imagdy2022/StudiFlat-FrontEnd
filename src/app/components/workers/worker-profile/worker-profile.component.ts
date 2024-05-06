@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
@@ -49,6 +50,7 @@ export class WorkerProfileComponent implements OnInit {
  // param title page
  pageTitle:any
  problemcount=0;
+ subscriptions:Subscription[] = [];
  ngOnInit() {
   this.ListJobs( );
 
@@ -188,40 +190,38 @@ public onClick(elementId: string): void {
 
 jobs:any=[]
 ListJobs( ) {
-
-  this._adminservices.ListJobs( ).subscribe((res) => {
+  this.subscriptions.push(this._adminservices.ListJobs( ).subscribe((res) => {
     this.jobs=res
   }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-  })
+  }));
+
 }
 GetWorkerByid( ) {
+  this.subscriptions.push(  this._adminservices.GetWorkerByid(this.param).subscribe((res) => {
+    this.dataworker=res
+   this.problemcount=res["issues"].length
+   }, (err: any) => {
 
-  this._adminservices.GetWorkerByid(this.param).subscribe((res) => {
-     this.dataworker=res
-    this.problemcount=res["issues"].length
-    }, (err: any) => {
-
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-  })
-
-
+   this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
+ }))
 }
 
 createworkerpost(data: any) {
 
   data.value.worker_PhoneNum = String(data.value.worker_PhoneNum);
   data.value.worker_WANum = String(data.value.worker_WANum);
-        this._adminservices.UpdateWorker({ ...data.value, worker_Skills: this.worker_Skills },this.param).subscribe((res) => {
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Your Data has been Successfully updated into DB  '}` });
+  this.subscriptions.push( this._adminservices.UpdateWorker({ ...data.value, worker_Skills: this.worker_Skills },this.param).subscribe((res) => {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Your Data has been Successfully updated into DB  '}` });
 
 
 
-        }, (err: any) => {
+  }, (err: any) => {
 
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-        })
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
+  }))
+
 
 
     }
@@ -236,7 +236,7 @@ createworkerpost(data: any) {
       // check if the file has been uploaded
       if (file) {
         // call the onUpload function to get the link to the file
-        this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
+        this.subscriptions.push( this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
           // create url to preview file
           file.url = URL.createObjectURL(file);
           this.selectedContractImg = file;
@@ -247,7 +247,8 @@ createworkerpost(data: any) {
 
         }, (err) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please try again` });
-        });
+        }))
+
       }
     }
 
@@ -274,8 +275,7 @@ createworkerpost(data: any) {
 
     }
     PostJob( ) {
-
-      this._adminservices.PostJob( this.Jobname).subscribe((res) => {
+      this.subscriptions.push(      this._adminservices.PostJob( this.Jobname).subscribe((res) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' Job has been Successfully inserted into DB  '}` });
 
 
@@ -288,13 +288,18 @@ createworkerpost(data: any) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
         this.Jobname=""
 
-      })
+      }))
 
 
   }
   gotopage( ){
     let url: string = "workers";
       this.router.navigateByUrl(url);
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 
 }

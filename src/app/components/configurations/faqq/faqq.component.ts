@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -19,8 +19,9 @@ export class FaqqComponent implements OnInit {
   headerData: Array<any> = [];
   loading: boolean = true;
   search: boolean = false;
+  subscriptions:Subscription[] = [];
   listDropDown: Array<object> = [
-    { name: 'All' },
+    { name: 'All  ' },
     { name: 'Today' },
     { name: 'Last Week' },
     { name: 'This month' },
@@ -84,7 +85,7 @@ export class FaqqComponent implements OnInit {
   getAllFAQ() {
     this.FAQ = [];
     this.numberFAQ = 0;
-    this._adminservices.GetFAQ().subscribe(
+    this.subscriptions.push(this._adminservices.GetFAQ().subscribe(
       (res: any) => {
         this.FAQ = res;
         this.totalRecords = this.FAQ.length;
@@ -95,7 +96,8 @@ export class FaqqComponent implements OnInit {
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   Ads: any = [];
   numberAds = 0;
@@ -104,7 +106,7 @@ export class FaqqComponent implements OnInit {
   GetAds() {
     this.Ads = [];
     this.numberAds = 0;
-    this._adminservices.GetAds().subscribe(
+    this.subscriptions.push(this._adminservices.GetAds().subscribe(
       (res: any) => {
         this.FAQ = res;
         this.totalRecordsAds = this.Ads.length;
@@ -115,7 +117,8 @@ export class FaqqComponent implements OnInit {
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   // DeleteUser(id :any){
   //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
@@ -162,7 +165,7 @@ export class FaqqComponent implements OnInit {
   }
 
   deletepartner(id: any) {
-    this._adminservices.DeletePartners(id).subscribe(
+    this.subscriptions.push(this._adminservices.DeletePartners(id).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -177,10 +180,11 @@ export class FaqqComponent implements OnInit {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
   DeleteAds(id: any) {
-    this._adminservices.DeleteAds(id).subscribe(
+    this.subscriptions.push(    this._adminservices.DeleteAds(id).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -196,7 +200,7 @@ export class FaqqComponent implements OnInit {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
   }
   Question_title: any = '';
   question_answer: any = '';
@@ -208,7 +212,7 @@ export class FaqqComponent implements OnInit {
     this.display1 = 'none';
   }
   CreateFAQ() {
-    this._adminservices
+    this.subscriptions.push(    this._adminservices
       .CreateFAQ(this.Question_title, this.question_answer)
       .subscribe(
         (res: any) => {
@@ -232,7 +236,8 @@ export class FaqqComponent implements OnInit {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ))
+
   }
   Question_title_update: any = '';
   question_answer_update: any = '';
@@ -252,7 +257,7 @@ export class FaqqComponent implements OnInit {
     this.display2 = 'none';
   }
   UpdateFAQ() {
-    this._adminservices
+    this.subscriptions.push( this._adminservices
       .UpdateFAQ(
         this.idfaq_updat,
         this.Question_title_update,
@@ -277,10 +282,11 @@ export class FaqqComponent implements OnInit {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ))
+
   }
   DeleteFAQ(id: any) {
-    this._adminservices.DeleteFAQ(id).subscribe(
+    this.subscriptions.push(this._adminservices.DeleteFAQ(id).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -296,7 +302,8 @@ export class FaqqComponent implements OnInit {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
   partnersRole: any;
   is_Super: any;
@@ -384,8 +391,7 @@ export class FaqqComponent implements OnInit {
     const formData = new FormData();
 
     formData.append('Photo_Attach', this.ListFiles, this.ListFiles.name);
-
-    this._adminservices
+    this.subscriptions.push(this._adminservices
       .CreateAds(this.link_create_ads, this.button_name, formData)
       .subscribe(
         (res: any) => {
@@ -408,7 +414,8 @@ export class FaqqComponent implements OnInit {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ))
+
   }
   searchText: any = '';
 
@@ -422,5 +429,10 @@ export class FaqqComponent implements OnInit {
     this.search = false;
     this.getAllFAQ();
     this.searchText = '';
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

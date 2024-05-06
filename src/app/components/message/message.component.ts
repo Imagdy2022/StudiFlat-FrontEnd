@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as signalR from '@microsoft/signalr';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { ApartmentService } from 'src/app/_services/apartments/apartment.service';
 import { environment } from 'src/environments/environment';
@@ -17,6 +18,9 @@ export class MessageComponent {
   value:any='';
   activePerson:boolean=true;
   targetId:any;
+  subscriptions:Subscription[] = [];
+  monthButton  : boolean= true;
+  weekButton  : boolean= false;
 
 
   constructor(private _ticketService:AdminsService ,private messageService: MessageService,public router: Router) {
@@ -84,12 +88,12 @@ export class MessageComponent {
     disablenext=false;
     disableperv=false;
 
-    date=""
+    date="All"
     totalRecords=0;
     getAll_tickets(   ) {
       this._tickets=[]
       this.number_tickets=0
-      this._ticketService.AllTickets(this.date,this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
+      this.subscriptions.push( this._ticketService.AllTickets(this.date,this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
         this._tickets = res["data"];
         this.number_tickets = this._tickets.length;
         this.totalofPages=res["totalPages"]
@@ -110,7 +114,8 @@ export class MessageComponent {
 
        }, (error) => {
          console.error('Error fetching owners:', error);
-      })
+      }))
+
     }
     tiggerPageChange(event: any) {
 
@@ -129,7 +134,7 @@ export class MessageComponent {
      }
 
     dropdownOption: Array<any> = [];
-    listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
+    listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
     Inquiries=[]
     InquireFillterLists: Array<any> = [];
     InquireFillterSelected: Array<any> = [];
@@ -138,7 +143,17 @@ export class MessageComponent {
       this.date=value.name;
       this.getAll_tickets();
     }
-
+    FilterButtons(value:any){
+      this.date=value;
+      if(this.date == 'This Month'){
+        this.monthButton = true;
+        this.weekButton = false
+      }else{
+        this.monthButton = false;
+        this.weekButton = true;
+      }
+      this.getAll_tickets()
+    }
 
 
     hidecard(id:any){
@@ -163,12 +178,18 @@ export class MessageComponent {
   }
   CloseTicket(status:any) {
     let index = this.targetId
-    this._ticketService.CloseTicket(index,status  ).subscribe((res) => {
-       this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
-       this.getAll_tickets();
-       }, (error) => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
-    })
+    this.subscriptions.push( this._ticketService.CloseTicket(index,status  ).subscribe((res) => {
+      this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
+      this.getAll_tickets();
+      }, (error) => {
+     this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+   }))
+
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
   }
 

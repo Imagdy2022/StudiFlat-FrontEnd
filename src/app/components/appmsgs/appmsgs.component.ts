@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -19,6 +19,7 @@ export class AppMsgsComponent implements OnInit {
   headerData: Array<any> = [];
   loading: boolean = true;
   search: boolean = false;
+  subscriptions:Subscription[] = [];
 
   constructor(
     public _adminservices: AdminsService,
@@ -79,7 +80,7 @@ export class AppMsgsComponent implements OnInit {
   getAllMsgs() {
     this.Msgs = [];
     this.numberMsgs = 0;
-    this._adminservices.GetMsgs(this.pageNumber, this.pagesize).subscribe(
+    this.subscriptions.push(this._adminservices.GetMsgs(this.pageNumber, this.pagesize).subscribe(
       (res: any) => {
         this.Msgs = res['data'];
         this.totalRecords = res['totalRecords'];
@@ -90,7 +91,8 @@ export class AppMsgsComponent implements OnInit {
       (error) => {
         console.error('Error fetching Messages:', error);
       }
-    );
+    ))
+
   }
 
   detailperson(event: any, id: any): void {
@@ -144,32 +146,33 @@ export class AppMsgsComponent implements OnInit {
     this.display2 = 'none';
   }
   UpdateMsgs() {
-    this._adminservices
-      .EditMsgs(
-        this.idMsgs_updat,
-        this.Question_title_update,
-        this.question_answer_update
-      )
-      .subscribe(
-        (res: any) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: res['message'],
-          });
-          this.display1 = 'none';
-          this.getAllMsgs();
 
-          this.onCloseModal2();
-        },
-        (err: any) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: `${err.error.message[0]}`,
-          });
-        }
-      );
+      this.subscriptions.push(    this._adminservices
+        .EditMsgs(
+          this.idMsgs_updat,
+          this.Question_title_update,
+          this.question_answer_update
+        )
+        .subscribe(
+          (res: any) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: res['message'],
+            });
+            this.display1 = 'none';
+            this.getAllMsgs();
+
+            this.onCloseModal2();
+          },
+          (err: any) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${err.error.message[0]}`,
+            });
+          }
+        ))
   }
 
   partnersRole: any;
@@ -267,5 +270,9 @@ export class AppMsgsComponent implements OnInit {
     this.search = false;
     this.getAllMsgs();
     this.searchText = '';
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

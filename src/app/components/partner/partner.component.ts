@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class PartnerComponent implements OnInit {
  selectedProducts: Array<object> = [];
  headerData: Array<any> = [];
  loading: boolean = true;
- search:boolean=false
+ search:boolean=false;
+ subscriptions:Subscription[] = [];
  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last Week'},{name:'This month'},{name:'This year'}]
 
  constructor( public _adminservices:AdminsService ,public router: Router,private messageService: MessageService,) { }
@@ -89,17 +91,18 @@ tiggerPageChange(event: any) {
   getAllpartners(  ) {
    this.partners=[]
    this.numberpartners=0
-   this._adminservices.ListPartners( this.pageNumber,this.pagesize,this.Date,this.searchText).subscribe((res:any) => {
-     this.partners = res["data"];
-     this.totalRecords=res["totalRecords"]
+   this.subscriptions.push(this._adminservices.ListPartners( this.pageNumber,this.pagesize,this.Date,this.searchText).subscribe((res:any) => {
+    this.partners = res["data"];
+    this.totalRecords=res["totalRecords"]
 
-     this.numberpartners = this.partners.length;
-     this.totalofPages=res["totalPages"]
+    this.numberpartners = this.partners.length;
+    this.totalofPages=res["totalPages"]
 
 
-    }, (error) => {
-      console.error('Error fetching owners:', error);
-   })
+   }, (error) => {
+     console.error('Error fetching owners:', error);
+  }))
+
  }
  // DeleteUser(id :any){
  //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
@@ -136,19 +139,17 @@ tiggerPageChange(event: any) {
 
 }
 deletepartner( id:any) {
+ this.subscriptions.push( this._adminservices.DeletePartners(id ).subscribe((res) => {
+  this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' partner has been Successfully deleted into DB  '}` });
 
- this._adminservices.DeletePartners(id ).subscribe((res) => {
-   this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' partner has been Successfully deleted into DB  '}` });
 
+  this.getAllpartners()
 
-   this.getAllpartners()
+}, (err: any) => {
 
- }, (err: any) => {
+  this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
 
-   this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-
- })
-
+}))
 
 }
 partnersRole:any
@@ -191,5 +192,9 @@ searchAction() {
   this.getAllpartners()
     // this.searchText =""
 
+}
+ngOnDestroy() {
+  for(let i=0;i<this.subscriptions.length;i++)
+  this.subscriptions[i].unsubscribe();
 }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -19,8 +19,9 @@ export class AdsComponent implements OnInit {
   headerData: Array<any> = [];
   loading: boolean = true;
   search: boolean = false;
+  subscriptions:Subscription[] = [];
   listDropDown: Array<object> = [
-    { name: 'All' },
+    { name: 'All  ' },
     { name: 'Today' },
     { name: 'Last Week' },
     { name: 'This month' },
@@ -87,7 +88,7 @@ export class AdsComponent implements OnInit {
   GetAds() {
     this.Ads = [];
     this.numberAds = 0;
-    this._adminservices.GetAds().subscribe(
+    this.subscriptions.push( this._adminservices.GetAds().subscribe(
       (res: any) => {
         this.Ads = res;
         this.totalRecordsAds = this.Ads.length;
@@ -98,7 +99,8 @@ export class AdsComponent implements OnInit {
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   // DeleteUser(id :any){
   //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
@@ -138,7 +140,7 @@ export class AdsComponent implements OnInit {
   }
 
   deletepartner(id: any) {
-    this._adminservices.DeletePartners(id).subscribe(
+    this.subscriptions.push( this._adminservices.DeletePartners(id).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -153,10 +155,11 @@ export class AdsComponent implements OnInit {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
   DeleteAds(id: any) {
-    this._adminservices.DeleteAds(id).subscribe(
+    this.subscriptions.push(this._adminservices.DeleteAds(id).subscribe(
       (res: any) => {
         this.messageService.add({
           severity: 'success',
@@ -172,7 +175,8 @@ export class AdsComponent implements OnInit {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
   Question_title: any = '';
   question_answer: any = '';
@@ -189,33 +193,6 @@ export class AdsComponent implements OnInit {
   display2: any = 'none';
   idfaq_updat: any;
 
-  UpdateFAQ() {
-    this._adminservices
-      .UpdateFAQ(
-        this.idfaq_updat,
-        this.Question_title_update,
-        this.question_answer_update
-      )
-      .subscribe(
-        (res: any) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: res['message'],
-          });
-          this.display1 = 'none';
-
-          this.onCloseModal2();
-        },
-        (err: any) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: `${err.error.message[0]}`,
-          });
-        }
-      );
-  }
 
   partnersRole: any;
   is_Super: any;
@@ -303,8 +280,7 @@ export class AdsComponent implements OnInit {
     const formData = new FormData();
 
     formData.append('Photo_Attach', this.ListFiles, this.ListFiles.name);
-
-    this._adminservices
+    this.subscriptions.push(    this._adminservices
       .CreateAds(this.link_create_ads, this.button_name, formData)
       .subscribe(
         (res: any) => {
@@ -327,7 +303,8 @@ export class AdsComponent implements OnInit {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ))
+
   }
   link_create_ads_update: any = '';
   button_name_update: any = '';
@@ -366,7 +343,7 @@ export class AdsComponent implements OnInit {
     const formData = new FormData();
 
     formData.append('Photo_Attach', this.ListFiles2, this.ListFiles2.name);
-    this._adminservices
+    this.subscriptions.push(    this._adminservices
       .UpdateAds(
         this.idads,
         this.link_create_ads_update,
@@ -391,7 +368,8 @@ export class AdsComponent implements OnInit {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ))
+
   }
   openmodupdateads(item: any) {
     this.ListFiles2 = null;
@@ -421,5 +399,10 @@ export class AdsComponent implements OnInit {
     this.search = false;
     this.GetAds();
     this.searchText = '';
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

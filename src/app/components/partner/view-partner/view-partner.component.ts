@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
@@ -47,6 +48,7 @@ paramTile="partenerView"
  selectedCity: any = '';
  /** loadingButton */
  loadingButton: boolean = false;
+ subscriptions:Subscription[] = [];
  // param title page
  pageTitle:any
  ngOnInit() {
@@ -159,16 +161,13 @@ public onClick(elementId: string): void {
 jobs:any=[]
 detil_part:any={}
 GetPartnerProfile( ) {
-
-  this._adminservices.PartnerProfile(this.param ).subscribe((res) => {
+  this.subscriptions.push(  this._adminservices.PartnerProfile(this.param ).subscribe((res) => {
     this.createpartner.patchValue(res);
     this.detil_part=res
       this.selectedContractImg = { 'url':res.partner_Passport};  }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-  })
-
-
+  }))
 }
 showEdit: Array<boolean> = [];
 
@@ -187,26 +186,24 @@ detailperson(event:any,id: any): void {
 }
 Countries:any=[]
 GetCountries( ) {
-
-  this._adminservices.GetCountries().subscribe((res) => {
+  this.subscriptions.push(  this._adminservices.GetCountries().subscribe((res) => {
     this.Countries=res
   }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
 
-  })
+  }))
 
 }
 GetAgencyCode( ) {
-
-  this._adminservices.GetAgencyCode().subscribe((res) => {
+  this.subscriptions.push(  this._adminservices.GetAgencyCode().subscribe((res) => {
     this.createpartner.get("partner_Code")?.patchValue(res);
 
   }, (err: any) => {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
 
-  })
+  }))
 
 }
  spinner :boolean= false;
@@ -220,8 +217,7 @@ createpartnerpost(data: any) {
   data.value.partner_WANumber = String(data.value.partner_WANumber);
 
   this.spinner = true;
-
-        this._adminservices.PostPartner({ ...data.value}).subscribe((res) => {
+        this.subscriptions.push(this._adminservices.PostPartner({ ...data.value}).subscribe((res) => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Your Data has been Successfully inserted into DB  '}` });
 
           this.spinner = false;
@@ -232,9 +228,7 @@ createpartnerpost(data: any) {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}\n` });
           this.spinner = false;
 
-        })
-
-
+        }))
     }
     formData2 = new FormData();
     selectedContractImg:any
@@ -250,7 +244,7 @@ createpartnerpost(data: any) {
         this.spinner = true;
 
         // call the onUpload function to get the link to the file
-        this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
+        this.subscriptions.push(this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
           // create url to preview file
           file.url = URL.createObjectURL(file);
           this.selectedContractImg = file;
@@ -265,7 +259,8 @@ createpartnerpost(data: any) {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please try again` });
           this.spinner = false;
 
-        });
+        }))
+
       }
     }
 
@@ -294,8 +289,7 @@ createpartnerpost(data: any) {
 
     }
     PostJob( ) {
-
-      this._adminservices.PostJob( this.Jobname).subscribe((res) => {
+      this.subscriptions.push(this._adminservices.PostJob( this.Jobname).subscribe((res) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' Job has been Successfully inserted into DB  '}` });
 
 
@@ -308,8 +302,11 @@ createpartnerpost(data: any) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
         this.Jobname=""
 
-      })
+      }))
+  }
 
-
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

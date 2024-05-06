@@ -58,7 +58,7 @@ export class SidebarComponent implements OnInit {
   is_Super:any
   ngOnInit(): void {
 
-    if(this.router.url=='/admins'||this.router.url=='/roles'){
+    if(this.router.url=='/admins'||this.router.url=='/roles'||this.router.url=='/app-msgs' ||this.router.url=='/push-msgs'){
       this.isFreeze=true
     }
     if(this.router.url=='/inquiries'||this.router.url=='/cancel-inquire'||this.router.url=='/checkout-inquire'){

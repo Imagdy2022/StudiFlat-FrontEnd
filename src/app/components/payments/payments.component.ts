@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import * as XLSX from 'xlsx'
 
@@ -16,6 +17,9 @@ export class PaymentsComponent implements OnInit {
   rangeDates: Date[] ;
   PaymentCards: any = {};
   checked: boolean = false;
+  subscriptions:Subscription[] = [];
+  monthButton  : boolean= true;
+  weekButton  : boolean= false;
 
   reminderForm: FormGroup = new FormGroup({
     inv_ID: new FormControl(null),
@@ -132,7 +136,7 @@ export class PaymentsComponent implements OnInit {
    }
   payments:any=[ ];
 dropdownOption: Array<any> = [];
-  listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
+  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
 
   paymentFillterLists: Array<any> = [];
   paymentFillterSelected: Array<any> = [];
@@ -165,6 +169,28 @@ dropdownOption: Array<any> = [];
      this.Date=value.name;
      this.GetAllPayments()
    }
+   FilterButton(){
+    this.GetAllPayments()
+   }
+   ClearButton(){
+    this.searchText="";
+    this.clickPayment(0);
+    this.clickType(0);
+    this.clickUserType(0);
+    this.GetAllPayments();
+   }
+   FilterButtons(value:any){
+    this.Date=value;
+    if(this.Date == 'This Month'){
+      this.monthButton = true;
+      this.weekButton = false
+    }else{
+      this.monthButton = false;
+      this.weekButton = true;
+    }
+    this.GetAllPayments();
+
+  }
 
 
    pageNumber=1;
@@ -182,19 +208,33 @@ dropdownOption: Array<any> = [];
  numberInvoices=0;
   GetAllPayments() {
     this.payments=[]
-    let data ={
-      page_No :1,
-      page_Size: 10,
-      filterKey : this.Date,
-      searchKey:this.searchText,
-      payment_Type: this.paymentType,
-      user_Type: this.userType,
-      invoice_Type: this.statuspayment,
-      start_Date: this.rangeDates,
-      end_Date: new Date(),
-    }
-
-    this._adminservices.AllPayments(data).subscribe((res:any) => {
+let data;
+    if(this?.rangeDates)
+      {data ={
+        page_No :1,
+        page_Size: 10,
+        filterKey : this.Date,
+        searchKey:this.searchText,
+        payment_Type: this.paymentType,
+        user_Type: this.userType,
+        invoice_Type: this.statuspayment,
+        start_Date:this?.rangeDates[0],
+        end_Date:this?.rangeDates[1]
+      }}
+      else {
+         data ={
+          page_No :1,
+          page_Size: 10,
+          filterKey : this.Date,
+          searchKey:this.searchText,
+          payment_Type: this.paymentType,
+          user_Type: this.userType,
+          invoice_Type: this.statuspayment,
+        }
+      }
+    
+    
+    this.subscriptions.push( this._adminservices.AllPayments(data).subscribe((res:any) => {
       this.payments = res.data;
       this.PaymentCards = res.cards;
       this.totalofPages=res["totalPages"]
@@ -203,18 +243,20 @@ dropdownOption: Array<any> = [];
 
      }, (error) => {
        console.error('Error fetching owners:', error);
-    })
+    }))
+
   }
 
   MarkPaid(id:any){
-    this._adminservices.MarkPaid(id).subscribe((res) => {
+    this.subscriptions.push(this._adminservices.MarkPaid(id).subscribe((res) => {
       this.messageService.add({   severity: 'success', summary: 'Success', detail: 'marked Successfuly' });
 
       this.GetAllPayments() ;
 
      }, (error) => {
       this.messageService.add({   severity: 'error', summary: 'error', detail: 'error' });
-    })
+    }))
+
   }
   hidecard( ){
     this.showEdit=[]
@@ -361,14 +403,15 @@ SendReminder() {
     rem_Date: this.reminderForm.value['rem_Date'],
     pushTypes: this.selectedOptions,
   }
-  this._adminservices.PaymentsReminder(data).subscribe((res) => {
-     this.messageService.add({ severity: 'success', summary: 'Success', detail:res.message });
-     setTimeout(()=>{
-       this.onCloseModal2();
-     },1000)
-   }, (error) => {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
-  })
+  this.subscriptions.push( this._adminservices.PaymentsReminder(data).subscribe((res) => {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail:res.message });
+    setTimeout(()=>{
+      this.onCloseModal2();
+    },1000)
+  }, (error) => {
+   this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+ }))
+
 
 }
 fileName= 'FinanceTable.xlsx'
@@ -379,6 +422,10 @@ exportToExcel(){
   XLSX.utils.book_append_sheet(wb,ws,'Sheet1')
   XLSX.writeFile(wb,this.fileName)
 
+}
+ngOnDestroy() {
+  for(let i=0;i<this.subscriptions.length;i++)
+  this.subscriptions[i].unsubscribe();
 }
 
 }

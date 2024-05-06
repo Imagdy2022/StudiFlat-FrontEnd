@@ -1,12 +1,12 @@
 <!-- start header  -->
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'report-details'"></app-head>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Issue Reports'"></app-head>
 </header>
 <!-- end header  -->
 
 <div class="row m-0">
     <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'issue-details'"></app-sidebar>
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Issue Reports'"></app-sidebar>
     <!-- end sidebar  -->
     <!-- start content page  -->
     <main class="p-4 col-lg-10">
@@ -268,8 +268,10 @@
                   <!-- /.modal-dialog -->
               </div>
             </div>
+        </div>
 
             <!-- Start Solve Desc-->
+          <div class="mt-4 row border bg-white rounded-3 py-3 ">
             <div id="OtherDetails" style="margin-top:20px" *ngIf="detialIssue.issue_Status=='Completed'">
               <span class="fw-bold">Fix Report Results</span>
               <p class="gray">a biref overview about solved the problem</p>

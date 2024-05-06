@@ -5,6 +5,7 @@ import { EChildernName } from 'src/app/shared/models/childernName';
 import { IOnwer } from 'src/app/models/onwer';
 import { ITableHeader } from 'src/app/shared/components/table/table/tableHeader';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owners',
@@ -39,8 +40,9 @@ export class OwnersComponent implements OnInit {
   itemsPerPage: number = 10;
   /** searchValue */
   searchValue: string = '';
+  subscriptions:Subscription[] = [];
   /** listDropDown */
-  listDropDown: Array<object> = [{ name: 'All' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
+  listDropDown: Array<object> = [{ name: 'All  ' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
 
   constructor(private ownerSer: OnwerService,public router: Router) {
   }
@@ -83,23 +85,23 @@ export class OwnersComponent implements OnInit {
    */
   Date=""
   getAllOwners(PageNumber: number, PageSize: number, search: string): void {
-    this.ownerSer.getAllOnwers(PageNumber, PageSize, search,this.Date).subscribe((res: IOnwer[] | any) => {
+    this.subscriptions.push( this.ownerSer.getAllOnwers(PageNumber, PageSize, search,this.Date).subscribe((res: IOnwer[] | any) => {
       this.products = res.data;
       this.fullRespone = res;
       this.spinner = true;
     }, (error) => {
       this.spinner = true;
       console.error('Error fetching owners:', error);
-    })
+    }));
   }
   /**
    * deleteOwner
    * @param event
    */
   deleteOwner(event: any): void {
-    this.ownerSer.deleteOwner(event.owner_ID).subscribe((res: IOnwer[] | any) => {
+    this.subscriptions.push(this.ownerSer.deleteOwner(event.owner_ID).subscribe((res: IOnwer[] | any) => {
       this.getAllOwners(this.pageNumber, this.itemsPerPage, this.searchValue);
-    })
+    }));
   }
   /**
    * searchInOwner
@@ -180,7 +182,8 @@ export class OwnersComponent implements OnInit {
     this.getAllOwners(this.pageNumber, this.itemsPerPage, this.searchValue)
     }
 
-
-
-
+    ngOnDestroy() {
+      for(let i=0;i<this.subscriptions.length;i++)
+      this.subscriptions[i].unsubscribe();
+    }
 }

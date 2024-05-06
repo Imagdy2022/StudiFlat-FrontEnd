@@ -23,6 +23,7 @@ import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { UserRoutingModule } from './user-routing.module';
+
 const routes: Routes = [
 
 ];
@@ -32,7 +33,7 @@ const routes: Routes = [
     UserComponent,
     InvoiceComponent,
     UserDetailsComponent,
-    EditeUserDetailsComponent,
+    EditeUserDetailsComponent
   ],
   exports: [UserComponent, UserDetailsComponent, EditeUserDetailsComponent],
   imports: [

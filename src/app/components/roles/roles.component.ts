@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Toast } from 'primeng/toast';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-roles',
@@ -38,6 +39,7 @@ export class RolesComponent implements OnInit {
   searchText: string = '';
   /**dropdownOption */
   dropdownOption: Array<any> = [];
+  subscriptions:Subscription[] = [];
   listDropDown: Array<object> = [
     { name: 'Today' },
     { name: 'Last week' },
@@ -87,7 +89,7 @@ export class RolesComponent implements OnInit {
   getAllRolles() {
     this.roles = [];
     this.numberRoles = 0;
-    this._rolesService.getAllRolles().subscribe(
+    this.subscriptions.push( this._rolesService.getAllRolles().subscribe(
       (res) => {
         this.roles = res;
         this.numberRoles = res.length;
@@ -97,11 +99,12 @@ export class RolesComponent implements OnInit {
         this.spinner = true;
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   data: any;
   createRole() {
-    this._rolesService.createRole(this.data).subscribe(
+    this.subscriptions.push(    this._rolesService.createRole(this.data).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -117,10 +120,10 @@ export class RolesComponent implements OnInit {
         this.spinner = true;
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
   }
   DeleteRole(id: any) {
-    this._rolesService.deleteRole(id).subscribe(
+    this.subscriptions.push(this._rolesService.deleteRole(id).subscribe(
       (res) => {
         this.getAllRolles();
         this.messageService.add({
@@ -132,7 +135,8 @@ export class RolesComponent implements OnInit {
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   onCloseModal1() {
     this.display1 = 'none';
@@ -188,5 +192,10 @@ export class RolesComponent implements OnInit {
   }
   hidecard() {
     this.showEdit = [];
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

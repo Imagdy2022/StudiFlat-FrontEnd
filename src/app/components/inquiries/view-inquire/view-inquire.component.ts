@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import saveAs from 'file-saver';
 import { MenuItem, MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { InquiresService } from 'src/app/_services/inquires/inquires.service';
 import { Guid } from 'guid-typescript';
 
@@ -15,6 +15,7 @@ export class ViewInquireComponent implements OnInit {
   home: MenuItem | undefined;
   gfg: MenuItem[] | undefined;
   showPassportModal: any;
+  subscriptions:Subscription[] = [];
 
   param: any;
   constructor(
@@ -80,7 +81,7 @@ export class ViewInquireComponent implements OnInit {
     this.showSide = value;
   }
   GetRequestDetails() {
-    this._inquiresService.GetRequestDetails(this.param).subscribe(
+    this.subscriptions.push(    this._inquiresService.GetRequestDetails(this.param).subscribe(
       (res) => {
         this.inquire_details = res[0];
         this.selectedContractImg = res[0].contract_Path;
@@ -90,10 +91,11 @@ export class ViewInquireComponent implements OnInit {
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   UploadReqContract() {
-    this._inquiresService
+    this.subscriptions.push(this._inquiresService
       .UploadReqContract(this.param, this.convertFileToFormData(this.ListFiles))
       .subscribe(
         (res) => {
@@ -112,14 +114,16 @@ export class ViewInquireComponent implements OnInit {
             detail: 'error',
           });
         }
-      );
+      ))
+
   }
   CreateContractPDF() {
     let ID = Guid.create();
     let FileName = ID + '.pdf';
-    this._inquiresService
+    this.subscriptions.push(  this._inquiresService
       .CreateContractPDF(this.param)
-      .subscribe((data) => saveAs(data, FileName));
+      .subscribe((data) => saveAs(data, FileName)))
+
   }
 
   selectedContractImg: any;
@@ -142,7 +146,7 @@ export class ViewInquireComponent implements OnInit {
     this.display2 = 'block';
   }
   ResignContract() {
-    this._inquiresService.ResginContract(this.param).subscribe(
+    this.subscriptions.push(    this._inquiresService.ResginContract(this.param).subscribe(
       (res) => {
         this.messageService.add({
           severity: res['status'] == 'Success' ? 'success' : 'error',
@@ -152,10 +156,11 @@ export class ViewInquireComponent implements OnInit {
       },
       (error) => {
       }
-    );
+    ))
+
   }
   NewPassportsNotValidation() {
-    this._inquiresService
+    this.subscriptions.push(  this._inquiresService
       .NewPassportsNotValidation(this.itemPass.uuid, false, this.Reason)
       .subscribe(
         (res) => {
@@ -174,10 +179,11 @@ export class ViewInquireComponent implements OnInit {
             detail: 'error',
           });
         }
-      );
+      ))
+
   }
   NewPassportsValidation(item: any) {
-    this._inquiresService.NewPassportsValidation(item.uuid, true).subscribe(
+    this.subscriptions.push(    this._inquiresService.NewPassportsValidation(item.uuid, true).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -193,10 +199,11 @@ export class ViewInquireComponent implements OnInit {
           detail: 'error',
         });
       }
-    );
+    ))
+
   }
   CancelRequest() {
-    this._inquiresService.CancelRequestw(this.param, this.Reason2).subscribe(
+    this.subscriptions.push(this._inquiresService.CancelRequestw(this.param, this.Reason2).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -213,11 +220,12 @@ export class ViewInquireComponent implements OnInit {
           detail: 'error',
         });
       }
-    );
+    ))
+
   }
   isvisable = false;
   ApproveRequest() {
-    this._inquiresService.ApproveRequest(this.param).subscribe(
+    this.subscriptions.push(    this._inquiresService.ApproveRequest(this.param).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -234,7 +242,8 @@ export class ViewInquireComponent implements OnInit {
           detail: `${error.error['message']}`,
         });
       }
-    );
+    ))
+
   }
   viewImage(image: any) {
     this.inquire_details['apt_thumb_Img'] = image;
@@ -300,5 +309,10 @@ export class ViewInquireComponent implements OnInit {
   //Bootstrap Modal Close event
   hidePassport() {
     this.showPassportModal = false;
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

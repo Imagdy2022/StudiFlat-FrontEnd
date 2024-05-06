@@ -1,9 +1,11 @@
 .week {
-  color: #757a82;
+  color: #605D62;
   border: 1px solid #ebebeb;
+  background-color: #fff;
 }
-.month{
+.activeButton{
   background-color: #1F4068;
+  color: #fff
 }
 
 
@@ -274,4 +276,8 @@ tr:last-child{
 .form-check-input:checked{
   background-color: #1f4068 !important;
   border: 1px solid #1f4068 !important;
+}
+
+.p-dropdown-items-wrapper {
+  max-height: 250px !important;
 }

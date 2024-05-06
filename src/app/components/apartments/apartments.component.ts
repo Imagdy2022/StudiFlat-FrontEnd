@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 import { ApartmentService } from 'src/app/_services/apartments/apartment.service';
 import { IApartments } from 'src/app/models/apartment';
@@ -20,6 +21,7 @@ export class ApartmentsComponent implements OnInit {
   spinner: boolean = true;
   listDropDown: Array<object> = [];
   apartmentList: IApartments[] = [];
+  subscriptions:Subscription[] = [];
 
   constructor(private apartmentSer: ApartmentService,public router: Router,private messageService: MessageService,) { }
 
@@ -92,7 +94,7 @@ gotopage( ){
 
 
     this.apartmentFillterSelected = [true];
-    this.listDropDown = [{ name: 'All' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
+    this.listDropDown = [{ name: 'All  ' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
   }
 
   /**
@@ -109,78 +111,62 @@ gotopage( ){
   totalofPages=0;;
   disablenext=false;
   disableperv=false;
-  incrementpage(){
 
-    this.pageNumber+=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    if(this.pageNumber>= this.totalofPages){
-      this.pageNumber=this.totalofPages;
-
-    }
-    this.getAllApartment();
-  }
-  decreamentPage(){
-    this.pageNumber-=1;
-    if(this.pageNumber<1){
-      this.pageNumber=1;
-
-    }
-    this.getAllApartment();
-
-  }
   messagemessage:any
   AddtoBest(apt_UUID:any) {
-    this.apartmentSer.AddtoBest( apt_UUID).subscribe((res) => {
+    this.subscriptions.push( this.apartmentSer.AddtoBest( apt_UUID).subscribe((res) => {
       this.messagemessage=res["message"]
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${this.messagemessage}` });
 
     }, (error) => {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-    })
+    }));
   }
   messagemessage2:any
   RemoveBest(apt_UUID:any) {
-    this.apartmentSer.RemoveBest( apt_UUID).subscribe((res) => {
+    this.subscriptions.push( this.apartmentSer.RemoveBest( apt_UUID).subscribe((res) => {
       this.messagemessage2=res["message"]
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${this.messagemessage2}` });
 
     }, (error) => {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-    })
+    }));
+
   }
   DeleteApartment(apt_UUID:any) {
-    this.apartmentSer.DeleteApartment( apt_UUID).subscribe((res:any) => {
-       this.messageService.add({ severity: 'success', summary: 'Success', detail:res["message"]  });
-       this.getAllApartment();
+    this.subscriptions.push( this.apartmentSer.DeleteApartment( apt_UUID).subscribe((res:any) => {
+      this.messageService.add({ severity: 'success', summary: 'Success', detail:res["message"]  });
+      this.getAllApartment();
 
-    }, (error) => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-    })
+   }, (error) => {
+     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
+   }));
+
   }
 
   getAllApartment(): void {
     this.apartmentList=[];
-    this.apartmentSer.FilterApartmentsFront(this.Date,this.pageNumber, this.itemsPerPage,this.filterStatus,this.searchText).subscribe((res) => {
-      this.fullRespone=res;
-      this.apartmentList = res["data"];
-      this.totalofPages=res["totalPages"]
-      if(this.totalofPages==this.pageNumber){
-        this.disablenext=true
-      }else{
-        this.disablenext=false
+    this.subscriptions.push(
+      this.apartmentSer.FilterApartmentsFront(this.Date,this.pageNumber, this.itemsPerPage,this.filterStatus,this.searchText).subscribe((res) => {
+        this.fullRespone=res;
+        this.apartmentList = res["data"];
+        this.totalofPages=res["totalPages"]
+        if(this.totalofPages==this.pageNumber){
+          this.disablenext=true
+        }else{
+          this.disablenext=false
 
-      }
-      if(this.pageNumber==1){
-        this.disableperv=true
-      }else{
-        this.disableperv=false
+        }
+        if(this.pageNumber==1){
+          this.disableperv=true
+        }else{
+          this.disableperv=false
 
-      }
-      this.spinner = false;
-    })
+        }
+        this.spinner = false;
+      })
+    )
+
   }
   tiggerPageChange(event: any) {
 
@@ -270,5 +256,9 @@ gotopage( ){
   // this.searchTextChange.emit(this.searchText);
    this.getAllApartment();
  }
+ ngOnDestroy() {
+  for(let i=0;i<this.subscriptions.length;i++)
+  this.subscriptions[i].unsubscribe();
+}
 }
 

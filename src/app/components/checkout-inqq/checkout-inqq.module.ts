@@ -2,9 +2,9 @@
  import { CheckoutDetailsComponent } from './checkout-details/checkout-details.component';
 
 import { CommonModule } from '@angular/common';
-  
+
 import { RouterModule, Routes } from '@angular/router';
- 
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
@@ -24,6 +24,7 @@ import { ChipModule } from 'primeng/chip';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { checkoutRoutingModule } from './checkout-inqq-routing.module';
 const routes: Routes = [];
 
 @NgModule({
@@ -46,7 +47,7 @@ const routes: Routes = [];
     BreadcrumbModule,
     ChipModule,
     PdfViewerModule,
-    RouterModule.forChild(routes),
+    checkoutRoutingModule
   ],
   exports: [],
   providers: [MessageService],

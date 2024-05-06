@@ -24,11 +24,14 @@
     background-color: #1f4068;
 }
 
-.month,
 .week {
-    color: #757a82;
-    background-color: white;
-    border: 1px solid #ebebeb;
+  color: #605D62;
+  border: 1px solid #ebebeb;
+  background-color: #fff;
+}
+.activeButton{
+  background-color: #1F4068;
+  color: #fff
 }
 
 @media (min-width: 768px) {
@@ -211,4 +214,7 @@ tr:last-child{
 
 .cursor{
   cursor: pointer;
+}
+.p-dropdown-items-wrapper {
+  max-height: 250px !important;
 }
