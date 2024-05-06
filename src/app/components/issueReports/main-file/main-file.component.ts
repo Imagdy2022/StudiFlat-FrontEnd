@@ -5,6 +5,7 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-file',
@@ -14,6 +15,7 @@ import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.serv
 export class MainFileComponent {
   showSide: string = '';
   showEdit: Array<boolean> = [];
+  subscriptions:Subscription[] = [];
 
   products!: Array<object>;
   issues: any = [];
@@ -86,7 +88,7 @@ export class MainFileComponent {
   getAllIssues() {
     this.issues = [];
     this.numberissues = 0;
-    this._adminservices
+    this.subscriptions.push(  this._adminservices
       .ListAllIssues(
         this.pageNumber,
         this.pagesize,
@@ -105,7 +107,8 @@ export class MainFileComponent {
         (error) => {
           console.error('Error fetching owners:', error);
         }
-      );
+      ));
+
   }
   detailperson(event: any, id: any): void {
     this.showEdit = [];
@@ -188,7 +191,7 @@ export class MainFileComponent {
 
   }
   cancelissue(id: any) {
-    this._adminservices.CancelIssue(id).subscribe(
+    this.subscriptions.push(this._adminservices.CancelIssue(id).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -204,11 +207,12 @@ export class MainFileComponent {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ));
+
   }
   Apointment3: any;
   MarkasProgress2() {
-    this._adminservices
+    this.subscriptions.push( this._adminservices
       .NewAppointment(this.paramid3, this.Apointment3.toLocaleString())
       .subscribe(
         (res) => {
@@ -227,10 +231,11 @@ export class MainFileComponent {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ));
+
   }
   MarkasProgress() {
-    this._adminservices.MarkasProgress(this.paramid, this.Apointment).subscribe(
+    this.subscriptions.push( this._adminservices.MarkasProgress(this.paramid, this.Apointment).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
@@ -247,7 +252,8 @@ export class MainFileComponent {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ));
+
   }
   appointement: any = [];
   display1 = 'none';
@@ -303,7 +309,7 @@ export class MainFileComponent {
     this.display2 = 'block';
   }
   GetIssueByid() {
-    this._adminservices.GetIssueDetails(this.paramid).subscribe(
+    this.subscriptions.push(    this._adminservices.GetIssueDetails(this.paramid).subscribe(
       (res) => {
         this.appointement = res['appointement'];
 
@@ -317,7 +323,8 @@ export class MainFileComponent {
           detail: `${err.error.message[0]}`,
         });
       }
-    );
+    ))
+
   }
   handleChange(item: any) {
     this.Apointment = item.appo_Date + ' ' + item.appo_Time;
@@ -334,7 +341,7 @@ export class MainFileComponent {
   issue_attach: any = '';
 
   MarkAsSolved() {
-    this._adminservices
+    this.subscriptions.push(    this._adminservices
       .MarkAsSolved(
         this.idmodel2,
         this.who_will_pay,
@@ -363,7 +370,7 @@ export class MainFileComponent {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ));
   }
   onSearchChange(searchValue: any) {
     this.Total_cost = [];
@@ -399,7 +406,7 @@ export class MainFileComponent {
     // check if the file has been uploaded
     if (file) {
       // call the onUpload function to get the link to the file
-      this.uploadService.uploadSingleFile(formData).subscribe(
+      this.subscriptions.push(  this.uploadService.uploadSingleFile(formData).subscribe(
         (img: any) => {
           // create url to preview file
           file.url = URL.createObjectURL(file);
@@ -425,7 +432,12 @@ export class MainFileComponent {
             detail: `Please try again`,
           });
         }
-      );
+      ));
+
     }
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

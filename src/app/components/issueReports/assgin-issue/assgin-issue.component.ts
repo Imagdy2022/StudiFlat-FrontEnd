@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 @Component({
   selector: 'app-assgin-issue',
@@ -17,6 +18,7 @@ export class AssginIssueComponent implements OnInit {
  loading: boolean = true;
  search:boolean=false
  paramid:any
+ subscriptions:Subscription[] = [];
  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last Week'},{name:'This month'},{name:'This year'}]
 
  constructor(public router: Router, private _ActivatedRoute:ActivatedRoute,public _adminservices:AdminsService ,private messageService: MessageService,) {
@@ -124,17 +126,17 @@ tiggerPageChange(event: any) {
   getAllworkers(  ) {
    this.workers=[]
    this.numberworkers=0
-   this._adminservices.GetAllWorkers( this.pageNumber,this.pagesize,"").subscribe((res:any) => {
-     this.workers = res["data"];
-     this.totalRecords=res["totalRecords"]
+   this.subscriptions.push(this._adminservices.GetAllWorkers( this.pageNumber,this.pagesize,"").subscribe((res:any) => {
+    this.workers = res["data"];
+    this.totalRecords=res["totalRecords"]
 
-     this.numberworkers = this.workers.length;
-     this.totalofPages=res["totalPages"]
+    this.numberworkers = this.workers.length;
+    this.totalofPages=res["totalPages"]
 
 
-    }, (error) => {
-      console.error('Error fetching owners:', error);
-   })
+   }, (error) => {
+     console.error('Error fetching owners:', error);
+  }))
  }
  // DeleteUser(id :any){
  //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
@@ -171,28 +173,24 @@ tiggerPageChange(event: any) {
 
 }
 PostJob( id:any) {
-
- this._adminservices.DeleteWorker(id ).subscribe((res) => {
-   this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' worker has been Successfully deleted into DB  '}` });
-
-
-   this.getAllworkers()
-
- }, (err: any) => {
-
-   this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-
- })
+  this.subscriptions.push( this._adminservices.DeleteWorker(id ).subscribe((res) => {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' worker has been Successfully deleted into DB  '}` });
 
 
+    this.getAllworkers()
+
+  }, (err: any) => {
+
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
+
+  }))
 }
 gotopage( ){
   let url: string = "Issue_Reports";
     this.router.navigateByUrl(url);
 }
 AssignWorker(  ) {
-
-  this._adminservices.AssignWorker( this.paramid,this.idworkerassigin ).subscribe((res) => {
+  this.subscriptions.push(  this._adminservices.AssignWorker( this.paramid,this.idworkerassigin ).subscribe((res) => {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'The Issue was Assigned to Selected Worker '}` });
 
     this.gotopage( );
@@ -201,9 +199,13 @@ AssignWorker(  ) {
 
     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
 
-  })
-
+  }))
 
  }
+
+ ngOnDestroy() {
+  for(let i=0;i<this.subscriptions.length;i++)
+  this.subscriptions[i].unsubscribe();
+}
 }
 
