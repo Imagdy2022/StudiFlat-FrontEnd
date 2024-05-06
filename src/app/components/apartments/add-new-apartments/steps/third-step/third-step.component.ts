@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-third-step',
   templateUrl: './third-step.component.html',
@@ -32,6 +33,7 @@ export class ThirdStepComponent {
   /** create_Apart_contract */
   create_Apart_contract!: FormGroup;
   apt_imgs: any = [];
+  subscriptions:Subscription[] = [];
 
   /** apt_UUID */
   apt_UUID: string = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
@@ -126,14 +128,14 @@ export class ThirdStepComponent {
   issshowsafe: any = '';
   dataEdit: any;
   getApartmentDetails() {
-    this._ApartmentService
+    this.subscriptions.push( this._ApartmentService
       .getApartDetail(this.idParamterEdit)
       .subscribe((res) => {
-        this._OnwerService
+        this.subscriptions.push(this._OnwerService
           .getOwner(res.general_Info['apt_Owner'])
           .subscribe((res) => {
             // this.nameOwner=res.owner_FirstName +" "+res.owner_LastName;
-          });
+          }));
         this.dataEdit = res;
         this.nameApartment = res.general_Info['apt_Name'];
         this.nameAddress = res.general_Info['apt_Address'];
@@ -196,7 +198,8 @@ export class ThirdStepComponent {
           this.CreateContract = 'No';
           this.createcontractpage = false;
         }
-      });
+      }));
+
   }
   bindCreatecontract(): void {
     this.create_Apart_contract = new FormGroup({
@@ -294,7 +297,7 @@ export class ThirdStepComponent {
     // check if the file has been uploaded
     if (file) {
       // call the onUpload function to get the link to the file
-      this.uploadService.uploadSingleFile(formData).subscribe(
+      this.subscriptions.push( this.uploadService.uploadSingleFile(formData).subscribe(
         (img: any) => {
           // create url to preview file
           file.url = URL.createObjectURL(file);
@@ -335,7 +338,8 @@ export class ThirdStepComponent {
             detail: `Please try again`,
           });
         }
-      );
+      ));
+
     }
   }
 
@@ -351,14 +355,15 @@ export class ThirdStepComponent {
   listDropDownPropertyowner: any = [];
   nameOwner: any = '';
   getAowners(id: any) {
-    this._ApartmentService.getOwnerDropList().subscribe((res) => {
+    this.subscriptions.push(this._ApartmentService.getOwnerDropList().subscribe((res) => {
       this.listDropDownPropertyowner = res.list;
       for (let i = 0; i < this.listDropDownPropertyowner.length; i++) {
         if (id == this.listDropDownPropertyowner[i].id) {
           this.nameOwner = this.listDropDownPropertyowner[i].name;
         }
       }
-    });
+    }));
+
   }
   idwner: any;
   // get  local storage
@@ -446,7 +451,7 @@ export class ThirdStepComponent {
       })
     );
     if (this.addApartment != 'add new apartments') {
-      this._ApartmentService
+      this.subscriptions.push( this._ApartmentService
         .createPostSec3(
           { ...this.create_Apart_contract.value, ...res },
           this.idParamterEdit
@@ -467,9 +472,10 @@ export class ThirdStepComponent {
               detail: `${err.error.message[0]}`,
             });
           }
-        );
+        ));
+
     } else {
-      this._ApartmentService
+      this.subscriptions.push( this._ApartmentService
         .createPostSec3(
           { ...this.create_Apart_contract.value, ...res },
           this.id
@@ -490,7 +496,7 @@ export class ThirdStepComponent {
               detail: `${err.error.message[0]}`,
             });
           }
-        );
+        ));
     }
   }
 
@@ -621,8 +627,7 @@ export class ThirdStepComponent {
 
   upload(): void {
     this.spinner = true;
-
-    this.uploadService
+    this.subscriptions.push( this.uploadService
       .uploadMultiFile(this.convertFileToFormData(this.ListFiles))
       .subscribe((data) => {
         this.messageService.add({
@@ -640,7 +645,7 @@ export class ThirdStepComponent {
           ?.patchValue(this.apt_imgs);
         localStorage.setItem('imagesAPT12', JSON.stringify(this.apt_imgs));
         this.spinner = false;
-      });
+      }));
   }
   convertFileToFormData(files: any[]) {
     const formData = new FormData();
@@ -660,5 +665,9 @@ export class ThirdStepComponent {
   gotopage() {
     let url: string = 'apartments';
     this.router.navigateByUrl(url);
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

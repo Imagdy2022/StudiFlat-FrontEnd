@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { RecentActivities } from 'src/app/models/recent-activities';
 
@@ -17,6 +18,7 @@ export class RecentActivitiesComponent implements OnInit{
   pagesize=10;
   totalofPages=0;
   totalRecords=0;
+  subscriptions:Subscription[] = [];
   listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
   constructor(public router: Router,private messageService: MessageService, public _adminservices: AdminsService,
   ) {
@@ -32,7 +34,7 @@ export class RecentActivitiesComponent implements OnInit{
   selectedfromDropDown(value:any){
   }
   RecentActivities() {
-    this._adminservices.RecentActivities(this.pageNumber,this.pagesize).subscribe({
+    this.subscriptions.push( this._adminservices.RecentActivities(this.pageNumber,this.pagesize).subscribe({
       next:(res:any)=>{
         this.RecentActivitiesarr = res.data;
         this.totalofPages=res.totalPages
@@ -40,7 +42,8 @@ export class RecentActivitiesComponent implements OnInit{
       },
       error:(err)=>{
       }
-    })
+    }));
+
   }
   tiggerPageChange(event: any) {
 
@@ -80,5 +83,8 @@ export class RecentActivitiesComponent implements OnInit{
           break;
     }
   }
-
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
+  }
 }

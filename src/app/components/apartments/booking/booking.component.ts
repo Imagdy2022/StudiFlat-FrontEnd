@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -48,7 +49,8 @@ export class BookingComponent implements OnInit {
     numberbokk=0;
     dataSelectionKey: string = '';
 
-    bokkRole:any
+    bokkRole:any;
+    subscriptions:Subscription[] = [];
 
 
     statusinquire:any=""
@@ -63,7 +65,7 @@ export class BookingComponent implements OnInit {
     getAllbokk(   ) {
       this.booking=[]
       this.numberbokk=0
-      this._bookService.GetBookingHistory(this.apt_UUID,this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
+      this.subscriptions.push( this._bookService.GetBookingHistory(this.apt_UUID,this.pageNumber,this.pagesize,this.searchText).subscribe((res:any) => {
         this.booking = res["data"];
         this.numberbokk = this.booking.length;
         this.totalofPages=res["totalPages"]
@@ -84,7 +86,8 @@ export class BookingComponent implements OnInit {
 
        }, (error) => {
          console.error('Error fetching owners:', error);
-      })
+      }));
+
     }
     tiggerPageChange(event: any) {
 
@@ -118,6 +121,10 @@ export class BookingComponent implements OnInit {
     hidecard(id:any){
        this.showEdit=[]
 
+    }
+    ngOnDestroy() {
+      for(let i=0;i<this.subscriptions.length;i++)
+      this.subscriptions[i].unsubscribe();
     }
   }
 

@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OnwerService } from '../../../_services/Onwers/onwer.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owner-details',
@@ -35,6 +36,7 @@ export class OwnerDetailsComponent {
   loadingButton: boolean = false;
   // param title page
   pageTitle: any;
+  subscriptions:Subscription[] = [];
 
   ngOnInit() {
     this.initCities();
@@ -86,9 +88,9 @@ export class OwnerDetailsComponent {
   checkPage(): void {
     if (this.pageTitle == 'owner_details') {
       this.id = this.param;
-      this._OnwerService.getOwner(this.id).subscribe((res) => {
+      this.subscriptions.push( this._OnwerService.getOwner(this.id).subscribe((res) => {
         this.createOwner.patchValue(res);
-      });
+      }));
       this.param = 'Owner details';
       this.listAnchors = [
         { id: 'Generalinfo', link: 'General info' },
@@ -99,9 +101,10 @@ export class OwnerDetailsComponent {
       ];
     } else if (this.pageTitle == 'edit_owner') {
       this.id = this.param;
-      this._OnwerService.getOwner(this.id).subscribe((res) => {
+      this.subscriptions.push(      this._OnwerService.getOwner(this.id).subscribe((res) => {
         this.createOwner.patchValue(res);
-      });
+      }))
+
       this.param = 'edit owner name details';
       this.listAnchors = [
         { id: 'Generalinfo', link: 'General info' },
@@ -193,7 +196,7 @@ export class OwnerDetailsComponent {
     data.value.owner_WA_Number = String(data.value.owner_WA_Number);
     this.loadingButton = true;
     if (this.param == 'Create New') {
-      this._OnwerService
+      this.subscriptions.push( this._OnwerService
         .createOwner({
           ...data.value,
           ...this.selectedCity,
@@ -218,7 +221,8 @@ export class OwnerDetailsComponent {
               detail: `${err.error.title}`,
             });
           }
-        );
+        ))
+
     } else {
       const editData = {
         ...data.value,
@@ -229,8 +233,7 @@ export class OwnerDetailsComponent {
           Country: 'UnSpecified',
         },
       };
-
-      this._OnwerService.editOwner(this.id, editData).subscribe(
+      this.subscriptions.push(this._OnwerService.editOwner(this.id, editData).subscribe(
         (res) => {
           this.loadingButton = false;
           this.router.navigate(['/owners']);
@@ -244,7 +247,7 @@ export class OwnerDetailsComponent {
             detail: `${err.error.title}`,
           });
         }
-      );
+      ));
     }
   }
 
@@ -275,5 +278,10 @@ export class OwnerDetailsComponent {
    */
   scrollTop(): void {
     window.scrollTo(0, 0);
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

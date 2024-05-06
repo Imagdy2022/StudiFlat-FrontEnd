@@ -4,6 +4,7 @@ import { ApartmentService } from '../../../../../_services/apartments/apartment.
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-second-step',
   templateUrl: './second-step.component.html',
@@ -80,6 +81,7 @@ export class SecondStepComponent {
   LabelKitchen: object = { text1: 'Kitchen Tool 1' };
   /** apt_UUID */
   apt_UUID: string = '';
+  subscriptions:Subscription[] = [];
   /** n_ofbedRoom */
   @Input() n_ofbedRoom = 0;
   // get id
@@ -126,12 +128,13 @@ export class SecondStepComponent {
   // get  local storage
   aprt_details_Edit: any;
   getApartmentDetails() {
-    this._ApartmentService
+    this.subscriptions.push(this._ApartmentService
       .getApartDetail(this.idParamterEdit)
       .subscribe((res) => {
         this.aprt_details_Edit = res.general_Info;
         this.getDataFromEdit(res);
-      });
+      }));
+
   }
   getLocalStorage(): void {
     if ('create_Apart_Equ' in localStorage) {
@@ -476,7 +479,7 @@ export class SecondStepComponent {
     };
 
     if (this.addApartment != 'add new apartments') {
-      this._ApartmentService
+      this.subscriptions.push(this._ApartmentService
         .createPostSec2(objectData, this.idParamterEdit)
         .subscribe(
           (res) => {
@@ -499,9 +502,10 @@ export class SecondStepComponent {
               detail: `${err.error.message[0]}`,
             });
           }
-        );
+        ));
+
     } else {
-      this._ApartmentService.createPostSec2(objectData, this.id).subscribe(
+      this.subscriptions.push(this._ApartmentService.createPostSec2(objectData, this.id).subscribe(
         (res) => {
           localStorage.setItem('create_Apart_Equ', JSON.stringify(objectData));
 
@@ -519,7 +523,8 @@ export class SecondStepComponent {
             detail: `${err.error.message[0]}`,
           });
         }
-      );
+      ));
+
     }
     this.room = [];
     this.bathroom = [];
@@ -618,5 +623,9 @@ export class SecondStepComponent {
   gotopage() {
     let url: string = 'apartments';
     this.router.navigateByUrl(url);
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

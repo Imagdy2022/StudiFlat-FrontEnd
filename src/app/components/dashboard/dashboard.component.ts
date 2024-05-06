@@ -6,9 +6,8 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { ApartmentService } from 'src/app/_services/apartments/apartment.service';
 import { environment } from 'src/environments/environment';
 import { IgxDoughnutChartComponent } from "igniteui-angular-charts";
-import { IgxRingSeriesComponent } from "igniteui-angular-charts";
-import { IgxSliceClickEventArgs } from "igniteui-angular-charts";
 import { RecentActivities } from 'src/app/models/recent-activities';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -22,6 +21,7 @@ export class DashboardComponent {
   public chart : IgxDoughnutChartComponent;
   showSide: string = '';
   apartmentsRentedDial: number = 15;
+  subscriptions:Subscription[] = [];
   headTableList:Array<string>=['Apartment name','Locations','Owner','Amount','Status']
   rowDatalist:Array<any>=[{img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',admin:'Ben Ten',amount:'@€25,00/Mo',status:'Rented'},
   {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',admin:'Ben Ten',amount:'@€25,00/Mo',status:'Rented'},
@@ -77,8 +77,7 @@ export class DashboardComponent {
   MonthlyRevenText:any=[]
 
   MonthlyRevenu() {
-
-    this._adminservices.MonthlyRevenu().subscribe(
+    this.subscriptions.push(this._adminservices.MonthlyRevenu().subscribe(
       (res: any) => {
         for(let i=0;i<res.length;i++){
           this.MonthlyRevenTotol.push(res[i].total)
@@ -88,48 +87,47 @@ export class DashboardComponent {
       (error) => {
         console.error('Error fetching owners:', error);
       }
-    );
+    ))
+
   }
   DashCards: any = {};
   GetDashCards() {
-
-    this._adminservices.GetDashCards().subscribe(
+    this.subscriptions.push(this._adminservices.GetDashCards().subscribe(
       (res: any) => {
         this.DashCards = res;
       },
       (error) => {
-        console.error('Error fetching owners:', error);
+        console.error('Error fetching Dashboard Cards:', error);
       }
-    );
+    ));
   }
 
   PopularAptarr: any[] = [];
   PopularApt() {
-
-    this._adminservices.PopularApt().subscribe(
+    this.subscriptions.push(    this._adminservices.PopularApt().subscribe(
       (res: any) => {
         this.PopularAptarr = res;
       },
       (error) => {
-        console.error('Error fetching owners:', error);
+        console.error('Error fetching PopularApt:', error);
       }
-    );
+    ));
   }
 
   RecentActivitiesarr: RecentActivities[] = [];
   RecentActivities() {
-    this._adminservices.RecentActivities(1,4).subscribe({
+    this.subscriptions.push(this._adminservices.RecentActivities(1,4).subscribe({
       next:(res:any)=>{
         this.RecentActivitiesarr = res.data;
       },
       error:(err)=>{
       }
-    })
+    }));
+
   }
   AptRented:any
   AptRentedFree() {
-
-    this._adminservices.AptRentedFree().subscribe(
+    this.subscriptions.push( this._adminservices.AptRentedFree().subscribe(
       (res: any) => {
         this.AptRented = res;
         this.dataChart = {
@@ -157,9 +155,11 @@ export class DashboardComponent {
       };
       },
       (error) => {
-        console.error('Error fetching owners:', error);
+        console.error('Error fetching Rented Free:', error);
       }
-    );
+    ))
+
+
   }
   dataChart: any;
 
@@ -243,5 +243,10 @@ export class DashboardComponent {
           this.router.navigate([`/apartments/booking/${actionID}`]);
           break;
     }
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

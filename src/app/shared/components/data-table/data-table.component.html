@@ -37,7 +37,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
 
-            <tr (click)="hidecard( )" routerLink="/owners/owner-profile/{{product.owner_ID}}"  style="cursor: pointer;" >
+            <tr (click)="hidecard( )"  style="cursor: pointer;" >
                 <!-- <td>
                     <p-tableCheckbox [value]="product" (click)="GetSelectedItem()"></p-tableCheckbox>
                 </td> -->
@@ -49,12 +49,12 @@
 
 
                 </td>
-                <td  *ngIf="pagePerson =='Owners' && product.owner_BankAccoun">{{product.owner_BankAccoun}}</td>
+                <td routerLink="/owners/owner-profile/{{product.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_BankAccoun">{{product.owner_BankAccoun}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'  ">{{product.owner_CreatedBy}}</td> -->
-                <td  *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>
-                <td  *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
+                <td routerLink="/owners/owner-profile/{{product.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>
+                <td  routerLink="/owners/owner-profile/{{product.owner_ID}}" *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'">{{product.gender}}</td> -->
-                <td  *ngIf="pagePerson=='Owners'">{{product.owner_About}}</td>
+                <td routerLink="/owners/owner-profile/{{product.owner_ID}}"   *ngIf="pagePerson=='Owners'">{{product.owner_About}}</td>
                 <!-- <td  *ngIf="pagePerson=='Owners'">{{product.owner_Status}}</td> -->
                 <td *ngIf="pagePerson=='Owners' " class="cursor position-relative">
                     <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,product.owner_ID)">

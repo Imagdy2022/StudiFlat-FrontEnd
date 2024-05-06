@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
@@ -24,6 +25,9 @@ export class AddNewMessageComponent {
   disablenext = false;
   disableperv = false;
   userSelectId :any;
+  checkedUsers: any[] = [];
+  selectedUsersIds: number[] = [];
+  subscriptions:Subscription[] = [];
 
   constructor(
     public _adminservices: AdminsService,
@@ -62,7 +66,7 @@ export class AddNewMessageComponent {
   getAllTenants() {
     this.Tenants = [];
     this.numberTenants = 0;
-    this._adminservices
+    this.subscriptions.push( this._adminservices
       .GetAllAppUsers(this.pageNumber, this.pagesize, this.searchText)
       .subscribe(
         (res: any) => {
@@ -84,7 +88,8 @@ export class AddNewMessageComponent {
         (error) => {
           console.error('Error fetching owners:', error);
         }
-      );
+      ))
+
   }
   tiggerPageChange(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
@@ -107,12 +112,32 @@ export class AddNewMessageComponent {
     this.getAllTenants();
   }
   selectAll(ev: any) {
-
+    if (ev.target.checked) {
+      this.checkedUsers = [];
+      this.Tenants.forEach((user : any) => {
+        document.getElementById(`selectedUser-${user.tenant_ID}`)?.setAttribute('checked', 'true');
+        this.checkedUsers.push(user);
+        this.selectedUsersIds.push(user.tenant_ID);
+      });
+    }
+    else {
+      this.Tenants.forEach((user:any) => {
+        document
+          .getElementById(`selectedUser-${user.tenant_ID}`)
+          ?.removeAttribute('checked');
+      });
+      this.checkedUsers = [];
+    }
   }
   onCheckboxChange(e: any) {
     if(e.target.checked){
       this.userSelectId = e.target.value
     }
+    }
+
+    ngOnDestroy() {
+      for(let i=0;i<this.subscriptions.length;i++)
+      this.subscriptions[i].unsubscribe();
     }
 
 }

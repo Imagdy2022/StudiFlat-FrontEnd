@@ -92,7 +92,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-partners>
 
-                    <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/partner/view-partner/{{partners.partner_ID}}">
+                    <tr (click)="hidecard()" style="cursor: pointer;" >
 
 
                         <td>
@@ -100,20 +100,20 @@
                             <img *ngIf="!partners.partner_Photo" routerLink="/partner/view-partner/{{partners.partner_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">                            {{partners?.partner_FName}} {{partners?.partner_LName}}
 
                         </td>
-                        <td>
+                        <td routerLink="/partner/view-partner/{{partners.partner_ID}}">
                             {{partners?.partner_Email}}
                         </td>
-                        <td>
+                        <td routerLink="/partner/view-partner/{{partners.partner_ID}}">
                             {{partners?.partner_PhoneNumber}}
                         </td>
 
-                        <td>
+                        <td routerLink="/partner/view-partner/{{partners.partner_ID}}">
                             {{partners?.partner_WANumber}}
                         </td>
-                        <td>
+                        <td routerLink="/partner/view-partner/{{partners.partner_ID}}">
                             {{partners?.partner_Code}}
                         </td>
-                        <td>
+                        <td routerLink="/partner/view-partner/{{partners.partner_ID}}">
                             {{partners?.partner_Type}}
                         </td>
 

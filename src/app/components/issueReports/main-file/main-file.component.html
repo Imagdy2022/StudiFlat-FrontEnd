@@ -93,30 +93,30 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-issue style="height: 200px !important;">
 
-                    <tr style="cursor: pointer;" (click)="hidecard()" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
+                    <tr style="cursor: pointer;" (click)="hidecard()" >
 
 
                         <td class="d-flex align-items-center" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                             {{issue?.issue_Code}}
                         </td>
-                        <td>
+                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                           {{issue?.requsted_By }}
 
                         </td>
 
-                        <td>
+                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                             {{issue?.apartment_Number}}
                         </td>
 
-                        <td>
+                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                             {{issue?.date_Reported | date:'medium' }}
                         </td>
-                        <td>
+                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                           <p style="width: 10vw; overflow: hidden; text-overflow: ellipsis;
                           white-space: nowrap;"> {{issue?.desc}}
                           </p>
                         </td>
-                        <td class="text-center">
+                        <td class="text-center" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                           <div>
                               <span class="rounded-5 px-3 badge Pending" *ngIf="issue?.issue_Status=='Pending'">
                                 {{issue?.issue_Status}}

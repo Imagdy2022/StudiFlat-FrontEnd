@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MessageService } from 'primeng/api';
+import { Subscription } from "rxjs";
 import { AdminsService } from "src/app/_services/admins/admins.service";
 
 
@@ -19,6 +20,7 @@ export class CreateNewPaymentComponent {
   imageFile:string='';
  firstIDFound = false;
   secondID:any;
+  subscriptions:Subscription[] = [];
 
   paymentForm : FormGroup = new FormGroup({
     Pay_To:new FormControl(null),
@@ -87,7 +89,7 @@ export class CreateNewPaymentComponent {
     this.GetPayToList();
   }
   GetPayToList(){
-    this._adminservices.GetPayToList(this.toType,this.searchText,this.pageNumber, this.pagesize ).subscribe({
+    this.subscriptions.push(this._adminservices.GetPayToList(this.toType,this.searchText,this.pageNumber, this.pagesize ).subscribe({
       next:(res:any)=>{
         this.allData = res.data
         this.pageNumber = res.pageNumber;
@@ -107,7 +109,8 @@ export class CreateNewPaymentComponent {
       },
       error:(err)=>{
       }
-    })
+    }))
+
   }
   getImageFile(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -133,14 +136,14 @@ export class CreateNewPaymentComponent {
     Payment_Attachment: this.imgUrl
     }
 
-     this._adminservices.AddPayment(data).subscribe({
+    this.subscriptions.push( this._adminservices.AddPayment(data).subscribe({
       next:(data:any)=>{
         this.messageService.add({ severity: 'success', summary: 'Success', detail:"send Success" });
       },
       error:(err)=>{
          this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
       }
-     })
+     }))
   }
 
 
@@ -148,5 +151,9 @@ export class CreateNewPaymentComponent {
 
   searchAction() {
     this.GetPayToList();
+  }
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

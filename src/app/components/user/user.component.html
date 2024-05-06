@@ -17,8 +17,8 @@
         <p class="fw-bold ms-1" style="color: #6c6a6a;">Users</p>
         <div class="d-flex justify-content-lg-between flex-md-row flex-column">
           <div class="d-flex mb-2 me-3 mb-2">
-            <button class="month rounded-start px-3 py-2 outline-none bg-white">This Month</button>
-            <button class="week rounded-end px-3 py-2 outline-none bg-white">Last Week</button>
+            <button class="month rounded-start px-3 py-2 text-white border-0 outline-none" (click)="FilterButtons('This Month')">This Month</button>
+            <button class="week px-3 py-2 outline-none bg-white" (click)="FilterButtons('Last Week')">Last Week</button>
         </div>
           <div class="d-flex mb-2">
               <!-- start dropdown button  -->
@@ -113,7 +113,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-Tenant>
 
-                    <tr (click)="hidecard(Tenant.request_ID)"  routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}"  style="cursor: pointer;">
+                    <tr (click)="hidecard(Tenant.request_ID)"   style="cursor: pointer;">
 
                         <td class="d-flex align-items-center">
 
@@ -123,20 +123,20 @@
                             <img *ngIf="!Tenant.user_Photo" routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{Tenant?.user_Name}}
 
                         </td>
-                        <td>
+                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
                             {{Tenant?.reg_Time}}
                         </td>
-                        <td>
+                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
                             {{Tenant?.email}}
                         </td>
-                        <td>
+                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
                           <span class="ms-3"> {{Tenant?.rent_No}} </span>
                         </td>
 
                         <!-- <td>
                     <p class="d-flex align-items-center fw-bold mt-2">{{admin?.status}}</p>
                 </td> -->
-                        <td>
+                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
                           <div>
                               <span class="rounded-5 px-3 badge excellent" *ngIf="Tenant?.user_Behavior=='Excellent'">
                                 <span>
@@ -168,9 +168,6 @@
                             <div>
                                 <p-tag severity="success" value="Active" [rounded]="true " *ngIf="Tenant?.status==true"> </p-tag>
                                 <p-tag severity="danger" value="Suspended" [rounded]="true " *ngIf="Tenant?.status==false"> </p-tag>
-
-
-
                             </div>
                         </td> -->
 
@@ -179,7 +176,7 @@
               <img src="assets/images/edit.svg">
           </button>
                             <div *ngIf="showEdit[Tenant.user_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
-                               <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">Edit</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">Edit</button> 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteUser(Tenant.user_ID)" *ngIf="TantsRole?.p_Delete==true || is_Super==true"> Delete </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendUser(Tenant.user_ID)">Suspend User </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status==false" (click)="unSuspendUser(Tenant.user_ID)">UnSuspend User </button>
