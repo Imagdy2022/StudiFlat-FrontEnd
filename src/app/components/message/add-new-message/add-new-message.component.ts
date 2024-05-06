@@ -146,37 +146,22 @@ export class AddNewMessageComponent {
     }
   }
   onCheckboxChange(e: any) {
-    if(e.target.checked){
-      this.userSelectId = e.target.value
+    this.checkedUsers = [];
+    if (e.target.checked) {
+      let user = this.Tenants.find(
+        (sc) => sc.tenant_ID == e.target.value
+      );
+      if (user) {
+        this.checkedUsers.push(user);
+        this.selectedUsersIds.push(user.tenant_ID);
+      }
     }
-    // this.selectedUsersIds.push(this.userSelectId);
-    // console.log(this.selectedUsersIds)
-    // this.checkedUsers = [];
-    // if (e.target.checked) {
-    //   console.log(this.Tenants)
-    //   let user = this.Tenants.find(
-    //     (sc) => sc.tenant_ID == e.target.value
-    //   );
-    //   if (user) {
-    //     this.checkedUsers.push(user);
-    //     this.selectedUsersIds.push(user.tenant_ID);
-
-    //     console.log(this.checkedUsers);
-    //     console.log(this.selectedUsersIds)
-
-    //   }
-    // } else {
-    //   this.checkedUsers.splice(
-    //     this.checkedUsers.findIndex(
-    //       (sc) => sc.tenant_ID == e.target.value
-    //     ),
-    //     1
-    //   );
-    //   console.log(this.checkedUsers);
-    //   console.log(this.selectedUsersIds)
-
-    // }
+    else {
+      let index = this.checkedUsers.findIndex(sc => sc.tenant_ID == e.target.value);
+          this.checkedUsers.splice(index, 1);
+          this.selectedUsersIds.splice(index, 1);
     }
+  }
     display1:any;
     onOpenModal1( ) {
        this.display1 = 'block';
@@ -218,12 +203,7 @@ export class AddNewMessageComponent {
     upload(): void {
       this.subscriptions.push( this.uploadService.uploadSingleFile(this.convertFileToFormData(this.ListFiles )).subscribe(data => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'attach Upload Successfully'}` });
-        debugger
-
           this.apt_imgs= data[0].file_Path  ;
-
-
-
       }))
 
             }
@@ -244,10 +224,10 @@ export class AddNewMessageComponent {
 
     }
     NextButtons(){
-      if(this.checkedUsers.length != 0)
+      if(this.selectedUsersIds.length > 1)
         this.onOpenModal1();
       else
-      this.router.navigate([`/messages/user-message/${this.userSelectId}`])
+      this.router.navigate([`/messages/user-message/${this.selectedUsersIds[0]}`])
 
     }
 
