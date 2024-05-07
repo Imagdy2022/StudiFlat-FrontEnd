@@ -69,13 +69,13 @@ export class RecentActivitiesComponent implements OnInit{
       case 'Partners':
         this.router.navigate([`/partner/view-partner/${actionID}`]);
         break;
-        case 'Tenants':
+        case 'Tenant':
           this.router.navigate([`/users/app-edite-user-details/${actionID}`]);
           break;
-        case 'Tickets':
+        case 'Chats':
           this.router.navigate([`/messages/message-tiket/${actionID}`]);
           break;
-        case 'Invoices':
+        case 'Payment':
           this.router.navigate([`/payments/invoice/${actionID}`]);
           break;
         case 'Booking':
