@@ -51,6 +51,7 @@
     height: 300px!important;
 }
 
+
 @media (min-width: 768px) {
     .map-container {
         width: 500px !important;
@@ -89,8 +90,6 @@
 }
 
 .profile1 {
-    width: 1130px;
-    height: 1717px;
     padding: 24px;
     background: white;
     border-radius: 8px;
@@ -272,4 +271,20 @@
     align-items: flex-start;
     gap: 16px;
     display: inline-flex
+}
+
+td {
+  font-size: 14px !important;
+  padding: 0px 24px !important;
+  font-family: 'Poppins';
+  height: 72px !important;
+  border-top: 1px solid #F6F6F6 !important;
+  border-bottom: none !important;
+
+}
+
+th {
+    font-size: 14px !important;
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
 }

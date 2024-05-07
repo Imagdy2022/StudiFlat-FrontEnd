@@ -34,7 +34,7 @@
 
         <p-toast></p-toast>
         <div class="card mt-2">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-center ps-1 pe-3 pt-1" style="margin-bottom: 12px;">
                 <!-- length Of person -->
                 <div class="d-flex mx-2 mt-4">
                     <p class="me-2 fs-5 fw-bold ml-8">Advertisements : {{numberAds}}</p>
@@ -43,27 +43,12 @@
         </p> -->
                 </div>
                 <!-- search input -->
-                <div class="d-flex align-items-center mx-2 mt-2 w-50">
+                <div class="d-flex align-items-center mx-2 mt-2">
                     <a class="px-3 py-2 rounded border text-white text-decoration-none marmodify" style="background-color:#1F4068; cursor: pointer;" (click)="openmodel3adds()">
                         <img src="assets/images/plus.svg" class="me-2 ">Add New
                     </a>
                 </div>
             </div>
-            <!-- <div class="d-flex justify-content-between">
-                 <div class="d-flex mx-2 mt-4">
-                    <p class="me-2 fs-5 fw-bold ml-8">advertisements : {{numberAds}}</p>
-
-                </div>
-                 <div class="d-flex align-items-center mx-2 mt-2 w-50">
-                    <a class="px-3 py-2 rounded border text-white text-decoration-none" style="background-color:#1F4068; cursor: pointer;margin-left: 423px;" (click)="openmodel3adds()">
-                        <img src="assets/images/plus.svg" class="me-2 ">Add New
-                    </a>
-                </div>
-            </div> -->
-            <!-- <p-table #dtk [value]="Ads" /> -->
-
-
-
             <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="Ads">
                 <ng-template pTemplate="header" class="text-center">
                     <tr *ngIf="headerData">
@@ -138,7 +123,7 @@
         <div class="modal-content" style="    margin-top: 150px;">
             <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
                 <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
-                    <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
+                    <span class="form-label gray fw-bold" style="vertical-align: middle">
                 Update ads
         </span>
                 </p>
@@ -155,9 +140,9 @@
 
                 <div class="row">
 
-                    <label class="form-label gray fw-bold"> Upload picture
+                    <label class="form-label gray fw-bold w-100"> Upload picture
           </label>
-                    <div class="position-relative h-124px mb-3">
+                    <div class="position-relative h-124px w-100">
 
                         <input type="file" accept="image/*" (change)="selectFile2($event)" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
                         <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute" width="97%">
@@ -166,15 +151,15 @@
 
                 </div>
                 <div class="row" *ngIf="urls_update != null">
-                    <div class="col-md-2 card33">
+                    <div class="col-md-4">
                         <a (click)="removeItem2()" style="border: none;   margin-bottom: 10px; position: absolute;">
                             <img class="imageRemove" src="../../../../../../assets/images/delete.svg" width="32px" height="32px;">
                         </a>
-                        <img [src]="urls_update" alt="Avatar" style="width:350px;height:205px ; ">
+                        <img [src]="urls_update" alt="Avatar" class="w-100" style="height:200px ; ">
 
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                     <div class="mb-3 col-12 col-md-12">
                         <label for="exampleInputPricepermonth" class="form-label gray fw-bold">link</label>
                         <input type="text" [(ngModel)]="link_create_ads_update" class="form-control rounded-2 py-2 fs-6" id="exampleInputPricepermonth" />
@@ -195,23 +180,21 @@
 
             <div class="modal-footer">
 
-                <div class="d-flex justify-content-between">
-                    <div class="py-2 px-3 fw-bold"></div>
-                    <div class="d-flex justify-content-between">
-                        <a (click)="onCloseModal2()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvddmodel">
-                  Cancel
-    </a>
-                        <button (click)="Updateads()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
-                  confirm
-    </button>
-                    </div>
-                </div>
-                <!-- Confirm -->
+                  <div class="d-flex justify-content-between w-100">
+                      <a (click)="onCloseModal2()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvddmodel">
+                Cancel
+  </a>
+                      <button (click)="Updateads()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+                confirm
+  </button>
+                  </div>
 
-            </div>
+              <!-- Confirm -->
+
+          </div>
 
 
-        </div>
+      </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
@@ -221,8 +204,8 @@
         <div class="modal-content" style="    margin-top: 150px;">
             <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
                 <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
-                    <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
-                add new advertisement
+                    <span class="form-label gray fw-bold" style="vertical-align: middle;">
+                Add new advertisement
       </span>
                 </p>
                 <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal3()">
@@ -238,26 +221,26 @@
 
                 <div class="row">
 
-                    <label class="form-label gray fw-bold"> Upload picture
+                    <label class="form-label gray fw-bold w-100"> Upload picture
             </label>
-                    <div class="position-relative h-124px mb-3">
+            <div class="position-relative h-124px w-100">
 
-                        <input type="file" accept="image/*" (change)="selectFile($event)" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                        <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute" width="90%">
+              <input type="file" accept="image/*" (change)="selectFile($event)" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
+              <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute" width="97%">
 
-                    </div>
+          </div>
 
                 </div>
                 <div class="row" *ngIf="urls != null">
-                    <div class="col-md-2 card33">
+                    <div class="col-md-4">
                         <a (click)="removeItem()" style="border: none;   margin-bottom: 10px; position: absolute;">
                             <img class="imageRemove" src="../../../../../../assets/images/delete.svg" width="32px" height="32px;">
                         </a>
-                        <img [src]="urls" alt="Avatar" style="width:350px;height:205px ; ">
+                        <img [src]="urls" alt="Avatar" class="w-100" style="height:205px ; ">
 
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                     <div class="mb-3 col-12 col-md-12">
                         <label for="exampleInputPricepermonth" class="form-label gray fw-bold">link</label>
                         <input type="text" [(ngModel)]="link_create_ads" class="form-control rounded-2 py-2 fs-6" id="exampleInputPricepermonth" />
@@ -276,25 +259,23 @@
 
 
 
+
             <div class="modal-footer">
 
-                <div class="d-flex justify-content-between">
-                    <div class="py-2 px-3 fw-bold"></div>
-                    <div class="d-flex justify-content-between">
-                        <a (click)="onCloseModal3()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvddmodel">
-                Cancel
-  </a>
-                        <button (click)="CreateAds()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
-                confirm
-  </button>
-                    </div>
-                </div>
-                <!-- Confirm -->
+                  <div class="d-flex justify-content-between w-100 px-2">
+                      <a (click)="onCloseModal3()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold  xcvddmodel">
+              Cancel
+</a>
+                      <button (click)="CreateAds()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+              confirm
+</button>
+                  </div>
+              <!-- Confirm -->
 
-            </div>
+          </div>
 
 
-        </div>
+      </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->

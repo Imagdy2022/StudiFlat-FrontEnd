@@ -82,7 +82,7 @@ export class WorkerProfileComponent implements OnInit {
 
    }
  }
- showEdit:any
+ showEdit: Array<boolean> = [];
  detailperson(event:any, id: any){
   this.showEdit=[]
 event.stopPropagation()
