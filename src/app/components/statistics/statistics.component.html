@@ -1,58 +1,89 @@
 <!-- start header -->
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'statistics'"></app-head>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Statistics'"></app-head>
 </header>
 <!-- end header -->
 <div class="row m-0">
     <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'statistics'"></app-sidebar>
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Statistics'"></app-sidebar>
     <!-- end sidebar  -->
     <!-- start content page  -->
     <main class=" p-4 col-lg-10">
 
         <div class="d-md-flex justify-content-between dashboard" style="margin-top: 8px; margin-bottom: 16px;">
-            <p class="fw-bold" style="color: #6c6a6a;">statistics</p>
+            <p class="fw-bold" style="color: #6c6a6a;">Statistics</p>
             <div class="d-md-flex justify-content-lg-between  ">
-                <div class="d-flex mb-2 me-3">
-                    <button class="month rounded-start px-3 py-2 text-white border-0 outline-none">This Month</button>
-                    <button class="week rounded-end px-3 py-2 outline-none bg-white">Last Week</button>
-                </div>
                 <!-- start dropdown button  -->
-                <app-dropdown class="" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+                <app-dropdown [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
                 <!-- end dropdown button  -->
             </div>
         </div>
 
-        <div class="row my-2">
-            <!--Apartment ratings table-->
-            <div class="col-12 col-md-7 mb-3">
-                <app-statistics-table [headTitle]="headTitleRating" [listDropDown]="listDropDownRating" [headTableList]="headTableListRating" [rowDatalist]="rowDatalistRating">
-                </app-statistics-table>
-            </div>
-            <!--Vacancy rate chart-->
-            <div class="col-12 col-md-5 mb-3">
-                <div class="p-3 border rounded bg-white h-350">
-                </div>
-            </div>
-        </div>
-        <!--charts-->
-        <div class="row">
-            <!--Total revenue chart-->
-            <div class="col-12 col-md-6  mb-3 ">
-                <div class=" bg-white border rounded p-3">
-                    Chart
-                    <!--chart-->
-                </div>
-            </div>
-            <!--area location-->
-            <div class="col-12 col-md-6  mb-3">
-                <!--chart-->
-                <div class="bg-white border rounded p-3">
-                    Chart
-                </div>
 
-            </div>
+        <div class="row g-4">
+          <!-- start total details cards -->
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="total-detals">
+              <div class="d-flex align-items-center">
+                  <span class="icon">€</span>
+                  <span class="mx-3 fw-bold">Income</span>
+              </div>
+              <div>
+                  <h3 class="my-2">{{StatisticsCards.income ?? 0}}</h3>
+                  <div>
+                      <i class="fa fa-arrow-down red" *ngIf="StatisticsCards.income_Up==false" aria-hidden="true"></i>
+                      <i class="fa fa-arrow-up green" *ngIf="StatisticsCards.income_Up==true" aria-hidden="true"></i>
+                      <span class="ms-1 fw-bold" [class.red]="StatisticsCards.income_Up==false" [class.green]="StatisticsCards.income_Up==true"
+                      >{{StatisticsCards.income_Perc}} %</span>
+                      <span class="mx-3">vs last month</span>
+                  </div>
+              </div>
+          </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="total-detals">
+              <div class="d-flex align-items-center">
+                <span class="icon">€</span>
+                  <span class="mx-3 fw-bold">Outcome</span>
+              </div>
+              <div>
+                  <h3 class="my-2">{{StatisticsCards.outcome ?? 0}}</h3>
+                  <div>
+                      <i class="fa fa-arrow-down red" *ngIf="StatisticsCards.outcome_Up==false" aria-hidden="true"></i>
+                      <i class="fa fa-arrow-up green" *ngIf="StatisticsCards.outcome_Up==true" aria-hidden="true"></i>
+                      <span class="ms-1 fw-bold" [class.red]="StatisticsCards.outcome_Up==false" [class.green]="StatisticsCards.outcome_Up==true"
+                      >{{StatisticsCards.outcome_Perc}} %</span>
+                      <span class="mx-3">vs last month</span>
+                  </div>
+              </div>
+          </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="total-detals">
+              <div class="d-flex align-items-center">
+                <span class="icon">€</span>
+                  <span class="mx-3 fw-bold">Total revenue
+                   </span>
+              </div>
+              <div>
+                  <h3 class="my-2">{{StatisticsCards.revenue ?? 0}}</h3>
+                  <div>
+                    <div>
+                        <i class="fa fa-arrow-down red" *ngIf="StatisticsCards.revenue_Up==false" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-up green" *ngIf="StatisticsCards.revenue_Up==true" aria-hidden="true"></i>
+                        <span class="ms-1 fw-bold" [class.red]="StatisticsCards.revenue_Up==false" [class.green]="StatisticsCards.revenue_Up==true"
+                        >{{StatisticsCards.revenue_Perc}} %</span>
+                        <span class="mx-3">vs last month</span>
+                    </div>
+                </div>
+              </div>
+          </div>
+          </div>
+          <!-- end total details cards -->
         </div>
+
+
 
         <div class="row mt-3">
             <!--Apartments requests table-->

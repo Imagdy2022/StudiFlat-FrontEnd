@@ -773,4 +773,10 @@ RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
   };
   return this.http.post<any>(url, body, { headers: this.headers });
 }
+
+GetIncomeOutcome(): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/GetIncomeOutcome';
+
+  return this.http.get<any[]>(url, { headers: this.headers });
+}
 }

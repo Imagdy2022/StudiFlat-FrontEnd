@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { ApartmentService } from 'src/app/_services/apartments/apartment.service';
 
 @Component({
@@ -7,9 +9,11 @@ import { ApartmentService } from 'src/app/_services/apartments/apartment.service
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements OnInit{
   showSide: string = '';
-  listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
+  Date :string ='All';
+  subscriptions:Subscription[] = [];
+  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
   headTitleRating:string='Apartment ratings'
   headTitleRequests:string='Apartments requests'
   headTitleTenantpaymenthistory:string='Tenant payment history'
@@ -57,9 +61,14 @@ export class StatisticsComponent {
 
   ]
 
-  constructor(private apartmentSer: ApartmentService,public router: Router) {
-    this.checkRole();
+  constructor(private apartmentSer: ApartmentService,public router: Router, private _adminservices:AdminsService) {
+
   }
+  ngOnInit(): void {
+    this.checkRole();
+    this.GetIncomeOutcome()
+  }
+
 
   StatisticsRole:any
  is_Super:any
@@ -84,12 +93,29 @@ export class StatisticsComponent {
    }
  }
 
+ StatisticsCards: any = {};
+ GetIncomeOutcome() {
+   this.subscriptions.push(this._adminservices.GetIncomeOutcome().subscribe(
+     (res: any) => {
+       this.StatisticsCards = res;
+     },
+     (error) => {
+      //  console.error('Error fetching Dashboard Cards:', error);
+     }
+   ));
+ }
+
 
   addItem(value: any) {
     this.showSide = value
 
   }
-  selectedfromDropDown(value:any){
+  selectedfromDropDown(value: any) {
+    this.Date = value.name;
+  }
 
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }
