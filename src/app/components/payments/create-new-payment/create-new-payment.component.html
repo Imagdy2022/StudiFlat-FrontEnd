@@ -74,7 +74,7 @@
             </div>
 
             <div class="input">
-              <input type="text" class="form-control py-2" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
+              <input type="text" class="form-control py-2" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" [ngModelOptions]="{standalone:true}" />
                 <img src="../../../assets/images/search.svg" alt="">
             </div>
         </div>

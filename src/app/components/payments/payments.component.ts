@@ -367,7 +367,6 @@ clickUserType(index:any){
 searchText:any=""
 
 searchKey(data: string) {
-  debugger
   this.searchText = data;
   this.GetAllPayments()
 }

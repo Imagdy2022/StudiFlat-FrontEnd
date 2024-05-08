@@ -77,7 +77,7 @@ export class CreateNewPaymentComponent {
           this.itemID1 = data[key];
           this.firstIDFound = true;
         }
-        if(key.toLowerCase().includes('id')){
+       else if(key.toLowerCase().includes('id')){
           this.itemID2 = data[key];
         }
       }
@@ -89,7 +89,7 @@ export class CreateNewPaymentComponent {
     this.GetPayToList();
   }
   GetPayToList(){
-    this.subscriptions.push(this._adminservices.GetPayToList(this.toType,this.searchText,this.pageNumber, this.pagesize ).subscribe({
+    this.subscriptions.push(this._adminservices.GetPayToList(this.toType, this.searchText,this.pageNumber, this.pagesize ).subscribe({
       next:(res:any)=>{
         this.allData = res.data
         this.pageNumber = res.pageNumber;
@@ -156,11 +156,11 @@ export class CreateNewPaymentComponent {
      }))
   }
 
-
-  searchText: any = '';
+  searchText:  string = '';
 
   searchAction() {
-    this.GetPayToList();
+    this.GetPayToList()
+
   }
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
