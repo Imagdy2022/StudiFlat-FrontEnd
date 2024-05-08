@@ -174,7 +174,7 @@ tiggerPageChange(event: any) {
 }
 PostJob( id:any) {
   this.subscriptions.push( this._adminservices.DeleteWorker(id ).subscribe((res) => {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' worker has been Successfully deleted into DB  '}` });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
 
 
     this.getAllworkers()
@@ -191,7 +191,7 @@ gotopage( ){
 }
 AssignWorker(  ) {
   this.subscriptions.push(  this._adminservices.AssignWorker( this.paramid,this.idworkerassigin ).subscribe((res) => {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'The Issue was Assigned to Selected Worker '}` });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
 
     this.gotopage( );
 

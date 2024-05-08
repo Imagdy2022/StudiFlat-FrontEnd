@@ -145,7 +145,7 @@ export class AdsComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${' partner has been Successfully deleted into DB  '}`,
+          detail: `${res.message}`,
         });
       },
       (err: any) => {

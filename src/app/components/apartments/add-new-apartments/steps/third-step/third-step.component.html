@@ -330,19 +330,20 @@
                         <div class="mb-3 col-12 col-md-6">
                             <label class="form-label gray fw-bold">picture of the apartment door</label>
                             <div class="position-relative h-124px mb-3">
-                                <!-- start single img upload and preview -->
-                                <ng-container *ngIf="!selectedDoorImg">
-                                    <input type="file" accept="image/*" (change)="onUploadContract($event,'door_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                                    <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute">
-                                </ng-container>
-                                <ng-container *ngIf="selectedDoorImg">
-                                    <!-- <input type="file" accept="image/*" (change)="onUploadContract($event,'door_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
-                                    <a (click)="opencloseModal(selectedDoorImg.url)">
+                              <!-- start single img upload and preview -->
+                              <ng-container *ngIf="!selectedDoorImg">
+                                  <input type="file" accept="image/*" (change)="onUploadContract($event,'door_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
+                                  <img src="assets/images/apartmentImages/File upload.svg" class="position-absolute">
+                              </ng-container>
+                              <ng-container *ngIf="selectedDoorImg">
+                                  <!-- <input type="file" accept="image/*" (change)="onUploadContract($event,'door_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute"> -->
+                                  <a (click)="opencloseModal(selectedDoorImg.url)">
                                     <img [src]="selectedDoorImg ? selectedDoorImg.url : null" class="position-absolute cursor rounded-3" style="width:200px;height:124px ;">
-                                    </a>
-                                </ng-container>
-                                <!-- end single img upload and preview -->
-                            </div>
+                                  </a>
+                              </ng-container>
+                              <!-- end single img upload and preview -->
+
+                          </div>
                             <div *ngIf="addApartment == 'Edit Apartment Name'" class="h-124px mb-3">
                                 <img [src]="door_Img" *ngIf="issshowdoor=='door'" class="position-absolute imgPreviewUploader cursor">
                             </div>

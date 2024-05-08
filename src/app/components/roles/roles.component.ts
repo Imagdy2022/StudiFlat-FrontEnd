@@ -109,7 +109,7 @@ export class RolesComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'ٌRoles Upload Successfully'}`,
+          detail: `${res.message}`,
         });
 
         this.getAllRolles();
@@ -118,7 +118,11 @@ export class RolesComponent implements OnInit {
       },
       (error) => {
         this.spinner = true;
-        console.error('Error fetching owners:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${error.error.message[0]}`,
+        });
       }
     ))
   }
@@ -129,11 +133,15 @@ export class RolesComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'Deleted Successfuly'}`,
+          detail: `${res.message}`,
         });
       },
       (error) => {
-        console.error('Error fetching owners:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${error.error.message[0]}`,
+        });
       }
     ))
 

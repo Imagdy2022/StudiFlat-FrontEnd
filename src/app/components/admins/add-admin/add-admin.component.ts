@@ -162,14 +162,14 @@ export class AddAdminComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'success',
-              detail: ` Admin Added`,
+              detail: `${res.message}`,
             });
 
             this.router.navigate(['/admins']);
           },
           (err) => {
             this.loadingButton = false;
-            console.error('Error fetching CreateOwner:', err);
+           
             this.messageService.add({
               severity: 'error',
               summary: 'Error',

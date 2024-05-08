@@ -182,7 +182,6 @@ export class OwnerProfileComponent implements OnInit{
         this.router.navigate(['/owners']);
       }, (err) => {
         this.loadingButton = false;
-        console.error('Error fetching CreateOwner:', err);
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.title}` });
       }));
 
@@ -195,7 +194,6 @@ export class OwnerProfileComponent implements OnInit{
         this.router.navigate(['/owners'])
       }, (err) => {
         this.loadingButton = false;
-        console.error('Error fetching CreateOwner:', err);
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.title}` });
 
       }));

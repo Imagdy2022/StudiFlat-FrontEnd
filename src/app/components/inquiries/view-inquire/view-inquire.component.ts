@@ -111,7 +111,7 @@ export class ViewInquireComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'error',
+            detail: error.error.message[0],
           });
         }
       ))
@@ -167,7 +167,7 @@ export class ViewInquireComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: 'Passport has Marked as UnValid',
+            detail: res.message,
           });
           this.display1 = 'none';
           this.GetRequestDetails();
@@ -176,7 +176,7 @@ export class ViewInquireComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'error',
+            detail: error.error.message[0],
           });
         }
       ))
@@ -188,7 +188,7 @@ export class ViewInquireComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: 'Passport has Marked as Valid',
+          detail: res.message,
         });
         this.GetRequestDetails();
       },
@@ -196,7 +196,7 @@ export class ViewInquireComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'error',
+          detail: error.error.message[0],
         });
       }
     ))

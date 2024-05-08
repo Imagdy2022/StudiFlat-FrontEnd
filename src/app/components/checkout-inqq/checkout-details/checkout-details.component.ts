@@ -339,7 +339,7 @@ progress = 0;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'error',
+          detail: `${error.error.message[0]}`,
         });
         this.display3="none"
 

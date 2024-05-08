@@ -232,8 +232,8 @@ let data;
           invoice_Type: this.statuspayment,
         }
       }
-    
-    
+
+
     this.subscriptions.push( this._adminservices.AllPayments(data).subscribe((res:any) => {
       this.payments = res.data;
       this.PaymentCards = res.cards;
@@ -249,12 +249,12 @@ let data;
 
   MarkPaid(id:any){
     this.subscriptions.push(this._adminservices.MarkPaid(id).subscribe((res) => {
-      this.messageService.add({   severity: 'success', summary: 'Success', detail: 'marked Successfuly' });
+      this.messageService.add({   severity: 'success', summary: 'Success', detail: res.message });
 
       this.GetAllPayments() ;
 
      }, (error) => {
-      this.messageService.add({   severity: 'error', summary: 'error', detail: 'error' });
+      this.messageService.add({   severity: 'error', summary: 'error', detail: error.error.message[0]});
     }))
 
   }
@@ -409,7 +409,7 @@ SendReminder() {
       this.onCloseModal2();
     },1000)
   }, (error) => {
-   this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+   this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
  }))
 
 

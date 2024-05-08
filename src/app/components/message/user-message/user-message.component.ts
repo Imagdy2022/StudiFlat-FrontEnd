@@ -104,12 +104,12 @@ export class UserMessageComponent {
     msg_Attachement: this.apt_imgs,
   }
   this.subscriptions.push( this._ticketService.SendMsg(data).subscribe((res) => {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail:"send Success" });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });
     this.GetChatHistory()
     this.reply_Desc ="";
     this.apt_imgs = null;
   }, (error) => {
-   this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+   this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
  }))
 
 }

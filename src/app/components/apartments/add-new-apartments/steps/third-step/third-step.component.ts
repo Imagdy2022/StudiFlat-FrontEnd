@@ -323,12 +323,13 @@ export class ThirdStepComponent {
           this.create_Apart_contract
             .get(fieldName)
             ?.patchValue(img[0].file_Path);
-
+            (res :any) => {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: `Attachments has uploaded Successfuly`,
+            detail: `${res.message}`,
           });
+        }
           this.afterUploadImage = 'true';
         },
         (err) => {
@@ -461,7 +462,7 @@ export class ThirdStepComponent {
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: `${'Success Second Step'}`,
+              detail: `${res.message}`,
             });
             this.submitSecondForm();
           },
@@ -485,7 +486,7 @@ export class ThirdStepComponent {
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: `${'Success Second Step'}`,
+              detail: `${res.message}`,
             });
             this.submitSecondForm();
           },

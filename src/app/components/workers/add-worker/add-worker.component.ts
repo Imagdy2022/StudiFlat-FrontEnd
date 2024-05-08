@@ -187,7 +187,7 @@ export class AddWorkerComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: `${'Your Data has been Successfully inserted into DB  '}`,
+            detail: `${res.message}`,
           });
 
           this.spinner = false;
@@ -276,7 +276,7 @@ export class AddWorkerComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${' Job has been Successfully inserted into DB  '}`,
+          detail: `${res.message}`,
         });
 
         this.Jobname = '';

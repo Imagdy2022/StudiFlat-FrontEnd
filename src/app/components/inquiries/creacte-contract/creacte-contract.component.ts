@@ -86,7 +86,7 @@ export class CreacteContractComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${'error'}`,
+          detail: `${error.error.message[0]}`,
         });
       }
     ))

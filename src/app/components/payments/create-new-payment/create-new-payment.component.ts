@@ -35,7 +35,7 @@ export class CreateNewPaymentComponent {
 
   })
 
-  constructor( public _adminservices:AdminsService ,public router: Router ,private messageService: MessageService) { }
+  constructor( public _adminservices:AdminsService ,public router: Router , private messageService: MessageService) { }
 
   ngOnInit() {
     this.GetPayToList();
@@ -120,6 +120,11 @@ export class CreateNewPaymentComponent {
       reader.onload = (event: any) => {
         this.imgUrl = event.target.result;
         this.paymentForm.get('Payment_Attachment')?.setValue(this.imgUrl);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `${'Images Upload Successfully'}`,
+        });
       };
     }
   }
@@ -138,10 +143,15 @@ export class CreateNewPaymentComponent {
 
     this.subscriptions.push( this._adminservices.AddPayment(data).subscribe({
       next:(data:any)=>{
-        this.messageService.add({ severity: 'success', summary: 'Success', detail:"send Success" });
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `${data.message }`,
+        });
+        this.router.navigate(['/payments'])
       },
       error:(err)=>{
-         this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+         this.messageService.add({ severity: 'error', summary: 'Error', detail: `${err.error.message[0]}`});
       }
      }))
   }

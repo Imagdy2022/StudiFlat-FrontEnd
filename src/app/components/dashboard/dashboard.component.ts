@@ -230,7 +230,7 @@ export class DashboardComponent {
       case 'Partners':
         this.router.navigate([`/partner/view-partner/${actionID}`]);
         break;
-        case 'Tenant':
+        case 'Tenants':
           this.router.navigate([`/users/app-edite-user-details/${actionID}`]);
           break;
         case 'Chats':

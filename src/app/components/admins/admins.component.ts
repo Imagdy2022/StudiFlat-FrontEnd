@@ -88,13 +88,17 @@ export class AdminsComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: `${'Status of users has been changed successfuly'}`,
+            detail: `${res.message}`,
           });
           this.getAllRolles();
           this.display1 = 'none';
         },
         (error) => {
-          console.error('Error fetching owners:', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.error.message[0]}`,
+          });
         }
       ))
 
@@ -108,7 +112,11 @@ export class AdminsComponent implements OnInit {
         this.numberadmins = res.length;
       },
       (error) => {
-        console.error('Error fetching owners:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${error.error.message[0]}`,
+        });
       }
     ))
 
@@ -157,11 +165,15 @@ export class AdminsComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'the item deleted'}`,
+          detail: `${res.message}`,
         });
       },
       (error) => {
-        console.error('Error fetching owners:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${error.error.message[0]}`,
+        });
       }
     ))
 

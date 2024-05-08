@@ -205,7 +205,7 @@ export class MainFileComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'The Issue Canceled '}`,
+          detail: `${res.message}`,
         });
         this.getAllIssues();
       },
@@ -249,7 +249,7 @@ export class MainFileComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'Mark as Progress Successfuly '}`,
+          detail: `${res.message}`,
         });
         this.getAllIssues();
         this.onCloseModal1();
@@ -366,7 +366,7 @@ export class MainFileComponent {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: `${'The Issue was marked as Solved'}`,
+            detail: `${res.message}`,
           });
           this.getAllIssues();
 

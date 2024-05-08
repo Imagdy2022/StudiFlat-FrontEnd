@@ -195,21 +195,19 @@ export class ApartmentDetailsComponent implements OnInit {
   }
 
   DownloadFile(path: any) {
-    debugger;
     this.subscriptions.push(this._ApartmentService.DownloadFile(path).subscribe(
       (res) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${' Download   Successfuly'}`,
+          detail: `${res.message}`,
         });
       },
       (error) => {
-        debugger;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${error}`,
+          detail: `${error.message[0]}`,
         });
       }
     ));
@@ -221,14 +219,14 @@ export class ApartmentDetailsComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'Rented Mark Successfuly'}`,
+          detail: `${res.message}`,
         });
       },
       (error) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${'error'}`,
+          detail: `${error.message}`,
         });
       }
     ));
@@ -239,14 +237,14 @@ export class ApartmentDetailsComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'Avaliable Mark Successfuly'}`,
+          detail: `${res.message}`,
         });
       },
       (error) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${'error'}`,
+          detail: `${error.message}`,
         });
       }
     ));
@@ -257,14 +255,14 @@ export class ApartmentDetailsComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'Draft Mark Successfuly'}`,
+          detail: `${res.message}`,
         });
       },
       (error) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${'error'}`,
+          detail: `${error.message}`,
         });
       }
     ));
