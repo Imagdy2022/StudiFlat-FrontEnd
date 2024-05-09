@@ -779,4 +779,36 @@ GetIncomeOutcome(): Observable<any[]> {
 
   return this.http.get<any[]>(url, { headers: this.headers });
 }
+
+ApartmentRequests(Is_Highest:boolean): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/ApartmentRequests';
+  const params = new HttpParams()
+     .set('Is_Highest', Is_Highest)
+
+  return this.http.get<any[]>(url, { headers: this.headers, params: params });
+}
+PaymentHistory(Order:string): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/PaymentHistory';
+  const params = new HttpParams()
+     .set('Order', Order)
+
+  return this.http.get<any[]>(url, { headers: this.headers, params: params });
+}
+
+ApartmentRating(Is_Highest:boolean): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/ApartmentRating';
+  const params = new HttpParams()
+     .set('Is_Highest', Is_Highest)
+
+  return this.http.get<any[]>(url, { headers: this.headers, params: params });
+}
+UserProblems(Is_Highest:boolean): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/UserProblems';
+  const params = new HttpParams()
+     .set('Is_Highest', Is_Highest)
+
+  return this.http.get<any[]>(url, { headers: this.headers, params: params });
+}
+
+
 }

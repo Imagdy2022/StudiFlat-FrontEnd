@@ -33,3 +33,45 @@ span.icon{
     width: 30px;
     height: 33px;
 }
+.excellent {
+  color: #027A48;
+  background-color: #ECFDF3;
+}
+
+.good {
+  color: #FFB900;
+  background-color: #FFF9E6;
+}
+
+.poor {
+  color: #EF2011;
+  background-color: #FCEEEE;
+}
+
+tr{
+  border-bottom: 1px solid #F6F6F6 !important;
+}
+tr th{
+  color: #484649;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+tr td{
+  img{
+    width: 40px !important;
+    height: 40px !important;
+  }
+  h5{
+    color: #060D15;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+  p{
+    color:  #939094;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+}
