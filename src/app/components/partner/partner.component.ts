@@ -140,7 +140,7 @@ tiggerPageChange(event: any) {
 }
 deletepartner( id:any) {
  this.subscriptions.push( this._adminservices.DeletePartners(id ).subscribe((res) => {
-  this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' partner has been Successfully deleted into DB  '}` });
+  this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
 
 
   this.getAllpartners()

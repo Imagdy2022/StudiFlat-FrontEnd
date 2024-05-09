@@ -168,11 +168,11 @@ event.stopPropagation()
       .InsertCheckOut(REQ_ID)
       .subscribe(
         (res) => {
-          // this.messageService.add({
-          //   severity: 'success',
-          //   summary: 'Success',
-          //   detail: 'Passport has Marked as UnValid',
-          // });
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
           this.display1 = 'block';
           this.getAllcheckOut(this.statusinquire)
 
@@ -183,7 +183,7 @@ event.stopPropagation()
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'error',
+            detail: `${error.error.message[0]}`,
           });
         }
       ))

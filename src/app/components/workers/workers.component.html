@@ -98,9 +98,9 @@
                     <tr (click)="hidecard()" style="cursor: pointer;" >
 
 
-                        <td>
-                            <img *ngIf="workers.worker_Img" routerLink="/workers/worker-profile/{{workers.worker_ID}}" [src]="workers?.worker_Img" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;">
-                            <img *ngIf="!workers.worker_Img" routerLink="/workers/worker-profile/{{workers.worker_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{workers?.worker_FName}}
+                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
+                            <img *ngIf="workers.worker_Img" [src]="workers?.worker_Img" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;">
+                            <img *ngIf="!workers.worker_Img" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{workers?.worker_FName}}
                             {{workers?.worker_LName}}
 
                         </td>

@@ -233,12 +233,12 @@ event.stopPropagation()
   }
   AddWaitingList(id:any){
     this.subscriptions.push( this._inquiresService.AddWaitingList(id).subscribe((res) => {
-      this.messageService.add({   severity: 'success', summary: 'Success', detail: 'Add Successfuly' });
+      this.messageService.add({   severity: 'success', summary: 'Success', detail: res.message});
 
       this.clickIquires( this.checkindex) ;
 
      }, (error) => {
-      this.messageService.add({   severity: 'error', summary: 'error', detail: 'error' });
+      this.messageService.add({   severity: 'error', summary: 'error', detail: error.error.message[0] });
     }))
 
   }
@@ -257,11 +257,11 @@ event.stopPropagation()
     this.subscriptions.push( this._inquiresService.CancelRequest(this.idRequest,this.Reason).subscribe((res) => {
       this.clickIquires( this.checkindex) ;
       this.display1="none"
-      this.messageService.add({   severity: 'success', summary: 'Success', detail: 'Cancel Request Successfuly' });
+      this.messageService.add({   severity: 'success', summary: 'Success', detail: res.message });
 
 
      }, (error) => {
-      this.messageService.add({   severity: 'error', summary: 'error', detail: 'error' });
+      this.messageService.add({   severity: 'error', summary: 'error', detail: error.error.message[0] });
     }))
 
   }

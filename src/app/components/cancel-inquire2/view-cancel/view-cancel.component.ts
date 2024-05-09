@@ -79,7 +79,11 @@ export class ViewCancelComponent implements OnInit{
 
          },
       (error) => {
-        console.error('Error fetching owners:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${error.error.message[0]}`,
+        });
       }
     ))
 
@@ -97,7 +101,11 @@ export class ViewCancelComponent implements OnInit{
         this.display4 = 'block';
       },
       (error) => {
-        console.error('Error fetching owners:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${error.error.message[0]}`,
+        });
       }
     ))
 

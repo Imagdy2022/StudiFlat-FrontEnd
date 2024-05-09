@@ -38,19 +38,21 @@
         </div>
         <p-toast></p-toast>
         <div class="card mt-2">
-            <div class="d-flex justify-content-between">
-                <!-- length Of person -->
-                <div class="d-flex mx-2 mt-4">
-                    <p class="me-2 fs-5 fw-bold ml-8">FAQ : {{numberFAQ}}</p>
-
-                </div>
-                <!-- search input -->
-                <div class="d-flex align-items-center mx-2 mt-2 w-50">
-                    <a class="px-3 py-2 rounded border text-white text-decoration-none  marmodify" (click)="openmodelcreatefaq()" style="background-color:#1F4068; cursor: pointer; ">
-                        <img src="assets/images/plus.svg" class="me-2 ">Add New
-                    </a>
-                </div>
-            </div>
+            <div class="d-flex justify-content-between align-items-center ps-1 pe-3 pt-1" style="margin-bottom: 12px;">
+              <!-- length Of person -->
+              <div class="d-flex mx-2 mt-4">
+                  <p class="me-2 fs-5 fw-bold ml-8">FAQ : {{numberFAQ}}</p>
+                  <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
+          {{fullRespone?.totalRecords}} {{pagePerson}}
+      </p> -->
+              </div>
+              <!-- search input -->
+              <div class="d-flex align-items-center mx-2 mt-2">
+                  <a class="px-3 py-2 rounded border text-white text-decoration-none marmodify" style="background-color:#1F4068; cursor: pointer;" (click)="openmodelcreatefaq()">
+                      <img src="assets/images/plus.svg" class="me-2 ">Add New
+                  </a>
+              </div>
+          </div>
             <!-- <p-table #dt1 [value]="FAQ" [(selection)]="selectppdd" dataKey="id1" [filterDelay]="0" /> -->
 
 
@@ -179,17 +181,14 @@
 
             <div class="modal-footer">
 
-                <div class="d-flex justify-content-between">
-                    <div class="py-2 px-3 fw-bold"></div>
-                    <div class="d-flex justify-content-between">
-                        <a (click)="onCloseModal1()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvddmodel">
+                <div class="d-flex justify-content-between w-100 px-2">
+                        <a (click)="onCloseModal1()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold  xcvddmodel">
                   Cancel
     </a>
                         <button (click)="CreateFAQ()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
                   confirm
     </button>
                     </div>
-                </div>
                 <!-- Confirm -->
 
             </div>
@@ -241,20 +240,16 @@
 
             <div class="modal-footer">
 
-                <div class="d-flex justify-content-between">
-                    <div class="py-2 px-3 fw-bold"></div>
-                    <div class="d-flex justify-content-between">
-                        <a (click)="onCloseModal2()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvddmodel">
+              <div class="d-flex justify-content-between w-100 px-2">
+                        <a (click)="onCloseModal2()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold xcvddmodel">
                   Cancel
     </a>
                         <button (click)="UpdateFAQ()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
                   confirm
     </button>
                     </div>
-                </div>
-                <!-- Confirm -->
 
-            </div>
+                <!-- Confirm -->
 
 
         </div>

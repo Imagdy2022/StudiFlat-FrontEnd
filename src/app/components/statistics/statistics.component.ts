@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { ApartmentService } from 'src/app/_services/apartments/apartment.service';
 
 @Component({
@@ -7,59 +9,39 @@ import { ApartmentService } from 'src/app/_services/apartments/apartment.service
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements OnInit{
   showSide: string = '';
-  listDropDown:Array<object>=[{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
-  headTitleRating:string='Apartment ratings'
-  headTitleRequests:string='Apartments requests'
-  headTitleTenantpaymenthistory:string='Tenant payment history'
-  headTitleApartmentsizes:string='Apartment sizes'
-  headTitleUserreportproblems:string='User report problems'
-  headTitleApartmentdemands:string='Apartment demands'
-  headTableListRating:Array<string>=['Name','Locations','Ratings']
-  headTableListUserreportproblems:Array<string>=['User name','Apartments name','No. of problem reports']
-  headTableListTenantpaymenthistory:Array<string>=['Name','Duration','Behaviour']
-  headTableListApartmentdemands:Array<string>=['Name']
-  headTableListRequests:Array<any>=['Name','Requests']
+  Date :string ='All';
+  requestRate :  boolean = true;
+  paymentHistoryRate :string = 'All';
+  apartmentRate :  boolean = true;
+  userProblem :  boolean = true;
+  subscriptions:Subscription[] = [];
+  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
 
-  listDropDownRating:Array<object> =[{name:'Highest'},{name:'Medium'},{name:'Lowest'},{name:'None'}]
-  listDropDownTenantpaymenthistory:Array<object> =[{name:'Poor'},{name:'Good'},{name:'Average'},{name:'Bad'}]
-  listDropDownRequests:Array<object> =[{name:'Highest'},{name:'Medium'},{name:'Lowest'},{name:'None'}]
-  listDropDownApartmentsizes:Array<object> =[{name:'Popular'},{name:'Least popular'},{name:'Edit'},{name:'All'}]
-  listDropDownApartmentdemands:Array<object> =[{name:'Highest'},{name:'Medium'},{name:'Lowest'},{name:'None'}]
+  listDropDownTenantpaymenthistory:Array<object> =[{name :'All'},{name:'Excellent'},{name:'Good'},{name:'Poor'}]
+  listDropDownRequests:Array<object> =[{name:'Highest'},{name:'Lowest'}]
+  ApartmentRatingsDropDown:Array<object> =[{name:'Highest'},{name:'Lowest'}]
+  listDropDownUserProblem:Array<object> =[{name:'Highest'},{name:'Lowest'}]
 
+  rowDatalistTenantpaymenthistory:Array<any>=[]
+  ApartmentRatings:Array<any>=[]
+  rowDatalistRequests:Array<any>=[]
 
-  rowDatalistRating:Array<any>=[{img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',rating:'4.5'},
-  {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',rating:'4.5'},
-  {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',rating:'4.5'}
-]
-  rowDatalistTenantpaymenthistory:Array<any>=[{img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'April 27 - May 27, 2023',rating:'Poor'},
-  {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'April 27 - May 27, 2023',rating:'Poor'},
-  {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'April 27 - May 27, 2023',rating:'Poor'}
-  ]
-  rowDatalistUserreportproblems:Array<any>=[
-    {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',rating:'4.5'},
-    {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',rating:'4.5'},
-    {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'Alt-Moabit',rating:'4.5'}
-  ]
-  rowDatalistRequests:Array<any>=[{img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'23'},
-  {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'23'},
-  {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit',location:'23'},]
+  rowdataListUserreportproblems:Array<any>=[]
 
-  rowDatalistApartmentdemands:Array<any>=[{img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit'},
-  {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit'},
-  {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',title:'Alt-Moabit'},]
+  constructor(public router: Router, private _adminservices:AdminsService) {
 
-  rowdataListUserreportproblems:Array<any>=[
-    {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',img1:'assets/images/Avatar.svg',name1:'Willow Creek Apartments',title:'Alt-Moabit',numberofproblem:'22'},
-    {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',img1:'assets/images/Avatar.svg',name1:'Willow Creek Apartments',title:'Alt-Moabit',numberofproblem:'22'},
-    {img:'assets/images/Avatar.svg',name:'Willow Creek Apartments',img1:'assets/images/Avatar.svg',name1:'Willow Creek Apartments',title:'Alt-Moabit',numberofproblem:'22'},
-
-  ]
-
-  constructor(private apartmentSer: ApartmentService,public router: Router) {
-    this.checkRole();
   }
+  ngOnInit(): void {
+    this.checkRole();
+    this.GetIncomeOutcome()
+    this.ApartmentRequests();
+    this.PaymentHistory();
+    this.ApartmentRating();
+    this.UserProblems();
+  }
+
 
   StatisticsRole:any
  is_Super:any
@@ -84,12 +66,94 @@ export class StatisticsComponent {
    }
  }
 
+ StatisticsCards: any = {};
+ GetIncomeOutcome() {
+   this.subscriptions.push(this._adminservices.GetIncomeOutcome().subscribe(
+     (res: any) => {
+       this.StatisticsCards = res;
+     },
+     (error) => {
+     }
+   ));
+ }
+
+ ApartmentRequests() {
+  this.subscriptions.push(this._adminservices.ApartmentRequests(this.requestRate).subscribe(
+    (res: any) => {
+      this.rowDatalistRequests = res;
+    },
+    (error) => {
+    }
+  ));
+}
+PaymentHistory() {
+  this.subscriptions.push(this._adminservices.PaymentHistory(this.paymentHistoryRate).subscribe(
+    (res: any) => {
+      this.rowDatalistTenantpaymenthistory = res;
+    },
+    (error) => {
+    }
+  ));
+}
+
+ApartmentRating() {
+  this.subscriptions.push(this._adminservices.ApartmentRating(this.apartmentRate).subscribe(
+    (res: any) => {
+      this.ApartmentRatings = res;
+    },
+    (error) => {
+    }
+  ));
+}
+
+UserProblems() {
+  this.subscriptions.push(this._adminservices.UserProblems(this.userProblem).subscribe(
+    (res: any) => {
+      this.rowdataListUserreportproblems = res;
+    },
+    (error) => {
+    }
+  ));
+}
+
 
   addItem(value: any) {
     this.showSide = value
 
   }
-  selectedfromDropDown(value:any){
+  selectedfromDropDown(value: any) {
+    this.Date = value.name;
+  }
 
+  selectedApartmentsRequests(value: any) {
+    if(value.name == 'Highest')
+      this.requestRate= true
+    else
+    this.requestRate= false
+   this.ApartmentRequests();
+  }
+  selectedPaymentHistory(value: any) {
+   this.paymentHistoryRate = value.name
+   this.PaymentHistory();
+  }
+  selectedApartmentsRateing(value: any) {
+    if(value.name == 'Highest')
+      this.apartmentRate= true
+    else
+    this.apartmentRate= false
+   this.ApartmentRating();
+  }
+
+  selectedUserProblem(value: any) {
+    if(value.name == 'Highest')
+      this.userProblem= true
+    else
+    this.userProblem= false
+   this.UserProblems();
+  }
+
+  ngOnDestroy() {
+    for(let i=0;i<this.subscriptions.length;i++)
+    this.subscriptions[i].unsubscribe();
   }
 }

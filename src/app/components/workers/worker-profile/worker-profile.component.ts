@@ -82,7 +82,7 @@ export class WorkerProfileComponent implements OnInit {
 
    }
  }
- showEdit:any
+ showEdit: Array<boolean> = [];
  detailperson(event:any, id: any){
   this.showEdit=[]
 event.stopPropagation()
@@ -213,7 +213,7 @@ createworkerpost(data: any) {
   data.value.worker_PhoneNum = String(data.value.worker_PhoneNum);
   data.value.worker_WANum = String(data.value.worker_WANum);
   this.subscriptions.push( this._adminservices.UpdateWorker({ ...data.value, worker_Skills: this.worker_Skills },this.param).subscribe((res) => {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Your Data has been Successfully updated into DB  '}` });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
 
 
 
@@ -276,7 +276,7 @@ createworkerpost(data: any) {
     }
     PostJob( ) {
       this.subscriptions.push(      this._adminservices.PostJob( this.Jobname).subscribe((res) => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' Job has been Successfully inserted into DB  '}` });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
 
 
         this.Jobname=""

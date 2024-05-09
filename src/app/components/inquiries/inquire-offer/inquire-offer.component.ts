@@ -65,7 +65,7 @@ export class InquireOfferComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${'error'}`,
+          detail: `${error.error.message[0]}`,
         });
       }
     ))
@@ -198,7 +198,7 @@ export class InquireOfferComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: `${'error'}`,
+            detail: `${error.error.message[0]}`,
           });
         }
       ))

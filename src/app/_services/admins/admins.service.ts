@@ -95,7 +95,7 @@ export class AdminsService {
     return this.http.get(url, { headers: this.headers });
   }
   public GetINVDetails(id: any): Observable<any> {
-    let url = environment.apiUrl + '/Accounting/GetINVDetails?Inv_ID=' + id;
+    let url = environment.apiUrl + '/Payments/GetInvoiceDetails?Invoice_ID=' + id;
 
     return this.http.get(url, { headers: this.headers });
   }
@@ -533,8 +533,8 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
   MarkPaid(id: any): Observable<any> {
-    const url = environment.apiUrl + '/Accounting/MarkPaid?Inv_ID=' + id;
-    return this.http.put<any>(url, id, { headers: this.headers });
+    const url = environment.apiUrl + '/Payments/SetInvoicePaid_UnPaid?Inv_ID=' + id;
+    return this.http.post<any>(url, id, { headers: this.headers });
   }
   AllTickets(
     type: any,
@@ -773,4 +773,42 @@ RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
   };
   return this.http.post<any>(url, body, { headers: this.headers });
 }
+
+GetIncomeOutcome(): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/GetIncomeOutcome';
+
+  return this.http.get<any[]>(url, { headers: this.headers });
+}
+
+ApartmentRequests(Is_Highest:boolean): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/ApartmentRequests';
+  const params = new HttpParams()
+     .set('Is_Highest', Is_Highest)
+
+  return this.http.get<any[]>(url, { headers: this.headers, params: params });
+}
+PaymentHistory(Order:string): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/PaymentHistory';
+  const params = new HttpParams()
+     .set('Order', Order)
+
+  return this.http.get<any[]>(url, { headers: this.headers, params: params });
+}
+
+ApartmentRating(Is_Highest:boolean): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/ApartmentRating';
+  const params = new HttpParams()
+     .set('Is_Highest', Is_Highest)
+
+  return this.http.get<any[]>(url, { headers: this.headers, params: params });
+}
+UserProblems(Is_Highest:boolean): Observable<any[]> {
+  const url = environment.apiUrl + '/Statistics/UserProblems';
+  const params = new HttpParams()
+     .set('Is_Highest', Is_Highest)
+
+  return this.http.get<any[]>(url, { headers: this.headers, params: params });
+}
+
+
 }

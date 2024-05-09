@@ -113,21 +113,21 @@ export class MessResquestComponent implements OnInit {
     msg_Attachement: this.apt_imgs,
   }
   this.subscriptions.push(  this._ticketService.SendMsg(data).subscribe((res) => {
-    this.messageService.add({   severity: 'success', summary: 'Success', detail:"send Success" });
+    this.messageService.add({   severity: 'success', summary: 'Success', detail: res?.message });
     this.getAll_tickets(   )
     this.reply_Desc=""
     this.apt_imgs=null
   }, (error) => {
-   this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+   this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
  }))
 
 }
 CloseTicket(status:any) {
   this.subscriptions.push(  this._ticketService.CloseTicket(this.paramid,status  ).subscribe((res) => {
-    this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
+    this.messageService.add({   severity: 'success', summary: 'Success', detail: res.message });
     this.gotopage();
     }, (error) => {
-   this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+   this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0]});
  }))
 
 }

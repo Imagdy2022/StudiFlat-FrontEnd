@@ -179,10 +179,10 @@ export class MessageComponent {
   CloseTicket(status:any) {
     let index = this.targetId
     this.subscriptions.push( this._ticketService.CloseTicket(index,status  ).subscribe((res) => {
-      this.messageService.add({   severity: 'success', summary: 'Success', detail:"  Success" });
+      this.messageService.add({   severity: 'success', summary: 'Success', detail: res.message });
       this.getAll_tickets();
       }, (error) => {
-     this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+     this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
    }))
 
   }

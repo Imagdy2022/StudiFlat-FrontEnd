@@ -231,7 +231,7 @@ export class ForthStepComponent {
     this.checkValidData()
 
     this.subscriptions.push( this._ApartmentService.createPostSec4(payloadData, this.id).subscribe((res) => {
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Congrats! Success Creation'}` });
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
       this.router.navigate(['apartments']);
     }, (err: any) => {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });

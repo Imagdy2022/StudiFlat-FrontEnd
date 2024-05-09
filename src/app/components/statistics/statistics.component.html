@@ -1,116 +1,280 @@
 <!-- start header -->
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'statistics'"></app-head>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Statistics'"></app-head>
 </header>
 <!-- end header -->
 <div class="row m-0">
     <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'statistics'"></app-sidebar>
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Statistics'"></app-sidebar>
     <!-- end sidebar  -->
     <!-- start content page  -->
     <main class=" p-4 col-lg-10">
 
         <div class="d-md-flex justify-content-between dashboard" style="margin-top: 8px; margin-bottom: 16px;">
-            <p class="fw-bold" style="color: #6c6a6a;">statistics</p>
+            <p class="fw-bold" style="color: #6c6a6a;">Statistics</p>
             <div class="d-md-flex justify-content-lg-between  ">
-                <div class="d-flex mb-2 me-3">
-                    <button class="month rounded-start px-3 py-2 text-white border-0 outline-none">This Month</button>
-                    <button class="week rounded-end px-3 py-2 outline-none bg-white">Last Week</button>
-                </div>
                 <!-- start dropdown button  -->
-                <app-dropdown class="" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+                <app-dropdown [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
                 <!-- end dropdown button  -->
             </div>
         </div>
 
-        <div class="row my-2">
-            <!--Apartment ratings table-->
-            <div class="col-12 col-md-7 mb-3">
-                <app-statistics-table [headTitle]="headTitleRating" [listDropDown]="listDropDownRating" [headTableList]="headTableListRating" [rowDatalist]="rowDatalistRating">
-                </app-statistics-table>
-            </div>
-            <!--Vacancy rate chart-->
-            <div class="col-12 col-md-5 mb-3">
-                <div class="p-3 border rounded bg-white h-350">
-                </div>
-            </div>
-        </div>
-        <!--charts-->
-        <div class="row">
-            <!--Total revenue chart-->
-            <div class="col-12 col-md-6  mb-3 ">
-                <div class=" bg-white border rounded p-3">
-                    Chart
-                    <!--chart-->
-                </div>
-            </div>
-            <!--area location-->
-            <div class="col-12 col-md-6  mb-3">
-                <!--chart-->
-                <div class="bg-white border rounded p-3">
-                    Chart
-                </div>
 
-            </div>
+        <div class="row g-4">
+          <!-- start total details cards -->
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="total-detals">
+              <div class="d-flex align-items-center">
+                  <span class="icon">€</span>
+                  <span class="mx-3 fw-bold">Income</span>
+              </div>
+              <div>
+                  <h3 class="my-2">{{StatisticsCards.income ?? 0}}</h3>
+                  <div>
+                      <i class="fa fa-arrow-down red" *ngIf="StatisticsCards.income_Up==false" aria-hidden="true"></i>
+                      <i class="fa fa-arrow-up green" *ngIf="StatisticsCards.income_Up==true" aria-hidden="true"></i>
+                      <span class="ms-1 fw-bold" [class.red]="StatisticsCards.income_Up==false" [class.green]="StatisticsCards.income_Up==true"
+                      >{{StatisticsCards.income_Perc}} %</span>
+                      <span class="mx-3">vs last month</span>
+                  </div>
+              </div>
+          </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="total-detals">
+              <div class="d-flex align-items-center">
+                <span class="icon">€</span>
+                  <span class="mx-3 fw-bold">Outcome</span>
+              </div>
+              <div>
+                  <h3 class="my-2">{{StatisticsCards.outcome ?? 0}}</h3>
+                  <div>
+                      <i class="fa fa-arrow-down red" *ngIf="StatisticsCards.outcome_Up==false" aria-hidden="true"></i>
+                      <i class="fa fa-arrow-up green" *ngIf="StatisticsCards.outcome_Up==true" aria-hidden="true"></i>
+                      <span class="ms-1 fw-bold" [class.red]="StatisticsCards.outcome_Up==false" [class.green]="StatisticsCards.outcome_Up==true"
+                      >{{StatisticsCards.outcome_Perc}} %</span>
+                      <span class="mx-3">vs last month</span>
+                  </div>
+              </div>
+          </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="total-detals">
+              <div class="d-flex align-items-center">
+                <span class="icon">€</span>
+                  <span class="mx-3 fw-bold">Total revenue
+                   </span>
+              </div>
+              <div>
+                  <h3 class="my-2">{{StatisticsCards.revenue ?? 0}}</h3>
+                  <div>
+                    <div>
+                        <i class="fa fa-arrow-down red" *ngIf="StatisticsCards.revenue_Up==false" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-up green" *ngIf="StatisticsCards.revenue_Up==true" aria-hidden="true"></i>
+                        <span class="ms-1 fw-bold" [class.red]="StatisticsCards.revenue_Up==false" [class.green]="StatisticsCards.revenue_Up==true"
+                        >{{StatisticsCards.revenue_Perc}} %</span>
+                        <span class="mx-3">vs last month</span>
+                    </div>
+                </div>
+              </div>
+          </div>
+          </div>
+          <!-- end total details cards -->
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-2">
             <!--Apartments requests table-->
-            <div class="col-12 col-md-5  mb-3">
-                <app-statistics-table1 [headTitle]="headTitleRequests" [listDropDown]="listDropDownRequests" [headTableList]="headTableListRequests" [rowDatalist]="rowDatalistRequests"></app-statistics-table1>
+            <div class="col-12 col-md-4  mb-3">
+              <div class="p-3 bg-white border rounded-3 h-350 overflow-overlay">
+                <div class="d-md-flex justify-content-between align-items-center">
+                  <p class="fw-bold ms-1">Apartments Requests</p>
+                    <div class="d-flex mb-2">
+                        <app-dropdown [list]="listDropDownRequests" (selected)="selectedApartmentsRequests($event)"></app-dropdown>
+                    </div>
+                  </div>
+
+                  <table class="table  mt-2">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Requests</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of rowDatalistRequests">
+                        <td class="d-flex">
+                          <img [src]="data.apt_Photo" class="me-3 rounded-circle" />
+                          <div>
+                            <h5 class="my-0">{{data.apt_Name}}</h5>
+                            <p class="gray my-0">{{data.apt_Area}}</p>
+                          </div>
+                        </td>
+                        <td class="gray text-center">{{data.total_Req}}</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+              </div>
             </div>
-            <!--Tenant payment history table-->
-            <div class="col-12 col-md-7  mb-3">
-                <app-statistics-table [headTitle]="headTitleTenantpaymenthistory" [listDropDown]="listDropDownTenantpaymenthistory" [headTableList]="headTableListTenantpaymenthistory" [rowDatalist]="rowDatalistTenantpaymenthistory"></app-statistics-table>
+            <!--data payment history table-->
+            <div class="col-12 col-md-8  mb-3">
+              <div class="p-3 bg-white border rounded-3 h-350 overflow-overlay">
+                <div class="d-md-flex justify-content-between align-items-center">
+                  <p class="fw-bold ms-1">Tenant payment history</p>
+                    <div class="d-flex mb-2">
+                        <app-dropdown [list]="listDropDownTenantpaymenthistory" (selected)="selectedPaymentHistory($event)"></app-dropdown>
+                    </div>
+                  </div>
+
+                  <table class="table  mt-2">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Duration</th>
+                        <th>Behaviour</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of rowDatalistTenantpaymenthistory">
+                        <td class="d-flex">
+                          <img [src]="data.user_Photo" class="me-3 rounded-circle" />
+                          <div>
+                            <h5 class="my-0">{{data.user_Name}}</h5>
+                          </div>
+                        </td>
+                        <td class="">{{data.date | date}}</td>
+                        <td>
+                          <div>
+                            <span class="rounded-5 px-3 badge excellent" *ngIf="data?.user_Behavior=='Excellent'">
+                              {{data?.user_Behavior}}
+                          </span>
+                        <span class="rounded-5 px-3 badge good"  *ngIf="data?.user_Behavior=='Good'">
+                          {{data?.user_Behavior}}
+                      </span>
+                      <span class="rounded-5 px-3  badge poor"  *ngIf="data?.user_Behavior=='Poor'">
+                        {{data?.user_Behavior}}
+                    </span>
+                        </div>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+              </div>
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-2">
             <!--Apartment sizes table-->
-            <div class="col-12 col-md-7  mb-3">
-                <app-statistics-table [headTitle]="headTitleApartmentsizes" [listDropDown]="listDropDownApartmentsizes" [headTableList]="headTableListTenantpaymenthistory" [rowDatalist]="rowDatalistTenantpaymenthistory"></app-statistics-table>
+            <div class="col-12 col-md-8  mb-3">
+              <div class="p-3 bg-white border rounded h-350 overflow-overlay">
+                <div class="d-md-flex justify-content-between align-items-center">
+                  <p class="fw-bold ms-1">Apartment Ratings</p>
+                    <div class="d-flex mb-2">
+                        <app-dropdown [list]="ApartmentRatingsDropDown" (selected)="selectedApartmentsRateing($event)"></app-dropdown>
+                    </div>
+                  </div>
+
+                  <table class="table  mt-2">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Locations</th>
+                        <th>Ratings</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of ApartmentRatings">
+                        <td class="d-flex">
+                          <img [src]="data.apt_Photo" class="me-3 rounded-circle" />
+                          <div>
+                            <h5 class="my-0">{{data.apt_Name}}</h5>
+                            <p class="gray my-0">{{data.apt_Area}}</p>
+                          </div>
+                        </td>
+                        <td>{{data?.apt_Area}}</td>
+                        <td>{{data?.apt_Rate}}</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+              </div>
             </div>
             <!--Apartment demands table-->
-            <div class="col-12 col-md-5  mb-3">
-                <app-statistics-table1 [headTitle]="headTitleApartmentdemands" [listDropDown]="listDropDownApartmentdemands" [headTableList]="headTableListApartmentdemands" [rowDatalist]="rowDatalistApartmentdemands"></app-statistics-table1>
+            <div class="col-12 col-md-4  mb-3">
+              <div class="p-3 bg-white border rounded h-350 overflow-overlay">
+                <div class="d-md-flex justify-content-between align-items-center">
+                  <p class="fw-bold ms-1">Apartment Demands</p>
+                    <div class="d-flex mb-2">
+                        <app-dropdown [list]="listDropDownRequests" (selected)="selectedApartmentsRequests($event)"></app-dropdown>
+                    </div>
+                  </div>
+
+                  <table class="table  mt-2">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of rowDatalistRequests">
+                        <td class="d-flex">
+                          <img [src]="data.apt_Photo" class="me-3 rounded-circle" />
+                          <div>
+                            <h5 class="my-0">{{data.apt_Name}}</h5>
+                            <p class="gray my-0">{{data.apt_Area}}</p>
+                          </div>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+              </div>
             </div>
 
         </div>
 
         <!--User report problems table-->
-        <div class="p-3 table-abrtment bg-white border rounded overflow-overlay  mb-3 h-350">
-            <app-header-table [headTitle]="'User report problems'" [listDropDown]="listDropDownApartmentdemands"></app-header-table>
-            <table class="table table-hover mt-2">
-                <thead>
+        <div class="row mt-2">
+          <div class="col-12 col-md-12  mb-3">
+            <div class="p-3 bg-white border rounded-3 h-350 overflow-overlay">
+              <div class="d-md-flex justify-content-between align-items-center">
+                <p class="fw-bold ms-1">User Report Problems</p>
+                  <div class="d-flex mb-2">
+                      <app-dropdown [list]="listDropDownUserProblem" (selected)="selectedUserProblem($event)"></app-dropdown>
+                  </div>
+                </div>
+
+                <table class="table  mt-2">
+                  <thead>
                     <tr>
-                        <th class="fs-16 gray fw-bold" scope="col" *ngFor="let datahead of headTableListUserreportproblems">{{datahead}}</th>
+                      <th>User name</th>
+                      <th>Apartments name</th>
+                      <th>No. of problem reports</th>
                     </tr>
-                </thead>
-                <tbody>
+                  </thead>
+                  <tbody>
                     <tr *ngFor="let data of rowdataListUserreportproblems">
-                        <th scope="row" class="d-md-flex ">
-                            <img [src]="data.img" class="me-3" />
-                            <div>
-                                <p class="pf fw-bold mb-0">{{data.name}}</p>
-                            </div>
-                        </th>
-                        <td>
-                            <div class="d-md-flex ">
-                                <img [src]="data.img1" class="me-3" />
-                                <div>
-                                    <p class="pf fw-bold mb-0">{{data.name1}}</p>
-                                    <p class="gray mb-0">{{data.title}}</p>
-                                </div>
-                            </div>
-
-                        </td>
-                        <td class="gray">{{data.numberofproblem}}</td>
+                      <td>
+                        <img [src]="data.user_Photo" class="me-3 rounded-circle" />
+                          <span style=" color: #060D15;font-size: 14px;font-weight: 600;">{{data.user_Name}}</span>
+                      </td>
+                    <td class="d-flex align-items-center">
+                        <img [src]="data.apt_Photo" class="me-3 rounded-circle" />
+                        <div>
+                          <h5 class="my-0">{{data.apt_Name}}</h5>
+                          <p class="gray my-0">{{data.apt_Area}}</p>
+                        </div>
+                      </td>
+              <td>{{data.issue_Count}}</td>
                     </tr>
 
-                </tbody>
-            </table>
+                  </tbody>
+                </table>
+            </div>
+          </div>
         </div>
-
 
     </main>
     <!-- end content page  -->

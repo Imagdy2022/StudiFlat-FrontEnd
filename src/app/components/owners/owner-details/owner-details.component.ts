@@ -214,7 +214,6 @@ export class OwnerDetailsComponent {
           },
           (err) => {
             this.loadingButton = false;
-            console.error('Error fetching CreateOwner:', err);
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
@@ -240,7 +239,6 @@ export class OwnerDetailsComponent {
         },
         (err) => {
           this.loadingButton = false;
-          console.error('Error fetching CreateOwner:', err);
           this.messageService.add({
             severity: 'error',
             summary: 'Error',

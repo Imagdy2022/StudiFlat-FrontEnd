@@ -118,7 +118,7 @@ tiggerPageChange(event: any) {
  }
  deleteworker( id:any) {
   this.subscriptions.push(this._adminservices.DeleteWorker(id ).subscribe((res) => {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' worker has been Successfully deleted into DB  '}` });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
 
 
     this.getAllworkers()

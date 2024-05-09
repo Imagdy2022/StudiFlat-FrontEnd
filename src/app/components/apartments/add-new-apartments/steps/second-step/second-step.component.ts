@@ -491,7 +491,7 @@ export class SecondStepComponent {
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: `${'Success Second Step'}`,
+              detail: `${res.message}`,
             });
             this.submitSecondForm();
           },
@@ -512,7 +512,7 @@ export class SecondStepComponent {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: `${'Success Second Step'}`,
+            detail: `${res.message}`,
           });
           this.submitSecondForm();
         },

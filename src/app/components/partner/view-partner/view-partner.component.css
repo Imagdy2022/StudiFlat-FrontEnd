@@ -180,18 +180,16 @@
 }
 
 .profile1 {
-    width: 1130px;
-    height: 1717px;
-    padding: 24px;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px #EBEBEB solid;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 24px;
-    display: inline-flex
+  padding: 24px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px #EBEBEB solid;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+  display: inline-flex
 }
 
 @media (max-width: 768px) {
@@ -214,4 +212,20 @@
     align-items: flex-start;
     gap: 24px;
     display: inline-flex
+}
+
+td {
+  font-size: 14px !important;
+  padding: 0px 24px !important;
+  font-family: 'Poppins';
+  height: 72px !important;
+  border-top: 1px solid #F6F6F6 !important;
+  border-bottom: none !important;
+
+}
+
+th {
+    font-size: 14px !important;
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
 }

@@ -161,14 +161,14 @@ export class EditeUserDetailsComponent {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: `${'User    Insered or Updated Successfuly'}`,
+            detail: `${res.message}`,
           });
         },
         (error) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: `${'error'}`,
+            detail: `${error.error.message[0]}`,
           });
         }
       ));

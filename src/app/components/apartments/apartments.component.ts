@@ -129,7 +129,7 @@ gotopage( ){
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${this.messagemessage2}` });
 
     }, (error) => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: `${error.error.message[0]}` });
     }));
 
   }
@@ -139,7 +139,7 @@ gotopage( ){
       this.getAllApartment();
 
    }, (error) => {
-     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
+     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${error.error.message[0]}` });
    }));
 
   }

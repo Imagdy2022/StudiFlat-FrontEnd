@@ -477,7 +477,7 @@ export class FirstStepComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: `${'Success First Step'}`,
+              detail: `${res?.message}`,
             });
             this.n_ofbedroom = data.value.apt_Bedrooms;
             this.apt_Toilets = data.value.apt_Toilets;
@@ -493,7 +493,7 @@ export class FirstStepComponent implements OnInit {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: `${err.error.message[0]}`,
+              detail: `${err?.error?.message[0]}`,
             });
           }
         ));
@@ -509,7 +509,7 @@ export class FirstStepComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: `${'Success First Step'}`,
+              detail: `${res?.message}`,
             });
             this.n_ofbedroom = data.value.apt_Bedrooms;
             this.apt_Toilets = data.value.apt_Toilets;
@@ -525,7 +525,7 @@ export class FirstStepComponent implements OnInit {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: `${err.error.message[0]}`,
+              detail: `${err?.error?.message[0]}`,
             });
           }
         ));

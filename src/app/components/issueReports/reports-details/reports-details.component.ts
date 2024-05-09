@@ -226,7 +226,7 @@ export class ReportsDetailsComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'Mark as Progress Successfuly '}`,
+          detail: `${res.message}`,
         });
         this.GetIssueByid();
         this.onCloseModal1();

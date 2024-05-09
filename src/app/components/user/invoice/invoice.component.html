@@ -31,18 +31,18 @@
             </div>
             <div class="invice1">Invoice</div>
             <div class="invoce2"><span class="invoce3"> </span><span class="invice4">  </span>
-                <span class="invice5">{{_details.description}}</span><span class="invoce6"> </span></div>
+                <span class="invice5">{{_details.invoice_Details[0].invoice_Desc}}</span><span class="invoce6"> </span></div>
             <div class="price11">Price</div>
             <div class="total22">Total</div>
             <div class="section33">
                 <div class="class33">
                     <div class="invoicenu">Invoice No.</div>
-                    <div class="invocede"> {{_details.invoice_No}} </div>
+                    <div class="invocede"> {{_details.inv_Code}} </div>
                 </div>
                 <div class="divclassss">
                     <div class="ttott">
                         <div class="issue33">Issued on</div>
-                        <div class="datedes">{{_details.issued_On}} </div>
+                        <div class="datedes">{{_details.issued_on}} </div>
                     </div>
                     <div class="ttott">
                         <div class="issue33">Payment Due</div>
@@ -53,10 +53,10 @@
             <div class="stackkc">
                 <div style="flex: 1 1 0; align-self: stretch; padding-right: 17.02px; justify-content: flex-start; align-items: flex-start; gap: 340.58px; display: inline-flex">
                     <div style="width: 375.09px; color: #313033; font-size: 18px; font-family: SF Pro Text; font-weight: 400; line-height: 24.01px; word-wrap: break-word"> {{_details.apt_Name}}</div>
-                    <div class="ddfdffd"> {{_details.price}}</div>
+                    <div class="ddfdffd"> {{_details.invoice_Details[0].invoice_Amount}}</div>
                 </div>
             </div>
-            <div class="priceeins"> {{_details.price}}</div>
+            <div class="priceeins"> {{_details.invoice_Details[0].invoice_Total}}</div>
             <div class="stysda">
                 <div style="justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
                     <div class="ccarddinvice">Total</div>
@@ -68,7 +68,7 @@
                         <div class="ccarddinvice">)</div>
                     </div>
                 </div>
-                <div class="pricinn">{{_details.price}}</div>
+                <div class="pricinn">{{_details.invoice_Details[0].invoice_Amount}}</div>
             </div>
             <div class="imgheap">
                 <div class="imgginv">
@@ -76,7 +76,7 @@
                     <div class="prepheap">
                         <div class="prpee">
                             <div class="phonein">Prepared Date: {{_details.prepared_Date|date: 'dd/MM/yyyy' }}</div>
-                            <div class="phonein">Email: {{_details.email}}</div>
+                            <div class="phonein">Title: {{_details.invoice_Title}}</div>
                         </div>
                         <div>
 

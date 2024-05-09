@@ -218,7 +218,7 @@ createpartnerpost(data: any) {
 
   this.spinner = true;
         this.subscriptions.push(this._adminservices.PostPartner({ ...data.value}).subscribe((res) => {
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Your Data has been Successfully inserted into DB  '}` });
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
 
           this.spinner = false;
           this.gotopage( )
@@ -290,7 +290,7 @@ createpartnerpost(data: any) {
     }
     PostJob( ) {
       this.subscriptions.push(this._adminservices.PostJob( this.Jobname).subscribe((res) => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: `${' Job has been Successfully inserted into DB  '}` });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
 
 
         this.Jobname=""

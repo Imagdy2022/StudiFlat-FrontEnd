@@ -142,7 +142,7 @@ export class UserComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'Deleted Successfuly'}`,
+          detail: `${res.message}`,
         });
 
         this.getAllTenants();
@@ -151,7 +151,7 @@ export class UserComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${'error'}`,
+          detail: `${error.error.message[0]}`,
         });
       }
     ));
@@ -163,7 +163,7 @@ export class UserComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'Suspended Successfuly'}`,
+          detail: `${res.message}`,
         });
 
         this.getAllTenants();
@@ -172,7 +172,7 @@ export class UserComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${'error'}`,
+          detail: `${error.error.message[0]}`,
         });
       }
     ));
@@ -183,7 +183,7 @@ export class UserComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: `${'UnSuspend Tenant Successfuly'}`,
+          detail: `${res.message}`,
         });
 
         this.getAllTenants();
@@ -192,7 +192,7 @@ export class UserComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${'error'}`,
+          detail: `${error.error.message[0]}`,
         });
       }
     ));
