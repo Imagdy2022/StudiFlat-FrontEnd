@@ -248,6 +248,7 @@ let data;
   }
 
   MarkPaid(id:any){
+    
     this.subscriptions.push(this._adminservices.MarkPaid(id).subscribe((res) => {
       this.messageService.add({   severity: 'success', summary: 'Success', detail: res.message });
 

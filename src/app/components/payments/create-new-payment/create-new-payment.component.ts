@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MessageService } from 'primeng/api';
 import { Subscription } from "rxjs";
+import { UploadFileService } from "src/app/_services/UploadFile/upload-file.service";
 import { AdminsService } from "src/app/_services/admins/admins.service";
 
 
@@ -21,7 +22,7 @@ export class CreateNewPaymentComponent {
  firstIDFound = false;
   secondID:any;
   subscriptions:Subscription[] = [];
-
+  attachUrl:any;
   paymentForm : FormGroup = new FormGroup({
     Pay_To:new FormControl(null),
     Pay_UUID:new FormControl(null),
@@ -35,7 +36,7 @@ export class CreateNewPaymentComponent {
 
   })
 
-  constructor( public _adminservices:AdminsService ,public router: Router , private messageService: MessageService) { }
+  constructor(private uploadService: UploadFileService, public _adminservices:AdminsService ,public router: Router , private messageService: MessageService) { }
 
   ngOnInit() {
     this.GetPayToList();
@@ -138,7 +139,7 @@ export class CreateNewPaymentComponent {
     Payment_Amount: this.paymentForm.value['Payment_Amount'],
     Payment_Bouns:  this.paymentForm.value['Payment_Bouns'],
     Payment_Notes: this.paymentForm.value['Payment_Notes'],
-    Payment_Attachment: this.imgUrl
+    Payment_Attachment: this.attachUrl
     }
 
     this.subscriptions.push( this._adminservices.AddPayment(data).subscribe({
@@ -162,6 +163,41 @@ export class CreateNewPaymentComponent {
     this.GetPayToList()
 
   }
+  onUploadContract(event: any): void {
+    // get the file
+    const file = event.target.files[0];
+    // convert the file to formdata
+    const formData = new FormData();
+    formData.append('fileData', file, file.name);
+    // check if the file has been uploaded
+    if (file) {
+      // call the onUpload function to get the link to the file
+      this.subscriptions.push( this.uploadService.uploadSingleFile(formData).subscribe(
+        // (img: any) => {
+        //   // create url to preview file
+        //   file.url = URL.createObjectURL(file);
+        //   // check wich file uploaded
+          
+            (res :any) => {
+              this.attachUrl=res[0].file_Path;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+        },
+        (err:any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `Please try again`,
+          });
+        }
+      ));
+
+    }
+  }
+
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
     this.subscriptions[i].unsubscribe();

@@ -95,7 +95,7 @@ export class AdminsService {
     return this.http.get(url, { headers: this.headers });
   }
   public GetINVDetails(id: any): Observable<any> {
-    let url = environment.apiUrl + '/Accounting/GetINVDetails?Inv_ID=' + id;
+    let url = environment.apiUrl + '/Payments/GetInvoiceDetails?Invoice_ID=' + id;
 
     return this.http.get(url, { headers: this.headers });
   }
@@ -533,8 +533,8 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
   MarkPaid(id: any): Observable<any> {
-    const url = environment.apiUrl + '/Accounting/MarkPaid?Inv_ID=' + id;
-    return this.http.put<any>(url, id, { headers: this.headers });
+    const url = environment.apiUrl + '/Payments/SetInvoicePaid_UnPaid?Inv_ID=' + id;
+    return this.http.post<any>(url, id, { headers: this.headers });
   }
   AllTickets(
     type: any,

@@ -86,7 +86,11 @@
 
                             </th>
                             <th class="td-name">
-                              Requested  by
+                               Inquiry Id
+  
+                              </th>
+                            <th class="td-name">
+                              Requested Appartment
 
                             </th>
                             <th class="td-name">
@@ -124,6 +128,9 @@
 
                             <img *ngIf="!inquire.profileImg" routerLink="/users/app-edite-user-details/{{inquire.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{inquire?.userName}}
 
+                        </td>
+                        <td>
+                            {{inquire?.request_Code}}  
                         </td>
                         <td routerLink="/inquiries/view-inquire/{{inquire.request_ID}}">
                             {{inquire?.requested_Apt}}
