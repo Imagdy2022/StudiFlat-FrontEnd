@@ -63,7 +63,7 @@
                                       {{item?.msg_Body}}
                                   </p>
                                   <a (click)="openmodel(item?.msg_Attachement)">
-                                  <img style="width: 70px;  height: 70px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
+                                  <img style="width: 130px;  height:130px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
                                   </a>
                               </div>
                           </div>
@@ -81,7 +81,7 @@
                                   {{item?.msg_Body}}
                               </p>
                               <a (click)="openmodel(item?.msg_Attachement)">
-                                <img style="width: 70px;  height: 70px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
+                                <img style="width: 130px;  height:130px" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!=''" [src]="item?.msg_Attachement">
                                 </a>
 
                           </div>
@@ -91,6 +91,7 @@
                       <textarea [(ngModel)]="reply_Desc" id="w3review" name="w3review" class="w-100 h-100 p-3 border rounded" placeholder="Send a message" style="resize: none; outline: none"></textarea>
                       <div class="position-absolute d-flex justify-content-between" style="right: 6%; bottom: 15%">
                           <!-- <button class="border-0 bg-transparent"> -->
+                            <span class="me-2 mt-1">{{fileSelected}}</span>
                           <input type="file" accept="image/*" (change)="selectFile($event)" style=" width: 28% !important;" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
 
                           <img src="assets/images/message/attach_file.svg" />

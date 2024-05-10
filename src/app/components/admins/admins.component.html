@@ -88,7 +88,7 @@
                     <tr style="cursor: pointer;" (click)="hidecard()">
 
                         <td>
-                            {{admin?.userName}}
+                            {{admin?.fullName}}
                         </td>
                         <td>
                             {{admin?.email}}
@@ -107,12 +107,13 @@
                         </td> -->
                         <td>
                             <div>
-                                <p-tag severity="success" value="Active" [rounded]="true " *ngIf="admin?.status==true"> </p-tag>
-
-
-                                <p-tag severity="danger" value="Non-Active" [rounded]="true " *ngIf="admin?.status==false"> </p-tag>
-
-                            </div>
+                              <span class="rounded-5 px-3 badge Active" *ngIf="admin?.status==true">
+                                Active
+                            </span>
+                            <span class="rounded-5 px-3 badge InActive" *ngIf="admin?.status==false">
+                              In Active
+                          </span>
+                          </div>
                         </td>
                         <td class="cursor position-relative">
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,admin.user_ID)">
