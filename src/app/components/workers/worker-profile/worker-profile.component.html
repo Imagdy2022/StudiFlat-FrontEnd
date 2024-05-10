@@ -17,7 +17,7 @@
             <div style="color: #605D62; font-size: 20px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">worker profile</div>
             <!-- style="width: 1082px; height: 833px; justify-content: center; align-items: flex-start; gap: 32px; display: inline-flex" -->
 
-            <div class="row w-100 d-flex mx-0">
+            <div class="row w-100 d-flex mx-0 gx-0">
                 <div class="col-lg-4 px-0">
                     <div class="frist">
                         <img class="frist2" [src]="dataworker?.worker_Photo" />
@@ -110,7 +110,7 @@
                                     <div style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">Skills</div>
                                     <div style="align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex">
 
-                                        <div *ngFor="let skill of dataworker?.worker_Skills" style="padding-top: 8px; padding-bottom: 12px; padding-left: 30px; padding-right: 30px; background: white; border-radius: 4px; overflow: hidden; border: 1px #CECECE solid; justify-content: center; align-items: center; display: flex;width: 140px;">
+                                        <div *ngFor="let skill of dataworker?.worker_Skills" style="padding-top: 8px;padding-left: 14px; padding-bottom: 12px; padding-right: 30px; background: white; border-radius: 4px; overflow: hidden; border: 1px #CECECE solid; display: flex;width: 140px;width: 50%;">
                                             <div style="color: #605D62; font-size: 16px; font-family: Poppins; font-weight: 500; line-height: 20px; word-wrap: break-word"> {{skill?.skill_Name}}</div>
                                         </div>
 

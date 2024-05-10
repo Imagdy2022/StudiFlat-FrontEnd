@@ -117,9 +117,6 @@
         display: block !important;
         width: auto !important;
     }
-    .frist2 {
-        width: auto !important;
-    }
     .frist3 {
         display: block !important;
     }
@@ -149,8 +146,6 @@
 }
 
 .frist2 {
-    width: 350px;
-    height: 250px;
     position: relative;
     background: linear-gradient(0deg, white 0%, white 100%)
 }

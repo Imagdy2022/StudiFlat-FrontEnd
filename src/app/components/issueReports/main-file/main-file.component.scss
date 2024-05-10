@@ -3,7 +3,8 @@
   border: 1px solid #ebebeb;
   background-color: #fff;
 }
-.activeButton{
+
+.activeButton {
   background-color: #1F4068;
   color: #fff
 }
@@ -18,191 +19,210 @@ td {
 }
 
 th {
-    font-size: 14px !important;
-    font-family: 'Poppins';
-    border-bottom: 1px solid #F6F6F6 !important;
-    background: #F6F6F6 !important  ;
+  font-size: 14px !important;
+  font-family: 'Poppins';
+  border-bottom: 1px solid #F6F6F6 !important;
+  background: #F6F6F6 !important;
 }
 
 .cardss {
-    display: flex;
-    width: 432px;
-    padding: 16px;
-    align-items: center;
-    gap: 24px;
-    border-radius: 8px;
-    background: #FFF;
-    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.15);
+  display: flex;
+  width: 432px;
+  padding: 16px;
+  align-items: center;
+  gap: 24px;
+  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.15);
 }
 
 .cards {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-radius: 8px;
-    background: #FFF;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #FFF;
 }
 
 @media (min-width: 768px) {
-    .cardss {
-        margin-left: 23px;
-    }
+  .cardss {
+    margin-left: 23px;
+  }
 }
 
 @media (min-width: 768px) {
-    .xcvdd {
-        margin-right: 257px !important;
-    }
-    .cvvvvvvv {
-        margin-right: -898px;
-    }
+  .xcvdd {
+    margin-right: 257px !important;
+  }
+
+  .cvvvvvvv {
+    margin-right: -898px;
+  }
 }
 
 @media (min-width: 768px) {
-    .xcvdd {
-        margin-right: 257px !important;
-    }
+  .xcvdd {
+    margin-right: 257px !important;
+  }
 }
 
 .buttomstyle {
-    color: var(--Primary-40, #1F4068);
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 24px;
+  color: var(--Primary-40, #1F4068);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
 }
 
 .apartmentList {
-    color: #787579;
-    &:hover {
-        border-bottom: 2px solid #1f4068 !important;
-        font-weight: 600;
-        color: #1f4068 !important;
-    }
+  color: #787579;
+
+  &:hover {
+    border-bottom: 2px solid #1f4068 !important;
+    font-weight: 600;
+    color: #1f4068 !important;
+  }
 }
 
 .paroductApartment {
-    .details {
-        border: 1px solid #dfdfdf;
-        max-height: 220px;
+  .details {
+    border: 1px solid #dfdfdf;
+    max-height: 220px;
+  }
+
+  .apartmentImage {
+    border-radius: 8px 8px 0px 0px;
+    max-height: 184px;
+  }
+
+  .Price {
+    color: #1F4068;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33.6px;
+
+    .time {
+      font-size: 16px;
+      line-height: 16px;
+      position: relative;
+      top: -2px;
     }
-    .apartmentImage {
-        border-radius: 8px 8px 0px 0px;
-        max-height: 184px;
-    }
-    .Price {
-        color: #1F4068;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 33.6px;
-        .time {
-            font-size: 16px;
-            line-height: 16px;
-            position: relative;
-            top: -2px;
-        }
-    }
+  }
 }
 
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .rentedORavailable {
-    background-color: rgb(255 255 255 / 70%);
-    color: #1f4068 !important;
+  background-color: rgb(255 255 255 / 70%);
+  color: #1f4068 !important;
 }
 
 .rented {
-    color: #1f4068 !important;
+  color: #1f4068 !important;
 }
 
 .available {
-    color: #12b76a !important;
+  color: #12b76a !important;
 }
 
 .clickApartmentList {
-    color: #1f4068 !important;
-    font-weight: 600;
-    border-bottom: 2px solid #1f4068 !important;
+  color: #1f4068 !important;
+  font-weight: 600;
+  border-bottom: 2px solid #1f4068 !important;
 }
 
 .none {
-    @media (max-width: 992px) {
-        display: none;
-    }
+  @media (max-width: 992px) {
+    display: none;
+  }
 }
 
 .p-fileupload-buttonbar .p-button {
-    margin-bottom: 10px !important;
+  margin-bottom: 10px !important;
 }
 
-.badge{
-  font-size: 13px ;
+.badge {
+  font-size: 13px;
   padding: 4px 8px;
   font-weight: 500;
 }
+
 .Pending {
-    color: #027A48;
-    background-color: #ECFDF3;
+  color: #DB00FF;
+
+  background-color: #FCEAFF
 }
+
 .Completed {
-    color: #DB00FF;
-    background-color: #FCEAFF
+  color: #027A48;
+  background-color: #ECFDF3;
+
 }
+
 .InProgress {
   color: #1F4068;
   background-color: #D2D9E1
 }
+
 .Cancelled {
   color: #EF2011;
   background-color: #FCEEEE;
 }
-tr{
-  .Actions{
+
+tr {
+  .Actions {
     width: 150px;
     z-index: 999;
     right: 35px;
     top: 50px;
   }
 }
-tr:nth-last-child(3){
-  .Actions{
+
+tr:nth-last-child(3) {
+  .Actions {
     width: 150px;
     z-index: 999;
     right: 35px;
     top: -50px;
   }
 }
-tr:nth-last-child(2){
-  .Actions{
+
+tr:nth-last-child(2) {
+  .Actions {
     width: 150px;
     z-index: 999;
     right: 35px;
     top: -120px;
   }
 }
-tr:last-child{
-  .Actions{
+
+tr:last-child {
+  .Actions {
     width: 150px;
     z-index: 999;
     right: 35px;
     top: -200px;
   }
 }
-.input{
+
+.input {
   position: relative;
-  img{
+
+  img {
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
+  }
 }
-}
-::placeholder{
+
+::placeholder {
   font-size: 13px !important;
 }
+
 .file {
   z-index: 3 !important;
   opacity: 0;
@@ -216,6 +236,7 @@ tr:last-child{
 .cursor {
   cursor: pointer;
 }
+
 ::ng-deep .imgPreviewUploader {
   width: 200px !important;
   height: 200px !important;
