@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   selector: 'app-add-new-apartments',
   templateUrl: './add-new-apartments.component.html',
   styleUrls: ['./add-new-apartments.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class AddNewApartmentsComponent {
 

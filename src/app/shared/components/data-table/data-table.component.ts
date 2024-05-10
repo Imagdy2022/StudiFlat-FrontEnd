@@ -5,7 +5,7 @@ import { ConfirmationService } from 'primeng/api';
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class DataTableComponent {
 

@@ -5,7 +5,7 @@ import { IOnwer } from 'src/app/models/onwer';
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 
 })
 export class TableComponent implements OnInit, OnChanges {

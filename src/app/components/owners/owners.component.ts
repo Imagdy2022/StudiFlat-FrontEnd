@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-owners',
   templateUrl: './owners.component.html',
   styleUrls: ['./owners.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 
 })
 export class OwnersComponent implements OnInit {

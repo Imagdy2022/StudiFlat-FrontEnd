@@ -10,7 +10,6 @@ import { Observable, Subscription } from 'rxjs';
   selector: 'app-edite-user-details',
   templateUrl: './edite-user-details.component.html',
   styleUrls: ['./edite-user-details.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class EditeUserDetailsComponent {
   showSide: string = '';
