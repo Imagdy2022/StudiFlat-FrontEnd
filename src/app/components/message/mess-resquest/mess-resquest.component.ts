@@ -17,6 +17,7 @@ export class MessResquestComponent implements OnInit {
   showSide:string = '';
   value:any=''
   paramid:any=""
+  userID:any=""
   activePerson:boolean=true
   subscriptions:Subscription[] = [];
    constructor(    private uploadService: UploadFileService,  public router: Router, private _ActivatedRoute:ActivatedRoute,public _ticketService:AdminsService ,private messageService: MessageService,) {
@@ -52,8 +53,9 @@ export class MessResquestComponent implements OnInit {
 
   deatail:any={}
   getAll_tickets(   ) {
-    this.subscriptions.push(     this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
+    this.subscriptions.push(this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
+      this.userID = res?.msgs[0]?.user_ID
 
      }, (error) => {
        console.error('Error fetching chat:', error);

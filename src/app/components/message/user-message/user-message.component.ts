@@ -17,7 +17,7 @@ export class UserMessageComponent {
   value:any=''
   paramid:any=""
   chatID:any;
-  allChat :any[]=[]
+  allChat :any
   deatail:any={}
   activePerson:boolean=true
   subscriptions:Subscription[] = [];
