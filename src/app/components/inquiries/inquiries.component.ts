@@ -171,7 +171,7 @@ event.stopPropagation()
       },
       {
         id:5,
-        name:"Terminated Booking"
+        name:"Rejected Booking"
       }
     ];
     this.InquireFillterSelected = [true];
@@ -225,7 +225,7 @@ event.stopPropagation()
 
     }
     if(index?.target?.value == 5){
-      this.statusinquire="Terminated"
+      this.statusinquire=" Rejected"
 
       this.getAllInquires(this.statusinquire);
 

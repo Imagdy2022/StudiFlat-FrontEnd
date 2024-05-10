@@ -44,3 +44,16 @@ th {
   border-bottom: 1px solid #F6F6F6 !important;
   background: #F6F6F6 !important  ;
 }
+tr{
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+}
+tr .Actions{
+  width: 150px;
+  z-index: 999;
+  right: 70px;
+  top: 50px;
+}
+tr:last-child .Actions{
+    top: 10px;
+}

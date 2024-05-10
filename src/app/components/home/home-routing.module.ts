@@ -73,11 +73,6 @@ const routes: Routes = [
     path: 'push-msgs',canActivate: [AuthGuard], loadChildren: () => import('../../components/pushmsgs/pushmsgs.module').then(p=>p.PushmsgsModule)
   },
   { path: 'unlegal', canActivate: [AuthGuard],  loadChildren: () => import('../../components/unlegal/unlegal.module').then(u=>u.UnlegalModule) },
-  {
-    path: 'authorization/:id',
-    component: AuthorizationComponent,
-    canActivate: [AuthGuard],
-  },
 
   {
     path: 'Report-print/:id',

@@ -44,12 +44,12 @@
                 </div>
                 </div>
                 <!-- search input -->
-                <div class="col-md-5">
+                <!-- <div class="col-md-5">
                   <div class="input">
                     <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
                       <img src="../../../assets/images/search.svg" alt="">
                   </div>
-                </div>
+                </div> -->
             </div>
 
             <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="roles">
@@ -66,7 +66,6 @@
 
                             </th>
                             <th class="td-name">
-                                Operation
 
                             </th>
                         </ng-container>
@@ -86,9 +85,9 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,role.id)">
                       <img src="assets/images/edit.svg">
                   </button>
-                            <div *ngIf="showEdit[role.id]" style="width:200px;z-index:999 ; right: 200px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                            <div *ngIf="showEdit[role.id]" class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="AdminRole?.p_Update==true || is_Super==true" (click)="UpdateOpenRole(role)">update Role</button>
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/authorization/{{role.id}}">Give authorization</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/roles/authorization/{{role.id}}">Give authorization</button>
                                 <!-- <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">Assigned users</button> -->
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="AdminRole?.p_Delete==true || is_Super==true" (click)="DeleteRole(role.id)"> Delete  </button>
                             </div>
@@ -213,17 +212,15 @@ Add New Role
 
             <div class="modal-footer">
 
-                <div class="d-flex justify-content-between">
-                    <div class="py-2 px-3 fw-bold"></div>
-                    <div class="d-flex justify-content-between">
-                        <a (click)="onCloseModal2()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
+                    <div class="d-flex justify-content-between w-100">
+                        <a (click)="onCloseModal2()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold xcvdd">
                         Cancel
           </a>
                         <button (click)="createRole()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
                         confirm
           </button>
                     </div>
-                </div>
+
                 <!-- Confirm -->
 
             </div>

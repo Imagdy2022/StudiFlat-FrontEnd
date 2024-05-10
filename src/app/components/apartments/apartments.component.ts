@@ -10,7 +10,7 @@ import { IApartments } from 'src/app/models/apartment';
   selector: 'app-apartments',
   templateUrl: './apartments.component.html',
   styleUrls: ['./apartments.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class ApartmentsComponent implements OnInit {
 

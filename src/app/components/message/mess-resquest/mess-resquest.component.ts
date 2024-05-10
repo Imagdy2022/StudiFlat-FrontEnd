@@ -17,6 +17,8 @@ export class MessResquestComponent implements OnInit {
   showSide:string = '';
   value:any=''
   paramid:any=""
+  userID:any=""
+  fileSelected:any;
   activePerson:boolean=true
   subscriptions:Subscription[] = [];
    constructor(    private uploadService: UploadFileService,  public router: Router, private _ActivatedRoute:ActivatedRoute,public _ticketService:AdminsService ,private messageService: MessageService,) {
@@ -36,11 +38,11 @@ export class MessResquestComponent implements OnInit {
   });
 
   connection.on("AppReply", (result: any) => {
-    this.subscriptions.push(    this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
+    this.subscriptions.push(this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
 
      }, (error) => {
-       console.error('Error fetching owners:', error);
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
     }))
 
   });
@@ -52,11 +54,12 @@ export class MessResquestComponent implements OnInit {
 
   deatail:any={}
   getAll_tickets(   ) {
-    this.subscriptions.push(     this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
+    this.subscriptions.push(this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
+      this.userID = res?.msgs[0]?.user_ID
 
      }, (error) => {
-       console.error('Error fetching chat:', error);
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
     }))
 
   }
@@ -81,7 +84,6 @@ export class MessResquestComponent implements OnInit {
  currentFile?: File ;selectedContractImg:any
 
  selectFile(event: any): void {
-  debugger
    this.ListFiles=null
    this.message = '';
    this.preview = '';
@@ -100,6 +102,7 @@ export class MessResquestComponent implements OnInit {
        reader.onload = (e: any) => {
 
           this.urls.push(e.target.result);
+          this.fileSelected= file.name;
        }
        reader.readAsDataURL(file);
      }
@@ -117,6 +120,7 @@ export class MessResquestComponent implements OnInit {
     this.getAll_tickets(   )
     this.reply_Desc=""
     this.apt_imgs=null
+    this.fileSelected = ""
   }, (error) => {
    this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
  }))

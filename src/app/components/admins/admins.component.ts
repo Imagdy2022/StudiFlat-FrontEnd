@@ -23,11 +23,13 @@ export class AdminsComponent implements OnInit {
 
   dropdownOption: Array<any> = [];
   listDropDown: Array<object> = [
+    {name: 'All'},
     { name: 'Today' },
     { name: 'Last week' },
     { name: 'This month' },
     { name: 'This year' },
   ];
+  Date = 'All';
   admins: any = [];
   showSide: string = '';
   numberadmins = 0;
@@ -43,7 +45,7 @@ export class AdminsComponent implements OnInit {
   ngOnInit() {
     this.home = { icon: 'pi pi-home', routerLink: ['/dashboard'] };
 
-    this.getAllRolles();
+    this.getAllAdmins();
     this.checkRole();
   }
   AdminRole: any;
@@ -90,7 +92,7 @@ export class AdminsComponent implements OnInit {
             summary: 'Success',
             detail: `${res.message}`,
           });
-          this.getAllRolles();
+          this.getAllAdmins();
           this.display1 = 'none';
         },
         (error) => {
@@ -103,10 +105,10 @@ export class AdminsComponent implements OnInit {
       ))
 
   }
-  getAllRolles() {
+  getAllAdmins() {
     this.admins = [];
     this.numberadmins = 0;
-    this.subscriptions.push( this._adminservices.getAllAdmins().subscribe(
+    this.subscriptions.push( this._adminservices.getAllAdmins(this.searchText, this. Date).subscribe(
       (res) => {
         this.admins = res;
         this.numberadmins = res.length;
@@ -128,6 +130,8 @@ export class AdminsComponent implements OnInit {
     // Handle the selected action here
   }
   selectedfromDropDown(value: any) {
+    this.Date = value.name
+    this.getAllAdmins();
 
   }
   openDropdown(event: Event) {
@@ -135,8 +139,7 @@ export class AdminsComponent implements OnInit {
   }
 
   searchAction() {
-    this.searchTextChange.emit(this.searchText);
-    this.search = false;
+   this.getAllAdmins();
   }
 
   detailperson(event: any, id: any) {
@@ -172,7 +175,7 @@ export class AdminsComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: `${error.error.message[0]}`,
+          detail: `${error.error.message}`,
         });
       }
     ))

@@ -16,6 +16,7 @@ export class StatisticsComponent implements OnInit{
   paymentHistoryRate :string = 'All';
   apartmentRate :  boolean = true;
   userProblem :  boolean = true;
+  DemandsRate :  boolean = true;
   subscriptions:Subscription[] = [];
   listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last week'},{name:'This month'},{name:'This year'}]
 
@@ -23,10 +24,12 @@ export class StatisticsComponent implements OnInit{
   listDropDownRequests:Array<object> =[{name:'Highest'},{name:'Lowest'}]
   ApartmentRatingsDropDown:Array<object> =[{name:'Highest'},{name:'Lowest'}]
   listDropDownUserProblem:Array<object> =[{name:'Highest'},{name:'Lowest'}]
+  listDropDownApartmentDemands:Array<object> =[{name:'Highest'},{name:'Lowest'}]
 
   rowDatalistTenantpaymenthistory:Array<any>=[]
   ApartmentRatings:Array<any>=[]
   rowDatalistRequests:Array<any>=[]
+  rowDatalistDemands:Array<any>=[]
 
   rowdataListUserreportproblems:Array<any>=[]
 
@@ -40,6 +43,7 @@ export class StatisticsComponent implements OnInit{
     this.PaymentHistory();
     this.ApartmentRating();
     this.UserProblems();
+    this.ApartmentDemands();
   }
 
 
@@ -81,6 +85,15 @@ export class StatisticsComponent implements OnInit{
   this.subscriptions.push(this._adminservices.ApartmentRequests(this.requestRate).subscribe(
     (res: any) => {
       this.rowDatalistRequests = res;
+    },
+    (error) => {
+    }
+  ));
+}
+ApartmentDemands() {
+  this.subscriptions.push(this._adminservices.ApartmentRequests(this.DemandsRate).subscribe(
+    (res: any) => {
+      this.rowDatalistDemands = res;
     },
     (error) => {
     }
@@ -132,6 +145,14 @@ UserProblems() {
     this.requestRate= false
    this.ApartmentRequests();
   }
+  selectedApartmentDemands(value: any) {
+    if(value.name == 'Highest')
+      this.DemandsRate= true
+    else
+    this.DemandsRate= false
+   this.ApartmentDemands();
+  }
+
   selectedPaymentHistory(value: any) {
    this.paymentHistoryRate = value.name
    this.PaymentHistory();

@@ -28,4 +28,38 @@ th {
     top: 50%;
     transform: translateY(-50%);
 }
+.badge{
+  font-size: 13px ;
+  padding: 4px 8px;
+  font-weight: 500;
+}
 
+.Active {
+  color: #027A48;
+  background-color: #ECFDF3;
+}
+
+.InActive {
+  color: #EF2011;
+  background-color: #FCEEEE;
+}
+tr{
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+.Actions{
+  width: 150px;
+  z-index: 999;
+  right: 28px;
+  top: 50px;
+}
+}
+tr:nth-last-child(2){
+.Actions{
+  top: 10px;
+}
+}
+tr:last-child{
+.Actions{
+  top: -50px;
+}
+}

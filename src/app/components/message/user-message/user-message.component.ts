@@ -17,8 +17,9 @@ export class UserMessageComponent {
   value:any=''
   paramid:any=""
   chatID:any;
-  allChat :any[]=[]
-  deatail:any={}
+  allChat :any
+  deatail:any={};
+ fileSelected :any ;
   activePerson:boolean=true
   subscriptions:Subscription[] = [];
    constructor(    private uploadService: UploadFileService,  public router: Router, private _ActivatedRoute:ActivatedRoute,public _ticketService:AdminsService ,private messageService: MessageService,) {
@@ -91,6 +92,7 @@ export class UserMessageComponent {
        reader.onload = (e: any) => {
 
           this.urls.push(e.target.result);
+          this.fileSelected= file.name;
        }
        reader.readAsDataURL(file);
      }
@@ -108,6 +110,7 @@ export class UserMessageComponent {
     this.GetChatHistory()
     this.reply_Desc ="";
     this.apt_imgs = null;
+    this.fileSelected ="";
   }, (error) => {
    this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
  }))

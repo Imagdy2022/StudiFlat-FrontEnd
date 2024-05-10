@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-general-info-user',
   templateUrl: './general-info-user.component.html',
   styleUrls: ['./general-info-user.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class GeneralInfoUserComponent {
   @Input() titlePage: string = '';

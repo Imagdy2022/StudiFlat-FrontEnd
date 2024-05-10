@@ -84,7 +84,7 @@
                           <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,fqq.msg_ID)">
   <img src="assets/images/edit.svg">
 </button>
-                          <div *ngIf="showEdit[fqq.msg_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                          <div *ngIf="showEdit[fqq.msg_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                               <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="openmodel2updateMsgs(fqq)">Update</button>
 
 
@@ -104,7 +104,7 @@
               </ng-template>
 
           </p-table>
-          <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+          <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords" ></p-paginator>
 
           <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
       <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
