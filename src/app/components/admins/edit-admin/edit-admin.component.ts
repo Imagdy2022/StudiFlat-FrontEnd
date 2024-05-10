@@ -18,6 +18,8 @@ export class EditAdminComponent implements OnInit {
   param: any;
   home: any;
   gfg: any;
+  passwordValue:any;
+  confirmPasswordValue:any;
   subscriptions:Subscription[] = [];
   constructor(
     private viewportScroller: ViewportScroller,
@@ -167,6 +169,11 @@ export class EditAdminComponent implements OnInit {
       .subscribe(
         (res) => {
           this.loadingButton = false;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'success',
+            detail: `${res.message}`,
+          });
           this.router.navigate(['/admins']);
         },
         (err) => {
@@ -200,6 +207,34 @@ export class EditAdminComponent implements OnInit {
     } else {
       this.showEror = 'true';
     }
+  }
+
+  changePassword(){
+    let changePassword={
+      user_ID : this.param,
+      newPassword: this.passwordValue,
+      confirmPassword: this.confirmPasswordValue
+    }
+
+    this.subscriptions.push(  this._adminservices.UpdatePassword(changePassword)
+      .subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'success',
+            detail: `${res.message}`,
+          });
+        },
+        (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${err.error.message}`,
+          });
+        }
+      ))
+
+
   }
 
   ngOnDestroy() {

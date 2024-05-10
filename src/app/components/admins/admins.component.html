@@ -77,8 +77,6 @@
 
                             </th>
                             <th class="td-name">
-                                Operation
-
                             </th>
                         </ng-container>
                     </tr>
@@ -115,14 +113,14 @@
                           </span>
                           </div>
                         </td>
-                        <td class="cursor position-relative">
+                        <td class="cursor position-relative" style="text-align: center;">
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,admin.user_ID)">
                       <img src="assets/images/edit.svg">
                   </button>
-                            <div *ngIf="showEdit[admin.user_ID]" style="width:200px;z-index:999 ; right:89px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                            <div *ngIf="showEdit[admin.user_ID]"  class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/admins/edit-admin/{{admin.user_ID}}">update  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="admin?.status==true" (click)="sendToModel1(admin)">deactivate</button>
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="admin?.status==false" (click)="sendToModel1(admin)">Activate</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent  button text-start py-2 w-100" *ngIf="admin?.status==true" (click)="sendToModel1(admin)">deactivate</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent  button text-start py-2 w-100" *ngIf="admin?.status==false" (click)="sendToModel1(admin)">Activate</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="openModal2(admin.user_ID)"> Delete  </button>
                             </div>
@@ -217,42 +215,32 @@ Activate And Deactivate Admin
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="    margin-top: 150px;">
             <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
-                <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600;">
                     <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
-                    delete the item
+                    Delete the item
           </span>
                 </p>
                 <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal2()">
 <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
 </button>
 
-
-
             </div>
-            <hr>
             <div class="modal-body">
 
 
-                <h4 style="margin-top:0px ;margin-bottom: 0px;"> Are you sure you want to delete the item? </h4>
+                <h4 style="margin-top:0px ;margin-bottom: 0px; font-size: 16px;"> Are you sure you want to delete the item? </h4>
 
             </div>
 
-
-
-
             <div class="modal-footer">
-
-                <div class="d-flex justify-content-between">
-                    <div class="py-2 px-3 fw-bold"></div>
-                    <div class="d-flex justify-content-between">
-                        <a (click)="onCloseModal2()" style="   margin-right: 251px !important; border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
+                    <div class="d-flex justify-content-between w-100">
+                        <a (click)="onCloseModal2()" style="   margin-right: 251px !important; border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold xcvdd">
                     Cancel
       </a>
                         <button (click)="onSubmitModal2()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
                     confirm
       </button>
                     </div>
-                </div>
                 <!-- Confirm -->
 
             </div>

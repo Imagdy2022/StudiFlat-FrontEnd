@@ -1,18 +1,25 @@
 <!-- start header  -->
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'authorization'"></app-head>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Roles'"></app-head>
 </header>
 <!-- end header  -->
 
 <div class="row m-0">
 
     <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Authorizations'"></app-sidebar>
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Roles'"></app-sidebar>
 
     <main class="p-4 col-lg-10">
 
       <div class="row" style="color: #6c6a6a">
-        <p-breadcrumb class="max-w-full" [model]="gfg" [home]="home"></p-breadcrumb>
+
+        <div class="d-md-flex justify-content-between dashboard mt-2">
+          <div class="d-flex" style=" cursor: pointer;">
+              <p routerLink="/roles" class="fw-bold me-2" style="color: #6c6a6a;">Roles</p>
+              <img src="assets/images/user/right-arrow.svg" class="me-2" style="margin-top: -15px">
+              <p class="fw-bold" style="color: #6c6a6a">Role Permessions</p>
+          </div>
+      </div>
 
      </div>
         <div class="card mt-2">

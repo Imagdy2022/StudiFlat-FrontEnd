@@ -5,8 +5,9 @@ import { RolesComponent } from './roles.component';
 
 
 
+
 const routes: Routes = [
-  { path: '', component: RolesComponent },
+  { path: '', component: RolesComponent }
 ];
 
 @NgModule({

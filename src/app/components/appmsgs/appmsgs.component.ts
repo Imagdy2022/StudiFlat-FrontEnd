@@ -54,7 +54,7 @@ export class AppMsgsComponent implements OnInit {
 
   statusTenant: any = '';
   pageNumber = 1;
-  pagesize = 20;
+  pagesize = 10;
   pagesize2 = 10;
 
   totalofPages = 0;

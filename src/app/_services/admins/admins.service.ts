@@ -18,10 +18,11 @@ export class AdminsService {
     Authorization: `Bearer ${this.token}`,
   });
 
-  getAllAdmins(Search:string): Observable<any[]> {
+  getAllAdmins(Search:string, Date:any): Observable<any[]> {
     const url = `${environment.apiUrl}/Admin/GetAllAdmins`;
     const params = new HttpParams()
     .set('Search', Search)
+    .set('Date', Date)
     return this.http.get<any[]>(url, { headers: this.headers, params:params });
   }
   UpdateADminStatus(status: any, id: any): Observable<any> {
@@ -53,6 +54,12 @@ export class AdminsService {
     let url = environment.apiUrl + '/Admin/UpdateUserAccount?User_ID=' + id;
     return this.http.put(url, body, { headers: this.headers });
   }
+
+  UpdatePassword(data: any,): Observable<any> {
+    let url = environment.apiUrl + '/Admin/UpdatePassword';
+    return this.http.put(url, data, { headers: this.headers });
+  }
+
   public DeleteUser(id: any): Observable<any> {
     let url = environment.apiUrl + '/Admin/DeleteUser?User_ID=' + id;
 

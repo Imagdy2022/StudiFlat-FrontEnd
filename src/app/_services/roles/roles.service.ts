@@ -18,10 +18,12 @@ export class RolesService {
   });
 
 
-  getAllRolles(  ): Observable<any[]> {
+  getAllRolles(Date?:any): Observable<any[]> {
 
     const url = `${environment.apiUrl}/Admin/GetRoles`;
-    return this.http.get<any[]>(url, {  headers: this.headers });
+    const params = new HttpParams()
+    .set('Date', Date)
+    return this.http.get<any[]>(url, {  headers: this.headers, params:params });
 
   }
   GetRolePermission(  id:any): Observable<any> {

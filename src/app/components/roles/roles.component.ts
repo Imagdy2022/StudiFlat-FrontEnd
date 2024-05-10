@@ -41,12 +41,13 @@ export class RolesComponent implements OnInit {
   dropdownOption: Array<any> = [];
   subscriptions:Subscription[] = [];
   listDropDown: Array<object> = [
+    {name:'All'},
     { name: 'Today' },
     { name: 'Last week' },
     { name: 'This month' },
     { name: 'This year' },
   ];
-
+  Date: string ='All'
   spinner: boolean = false;
   numberRoles = 0;
   display1 = 'none';
@@ -89,7 +90,7 @@ export class RolesComponent implements OnInit {
   getAllRolles() {
     this.roles = [];
     this.numberRoles = 0;
-    this.subscriptions.push( this._rolesService.getAllRolles().subscribe(
+    this.subscriptions.push( this._rolesService.getAllRolles(this.Date).subscribe(
       (res) => {
         this.roles = res;
         this.numberRoles = res.length;
@@ -162,6 +163,9 @@ export class RolesComponent implements OnInit {
     this.display2 = 'block';
   }
   selectedfromDropDown(value: any) {
+    this.Date = value.name
+    this.getAllRolles();
+
   }
   showSide: string = '';
 

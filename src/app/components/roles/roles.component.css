@@ -46,3 +46,16 @@ th {
 * {
     font-family: 'Poppins'
 }
+
+tr{
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+}
+
+tr .Actions{
+  width: 150px;
+  z-index: 999;
+  right: 28px;
+  top: 50px;
+}
+

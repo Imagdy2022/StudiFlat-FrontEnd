@@ -159,12 +159,12 @@
 
 
               <div class="row">
-                <div class="mb-3 col-12 col-md-6">
+                <div class="mb-3 col-12 col-md-12">
                   <label class="form-label gray fw-bold">User</label>
                   <!-- start dropdown button  -->
                   <div class="selectForm">
                       <!-- <app-dropdown [list]="listDropDownArea" [holder]="selectArea" (selected)="selectedfromDropDownArea($event,'insert')"></app-dropdown> -->
-                      <select class="s-cont form-select form-select-sm mb-3" [(ngModel)]="UserID"   #UserSelect (change)='onUserSelected(UserSelect.value)'>
+                      <select class="form-select mb-3" [(ngModel)]="UserID"   #UserSelect (change)='onUserSelected(UserSelect.value)'>
                         <option value="0" disabled  selected>Select User</option>
 
                        <option *ngFor="let type of listDropDownArea" value="{{type.user_ID}}"> {{type.user_Name}} </option>
@@ -193,17 +193,14 @@
 
           <div class="modal-footer">
 
-              <div class="d-flex justify-content-between">
-                  <div class="py-2 px-3 fw-bold"></div>
-                  <div class="d-flex justify-content-between">
-                      <a (click)="onCloseModal1()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvddmodel">
+                  <div class="d-flex justify-content-between w-100">
+                      <a (click)="onCloseModal1()" style="    border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold  xcvddmodel">
                 Cancel
   </a>
                       <button (click)="CreateFAQ()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
                 confirm
   </button>
                   </div>
-              </div>
               <!-- Confirm -->
 
           </div>
