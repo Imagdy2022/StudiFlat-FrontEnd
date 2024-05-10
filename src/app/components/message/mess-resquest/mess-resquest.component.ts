@@ -37,11 +37,11 @@ export class MessResquestComponent implements OnInit {
   });
 
   connection.on("AppReply", (result: any) => {
-    this.subscriptions.push(    this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
+    this.subscriptions.push(this._ticketService.GetTicketDetails(this.paramid).subscribe((res:any) => {
       this.deatail = res;
 
      }, (error) => {
-       console.error('Error fetching owners:', error);
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
     }))
 
   });
@@ -58,7 +58,7 @@ export class MessResquestComponent implements OnInit {
       this.userID = res?.msgs[0]?.user_ID
 
      }, (error) => {
-       console.error('Error fetching chat:', error);
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message[0] });
     }))
 
   }

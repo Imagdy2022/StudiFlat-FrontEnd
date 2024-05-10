@@ -174,6 +174,7 @@ dropdownOption: Array<any> = [];
    }
    ClearButton(){
     this.searchText="";
+    this.rangeDates=[];
     this.clickPayment(0);
     this.clickType(0);
     this.clickUserType(0);
@@ -248,7 +249,7 @@ let data;
   }
 
   MarkPaid(id:any){
-    
+
     this.subscriptions.push(this._adminservices.MarkPaid(id).subscribe((res) => {
       this.messageService.add({   severity: 'success', summary: 'Success', detail: res.message });
 

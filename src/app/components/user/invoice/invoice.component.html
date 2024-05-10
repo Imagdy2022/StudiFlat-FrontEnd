@@ -31,7 +31,7 @@
             </div>
             <div class="invice1">Invoice</div>
             <div class="invoce2"><span class="invoce3"> </span><span class="invice4">  </span>
-                <span class="invice5">{{_details.invoice_Details[0].invoice_Desc}}</span><span class="invoce6"> </span></div>
+                <span class="invice5">{{invoiceDetail?.invoice_Desc}}</span><span class="invoce6"> </span></div>
             <div class="price11">Price</div>
             <div class="total22">Total</div>
             <div class="section33">
@@ -52,23 +52,23 @@
             </div>
             <div class="stackkc">
                 <div style="flex: 1 1 0; align-self: stretch; padding-right: 17.02px; justify-content: flex-start; align-items: flex-start; gap: 340.58px; display: inline-flex">
-                    <div style="width: 375.09px; color: #313033; font-size: 18px; font-family: SF Pro Text; font-weight: 400; line-height: 24.01px; word-wrap: break-word"> {{_details.apt_Name}}</div>
-                    <div class="ddfdffd"> {{_details.invoice_Details[0].invoice_Amount}}</div>
+                    <div style="width: 375.09px; color: #313033; font-size: 18px; font-family: 'Popines'; font-weight: 400; line-height: 24.01px; word-wrap: break-word"> {{_details.apt_Name}}</div>
+                    <div class="ddfdffd"> {{invoiceDetail?.invoice_Amount}}</div>
                 </div>
             </div>
-            <div class="priceeins"> {{_details.invoice_Details[0].invoice_Total}}</div>
+            <div class="priceeins"> {{invoiceDetail?.invoice_Total}}</div>
             <div class="stysda">
                 <div style="justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
                     <div class="ccarddinvice">Total</div>
                     <div style="justify-content: center; align-items: center; gap: 1.50px; display: flex">
                         <div class="ccarddinvice">(</div>
                         <div style="justify-content: flex-start; align-items: flex-start; display: flex">
-                            <div style="text-align: right; color: #121722; font-size: 15px; font-family: Inter; font-weight: 400; word-wrap: break-word">USD</div>
+                            <div style="text-align: right; color: #121722; font-size: 15px; font-family: 'Popines'; font-weight: 400; word-wrap: break-word">USD</div>
                         </div>
                         <div class="ccarddinvice">)</div>
                     </div>
                 </div>
-                <div class="pricinn">{{_details.invoice_Details[0].invoice_Amount}}</div>
+                <div class="pricinn">{{invoiceDetail?.invoice_Amount}}</div>
             </div>
             <div class="imgheap">
                 <div class="imgginv">

@@ -106,7 +106,7 @@ export class AdminsComponent implements OnInit {
   getAllRolles() {
     this.admins = [];
     this.numberadmins = 0;
-    this.subscriptions.push( this._adminservices.getAllAdmins().subscribe(
+    this.subscriptions.push( this._adminservices.getAllAdmins(this.searchText).subscribe(
       (res) => {
         this.admins = res;
         this.numberadmins = res.length;
@@ -135,8 +135,7 @@ export class AdminsComponent implements OnInit {
   }
 
   searchAction() {
-    this.searchTextChange.emit(this.searchText);
-    this.search = false;
+   this.getAllRolles();
   }
 
   detailperson(event: any, id: any) {

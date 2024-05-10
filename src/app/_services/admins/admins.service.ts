@@ -18,9 +18,11 @@ export class AdminsService {
     Authorization: `Bearer ${this.token}`,
   });
 
-  getAllAdmins(): Observable<any[]> {
+  getAllAdmins(Search:string): Observable<any[]> {
     const url = `${environment.apiUrl}/Admin/GetAllAdmins`;
-    return this.http.get<any[]>(url, { headers: this.headers });
+    const params = new HttpParams()
+    .set('Search', Search)
+    return this.http.get<any[]>(url, { headers: this.headers, params:params });
   }
   UpdateADminStatus(status: any, id: any): Observable<any> {
     let body = {

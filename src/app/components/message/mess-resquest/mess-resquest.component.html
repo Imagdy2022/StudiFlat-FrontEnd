@@ -58,7 +58,7 @@
                 <div class="px-4">
                     <div *ngFor=" let item of deatail.msgs">
                         <!-- Reciver -->
-                        <div class="d-flex justify-content-between reciver mb-2 py-3" *ngIf="item?.is_Mobile">
+                        <div class="d-flex justify-content-between reciver  py-3" *ngIf="item?.is_Mobile">
                             <div class="d-flex">
                                 <!-- <img src="assets/images/Avatar.svg" class="me-3 mb-3" /> -->
                                 <img *ngIf="item?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;margin-top: 13px;" [src]="item?.user_Photo" class="me-3" />
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <!-- Sender -->
-                        <div class="d-flex justify-content-end mb-2 py-3" *ngIf="!item.is_Mobile">
+                        <div class="d-flex justify-content-end py-3" *ngIf="!item.is_Mobile">
                             <div style="margin-bottom: 20px;">
                                 <div class="ml-3 d-flex justify-content-between">
                                     <div>

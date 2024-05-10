@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
-  // encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class DropdownComponent {
   @Input() list: Array<object> = []
