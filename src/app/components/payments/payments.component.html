@@ -228,31 +228,31 @@
                 <ng-template pTemplate="body" let-payment>
 
                     <tr style="cursor: pointer;" (click)="hidecard()"  >
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
                             {{payment?.trans_No}}
                         </td>
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
                           {{payment?.trans_Date_Format | date}}
                       </td>
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
                             {{payment?.apt_Name}}
                         </td>
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">{{payment?.payment}}</td>
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">{{payment?.user_Type}}</td>
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">{{payment?.userName}}</td>
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">{{payment?.payment}}</td>
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">{{payment?.user_Type}}</td>
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">{{payment?.userName}}</td>
 
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
                             {{payment?.amount}}
                         </td>
 
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
                           {{payment?.service_Fee}}
                         </td>
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
                           {{payment?.type}}
                         </td>
 
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
                           <div>
                               <span class="rounded-5 px-3"*ngIf="payment?.method==	'Stripe'">
                                 <span>
@@ -269,10 +269,10 @@
                           </span>
                           </div>
                       </td>
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
                             {{payment?.phoneNo}}
                         </td>
-                        <td routerLink="/payments/invoice/{{payment.inv_ID}}">
+                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
                           <div>
                               <span class="rounded-5 px-3 badge paid"*ngIf="payment?.status_Paid==true">
                                 <span>
@@ -293,12 +293,12 @@
                   <img src="assets/images/edit.svg">
               </button>
                             <div *ngIf="showEdit[payment.inv_ID]  " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button px-3">
-                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/payments/invoice/{{payment.inv_ID}}">View Invoice Details  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/payments/invoice/{{payment?.inv_ID}}">View Invoice Details  </button>
                                 <!-- *ngIf="payment?.inv_Paid==true && payment.payment_By=='Cash'" -->
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="MarkPaid(payment.inv_ID)" *ngIf="payment?.status_Paid==true"> Mark As Unpaid    </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="MarkPaid(payment?.inv_ID)" *ngIf="payment?.status_Paid==true"> Mark As Unpaid    </button>
                                  <!-- *ngIf="payment?.inv_Paid==false && payment.payment_By=='Cash'" -->
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="MarkPaid(payment.inv_ID)" *ngIf="payment?.status_Paid==false">Mark As Paid  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="openModal2(payment.inv_ID)">Send Reminder  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="MarkPaid(payment?.inv_ID)" *ngIf="payment?.status_Paid==false">Mark As Paid  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="openModal2(payment?.inv_ID)">Send Reminder  </button>
 
                             </div>
                         </td>

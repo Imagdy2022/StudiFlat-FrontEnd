@@ -136,7 +136,7 @@
 
                             <div class=" col-12 col-md-6 col-lg-4 mb-4  position-relative px-2 mb-4 h-100" style="height: 393px !important;">
 
-                                <a routerLink="/apartments/apartments-details/{{item.apt_ID}}" style="height: 46% !important;" class="d-block">
+                                <a routerLink="/apartments/apartments-details/{{item?.apt_ID}}" style="height: 46% !important;" class="d-block">
                                     <img [src]="item.apt_ThumbImage" class="w-100 h-100 apartmentImage">
                                     <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3 " [class.available]="item.statusString != 'Rented'">{{item.apt_Status}}</p>
                                 </a>

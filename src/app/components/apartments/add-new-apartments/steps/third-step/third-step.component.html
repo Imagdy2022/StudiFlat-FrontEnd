@@ -13,7 +13,7 @@
             <div>
                 <div class="position-relative h-124px mb-3">
                     <!-- start single img upload and preview -->
-                    <ng-container *ngIf="!selectedContractImg">
+                    <ng-container >
                         <input type="file" accept=".pdf, image/*" (change)="onUploadContract($event,'contract_Path')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
                         <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute h-100" width="100%">
                     </ng-container>
