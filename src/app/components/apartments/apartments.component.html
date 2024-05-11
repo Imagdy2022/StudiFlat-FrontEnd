@@ -62,15 +62,15 @@
 
                     <div class=" col-12 col-md-6 col-lg-3 mb-2  position-relative px-2 h-100" style="height: 393px !important;cursor: pointer;">
 
-                        <a  style="height: 46% !important;" class="d-block" routerLink="/apartments/apartments-details/{{item.apt_UUID}}" >
+                        <a  style="height: 46% !important;" class="d-block" routerLink="/apartments/apartments-details/{{item?.apt_UUID}}" >
                             <img [src]="item.apt_ThumbImg.includes('http') ? item.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'" class="w-100 h-100 apartmentImage">
                             <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3 " [class.available]="item.statusString != 'Rented'">{{item.statusString}}</p>
                         </a>
                         <div class="bg-white p-3 details h-50 rounded-bottom" >
-                            <div class="fw-bold  " routerLink="/apartments/apartments-details/{{item.apt_UUID}}">{{item.apt_Name }}</div>
-                            <div class="d-flex" routerLink="/apartments/apartments-details/{{item.apt_UUID}}">
+                            <div class="fw-bold  " routerLink="/apartments/apartments-details/{{item?.apt_UUID}}">{{item?.apt_Name }}</div>
+                            <div class="d-flex" routerLink="/apartments/apartments-details/{{item?.apt_UUID}}">
                                 <img src="assets/images/apartmentImages/location.svg" class="my-3">
-                                <p class="fw-bold mt-3 text-left mx-1">{{item.apt_StName}}</p>
+                                <p class="fw-bold mt-3 text-left mx-1">{{item?.apt_StName}}</p>
                             </div>
                             <div class="d-flex" style="margin: -25px 0 -10px 0;" routerLink="/apartments/apartments-details/{{item.apt_UUID}}">
                                 <div class="d-flex justify-content-between">

@@ -28,7 +28,7 @@
         <div class="mt-3 row border bg-white rounded-3 py-3 ">
             <aside class="col-2 p-0 ps-1 position-fixed d-none d-md-block">
                 <a class="d-block text-decoration-none fw-bold px-2 py-3 text-black mb-1 active" *ngFor="let listAnchor of listAnchors ; let index=index" style="color: #605D62 !important; cursor: pointer;" (click)="onClick(listAnchor.id)" [class.active]="link[index]==true"
-                    (click)="changeAnchor(index)">{{listAnchor.link}}</a>
+                    (click)="changeAnchor(index)">{{listAnchor?.link}}</a>
             </aside>
 
             <div class="col-md-10 content-details ">
@@ -58,8 +58,8 @@
                 <div class="d-flex mb-5 d-md-block d-flex justify-content-center justify-md-content-start ">
                     <div class=" d-md-flex  align-items-center justify-md-content-start ">
                         <div class="rounded-circle imageOfPerson me-4" style="box-shadow: 0 2px 6px #d1d1d1;">
-                            <img *ngIf="Tenant_details.user_Photo!=null && Tenant_details.user_Photo!=''" class="imageOfPerson rounded-circle" style="border: 3px solid white;" [src]="Tenant_details.user_Photo">
-                            <img *ngIf="Tenant_details.user_Photo==null||Tenant_details.user_Photo==''" class="imageOfPerson rounded-circle" style="border: 3px solid white;" src="../../../../assets/images/avatardef.jpg">
+                            <img *ngIf="Tenant_details?.user_Photo!=null && Tenant_details?.user_Photo!=''" class="imageOfPerson rounded-circle" style="border: 3px solid white;" [src]="Tenant_details?.user_Photo">
+                            <img *ngIf="Tenant_details?.user_Photo==null||Tenant_details?.user_Photo==''" class="imageOfPerson rounded-circle" style="border: 3px solid white;" src="../../../../assets/images/avatardef.jpg">
 
                         </div>
 
@@ -74,7 +74,7 @@
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">Full Name</label>
-                        <input class="form-control w-100" [(ngModel)]="Tenant_details.user_FullName" type="text">
+                        <input class="form-control w-100" [(ngModel)]="Tenant_details!.user_FullName" type="text">
                     </div>
 
                 </div>
@@ -481,7 +481,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class=" d-md-flex  align-items-center justify-md-content-start ">
                       <div class="rounded-circle" style="box-shadow: 0 2px 6px #d1d1d1;">
-                          <img class="rounded-circle rateImage" style="border: 3px solid white;" [src]="Tenant_details.user_Photo">
+                          <img class="rounded-circle rateImage" style="border: 3px solid white;" [src]="Tenant_details?.user_Photo">
                       </div>
 
 

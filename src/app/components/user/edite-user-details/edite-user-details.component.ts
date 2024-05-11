@@ -15,7 +15,7 @@ export class EditeUserDetailsComponent {
   showSide: string = '';
   value: string = '';
   cities: Array<object> = [];
-  selectedCity: Object = {};
+  selectedCity: any;
   available: boolean = true;
   link: Array<boolean> = [true];
   subscriptions:Subscription[] = [];
@@ -114,8 +114,8 @@ export class EditeUserDetailsComponent {
       { name: 'Paris', code: 'PRS' },
     ];
   }
-  Tenant_details: any = {};
-  Tenant_Attach: any = {};
+  Tenant_details: any = [];
+  Tenant_Attach: any = [];
   tenant_photo = '';
   GetRequestDetails() {
     this.subscriptions.push(this._adminservices.TenantDetails(this.param).subscribe(

@@ -109,7 +109,7 @@
                             <div *ngIf="showEdit[workers.worker_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/edit-workers/{{workers.worker_ID}}">update</button>
 
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/worker-profile/{{workers.worker_ID}}"> View Profile  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/workers/worker-profile/{{workers.worker_ID}}"> View Profile  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="PostJob(workers.worker_ID)">Delete </button>
 
                             </div>

@@ -118,7 +118,7 @@
                       <img src="assets/images/edit.svg">
                   </button>
                             <div *ngIf="showEdit[admin.user_ID]"  class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/admins/edit-admin/{{admin.user_ID}}">update  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/admins/edit-admin/{{admin?.user_ID}}">update  </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent  button text-start py-2 w-100" *ngIf="admin?.status==true" (click)="sendToModel1(admin)">deactivate</button>
                                 <button class="d-block border-0 outlin-0 bg-transparent  button text-start py-2 w-100" *ngIf="admin?.status==false" (click)="sendToModel1(admin)">Activate</button>
 

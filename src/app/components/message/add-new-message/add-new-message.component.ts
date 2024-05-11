@@ -210,10 +210,10 @@ export class AddNewMessageComponent {
 
     SendMsgtoMultiUsers() {
       let data = {
-        users_IDs: this.selectedUsersIds,
-        msg_Body: this.reply_Desc,
-        msg_Attachement: this.apt_imgs,
-        is_All : this.isAllUser
+        users_IDs: this?.selectedUsersIds,
+        msg_Body: this?.reply_Desc,
+        msg_Attachement: this?.apt_imgs,
+        is_All : this?.isAllUser
       }
       this.subscriptions.push( this._ticketService.SendMsgtoMultiUsers(data).subscribe((res) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });

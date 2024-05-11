@@ -489,7 +489,7 @@
                             <div class="row p-2 mt-2 rounded-3" style="background-color: #f5f6f8">
                                 <div class="col-4">
 
-                                  <a routerLink="/owners/owner-profile/{{OwnerDtail.owner_ID}}">
+                                  <a routerLink="/owners/owner-profile/{{OwnerDtail?.owner_ID}}">
 
                                   <img *ngIf="OwnerDtail?.owner_Photo==null||OwnerDtail?.owner_Photo==''" src="assets/images/apartmentImages/Rectangle 34624164.svg" />
                                     <img [src]="OwnerDtail?.owner_Photo" />
