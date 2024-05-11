@@ -118,26 +118,26 @@
 
                         <td class="d-flex align-items-center">
 
-                            <img *ngIf=" Tenant.user_Photo  " routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}" [src]="Tenant?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                            <img *ngIf=" Tenant.user_Photo  " routerLink="/users/app-edite-user-details/{{Tenant?.user_ID}}" [src]="Tenant?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
 
 
-                            <img *ngIf="!Tenant.user_Photo" routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{Tenant?.user_Name}}
+                            <img *ngIf="!Tenant.user_Photo" routerLink="/users/app-edite-user-details/{{Tenant?.user_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{Tenant?.user_Name}}
 
                         </td>
-                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
+                        <td routerLink="/users/app-edite-user-details/{{Tenant?.user_ID}}">
                             {{Tenant?.reg_Time}}
                         </td>
-                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
+                        <td routerLink="/users/app-edite-user-details/{{Tenant?.user_ID}}">
                             {{Tenant?.email}}
                         </td>
-                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
+                        <td routerLink="/users/app-edite-user-details/{{Tenant?.user_ID}}">
                           <span class="ms-3"> {{Tenant?.rent_No}} </span>
                         </td>
 
                         <!-- <td>
                     <p class="d-flex align-items-center fw-bold mt-2">{{admin?.status}}</p>
                 </td> -->
-                        <td routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">
+                        <td routerLink="/users/app-edite-user-details/{{Tenant?.user_ID}}">
                           <div>
                               <span class="rounded-5 px-3 badge excellent" *ngIf="Tenant?.user_Behavior=='Excellent'">
                                 <span>
@@ -177,7 +177,7 @@
               <img src="assets/images/edit.svg">
           </button>
                             <div *ngIf="showEdit[Tenant.user_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/users/app-edite-user-details/{{Tenant.user_ID}}">Edit</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/users/app-edite-user-details/{{Tenant?.user_ID}}">Edit</button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteUser(Tenant.user_ID)" *ngIf="TantsRole?.p_Delete==true || is_Super==true"> Delete </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendUser(Tenant.user_ID)">Suspend User </button>
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status==false" (click)="unSuspendUser(Tenant.user_ID)">UnSuspend User </button>

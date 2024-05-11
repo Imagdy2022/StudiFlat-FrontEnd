@@ -98,26 +98,26 @@
                     <tr (click)="hidecard()" style="cursor: pointer;" >
 
 
-                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
+                        <td routerLink="/workers/worker-profile/{{workers?.worker_ID}}">
                             <img *ngIf="workers.worker_Img" [src]="workers?.worker_Img" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;">
                             <img *ngIf="!workers.worker_Img" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;"> {{workers?.worker_FName}}
                             {{workers?.worker_LName}}
 
                         </td>
-                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
+                        <td routerLink="/workers/worker-profile/{{workers?.worker_ID}}">
                             {{workers?.worker_Email}}
                         </td>
-                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
+                        <td routerLink="/workers/worker-profile/{{workers?.worker_ID}}">
                             {{workers?.worker_PhoneNum}}
                         </td>
 
-                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
+                        <td routerLink="/workers/worker-profile/{{workers?.worker_ID}}">
                             {{workers?.worker_WANum}}
                         </td>
-                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
+                        <td routerLink="/workers/worker-profile/{{workers?.worker_ID}}">
                             {{workers?.worker_Job}}
                         </td>
-                        <td routerLink="/workers/worker-profile/{{workers.worker_ID}}">
+                        <td routerLink="/workers/worker-profile/{{workers?.worker_ID}}">
                             {{workers?.worker_Type}}
                         </td>
 
@@ -127,10 +127,10 @@
             <img src="assets/images/edit.svg">
         </button>
                             <div *ngIf="showEdit[workers.worker_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="workersRole?.p_Update==true || is_Super==true" routerLink="/workers/edit-workers/{{workers.worker_ID}}">update</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="workersRole?.p_Update==true || is_Super==true" routerLink="/workers/edit-workers/{{workers?.worker_ID}}">update</button>
 
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/workers/worker-profile/{{workers.worker_ID}}"> View Profile  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="workersRole?.p_Delete==true || is_Super==true" (click)="deleteworker(workers.worker_ID)">Delete </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/workers/worker-profile/{{workers?.worker_ID}}"> View Profile  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="workersRole?.p_Delete==true || is_Super==true" (click)="deleteworker(workers?.worker_ID)">Delete </button>
 
                             </div>
 

@@ -99,24 +99,24 @@
                         <td class="d-flex align-items-center" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
                             {{issue?.issue_Code}}
                         </td>
-                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
+                        <td routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">
                           {{issue?.requsted_By }}
 
                         </td>
 
-                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
+                        <td routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">
                             {{issue?.apartment_Number}}
                         </td>
 
-                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
+                        <td routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">
                             {{issue?.date_Reported | date:'medium' }}
                         </td>
-                        <td routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
+                        <td routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">
                           <p style="width: 10vw; overflow: hidden; text-overflow: ellipsis;
                           white-space: nowrap;"> {{issue?.desc}}
                           </p>
                         </td>
-                        <td class="text-center" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">
+                        <td class="text-center" routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">
                           <div>
                               <span class="rounded-5 px-3 badge Pending" *ngIf="issue?.issue_Status=='Pending'">
                                 {{issue?.issue_Status}}
@@ -147,24 +147,24 @@
 
 
                         <td class="cursor position-relative" style="text-align: center;">
-                            <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,issue.issue_ID)">
+                            <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,issue?.issue_ID)">
               <img src="assets/images/edit.svg">
           </button>
                             <div *ngIf="showEdit[issue.issue_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/Issue_Reports/Report-view/{{issue.issue_ID}}">View Details</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/Issue_Reports/assgin-issue/{{issue.issue_ID}}"> assign worker  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="OpenModal1(issue.issue_ID) " *ngIf="issue.worker!='00000000-0000-0000-0000-000000000000'">Mark it as In-Progress
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="OpenModal1(issue?.issue_ID) " *ngIf="issue.worker!='00000000-0000-0000-0000-000000000000'">Mark it as In-Progress
 
 
                                 </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="OpenModal2(issue.issue_ID)">Mark it as Solved
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="OpenModal2(issue?.issue_ID)">Mark it as Solved
 
                                    </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="OpenModal3(issue.issue_ID)">New Appointment
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="OpenModal3(issue?.issue_ID)">New Appointment
 
                                    </button>
-                                <button *ngIf="issue?.issue_Status !='Cancelled'" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="cancelissue(issue.issue_ID)">Cancel </button>
+                                <button *ngIf="issue?.issue_Status !='Cancelled'" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="cancelissue(issue?.issue_ID)">Cancel </button>
 
                             </div>
 

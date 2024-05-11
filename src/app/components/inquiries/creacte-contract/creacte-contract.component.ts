@@ -13,6 +13,15 @@ export class CreacteContractComponent implements OnInit {
   mindate: any;
   param: any;
   subscriptions:Subscription[] = [];
+  contract_details: any;
+  showSide: string = '';
+  value: any;
+  contract_Main: any;
+  Reason: any = '';
+  Reason2: any = '';
+
+  display1 = 'none';
+
   constructor(
     private _inquiresService: InquiresService,
     private _ActivatedRoute: ActivatedRoute,
@@ -51,15 +60,7 @@ export class CreacteContractComponent implements OnInit {
     let url: string = 'unlegal';
     this.router.navigateByUrl(url);
   }
-  contract_details: any = {};
-  showSide: string = '';
-  value: any;
-  contract_Main: any;
-  Reason: any = '';
-  Reason2: any = '';
-
-  display1 = 'none';
-
+  
   GetContract() {
     this.subscriptions.push(    this._inquiresService.GetContract(this.param).subscribe(
       (res) => {

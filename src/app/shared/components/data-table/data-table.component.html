@@ -44,17 +44,17 @@
                 <!-- in owner case -->
                 <td *ngIf="pagePerson =='Owners'  ">
 
-                    <img *ngIf="product.owner_Photo" routerLink="/owners/owner-profile/{{product.owner_ID}}" [src]="product?.owner_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
-                    <img *ngIf="!product.owner_Photo" routerLink="/owners/owner-profile/{{product.owner_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">                    {{product.owner_FirstName}} {{product.owner_LastName }}
+                    <img *ngIf="product.owner_Photo" routerLink="/owners/owner-profile/{{product?.owner_ID}}" [src]="product?.owner_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                    <img *ngIf="!product.owner_Photo" routerLink="/owners/owner-profile/{{product?.owner_ID}}" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">                    {{product.owner_FirstName}} {{product.owner_LastName }}
 
 
                 </td>
-                <td routerLink="/owners/owner-profile/{{product.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_BankAccoun">{{product.owner_BankAccoun}}</td>
+                <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_BankAccoun">{{product.owner_BankAccoun}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'  ">{{product.owner_CreatedBy}}</td> -->
-                <td routerLink="/owners/owner-profile/{{product.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>
-                <td  routerLink="/owners/owner-profile/{{product.owner_ID}}" *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
+                <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>
+                <td  routerLink="/owners/owner-profile/{{product?.owner_ID}}" *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'">{{product.gender}}</td> -->
-                <td routerLink="/owners/owner-profile/{{product.owner_ID}}"   *ngIf="pagePerson=='Owners'">{{product.owner_About}}</td>
+                <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"   *ngIf="pagePerson=='Owners'">{{product.owner_About}}</td>
                 <!-- <td  *ngIf="pagePerson=='Owners'">{{product.owner_Status}}</td> -->
                 <td *ngIf="pagePerson=='Owners' " class="cursor position-relative">
                     <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,product.owner_ID)">
