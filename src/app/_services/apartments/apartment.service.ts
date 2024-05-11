@@ -35,16 +35,15 @@ export class ApartmentService {
     PageNumber: number,
     PageSize: number,
     Apt_Statuss: any,
-    SearchKey: any,
+    SearchKey: any
   ): Observable<any> {
     const url = `${environment.apiUrl}/Apartment/FilterApartmentsFront`;
     const params = new HttpParams()
-     .set('FilterKey', FilterKey)
+      .set('FilterKey', FilterKey)
       .set('PageNo', PageNumber)
       .set('PageSize', PageSize)
       .set('Apt_Statuss', Apt_Statuss)
-      .set('SearchKey', SearchKey)
-
+      .set('SearchKey', SearchKey);
 
     return this.http.get<any>(url, { headers: this.headers, params: params });
   }
@@ -150,6 +149,20 @@ export class ApartmentService {
       { headers: this.headers }
     );
   }
+
+  ApproveReview(id: string, approve: boolean): Observable<any> {
+    return this.http.put(
+      `${
+        environment.apiUrl +
+        '/Apartment/ApproveReview?' +
+        `Review_ID=${id}` +
+        `Approved=${approve}`
+      }`,
+      id,
+      { headers: this.headers }
+    );
+  }
+
   MarkDraft(id: string): Observable<any> {
     return this.http.put(
       `${environment.apiUrl + '/Apartment/MarkDraft?' + `Apt_ID=${id}`}`,

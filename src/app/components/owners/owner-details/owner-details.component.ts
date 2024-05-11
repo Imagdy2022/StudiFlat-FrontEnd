@@ -36,7 +36,7 @@ export class OwnerDetailsComponent {
   loadingButton: boolean = false;
   // param title page
   pageTitle: any;
-  subscriptions:Subscription[] = [];
+  subscriptions: Subscription[] = [];
 
   ngOnInit() {
     this.initCities();
@@ -88,9 +88,11 @@ export class OwnerDetailsComponent {
   checkPage(): void {
     if (this.pageTitle == 'owner_details') {
       this.id = this.param;
-      this.subscriptions.push( this._OnwerService.getOwner(this.id).subscribe((res) => {
-        this.createOwner.patchValue(res);
-      }));
+      this.subscriptions.push(
+        this._OnwerService.getOwner(this.id).subscribe((res) => {
+          this.createOwner.patchValue(res);
+        })
+      );
       this.param = 'Owner details';
       this.listAnchors = [
         { id: 'Generalinfo', link: 'General info' },
@@ -101,9 +103,11 @@ export class OwnerDetailsComponent {
       ];
     } else if (this.pageTitle == 'edit_owner') {
       this.id = this.param;
-      this.subscriptions.push(      this._OnwerService.getOwner(this.id).subscribe((res) => {
-        this.createOwner.patchValue(res);
-      }))
+      this.subscriptions.push(
+        this._OnwerService.getOwner(this.id).subscribe((res) => {
+          this.createOwner.patchValue(res);
+        })
+      );
 
       this.param = 'edit owner name details';
       this.listAnchors = [
@@ -183,8 +187,7 @@ export class OwnerDetailsComponent {
   public onClick(elementId: string): void {
     this.viewportScroller.scrollToAnchor(elementId);
   }
-  public selectCountry(value: any) {
-  }
+  public selectCountry(value: any) {}
   changeAnchor(index: number): void {
     this.link = this.link.map((el) => (el == true ? false : false));
     this.link[index] = true;
@@ -196,18 +199,46 @@ export class OwnerDetailsComponent {
     data.value.owner_WA_Number = String(data.value.owner_WA_Number);
     this.loadingButton = true;
     if (this.param == 'Create New') {
-      this.subscriptions.push( this._OnwerService
-        .createOwner({
-          ...data.value,
-          ...this.selectedCity,
-          ...{
-            nationality: 'AF',
-            Gender: 'UnSpecified',
-            Country: 'UnSpecified',
-            Status: '1',
-          },
-        })
-        .subscribe(
+      this.subscriptions.push(
+        this._OnwerService
+          .createOwner({
+            ...data.value,
+            ...this.selectedCity,
+            ...{
+              nationality: 'AF',
+              Gender: 'UnSpecified',
+              Country: 'UnSpecified',
+              Status: '1',
+            },
+          })
+          .subscribe(
+            (res) => {
+              this.loadingButton = false;
+              this.router.navigate(['/owners']);
+            },
+            (err) => {
+              this.loadingButton = false;
+              console.log(err);
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: `${err.error.message[0]}`,
+              });
+            }
+          )
+      );
+    } else {
+      const editData = {
+        ...data.value,
+        ...{
+          nationality: 'AF',
+          owner_ID: this.id,
+          Gender: 'UnSpecified',
+          Country: 'UnSpecified',
+        },
+      };
+      this.subscriptions.push(
+        this._OnwerService.editOwner(this.id, editData).subscribe(
           (res) => {
             this.loadingButton = false;
             this.router.navigate(['/owners']);
@@ -220,32 +251,8 @@ export class OwnerDetailsComponent {
               detail: `${err.error.title}`,
             });
           }
-        ))
-
-    } else {
-      const editData = {
-        ...data.value,
-        ...{
-          nationality: 'AF',
-          owner_ID: this.id,
-          Gender: 'UnSpecified',
-          Country: 'UnSpecified',
-        },
-      };
-      this.subscriptions.push(this._OnwerService.editOwner(this.id, editData).subscribe(
-        (res) => {
-          this.loadingButton = false;
-          this.router.navigate(['/owners']);
-        },
-        (err) => {
-          this.loadingButton = false;
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: `${err.error.title}`,
-          });
-        }
-      ));
+        )
+      );
     }
   }
 
@@ -279,7 +286,7 @@ export class OwnerDetailsComponent {
   }
 
   ngOnDestroy() {
-    for(let i=0;i<this.subscriptions.length;i++)
-    this.subscriptions[i].unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++)
+      this.subscriptions[i].unsubscribe();
   }
 }

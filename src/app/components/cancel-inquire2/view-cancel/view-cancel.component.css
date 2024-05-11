@@ -1,7 +1,24 @@
 .blue {
     color: #1f4068;
 }
-
+.btn.btn-color{
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: #1F4068 !important;
+  border: 1px solid  #1F4068;
+  padding-left: 5rem;
+    padding-right: 5rem;
+}
+.btn.btn-outline{
+  color: #1F4068;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: #fff !important;
+  border: 1px solid  #1F4068;
+  padding-left: 5rem;
+    padding-right: 5rem;
+}
 .file {
     z-index: 3 !important;
     opacity: 0;

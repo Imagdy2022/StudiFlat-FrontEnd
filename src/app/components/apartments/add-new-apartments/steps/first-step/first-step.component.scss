@@ -41,7 +41,10 @@
         width: 22%;
     }
 }
-
+.backcancel {
+  border: 1px solid#798CA4 !important;
+  color: #0C1A2A !important;
+}
 @media (max-width: 768px) {
     .map-container {
         width: 320px !important;
