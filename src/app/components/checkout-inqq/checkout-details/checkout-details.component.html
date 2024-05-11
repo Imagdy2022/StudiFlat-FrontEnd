@@ -92,10 +92,12 @@
 
 
         </div>
-        <div *ngIf="CheckoutSheet.issue_Checkouts>0">
+        <div *ngIf="CheckoutSheet.issue_Checkouts">
             <div class="diveinvoceder" *ngFor="let item of CheckoutSheet.issue_Checkouts" >
                 <div style="color: #605D62;font-weight: 600;">
-                    {{item.issue_Code}}
+                    <a routerLink="/Issue_Reports/Report-view/{{item.issue_ID}}">
+                      {{item.issue_Code}}
+                    </a>
                 </div>
                 <br>
                 <div style="color: #605D62;font-weight: 500;">

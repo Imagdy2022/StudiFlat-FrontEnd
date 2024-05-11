@@ -90,23 +90,24 @@
                 </div>
             </div>
             <div class="row" *ngIf="createcontractpage">
-                <div class="mb-3 col-12 col-md-6">
+                <div class="mb-3 col-12 col-md-4">
                     <label class="form-label gray fw-bold">Contract start date</label>
-                    <p-calendar formControlName="contractDate_Start" dateFormat="dd/mm/yy"></p-calendar>
+                    <p-calendar formControlName="contractDate_Start" dateFormat="dd/mm/yy" class="form-control"></p-calendar>
 
                 </div>
-                <div class="mb-3 col-12 col-md-6">
+                <div class="mb-3 col-12 col-md-4">
                     <label class="form-label gray fw-bold">Contract end date</label>
-                    <p-calendar formControlName="contractDate_End" dateFormat="dd/mm/yy"></p-calendar>
+                    <p-calendar formControlName="contractDate_End" dateFormat="dd/mm/yy" class="form-control"></p-calendar>
                 </div>
+                <div class="mb-3  col-12 col-md-4" *ngIf="createcontractpage">
+                  <label class="form-label gray fw-bold">price per month</label>
+                  <input type="number" formControlName="rent_Fees" [class.is-invalid]="create_Apart_contract.get('rent_Fees')!.invalid && create_Apart_contract.get('rent_Fees')!.touched " class="form-control rounded-2 py-2 fs-6" />
+                  <span class="text-danger d-block m-2 " *ngIf="create_Apart_contract.get('rent_Fees')!.invalid && create_Apart_contract.get('rent_Fees')!.touched ">
+              this field is required
+            </span>
+              </div>
             </div>
-            <div class="mb-3 pe-2 col-12 col-md-6" *ngIf="createcontractpage">
-                <label class="form-label gray fw-bold">price per month</label>
-                <input type="number" formControlName="rent_Fees" [class.is-invalid]="create_Apart_contract.get('rent_Fees')!.invalid && create_Apart_contract.get('rent_Fees')!.touched " class="form-control rounded-2 py-2 fs-6" />
-                <span class="text-danger d-block m-2 " *ngIf="create_Apart_contract.get('rent_Fees')!.invalid && create_Apart_contract.get('rent_Fees')!.touched ">
-            this field is required
-          </span>
-            </div>
+
 
             <!--Sections-->
 
@@ -226,7 +227,7 @@
                             </div> -->
                             <div class="card1">
                                 <div class="row">
-                                    <div class="col-md-2 card33" *ngFor="let image of apt_imgs;  index as i ">
+                                    <div class="col-md-2 mt-4 card33" *ngFor="let image of apt_imgs;  index as i ">
                                         <a (click)="removeItem(image.pic_URL)" style="      border: none;   margin-bottom: 10px; position: absolute;">
                                             <img class="imageRemove" src="../../../../../../assets/images/delete.svg" width="32px" height="32px;">
                                         </a>
@@ -276,7 +277,7 @@
                             </div>
 
                             <div>
-                                <div class="mb-3 mt-2">
+                                <div class="mb-3 mt-4">
                                     <label for="exampleFormControlTextarea1" class="form-label gray">Description of trash Location</label>
                                     <textarea formControlName="trash_Location" class=" border p-3 rounded-2 w-100" rows="5" style="resize: inherit;"></textarea>
                                 </div>
@@ -409,7 +410,7 @@
             </div>
             <div class="mb-3 col-12 col-md-12">
                 <label class="form-label gray fw-bold">picture of a building's door</label>
-                <div class="position-relative h-124px mb-3">
+                <div class="position-relative h-124px mb-3 mb-5">
                     <!-- start single img upload and preview -->
                     <ng-container *ngIf="!selectedBuildingImg">
                         <input type="file" accept="image/*" (change)="onUploadContract($event,'building_Img')" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
@@ -424,16 +425,17 @@
                     <!-- end single img upload and preview -->
                 </div>
 
-                <div *ngIf="addApartment == 'Edit Apartment Name'" class="h-124px mb-3">
+                <div *ngIf="addApartment == 'Edit Apartment Name'" class="h-124px mb-5">
 
                     <img [src]="building_Img" *ngIf="issshowbuilding=='building'" class="position-absolute imgPreviewUploader">
                 </div>
 
             </div>
             <div>
+              <span class="mt-5"></span>
                 <ng-container>
                     <div class="row" *ngFor="let data  of apt_inputfields ">
-                        <div class="mb-3 col-12 col-md-6">
+                        <div class="mb-3 col-12 col-md-6 mt-5">
                             <label class="form-label gray fw-bold">{{data.field_Name}} </label>
                             <input type="text" value="{{data.field_Content}}" class="form-control rounded-2 py-2 fs-6" />
                         </div>

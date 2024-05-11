@@ -33,7 +33,7 @@
                 </a>
 
             </div>
-            <p-steps [model]="items" (Responsive)="true" [(activeIndex)]="activeIndex" [readonly]="true"></p-steps>
+            <p-steps [model]="items" (Responsive)="true" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
         </div>
         <!--start form of general info-->
         <app-first-step *ngIf="activeIndex == 0" (jumbToNextSteb)="changeItem(1)" (jumbToNextSteb2n_ofbedroom)="jumbToNextSteb2($event)" (jumbToNextSteb2_apt_Toilets)="jumbToNextSteb2_apt_Toilets($event)" (getId)="id($event)" (jumbToNextSteb2_n_ofLiving)="jumbToNextSteb2_n_ofLiving($event)"

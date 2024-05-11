@@ -29,7 +29,7 @@ export class ApartmentDetailsComponent implements OnInit {
   aprt_details: any;
   /** apt_UUID */
   apt_UUID: any;
-  subscriptions:Subscription[] = [];
+  subscriptions: Subscription[] = [];
 
   constructor(
     public _ApartmentService: ApartmentService,
@@ -92,49 +92,58 @@ export class ApartmentDetailsComponent implements OnInit {
   tenant: any;
 
   getApartmentDetails() {
-    this.subscriptions.push( this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
-      this.subscriptions.push(this._OnwerService
-        .getOwner(res.general_Info['apt_Owner'])
-        .subscribe((res) => {
-          this.OwnerDtail = res;
-        }));
-      this.aprt_details = res.general_Info;
-      this.trasponrts = res.trasponrts;
-      this.rent_Rules = res.rent_Rules;
-      this.features = res.features;
-      this.facilities = res.facilities;
-      this.contract_Main = res.contract_Main;
-      this.bath_Room = res.bath_Room;
-      this.backup_Info = res.backup_Info;
-      this.center = {
-        lat: this.aprt_details['apt_Lat'],
-        lng: this.aprt_details['apt_Long'],
-      };
-      this.kitchen_Tools = res.kitchen_Tools;
-      this.tenant = res.tenant;
-      this.transform(res.general_Info['apt_VideoLink']);
-      for (let i = 0; i < res.rooms.length; i++) {
-        if (res.rooms[i].room_Type == 'Bedroom') {
-          this.roomsBedRoom.push(res.rooms[i]);
-        } else {
-          this.roomsLiving.push(res.rooms[i]);
+    this.subscriptions.push(
+      this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
+        this.subscriptions.push(
+          this._OnwerService
+            .getOwner(res.general_Info['apt_Owner'])
+            .subscribe((res) => {
+              this.OwnerDtail = res;
+            })
+        );
+        this.aprt_details = res.general_Info;
+        this.trasponrts = res.trasponrts;
+        this.rent_Rules = res.rent_Rules;
+        this.features = res.features;
+        this.facilities = res.facilities;
+        this.contract_Main = res.contract_Main;
+        this.bath_Room = res.bath_Room;
+        this.backup_Info = res.backup_Info;
+        this.center = {
+          lat: this.aprt_details['apt_Lat'],
+          lng: this.aprt_details['apt_Long'],
+        };
+        this.kitchen_Tools = res.kitchen_Tools;
+        this.tenant = res.tenant;
+        this.transform(res.general_Info['apt_VideoLink']);
+        for (let i = 0; i < res.rooms.length; i++) {
+          if (res.rooms[i].room_Type == 'Bedroom') {
+            this.roomsBedRoom.push(res.rooms[i]);
+          } else {
+            this.roomsLiving.push(res.rooms[i]);
+          }
         }
-      }
-    }));
+      })
+    );
   }
 
   GetApartmentReview() {
-    this.subscriptions.push(  this._ApartmentService.GetApartmentReview(this.apt_UUID).subscribe((res) => {
-      this.AllReviews = res;
-     }));
-
+    this.subscriptions.push(
+      this._ApartmentService
+        .GetApartmentReview(this.apt_UUID)
+        .subscribe((res) => {
+          this.AllReviews = res;
+        })
+    );
   }
   DownloadTenantContract() {
     let ID = Guid.create();
     let FileName = ID + '.pdf';
-    this.subscriptions.push( this._ApartmentService
-      .CreateContractPDF(this.tenant[0].req_ID)
-      .subscribe((data) => saveAs(data, FileName)));
+    this.subscriptions.push(
+      this._ApartmentService
+        .CreateContractPDF(this.tenant[0].req_ID)
+        .subscribe((data) => saveAs(data, FileName))
+    );
   }
   transform(videoURL: string) {
     let srclink = videoURL;
@@ -195,77 +204,110 @@ export class ApartmentDetailsComponent implements OnInit {
   }
 
   DownloadFile(path: any) {
-    this.subscriptions.push(this._ApartmentService.DownloadFile(path).subscribe(
-      (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `${res.message}`,
-        });
-      },
-      (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${error.message[0]}`,
-        });
-      }
-    ));
+    this.subscriptions.push(
+      this._ApartmentService.DownloadFile(path).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.message[0]}`,
+          });
+        }
+      )
+    );
   }
 
   MarkRented() {
-    this.subscriptions.push(this._ApartmentService.MarkRented(this.apt_UUID).subscribe(
-      (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `${res.message}`,
-        });
-      },
-      (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${error.message}`,
-        });
-      }
-    ));
+    this.subscriptions.push(
+      this._ApartmentService.MarkRented(this.apt_UUID).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.message}`,
+          });
+        }
+      )
+    );
   }
+  reviewID: any;
+  reviewapproved: any;
+
   MarkAvaliablePublish() {
-    this.subscriptions.push(this._ApartmentService.MarkAvaliablePublish(this.apt_UUID).subscribe(
-      (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `${res.message}`,
-        });
-      },
-      (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${error.message}`,
-        });
-      }
-    ));
+    this.subscriptions.push(
+      this._ApartmentService.MarkAvaliablePublish(this.apt_UUID).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.message}`,
+          });
+        }
+      )
+    );
   }
+
+  ApproveReview(id: string, approval: boolean) {
+    this.subscriptions.push(
+      this._ApartmentService.ApproveReview(id, approval).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.message}`,
+          });
+        }
+      )
+    );
+  }
+
   MarkDraft() {
-    this.subscriptions.push(this._ApartmentService.MarkDraft(this.apt_UUID).subscribe(
-      (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `${res.message}`,
-        });
-      },
-      (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${error.message}`,
-        });
-      }
-    ));
+    this.subscriptions.push(
+      this._ApartmentService.MarkDraft(this.apt_UUID).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.message}`,
+          });
+        }
+      )
+    );
   }
   downloadImage(url: any) {
     fetch(url, {
@@ -300,7 +342,7 @@ export class ApartmentDetailsComponent implements OnInit {
     a.click();
   }
   ngOnDestroy() {
-    for(let i=0;i<this.subscriptions.length;i++)
-    this.subscriptions[i].unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++)
+      this.subscriptions[i].unsubscribe();
   }
 }

@@ -34,7 +34,7 @@
                             <div class="carbon-close"><img (click)="closenotifaction()" style="cursor: pointer;" class="vector" src="../../../../assets/images/carbon_close.svg" /></div>
                             <div class="text-wrapper">Notifications</div>
                             <div class="div-2 px-0 mx-0">
-                                <div class="frame" [ngStyle]="{'background-color':item.iS_Readed==false ? '#ffffff':'#ECF1F9'}" *ngFor="let item of NotifiList">
+                                <div class="frame" [ngStyle]="{'background-color':item.iS_Readed==false ? '#ECF1F9':'#ffffff'}" *ngFor="let item of NotifiList">
                                     <img class="studiflats" src="../../../../assets/images/Layer 2.svg" />
                                     <div class="frame-wrapper ms-3" >
                                         <div class="div-wrapper">
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div *ngIf="item.iS_Readed==false" class="text-wrapper-2"><a style="cursor: pointer !important;" (click)="MarkReaded(item.id)">
-                                      Unread
+                                      Unreaded
 
                                     </a></div>
                                     <div *ngIf="item.iS_Readed==true" class="text-wrapper-2"><a style="cursor: pointer !important;" (click)="MarkUnReaded(item.id)">
