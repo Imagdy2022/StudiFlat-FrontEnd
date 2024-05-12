@@ -194,6 +194,10 @@
                   Assign Owner
 
                  </button>
+                 <button routerLink="/messages/user-message/{{detialIssue.user_ID}}" class="backcancel bg-white rounded-2 py-2 px-3 fw-bold mx-2">
+                    Chat User
+
+                   </button>
                  <button   class="backcancel bg-white rounded-2 py-2 px-3 fw-bold mx-2" (click)="OpenModal1(detialIssue.issue_ID) " *ngIf="detialIssue.worker_name!=''">
                   Mark in Progress
 
