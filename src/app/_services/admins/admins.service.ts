@@ -230,6 +230,10 @@ export class AdminsService {
       .set('Key', searchkey);
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
+  StartNewIssueChat(userId: any,chatId:any): Observable<any> {
+    const url = environment.apiUrl + `/Issues/StartIssueChat?UserID=${userId}&Issue_ID=${chatId}`;
+    return this.http.post<any>(url, { headers: this.headers });
+  }
   GetIssueDetails(id: any): Observable<any> {
     const url = environment.apiUrl + '/Issues/IssueInDetails?Issue_ID=' + id;
     return this.http.get<any>(url, { headers: this.headers });
