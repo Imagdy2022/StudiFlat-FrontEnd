@@ -4,11 +4,11 @@ import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 @Component({
-  selector: 'app-assgin-issue',
-  templateUrl: './assgin-issue.component.html',
-  styleUrls: ['./assgin-issue.component.css'],
+  selector: 'app-assgin-issue-owner',
+  templateUrl: './assgin-issue-owner.component.html',
+  styleUrls: ['./assgin-issue-owner.component.css'],
 })
-export class AssginIssueComponent implements OnInit {
+export class AssginIssueOwnerComponent implements OnInit {
   showEdit: Array<boolean> = [];
   showSide: string = '';
   products!: Array<object>;
@@ -126,7 +126,7 @@ export class AssginIssueComponent implements OnInit {
     this.numberworkers = 0;
     this.subscriptions.push(
       this._adminservices
-        .GetAllWorkers(this.pageNumber, this.pagesize, '')
+        .getAllOnwers(this.pageNumber, this.pagesize, '', this.Date)
         .subscribe(
           (res: any) => {
             this.workers = res['data'];
@@ -202,7 +202,7 @@ export class AssginIssueComponent implements OnInit {
   AssignWorker() {
     this.subscriptions.push(
       this._adminservices
-        .AssignWorker(this.paramid, this.idworkerassigin, true)
+        .AssignWorker(this.paramid, this.idworkerassigin, false)
         .subscribe(
           (res) => {
             this.messageService.add({

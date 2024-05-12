@@ -1,0 +1,11 @@
+@media (min-width: 768px) {
+    .xcvdd {
+        margin-right: 1000px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .xcvdd {
+        /* margin-right: 1000px !important; */
+    }
+}

@@ -90,7 +90,8 @@ export class ApartmentDetailsComponent implements OnInit {
   kitchen_Tools: any = [];
   AllReviews: Reviews[] = [];
   tenant: any;
-
+  rating_total: any;
+  rating_count: any;
   getApartmentDetails() {
     this.subscriptions.push(
       this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
@@ -115,6 +116,8 @@ export class ApartmentDetailsComponent implements OnInit {
         };
         this.kitchen_Tools = res.kitchen_Tools;
         this.tenant = res.tenant;
+        this.rating_total = res.rating_Total;
+        this.rating_count = res.rating_Count;
         this.transform(res.general_Info['apt_VideoLink']);
         for (let i = 0; i < res.rooms.length; i++) {
           if (res.rooms[i].room_Type == 'Bedroom') {

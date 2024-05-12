@@ -1,0 +1,141 @@
+<!-- <app-edite-user-details></app-edite-user-details> -->
+<!-- start header  -->
+<header>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Assign Issue to Owner'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+
+    <!-- start sidebar  -->
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Assign Owner'"></app-sidebar>
+    <!-- end sidebar  -->
+
+    <!-- start content page  -->
+    <main class="p-4 col-lg-10 ">
+        <div class="d-md-flex justify-content-between dashboard mt-2">
+            <!-- <p class="fw-bold ms-1" style="color: #6c6a6a;">workers : {{numberworkers}}</p> -->
+            <div class="d-flex justify-content-lg-between ">
+                <div class="d-flex justify-content-between ">
+                    <!-- <button class="month rounded-start px-3 py-1 outline-none">This Month</button>
+                <button class="week rounded-end px-3 py-1 outline-none">Last Week</button> -->
+                </div>
+                <!-- start dropdown button  -->
+                <!-- <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
+                <!-- end dropdown button  -->
+                <!-- start addUserButton  -->
+                <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
+                <!-- end addUserButton  -->
+                <!-- <a class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/add-workers" style="background-color:#1F4068; cursor: pointer;">
+                  <img src="assets/images/plus.svg" class="me-2 ">Add New
+              </a> -->
+            </div>
+        </div>
+
+        <p-toast></p-toast>
+        <div class="card mt-2">
+            <p class="fw-bold ms-1" style="color: #000000;margin-top: 22px;margin-left: 25px !important;font-size: 18px;">Assign Owner</p>
+
+            <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="workers">
+                <ng-template pTemplate="header" class="text-center">
+                    <tr *ngIf="headerData">
+                        <ng-container>
+
+
+                            <th class="td-name">
+                                Name
+
+                            </th>
+                            <th class="td-name">
+                                Email
+
+                            </th>
+                            <th class="td-name">
+                                Phone number
+
+                            </th>
+                            <th class="td-name">
+                                WhatsApp
+
+                            </th>
+
+
+
+                        </ng-container>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-workers>
+
+                    <tr style="cursor: pointer;" (click)="hidecard()">
+
+
+                        <td>
+                            <label>
+                            <input type="radio" name="color" (change)="handleChange($event,workers.owner_ID)"    >
+
+                          </label> {{workers?.fullName}}
+                        </td>
+                        <td>
+                            {{workers?.owner_Mail}}
+                        </td>
+                        <td>
+                            {{workers?.owner_Phone}}
+                        </td>
+
+                        <td>
+                            {{workers?.owner_WA_Number}}
+                        </td>
+
+
+
+                      <!--
+                          <td class="cursor position-relative">
+                            <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,workers.owner_ID)">
+          <img src="assets/images/edit.svg">
+      </button>
+                            <div *ngIf="showEdit[workers.owner_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/edit-workers/{{workers.worker_ID}}">update</button>
+
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/workers/worker-profile/{{workers.worker_ID}}"> View Profile  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="PostJob(workers.worker_ID)">Delete </button>
+
+                            </div>
+
+                        </td>
+                      -->
+
+                    </tr>
+
+                </ng-template>
+
+
+                <ng-template pTemplate="emptymessage">
+                    <div class="container text-center mt-4">
+                        <p class="mb-0">No data found.</p>
+                    </div>
+                </ng-template>
+
+            </p-table>
+            <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+
+
+            <div class="modal-footer">
+
+                <div class="d-flex justify-content-between">
+                    <div class="py-2 px-3 fw-bold"></div>
+                    <div class="d-flex justify-content-between" style="margin: 20px;">
+                        <a (click)="gotopage() " style="border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
+                Cancel
+  </a>
+                        <button (click)="AssignWorker() " class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+                confirm
+  </button>
+                    </div>
+                </div>
+                <!-- Confirm -->
+
+            </div>
+        </div>
+    </main>
+    <!-- end content page  -->
+</div>

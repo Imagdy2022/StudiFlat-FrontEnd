@@ -92,15 +92,18 @@
                     <input class="form-control w-100" [(ngModel)]="detialIssue.apt_Address" type="text">
                 </div>
                 <div class="row ">
-                    <div class="col-12 col-md-6 mb-4">
+                    <div class="col-12 col-md-4 mb-4">
                         <label class="fw-bold" style="color: #605D62;">Floor no.</label>
                         <input class="form-control w-100" [(ngModel)]="detialIssue.apt_FloorNo" type="number">
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-4">
                         <label class="fw-bold" style="color: #605D62">The location of the apartment on the floor</label>
                         <input class="form-control w-100" [(ngModel)]="detialIssue.side" type="text">
                     </div>
-
+                    <div class="col-12 col-md-4">
+                      <label class="fw-bold" style="color: #605D62">Assigned To</label>
+                      <input class="form-control w-100" [(ngModel)]="detialIssue.worker_name" type="text">
+                  </div>
                 </div>
                 <!-- <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
@@ -183,8 +186,12 @@
                         <button (click)="gotopage2()" class="backcancel bg-white rounded-2 py-2 px-3 fw-bold mx-2">
                   Cancel
                 </button>
-                        <button routerLink="/assgin-issue/{{detialIssue.issue_ID}}" class="backcancel bg-white rounded-2 py-2 px-3 fw-bold mx-2">
+                        <button routerLink="/Issue_Reports/assgin-issue/{{detialIssue.issue_ID}}" class="backcancel bg-white rounded-2 py-2 px-3 fw-bold mx-2">
                   assign worker
+
+                 </button>
+                 <button routerLink="/Issue_Reports/assgin-issue-owner/{{detialIssue.issue_ID}}" class="backcancel bg-white rounded-2 py-2 px-3 fw-bold mx-2">
+                  Assign Owner
 
                  </button>
                  <button   class="backcancel bg-white rounded-2 py-2 px-3 fw-bold mx-2" (click)="OpenModal1(detialIssue.issue_ID) " *ngIf="detialIssue.worker_name!=''">

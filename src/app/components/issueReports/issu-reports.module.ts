@@ -23,6 +23,7 @@ import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
 import { ChipModule } from 'primeng/chip';
 import { IssuReportsRoutingModule } from './issu-reports-routing.module';
+import { AssginIssueOwnerComponent } from './assgin-issue-owner/assgin-issue-owner.component';
 const routes: Routes = [];
 
 @NgModule({
@@ -31,6 +32,7 @@ const routes: Routes = [];
     MainFileComponent,
     AssginIssueComponent,
     ReportPrintComponent,
+    AssginIssueOwnerComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,7 @@ const routes: Routes = [];
     ButtonModule,
     ToastModule,
     ChipModule,
-    IssuReportsRoutingModule
+    IssuReportsRoutingModule,
   ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
