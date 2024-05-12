@@ -289,7 +289,26 @@ export class ReportsDetailsComponent {
       ));
 
   }
+routeToMessage(obj:any)
+{
+  if(obj.chat_ID)
+    this.router.navigate([`/messages/message-tiket/${obj.chat_ID}`])
+  else
+  {
+    
+    this.subscriptions.push( this._adminservices.StartNewIssueChat(obj.user_ID,obj.issue_ID).subscribe({
+      next:(data:any)=>{
+        let chatID = data.uuid;
+        this.router.navigate([`/messages/user-message/${chatID}`])
 
+      },
+      error:(err:any)=>{
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
+      }
+    }))
+
+
+  }}
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
     this.subscriptions[i].unsubscribe();
