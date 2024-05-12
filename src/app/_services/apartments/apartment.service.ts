@@ -156,7 +156,7 @@ export class ApartmentService {
         environment.apiUrl +
         '/Apartment/ApproveReview?' +
         `Review_ID=${id}` +
-        `Approved=${approve}`
+        `&Approved=${approve}`
       }`,
       id,
       { headers: this.headers }

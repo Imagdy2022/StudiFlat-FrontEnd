@@ -32,7 +32,11 @@ import { UserModule } from './components/user/user.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { PathLocationStrategy } from '@angular/common';
+import {
+  HashLocationStrategy,
+  LocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 import { BlockUIModule } from 'ng-block-ui';
 import { BlockUIHttpModule } from 'ng-block-ui/http';
 import { PushmsgsModule } from './components/pushmsgs/pushmsgs.module';
@@ -53,11 +57,13 @@ initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [AppComponent, StatisticsComponent],
-  imports: [BrowserAnimationsModule,
+  imports: [
+    BrowserAnimationsModule,
     AppRoutingModule,
     IssuReportsModule,
     ConfigurationsModule,
-    BrowserModule,CheckoutInqqModule,
+    BrowserModule,
+    CheckoutInqqModule,
     AuthorizationModule,
     CancelInquire2Module,
     AdminsModule,
@@ -82,7 +88,8 @@ initializeApp(environment.firebase);
     GoogleMapsModule,
     BadgeModule,
     FontAwesomeModule,
-    AppMsgsModule,ChartModule,
+    AppMsgsModule,
+    ChartModule,
     PushmsgsModule,
     BlockUIModule.forRoot({
       delayStart: 1,
@@ -95,7 +102,11 @@ initializeApp(environment.firebase);
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [HttpClientModule, JwtInterceptor, PathLocationStrategy],
+  providers: [
+    HttpClientModule,
+    JwtInterceptor,
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

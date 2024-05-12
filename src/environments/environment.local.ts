@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
 
-  apiUrl: 'https://localhost:57345/api',
+  apiUrl: 'https://localhost:57444/api',
 
   outputPath: 'dist/Production',
   firebase: {

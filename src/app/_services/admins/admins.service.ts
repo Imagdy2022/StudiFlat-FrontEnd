@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+import { IOnwer } from 'src/app/models/onwer';
 
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -18,12 +19,10 @@ export class AdminsService {
     Authorization: `Bearer ${this.token}`,
   });
 
-  getAllAdmins(Search:string, Date:any): Observable<any[]> {
+  getAllAdmins(Search: string, Date: any): Observable<any[]> {
     const url = `${environment.apiUrl}/Admin/GetAllAdmins`;
-    const params = new HttpParams()
-    .set('Search', Search)
-    .set('Date', Date)
-    return this.http.get<any[]>(url, { headers: this.headers, params:params });
+    const params = new HttpParams().set('Search', Search).set('Date', Date);
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
   UpdateADminStatus(status: any, id: any): Observable<any> {
     let body = {
@@ -55,7 +54,7 @@ export class AdminsService {
     return this.http.put(url, body, { headers: this.headers });
   }
 
-  UpdatePassword(data: any,): Observable<any> {
+  UpdatePassword(data: any): Observable<any> {
     let url = environment.apiUrl + '/Admin/UpdatePassword';
     return this.http.put(url, data, { headers: this.headers });
   }
@@ -104,7 +103,8 @@ export class AdminsService {
     return this.http.get(url, { headers: this.headers });
   }
   public GetINVDetails(id: any): Observable<any> {
-    let url = environment.apiUrl + '/Payments/GetInvoiceDetails?Invoice_ID=' + id;
+    let url =
+      environment.apiUrl + '/Payments/GetInvoiceDetails?Invoice_ID=' + id;
 
     return this.http.get(url, { headers: this.headers });
   }
@@ -163,6 +163,31 @@ export class AdminsService {
       search;
     return this.http.get<any[]>(url, { headers: this.headers });
   }
+
+  getAllOnwers(
+    PageNumber: number,
+    PageSize: number,
+    Search: string,
+    Date: any
+  ): Observable<IOnwer[]> {
+    const url = `${environment.apiUrl}/Owner`;
+    let params = new HttpParams()
+      .set('PageNumber', PageNumber)
+      .set('PageSize', PageSize)
+      .set('Date', Date)
+      .set('Key', Search);
+
+    // Check if the Search condition is met
+    // if (Search.length > 0) {
+    //   params = params.set('Search', Search);
+    // }
+
+    return this.http.get<IOnwer[]>(url, {
+      params: params,
+      headers: this.headers,
+    });
+  }
+
   InsertWorker(data: any): Observable<any> {
     const url = environment.apiUrl + '/Workers/InsertWorker ';
     return this.http.post<any>(url, data, { headers: this.headers });
@@ -214,7 +239,7 @@ export class AdminsService {
     return this.http.get(url, { headers: this.headers, responseType: 'blob' });
   }
 
-  AssignWorker(Issue_ID: any, idworker: any): Observable<any> {
+  AssignWorker(Issue_ID: any, idworker: any, is_worker: any): Observable<any> {
     let body = {
       Issue_ID: Issue_ID,
       idworker: idworker,
@@ -224,7 +249,9 @@ export class AdminsService {
       '/Issues/AssignWorker?Issue_ID=' +
       Issue_ID +
       '&Worker_ID=' +
-      idworker;
+      idworker +
+      '&Is_Worker=' +
+      is_worker;
     return this.http.put<any>(url, body, { headers: this.headers });
   }
   UpdateIssue(Issue_ID: any, detialIssue: any): Observable<any> {
@@ -256,7 +283,8 @@ export class AdminsService {
     company_Gain: any,
     solve_Desc: any,
     item_Cost: any,
-    item_attach: any
+    item_attach: any,
+    service_cost: any
   ): Observable<any> {
     let body = {
       issue_ID: Issue_ID,
@@ -267,6 +295,7 @@ export class AdminsService {
       company_Gain: company_Gain,
       solve_Desc: solve_Desc,
       invoice_URL: item_attach,
+      service_Fees: service_cost,
     };
 
     const url = environment.apiUrl + '/Issues/MarkAsSolved';
@@ -463,28 +492,23 @@ export class AdminsService {
     return this.http.post<any>(url, AttachFile, { headers: headers1 });
   }
 
-
-
-
-
-  AddExpense( data:any): Observable<any> {
-    const url = environment.apiUrl +"/Checkout/AddExpense"
+  AddExpense(data: any): Observable<any> {
+    const url = environment.apiUrl + '/Checkout/AddExpense';
 
     return this.http.post<any>(url, data, { headers: this.headers });
   }
 
-  UpdateExpense( data:any): Observable<any> {
-  const url = environment.apiUrl +"/Checkout/UpdateExpense"
+  UpdateExpense(data: any): Observable<any> {
+    const url = environment.apiUrl + '/Checkout/UpdateExpense';
 
-  return this.http.put<any>(url, data, { headers: this.headers });
-}
+    return this.http.put<any>(url, data, { headers: this.headers });
+  }
 
-
-DeleteExpense(Exp_ID: any): Observable<any[]> {
-  const url = environment.apiUrl + '/Checkout/DeleteExpense?Exp_ID='+Exp_ID;
-  const params = new HttpParams().set('Exp_ID', Exp_ID);
-  return this.http.delete<any>(url, { headers: this.headers });
-}
+  DeleteExpense(Exp_ID: any): Observable<any[]> {
+    const url = environment.apiUrl + '/Checkout/DeleteExpense?Exp_ID=' + Exp_ID;
+    const params = new HttpParams().set('Exp_ID', Exp_ID);
+    return this.http.delete<any>(url, { headers: this.headers });
+  }
   DeleteAds(Ads_ID: any): Observable<any[]> {
     const url = environment.apiUrl + '/Basics/DeleteAds';
     const params = new HttpParams().set('Ads_ID', Ads_ID);
@@ -542,7 +566,8 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
   MarkPaid(id: any): Observable<any> {
-    const url = environment.apiUrl + '/Payments/SetInvoicePaid_UnPaid?Inv_ID=' + id;
+    const url =
+      environment.apiUrl + '/Payments/SetInvoicePaid_UnPaid?Inv_ID=' + id;
     return this.http.post<any>(url, id, { headers: this.headers });
   }
   AllTickets(
@@ -580,14 +605,19 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
 
     return this.http.post<any>(url, data, { headers: this.headers });
   }
-  GetPayToList(toType:string ,Search:string ,Page_No:number,Page_Size:number): Observable<any[]> {
+  GetPayToList(
+    toType: string,
+    Search: string,
+    Page_No: number,
+    Page_Size: number
+  ): Observable<any[]> {
     const url = environment.apiUrl + `/Payments/GetPayToList`;
     const params = new HttpParams()
-    .set('to', toType)
-    .set('Search', Search)
-    .set('Page_No', Page_No)
-    .set('Page_Size', Page_Size)
-    return this.http.get<any[]>(url, { headers: this.headers , params: params });
+      .set('to', toType)
+      .set('Search', Search)
+      .set('Page_No', Page_No)
+      .set('Page_Size', Page_Size);
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
 
   GetAllEmp(PageNumber: number, PageSize: number): Observable<any[]> {
@@ -661,7 +691,8 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     return this.http.get<any[]>(url, { headers: this.headers });
   }
   StartNewChatWithUser(UserID: string): Observable<any> {
-    const url = environment.apiUrl + `/Chat/StartNewChatWithUser?UserID=${UserID}`;
+    const url =
+      environment.apiUrl + `/Chat/StartNewChatWithUser?UserID=${UserID}`;
     return this.http.post<any>(url, UserID, { headers: this.headers });
   }
   SendMsg(data: any): Observable<any> {
@@ -672,7 +703,7 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     const url = environment.apiUrl + `/Chat/SendMsgtoMultiUsers`;
     return this.http.post<any>(url, data, { headers: this.headers });
   }
-  GetChatHistory(Chat_ID:string): Observable<any[]> {
+  GetChatHistory(Chat_ID: string): Observable<any[]> {
     const url = environment.apiUrl + `/Chat/GetChatMessages?Chat_ID=${Chat_ID}`;
 
     return this.http.get<any[]>(url, { headers: this.headers });
@@ -704,17 +735,13 @@ DeleteExpense(Exp_ID: any): Observable<any[]> {
     return this.http.get<any[]>(url, { headers: this.headers });
   }
 
-MonthlyRevenu(): Observable<any[]> {
+  MonthlyRevenu(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/MonthlyRevenu';
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
 
-
-
-
-
-AptRentedFree(): Observable<any[]> {
+  AptRentedFree(): Observable<any[]> {
     const url = environment.apiUrl + '/Dashboard/AptRentedFree';
 
     return this.http.get<any[]>(url, { headers: this.headers });
@@ -726,98 +753,92 @@ AptRentedFree(): Observable<any[]> {
     return this.http.get<any[]>(url, { headers: this.headers });
   }
 
-RecentActivities(PageNumber:number,PageSize:number): Observable<any[]> {
-    const url = environment.apiUrl + `/Dashboard/RecentActivities?PageNumber=${PageNumber}&PageSize=${PageSize}`;
+  RecentActivities(PageNumber: number, PageSize: number): Observable<any[]> {
+    const url =
+      environment.apiUrl +
+      `/Dashboard/RecentActivities?PageNumber=${PageNumber}&PageSize=${PageSize}`;
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
-  GetCheckoutSheetDetails(Req_ID:any): Observable<any[]> {
-    const url = environment.apiUrl + '/Checkout/GetCheckoutSheetDetails?Req_ID='+Req_ID;
+  GetCheckoutSheetDetails(Req_ID: any): Observable<any[]> {
+    const url =
+      environment.apiUrl + '/Checkout/GetCheckoutSheetDetails?Req_ID=' + Req_ID;
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }
 
   GetTerminations(
-     PageNo: number,
+    PageNo: number,
     PageSize: number,
     SearchKey: any,
-    FilterKey:any
+    FilterKey: any
   ): Observable<any[]> {
     const url = environment.apiUrl + '/Termination/GetTerminations';
     const params = new HttpParams()
       .set('PageNo', PageNo)
       .set('PageSize', PageSize)
       .set('SearchKey', SearchKey)
-      .set('FilterKey', FilterKey)
+      .set('FilterKey', FilterKey);
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
 
-
-
   GetCheckoutList(
     PageNo: number,
-   PageSize: number,
-   SearchKey: any,
-   status:any,
-   FilterKey:any
- ): Observable<any[]> {
-   const url = environment.apiUrl + '/Checkout/GetCheckoutList';
-   const params = new HttpParams()
-     .set('PageNo', PageNo)
-     .set('PageSize', PageSize)
-     .set('SearchKey', SearchKey)
-     .set('Status',status)
-     .set('FilterKey',FilterKey)
+    PageSize: number,
+    SearchKey: any,
+    status: any,
+    FilterKey: any
+  ): Observable<any[]> {
+    const url = environment.apiUrl + '/Checkout/GetCheckoutList';
+    const params = new HttpParams()
+      .set('PageNo', PageNo)
+      .set('PageSize', PageSize)
+      .set('SearchKey', SearchKey)
+      .set('Status', status)
+      .set('FilterKey', FilterKey);
 
-   return this.http.get<any[]>(url, { headers: this.headers, params: params });
- }
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
 
+  InsertCheckOut(Req_ID: any): Observable<any> {
+    const url =
+      environment.apiUrl + '/Checkout/InsertCheckOut?Req_ID=' + Req_ID;
+    let body = {
+      Req_ID: Req_ID,
+    };
+    return this.http.post<any>(url, body, { headers: this.headers });
+  }
 
+  GetIncomeOutcome(): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/GetIncomeOutcome';
 
- InsertCheckOut(Req_ID: any ): Observable<any> {
-  const url = environment.apiUrl + '/Checkout/InsertCheckOut?Req_ID='+Req_ID;
-  let body = {
-    Req_ID: Req_ID,
-  };
-  return this.http.post<any>(url, body, { headers: this.headers });
-}
+    return this.http.get<any[]>(url, { headers: this.headers });
+  }
 
-GetIncomeOutcome(): Observable<any[]> {
-  const url = environment.apiUrl + '/Statistics/GetIncomeOutcome';
+  ApartmentRequests(Is_Highest: boolean): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/ApartmentRequests';
+    const params = new HttpParams().set('Is_Highest', Is_Highest);
 
-  return this.http.get<any[]>(url, { headers: this.headers });
-}
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+  PaymentHistory(Order: string): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/PaymentHistory';
+    const params = new HttpParams().set('Order', Order);
 
-ApartmentRequests(Is_Highest:boolean): Observable<any[]> {
-  const url = environment.apiUrl + '/Statistics/ApartmentRequests';
-  const params = new HttpParams()
-     .set('Is_Highest', Is_Highest)
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
 
-  return this.http.get<any[]>(url, { headers: this.headers, params: params });
-}
-PaymentHistory(Order:string): Observable<any[]> {
-  const url = environment.apiUrl + '/Statistics/PaymentHistory';
-  const params = new HttpParams()
-     .set('Order', Order)
+  ApartmentRating(Is_Highest: boolean): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/ApartmentRating';
+    const params = new HttpParams().set('Is_Highest', Is_Highest);
 
-  return this.http.get<any[]>(url, { headers: this.headers, params: params });
-}
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+  UserProblems(Is_Highest: boolean): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/UserProblems';
+    const params = new HttpParams().set('Is_Highest', Is_Highest);
 
-ApartmentRating(Is_Highest:boolean): Observable<any[]> {
-  const url = environment.apiUrl + '/Statistics/ApartmentRating';
-  const params = new HttpParams()
-     .set('Is_Highest', Is_Highest)
-
-  return this.http.get<any[]>(url, { headers: this.headers, params: params });
-}
-UserProblems(Is_Highest:boolean): Observable<any[]> {
-  const url = environment.apiUrl + '/Statistics/UserProblems';
-  const params = new HttpParams()
-     .set('Is_Highest', Is_Highest)
-
-  return this.http.get<any[]>(url, { headers: this.headers, params: params });
-}
-
-
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
 }

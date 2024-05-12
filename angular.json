@@ -87,6 +87,25 @@
                           "outputHashing": "all",
                           "outputPath": "dist/local"
                       },
+                      "stage": {
+                        "budgets": [{
+                                "type": "initial",
+                                "maximumWarning": "1024mb",
+                                "maximumError": "1024mb"
+                            },
+                            {
+                                "type": "anyComponentStyle",
+                                "maximumWarning": "1024kb",
+                                "maximumError": "1024kb"
+                            }
+                        ],
+                        "fileReplacements": [{
+                            "replace": "src/environments/environment.ts",
+                            "with": "src/environments/environment.stage.ts"
+                        }],
+                        "outputHashing": "all",
+                        "outputPath": "dist/local"
+                    },
                         "development": {
                             "buildOptimizer": false,
                             "optimization": false,
@@ -107,6 +126,9 @@
                         "local": {
                           "browserTarget": "StudiFlats:build:local"
                       },
+                      "stage": {
+                        "browserTarget": "StudiFlats:build:stage"
+                    },
                         "development": {
                             "browserTarget": "StudiFlats:build:development"
                         }

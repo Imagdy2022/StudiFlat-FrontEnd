@@ -158,7 +158,7 @@
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <div class="Price">
-                                            ${{item.apt_Price}} <span class="time">/ month</span>
+                                          €{{item.apt_Price}} <span class="time">/ month</span>
                                         </div>
 
                                     </div>
@@ -240,80 +240,81 @@
 
                     </div>
                 </div>
+                <div class="  mt-4">
+
+                  <p-table class="table-shopping" [scrollable]="true" scrollHeight="400px" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem','height':' 161px'}" [value]="OnwerDetail.invoice_Owners_list">
+                      <ng-template pTemplate="header" class="text-center">
+                          <tr>
+                              <ng-container>
+
+
+                                  <th class="td-name">
+                                      Apartment name
+
+                                  </th>
+                                  <th class="td-name">
+                                      Amount
+
+                                  </th>
+
+                                  <th class="td-name">
+                                      For
+
+                                  </th>
+
+                                  <th class="td-name">
+                                      Date
+
+                                  </th>
+                                  <th class="td-name">
+
+
+                                  </th>
+                              </ng-container>
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-issue style="height: 200px !important;">
+
+                          <tr>
+
+
+                              <td>
+                                  {{issue?.apt_Name}}
+                              </td>
+                              <td>
+                                  {{issue?.amount}}
+                              </td>
+
+
+                              <td>
+                                  {{issue?.for}}
+                              </td>
+                              <td>
+                                  {{issue?.date}}
+                              </td>
+                              <td>
+                                  <a href="{{issue?.download_Path}}"><img src="../../../../assets/images/user/download.svg"> </a>
+
+                              </td>
+                          </tr>
+
+                      </ng-template>
+
+
+                      <ng-template pTemplate="emptymessage">
+                          <div class="container text-center mt-4">
+                              <p class="mb-0">No data found.</p>
+                          </div>
+                      </ng-template>
+
+                  </p-table>
+                  <!-- <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator> -->
+
+
+              </div>
                 <div style="align-self: stretch;  background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.06); border-radius: 8px; overflow: hidden; border: 1px #EBEBEB solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
 
-                    <div class="  mt-4">
 
-                        <p-table class="table-shopping" [scrollable]="true" scrollHeight="400px" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem','height':' 161px'}" [value]="OnwerDetail.invoice_Owners_list">
-                            <ng-template pTemplate="header" class="text-center">
-                                <tr>
-                                    <ng-container>
-
-
-                                        <th class="td-name">
-                                            Apartment name
-
-                                        </th>
-                                        <th class="td-name">
-                                            Amount
-
-                                        </th>
-
-                                        <th class="td-name">
-                                            For
-
-                                        </th>
-
-                                        <th class="td-name">
-                                            Date
-
-                                        </th>
-                                        <th class="td-name">
-
-
-                                        </th>
-                                    </ng-container>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-issue style="height: 200px !important;">
-
-                                <tr>
-
-
-                                    <td>
-                                        {{issue?.apt_Name}}
-                                    </td>
-                                    <td>
-                                        {{issue?.amount}}
-                                    </td>
-
-
-                                    <td>
-                                        {{issue?.for}}
-                                    </td>
-                                    <td>
-                                        {{issue?.date}}
-                                    </td>
-                                    <td>
-                                        <a href="{{issue?.download_Path}}"><img src="../../../../assets/images/user/download.svg"> </a>
-
-                                    </td>
-                                </tr>
-
-                            </ng-template>
-
-
-                            <ng-template pTemplate="emptymessage">
-                                <div class="container text-center mt-4">
-                                    <p class="mb-0">No data found.</p>
-                                </div>
-                            </ng-template>
-
-                        </p-table>
-                        <!-- <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator> -->
-
-
-                    </div>
                 </div>
                 <div class="d-flex justify-content-between" *ngIf="param!='Owner details'">
                     <button (click)=" gotopage2( )" class="outlet-0 bg-transparent rounded-3 px-4 py-2 fw-bold downloadAll">Cancel</button>

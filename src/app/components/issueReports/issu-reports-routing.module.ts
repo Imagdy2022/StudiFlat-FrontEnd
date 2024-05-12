@@ -3,11 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainFileComponent } from './main-file/main-file.component';
 import { AssginIssueComponent } from './assgin-issue/assgin-issue.component';
 import { ReportsDetailsComponent } from './reports-details/reports-details.component';
-
+import { AssginIssueOwnerComponent } from './assgin-issue-owner/assgin-issue-owner.component';
 
 const routes: Routes = [
   {
-    path: '', component: MainFileComponent,
+    path: '',
+    component: MainFileComponent,
   },
   {
     path: 'Report-view/:id',
@@ -17,11 +18,14 @@ const routes: Routes = [
     path: 'assgin-issue/:id',
     component: AssginIssueComponent,
   },
+  {
+    path: 'assgin-issue-owner/:id',
+    component: AssginIssueOwnerComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class IssuReportsRoutingModule { }
-
+export class IssuReportsRoutingModule {}

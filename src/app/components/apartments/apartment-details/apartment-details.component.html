@@ -42,9 +42,9 @@
                     </ng-container>
 
                     <div class="d-flex">
-                        <p class="d-lg-inline-block me-3 fw-bold">Rating</p>
+                        <p class="d-lg-inline-block me-3 fw-bold">Rating ( {{ rating_count }} )</p>
                         <div class="mt-0">
-                            <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
+                            <p-rating [(ngModel)]="rating_total" [readonly]="true" [cancel]="false"></p-rating>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
                         <h4 class="fw-bold my-0">{{ aprt_details?.apt_Name }}</h4>
                         <p class="gray mt-0">{{ aprt_details?.apt_StName }}</p>
                         <h5 class="blue fw-bold my-0">
-                            {{ aprt_details?.apt_Price }} / month
+                            {{ aprt_details?.apt_Price }} € / Month
                         </h5>
                         <div class="d-flex">
                             <div class="d-flex justify-content-between me-3">

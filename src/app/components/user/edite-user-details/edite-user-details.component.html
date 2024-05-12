@@ -257,7 +257,7 @@
                     <div class="accordion-item" *ngIf="Tenant_Attach!=null">
                         <h2 class="accordion-header" id="flush-headingThree">
                             <button class="accordion-button collapsed ps-0  text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                      Attachments
+                              <p class="fw-bold mb-0" id="Rentalhistory">Attachments </p>
                     </button>
                         </h2>
                         <div id="flush-collapseThree" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
@@ -505,7 +505,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <button (click)="gotopage2()" class="outlet-0 bg-transparent rounded-3 px-4 py-2 fw-bold downloadAll">Cancel</button>
+                    <button (click)="gotopage2()" class="backcancel bg-white rounded-2 border-0 py-2 px-3 fw-bold mx-2 blue downloadAll">Cancel</button>
                     <button (click)="UpdateTenantInfo()" class="outlet-0 text-white border-0 px-4 py-2 rounded-3" style="background-color: #1f4068;" type="submit">Save</button>
                 </div>
                 <!-- end user information form-->
@@ -520,7 +520,7 @@
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" style=" background-color: rgb(23 22 22 / 50%);;">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="    margin-top: 150px;">
-            <div class="modal-header pb-0" style="background-color:#ffffff; border-bottom: none !important">
+            <div class="modal-header pb-0" style="background-color:#ffffff; border-bottom: none !important;position:relative !important;">
                 <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
                     <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
               add Attachment
