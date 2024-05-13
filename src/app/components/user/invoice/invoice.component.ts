@@ -24,7 +24,7 @@ export class InvoiceComponent implements OnInit {
   link: Array<boolean> = [true];
   subscriptions:Subscription[] = [];
   invoiceDetail:any;
-
+  invoices:any[]=[]
    titlePage: string = '';
    changeImageUrl:any;
   imageUrl: string = '';
@@ -81,8 +81,9 @@ export class InvoiceComponent implements OnInit {
   GetINVDetails(  ) {
     this.subscriptions.push(  this._adminservices.GetINVDetails(this.param).subscribe((res) => {
       this._details = res ;
-      this.invoiceDetail = res.invoice_Details[0]
-
+      this.invoiceDetail = res
+ this.invoices=this.invoiceDetail.invoice_Details;
+ console.log(this.invoices)
       }, (error) => {
        console.error('Error fetching Invoice Details:', error);
     }));

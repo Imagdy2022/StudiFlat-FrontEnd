@@ -25,38 +25,49 @@
         <div class="frist11 xxcprint" id="MyDIv">
             <div class="frist22"></div>
             <div class="frist33"></div>
+           
+
             <div class="frist44">
                 <div class="frist55">Clients</div>
-                <div class="frist66" *ngFor="let client of _details.clients">{{client}} </div>
+                <div class="frist66">{{invoiceDetail?.cust_Type}} </div>
             </div>
+            <!-- invoice-details --> 
+            <div *ngFor="let invoice of invoices" >
             <div class="invice1">Invoice</div>
-            <div class="invoce2"><span class="invoce3"> </span><span class="invice4">  </span>
-                <span class="invice5">{{invoiceDetail?.invoice_Desc}}</span><span class="invoce6"> </span></div>
+            <div class="invoce2">
+                <span class="invoce3"> </span><span class="invice4">  </span>
+                <span class="invice5">{{invoice?.invoice_Desc}}</span><span class="invoce6"> </span>
+            </div>
             <div class="price11">Price</div>
             <div class="total22">Total</div>
             <div class="section33">
                 <div class="class33">
                     <div class="invoicenu">Invoice No.</div>
-                    <div class="invocede"> {{_details.inv_Code}} </div>
+                    <div class="invocede"> {{invoiceDetail.inv_Code}} </div>
                 </div>
                 <div class="divclassss">
                     <div class="ttott">
                         <div class="issue33">Issued on</div>
-                        <div class="datedes">{{_details.issued_on}} </div>
+                        <div class="datedes">{{invoiceDetail.issued_on}} </div>
                     </div>
                     <div class="ttott">
                         <div class="issue33">Payment Due</div>
-                        <div class="datedes">{{_details.payment_Due}}</div>
+                        <div class="datedes">{{invoiceDetail.payment_Due}}</div>
                     </div>
                 </div>
             </div>
             <div class="stackkc">
                 <div style="flex: 1 1 0; align-self: stretch; padding-right: 17.02px; justify-content: flex-start; align-items: flex-start; gap: 340.58px; display: inline-flex">
                     <div style="width: 375.09px; color: #313033; font-size: 18px; font-family: 'Popines'; font-weight: 400; line-height: 24.01px; word-wrap: break-word"> {{_details.apt_Name}}</div>
-                    <div class="ddfdffd"> {{invoiceDetail?.invoice_Amount}}</div>
+                    <div class="ddfdffd"> {{invoice?.invoice_Amount}}</div>
                 </div>
-            </div>
-            <div class="priceeins"> {{invoiceDetail?.invoice_Total}}</div>
+            </div>   
+                 <div class="priceeins"> {{invoice?.invoice_Amount}}</div>
+
+            </div>        
+            
+
+            <!-- total -->
             <div class="stysda">
                 <div style="justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
                     <div class="ccarddinvice">Total</div>
@@ -68,8 +79,9 @@
                         <div class="ccarddinvice">)</div>
                     </div>
                 </div>
-                <div class="pricinn">{{invoiceDetail?.invoice_Amount}}</div>
+                <div class="pricinn">{{invoiceDetail?.grand_Total}}</div>
             </div>
+            <!-- prepared by -->
             <div class="imgheap">
                 <div class="imgginv">
                     <img style="width: 169.17px; height: 72px" src="./assets/images/logo.svg" />
