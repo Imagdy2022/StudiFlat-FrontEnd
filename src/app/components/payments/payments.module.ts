@@ -19,6 +19,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { CreateNewPaymentComponent } from './create-new-payment/create-new-payment.component';
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { CalendarModule } from 'primeng/calendar';
+import { PaymentExportPdfComponent } from './payment-export-pdf/payment-export-pdf.component';
 
 const routes: Routes = [];
 
@@ -26,6 +27,7 @@ const routes: Routes = [];
   declarations: [
     PaymentsComponent,
     CreateNewPaymentComponent,
+    PaymentExportPdfComponent,
    ],
    exports: [CreateNewPaymentComponent],
   imports: [

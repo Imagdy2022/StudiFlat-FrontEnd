@@ -49,6 +49,7 @@ export class EditWorkerComponent implements OnInit{
  // param title page
  pageTitle:any;
  subscriptions:Subscription[] = [];
+ subTitle :string = "Upload Worker photo and enter details."
  ngOnInit() {
   this.ListJobs( );
 

@@ -440,6 +440,7 @@ export class MainFileComponent {
               ? (this.selectedContractImg = file)
               : null;
 
+              this.issue_attach = this.selectedContractImg.url
             // patch the fieldName in Form
 
             this.messageService.add({

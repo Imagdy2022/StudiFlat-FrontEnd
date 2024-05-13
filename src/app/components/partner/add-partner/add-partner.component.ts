@@ -51,6 +51,7 @@ export class AddPartnerComponent implements OnInit {
  subscriptions:Subscription[] = [];
  // param title page
  pageTitle:any
+ subTitle :string = "Upload Partner photo and enter details."
  ngOnInit() {
     this.bindCreatepartner()
     this.GetAgencyCode( );
