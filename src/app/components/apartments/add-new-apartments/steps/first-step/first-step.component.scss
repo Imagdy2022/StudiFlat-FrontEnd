@@ -252,7 +252,10 @@ option {
     outline: none;
   }
 }
-
+.owner button{
+  width: 24px;
+  height: 24px;
+}
 ::ng-deep  .mb-3{
   margin-bottom: 24px !important;
 }

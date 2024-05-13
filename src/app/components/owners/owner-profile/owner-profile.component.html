@@ -38,8 +38,8 @@
             <div class="col-md-10 content-details "   [ngClass]="{'OwnerDetails': param === 'Owner details'}">
 
                 <div id="Generalinfo">
-                    <p class="fw-bold mb-0">General info</p>
-                    <p style="color: #605D62 !important;">Update Owner photo and personal details.</p>
+                    <p class="fw-bold mb-3">General info</p>
+                    <!-- <p style="color: #605D62 !important;">Update Owner photo and personal details.</p> -->
                 </div>
                 <div class="d-flex mb-5 d-md-block d-flex justify-content-center justify-md-content-start ">
                     <div class=" d-md-flex  align-items-center justify-md-content-start ">
@@ -61,27 +61,27 @@
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">First name</label>
-                        <input readonly [(ngModel)]="OnwerDetail.owner_FirstName" class="form-control w-100 bg-white" type="text">
+                        <input readonly disabled [(ngModel)]="OnwerDetail.owner_FirstName" class="form-control w-100 bg-white" type="text">
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="fw-bold" style="color: #605D62">Last name</label>
-                        <input readonly [(ngModel)]="OnwerDetail.owner_LastName" class="form-control w-100 bg-white" type="text">
+                        <input readonly disabled [(ngModel)]="OnwerDetail.owner_LastName" class="form-control w-100 bg-white" type="text">
                     </div>
 
                 </div>
                 <div class="mb-4">
                     <label class="fw-bold" style="color: #605D62;">Email</label>
                     <img  *ngIf="param!='Owner details'" src="assets/images/user/mail.svg" class="position-relative top-icon-input" style="right: 20px;">
-                    <input readonly [(ngModel)]="OnwerDetail.owner_Mail" class="form-control w-100 bg-white" type="email">
+                    <input readonly disabled [(ngModel)]="OnwerDetail.owner_Mail" class="form-control w-100 bg-white" type="email">
                 </div>
                 <div class="mb-4">
                     <label class="fw-bold" style="color: #605D62;">Address</label>
 
-                    <input readonly [(ngModel)]="OnwerDetail.owner_Address" class="form-control w-100 bg-white" type="text">
+                    <input readonly disabled [(ngModel)]="OnwerDetail.owner_Address" class="form-control w-100 bg-white" type="text">
                 </div>
                 <div>
                     <label class="fw-bold" style="color: #605D62;">About</label>
-                    <textarea readonly [(ngModel)]="OnwerDetail.owner_About" class="form-control border bg-white rounded-3 w-100 p-2" rows="5" style="resize: unset;"></textarea>
+                    <textarea readonly disabled [(ngModel)]="OnwerDetail.owner_About" class="form-control border bg-white rounded-3 w-100 p-2" rows="5" style="resize: unset;"></textarea>
                 </div>
 
                 <!--end General info form-->
@@ -96,7 +96,7 @@
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">Date of birth</label>
                         <ng-container *ngIf="param!='Owner details'">
-                          <input readonly [(ngModel)]="OnwerDetail.owner_DOB" class="form-control w-100 bg-white" type="date">
+                          <input readonly disabled [(ngModel)]="OnwerDetail.owner_DOB" class="form-control w-100 bg-white" type="date">
                         </ng-container>
                         <ng-container *ngIf="param =='Owner details'">
                           <p class="form-control w-100">{{OnwerDetail.owner_DOB}}</p>
@@ -106,18 +106,18 @@
 
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">Country</label>
-                        <input readonly [(ngModel)]="OnwerDetail.nationality" class="form-control w-100 bg-white" type="text">
+                        <input readonly disabled [(ngModel)]="OnwerDetail.nationality" class="form-control w-100 bg-white" type="text">
                     </div>
 
                 </div>
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">Phone number</label>
-                        <input readonly [(ngModel)]="OnwerDetail.owner_Phone" class="form-control w-100 bg-white" type="number">
+                        <input readonly disabled [(ngModel)]="OnwerDetail.owner_Phone" class="form-control w-100 bg-white" type="number">
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="fw-bold" style="color: #605D62">whatsapp number</label>
-                        <input readonly [(ngModel)]="OnwerDetail.owner_WA_Number" class="form-control w-100 bg-white" type="number">
+                        <input readonly disabled [(ngModel)]="OnwerDetail.owner_WA_Number" class="form-control w-100 bg-white" type="number">
                     </div>
 
                 </div>
@@ -215,17 +215,17 @@
                     <div class="row ">
                         <div class="col-12 col-md-6 mb-4">
                             <label class="fw-bold" style="color: #605D62;">Bank Name</label>
-                            <input readonly [(ngModel)]="OnwerDetail.owner_Bank" class="form-control w-100 bg-white" type="text">
+                            <input readonly disabled [(ngModel)]="OnwerDetail.owner_Bank" class="form-control w-100 bg-white" type="text">
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="fw-bold" style="color: #605D62">Account Number</label>
-                            <input readonly [(ngModel)]="OnwerDetail.owner_BankAccount" class="form-control w-100 bg-white" type="text">
+                            <input readonly disabled [(ngModel)]="OnwerDetail.owner_BankAccount" class="form-control w-100 bg-white" type="text">
                         </div>
 
                     </div>
                     <div class="mb-4">
                         <label class="fw-bold" style="color: #605D62;">Swift Number</label>
-                        <input readonly [(ngModel)]="OnwerDetail.owner_BankSwift" class="form-control w-100 bg-white" type="text">
+                        <input readonly disabled [(ngModel)]="OnwerDetail.owner_BankSwift" class="form-control w-100 bg-white" type="text">
                     </div>
                 </div>
 
