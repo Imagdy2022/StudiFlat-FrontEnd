@@ -43,6 +43,25 @@ export class AuthenticationService {
       })
     );
   }
+  Login2FA(Email: string, Code: string) {
+    let url =
+      environment.apiUrl +
+      '/Admin/Login-2FA?UserMail=' +
+      Email +
+      '&Code=' +
+      Code;
+    return this.http.post<any>(url, { Email, Code }).pipe(
+      map((user) => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('tokenKey', user.token);
+        localStorage.setItem('permissions', user);
+
+        this.userSubject.next(user);
+        return user;
+      })
+    );
+  }
   public isLoggedIn(): boolean {
     let token = localStorage.getItem('tokenKey');
     return token != null && token.length > 0;

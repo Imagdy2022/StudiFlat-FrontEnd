@@ -42,6 +42,15 @@
               </select>
 
             </div>
+            <div class="col-md-4">
+              <label class="form-label">Payment Method</label>
+              <select class="form-select" formControlName="Pay_Method">
+                <option value="Cash">Cash</option>
+                <option value="Online">Online</option>
+
+              </select>
+
+            </div>
             <div class="col-md-4" *ngIf="toType == 'Apartment'">
               <label class="form-label">Type</label>
               <select class="form-select" formControlName="Pay_To_Type" >
