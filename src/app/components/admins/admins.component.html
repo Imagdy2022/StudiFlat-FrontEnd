@@ -119,6 +119,8 @@
                   </button>
                             <div *ngIf="showEdit[admin.user_ID]"  class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/admins/edit-admin/{{admin?.user_ID}}">update  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" (click)="OpenModal3(admin?.email)">2FA Setup</button>
+
                                 <button class="d-block border-0 outlin-0 bg-transparent  button text-start py-2 w-100" *ngIf="admin?.status==true" (click)="sendToModel1(admin)">deactivate</button>
                                 <button class="d-block border-0 outlin-0 bg-transparent  button text-start py-2 w-100" *ngIf="admin?.status==false" (click)="sendToModel1(admin)">Activate</button>
 
@@ -250,4 +252,66 @@ Activate And Deactivate Admin
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" style=" background-color: rgb(23 22 22 / 50%);;">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content" style="    margin-top: 150px;">
+          <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
+              <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                  <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
+Setup 2FA Authenticator          </span>
+              </p>
+              <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal1()">
+<span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+</button>
+
+
+
+          </div>
+
+          <div class="modal-body">
+
+
+              <div class="row">
+
+                  <div class="mb-3 col-12 col-md-12">
+                      <label class="form-label gray fw-bold">Scan This QR by any Authenticator App and then enter generated Code by App in below Input Field</label>
+                      <!-- start dropdown button  -->
+                      <div class="selectForm">
+                          <!-- <app-dropdown [list]="listDropDownArea" [holder]="selectArea" (selected)="selectedfromDropDownArea($event,'insert')"></app-dropdown> -->
+                          <img src="{{ faarray?.qR_Link }}" class="img-thumbnail img-fluid border-0">
+                          <input class="form-control w-100" [(ngModel)]="AuthCode" type="text">
+
+                      </div>
+                      <!-- end dropdown button  -->
+                  </div>
+              </div>
+
+          </div>
+
+
+
+
+          <div class="modal-footer">
+
+              <div class="d-flex justify-content-between">
+                  <div class="py-2 px-3 fw-bold"></div>
+                  <div class="d-flex justify-content-between">
+                      <a (click)="onCloseModal3()" style="   margin-right: 251px !important; border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
+                    Cancel
+      </a>
+                      <button (click)="onSubmitModal3(paramid3)" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+                    confirm
+      </button>
+                  </div>
+              </div>
+              <!-- Confirm -->
+
+          </div>
+
+
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>

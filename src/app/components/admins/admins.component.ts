@@ -17,13 +17,13 @@ export class AdminsComponent implements OnInit {
   search: boolean = false;
   /** searchText  */
   searchText: string = '';
-  subscriptions:Subscription[] = [];
+  subscriptions: Subscription[] = [];
   /**dropdownOption */
   searchTextChange: EventEmitter<string> = new EventEmitter<string>();
 
   dropdownOption: Array<any> = [];
   listDropDown: Array<object> = [
-    {name: 'All'},
+    { name: 'All' },
     { name: 'Today' },
     { name: 'Last week' },
     { name: 'This month' },
@@ -36,6 +36,7 @@ export class AdminsComponent implements OnInit {
   display1 = 'none';
   statusAdmin: any;
   adminDataToModel: any;
+  display3: string;
   constructor(
     public _adminservices: AdminsService,
     private messageService: MessageService,
@@ -74,6 +75,9 @@ export class AdminsComponent implements OnInit {
   onCloseModal1() {
     this.display1 = 'none';
   }
+  onCloseModal3() {
+    this.display3 = 'none';
+  }
   idAdmin: any;
   sendToModel1(data: any) {
     this.statusAdmin = data.status;
@@ -83,17 +87,37 @@ export class AdminsComponent implements OnInit {
   }
 
   onSubmitModal1() {
-    this.subscriptions.push(this._adminservices
-      .UpdateADminStatus(this.statusAdmin, this.idAdmin)
-      .subscribe(
+    this.subscriptions.push(
+      this._adminservices
+        .UpdateADminStatus(this.statusAdmin, this.idAdmin)
+        .subscribe(
+          (res) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: `${res.message}`,
+            });
+            this.getAllAdmins();
+            this.display1 = 'none';
+          },
+          (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${error.error.message[0]}`,
+            });
+          }
+        )
+    );
+  }
+  getAllAdmins() {
+    this.admins = [];
+    this.numberadmins = 0;
+    this.subscriptions.push(
+      this._adminservices.getAllAdmins(this.searchText, this.Date).subscribe(
         (res) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: `${res.message}`,
-          });
-          this.getAllAdmins();
-          this.display1 = 'none';
+          this.admins = res;
+          this.numberadmins = res.length;
         },
         (error) => {
           this.messageService.add({
@@ -102,26 +126,8 @@ export class AdminsComponent implements OnInit {
             detail: `${error.error.message[0]}`,
           });
         }
-      ))
-
-  }
-  getAllAdmins() {
-    this.admins = [];
-    this.numberadmins = 0;
-    this.subscriptions.push( this._adminservices.getAllAdmins(this.searchText, this. Date).subscribe(
-      (res) => {
-        this.admins = res;
-        this.numberadmins = res.length;
-      },
-      (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${error.error.message[0]}`,
-        });
-      }
-    ))
-
+      )
+    );
   }
   addItem(value: string): void {
     this.showSide = value;
@@ -130,16 +136,15 @@ export class AdminsComponent implements OnInit {
     // Handle the selected action here
   }
   selectedfromDropDown(value: any) {
-    this.Date = value.name
+    this.Date = value.name;
     this.getAllAdmins();
-
   }
   openDropdown(event: Event) {
     event.stopPropagation(); // Prevents the dropdown from closing when clicking the button
   }
 
   searchAction() {
-   this.getAllAdmins();
+    this.getAllAdmins();
   }
 
   detailperson(event: any, id: any) {
@@ -163,27 +168,78 @@ export class AdminsComponent implements OnInit {
     this.display2 = 'block';
   }
   onSubmitModal2() {
-    this.subscriptions.push(   this._adminservices.DeleteUser(this.idDeleted).subscribe(
-      (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `${res.message}`,
-        });
-      },
-      (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${error.error.message}`,
-        });
-      }
-    ))
-
+    this.subscriptions.push(
+      this._adminservices.DeleteUser(this.idDeleted).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.error.message}`,
+          });
+        }
+      )
+    );
   }
-
+  paramid3: any;
+  faarray: any;
+  OpenModal3(id: any) {
+    this.paramid3 = id;
+    this.subscriptions.push(
+      this._adminservices.TFASetup(id).subscribe(
+        (res) => {
+          this.faarray = res;
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.error.message[0]}`,
+          });
+        }
+      )
+    );
+    this.display3 = 'block';
+  }
   ngOnDestroy() {
-    for(let i=0;i<this.subscriptions.length;i++)
-    this.subscriptions[i].unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++)
+      this.subscriptions[i].unsubscribe();
+  }
+  AuthCode: any;
+  onSubmitModal3(email: any) {
+    this.subscriptions.push(
+      this._adminservices
+        .TFAEnable(
+          this.faarray.qR_Link,
+          email,
+          this.AuthCode,
+          this.faarray.authenticatorKey,
+          this.faarray.formattedKey
+        )
+        .subscribe(
+          (res) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: '2FA Login has Enabled',
+            });
+            this.getAllAdmins();
+            this.display3 = 'none';
+          },
+          (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${error.error.message[0]}`,
+            });
+          }
+        )
+    );
   }
 }
