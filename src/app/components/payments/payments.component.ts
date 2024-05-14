@@ -101,7 +101,7 @@ export class PaymentsComponent implements OnInit {
         name: 'Pending In Payments',
       },
       {
-        id: 3,
+        id: 4,
         name: 'Pending Out Payments',
       },
     ];
