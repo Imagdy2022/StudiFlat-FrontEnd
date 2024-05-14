@@ -119,8 +119,8 @@
         </div>
 
         <div style="display: flex;align-items: end; justify-content: end;    margin-bottom: 22px; margin-top: 20px;">
-            <button  (click)="AddnewExpense()"  class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
-                Add  new expense
+            <button  [disabled]="CheckoutSheet.is_Ready_Checkout" (click)="AddnewExpense()"  class="btn btn-color">
+                Add  New Expense
         </button>
         </div>
 
@@ -153,7 +153,10 @@
                     Cost of Expense
 
                 </th>
+                <th class="td-name">
+                  Attachment
 
+              </th>
                 <th class="td-name">
 
                   actions
@@ -177,7 +180,11 @@
             <td>
                 {{termina?.expense_Amount}} €
             </td>
-
+            <td>
+              <a *ngIf="termina?.expense_File!=''" [href]="termina?.expense_File" target="_blank">
+                  <img src="assets/images/apartmentImages/move.svg" height="32px" width="32px">
+              </a>
+          </td>
 
 
 
@@ -187,8 +194,8 @@
 </button>
                 <div *ngIf="showEdit[termina.expense_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
 
-                    <button (click)="OpenupdateExpene(termina)" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"  >update expense </button>
-                    <button (click)="DeleteExpene(termina )"class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"  >Delete expense </button>
+                    <button [disabled]="CheckoutSheet.is_Ready_Checkout" (click)="OpenupdateExpene(termina)" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"  >update expense </button>
+                    <button [disabled]="CheckoutSheet.is_Ready_Checkout" (click)="DeleteExpene(termina )"class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"  >Delete expense </button>
 
                 </div>
 
@@ -222,8 +229,8 @@
         <a (click)="gotoListCheckOut()" style=" margin-right: 271px !important;cursor: pointer;   border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
             Cancel
     </a>
-        <button  (click)="InsertCheckOut()"  class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
-            send checkout
+        <button  [disabled]="CheckoutSheet.is_Ready_Checkout" (click)="InsertCheckOut()"  class="btn btn-color">
+            Send Checkout
     </button>
      </div>
   </div>
@@ -238,10 +245,10 @@
             <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
                 <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
                     <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
-                        Add  new expense
+                        Add New Expense
             </span>
                 </p>
-                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal1()">
+                <button  type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal1()">
 <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
 </button>
 

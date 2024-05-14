@@ -18,9 +18,9 @@ export class EditAdminComponent implements OnInit {
   param: any;
   home: any;
   gfg: any;
-  passwordValue:any;
-  confirmPasswordValue:any;
-  subscriptions:Subscription[] = [];
+  passwordValue: any;
+  confirmPasswordValue: any;
+  subscriptions: Subscription[] = [];
   constructor(
     private viewportScroller: ViewportScroller,
     private uploadfile: UploadFileService,
@@ -88,29 +88,32 @@ export class EditAdminComponent implements OnInit {
   roles: any = [];
   getAllRolles() {
     this.roles = [];
-    this.subscriptions.push(  this._rolesService.getAllRolles().subscribe(
-      (res) => {
-        this.roles = res;
-      },
-      (error) => {
-        console.error('Error fetching owners:', error);
-      }
-    ))
-
+    this.subscriptions.push(
+      this._rolesService.getAllRolles().subscribe(
+        (res) => {
+          this.roles = res;
+        },
+        (error) => {
+          console.error('Error fetching owners:', error);
+        }
+      )
+    );
   }
   adminsData: any;
   GetProfile() {
     this.adminsData;
-   this.subscriptions.push( this._adminservices.GetProfile(this.param).subscribe(
-    (res) => {
-      this.adminsData = res[0];
-      this.createAdmin.patchValue(res[0]);
-      this.imageUrl = this.createAdmin.get('user_Img')?.value;
-    },
-    (error) => {
-      console.error('Error fetching owners:', error);
-    }
-  ))
+    this.subscriptions.push(
+      this._adminservices.GetProfile(this.param).subscribe(
+        (res) => {
+          this.adminsData = res[0];
+          this.createAdmin.patchValue(res[0]);
+          this.imageUrl = this.createAdmin.get('user_Img')?.value;
+        },
+        (error) => {
+          console.error('Error fetching owners:', error);
+        }
+      )
+    );
   }
   bindCreateAdmin(): void {
     this.createAdmin = new FormGroup({
@@ -121,6 +124,7 @@ export class EditAdminComponent implements OnInit {
       user_Img: new FormControl('', [Validators.required]),
       role: new FormControl('', [Validators.required]),
       wA_Number: new FormControl('', [Validators.required]),
+      salary: new FormControl(0, [Validators.required]),
     });
   }
   public onClick(elementId: string): void {
@@ -143,11 +147,13 @@ export class EditAdminComponent implements OnInit {
       const formData = new FormData();
       formData.append('fileData', selectedFile, selectedFile.name);
 
-    this.subscriptions.push(  this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
-      this.imageUrl = img[0].file_Path;
-      // this.changeImageUrl.emit(img[0].file_Path);
-      this.loadingButton = false;
-    }))
+      this.subscriptions.push(
+        this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
+          this.imageUrl = img[0].file_Path;
+          // this.changeImageUrl.emit(img[0].file_Path);
+          this.loadingButton = false;
+        })
+      );
     } else if (event == 'delete') {
       this.imageUrl = '';
       // this.changeImageUrl.emit(this.defaultImageUrl());
@@ -162,31 +168,34 @@ export class EditAdminComponent implements OnInit {
     this.showEror = 'false';
     data.value.wA_Number = String(data.value.wA_Number);
     data.value.phone = String(data.value.phone);
+    data.value.salary = String(data.value.salary);
+
     data.value.user_Img = this.imageUrl;
     this.loadingButton = true;
-    this.subscriptions.push(  this._adminservices
-      .UpdateUserAccount({ ...data.value }, this.param)
-      .subscribe(
-        (res) => {
-          this.loadingButton = false;
-          this.messageService.add({
-            severity: 'success',
-            summary: 'success',
-            detail: `${res.message}`,
-          });
-          this.router.navigate(['/admins']);
-        },
-        (err) => {
-          this.loadingButton = false;
-          console.error('Error fetching CreateOwner:', err);
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: `${err.error.message[0]}`,
-          });
-        }
-      ))
-
+    this.subscriptions.push(
+      this._adminservices
+        .UpdateUserAccount({ ...data.value }, this.param)
+        .subscribe(
+          (res) => {
+            this.loadingButton = false;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'success',
+              detail: `${res.message}`,
+            });
+            this.router.navigate(['/admins']);
+          },
+          (err) => {
+            this.loadingButton = false;
+            console.error('Error fetching CreateOwner:', err);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${err.error.message[0]}`,
+            });
+          }
+        )
+    );
 
     /** conver number to string while backend fix this */
   }
@@ -209,15 +218,15 @@ export class EditAdminComponent implements OnInit {
     }
   }
 
-  changePassword(){
-    let changePassword={
-      user_ID : this.param,
+  changePassword() {
+    let changePassword = {
+      user_ID: this.param,
       newPassword: this.passwordValue,
-      confirmPassword: this.confirmPasswordValue
-    }
+      confirmPassword: this.confirmPasswordValue,
+    };
 
-    this.subscriptions.push(  this._adminservices.UpdatePassword(changePassword)
-      .subscribe(
+    this.subscriptions.push(
+      this._adminservices.UpdatePassword(changePassword).subscribe(
         (res) => {
           this.messageService.add({
             severity: 'success',
@@ -232,13 +241,12 @@ export class EditAdminComponent implements OnInit {
             detail: `${err.error.message}`,
           });
         }
-      ))
-
-
+      )
+    );
   }
 
   ngOnDestroy() {
-    for(let i=0;i<this.subscriptions.length;i++)
-    this.subscriptions[i].unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++)
+      this.subscriptions[i].unsubscribe();
   }
 }

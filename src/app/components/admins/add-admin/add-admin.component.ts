@@ -17,7 +17,7 @@ export class AddAdminComponent implements OnInit {
   createAdmin!: FormGroup;
   home: MenuItem | undefined;
   gfg: MenuItem[] | undefined;
-  subscriptions:Subscription[] = [];
+  subscriptions: Subscription[] = [];
   constructor(
     private viewportScroller: ViewportScroller,
     private uploadfile: UploadFileService,
@@ -88,15 +88,16 @@ export class AddAdminComponent implements OnInit {
   roles: any = [];
   getAllRolles() {
     this.roles = [];
-    this.subscriptions.push( this._rolesService.getAllRolles().subscribe(
-      (res) => {
-        this.roles = res;
-      },
-      (error) => {
-        console.error('Error fetching owners:', error);
-      }
-    ))
-
+    this.subscriptions.push(
+      this._rolesService.getAllRolles().subscribe(
+        (res) => {
+          this.roles = res;
+        },
+        (error) => {
+          console.error('Error fetching owners:', error);
+        }
+      )
+    );
   }
   bindCreateAdmin(): void {
     this.createAdmin = new FormGroup({
@@ -109,6 +110,7 @@ export class AddAdminComponent implements OnInit {
       role: new FormControl('', [Validators.required]),
       wA_Number: new FormControl('', [Validators.required]),
       about: new FormControl('', [Validators.required]),
+      salary: new FormControl(0, [Validators.required]),
     });
   }
   public onClick(elementId: string): void {
@@ -130,12 +132,13 @@ export class AddAdminComponent implements OnInit {
       const selectedFile = event.target.files[0];
       const formData = new FormData();
       formData.append('fileData', selectedFile);
-      this.subscriptions.push(    this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
-        this.imageUrl = img[0].file_Path;
-        // this.changeImageUrl.emit(img[0].file_Path);
-        this.loadingButton = false;
-      }))
-
+      this.subscriptions.push(
+        this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
+          this.imageUrl = img[0].file_Path;
+          // this.changeImageUrl.emit(img[0].file_Path);
+          this.loadingButton = false;
+        })
+      );
     } else if (event == 'delete') {
       this.imageUrl = '';
       // this.changeImageUrl.emit(this.defaultImageUrl());
@@ -151,33 +154,36 @@ export class AddAdminComponent implements OnInit {
       data.value.wA_Number = String(data.value.wA_Number);
       data.value.phone = String(data.value.phone);
       data.value.user_Img = this.imageUrl;
+      data.value.salary = String(data.value.salary);
+
       this.loadingButton = true;
-      this.subscriptions.push(  this._adminservices
-        .createAdmin({
-          ...data.value,
-        })
-        .subscribe(
-          (res) => {
-            this.loadingButton = false;
-            this.messageService.add({
-              severity: 'success',
-              summary: 'success',
-              detail: `${res.message}`,
-            });
+      this.subscriptions.push(
+        this._adminservices
+          .createAdmin({
+            ...data.value,
+          })
+          .subscribe(
+            (res) => {
+              this.loadingButton = false;
+              this.messageService.add({
+                severity: 'success',
+                summary: 'success',
+                detail: `${res.message}`,
+              });
 
-            this.router.navigate(['/admins']);
-          },
-          (err) => {
-            this.loadingButton = false;
-           
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: `${err.error.message[0]}`,
-            });
-          }
-        ))
+              this.router.navigate(['/admins']);
+            },
+            (err) => {
+              this.loadingButton = false;
 
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: `${err.error.message[0]}`,
+              });
+            }
+          )
+      );
     } else {
       this.showEror = 'true';
     }
@@ -202,7 +208,7 @@ export class AddAdminComponent implements OnInit {
     }
   }
   ngOnDestroy() {
-    for(let i=0;i<this.subscriptions.length;i++)
-    this.subscriptions[i].unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++)
+      this.subscriptions[i].unsubscribe();
   }
 }

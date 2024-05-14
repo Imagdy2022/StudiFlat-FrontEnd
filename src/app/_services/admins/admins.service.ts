@@ -810,6 +810,15 @@ export class AdminsService {
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
+  GetBankDetails(Req_ID: any): Observable<any[]> {
+    const url = environment.apiUrl + '/Checkout/GetBankDetails';
+    const params = new HttpParams().set('Req_ID', Req_ID);
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+  GetRefundDetails(id: any): Observable<any> {
+    const url = environment.apiUrl + '/Checkout/GetRefundDetails?Req_ID=' + id;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
 
   InsertCheckOut(Req_ID: any): Observable<any> {
     const url =
@@ -871,6 +880,22 @@ export class AdminsService {
       isTfaEnabled: true,
       authenticatorKey: authkey,
       formattedKey: fkey,
+    };
+
+    return this.http.post<any>(url, body, { headers: this.headers });
+  }
+  PostRefunding(
+    Req_ID: any,
+    Inv_ID: any,
+    Transaction_ID: any,
+    Refund_Attachment: any
+  ): Observable<any[]> {
+    const url = environment.apiUrl + '/Checkout/PostRefunding';
+    let body = {
+      req_ID: Req_ID,
+      inv_ID: Inv_ID,
+      transaction_ID: Transaction_ID,
+      refund_Attachment: Refund_Attachment,
     };
 
     return this.http.post<any>(url, body, { headers: this.headers });

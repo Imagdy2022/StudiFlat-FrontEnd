@@ -14,7 +14,8 @@
     <main class="p-4 col-lg-10">
 
         <div class="profile1 w-100">
-            <div style="color: #605D62; font-size: 20px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">worker profile</div>
+            <div style="color: #605D62; font-size: 20px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">
+                worker profile</div>
             <!-- style="width: 1082px; height: 833px; justify-content: center; align-items: flex-start; gap: 32px; display: inline-flex" -->
 
             <div class="row w-100 d-flex mx-0 gx-0">
@@ -22,34 +23,57 @@
                     <div class="frist">
                         <img class="frist2" [src]="dataworker?.worker_Photo" />
                         <div class="frist3">
-                            <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-                                <div style="color: #484649; font-size: 20px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">{{dataworker?.worker_Name}}</div>
-                                <div style="color: #787579; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">{{dataworker?.worker_Job}}</div>
+                            <div
+                                style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
+                                <div
+                                    style="color: #484649; font-size: 20px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">
+                                    {{ dataworker?.worker_Name }}</div>
+                                <div
+                                    style="color: #787579; font-size: 14px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">
+                                    {{ dataworker?.worker_Job }}</div>
                             </div>
-                            <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                                <div style="color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">about worker</div>
-                                <div style="width: 322px;height: 200px; color: #484649; font-size: 16px; font-family: Poppins; font-weight: 400; text-transform: capitalize; line-height: 23px;word-wrap: break-word">{{dataworker?.worker_About}} </div>
+                            <div
+                                style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                                <div
+                                    style="color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">
+                                    about worker</div>
+                                <div
+                                    style="width: 322px;height: 200px; color: #484649; font-size: 16px; font-family: Poppins; font-weight: 400; text-transform: capitalize; line-height: 23px;word-wrap: break-word">
+                                    {{ dataworker?.worker_About }} </div>
                             </div>
-                            <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                                <div style="color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">contact information</div>
-                                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                            <div
+                                style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                                <div
+                                    style="color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">
+                                    contact information</div>
+                                <div
+                                    style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
                                     <div style="justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
                                         <div style="width: 24px; height: 24px; position: relative">
-                                            <div style="width: 20px; height: 16px; left: 2px; top: 4px; position: absolute; "> <img src="../../../../assets/images/ic_outline-email.svg"></div>
+                                            <div style="width: 20px; height: 16px; left: 2px; top: 4px; position: absolute; "> <img
+                                                    src="../../../../assets/images/ic_outline-email.svg"></div>
                                         </div>
-                                        <div style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">{{dataworker?.worker_Email}}</div>
+                                        <div
+                                            style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">
+                                            {{ dataworker?.worker_Email }}</div>
                                     </div>
                                     <div style="justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
                                         <div style="width: 24px; height: 24px; position: relative">
-                                            <div style="width: 17px; height: 17px; left: 3px; top: 4px; position: absolute;"><img src="../../../../assets/images/tabler_phone.svg"></div>
+                                            <div style="width: 17px; height: 17px; left: 3px; top: 4px; position: absolute;"><img
+                                                    src="../../../../assets/images/tabler_phone.svg"></div>
                                         </div>
-                                        <div style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">{{dataworker?.worker_Phone}}</div>
+                                        <div
+                                            style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">
+                                            {{ dataworker?.worker_Phone }}</div>
                                     </div>
                                     <div style="justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
                                         <div style="width: 24px; height: 24px; position: relative">
-                                            <div style="width: 19.90px; height: 20px; left: 2.05px; top: 2px; position: absolute; "> <img src="../../../../assets/images/ic_outline-whatsapp.svg"></div>
+                                            <div style="width: 19.90px; height: 20px; left: 2.05px; top: 2px; position: absolute; "> <img
+                                                    src="../../../../assets/images/ic_outline-whatsapp.svg"></div>
                                         </div>
-                                        <div style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">+{{dataworker?.worker_Whastapp}}</div>
+                                        <div
+                                            style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 16px; word-wrap: break-word">
+                                            +{{ dataworker?.worker_Whastapp }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +82,8 @@
                 </div>
                 <div class="col-lg-8 px-0">
                     <div class="ptof11 w-100">
-                        <div class="ptof12 w-100" style="align-self: stretch; justify-content: flex-start; align-items: flex-end; gap: 24px; display: inline-flex">
+                        <div class="ptof12 w-100"
+                            style="align-self: stretch; justify-content: flex-start; align-items: flex-end; gap: 24px; display: inline-flex">
                             <div class="frist4">
                                 <div class="addsewe">
                                     <div class="apppddd">
@@ -70,7 +95,7 @@
                                     <div class="flexcverer">Total Earning</div>
                                 </div>
                                 <div class="sioi">
-                                    <div class="mossssaaa">{{dataworker?.total_Earning}}</div>
+                                    <div class="mossssaaa">{{ dataworker?.total_Earning }}</div>
                                 </div>
                             </div>
                             <div class="classpaddindd">
@@ -85,79 +110,131 @@
                                     </div>
                                 </div>
                                 <div class="sioi">
-                                    <div class="mossssaaa">{{dataworker?.month_Earning}}</div>
+                                    <div class="mossssaaa">{{ dataworker?.month_Earning }}</div>
                                 </div>
                             </div>
-                            <div style="flex: 1 1 0; height: 174px; padding-left: 24px; padding-right: 24px; padding-top: 16px; padding-bottom: 16px; background: #F9F9F9; border-radius: 12px; border: 1px #EBEBEB solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex">
-                                <div style="width: 158px; flex: 1 1 0; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
+                            <div
+                                style="flex: 1 1 0; height: 174px; padding-left: 24px; padding-right: 24px; padding-top: 16px; padding-bottom: 16px; background: #F9F9F9; border-radius: 12px; border: 1px #EBEBEB solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex">
+                                <div
+                                    style="width: 158px; flex: 1 1 0; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
                                     <div style="width: 48px; height: 48px; position: relative">
-                                        <div style="width: 48px; height: 48px; left: 0px; top: 0px; position: absolute;   border-radius: 9999px"></div>
+                                        <div
+                                            style="width: 48px; height: 48px; left: 0px; top: 0px; position: absolute;   border-radius: 9999px">
+                                        </div>
                                         <div style="width: 24px; height: 24px; left: 12.33px; top: 12px; position: absolute">
-                                            <div style="width: 44px; height: 16px; left: -7px; top: -7px; position: absolute; "><img src="../../../../assets/images/user/Group 68.svg"></div>
+                                            <div style="width: 44px; height: 16px; left: -7px; top: -7px; position: absolute; "><img
+                                                    src="../../../../assets/images/user/Group 68.svg"></div>
                                         </div>
                                     </div>
-                                    <div style="flex: 1 1 0; color: #060D15; font-size: 16px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">Assigned Problemes
+                                    <div
+                                        style="flex: 1 1 0; color: #060D15; font-size: 16px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">
+                                        Assigned Problemes
                                     </div>
                                 </div>
-                                <div style="height: 40px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                                    <div style="align-self: stretch; color: #1F4068; font-size: 32px; font-family: Poppins; font-weight: 600; line-height: 40px; word-wrap: break-word">{{problemcount}}</div>
+                                <div
+                                    style="height: 40px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                                    <div
+                                        style="align-self: stretch; color: #1F4068; font-size: 32px; font-family: Poppins; font-weight: 600; line-height: 40px; word-wrap: break-word">
+                                        {{ problemcount }}</div>
                                 </div>
                             </div>
                         </div>
-                        <div style="align-self: stretch; height: 635px; padding: 24px; background: #F9F9F9; border-radius: 8px; border: 1px #EBEBEB solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-                            <div style="align-self: stretch; height: 587px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: flex" >
-                                <div style="align-self: stretch; height: 80px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                                    <div style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">Skills</div>
-                                    <div style="align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex">
+                        <div
+                            style="align-self: stretch; height: 635px; padding: 24px; background: #F9F9F9; border-radius: 8px; border: 1px #EBEBEB solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
+                            <div
+                                style="align-self: stretch; height: 587px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: flex">
+                                <div
+                                    style="align-self: stretch; height: 80px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                                    <div
+                                        style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">
+                                        Skills</div>
+                                    <div
+                                        style="align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex">
 
-                                        <div *ngFor="let skill of dataworker?.worker_Skills" style="padding-top: 8px;padding-left: 14px; padding-bottom: 12px; padding-right: 30px; background: white; border-radius: 4px; overflow: hidden; border: 1px #CECECE solid; display: flex;width: 140px;width: 50%;">
-                                            <div style="color: #605D62; font-size: 16px; font-family: Poppins; font-weight: 500; line-height: 20px; word-wrap: break-word"> {{skill?.skill_Name}}</div>
+                                        <div *ngFor="let skill of dataworker?.worker_Skills"
+                                            style="padding-top: 8px;padding-left: 14px; padding-bottom: 12px; padding-right: 30px; background: white; border-radius: 4px; overflow: hidden; border: 1px #CECECE solid; display: flex;width: 140px;width: 50%;">
+                                            <div
+                                                style="color: #605D62; font-size: 16px; font-family: Poppins; font-weight: 500; line-height: 20px; word-wrap: break-word">
+                                                {{ skill?.skill_Name }}</div>
                                         </div>
 
 
                                     </div>
                                 </div>
-                                <div style="align-self: stretch; height: 196px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                                    <div style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 600; text-transform: capitalize; line-height: 24px; word-wrap: break-word">bank account Details</div>
-                                    <div style="align-self: stretch; height: 156px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 24px; display: flex">
-                                        <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 24px; display: inline-flex">
-                                            <div style="flex: 1 1 0; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: inline-flex">
-                                                <div style="align-self: stretch; height: 66px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
-                                                    <div style="color: #605D62; font-size: 14px; font-family: Poppins; font-weight: 600; line-height: 20px; word-wrap: break-word">Bank Name</div>
-                                                    <div style="align-self: stretch; height: 40px; padding-left: 14px; padding-right: 14px; padding-top: 10px; padding-bottom: 10px; background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); border-radius: 8px; overflow: hidden; border: 1px #CECECE solid; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                                                        <div style="flex: 1 1 0; height: 20px; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-                                                            <div style="flex: 1 1 0; color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word"> {{dataworker?.worker_Bank}}</div>
+                                <div
+                                    style="align-self: stretch; height: 196px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                                    <div
+                                        style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 600; text-transform: capitalize; line-height: 24px; word-wrap: break-word">
+                                        bank account Details</div>
+                                    <div
+                                        style="align-self: stretch; height: 156px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 24px; display: flex">
+                                        <div
+                                            style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 24px; display: inline-flex">
+                                            <div
+                                                style="flex: 1 1 0; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: inline-flex">
+                                                <div
+                                                    style="align-self: stretch; height: 66px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
+                                                    <div
+                                                        style="color: #605D62; font-size: 14px; font-family: Poppins; font-weight: 600; line-height: 20px; word-wrap: break-word">
+                                                        Bank Name</div>
+                                                    <div
+                                                        style="align-self: stretch; height: 40px; padding-left: 14px; padding-right: 14px; padding-top: 10px; padding-bottom: 10px; background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); border-radius: 8px; overflow: hidden; border: 1px #CECECE solid; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+                                                        <div
+                                                            style="flex: 1 1 0; height: 20px; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
+                                                            <div
+                                                                style="flex: 1 1 0; color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">
+                                                                {{ dataworker?.worker_Bank }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div style="flex: 1 1 0; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: inline-flex">
-                                                <div style="align-self: stretch; height: 66px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
-                                                    <div style="color: #605D62; font-size: 14px; font-family: Poppins; font-weight: 600; line-height: 20px; word-wrap: break-word">Account Number</div>
-                                                    <div style="align-self: stretch; height: 40px; padding-left: 14px; padding-right: 14px; padding-top: 10px; padding-bottom: 10px; background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); border-radius: 8px; overflow: hidden; border: 1px #CECECE solid; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                                                        <div style="flex: 1 1 0; height: 20px; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-                                                            <div style="flex: 1 1 0; color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">{{dataworker?.worker_Account}}</div>
+                                            <div
+                                                style="flex: 1 1 0; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: inline-flex">
+                                                <div
+                                                    style="align-self: stretch; height: 66px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
+                                                    <div
+                                                        style="color: #605D62; font-size: 14px; font-family: Poppins; font-weight: 600; line-height: 20px; word-wrap: break-word">
+                                                        Account Number</div>
+                                                    <div
+                                                        style="align-self: stretch; height: 40px; padding-left: 14px; padding-right: 14px; padding-top: 10px; padding-bottom: 10px; background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); border-radius: 8px; overflow: hidden; border: 1px #CECECE solid; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+                                                        <div
+                                                            style="flex: 1 1 0; height: 20px; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
+                                                            <div
+                                                                style="flex: 1 1 0; color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">
+                                                                {{ dataworker?.worker_Account }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style="align-self: stretch; height: 66px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
-                                            <div style="align-self: stretch; height: 66px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
-                                                <div style="color: #605D62; font-size: 14px; font-family: Poppins; font-weight: 600; line-height: 20px; word-wrap: break-word">Swift Number</div>
-                                                <div style="align-self: stretch; height: 40px; padding-left: 14px; padding-right: 14px; padding-top: 10px; padding-bottom: 10px; background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); border-radius: 8px; overflow: hidden; border: 1px #CECECE solid; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                                                    <div style="flex: 1 1 0; height: 20px; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-                                                        <div style="flex: 1 1 0; color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">{{dataworker?.worker_Swift}}</div>
+                                        <div
+                                            style="align-self: stretch; height: 66px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
+                                            <div
+                                                style="align-self: stretch; height: 66px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
+                                                <div
+                                                    style="color: #605D62; font-size: 14px; font-family: Poppins; font-weight: 600; line-height: 20px; word-wrap: break-word">
+                                                    Swift Number</div>
+                                                <div
+                                                    style="align-self: stretch; height: 40px; padding-left: 14px; padding-right: 14px; padding-top: 10px; padding-bottom: 10px; background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); border-radius: 8px; overflow: hidden; border: 1px #CECECE solid; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+                                                    <div
+                                                        style="flex: 1 1 0; height: 20px; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
+                                                        <div
+                                                            style="flex: 1 1 0; color: #313033; font-size: 16px; font-family: Poppins; font-weight: 400; line-height: 20px; word-wrap: break-word">
+                                                            {{ dataworker?.worker_Swift }}</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div style="align-self: stretch; height: 247px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                                    <div style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 600; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Passport or national ID</div>
-                                    <div style="align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 24px; display: inline-flex">
-                                        <img style="height: 220px; border-radius: 4px;" [src]="dataworker?.worker_Passport" class="w-50"/>
+                                <div
+                                    style="align-self: stretch; height: 247px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                                    <div
+                                        style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 600; text-transform: capitalize; line-height: 24px; word-wrap: break-word">
+                                        Passport or national ID</div>
+                                    <div
+                                        style="align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 24px; display: inline-flex">
+                                        <img style="height: 220px; border-radius: 4px;" [src]="dataworker?.worker_Passport" class="w-50" />
                                         <!-- <img style="flex: 1 1 0; height: 207px; border-radius: 4px" src="https://via.placeholder.com/314x207" /> -->
                                     </div>
                                 </div>
@@ -168,40 +245,50 @@
 
             </div>
 
-            <div style="align-self: stretch;  background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.06); border-radius: 8px; overflow: hidden; border: 1px #EBEBEB solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
+            <div
+                style="align-self: stretch;  background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.06); border-radius: 8px; overflow: hidden; border: 1px #EBEBEB solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
 
                 <div style="color: #000000;font-size: 20px;font-weight: 600;" class="p-3">Assigned problems</div>
 
                 <div class="card mt-2 mb-0 pb-0">
 
-                    <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem','height':' 161px'}" [value]="dataworker?.issues">
+                    <p-table class="table-shopping" [selectionPageOnly]="true"
+                        [tableStyle]="{'min-width': '50rem' ,'min-': '50rem','height':' 161px'}" [value]="dataworker?.issues">
                         <ng-template pTemplate="header" class="text-center">
                             <tr>
-                                    <th class="td-name">
-                                        Problem ID
+                                <th class="td-name">
+                                    Problem ID
 
-                                    </th>
-                                    <th class="td-name">
-                                        Apartment Name
+                                </th>
+                                <th class="td-name">
+                                    Apartment Name
 
-                                    </th>
+                                </th>
+                                <th class="td-name">
+                                    Item Cost
 
-                                    <th class="td-name">
-                                        Assigned Date
+                                </th>
+                                <th class="td-name">
+                                    Worker Cost
 
-                                    </th>
-                                    <!-- <th class="td-name">
+                                </th>
+
+                                <th class="td-name">
+                                    Assigned Date
+
+                                </th>
+                                <!-- <th class="td-name">
                                   maintenance cost
 
                                 </th> -->
-                                    <th class="td-name">
-                                        Status
+                                <th class="td-name">
+                                    Status
 
-                                    </th>
-                                    <th class="td-name">
+                                </th>
+                                <th class="td-name">
 
-                                        Operations
-                                    </th>
+                                    Operations
+                                </th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-issue style="height: 200px !important;">
@@ -209,48 +296,59 @@
                             <tr style="cursor: pointer;" (click)="hidecard()">
 
 
-                                <td routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">
-                                    {{issue?.issue_Code}}
+                                <td routerLink="/Issue_Reports/Report-view/{{ issue?.issue_ID }}">
+                                    {{ issue?.issue_Code }}
                                 </td>
-                                <td routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">
-                                    {{issue?.apartment_Name}}
+                                <td routerLink="/Issue_Reports/Report-view/{{ issue?.issue_ID }}">
+                                    {{ issue?.apartment_Name }}
+                                </td>
+                                <td routerLink="/Issue_Reports/Report-view/{{ issue?.issue_ID }}">
+                                    {{ issue?.items_Cost }}
+                                </td>
+                                <td routerLink="/Issue_Reports/Report-view/{{ issue?.issue_ID }}">
+                                    {{ issue?.worker_Cost }}
                                 </td>
 
-
-                                <td routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">
-                                    {{issue?.issue_Date}}
+                                <td routerLink="/Issue_Reports/Report-view/{{ issue?.issue_ID }}">
+                                    {{ issue?.issue_Date }}
                                 </td>
 
-                                <td routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">
-                                    <span class="rounded-5 px-3 py-1" style="background-color: #FCEEEE;color: #EF2011;" *ngIf="issue?.issue_Status=='Cancelled'">
-                                 Cancelled
-
-                                 </span>
-                                    <span class="rounded-5 px-3 py-1" style="background-color: #FFF9E6;color: #FFB900;" *ngIf="issue?.issue_Status=='Pending'">
-                                  Pending
-
-                                  </span>
-                                    <span class="rounded-5 px-3 py-1" style="background-color: #ECFDF3;color: #027A48;" *ngIf="issue?.issue_Status=='Completed'">
-                                    Completed
+                                <td routerLink="/Issue_Reports/Report-view/{{ issue?.issue_ID }}">
+                                    <span class="rounded-5 px-3 py-1" style="background-color: #FCEEEE;color: #EF2011;"
+                                        *ngIf="issue?.issue_Status=='Cancelled'">
+                                        Cancelled
 
                                     </span>
-                                    <span class="rounded-5 px-3 py-1" style="background-color: #EFF8FF;color: #175CD3;" *ngIf="issue?.issue_Status=='InProgress'">
-                                      InProgress
+                                    <span class="rounded-5 px-3 py-1" style="background-color: #FFF9E6;color: #FFB900;"
+                                        *ngIf="issue?.issue_Status=='Pending'">
+                                        Pending
 
-                                      </span>
+                                    </span>
+                                    <span class="rounded-5 px-3 py-1" style="background-color: #ECFDF3;color: #027A48;"
+                                        *ngIf="issue?.issue_Status=='Completed'">
+                                        Completed
+
+                                    </span>
+                                    <span class="rounded-5 px-3 py-1" style="background-color: #EFF8FF;color: #175CD3;"
+                                        *ngIf="issue?.issue_Status=='InProgress'">
+                                        InProgress
+
+                                    </span>
 
                                 </td>
 
 
                                 <td class="cursor position-relative">
                                     <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,issue?.issue_ID)">
-                  <img src="assets/images/edit.svg">
-              </button>
-                                    <div *ngIf="showEdit[issue?.issue_ID] " style="width: 191px;z-index: 999;right: 98px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                        <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/Issue_Reports/Report-view/{{issue?.issue_ID}}">view issue details</button>
+                                        <img src="assets/images/edit.svg">
+                                    </button>
+                                    <div *ngIf="showEdit[issue?.issue_ID] " style="width: 191px;z-index: 999;right: 98px;"
+                                        class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                                        <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100"
+                                            routerLink="/Issue_Reports/Report-view/{{ issue?.issue_ID }}">view issue details</button>
 
-                                        <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"> Delete  </button>
-
+                                        <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"> Delete
+                                        </button>
 
 
                                     </div>
