@@ -1,34 +1,70 @@
-.frist11 {
+.card {
     min-height: 879px!important;
     position: relative;
     background: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
-    overflow: hidden
+    overflow: hidden;
+    padding: 24px 18px !important;
+}
+.date p{
+  color: #484649;
+  font-size: 13.91px;
+  font-weight: 400;
+  line-height: 18.09px;
+  word-wrap: break-word
+}
+.invoiceCard{
+  border-radius: 18.004px;
+  background: #EAF0F7;
+}
+.mainTitle .title h3 {
+  color: #121722;
+  font-size: 30.01px;
+  font-weight: 700;
+  word-wrap: break-word
+}
+.client h4{
+  color: #121722;
+  font-size: 21px;
+  font-weight: 600;
+}
+.client p{
+  color: #121722;
+  font-size: 15px;
+  font-weight: 400;
+}
+.invoice{
+  color: #60737D;
+  text-align: right;
+  font-size: 15px;
+  font-weight: 400;
+}
+.dateDetails{
+  color: #121722;
+  text-align: right;
+  font-size: 16px;
+  font-weight: 400;
+}
+.desc{
+  color:  #313033;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24.006px;
+}
+.data{
+  color: #60737D;
+  font-size: 15px;
+  font-weight: 400;
 }
 
 @media print {
-    .xxcprint {
+    .card {
         margin-top: 0%;
     }
     .section33 {
         float: right;
         margin-left: 500px;
-    }
-    header {
-        display: none !important
-    }
-    .xprintt {
-        display: none !important
-    }
-    .zswed {
-        display: none !important
-    }
-    .prepheap {
-        margin-left: -150px !important
-    }
-    .pricinn {
-        margin-right: 150px !important
     }
 }
 
@@ -41,156 +77,11 @@
 }
 
 @media (min-width: 768px) {
-    .frist11 {
+    .card {
         margin-left: 70px;
         width: 1050px;
     }
-    .imgginv {
-        gap: 637.74px;
-    }
-}
 
-@media (max-width: 768px) {
-    .section33 {
-        left: 180.24px !important
-    }
-}
-
-.frist22 {
-    width: 1020.24px;
-    height: 300.06px;
-    left: 15.07px;
-    top: 140.97px;
-    position: absolute;
-    background: #EAF0F7;
-    border-radius: 18px;
-    -webkit-border-radius: 18px;
-    -moz-border-radius: 18px;
-    -ms-border-radius: 18px;
-    -o-border-radius: 18px;
-}
-
-.frist33 {
-    width: 862.70px;
-    height: 1.50px;
-    left: 15px;
-    top: 795.01px;
-    position: absolute;
-    background: #F2F5F9;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    -o-border-radius: 3px;
-}
-
-.frist44 {
-    left: 45.01px;
-    top: 276px;
-    position: absolute;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    display: inline-flex
-}
-
-.frist55 {
-    color: #121722;
-    font-size: 21px;
-    font-weight: 600;
-    word-wrap: break-word
-}
-
-.frist66 {
-    color: #121722;
-    font-size: 15px;
-    font-weight: 400;
-    word-wrap: break-word
-}
-
-.invice1 {
-    left: 45.01px;
-    top: 170.97px;
-    position: absolute;
-    color: #121722;
-    font-size: 30.01px;
-    font-weight: 700;
-    word-wrap: break-word
-}
-
-.invoce2 {
-    left: 45.01px;
-    top: 462.04px;
-    position: absolute
-}
-
-.invoce3 {
-    color: #121722;
-    font-size: 24.01px;
-    font-weight: 700;
-    word-wrap: break-word
-}
-
-.invice4 {
-    color: #121722;
-    font-size: 19.50px;
-    font-weight: 700;
-    word-wrap: break-word
-}
-
-.invice5 {
-    color: #121722;
-    font-size: 18px;
-    font-weight: 400;
-    word-wrap: break-word
-}
-
-.invoce6 {
-    color: #121722;
-    font-size: 19.50px;
-    font-weight: 700;
-    word-wrap: break-word
-}
-
-.price11 {
-    left: 760.68px;
-    top: 465.04px;
-    position: absolute;
-    text-align: right;
-    color: #60737D;
-    font-size: 15px;
-    font-weight: 400;
-    word-wrap: break-word
-}
-
-.total22 {
-    left: 934.72px;
-    top: 465.04px;
-    position: absolute;
-    text-align: right;
-    color: #60737D;
-    font-size: 15px;
-    font-weight: 400;
-    word-wrap: break-word
-}
-
-.section33 {
-    width: 145px;
-    left: 860.24px;
-    top: 170.97px;
-    position: absolute;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-    display: inline-flex
-}
-
-.class33 {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-end;
-    gap: 6px;
-    display: flex
 }
 
 .invoicenu {
@@ -198,7 +89,6 @@
     color: #60737D;
     font-size: 15px;
     font-weight: 400;
-    word-wrap: break-word
 }
 
 .invocede {
@@ -206,7 +96,6 @@
     color: #121722;
     font-size: 19.50px;
     font-weight: 700;
-    word-wrap: break-word
 }
 
 .divclassss {
@@ -242,7 +131,6 @@
 }
 
 .phonein {
-    text-align: right;
     color: #484649;
     font-size: 13.91px;
     font-weight: 400;
@@ -250,13 +138,6 @@
     word-wrap: break-word
 }
 
-.prpee {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 4.64px;
-    display: inline-flex
-}
 
 .prepheap {
     justify-content: flex-start;
@@ -265,21 +146,7 @@
     display: flex
 }
 
-.imgginv {
-    justify-content: flex-start;
-    align-items: flex-start;
-    display: flex
-}
 
-.imgheap {
-    left: 25.51px;
-    top: 30.15px;
-    position: absolute;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 637.74px;
-    display: inline-flex
-}
 
 .pricinn {
     text-align: right;
@@ -306,17 +173,6 @@
     font-size: 16.50px;
     font-weight: 400;
     word-wrap: break-word
-}
-
-.stackkc {
-    width: 802.69px;
-    height: 19.50px;
-    left: 45.01px;
-    top: 531.06px;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    display: inline-flex
 }
 
 .stysda {
