@@ -285,6 +285,13 @@ export class OwnerDetailsComponent {
   scrollTop(): void {
     window.scrollTo(0, 0);
   }
+  getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    const day = ('0' + today.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
 
   ngOnDestroy() {
     for (let i = 0; i < this.subscriptions.length; i++)

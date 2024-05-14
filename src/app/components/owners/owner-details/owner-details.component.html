@@ -71,13 +71,13 @@
                 <!--Other Details-->
                 <div id="OtherDetails">
                     <p class="fw-bold mb-0">Other Details</p>
-                    <p style="color: #605D62 !important;">Add other details relevant to your property.</p>
+                    <p style="color: #605D62 !important;">Enter other details.</p>
                 </div>
                 <!--start Other Details form-->
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">* Date of birth</label>
-                        <input formControlName='owner_DOB' class="form-control w-100 " type="date" [value]="formattedDate" style="cursor: pointer;">
+                        <input formControlName='owner_DOB' class="form-control w-100 " type="date" [value]="formattedDate" style="cursor: pointer;"  [max]="getTodayDate()">
                     </div>
 
                     <div class="col-12 col-md-6 mb-4">
@@ -178,7 +178,7 @@
 
                         <p class="fw-bold mb-0" id="Bankdetails" *ngIf="param=='Owner details'">Bank details</p>
                         <p class="fw-bold mb-0" id="Bankdetails" *ngIf="param!='Owner details'">Bank account information</p>
-                        <p style="color: #605D62 !important;">Add other details relevant to your property.</p>
+                        <p style="color: #605D62 !important;">Enter the bank details.</p>
                     </div>
                     <div class="row ">
                         <div class="col-12 col-md-6 mb-4">

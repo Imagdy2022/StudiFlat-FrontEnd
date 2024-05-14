@@ -197,7 +197,7 @@
         <div>
             <div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label gray fw-bold">Description</label>
+                    <label for="exampleFormControlTextarea1" class="form-label gray fw-bold">Apartment Description</label>
                     <textarea formControlName="apt_Descirpt" [class.is-invalid]="generalInfoForm.get('apt_Descirpt')!.invalid && generalInfoForm.get('apt_Descirpt')!.touched " class="border p-3 pt-3 rounded-2 w-100" rows="5" style="resize: inherit"></textarea>
                     <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Descirpt')!.invalid && generalInfoForm.get('apt_Descirpt')!.touched ">
             this field is required
@@ -223,7 +223,7 @@
                     </div>
                 </div> -->
                 <div class="col-md-12 mb-3">
-                  <label class="form-label gray fw-bold">Upload Images Of Apartment</label>
+                  <label class="form-label gray fw-bold">Upload documents of the Apartment</label>
                   <div class="image-upload mainimage">
                     <input type="file" accept="image/*" multiple="multiple" (change)="selectFile($event)">
                       <div class="image-uploads">
