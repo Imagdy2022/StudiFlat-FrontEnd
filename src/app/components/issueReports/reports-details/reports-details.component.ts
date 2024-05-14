@@ -18,7 +18,7 @@ export class ReportsDetailsComponent {
   Apointment: any;
   display1: any;
   appointement: any = [];
-  subscriptions:Subscription[] = [];
+  subscriptions: Subscription[] = [];
 
   constructor(
     private viewportScroller: ViewportScroller,
@@ -81,44 +81,46 @@ export class ReportsDetailsComponent {
   }
   detialIssue: any = {};
   GetIssueByid() {
-    this.subscriptions.push(    this._adminservices.GetIssueDetails(this.paramid).subscribe(
-      (res) => {
-        this.detialIssue = res;
-        this.appointement = res.appointement;
-        //  this.createissue.patchValue(res);
-        //  this.createissue.get('issue_Images')?.setValue(res["issue_Images"]);
-      },
-      (err: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${err.error.message[0]}`,
-        });
-      }
-    ))
-
+    this.subscriptions.push(
+      this._adminservices.GetIssueDetails(this.paramid).subscribe(
+        (res) => {
+          this.detialIssue = res;
+          this.appointement = res.appointement;
+          //  this.createissue.patchValue(res);
+          //  this.createissue.get('issue_Images')?.setValue(res["issue_Images"]);
+        },
+        (err: any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${err.error.message[0]}`,
+          });
+        }
+      )
+    );
   }
   UpdateIssue() {
-    this.subscriptions.push(    this._adminservices.UpdateIssue(this.paramid, this.detialIssue).subscribe(
-      (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: res['message'],
-        });
+    this.subscriptions.push(
+      this._adminservices.UpdateIssue(this.paramid, this.detialIssue).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: res['message'],
+          });
 
-        //  this.createissue.patchValue(res);
-        //  this.createissue.get('issue_Images')?.setValue(res["issue_Images"]);
-      },
-      (err: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${err.error.message[0]}`,
-        });
-      }
-    ))
-
+          //  this.createissue.patchValue(res);
+          //  this.createissue.get('issue_Images')?.setValue(res["issue_Images"]);
+        },
+        (err: any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${err.error.message[0]}`,
+          });
+        }
+      )
+    );
   }
 
   createissue!: FormGroup;
@@ -149,21 +151,22 @@ export class ReportsDetailsComponent {
   onUpload(event: any): void {
     this.uploadedFiles = event.files;
     this.convertFileToFormData(this.uploadedFiles);
-    this.subscriptions.push(    this.uploadService
-      .uploadMultiFile(this.convertFileToFormData(this.uploadedFiles))
-      .subscribe((data) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `${'Images Upload Successfully'}`,
-        });
+    this.subscriptions.push(
+      this.uploadService
+        .uploadMultiFile(this.convertFileToFormData(this.uploadedFiles))
+        .subscribe((data) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${'Images Upload Successfully'}`,
+          });
 
-        for (let file of data) {
-          this.issue_Images.push({ apt_imgs: file.name });
-        }
-        this.createissue.get('img_Url')?.patchValue(this.issue_Images);
-      }))
-
+          for (let file of data) {
+            this.issue_Images.push({ apt_imgs: file.name });
+          }
+          this.createissue.get('img_Url')?.patchValue(this.issue_Images);
+        })
+    );
   }
   convertFileToFormData(files: any[]) {
     const formData = new FormData();
@@ -221,25 +224,28 @@ export class ReportsDetailsComponent {
     this.Apointment = item.appo_Date + item.appo_Time;
   }
   MarkasProgress() {
-    this.subscriptions.push(    this._adminservices.MarkasProgress(this.paramid, this.Apointment).subscribe(
-      (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `${res.message}`,
-        });
-        this.GetIssueByid();
-        this.onCloseModal1();
-      },
-      (err: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${err.error.message[0]}`,
-        });
-      }
-    ))
-
+    this.subscriptions.push(
+      this._adminservices
+        .MarkasProgress(this.paramid, this.Apointment)
+        .subscribe(
+          (res) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: `${res.message}`,
+            });
+            this.GetIssueByid();
+            this.onCloseModal1();
+          },
+          (err: any) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${err.error.message[0]}`,
+            });
+          }
+        )
+    );
   }
   display22: any = 'none';
   imageSize: any = '';
@@ -267,50 +273,54 @@ export class ReportsDetailsComponent {
     this.display1 = 'block';
   }
   MarkasProgress2() {
-    this.subscriptions.push(    this._adminservices
-      .NewAppointment(this.paramid, this.Apointment3.toLocaleString())
-      .subscribe(
-        (res) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: res['message'],
-          });
-          this.GetIssueByid();
-          this.onCloseModal3();
-        },
-        (err: any) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: `${err.error.message[0]}`,
-          });
-        }
-      ));
-
+    this.subscriptions.push(
+      this._adminservices
+        .NewAppointment(this.paramid, this.Apointment3.toLocaleString())
+        .subscribe(
+          (res) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: res['message'],
+            });
+            this.GetIssueByid();
+            this.onCloseModal3();
+          },
+          (err: any) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${err.error.message[0]}`,
+            });
+          }
+        )
+    );
   }
-routeToMessage(obj:any)
-{
-  if(obj.chat_ID)
-    this.router.navigate([`/messages/message-tiket/${obj.chat_ID}`])
-  else
-  {
-    
-    this.subscriptions.push( this._adminservices.StartNewIssueChat(obj.user_ID,obj.issue_ID).subscribe({
-      next:(data:any)=>{
-        let chatID = data.uuid;
-        this.router.navigate([`/messages/user-message/${chatID}`])
-
-      },
-      error:(err:any)=>{
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: "error" });
-      }
-    }))
-
-
-  }}
+  routeToMessage(obj: any) {
+    if (obj.chat_ID)
+      this.router.navigate([`/messages/message-tiket/${obj.chat_ID}`]);
+    else {
+      this.subscriptions.push(
+        this._adminservices
+          .StartNewIssueChat(obj.user_ID, obj.issue_ID)
+          .subscribe({
+            next: (data: any) => {
+              let chatID = data.uuid;
+              this.router.navigate([`/messages/message-tiket/${chatID}`]);
+            },
+            error: (err: any) => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'error',
+              });
+            },
+          })
+      );
+    }
+  }
   ngOnDestroy() {
-    for(let i=0;i<this.subscriptions.length;i++)
-    this.subscriptions[i].unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++)
+      this.subscriptions[i].unsubscribe();
   }
 }

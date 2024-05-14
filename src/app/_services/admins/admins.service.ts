@@ -230,9 +230,15 @@ export class AdminsService {
       .set('Key', searchkey);
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
-  StartNewIssueChat(userId: any,chatId:any): Observable<any> {
-    const url = environment.apiUrl + `/Issues/StartIssueChat?UserID=${userId}&Issue_ID=${chatId}`;
-    return this.http.post<any>(url, { headers: this.headers });
+  StartNewIssueChat(userId: any, chatId: any): Observable<any> {
+    const url =
+      environment.apiUrl +
+      `/Issues/StartIssueChat?UserID=${userId}&Issue_ID=${chatId}`;
+    let body = {
+      UserID: userId,
+      Issue_ID: chatId,
+    };
+    return this.http.post<any>(url, body, { headers: this.headers });
   }
   GetIssueDetails(id: any): Observable<any> {
     const url = environment.apiUrl + '/Issues/IssueInDetails?Issue_ID=' + id;
@@ -844,5 +850,29 @@ export class AdminsService {
     const params = new HttpParams().set('Is_Highest', Is_Highest);
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+
+  TFASetup(email: any): Observable<any> {
+    const url = environment.apiUrl + '/Admin/TFASetup?email=' + email;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+  TFAEnable(
+    qrlink: any,
+    email: any,
+    code: any,
+    authkey: any,
+    fkey: any
+  ): Observable<any> {
+    const url = environment.apiUrl + '/Admin/TFAEnable';
+    let body = {
+      qR_Link: qrlink,
+      email: email,
+      code: code,
+      isTfaEnabled: true,
+      authenticatorKey: authkey,
+      formattedKey: fkey,
+    };
+
+    return this.http.post<any>(url, body, { headers: this.headers });
   }
 }
