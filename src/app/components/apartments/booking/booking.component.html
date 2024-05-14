@@ -137,8 +137,7 @@
                         </div>
                     </ng-template>
                 </p-table>
-
-                <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+              <p-paginator *ngIf="booking.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
 
             </div>
 

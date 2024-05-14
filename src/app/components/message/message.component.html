@@ -186,7 +186,7 @@
         </ng-template>
 
       </p-table>
-      <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize"
+      <p-paginator *ngIf="_tickets.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize"
         [totalRecords]="totalRecords"></p-paginator>
 
     </div>
