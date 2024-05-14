@@ -82,6 +82,7 @@ export class CreacteContractComponent implements OnInit {
           summary: 'Success',
           detail: `${this.messagemessage22}`,
         });
+        this.gotopage2();
       },
       (error) => {
         this.messageService.add({
@@ -93,7 +94,6 @@ export class CreacteContractComponent implements OnInit {
     ))
 
 
-    this.gotopage2();
   }
   addItem(value: string): void {
     this.showSide = value;

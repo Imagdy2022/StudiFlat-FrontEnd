@@ -11,8 +11,10 @@ import { HttpClient } from '@angular/common/http';
 export class GeneralInfoUserComponent {
   @Input() titlePage: string = '';
   @Output() changeImageUrl: EventEmitter<string> = new EventEmitter<string>();
-  @Input() imageUrl: string = '';
+  @Input() imageUrl: string;
+  @Input() title: string = '';
   @Input() loadingButton: boolean = false;
+ viewDeleteButtonButton: boolean = false;
 
   constructor(private uploadFile: UploadFileService, private http: HttpClient) { }
 
@@ -23,17 +25,26 @@ export class GeneralInfoUserComponent {
   uploadPic(event: any) {
     this.loadingButton = true;
     if (event != 'delete') {
-      const selectedFile = event.target.files[0];
-      const formData = new FormData();
-      formData.append('fileData', selectedFile, selectedFile.name);
+      if(event.target.files.length > 0){
+        this.viewDeleteButtonButton = true
+        const selectedFile = event.target.files[0];
+        const formData = new FormData();
+        formData.append('fileData', selectedFile, selectedFile.name);
 
-      this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
-        this.imageUrl = img[0].file_Path;
-        this.changeImageUrl.emit(img[0].file_Path);
+        this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
+          this.imageUrl = img[0].file_Path;
+          this.changeImageUrl.emit(img[0].file_Path);
+          this.loadingButton = false;
+        })
+
+      }
+      else{
         this.loadingButton = false;
-      })
+      }
+
     } else if (event == 'delete') {
       this.imageUrl = '';
+      this.viewDeleteButtonButton = false;
       this.changeImageUrl.emit(this.defaultImageUrl());
       this.loadingButton = false;
     }

@@ -37,6 +37,7 @@ export class OwnerDetailsComponent {
   // param title page
   pageTitle: any;
   subscriptions: Subscription[] = [];
+  subTitle :string = "Upload owner photo and enter details."
 
   ngOnInit() {
     this.initCities();
@@ -268,7 +269,7 @@ export class OwnerDetailsComponent {
       owner_About: new FormControl('', [Validators.required]),
       owner_DOB: new FormControl('', [Validators.required]),
       owner_Phone: new FormControl('', [Validators.required]),
-      owner_WA_Number: new FormControl('', [Validators.required]),
+      owner_WA_Number: new FormControl(''),
       owner_Bank: new FormControl('', [Validators.required]),
       owner_BankAccount: new FormControl('', [Validators.required]),
       owner_BankSwift: new FormControl('', [Validators.required]),

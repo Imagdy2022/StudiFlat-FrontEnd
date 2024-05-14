@@ -38,31 +38,31 @@
             <form class="col-md-10 content-details " [formGroup]="createOwner" (ngSubmit)="CreateOwner(createOwner)">
 
                 <!--General info-->
-                <app-general-info-user [titlePage]="param" [imageUrl]="createOwner.value.owner_Photo" (changeImageUrl)="updateUserImage($event)"></app-general-info-user>
+                <app-general-info-user [title]="subTitle" [titlePage]="param" [imageUrl]="createOwner.value.owner_Photo" (changeImageUrl)="updateUserImage($event)"></app-general-info-user>
                 <!--start General info form-->
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
-                        <label class="fw-bold" style="color: #605D62;">First name</label>
+                        <label class="fw-bold" style="color: #605D62;">* First name</label>
                         <input formControlName='owner_FirstName' class="form-control w-100" type="text">
                     </div>
                     <div class="col-12 col-md-6">
-                        <label class="fw-bold" style="color: #605D62">Last name</label>
+                        <label class="fw-bold" style="color: #605D62">* Last name</label>
                         <input formControlName='owner_LastName' class="form-control w-100" type="text">
                     </div>
 
                 </div>
                 <div class="mb-4">
-                    <label class="fw-bold" style="color: #605D62;">Email</label>
-                    <img src="assets/images/user/mail.svg" class="position-relative top-icon-input" style="right: 20px;">
-                    <input formControlName='owner_Mail' class="form-control w-100 ps-5" type="email">
+                    <label class="fw-bold" style="color: #605D62;">* Email</label>
+                    <img src="assets/images/user/mail.svg" class="position-relative top-icon-input" style="right: 45px;">
+                    <input formControlName='owner_Mail' class="form-control w-100" type="email" style="padding-left: 26px;">
                 </div>
                 <div class="mb-4">
-                    <label class="fw-bold" style="color: #605D62;">Address</label>
+                    <label class="fw-bold" style="color: #605D62;">* Address</label>
 
                     <input formControlName='owner_Address' class="form-control w-100" type="text">
                 </div>
                 <div>
-                    <label class="fw-bold" style="color: #605D62;">About</label>
+                    <label class="fw-bold" style="color: #605D62;">* About</label>
                     <textarea formControlName='owner_About' class="border rounded-3 w-100 p-2" rows="5" style="resize: unset;"></textarea>
                 </div>
 
@@ -76,12 +76,12 @@
                 <!--start Other Details form-->
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
-                        <label class="fw-bold" style="color: #605D62;">Date of birth</label>
-                        <input formControlName='owner_DOB' class="form-control w-100" type="date" [value]="formattedDate">
+                        <label class="fw-bold" style="color: #605D62;">* Date of birth</label>
+                        <input formControlName='owner_DOB' class="form-control w-100 " type="date" [value]="formattedDate" style="cursor: pointer;">
                     </div>
 
                     <div class="col-12 col-md-6 mb-4">
-                        <label class="fw-bold" style="color: #605D62;">Country</label>
+                        <label class="fw-bold" style="color: #605D62;">* Country</label>
                         <div class="w-100">
                             <p-dropdown [options]="cities" [(ngModel)]="selectedCity" [ngModelOptions]="{standalone: true}" optionLabel="country"></p-dropdown>
                         </div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
-                        <label class="fw-bold" style="color: #605D62;">Phone number</label>
+                        <label class="fw-bold" style="color: #605D62;">* Phone number</label>
                         <input formControlName='owner_Phone' class="form-control w-100" type="number">
                     </div>
                     <div class="col-12 col-md-6">
@@ -182,17 +182,17 @@
                     </div>
                     <div class="row ">
                         <div class="col-12 col-md-6 mb-4">
-                            <label class="fw-bold" style="color: #605D62;">Bank Name</label>
+                            <label class="fw-bold" style="color: #605D62;">* Bank Name</label>
                             <input formControlName='owner_Bank' class="form-control w-100" type="text">
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class="fw-bold" style="color: #605D62">Account Number</label>
+                            <label class="fw-bold" style="color: #605D62">* Account Number</label>
                             <input formControlName='owner_BankAccount' class="form-control w-100" type="text">
                         </div>
 
                     </div>
                     <div class="mb-4">
-                        <label class="fw-bold" style="color: #605D62;">Swift Number</label>
+                        <label class="fw-bold" style="color: #605D62;">* Swift Number</label>
                         <input formControlName='owner_BankSwift' class="form-control w-100" type="text">
                     </div>
                 </div>

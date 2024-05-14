@@ -51,6 +51,7 @@ export class AddWorkerComponent implements OnInit {
   loadingButton: boolean = false;
   // param title page
   pageTitle: any;
+  subTitle :string = "Upload Worker photo and enter details."
   subscriptions:Subscription[] = [];
   ngOnInit() {
     this.bindCreateworker();

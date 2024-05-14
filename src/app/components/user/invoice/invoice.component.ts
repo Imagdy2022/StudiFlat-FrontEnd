@@ -22,11 +22,15 @@ export class InvoiceComponent implements OnInit {
   selectedCity: Object = {};
   available: boolean = true;
   link: Array<boolean> = [true];
-  subscriptions: Subscription[] = [];
-  invoiceDetail: any;
 
-  titlePage: string = '';
-  changeImageUrl: any;
+  subscriptions:Subscription[] = [];
+  invoiceDetail:any;
+  invoices:any[]=[]
+   titlePage: string = '';
+   changeImageUrl:any;
+
+  
+
   imageUrl: string = '';
   loadingButton: boolean = false;
   ngOnInit() {
@@ -82,20 +86,19 @@ export class InvoiceComponent implements OnInit {
    * @return void
    */
 
-  _details: any = {};
-  GetINVDetails() {
-    this.subscriptions.push(
-      this._adminservices.GetINVDetails(this.param).subscribe(
-        (res) => {
-          this._details = res;
-          this.invoiceDetail = res.invoice_Details;
-        },
-        (error) => {
-          console.error('Error fetching Invoice Details:', error);
-        }
-      )
-    );
-  }
+
+  _details:any={}
+  GetINVDetails(  ) {
+    this.subscriptions.push(  this._adminservices.GetINVDetails(this.param).subscribe((res) => {
+      this._details = res ;
+      this.invoiceDetail = res
+ this.invoices=this.invoiceDetail.invoice_Details;
+ console.log(this.invoices)
+      }, (error) => {
+       console.error('Error fetching Invoice Details:', error);
+    }));
+}
+
 
   /**
    * addItem

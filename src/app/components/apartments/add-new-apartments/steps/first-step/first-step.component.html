@@ -154,7 +154,12 @@
           </span>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label class="form-label gray fw-bold">Property Owner</label>
+                    <div class="d-flex justify-content-between align-items-center owner me-2">
+                      <label class="form-label gray fw-bold">Property Owner</label>
+                      <button class="rounded border text-white text-decoration-none " routerLink="/owners/create_new" style="background-color:#1F4068;">
+                          +
+                      </button>
+                    </div>
                     <!-- start dropdown button  -->
                     <!-- <app-dropdown [list]="listDropDownPropertyowner" [holder]="Propertyowner" (selected)="selectedfromDropDownPropertyowner($event)"></app-dropdown> -->
                     <!-- end dropdown button  -->
