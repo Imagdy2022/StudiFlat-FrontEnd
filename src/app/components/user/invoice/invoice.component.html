@@ -23,7 +23,7 @@
 
         </div> -->
         <div class="card shadow-sm rounded-3 xxcprint" id="MyDIv">
-          <div class="d-flex justify-content-between " style="height: 110px;">
+            <div class="d-flex justify-content-between " style="height: 110px;">
             <div class="image">
               <img style="width: 169.17px;" src="./assets/images/logo.svg" />
             </div>
@@ -31,7 +31,9 @@
               <p class="phonein">Prepared Date: {{_details?.prepared_Date|date: 'dd/MM/yyyy' }}</p>
               <p class="phonein">Title: {{_details?.invoice_Title}}</p>
           </div>
-          </div>
+          </div> 
+          <div *ngFor="let invoice of invoices" style="margin-bottom:135px;">
+         
           <div class="row mb-4">
             <div class="col-12">
               <div class="invoiceCard p-4">
@@ -47,8 +49,8 @@
                 </div>
                 <div class="client d-flex justify-content-between">
                   <div class="client">
-                    <h4 >Client Name</h4>
-                    <p>{{invoiceDetail?.clients[0]}}</p>
+                    <h4 >Clients</h4>
+                    <p>{{invoiceDetail?.cust_Type}}</p>
                   </div>
                   <div>
                     <div class="InvoiceNo mb-3">
@@ -68,7 +70,7 @@
           <div class="row p-3">
             <div class="col-md-8">
               <h5 class="data"> Invoice </h5>
-                 <div class="desc mb-3" *ngFor="let invoice of invoices">
+                 <div class="desc mb-3" >
                   <p >{{invoice?.invoice_Desc}}</p>
 
                  </div>
@@ -76,7 +78,7 @@
             <div class="col-md-2">
               <div>
                 <h5 class="data"> Price </h5>
-                <div class="desc mb-3" *ngFor="let invoice of invoices">
+                <div class="desc mb-3" >
                  <p style="color: #60737D;">{{invoice?.invoice_Amount}}</p>
                 </div>
               </div>
@@ -85,14 +87,14 @@
             <div class="col-md-2">
               <div>
                 <h5 class="data"> Total </h5>
-                <div class="desc mb-3" *ngFor="let invoice of invoices">
+                <div class="desc mb-3" >
                  <p >{{invoice?.invoice_Total}}</p>
                 </div>
               </div>
 
             </div>
           </div>
-
+          </div>
 
           <div class="stysda">
             <div style="justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">

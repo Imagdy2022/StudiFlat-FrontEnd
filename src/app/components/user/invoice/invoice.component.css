@@ -1,5 +1,5 @@
 .card {
-    min-height: 879px!important;
+    height: auto!important;
     position: relative;
     background: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
@@ -181,7 +181,7 @@
     padding-left: 30.01px;
     padding-right: 30.01px;
     left: 670.66px;
-    top: 765px;
+    bottom: 50px;
     position: absolute;
     background: #DEE7F2;
     border-radius: 18px;
