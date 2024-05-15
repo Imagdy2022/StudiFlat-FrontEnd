@@ -53,7 +53,7 @@
         <!-- search input -->
         <div class="col-md-5">
           <div class="input">
-            <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()"
+            <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction($event)"
               [(ngModel)]="searchText" />
             <img src="../../../assets/images/search.svg" alt="">
           </div>
@@ -186,7 +186,7 @@
         </ng-template>
 
       </p-table>
-      <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize"
+      <p-paginator *ngIf="_tickets.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize"
         [totalRecords]="totalRecords"></p-paginator>
 
     </div>

@@ -36,9 +36,12 @@ export class BookingComponent implements OnInit {
   openDropdown(event: Event) {
     event.stopPropagation(); // Prevents the dropdown from closing when clicking the button
   }
-  searchAction() {
-    this.searchTextChange.emit(this.searchText);
-    this.search = false;
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
+   this.getAllbokk();
   }
   GetSelectedItem(): void {
       }

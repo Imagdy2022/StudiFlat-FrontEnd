@@ -412,11 +412,12 @@ export class MainFileComponent {
     this.getAllIssues();
   }
   searchTextChange: any;
-  searchAction() {
-    // this.searchTextChange.emit(this.searchText);
-    // this.search = false;
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
     this.getAllIssues();
-    // this.searchText = '';
   }
   selectedContractImg: any;
   afterUploadImage = 'true';

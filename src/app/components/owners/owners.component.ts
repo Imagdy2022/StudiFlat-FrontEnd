@@ -6,6 +6,7 @@ import { IOnwer } from 'src/app/models/onwer';
 import { ITableHeader } from 'src/app/shared/components/table/table/tableHeader';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-owners',
@@ -44,7 +45,7 @@ export class OwnersComponent implements OnInit {
   /** listDropDown */
   listDropDown: Array<object> = [{ name: 'All  ' },{ name: 'Today' }, { name: 'Last week' }, { name: 'This month' }, { name: 'This year' }];
 
-  constructor(private ownerSer: OnwerService,public router: Router) {
+  constructor(private messageService: MessageService,private ownerSer: OnwerService,public router: Router) {
   }
 
   ngOnInit() {
@@ -99,9 +100,25 @@ export class OwnersComponent implements OnInit {
    * @param event
    */
   deleteOwner(event: any): void {
-    this.subscriptions.push(this.ownerSer.deleteOwner(event.owner_ID).subscribe((res: IOnwer[] | any) => {
-      this.getAllOwners(this.pageNumber, this.itemsPerPage, this.searchValue);
-    }));
+    this.subscriptions.push(this.ownerSer.deleteOwner(event.owner_ID).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `${res.message}`,
+        });
+        this.getAllOwners(this.pageNumber, this.itemsPerPage, this.searchValue);
+        ;
+      },
+      (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${error.error.message}`,
+        });
+      }
+      
+      ));
   }
   /**
    * searchInOwner
@@ -143,12 +160,12 @@ export class OwnersComponent implements OnInit {
   initHeadersData(): Array<ITableHeader> {
     return [
       // { Name: '', SortableColumn: '', tableHeaderCheckbox: true, sortIcon: false },
-
+      //  {Name:" ", SortableColumn: 'owner_Photo'},
       { Name: 'Name', SortableColumn: 'owner_FirstName', sortIcon: true },
       { Name: 'Email Address', SortableColumn: 'owner_Mail', sortIcon: true },
       { Name: 'Phone Number', SortableColumn: 'owner_Phone', sortIcon: true },
       // { Name: 'Gender', SortableColumn: 'gender', sortIcon: false },
-      { Name: 'About', SortableColumn: 'owner_About', sortIcon: false },
+      { Name: 'About', SortableColumn: 'owner_About', sortIcon: true },
       { Name: 'Operations', SortableColumn: ' ', sortIcon: false },
 
 

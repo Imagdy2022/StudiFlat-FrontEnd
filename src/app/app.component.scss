@@ -36,15 +36,15 @@
 ::ng-deep .block-ui-spinner,
 ::ng-deep .block-ui-template {
   position: absolute;
-  top: 60% !important;
+  top: 50% !important;
   margin: 0 auto;
   left: 0;
   right: 0;
-  transform: translateY(-40%);
-  -webkit-transform: translateY(-40%);
-  -moz-transform: translateY(-40%);
-  -ms-transform: translateY(-40%);
-  -o-transform: translateY(-40%);
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
 }
 
 .block-ui-spinner>.message {
@@ -87,7 +87,7 @@
   }
 }
 
-.block-ui-wrapper{display:none;position:fixed;height:100%;width:100%;top:0;left:0;background:rgba(31, 64, 104, 0.5)!important;z-index:30000;cursor:wait}.block-ui-wrapper.block-ui-wrapper--element{position:absolute}.block-ui-wrapper.active{display:block;background-color: rgba(31, 64, 104, 0.5)!important;}.block-ui-wrapper.block-ui-main{position:fixed}.block-ui-spinner,.block-ui-template{ position:absolute; top:60%; margin:0 auto; left:0; right:0; transform:translateY(-40%); -webkit-transform:translateY(-40%); -moz-transform:translateY(-40%); -ms-transform:translateY(-40%); -o-transform:translateY(-40%); }.block-ui-spinner>.message{font-size:1.3em;text-align:center;color:#fff}.block-ui__element{position:relative}.loader,.loader:after{border-radius:50%;width:10em;height:10em}.loader{margin:7px auto;font-size:5px;position:relative;text-indent:-9999em;border-top:1.1em solid rgba(255,255,255,.2);border-right:1.1em solid rgba(255,255,255,.2);border-bottom:1.1em solid rgba(255,255,255,.2);border-left:1.1em solid #ffffff;transform:translateZ(0);animation:load8 1.1s infinite linear}@keyframes load8{0%{transform:rotate(0)}to{transform:rotate(360deg)}}
+.block-ui-wrapper{display:none;position:fixed;height:100%;width:100%;top:0;left:0;background:rgba(31, 64, 104, 0.5)!important;z-index:30000;cursor:wait}.block-ui-wrapper.block-ui-wrapper--element{position:absolute}.block-ui-wrapper.active{display:block;background-color: rgba(31, 64, 104, 0.5)!important;}.block-ui-wrapper.block-ui-main{position:fixed}.block-ui-spinner,.block-ui-template{ position:absolute; top:50%; margin:0 auto; left:0; right:0; transform:translateY(-50%); -webkit-transform:translateY(-50%); -moz-transform:translateY(-50%); -ms-transform:translateY(-50%); -o-transform:translateY(-50%); }.block-ui-spinner>.message{font-size:1.3em;text-align:center;color:#fff}.block-ui__element{position:relative}.loader,.loader:after{border-radius:50%;width:10em;height:10em}.loader{margin:7px auto;font-size:5px;position:relative;text-indent:-9999em;border-top:1.1em solid rgba(255,255,255,.2);border-right:1.1em solid rgba(255,255,255,.2);border-bottom:1.1em solid rgba(255,255,255,.2);border-left:1.1em solid #ffffff;transform:translateZ(0);animation:load8 1.1s infinite linear}@keyframes load8{0%{transform:rotate(0)}to{transform:rotate(360deg)}}
 
 ::ng-deep .p-datatable .p-datatable-thead > tr > th {
   padding-right: 24px !important;

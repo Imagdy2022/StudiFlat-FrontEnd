@@ -143,7 +143,11 @@ export class AdminsComponent implements OnInit {
     event.stopPropagation(); // Prevents the dropdown from closing when clicking the button
   }
 
-  searchAction() {
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
     this.getAllAdmins();
   }
 

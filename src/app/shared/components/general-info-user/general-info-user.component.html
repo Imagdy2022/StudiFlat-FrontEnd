@@ -12,7 +12,7 @@
 
                 <div class="btn-container" *ngIf="titlePage!='partenerView'">
                     <p-button class="btn-style sendDataPButton" label="Upload picture" [loading]="loadingButton" type="button"></p-button>
-                    <input type="file" #fileInput (change)="uploadPic($event)">
+                    <input type="file" #fileInput accept="image/*" (change)="uploadPic($event)">
                 </div>
               <!-- <ng-container *ngIf="viewDeleteButtonButton"> -->
                 <button type="button" class="outline-none border-0 py-2 px-3 rounded-3 delete" *ngIf="titlePage!= 'partenerView ' && viewDeleteButtonButton" (click)="uploadPic('delete')">Delete</button>

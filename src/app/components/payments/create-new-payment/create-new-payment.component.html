@@ -83,7 +83,7 @@
             </div>
 
             <div class="input">
-              <input type="text" class="form-control py-2" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" [ngModelOptions]="{standalone:true}" />
+              <input type="text" class="form-control py-2" placeholder="Global Search" (keyup)="searchAction($event)" [(ngModel)]="searchText" [ngModelOptions]="{standalone:true}" />
                 <img src="../../../assets/images/search.svg" alt="">
             </div>
         </div>
@@ -182,7 +182,7 @@
             </ng-template>
 
         </p-table>
-        <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+        <p-paginator *ngIf="allData.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
 
 
     </div>

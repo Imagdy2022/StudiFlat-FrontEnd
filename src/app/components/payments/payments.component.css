@@ -175,7 +175,7 @@ span.icon{
   }
 }
 .modal-header
-{
+{position: relative;
   border-bottom: unset;
   background-color:#ffffff;
   border-bottom: none !important;

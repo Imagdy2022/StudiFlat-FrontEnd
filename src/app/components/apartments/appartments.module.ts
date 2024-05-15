@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import {  CUSTOM_ELEMENTS_SCHEMA,NgModule } from '@angular/core';
+import { DialogModule } from 'primeng/dialog';
 
 
 
@@ -41,6 +42,9 @@ import { PaginatorModule } from 'primeng/paginator';
 import { TagModule } from 'primeng/tag';
  import { ButtonModule } from 'primeng/button';
 import { ApartmentsRoutingModule } from './appartments-routing.module';
+import { OwnersModule } from '../owners/owners.module';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { AddNewOwnerComponent } from './add-new-apartments/add-new-owner/add-new-owner.component';
 
 
 @NgModule({
@@ -54,10 +58,11 @@ import { ApartmentsRoutingModule } from './appartments-routing.module';
     ThirdStepComponent,
     ForthStepComponent,
     CreateContractComponent,
+    AddNewOwnerComponent,
 
   ],
   exports: [AddNewApartmentsComponent, ApartmentsComponent],
-  imports: [
+  imports: [DialogModule,
     CommonModule,ButtonModule,TagModule,TableModule,DropdownModule,
     SharedModule,
      StepsModule,

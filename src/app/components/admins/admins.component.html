@@ -41,7 +41,7 @@
               <!-- search input -->
               <div class="col-md-5">
                 <div class="input">
-                  <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
+                  <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
                     <img src="../../../assets/images/search.svg" alt="">
                 </div>
               </div>
@@ -148,7 +148,7 @@
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" style=" background-color: rgb(23 22 22 / 50%);;">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="    margin-top: 150px;">
-            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
+            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;position: relative;">
                 <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
                     <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
 Activate And Deactivate Admin
@@ -216,7 +216,7 @@ Activate And Deactivate Admin
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" style=" background-color: rgb(23 22 22 / 50%);;">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="    margin-top: 150px;">
-            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
+            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;position: relative;">
                 <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600;">
                     <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
                     Delete the item
@@ -256,7 +256,7 @@ Activate And Deactivate Admin
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" style=" background-color: rgb(23 22 22 / 50%);;">
   <div class="modal-dialog" role="document">
       <div class="modal-content" style="    margin-top: 150px;">
-          <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;">
+          <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;position: relative;">
               <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
                   <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
 Setup 2FA Authenticator          </span>

@@ -122,7 +122,11 @@ export class AddNewMessageComponent {
     this.getAllTenants();
   }
   searchTextChange: any;
-  searchAction() {
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
     this.getAllTenants();
   }
   selectAll(ev: any) {

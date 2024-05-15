@@ -169,11 +169,12 @@ export class MessageComponent {
     this.getAll_tickets();
   }
   searchTextChange:any
-  searchAction() {
-    // this.searchTextChange.emit(this.searchText);
-    // this.search = false;
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
     this.getAll_tickets();
-    // this.searchText =""
 
   }
   CloseTicket(status:any) {

@@ -1,19 +1,23 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+
+import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { OnwerService } from '../../../_services/Onwers/onwer.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
+import { FailedToStartTransportError } from '@microsoft/signalr/dist/esm/Errors';
 
 @Component({
-  selector: 'app-owner-details',
-  templateUrl: './owner-details.component.html',
-  styleUrls: ['./owner-details.component.scss'],
+  selector: 'app-add-new-owner',
+  templateUrl: './add-new-owner.component.html',
+  styleUrls: ['./add-new-owner.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class OwnerDetailsComponent {
+export class AddNewOwnerComponent {
+  @Output() dataEvent = new EventEmitter<boolean>();
+
   /** showSide  */
   showSide: string = '';
   /** available  */
@@ -90,7 +94,7 @@ export class OwnerDetailsComponent {
     if (this.pageTitle == 'owner_details') {
       this.id = this.param;
       this.subscriptions.push(
-        this._OnwerService.getOwner(this.id).subscribe((res) => {
+        this._OnwerService.getOwner(this.id).subscribe((res:any) => {
           this.createOwner.patchValue(res);
         })
       );
@@ -105,7 +109,7 @@ export class OwnerDetailsComponent {
     } else if (this.pageTitle == 'edit_owner') {
       this.id = this.param;
       this.subscriptions.push(
-        this._OnwerService.getOwner(this.id).subscribe((res) => {
+        this._OnwerService.getOwner(this.id).subscribe((res:any) => {
           this.createOwner.patchValue(res);
         })
       );
@@ -160,8 +164,7 @@ export class OwnerDetailsComponent {
     this.router.navigateByUrl(url);
   }
   gotopage2() {
-    let url: string = 'owners';
-    this.router.navigateByUrl(url);
+    this.dataEvent.emit(false);
   }
   /**
    * initCities
@@ -199,7 +202,7 @@ export class OwnerDetailsComponent {
     data.value.owner_Phone = String(data.value.owner_Phone);
     data.value.owner_WA_Number = String(data.value.owner_WA_Number);
     this.loadingButton = true;
-    if (this.param == 'Create New') {
+    
       this.subscriptions.push(
         this._OnwerService
           .createOwner({
@@ -215,7 +218,13 @@ export class OwnerDetailsComponent {
           .subscribe(
             (res) => {
               this.loadingButton = false;
-              this.router.navigate(['/owners']);
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: `${res.message}`,
+              });
+              this.dataEvent.emit(false);
+
             },
             (err) => {
               this.loadingButton = false;
@@ -228,33 +237,6 @@ export class OwnerDetailsComponent {
             }
           )
       );
-    } else {
-      const editData = {
-        ...data.value,
-        ...{
-          nationality: 'AF',
-          owner_ID: this.id,
-          Gender: 'UnSpecified',
-          Country: 'UnSpecified',
-        },
-      };
-      this.subscriptions.push(
-        this._OnwerService.editOwner(this.id, editData).subscribe(
-          (res) => {
-            this.loadingButton = false;
-            this.router.navigate(['/owners']);
-          },
-          (err) => {
-            this.loadingButton = false;
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: `${err.error.title}`,
-            });
-          }
-        )
-      );
-    }
   }
 
   updateUserImage(event: any) {
@@ -298,3 +280,4 @@ export class OwnerDetailsComponent {
       this.subscriptions[i].unsubscribe();
   }
 }
+

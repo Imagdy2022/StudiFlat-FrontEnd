@@ -102,6 +102,7 @@ export class FirstStepComponent implements OnInit {
   idParamterEdit: any = '';
   edit: any = '';
   storedImages: any;
+  display11:boolean=false;
   constructor(
     private _ApartmentService: ApartmentService,
     private uploadService: UploadFileService,
@@ -701,7 +702,16 @@ export class FirstStepComponent implements OnInit {
     let url: string = 'apartments';
     this.router.navigateByUrl(url);
   }
+  openOwnersModal()
+  {
+    this.display11=true;
 
+  }
+  closeOwnersModal()
+  {
+  this.getAowners();
+this.display11=false
+  }
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
     this.subscriptions[i].unsubscribe();

@@ -1,0 +1,38 @@
+.active {
+    color: #1f4068 !important;
+    background-color: #fafcff;
+    border-left: 3px solid #1f4068;
+}
+
+.content-details {
+    @media (min-width: 992px) {
+        padding: 3% !important;
+    }
+}
+
+.top-icon-input {
+    top: 30px;
+}
+
+.rentedORavailable {
+    background-color: rgb(255 255 255 / 70%);
+    color: #1f4068 !important;
+}
+
+.rented {
+    color: #1f4068 !important;
+}
+
+.available {
+    color: #12b76a !important;
+}
+
+
+* {
+    font-family: 'Poppins'
+}
+.drop
+{
+    width:200px!important;
+}
+

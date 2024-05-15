@@ -50,7 +50,7 @@
             <!-- search input -->
           <div class="col-md-5 col-8">
               <div class="input">
-                <input type="text" class="form-control py-2 w-100" (keyup)="searchAction()" [(ngModel)]="searchText" placeholder="Global Search"/>
+                <input type="text" class="form-control py-2 w-100" (keyup)="searchAction($event)" [(ngModel)]="searchText" placeholder="Global Search"/>
                   <img src="../../../assets/images/search.svg" alt="">
               </div>
           </div>
@@ -148,7 +148,7 @@
                 </ng-template>
 
             </p-table>
-            <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+            <p-paginator *ngIf="workers.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
 
             <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
             <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
