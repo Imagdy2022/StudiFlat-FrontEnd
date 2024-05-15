@@ -31,16 +31,6 @@
           </div>
         </div>
     </div>
-        <!-- <div class="row justify-content-center align-items-center" style="color: #6c6a6a">
-            <div class="col-10">
-                <p-breadcrumb class="max-w-full" [model]="[{label:'Tenants'}]" [home]="home"></p-breadcrumb>
-
-            </div>
-            <div class="col-2">
-                <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-
-            </div>
-        </div> -->
 
 
         <p-toast></p-toast>
@@ -59,16 +49,6 @@
                </div>
                 <!-- search input -->
               <div class="col-md-5 col-8">
-                  <!-- <ng-container *ngIf="!search; else searchVisible">
-                      <img class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true" src="../../../assets/images/search.svg">
-
-                  </ng-container>
-                  <ng-template #searchVisible>
-                      <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
-                      <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
-                        Search
-                    </button>
-                  </ng-template> -->
                   <div class="input">
                     <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
                       <img src="../../../assets/images/search.svg" alt="">
@@ -201,24 +181,9 @@
 
             <p-paginator *ngIf="Tenants.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
         </div>
-        <!-- <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="5" [totalRecords]="totalRecords"></p-paginator> -->
-
-        <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
-            <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-                <button (click)="decreamentPage( )" [disabled]="disableperv" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                Previous
-  </button>
-            </div>
-            <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{pageNumber}} of {{totalofPages}}</div>
-            <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-                <button [disabled]="disablenext" (click)="   incrementpage( )" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                    Next
-      </button>
-            </div>
-        </div> -->
+       
 
     </main>
     <!-- end content page  -->
 </div>
+

@@ -266,7 +266,7 @@
                 <!-- *ngIf="storedImages!=null||storedImages!=''" -->
                 <div class="row">
                     <div class="col-md-2 card33" *ngFor="let image of apt_imgs;  index as i ">
-                        <a (click)="removeItem(image.apt_imgs)" style="      border: none;   margin-bottom: 10px; position: absolute;">
+                        <a (click)="removeItem(image.apt_imgs)" style="border: none;margin-bottom: 10px; position: absolute;">
                             <img class="imageRemove" src="../../../../../../assets/images/delete.svg" width="32px" height="32px;">
                         </a>
                         <!-- <input type="checkbox" id="st{{i}}" (change)="checkValue($event,image)" /> -->
@@ -274,7 +274,7 @@
 
                         <label for="st{{i}}"></label>
                         <a (click)="opencloseModal(image.apt_imgs)">
-                            <img [src]="image.apt_imgs" alt="Avatar" style="width:339px;height:205px ; " class="cursor">
+                            <img class="star" [src]="image.apt_imgs" alt="Avatar" style="width:339px;height:205px ;">
 
                         </a>
 
