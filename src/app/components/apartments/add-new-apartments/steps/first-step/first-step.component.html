@@ -156,9 +156,9 @@
                 <div class="mb-3 col-12 col-md-6">
                     <div class="d-flex justify-content-between align-items-center owner me-2">
                       <label class="form-label gray fw-bold">Property Owner</label>
-                      <button class="rounded border text-white text-decoration-none " routerLink="/owners/create_new" style="background-color:#1F4068;">
+                      <a role="button" class="rounded border text-white text-decoration-none "  style="background-color:#1F4068;width:30px;text-align: center;" (click)="openOwnersModal()">
                           +
-                      </button>
+                      </a>
                     </div>
                     <!-- start dropdown button  -->
                     <!-- <app-dropdown [list]="listDropDownPropertyowner" [holder]="Propertyowner" (selected)="selectedfromDropDownPropertyowner($event)"></app-dropdown> -->
@@ -506,3 +506,19 @@ close
       </div>
   </div>
 </div>
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="display11" [style]="{ width: '80%' }">
+    <!-- <span class="p-text-secondary block mb-5">Update your information.</span>
+    <div class="flex align-items-center gap-3 mb-3">
+        <label for="username" class="font-semibold w-6rem">Username</label>
+        <input pInputText id="username" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+        <label for="email" class="font-semibold w-6rem">Email</label>
+        <input pInputText id="email" class="flex-auto" autocomplete="off" />
+    </div> -->
+    <app-add-new-owner></app-add-new-owner>
+    <div class="flex justify-content-end gap-2">
+        <p-button label="Cancel" severity="secondary" (click)="display11 = false" />
+        <p-button label="Save" (click)="display11 = false" />
+    </div>
+</p-dialog>

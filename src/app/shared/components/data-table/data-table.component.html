@@ -56,7 +56,8 @@
                 <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>
                 <td  routerLink="/owners/owner-profile/{{product?.owner_ID}}" *ngIf="pagePerson=='Owners'  ">{{product.owner_Phone}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'">{{product.gender}}</td> -->
-                <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"   *ngIf="pagePerson=='Owners'">{{product.owner_About}}</td>
+                <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"   *ngIf="pagePerson=='Owners'&&product.owner_About.length>25">{{product.owner_About | slice:0:25}} ...</td>
+                <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"   *ngIf="pagePerson=='Owners'&&product.owner_About.length<25">{{product.owner_About}} </td>
                 <!-- <td  *ngIf="pagePerson=='Owners'">{{product.owner_Status}}</td> -->
                 <td *ngIf="pagePerson=='Owners' " class="cursor position-relative">
                     <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,product.owner_ID)">

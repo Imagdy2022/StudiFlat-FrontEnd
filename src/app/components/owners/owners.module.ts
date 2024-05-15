@@ -39,7 +39,7 @@ const routes: Routes = [];
     ToastModule,
     OwnersRoutingModule
   ],
-  exports: [OwnerDetailsComponent],
+  exports: [OwnerDetailsComponent,],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
