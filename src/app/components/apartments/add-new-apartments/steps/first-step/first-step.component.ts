@@ -704,10 +704,14 @@ export class FirstStepComponent implements OnInit {
   }
   openOwnersModal()
   {
-    
-this.display11=true
+    this.display11=true;
+
   }
-  
+  closeOwnersModal()
+  {
+  this.getAowners();
+this.display11=false
+  }
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
     this.subscriptions[i].unsubscribe();

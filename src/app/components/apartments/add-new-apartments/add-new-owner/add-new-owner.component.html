@@ -1,39 +1,7 @@
-<!-- start header  -->
-<!-- end header  -->
-
-<p-toast></p-toast>
-
 <div class="row m-0">
-    <main class="p-4 col-lg-12">
-    <!-- start sidebar  -->
-    <!-- end sidebar  -->
-    <!-- start content page  -->
-    <!-- 
-        <div class="d-md-flex justify-content-between"> -->
-            <!-- <div class="d-flex">
-
-                <p class="fw-bold me-2" style="color: #6c6a6a"><a style="color: black" class="removeUnderLine" href="./owners">Owners </a></p>
-                <p class="fw-bold me-2">></p>
-                <p class="fw-bold" style="color: black">{{param}}</p>
-            </div>
-            <div *ngIf="param != 'edit owner name details'"> -->
-                <!-- <button class="outline-0 border-0 rounded-3 py-2 px-3 me-2 fw-bold" style="background-color: #EBEBEB; color:#1F4068">
-          <img src="assets/images/user/share.png"> Share</button> -->
-                <!-- <button class="outline-0 border-0 rounded-3 py-2 px-3 me-2 fw-bold" style="background-color: #EBEBEB; color:#1F4068">
-          <img src="assets/images/user/delete.svg"> Delete</button>
-                <button class="outline-0 border-0 rounded-3 py-2 px-3 text-white fw-bold" style="background-color:#1F4068"><img
-            src="assets/images/user/edit.svg"> Edit</button> -->
-            <!-- </div> -->
-        <!-- </div> -->
-
-        <div class="mt-3 row border bg-white rounded-3 py-3 ">
-            <aside class="col-2 p-0 ps-1 position-fixed d-none d-md-block">
-                <a class="d-block text-decoration-none fw-bold px-2 py-3 text-black mb-1 active" *ngFor="let listAnchor of listAnchors ; let index=index" style="color: #605D62 !important; cursor: pointer;" (click)="onClick(listAnchor.id)" [class.active]="link[index]==true"
-                    (click)="changeAnchor(index)">{{listAnchor.link}}</a>
-            </aside>
-
-            <form class="col-md-10 content-details " [formGroup]="createOwner" (ngSubmit)="CreateOwner(createOwner)">
-
+    <main class="col-lg-12">
+        <div class="row border bg-white rounded-3">
+            <form class="col-md-12 content-details " [formGroup]="createOwner" (ngSubmit)="CreateOwner(createOwner)">
                 <!--General info-->
                 <app-general-info-user [title]="subTitle" [titlePage]="param" [imageUrl]="createOwner.value.owner_Photo" (changeImageUrl)="updateUserImage($event)"></app-general-info-user>
                 <!--start General info form-->
@@ -207,7 +175,7 @@
 
                 </div>
 
-                <div class="d-flex justify-content-between" *ngIf="param!='Owner details'">
+                <div class="d-flex justify-content-between" >
                     <button (click)=" gotopage2( )" class="outlet-0 bg-transparent rounded-3 px-4 py-2 fw-bold downloadAll">Cancel</button>
                     <p-button class="outlet-0 text-white border-0 px-4 py-2 rounded-3 sendDataPButton" label="Save" [loading]="loadingButton" type="submit"></p-button>
 

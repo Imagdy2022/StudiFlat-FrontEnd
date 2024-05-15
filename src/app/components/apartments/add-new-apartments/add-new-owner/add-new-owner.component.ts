@@ -1,5 +1,5 @@
 
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,13 +7,17 @@ import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.serv
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
+import { FailedToStartTransportError } from '@microsoft/signalr/dist/esm/Errors';
 
 @Component({
   selector: 'app-add-new-owner',
   templateUrl: './add-new-owner.component.html',
-  styleUrls: ['./add-new-owner.component.scss']
+  styleUrls: ['./add-new-owner.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AddNewOwnerComponent {
+  @Output() dataEvent = new EventEmitter<boolean>();
+
   /** showSide  */
   showSide: string = '';
   /** available  */
@@ -160,8 +164,7 @@ export class AddNewOwnerComponent {
     this.router.navigateByUrl(url);
   }
   gotopage2() {
-    let url: string = 'owners';
-    this.router.navigateByUrl(url);
+    this.dataEvent.emit(false);
   }
   /**
    * initCities
@@ -199,7 +202,7 @@ export class AddNewOwnerComponent {
     data.value.owner_Phone = String(data.value.owner_Phone);
     data.value.owner_WA_Number = String(data.value.owner_WA_Number);
     this.loadingButton = true;
-    if (this.param == 'Create New') {
+    
       this.subscriptions.push(
         this._OnwerService
           .createOwner({
@@ -215,7 +218,13 @@ export class AddNewOwnerComponent {
           .subscribe(
             (res) => {
               this.loadingButton = false;
-              this.router.navigate(['/owners']);
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: `${res.message}`,
+              });
+              this.dataEvent.emit(false);
+
             },
             (err) => {
               this.loadingButton = false;
@@ -228,33 +237,6 @@ export class AddNewOwnerComponent {
             }
           )
       );
-    } else {
-      const editData = {
-        ...data.value,
-        ...{
-          nationality: 'AF',
-          owner_ID: this.id,
-          Gender: 'UnSpecified',
-          Country: 'UnSpecified',
-        },
-      };
-      this.subscriptions.push(
-        this._OnwerService.editOwner(this.id, editData).subscribe(
-          (res) => {
-            this.loadingButton = false;
-            this.router.navigate(['/owners']);
-          },
-          (err) => {
-            this.loadingButton = false;
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: `${err.error.title}`,
-            });
-          }
-        )
-      );
-    }
   }
 
   updateUserImage(event: any) {
