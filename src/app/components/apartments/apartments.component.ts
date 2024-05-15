@@ -252,10 +252,15 @@ gotopage( ){
    this.getAllApartment();
  }
  searchTextChange: any;
- searchAction() {
-  // this.searchTextChange.emit(this.searchText);
-   this.getAllApartment();
- }
+
+searchAction(event: KeyboardEvent) {
+  if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
+  this.getAllApartment();
+}
+
  ngOnDestroy() {
   for(let i=0;i<this.subscriptions.length;i++)
   this.subscriptions[i].unsubscribe();

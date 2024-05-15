@@ -386,8 +386,11 @@ export class PaymentsComponent implements OnInit {
   }
   searchTextChange: any;
   search: boolean = false;
-  searchAction() {
-    // this.searchTextChange.emit(this.searchText);
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
     this.GetAllPayments();
   }
   display2 = 'none';

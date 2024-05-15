@@ -121,3 +121,30 @@ tr:last-child{
 .p-dropdown-items-wrapper {
   max-height: 250px !important;
 }
+.owner-cell {
+  display: flex;
+  align-items: center;
+}
+
+.owner-info {
+  display: flex;
+  align-items: center;
+}
+
+.owner-photo {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+td[routerLink^="/owners/owner-profile"] {
+  overflow: hidden;
+  white-space: nowrap;
+}
+@media only screen and (max-width: 900px) {
+  .owner-cell {
+    width: 40vw;
+  }
+}

@@ -173,7 +173,11 @@ export class CreateNewPaymentComponent {
 
   searchText: string = '';
 
-  searchAction() {
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
     this.GetPayToList();
   }
   onUploadContract(event: any): void {

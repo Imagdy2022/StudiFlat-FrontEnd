@@ -217,11 +217,12 @@ export class UserComponent {
     this.getAllTenants();
   }
   searchTextChange: any;
-  searchAction() {
-    // this.searchTextChange.emit(this.searchText);
-    // this.search = false;
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
     this.getAllTenants();
-    // this.searchText = '';
   }
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)

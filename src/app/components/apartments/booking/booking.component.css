@@ -1,0 +1,9 @@
+.input{
+  position: relative;
+}
+.input  img{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}

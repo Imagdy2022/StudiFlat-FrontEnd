@@ -50,7 +50,7 @@
             <!-- search input -->
           <div class="col-md-5 col-8">
               <div class="input">
-                <input type="text" class="form-control py-2 w-100" (keyup)="searchAction()" [(ngModel)]="searchText" placeholder="Global Search"/>
+                <input type="text" class="form-control py-2 w-100" (keyup)="searchAction($event)" [(ngModel)]="searchText" placeholder="Global Search"/>
                   <img src="../../../assets/images/search.svg" alt="">
               </div>
           </div>
