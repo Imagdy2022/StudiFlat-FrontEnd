@@ -143,7 +143,7 @@ export class OwnersComponent implements OnInit {
   initHeadersData(): Array<ITableHeader> {
     return [
       // { Name: '', SortableColumn: '', tableHeaderCheckbox: true, sortIcon: false },
-       {Name:" ", SortableColumn: 'owner_Photo'},
+      //  {Name:" ", SortableColumn: 'owner_Photo'},
       { Name: 'Name', SortableColumn: 'owner_FirstName', sortIcon: true },
       { Name: 'Email Address', SortableColumn: 'owner_Mail', sortIcon: true },
       { Name: 'Phone Number', SortableColumn: 'owner_Phone', sortIcon: true },

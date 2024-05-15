@@ -15,7 +15,7 @@
         <!-- search input -->
         <div class="col-md-5">
           <div class="input">
-            <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction()" [(ngModel)]="searchText" />
+            <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
               <img src="../../../assets/images/search.svg" alt="">
           </div>
         </div>
@@ -42,15 +42,22 @@
                     <p-tableCheckbox [value]="product" (click)="GetSelectedItem()"></p-tableCheckbox>
                 </td> -->
                 <!-- in owner case -->
-                <td *ngIf="pagePerson =='Owners'"  routerLink="/owners/owner-profile/{{product?.owner_ID}}">
+                <!-- <td *ngIf="pagePerson =='Owners'"  routerLink="/owners/owner-profile/{{product?.owner_ID}}">
 
-                    <img *ngIf="product.owner_Photo" [src]="product?.owner_Photo" style="height: 50px;width: 50px;border-radius: 50%;cursor: pointer;">
-                    <img *ngIf="!product.owner_Photo" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;cursor: pointer;">
+                    <img *ngIf="product.owner_Photo" [src]="product?.owner_Photo" style="height: 50px;width: 50px;border-radius: 50%;cursor: pointer;" class="me-2">
+                    <img *ngIf="!product.owner_Photo" src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;cursor: pointer;" class="me-2">
+                    {{product.owner_FirstName}} {{product.owner_LastName }}
 
-                </td>
-                <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_FirstName && product.owner_LastName">
-                  {{product.owner_FirstName}} {{product.owner_LastName }}
-                </td>
+                </td> -->
+                <td *ngIf="pagePerson =='Owners'" routerLink="/owners/owner-profile/{{product?.owner_ID}}" class="owner-cell">
+                  <div class="owner-info">
+                      <img *ngIf="product.owner_Photo" [src]="product?.owner_Photo" alt="Owner Photo" class="owner-photo">
+                      <img *ngIf="!product.owner_Photo" src="../../../assets/images/Frame 1261154899.svg" alt="Default Photo" class="owner-photo">
+                      <div class="owner-name" [title]="product.owner_FirstName + ' ' + product.owner_LastName">
+                          {{product.owner_FirstName}} {{product.owner_LastName }}
+                      </div>
+                  </div>
+              </td>
                 <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_BankAccoun">{{product.owner_BankAccoun}}</td>
                 <!-- <td *ngIf="pagePerson=='Owners'  ">{{product.owner_CreatedBy}}</td> -->
                 <td routerLink="/owners/owner-profile/{{product?.owner_ID}}"  *ngIf="pagePerson =='Owners' && product.owner_Mail">{{product.owner_Mail}}</td>

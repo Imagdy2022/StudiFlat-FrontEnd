@@ -227,8 +227,11 @@ export class CheckoutInqqComponent implements OnInit {
     this.getAllcheckOut(this.statusinquire);
   }
   searchTextChange: any;
-  searchAction() {
-    // this.searchTextChange.emit(this.searchText);
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
     this.getAllcheckOut(this.statusinquire);
   }
   display3: any;

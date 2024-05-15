@@ -28,26 +28,26 @@
 
             <div class="card mt-2 bvngd">
 
+                <div class="row d-block d-md-flex justify-content-between my-2 px-3 py-2">
 
-                 <div class="d-flex justify-content-between">
-                    <!-- length Of person -->
-                    <div class="d-flex mx-2 mt-4">
-                        <p class="me-2 fs-5 fw-bold ml-8">Booking history</p>
 
-                    </div>
-                    <!-- search input -->
-                    <div class="d-flex align-items-center mx-2 mt-2 w-50">
-                        <ng-container *ngIf="!search; else searchVisible">
-                            <i class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true"></i>
-                        </ng-container>
-                        <ng-template #searchVisible>
-                            <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
-                            <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
-                            Search
-                        </button>
-                        </ng-template>
-                    </div>
+                <div class="col-md-4">
+                  <div class="d-flex align-items-center" style="font-size: 15px;">
+                    <label for="" style="color: #313331;font-weight: 500;font-size: 16px;">Booking history</label>
+
+                  </div>
                 </div>
+                 <div class="col-md-5 col-8">
+                  <div class="input">
+                    <input type="text" class="form-control py-2" placeholder=" Search by appartment location" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
+                      <img src="../../../assets/images/search.svg" alt="">
+                  </div>
+                 </div>
+
+                  <p-toast></p-toast>
+
+                  <!-- end apartmentLists button  -->
+              </div>
 
                 <p-table class="table-shopping" [(selection)]="selectedProducts" [dataKey]="dataSelectionKey" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="booking">
                     <ng-template pTemplate="header" class="text-center">

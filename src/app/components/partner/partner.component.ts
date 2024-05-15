@@ -186,11 +186,12 @@ searchKey(data: string) {
   this.getAllpartners()
 }
 searchTextChange:any
-searchAction() {
-  // this.searchTextChange.emit(this.searchText);
-  // this.search = false;
+searchAction(event: KeyboardEvent) {
+  if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+    event.preventDefault();
+    return;
+}
   this.getAllpartners()
-    // this.searchText =""
 
 }
 ngOnDestroy() {

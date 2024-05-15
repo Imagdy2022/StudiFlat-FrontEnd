@@ -109,7 +109,7 @@
                  <div class="row d-flex justify-content-between align-items-center gx-3 me-2 mb-2 mb-md-2">
                    <div class="col-6">
                     <div class="search pt-4">
-                      <input class="form-control fs-6 ps-3"  type="text" (keyup)="searchAction()" [(ngModel)]="searchText" placeholder="Search" />
+                      <input class="form-control fs-6 ps-3"  type="text" (keyup)="searchAction($event)" [(ngModel)]="searchText" placeholder="Search" />
                     </div>
                    </div>
                    <div class="col-6">

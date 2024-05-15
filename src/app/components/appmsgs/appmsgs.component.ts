@@ -265,12 +265,7 @@ export class AppMsgsComponent implements OnInit {
     this.getAllMsgs();
   }
   searchTextChange: any;
-  searchAction() {
-    // this.searchTextChange.emit(this.searchText);
-    this.search = false;
-    this.getAllMsgs();
-    this.searchText = '';
-  }
+
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
     this.subscriptions[i].unsubscribe();

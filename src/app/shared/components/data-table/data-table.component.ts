@@ -86,7 +86,11 @@ export class DataTableComponent {
 
 
 
-  searchAction() {
+  searchAction(event: KeyboardEvent) {
+    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+  }
     this.searchTextChange.emit(this.searchText);
     this.search = false;
   }
