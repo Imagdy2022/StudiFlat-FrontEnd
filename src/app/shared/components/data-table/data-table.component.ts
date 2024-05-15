@@ -136,18 +136,18 @@ export class DataTableComponent {
   confirmDelete(event: any, product: any) {
 
 
-    this.confirmationService.confirm({
-      target: event.target,
-      message: 'Are you sure you want to delete this?',
-      icon: 'pi pi-trash', // Change the icon to a trash icon or another suitable delete icon
-      accept: () => {
+    // this.confirmationService.confirm({
+    //   target: event.target,
+    //   message: 'Are you sure you want to delete this?',
+    //   icon: 'pi pi-trash', // Change the icon to a trash icon or another suitable delete icon
+    //   accept: () => {
         // Delete action
         this.deleteItem(product);
-      },
-      reject: () => {
-        // Cancel or reject action
-      }
-    });
+    //   },
+    //   reject: () => {
+    //     // Cancel or reject action
+    //   }
+    // });
   }
 
   /**
