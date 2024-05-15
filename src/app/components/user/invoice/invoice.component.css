@@ -34,7 +34,7 @@
 
 .ddfdffd {
     text-align: right;
-    color: #60737D;
+    color: #60737D !important;
     font-size: 16.50px;
     font-weight: 400;
     word-wrap: break-word
@@ -121,7 +121,8 @@
 .invoce2 {
     left: 45.01px;
     top: 462.04px;
-    position: absolute
+    position: absolute;
+    width:100% !important;
 }
 
 .invoce3 {

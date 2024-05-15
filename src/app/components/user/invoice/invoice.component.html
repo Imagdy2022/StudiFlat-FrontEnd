@@ -13,9 +13,11 @@
                 <p (click)="backClicked()" class="fw-bold" style="color: black ;cursor: pointer;">Back </p>
             </div>
             <div style="margin-right: 94px;">
-                <button (click)="OnPrint()" class="outline-0 border-0 rounded-3 py-2 px-3 me-2 fw-bold" style="background-color: #EBEBEB; color:#1F4068"><img src="assets/images/print.svg"> Print</button>
-                <button (click)="exportAsPDF('MyDIv');" class="outline-0 border-0 rounded-3 py-2 px-3 text-white fw-bold" style="background-color:#1F4068"><img
-        src="assets/images/Vector.svg"> Download PDF</button>
+                <button (click)="OnPrint()" class="outline-0 border-0 rounded-3 py-2 px-3 me-2 fw-bold"
+                    style="background-color: #EBEBEB; color:#1F4068"><img src="assets/images/print.svg"> Print</button>
+                <button (click)="exportAsPDF('MyDIv');" class="outline-0 border-0 rounded-3 py-2 px-3 text-white fw-bold"
+                    style="background-color:#1F4068"><img
+                        src="assets/images/Vector.svg"> Download PDF</button>
             </div>
         </div>
         <!-- <div class="d-flex">
@@ -25,47 +27,78 @@
         <div class="frist11 xxcprint" id="MyDIv">
             <div class="frist22"></div>
             <div class="frist33"></div>
-           
+
 
             <div class="frist44">
-                <div class="frist55">Clients</div>
-                <div class="frist66">{{invoiceDetail?.cust_Type}} </div>
+                <div class="frist55">{{ invoiceDetail?.cust_Type }} </div>
+                <div class="frist66 mt-2" *ngFor="let client of invoiceDetail?.clients
+                ">{{ client }} </div>
             </div>
-            <!-- invoice-details --> 
-            <div *ngFor="let invoice of invoices" >
-            <div class="invice1">Invoice</div>
-            <div class="invoce2">
-                <span class="invoce3"> </span><span class="invice4">  </span>
-                <span class="invice5">{{invoice?.invoice_Desc}}</span><span class="invoce6"> </span>
-            </div>
-            <div class="price11">Price</div>
-            <div class="total22">Total</div>
-            <div class="section33">
-                <div class="class33">
-                    <div class="invoicenu">Invoice No.</div>
-                    <div class="invocede"> {{invoiceDetail.inv_Code}} </div>
-                </div>
-                <div class="divclassss">
-                    <div class="ttott">
-                        <div class="issue33">Issued on</div>
-                        <div class="datedes">{{invoiceDetail.issued_on}} </div>
-                    </div>
-                    <div class="ttott">
-                        <div class="issue33">Payment Due</div>
-                        <div class="datedes">{{invoiceDetail.payment_Due}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="stackkc">
-                <div style="flex: 1 1 0; align-self: stretch; padding-right: 17.02px; justify-content: flex-start; align-items: flex-start; gap: 340.58px; display: inline-flex">
-                    <div style="width: 375.09px; color: #313033; font-size: 18px; font-family: 'Popines'; font-weight: 400; line-height: 24.01px; word-wrap: break-word"> {{_details.apt_Name}}</div>
-                    <div class="ddfdffd"> {{invoice?.invoice_Amount}}</div>
-                </div>
-            </div>   
-                 <div class="priceeins"> {{invoice?.invoice_Amount}}</div>
+            <!-- invoice-details -->
 
-            </div>        
-            
+            <div name="Invoice_Details_Table" class="invoce2">
+                <div class="row">
+                    <div class="col-8">
+                        <span style="color:#60737D !important;">Description:- {{ invoiceDetail?.apt_Name }}</span>
+                    </div>
+                    <div class="col-2">
+                        <span style="color:#60737D !important;">Price</span>
+                    </div>
+                    <div class="col-2">
+                        <span style="color:#60737D !important;">Total</span>
+                    </div>
+                </div>
+                <div class="row mt-4" *ngFor="let invoice of invoices">
+                    <div class="col-8">
+                        <span class="invice5">{{ invoice?.invoice_Desc }}</span>
+                    </div>
+                    <div class="col-2 ">
+                        <span class="invice5 ddfdffd">{{ invoice?.invoice_Amount }}</span>
+                    </div>
+                    <div class="col-2">
+                        <span class="invice5">{{ invoice?.invoice_Total }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngFor="let invoice of invoices">
+                <div class="invice1">Invoice</div>
+                <!--   <div class="invoce2">
+                    <span class="invoce3"> </span><span class="invice4"> </span>
+                    <span class="invice5">{{ invoice?.invoice_Desc }}</span><span class="invoce6"> </span>
+                </div> -->
+                <!--     <div class="price11">Price</div>
+                <div class="total22">Total</div> -->
+                <div class="section33">
+                    <div class="class33">
+                        <div class="invoicenu">Invoice No.</div>
+                        <div class="invocede"> {{ invoiceDetail.inv_Code }} </div>
+                    </div>
+                    <div class="divclassss">
+                        <div class="ttott">
+                            <div class="issue33">Issued on</div>
+                            <div class="datedes">{{ invoiceDetail.issued_on }} </div>
+                        </div>
+                        <div class="ttott">
+                            <div class="issue33">Payment Due</div>
+                            <div class="datedes">{{ invoiceDetail.payment_Due }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="stackkc">
+                    <div
+                        style="flex: 1 1 0; align-self: stretch; padding-right: 17.02px; justify-content: flex-start; align-items: flex-start; gap: 340.58px; display: inline-flex">
+                        <div
+                            style="width: 375.09px; color: #313033; font-size: 18px; font-family: 'Popines'; font-weight: 400; line-height: 24.01px; word-wrap: break-word">
+                            {{ _details.apt_Name }}
+                        </div>
+                        <div class="ddfdffd"> {{ invoice?.invoice_Amount }}</div>
+                    </div>
+                </div>
+                <div class="priceeins"> {{ invoice?.invoice_Amount }}</div> -->
+
+            </div>
+
 
             <!-- total -->
             <div class="stysda">
@@ -74,12 +107,14 @@
                     <div style="justify-content: center; align-items: center; gap: 1.50px; display: flex">
                         <div class="ccarddinvice">(</div>
                         <div style="justify-content: flex-start; align-items: flex-start; display: flex">
-                            <div style="text-align: right; color: #121722; font-size: 15px; font-family: 'Popines'; font-weight: 400; word-wrap: break-word">Euro</div>
+                            <div
+                                style="text-align: right; color: #121722; font-size: 15px; font-family: 'Popines'; font-weight: 400; word-wrap: break-word">
+                                Euro</div>
                         </div>
                         <div class="ccarddinvice">)</div>
                     </div>
                 </div>
-                <div class="pricinn">{{invoiceDetail?.grand_Total}}</div>
+                <div class="pricinn">{{ invoiceDetail?.grand_Total }}</div>
             </div>
             <!-- prepared by -->
             <div class="imgheap">
@@ -87,8 +122,8 @@
                     <img style="width: 169.17px; height: 72px" src="./assets/images/logo.svg" />
                     <div class="prepheap">
                         <div class="prpee">
-                            <div class="phonein">Prepared Date: {{_details.prepared_Date|date: 'dd/MM/yyyy' }}</div>
-                            <div class="phonein">Title: {{_details.invoice_Title}}</div>
+                            <div class="phonein">Prepared Date: {{ _details.prepared_Date|date: 'dd/MM/yyyy' }}</div>
+                            <div class="phonein">Title: {{ _details.invoice_Title }}</div>
                         </div>
                         <div>
 
