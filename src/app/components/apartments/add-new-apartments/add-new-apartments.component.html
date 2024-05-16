@@ -26,13 +26,6 @@
         </div>
         <!--end navigate add new apartments-->
         <div class="card p-4 stepper">
-            <div class="d-flex">
-                <i class="pi pi-arrow-left mt-1"></i>
-                <a href="javascript:void(0)" routerLink="/apartments" class="removeUnderLine">
-                    <p class="fw-bold ml-8"> {{ param }} </p>
-                </a>
-
-            </div>
             <p-steps [model]="items" (Responsive)="true" [(activeIndex)]="activeIndex" [readonly]="true"></p-steps>
         </div>
         <!--start form of general info-->

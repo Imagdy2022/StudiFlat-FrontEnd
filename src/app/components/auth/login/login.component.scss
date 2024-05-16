@@ -19,6 +19,17 @@ img{
     color: white;
     padding: 10px 0;
 }
+.password{
+  position: relative;
+  img{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+}
+}
 
 ::ng-deep .form-check input[type="checkbox"],
 ::ng-deep .radio input[type="radio"]{

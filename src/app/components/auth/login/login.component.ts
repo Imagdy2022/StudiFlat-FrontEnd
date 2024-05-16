@@ -112,4 +112,10 @@ export class LoginComponent {
         },
       });
   }
+
+  passwordVisible: boolean = false;
+
+togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
+}
 }

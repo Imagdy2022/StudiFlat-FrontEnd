@@ -224,6 +224,22 @@ export class UserComponent {
   }
     this.getAllTenants();
   }
+
+
+  display = 'none';
+  model1: Boolean = false;
+  model2: Boolean = false;
+  deleteModal(id: any) {
+    this.display = 'block';
+    this.display = 'flex';
+    this.model1 = true;
+    this.model2 = false;
+    // this.targetId = id;
+  }
+  onCloseHandled() {
+    this.display = 'none';
+  }
+
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
     this.subscriptions[i].unsubscribe();

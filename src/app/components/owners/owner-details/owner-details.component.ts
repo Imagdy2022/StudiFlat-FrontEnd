@@ -268,7 +268,7 @@ export class OwnerDetailsComponent {
       owner_Address: new FormControl('', [Validators.required]),
       owner_About: new FormControl('', [Validators.required]),
       owner_DOB: new FormControl('', [Validators.required]),
-      owner_Phone: new FormControl('', [Validators.required]),
+      owner_Phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
       owner_WA_Number: new FormControl(''),
       owner_Bank: new FormControl('', [Validators.required]),
       owner_BankAccount: new FormControl('', [Validators.required]),
@@ -276,6 +276,7 @@ export class OwnerDetailsComponent {
       owner_Photo: new FormControl('', [Validators.required]),
     });
   }
+
 
   /**
    * scrollTop
