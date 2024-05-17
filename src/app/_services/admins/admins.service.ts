@@ -211,7 +211,7 @@ export class AdminsService {
     return this.http.post<any>(url, data, { headers: this.headers });
   }
   DeleteWorker(id: any): Observable<any> {
-    const url = environment.apiUrl + '/Workers/DeleteWorker?id=' + id;
+    const url = environment.apiUrl + `/Workers/DeleteWorker?id=${id}`;
     return this.http.delete<any>(url, { headers: this.headers });
   }
   ListAllIssues(

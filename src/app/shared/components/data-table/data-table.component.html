@@ -75,7 +75,7 @@
 
                         <button *ngIf="OwnersRole?.p_Update==true || is_Super==true" routerLink="/owners/edit_owner/{{product.owner_ID}}" class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100">Edit</button>
 
-                        <button *ngIf="OwnersRole?.p_Delete==true || is_Super==true" (click)="confirmDelete($event,product)" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">Delete</button>
+                        <button *ngIf="OwnersRole?.p_Delete==true || is_Super==true" (click)="deleteModal(product)" class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100">Delete</button>
 
                     </div>
                     <!-- <div class="flex align-items-center justify-content-center gap-2">
@@ -151,4 +151,26 @@
 
     <p-paginator *ngIf="products.length >0" (onPageChange)="tiggerPageChange($event)" [rows]="10" [totalRecords]="fullRespone?.totalRecords"></p-paginator>
 
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" >
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close2.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/delete2.svg" alt=""></span>
+                  <h5>Confirm Deletion</h5>
+                  <p class="text-muted ">Are you want to delete the owner? </p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete" data-bs-dismiss="modal" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button" class="btn btn-color" id="closeModal" (click)="deleteItem()" >Delete</button>
+                  </div>
+     </div>
+      </div>
 </div>

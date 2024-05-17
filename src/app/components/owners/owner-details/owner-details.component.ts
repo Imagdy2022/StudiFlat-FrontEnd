@@ -263,17 +263,17 @@ export class OwnerDetailsComponent {
   }
   bindCreateOwner(): void {
     this.createOwner = new FormGroup({
-      owner_FirstName: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z]*$/)]),
-      owner_LastName: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z]*$/)]),
+      owner_FirstName: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)]),
+      owner_LastName: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)]),
       owner_Mail: new FormControl('', [Validators.email, Validators.required]),
       owner_Address: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9,. ]*$/)]),
       owner_About: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9,. ]*$/)]),
       owner_DOB: new FormControl('', [Validators.required]),
-      owner_Phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
+      owner_Phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9 ]*$/)]),
       owner_WA_Number: new FormControl(''),
-      owner_Bank: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z]*$/)]),
-      owner_BankAccount: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
-      owner_BankSwift: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9]*$/)]),
+      owner_Bank: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)]),
+      owner_BankAccount: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]*$/)]),
+      owner_BankSwift: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]*$/)]),
       owner_Photo: new FormControl('', [Validators.required]),
     });
   }

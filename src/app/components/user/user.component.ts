@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
 })
 export class UserComponent {
   home: MenuItem | undefined;
+  @ViewChild('closebutton') closebutton: any;
 
   showSide: string = '';
   products!: Array<object>;
@@ -20,6 +21,7 @@ export class UserComponent {
   loading: boolean = true;
   monthButton  : boolean= true;
   weekButton  : boolean= false;
+  userId:any;
   // search: boolean = false;
   listDropDown: Array<object> = [{ name: 'All  ' },
     { name: 'Today' },
@@ -136,9 +138,10 @@ export class UserComponent {
     }
     this.getAllTenants()
   }
-  DeleteUser(id: any) {
-    this.subscriptions.push(this._adminservices.DeleteTenant(id).subscribe(
+  DeleteUser() {
+    this.subscriptions.push(this._adminservices.DeleteTenant(this.userId).subscribe(
       (res: any) => {
+        this.closebutton.nativeElement.click();
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
@@ -157,9 +160,10 @@ export class UserComponent {
     ));
 
   }
-  SuspendUser(id: any) {
-    this.subscriptions.push( this._adminservices.SuspendTenant(id).subscribe(
+  SuspendUser() {
+    this.subscriptions.push( this._adminservices.SuspendTenant(this.userId).subscribe(
       (res: any) => {
+        this.closebutton.nativeElement.click();
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
@@ -177,9 +181,10 @@ export class UserComponent {
       }
     ));
   }
-  unSuspendUser(id: any) {
-    this.subscriptions.push(  this._adminservices.UnSuspendTenant(id).subscribe(
+  unSuspendUser() {
+    this.subscriptions.push(  this._adminservices.UnSuspendTenant(this.userId).subscribe(
       (res: any) => {
+        this.closebutton.nativeElement.click();
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
@@ -229,12 +234,30 @@ export class UserComponent {
   display = 'none';
   model1: Boolean = false;
   model2: Boolean = false;
+  model3: Boolean = false;
   deleteModal(id: any) {
     this.display = 'block';
     this.display = 'flex';
     this.model1 = true;
     this.model2 = false;
-    // this.targetId = id;
+    this.model3 = false;
+    this.userId = id;
+  }
+  SuspendModal(id: any) {
+    this.display = 'block';
+    this.display = 'flex';
+    this.model2 = true;
+    this.model1 = false;
+    this.model3 = false;
+    this.userId = id;
+  }
+  UnSuspendModal(id: any) {
+    this.display = 'block';
+    this.display = 'flex';
+    this.model3 = true;
+    this.model1 = false;
+    this.model2 = false;
+    this.userId = id;
   }
   onCloseHandled() {
     this.display = 'none';

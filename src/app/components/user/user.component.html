@@ -158,9 +158,9 @@
           </button>
                             <div *ngIf="showEdit[Tenant.user_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/users/app-edite-user-details/{{Tenant?.user_ID}}">Edit</button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteUser(Tenant.user_ID)" *ngIf="TantsRole?.p_Delete==true || is_Super==true"> Delete </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendUser(Tenant.user_ID)">Suspend User </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status==false" (click)="unSuspendUser(Tenant.user_ID)">UnSuspend User </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="deleteModal(Tenant.user_ID)" *ngIf="TantsRole?.p_Delete==true || is_Super==true"> Delete </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendModal(Tenant.user_ID)">Suspend User </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status==false" (click)="UnSuspendModal(Tenant.user_ID)">UnSuspend User </button>
 
                             </div>
 
@@ -181,9 +181,75 @@
 
             <p-paginator *ngIf="Tenants.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
         </div>
-       
+
 
     </main>
     <!-- end content page  -->
 </div>
 
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" *ngIf="model1 && !model2 && !model3">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close2.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/delete2.svg" alt=""></span>
+                  <h5>Confirm Deletion</h5>
+                  <p class="text-muted ">Are you want to delete the user? </p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete" data-bs-dismiss="modal" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button" class="btn btn-color" id="closeModal" (click)="DeleteUser()" >Delete</button>
+                  </div>
+     </div>
+      </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}"  *ngIf="model2 &&!model1 && !model3">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/block.svg" alt=""></span>
+                  <h5>Confirm Suspension</h5>
+                  <p class="text-muted ">Are you want to suspend the user? </p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete" data-bs-dismiss="modal" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button" class="btn btn-color"
+                        id="closeModal" (click)="SuspendUser()" >Suspend
+                  </button>
+                  </div>
+     </div>
+      </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}"  *ngIf="model3 &&!model1 && !model2">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/block.svg" alt=""></span>
+                  <h5>Confirm UnSuspension</h5>
+                  <p class="text-muted ">Are you want to un-suspend the user? </p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete" data-bs-dismiss="modal" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button" class="btn btn-color"
+                        id="closeModal" (click)="unSuspendUser()" >UnSuspend
+                  </button>
+                  </div>
+     </div>
+      </div>
+</div>

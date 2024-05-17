@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -7,10 +7,10 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
 @Component({
   selector: 'app-partner',
   templateUrl: './partner.component.html',
-  styleUrls: ['./partner.component.css']
+  styleUrls: ['./partner.component.scss']
 })
 export class PartnerComponent implements OnInit {
-
+  @ViewChild('closebutton') closebutton: any;
   showEdit: Array<boolean> = [];
  showSide: string = '';
  products!: Array<object>;
@@ -18,6 +18,7 @@ export class PartnerComponent implements OnInit {
  headerData: Array<any> = [];
  loading: boolean = true;
  search:boolean=false;
+ partnerId:any;
  subscriptions:Subscription[] = [];
  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last Week'},{name:'This month'},{name:'This year'}]
 
@@ -103,28 +104,7 @@ tiggerPageChange(event: any) {
      console.error('Error fetching owners:', error);
   }))
 
- }
- // DeleteUser(id :any){
- //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
- //     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Deleted Successfuly'}` });
-
- //     this.getAllpartners( );
-
- //    }, (error) => {
- //     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
- //   })
-
- // }
- // SuspendUser(id:any){
- //   this._adminservices.SuspendTenant( id).subscribe((res:any) => {
- //     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Suspended Successfuly'}` });
-
- //     this.getAllpartners( );
-
- //    }, (error) => {
- //     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
- //   })
- // }
+}
  detailperson(event:any,id: any): void {
    this.showEdit=[]
    event.stopPropagation()
@@ -138,10 +118,10 @@ tiggerPageChange(event: any) {
    this.showEdit=[]
 
 }
-deletepartner( id:any) {
- this.subscriptions.push( this._adminservices.DeletePartners(id ).subscribe((res) => {
+deletepartner() {
+ this.subscriptions.push( this._adminservices.DeletePartners(this.partnerId ).subscribe((res) => {
+  this.closebutton.nativeElement.click();
   this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
-
 
   this.getAllpartners()
 
@@ -194,6 +174,19 @@ searchAction(event: KeyboardEvent) {
   this.getAllpartners()
 
 }
+
+display = 'none';
+
+deleteModal(id: any) {
+  this.display = 'block';
+  this.display = 'flex';
+  this.partnerId = id;
+}
+
+onCloseHandled() {
+  this.display = 'none';
+}
+
 ngOnDestroy() {
   for(let i=0;i<this.subscriptions.length;i++)
   this.subscriptions[i].unsubscribe();
