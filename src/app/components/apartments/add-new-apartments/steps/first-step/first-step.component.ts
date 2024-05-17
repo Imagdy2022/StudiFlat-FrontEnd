@@ -401,8 +401,8 @@ export class FirstStepComponent implements OnInit {
       apt_FloorNo: new FormControl('0', [Validators.required]),
       apt_Name: new FormControl('', [Validators.required]),
       apt_AptNo: new FormControl('0', [Validators.required]),
-      apt_Price: new FormControl(0, [Validators.required]),
-      apt_SecuirtyDep: new FormControl(0, [Validators.required]),
+      apt_Price: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apt_SecuirtyDep: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       apt_BillDescirption: new FormControl(''),
       apt_StName: new FormControl('', [Validators.required]),
       apt_BuildingNo: new FormControl('', [Validators.required]),
@@ -416,11 +416,11 @@ export class FirstStepComponent implements OnInit {
       apt_MapLink: new FormControl('', [Validators.required]),
       // 'apt_Long': new FormControl('', [Validators.required]),
       //  'UUID': new FormControl(this.id ),
-      service_Fees: new FormControl('0', [Validators.required]),
+      service_Fees: new FormControl('0', [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
 
-      apt_Bedrooms: new FormControl(0, [Validators.required]),
-      apt_Toilets: new FormControl(0, [Validators.required]),
-      apt_Living: new FormControl(0, [Validators.required]),
+      apt_Bedrooms: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apt_Toilets: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apt_Living: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       apt_AllBillsIncludes: new FormControl(true, [Validators.required]), //true
       apt_Elevator: new FormControl(true, [Validators.required]),
       // 'apt_Lat': new FormControl('', [Validators.required]),//0

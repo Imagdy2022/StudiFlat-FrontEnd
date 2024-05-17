@@ -53,6 +53,7 @@ import {
 
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 initializeApp(environment.firebase);
 
 @NgModule({
@@ -91,6 +92,7 @@ initializeApp(environment.firebase);
     AppMsgsModule,
     ChartModule,
     PushmsgsModule,
+    NgbDatepickerModule,
     BlockUIModule.forRoot({
       delayStart: 1,
       delayStop: 500,

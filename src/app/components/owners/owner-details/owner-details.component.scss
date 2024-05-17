@@ -40,6 +40,17 @@
     border: 1px solid#939094 !important;
     color: #1F4068 !important;
 }
+.btn-date{
+  background-color: #fff !important;
+  right: 5px;
+  top: 5px;
+  outline: none;
+  border: 1px solid #E3E3E3 !important;
+  img {
+    height: 20px;
+    width: 20px;
+  }
+}
 
 * {
     font-family: 'Poppins'

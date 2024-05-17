@@ -44,10 +44,20 @@
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">* First name</label>
                         <input formControlName='owner_FirstName' class="form-control w-100" type="text">
+                        <div class="text-danger mt-3 error d-flex align-items-center"
+                        *ngIf="createOwner.get('owner_FirstName')?.getError('pattern')"  >
+                        <i class="fa-solid fa-ban text-danger mx-2"></i>
+                        <p class="mb-0 text-danger">First name is not valid</p>
+                      </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="fw-bold" style="color: #605D62">* Last name</label>
                         <input formControlName='owner_LastName' class="form-control w-100" type="text">
+                        <div class="text-danger mt-3 error d-flex align-items-center"
+                        *ngIf="createOwner.get('owner_LastName')?.getError('pattern')"  >
+                        <i class="fa-solid fa-ban text-danger mx-2"></i>
+                        <p class="mb-0 text-danger"> Last name is not valid</p>
+                      </div>
                     </div>
 
                 </div>
@@ -58,12 +68,21 @@
                 </div>
                 <div class="mb-4">
                     <label class="fw-bold" style="color: #605D62;">* Address</label>
-
                     <input formControlName='owner_Address' class="form-control w-100" type="text">
+                    <div class="text-danger mt-3 error d-flex align-items-center"
+                    *ngIf="createOwner.get('owner_Address')?.getError('pattern')"  >
+                    <i class="fa-solid fa-ban text-danger mx-2"></i>
+                    <p class="mb-0 text-danger">Address is not valid</p>
+                  </div>
                 </div>
                 <div>
                     <label class="fw-bold" style="color: #605D62;">* About</label>
                     <textarea formControlName='owner_About' class="border rounded-3 w-100 p-2" rows="5" style="resize: unset;"></textarea>
+                    <div class="text-danger mt-3 error d-flex align-items-center"
+                    *ngIf="createOwner.get('owner_About')?.getError('pattern')"  >
+                    <i class="fa-solid fa-ban text-danger mx-2"></i>
+                    <p class="mb-0 text-danger">About is not valid</p>
+                  </div>
                 </div>
 
                 <!--end General info form-->
@@ -78,6 +97,14 @@
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">* Date of birth</label>
                         <input formControlName='owner_DOB' class="form-control w-100 " type="date"  [value]="formattedDate" style="cursor: pointer;"  [max]="getTodayDate()">
+                       <!-- <div class="input-group">
+                        <input class="form-control" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                          formControlName='owner_DOB' [value]="formattedDate" style="cursor: pointer;"  [max]="getTodayDate()"/>
+                        <button  (click)="d.toggle()"
+                          class="bi bi-calendar3 btn-date" type="button">
+                        <img src="../../../../assets/images/date-picker.png" alt="" />
+                        </button>
+                      </div> -->
                     </div>
 
                     <div class="col-12 col-md-6 mb-4">
@@ -190,16 +217,31 @@
                         <div class="col-12 col-md-6 mb-4">
                             <label class="fw-bold" style="color: #605D62;">* Bank Name</label>
                             <input formControlName='owner_Bank' class="form-control w-100" type="text">
+                            <div class="text-danger mt-3 error d-flex align-items-center"
+                            *ngIf="createOwner.get('owner_Bank')?.getError('pattern')"  >
+                            <i class="fa-solid fa-ban text-danger mx-2"></i>
+                            <p class="mb-0 text-danger"> Bank Name is not valid </p>
+                          </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="fw-bold" style="color: #605D62">* Account Number</label>
                             <input formControlName='owner_BankAccount' class="form-control w-100" type="text">
+                            <div class="text-danger mt-3 error d-flex align-items-center"
+                            *ngIf="createOwner.get('owner_BankAccount')?.getError('pattern')"  >
+                            <i class="fa-solid fa-ban text-danger mx-2"></i>
+                            <p class="mb-0 text-danger"> Account Number is not valid </p>
+                          </div>
                         </div>
 
                     </div>
                     <div class="mb-4">
                         <label class="fw-bold" style="color: #605D62;">* Swift Number</label>
                         <input formControlName='owner_BankSwift' class="form-control w-100" type="text">
+                        <div class="text-danger mt-3 error d-flex align-items-center"
+                        *ngIf="createOwner.get('owner_BankSwift')?.getError('pattern')"  >
+                        <i class="fa-solid fa-ban text-danger mx-2"></i>
+                        <p class="mb-0 text-danger"> Swift Number is not valid </p>
+                      </div>
                     </div>
                 </div>
 
