@@ -143,10 +143,10 @@ for(let i=0; i<this.permissions.length;i++){
       this.param = index
       this.link = this.link.map(el => el == true ? false : false)
       this.link[index] = true
-      if (index == this.SideBarConstant.Logout) {
+      // if (index == this.SideBarConstant.Logout) {
 
-        this.router.navigate(['/login']);
-      }
+      //   this.router.navigate(['/login']);
+      // }
     }
 
   }
@@ -164,6 +164,15 @@ for(let i=0; i<this.permissions.length;i++){
 
   setfraze2(){
     this.isFreeze2=true
+  }
+  display = 'none';
+
+  logoutModal() {
+    this.display = 'block';
+    this.display = 'flex';
+  }
+  onCloseHandled() {
+    this.display = 'none';
   }
   onSubmitModal2(){
     this.authenticationService.logout() ;

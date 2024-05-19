@@ -96,9 +96,9 @@
                                             <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/apartments/page/{{item.apt_UUID}}">Edit</button>
                                             <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/apartments/apartments-details/{{item.apt_UUID}}">View details </button>
 
-                                            <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="AddtoBest(item.apt_UUID)">Add to best offers </button>
+                                            <button *ngIf="item.is_Best == false" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="AddtoBest(item.apt_UUID)">Add to best offers </button>
 
-                                            <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="RemoveBest(item.apt_UUID)">Remove  Best  offer </button>
+                                            <button *ngIf="item.is_Best == true" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="RemoveBest(item.apt_UUID)">Remove  Best  offer </button>
 
                                             <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteApartment(item.apt_UUID)"> Delete   </button>
 

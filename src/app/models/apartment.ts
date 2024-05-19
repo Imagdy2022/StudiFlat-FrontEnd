@@ -37,6 +37,7 @@ export class IApartments {
     "apt_Toilets": number;
     "apt_Living": number;
     "apt_Elevator": boolean;
+    "is_Best": boolean;
     "property_Imgs": Array<any>;
 
 }

@@ -13,7 +13,9 @@
                 <!-- start notification -->
                 <span (click)="shownot()" style="cursor: pointer; margin-right: 1.25rem;margin-top:0.55rem;">
                    <!-- <img src="assets/images/notification.svg" /> -->
-                   <i class="pi pi-bell mr-4 p-text-secondary"  pBadge [severity]="'danger'" style="font-size: 1.5rem"  [value]="NCount>0?NotiCount10:null"></i>
+
+                   <i *ngIf="NCount>0" class="pi pi-bell mr-4 p-text-secondary"  pBadge [severity]="'danger'" style="font-size: 1.5rem" [value]="NotiCount10"></i>
+                   <i *ngIf="NCount == 0" class="pi pi-bell"   badgeClass="p-badge-white"  style="font-size: 1.5rem" ></i>
 
 
 
@@ -28,13 +30,13 @@
                         <div class="div">
                           <div class="carbon-read" style="cursor: pointer;" *ngIf="NCount>0">
                             <a (click)="MarkAllRead()" style="cursor: pointer;">
-                            <i class="fa-solid fa-check-double" style="cursor: pointer;"></i>
+                            <i class="fa-solid fa-check-double" style="cursor: pointer; color: #1F4068;"></i>
                            </a>
                           </div>
                             <div class="carbon-close"><img (click)="closenotifaction()" style="cursor: pointer;" class="vector" src="../../../../assets/images/carbon_close.svg" /></div>
                             <div class="text-wrapper">Notifications</div>
                             <div class="div-2 px-0 mx-0">
-                                <div class="frame" [ngStyle]="{'background-color':item.iS_Readed==false ? '#ECF1F9':'#ffffff'}" *ngFor="let item of NotifiList">
+                                <div class="frame" [ngStyle]="{'background-color':item.iS_Readed==true ? '#ECF1F9':'#ffffff'}" *ngFor="let item of NotifiList">
                                     <img class="studiflats" src="../../../../assets/images/Layer 2.svg" />
                                     <div class="frame-wrapper ms-3" >
                                         <div class="div-wrapper">
@@ -45,11 +47,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngIf="item.iS_Readed==false" class="text-wrapper-2"><a style="cursor: pointer !important;" (click)="MarkReaded(item.id)">
+                                    <div *ngIf="item.iS_Readed==true" class="text-wrapper-2"><a style="cursor: pointer !important;" (click)="MarkUnReaded(item.id)">
                                        Readed
 
                                     </a></div>
-                                    <div *ngIf="item.iS_Readed==true" class="text-wrapper-2"><a style="cursor: pointer !important;" (click)="MarkUnReaded(item.id)">
+                                    <div *ngIf="item.iS_Readed==false" class="text-wrapper-2"><a style="cursor: pointer !important;" (click)="MarkReaded(item.id)">
                                     Unreaded
                                     </a></div>
 
