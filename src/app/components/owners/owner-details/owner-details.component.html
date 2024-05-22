@@ -259,7 +259,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between" *ngIf="param!='Owner details'">
-                    <button (click)=" gotopage2( )" class="outlet-0 bg-transparent rounded-3 px-4 py-2 fw-bold downloadAll">Cancel</button>
+                    <button (click)="cancleModal()" type="button" class="outlet-0 bg-transparent rounded-3 px-4 py-2 fw-bold downloadAll">Cancel</button>
                     <p-button class="outlet-0 text-white border-0 px-4 py-2 rounded-3 sendDataPButton" label="Save" [loading]="loadingButton" type="submit"></p-button>
 
                     <!-- <button class="outlet-0 text-white border-0 px-4 py-2 rounded-3" style="background-color: #1f4068;"
@@ -281,4 +281,26 @@
         </div>
     </main>
     <!-- end content page  -->
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display4}">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close2.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/cancle.svg" alt=""></span>
+                  <h5>Cancelation</h5>
+                  <p class="text-muted ">Are you sure to Cancel  Owner creation?</p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete mx-2" data-bs-dismiss="modal" (click)="onCloseHandled()">No</button>
+                    <button type="button" class="btn btn-color mx-2" id="closeModal" (click)="gotopage2( )" >Yes</button>
+                  </div>
+     </div>
+      </div>
 </div>

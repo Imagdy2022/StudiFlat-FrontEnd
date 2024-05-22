@@ -295,6 +295,15 @@ export class OwnerDetailsComponent {
     return `${year}-${month}-${day}`;
   }
 
+  display4 = 'none';
+  cancleModal() {
+    this.display4 = 'block';
+  }
+  onCloseHandled() {
+    this.display4 = 'none';
+  }
+
+
   ngOnDestroy() {
     for (let i = 0; i < this.subscriptions.length; i++)
       this.subscriptions[i].unsubscribe();
