@@ -1,0 +1,51 @@
+@media (min-width: 776px) {
+    .modal-dialog {
+        max-width: 850px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .xcvddmodel {
+        margin-right: 535px !important;
+    }
+}
+
+.file {
+    z-index: 3 !important;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.h-124px {
+    height: 124px !important;
+}
+
+.w-145px {
+    width: 145px;
+}
+
+@media (min-width: 768px) {
+    .marmodify {
+        margin-left: 486px;
+    }
+}
+
+td {
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
+
+}
+th {
+    font-size: 14px !important;
+    font-family: 'Poppins';
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
+}
+.truncate-cell {
+  max-width: 20rem; /* feel free to include any other value */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

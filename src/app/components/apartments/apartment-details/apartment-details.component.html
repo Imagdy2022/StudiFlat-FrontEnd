@@ -24,7 +24,8 @@
             <div class="row">
                 <div class="col-12 col-md-6 me-4">
                     <div class="rounded mb-3" style="overflow: hidde;height: 325px;">
-                        <img [src]="aprt_details?.apt_ThumbImg.includes('https') ? aprt_details?.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'" class="w-100 h-100" />
+                        <img [src]="aprt_details?.apt_ThumbImg.includes('https') ? aprt_details?.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'"
+                            class="w-100 h-100" />
                     </div>
                     <ng-container>
                         <div class="container testimonial-group">
@@ -32,7 +33,8 @@
 
                                 <div class="col-md-4  " *ngFor="let img of aprt_details?.property_Imgs">
                                     <a (click)="viewImage(img?.apt_imgs)" style="cursor: pointer;">
-                                        <img [src]="img?.apt_imgs && img?.apt_imgs.includes('https') ? img?.apt_imgs : '../../../assets/images/apartmentImages/default_apartment.jpg'" alt="Apartment Image" class="w-100 h-100 maxImg">
+                                        <img [src]="img?.apt_imgs && img?.apt_imgs.includes('https') ? img?.apt_imgs : '../../../assets/images/apartmentImages/default_apartment.jpg'"
+                                            alt="Apartment Image" class="w-100 h-100 maxImg">
                                     </a>
                                 </div>
 
@@ -80,14 +82,19 @@
                     </div>
                     <div class="d-flex mt-0">
                         <img src="assets/images/apartmentImages/schedule time.svg" />
-                        <p class="gray mt-3 ms-2">Duration: {{ contract_Main?.contractDate_Start |date: 'dd/MM/yyyy' }} - {{ contract_Main?.contractDate_End |date: 'dd/MM/yyyy' }}</p>
+                        <p class="gray mt-3 ms-2">Duration: {{ contract_Main?.contractDate_Start |date: 'dd/MM/yyyy' }} -
+                            {{ contract_Main?.contractDate_End |date: 'dd/MM/yyyy' }} - {{ request_code }}
+                        </p>
                     </div>
                     <div class="d-flex mt-0">
                         <img src="assets/images/apartmentImages/publish.svg" />
-                        <p class="gray mt-3 ms-2">Published: &nbsp; {{aprt_details?.apt_PublishDate| date :'medium'}}</p>
+                        <p class="gray mt-3 ms-2">Published: &nbsp; {{ aprt_details?.apt_PublishDate| date :'medium' }}</p>
                     </div>
                     <div class="row">
-                        <a *ngIf="ApartmentsRole?.p_Update==true || is_Super==true" class="col-12 border-0 outline-0 rounded-3 me-3 py-2 blue text-decoration-none text-center" routerLink="/apartments/page/{{this.apt_UUID}}" style="background-color: #d2d9e1"><img src="assets/images/apartmentImages/edit.svg" />Edit </a>
+                        <a *ngIf="ApartmentsRole?.p_Update==true || is_Super==true"
+                            class="col-12 border-0 outline-0 rounded-3 me-3 py-2 blue text-decoration-none text-center"
+                            routerLink="/apartments/page/{{ this.apt_UUID }}" style="background-color: #d2d9e1"><img
+                                src="assets/images/apartmentImages/edit.svg" />Edit </a>
 
                         <!-- <div class="col-4">
                             <app-share-button></app-share-button>
@@ -106,25 +113,31 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1transport" aria-expanded="false" aria-controls="flush-collapseOne1transport">
-                              Public transport
-                          </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1transport" aria-expanded="false"
+                                    aria-controls="flush-collapseOne1transport">
+                                    Public transport
+                                </button>
                             </h2>
-                            <div id="flush-collapseOne1transport" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseOne1transport" class="accordion-collapse collapse mt-3"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3" *ngFor="let data  of trasponrts ">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Transport within {{data.t_Distance}}</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{data.t_Name}}</div>
+                                    <p class="fw-bold" style="color: #605D62 !important;">Transport within {{ data.t_Distance }}</p>
+                                    <div class="form-control w-100 fs-6 pt-2">{{ data.t_Name }}</div>
                                 </div>
 
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne2Video" aria-expanded="false" aria-controls="flush-collapseOne2Video">
-                             Video Link
-                          </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne2Video" aria-expanded="false"
+                                    aria-controls="flush-collapseOne2Video">
+                                    Video Link
+                                </button>
                             </h2>
-                            <div id="flush-collapseOne2Video" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseOne2Video" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne"
+                                data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3">
 
                                     <iframe width="500" height="315" [src]="transform(aprt_details?.apt_VideoLink) "></iframe>
@@ -134,14 +147,17 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne3Location" aria-expanded="false" aria-controls="flush-collapseOne3Location">
-                           Location
-                        </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne3Location" aria-expanded="false"
+                                    aria-controls="flush-collapseOne3Location">
+                                    Location
+                                </button>
                             </h2>
-                            <div id="flush-collapseOne3Location" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseOne3Location" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne"
+                                data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3">
                                     <!-- <p class="fw-bold" style="color: #605D62 !important;">Link</p> -->
-                                    <!-- <div class="form-control w-100 fs-6 pt-2">{{aprt_details?.apt_MapLink}}</div> -->
+                                    <!-- <div class="form-control w-100 fs-6 pt-2">{{ aprt_details?.apt_MapLink }}</div> -->
                                     <google-map [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)">
                                         <map-marker [position]="center">
                                         </map-marker>
@@ -150,70 +166,86 @@
 
                             </div>
                         </div>
-                        <div style="margin-top:30px"  class="dataHeader">
+                        <div style="margin-top:30px" class="dataHeader">
                             <h5>Apartment details</h5>
                             <p>you can view details</p>
                         </div>
                         <div class="accordion-item" *ngFor="let data  of roomsBedRoom ; let i=index ">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnerooms'+i" aria-expanded="false" aria-controls="flush-collapseOnerooms">
-                                  bedroom {{i+1}}
-                      </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnerooms'+i" aria-expanded="false"
+                                    aria-controls="flush-collapseOnerooms">
+                                    bedroom {{ i+1 }}
+                                </button>
                             </h2>
 
-                            <div [id]="'flush-collapseOnerooms'+i" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div [id]="'flush-collapseOnerooms'+i" class="accordion-collapse collapse mt-3"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">{{data?.room_Name}}</p>
+                                    <p class="fw-bold" style="color: #605D62 !important;">{{ data?.room_Name }}</p>
 
-                                    <div *ngFor="let datax  of data.room_Tools let x=index" style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{datax?.tool_Name}}</div>
+                                    <div *ngFor="let datax  of data.room_Tools let x=index" style="margin-top:5px"
+                                        class="form-control w-100 fs-6 pt-2"> {{ datax?.tool_Name }}</div>
                                 </div>
 
                             </div>
                         </div>
                         <div class="accordion-item" *ngFor="let data  of roomsLiving ; let i=index ">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOneLiving'+i" aria-expanded="false" aria-controls="flush-collapseOneLiving">
-                                  living room {{i+1}}
-                    </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOneLiving'+i" aria-expanded="false"
+                                    aria-controls="flush-collapseOneLiving">
+                                    living room {{ i+1 }}
+                                </button>
                             </h2>
 
-                            <div [id]="'flush-collapseOneLiving'+i" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div [id]="'flush-collapseOneLiving'+i" class="accordion-collapse collapse mt-3"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">{{data?.room_Name}}</p>
+                                    <p class="fw-bold" style="color: #605D62 !important;">{{ data?.room_Name }}</p>
 
-                                    <div *ngFor="let datax  of data.room_Tools ; let n=index " style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{datax?.tool_Name}}</div>
+                                    <div *ngFor="let datax  of data.room_Tools ; let n=index " style="margin-top:5px"
+                                        class="form-control w-100 fs-6 pt-2">{{ datax?.tool_Name }}</div>
                                 </div>
 
                             </div>
                         </div>
                         <div class="accordion-item" *ngFor="let data  of bath_Room ; let i=index ">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnebathroom'+i" aria-expanded="false" aria-controls="flush-collapseOnebathroom">
-                                bathroom {{i+1}}
-                  </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnebathroom'+i" aria-expanded="false"
+                                    aria-controls="flush-collapseOnebathroom">
+                                    bathroom {{ i+1 }}
+                                </button>
                             </h2>
 
-                            <div [id]="'flush-collapseOnebathroom'+i" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div [id]="'flush-collapseOnebathroom'+i" class="accordion-collapse collapse mt-3"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">{{data?.bath_Name}}</p>
+                                    <p class="fw-bold" style="color: #605D62 !important;">{{ data?.bath_Name }}</p>
 
-                                    <div *ngFor="let datax  of data.bath_Tools ; let n=index " style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{datax?.tool_Name}}</div>
+                                    <div *ngFor="let datax  of data.bath_Tools ; let n=index " style="margin-top:5px"
+                                        class="form-control w-100 fs-6 pt-2">{{ datax?.tool_Name }}</div>
                                 </div>
 
                             </div>
                         </div>
                         <div class="accordion-item" *ngFor="let data  of kitchen_Tools ; let i=index ">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnekitchen'+i" aria-expanded="false" aria-controls="flush-collapseOnekitchen">
-                              kitchen
-                </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnekitchen'+i" aria-expanded="false"
+                                    aria-controls="flush-collapseOnekitchen">
+                                    kitchen
+                                </button>
                             </h2>
 
-                            <div [id]="'flush-collapseOnekitchen'+i" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div [id]="'flush-collapseOnekitchen'+i" class="accordion-collapse collapse mt-3"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3">
-                                    <!-- <p class="fw-bold" style="color: #605D62 !important;">{{data?.bath_Name}}</p> -->
+                                    <!-- <p class="fw-bold" style="color: #605D62 !important;">{{ data?.bath_Name }}</p> -->
 
-                                    <div *ngFor="let datax  of data.kit_tool ; let n=index " style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{datax?.description}}</div>
+                                    <div *ngFor="let datax  of data.kit_tool ; let n=index " style="margin-top:5px"
+                                        class="form-control w-100 fs-6 pt-2">{{ datax?.description }}</div>
                                 </div>
 
                             </div>
@@ -221,47 +253,58 @@
 
                         <div class="accordion-item" *ngFor="let data  of features ; let i=index ">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnefeatures'+i" aria-expanded="false" aria-controls="flush-collapseOnefeatures">
-                            feature details
-              </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnefeatures'+i" aria-expanded="false"
+                                    aria-controls="flush-collapseOnefeatures">
+                                    feature details
+                                </button>
                             </h2>
 
-                            <div [id]="'flush-collapseOnefeatures'+i" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div [id]="'flush-collapseOnefeatures'+i" class="accordion-collapse collapse mt-3"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3">
 
-                                    <div *ngFor="let datax  of data.fet_Names ; let n=index " style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{datax?.description}}</div>
+                                    <div *ngFor="let datax  of data.fet_Names ; let n=index " style="margin-top:5px"
+                                        class="form-control w-100 fs-6 pt-2">{{ datax?.description }}</div>
                                 </div>
 
                             </div>
                         </div>
                         <div class="accordion-item" *ngFor="let data  of facilities ; let i=index ">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnefacilities'+i" aria-expanded="false" aria-controls="flush-collapseOnefacilities">
-                                  facilities
-            </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnefacilities'+i" aria-expanded="false"
+                                    aria-controls="flush-collapseOnefacilities">
+                                    facilities
+                                </button>
                             </h2>
 
-                            <div [id]="'flush-collapseOnefacilities'+i" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div [id]="'flush-collapseOnefacilities'+i" class="accordion-collapse collapse mt-3"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3">
-                                    <!-- <p class="fw-bold" style="color: #605D62 !important;">{{data?.bath_Name}}</p> -->
+                                    <!-- <p class="fw-bold" style="color: #605D62 !important;">{{ data?.bath_Name }}</p> -->
 
-                                    <div *ngFor="let datax  of data.fac_Names ; let n=index " style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{datax?.description}}</div>
+                                    <div *ngFor="let datax  of data.fac_Names ; let n=index " style="margin-top:5px"
+                                        class="form-control w-100 fs-6 pt-2">{{ datax?.description }}</div>
                                 </div>
 
                             </div>
                         </div>
-                        <div style="margin-top:30px"  class="dataHeader">
+                        <div style="margin-top:30px" class="dataHeader">
                             <h5>other details</h5>
                             <p>you can show more details.</p>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOnebackup_Info" aria-expanded="false" aria-controls="flush-collapseOnebackup_Info">
-                              backup information
-        </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOnebackup_Info" aria-expanded="false"
+                                    aria-controls="flush-collapseOnebackup_Info">
+                                    backup information
+                                </button>
                             </h2>
 
-                            <div id="flush-collapseOnebackup_Info" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseOnebackup_Info" class="accordion-collapse collapse mt-3"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <!-- <div class="mb-3">
                                     <p class="fw-bold" style="color: #605D62 !important;">pictures for current damage</p>
 
@@ -271,48 +314,55 @@
                                         </div>
                                     </div>
                                     <p class="fw-bold" style="color: #605D62 !important;">Damage Description </p>
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{backup_Info?.apt_Dmgs_Desc}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ backup_Info?.apt_Dmgs_Desc }}</div>
 
                                 </div> -->
                                 <div>
                                     <div class="  mb-3">
                                         <p class="fw-bold" style="color: #605D62 !important;">Electricity meter number </p>
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{backup_Info?.elec_Meter_Num}}</div>
+                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{ backup_Info?.elec_Meter_Num }}
+                                        </div>
                                     </div>
                                     <div class="  mb-3">
                                         <p class="fw-bold" style="color: #605D62 !important;">Electricity meter consumption</p>
 
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{backup_Info?.elec_Meter_Cons}}</div>
+                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{ backup_Info?.elec_Meter_Cons }}
+                                        </div>
 
                                     </div>
                                     <div class="  mb-3  " *ngFor="let x of backup_Info?.inputFields ; let i=index">
-                                        <p class="fw-bold" style="color: #605D62 !important;">{{x?.field_Name}} </p>
+                                        <p class="fw-bold" style="color: #605D62 !important;">{{ x?.field_Name }} </p>
 
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{x?.field_Content}}</div>
+                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ x?.field_Content }}</div>
 
                                     </div>
                                     <div class="   mb-3">
                                         <p class="fw-bold" style="color: #605D62 !important;">Water meter number</p>
 
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{backup_Info?.water_Meter_Num}}</div>
+                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{ backup_Info?.water_Meter_Num }}
+                                        </div>
 
                                     </div>
                                     <div class="  mb-3">
                                         <p class="fw-bold" style="color: #605D62 !important;">Water meter consumption</p>
 
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{backup_Info?.water_Meter_Cons}}</div>
+                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">
+                                            {{ backup_Info?.water_Meter_Cons }}
+                                        </div>
 
                                     </div>
                                     <div class="   mb-3 ">
                                         <p class="fw-bold" style="color: #605D62 !important;">Gas meter number</p>
 
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{backup_Info?.gas_Meter_Num}}</div>
+                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{ backup_Info?.gas_Meter_Num }}
+                                        </div>
 
                                     </div>
                                     <div class="  mb-3  ">
                                         <p class="fw-bold" style="color: #605D62 !important;">Gas meter consumption</p>
 
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{backup_Info?.gas_Meter_Cons}}</div>
+                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ backup_Info?.gas_Meter_Cons }}
+                                        </div>
 
                                     </div>
                                 </div>
@@ -321,59 +371,62 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOnerentalroles" aria-expanded="false" aria-controls="flush-collapseOnerentalroles">
-                                  rental rules and Check in
-        </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOnerentalroles" aria-expanded="false"
+                                    aria-controls="flush-collapseOnerentalroles">
+                                    rental rules and Check in
+                                </button>
                             </h2>
 
-                            <div id="flush-collapseOnerentalroles" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseOnerentalroles" class="accordion-collapse collapse mt-3"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="  mb-3  " *ngFor="let x of rent_Rules?.apt_rules ; let i=index">
-                                    <p class="fw-bold" style="color: #605D62 !important;"> rule description : {{i+1}} </p>
+                                    <p class="fw-bold" style="color: #605D62 !important;"> rule description : {{ i+1 }} </p>
 
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{x?.rule_Desc}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ x?.rule_Desc }}</div>
 
                                 </div>
                                 <div class="  mb-3  " *ngFor="let x of rent_Rules?.apt_inputfields ; let i=index">
-                                    <p class="fw-bold" style="color: #605D62 !important;">{{x?.field_Name}} </p>
+                                    <p class="fw-bold" style="color: #605D62 !important;">{{ x?.field_Name }} </p>
 
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{x?.field_Content}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ x?.field_Content }}</div>
 
                                 </div>
                                 <div class="  mb-3  ">
                                     <p class="fw-bold" style="color: #605D62 !important;"> check Type </p>
 
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{rent_Rules?.checkType}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.checkType }}</div>
 
                                 </div>
 
                                 <div class="  mb-3  ">
                                     <p class="fw-bold" style="color: #605D62 !important;">Wi-Fi name</p>
 
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{rent_Rules?.wifi_Name}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.wifi_Name }}</div>
 
                                 </div>
                                 <div class="  mb-3  ">
                                     <p class="fw-bold" style="color: #605D62 !important;">Wi-Fi password</p>
 
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{rent_Rules?.wifi_Password}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.wifi_Password }}</div>
 
                                 </div>
                                 <div class="  mb-3  ">
                                     <p class="fw-bold" style="color: #605D62 !important;">Wi-Fi password</p>
 
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{rent_Rules?.wifi_Password}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.wifi_Password }}</div>
 
                                 </div>
                                 <div class="  mb-3  ">
                                     <p class="fw-bold" style="color: #605D62 !important;">mailBox Number</p>
 
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{rent_Rules?.mailBox_Num}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.mailBox_Num }}</div>
 
                                 </div>
                                 <div class="  mb-3  ">
                                     <p class="fw-bold" style="color: #605D62 !important;">Number of Doors </p>
 
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{rent_Rules?.numof_Doors}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.numof_Doors }}</div>
 
                                 </div>
                                 <div class="mb-3">
@@ -389,7 +442,7 @@
                                 <div class="  mb-3  ">
                                     <p class="fw-bold" style="color: #605D62 !important;"> safe_Code </p>
 
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{rent_Rules?.safe_Code}}</div>
+                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.safe_Code }}</div>
 
                                 </div>
                                 <div class="mb-3">
@@ -421,7 +474,8 @@
                                             <div class="container testimonial-group">
                                                 <div class="row mb-3  vcrr">
 
-                                                    <div class="col-md-4  " *ngFor="let datax  of rent_Rules?.tarsh_Pin_Imgs ; let n=index ">
+                                                    <div class="col-md-4  "
+                                                        *ngFor="let datax  of rent_Rules?.tarsh_Pin_Imgs ; let n=index ">
                                                         <a (click)=" viewimageinModel(datax?.pic_URL)" style="cursor: pointer;">
                                                             <img [src]="datax?.pic_URL" alt="Apartment Image" class="w-100 h-100 maxImg">
                                                         </a>
@@ -432,7 +486,7 @@
                                         </ng-container>
                                     </div>
                                     <p class="fw-bold" style="color: #605D62 !important;">Description of trash Location</p>
-                                    <div style="margin-top:5px" class="  w-100 fs-6 pt-2"> {{rent_Rules?.trash_Location}}</div>
+                                    <div style="margin-top:5px" class="  w-100 fs-6 pt-2"> {{ rent_Rules?.trash_Location }}</div>
 
                                 </div>
                                 <div>
@@ -442,12 +496,15 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOnedamages" aria-expanded="false" aria-controls="flush-collapseOnedamages">
-                                apartment damages
-      </button>
+                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOnedamages" aria-expanded="false"
+                                    aria-controls="flush-collapseOnedamages">
+                                    apartment damages
+                                </button>
                             </h2>
 
-                            <div id="flush-collapseOnedamages" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseOnedamages" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne"
+                                data-bs-parent="#accordionFlushExample">
                                 <div class="mb-3">
                                     <p class="fw-bold" style="color: #605D62 !important;">pictures for current damage</p>
 
@@ -469,7 +526,7 @@
 
                                     </div>
                                     <p class="fw-bold" style="color: #605D62 !important;">Damage Description </p>
-                                    <div style="margin-top:5px" class=" w-100 fs-6 pt-2">{{backup_Info?.apt_Dmgs_Desc}}</div>
+                                    <div style="margin-top:5px" class=" w-100 fs-6 pt-2">{{ backup_Info?.apt_Dmgs_Desc }}</div>
 
                                 </div>
 
@@ -489,22 +546,23 @@
                             <div class="row p-2 mt-2 rounded-3" style="background-color: #f5f6f8">
                                 <div class="col-4">
 
-                                  <a routerLink="/owners/owner-profile/{{OwnerDtail?.owner_ID}}">
+                                    <a routerLink="/owners/owner-profile/{{ OwnerDtail?.owner_ID }}">
 
-                                  <img *ngIf="OwnerDtail?.owner_Photo==null||OwnerDtail?.owner_Photo==''" src="assets/images/apartmentImages/Rectangle 34624164.svg" />
-                                    <img [src]="OwnerDtail?.owner_Photo" />
-                                  </a>
+                                        <img *ngIf="OwnerDtail?.owner_Photo==null||OwnerDtail?.owner_Photo==''"
+                                            src="assets/images/apartmentImages/Rectangle 34624164.svg" />
+                                        <img [src]="OwnerDtail?.owner_Photo" />
+                                    </a>
                                 </div>
                                 <div class="col-8">
-                                    <h6 class="fw-bold mt-2">{{OwnerDtail?.owner_FirstName}}&nbsp; {{OwnerDtail?.owner_LastName}}</h6>
+                                    <h6 class="fw-bold mt-2">{{ OwnerDtail?.owner_FirstName }}&nbsp; {{ OwnerDtail?.owner_LastName }}</h6>
                                     <div class="mt-4">
                                         <div class="mb-2 d-flex">
                                             <img src="assets/images/apartmentImages/call.svg" />
-                                            <div class="gray ms-2">{{OwnerDtail?.owner_Phone}} </div>
+                                            <div class="gray ms-2">{{ OwnerDtail?.owner_Phone }} </div>
                                         </div>
                                         <div>
                                             <img src="assets/images/apartmentImages/mail.svg" />
-                                            <span class="gray ms-2">{{OwnerDtail?.owner_Mail}} </span>
+                                            <span class="gray ms-2">{{ OwnerDtail?.owner_Mail }} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -518,15 +576,18 @@
                             <div class="col-12 col-md-5 d-flex align-items-center justify-content-end">
                                 <div class="mb-3">
                                     <!-- <a class="me-3 cursor" routerLink="/apartments/contract/create-owner-contract"><img src="assets/images/apartmentImages/edit1.svg" /></a> -->
-                                    <a class="me-3 cursor" *ngIf="contract_Main?.contract_Path" target="_blank" [href]="contract_Main?.contract_Path"><img src="assets/images/apartmentImages/delete.svg" /></a>
-                                    <a class="me-3 cursor" *ngIf="contract_Main?.contract_Path==''||contract_Main?.contract_Path==null"><img src="assets/images/apartmentImages/delete.svg" /></a>
+                                    <a class="me-3 cursor" *ngIf="contract_Main?.contract_Path" target="_blank"
+                                        [href]="contract_Main?.contract_Path"><img src="assets/images/apartmentImages/delete.svg" /></a>
+                                    <a class="me-3 cursor" *ngIf="contract_Main?.contract_Path==''||contract_Main?.contract_Path==null"><img
+                                            src="assets/images/apartmentImages/delete.svg" /></a>
 
-                                    <!-- <a class="me-3 cursor" routerLink=""><img src="assets/images/apartmentImages/share.svg" /></a> -->
-                            <!--
-                                                                  <a class="me-3 cursor" (click)="DownloadFile(contract_Main?.contract_Path)"><img src="assets/images/apartmentImages/move.svg" /></a>
 
-                            -->
-                                  </div>
+                                    <a class="me-3 cursor" *ngIf="owner_contract_file_name!=null||owner_contract_file_name!=''"
+                                        href="{{ contract_Main?.contract_Path }}" download="{{ owner_contract_file_name }}"><img
+                                            src="assets/images/apartmentImages/move.svg" /></a>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -536,7 +597,8 @@
                             <p class="fw-bold m-0">About Tenant</p>
                             <div class="row p-2 mt-2 rounded-3" style="background-color: #f5f6f8">
                                 <div class="col-4">
-                                    <img routerLink="/users/app-edite-user-details/{{tenant[0]?.user_ID}}" [src]="tenant[0]?.user_Photo!=''?tenant[0]?.user_Photo:'assets/images/apartmentImages/Rectangle 34624164.svg'" />
+                                    <img routerLink="/users/app-edite-user-details/{{ tenant[0]?.user_ID }}"
+                                        [src]="tenant[0]?.user_Photo!=''?tenant[0]?.user_Photo:'assets/images/apartmentImages/Rectangle 34624164.svg'" />
                                 </div>
                                 <div class="col-8">
                                     <h6 class="fw-bold mt-2">{{ tenant[0]?.user_Name }}</h6>
@@ -561,141 +623,149 @@
                             <div class="col-12 col-md-5 d-flex align-items-center justify-content-end">
                                 <div class="mb-3">
                                     <!-- <a class="me-3 cursor" routerLink="/apartments/contract/create-tenant-contract"><img src="assets/images/apartmentImages/edit1.svg" /></a> -->
-                                    <a class="me-3 cursor" target="_blank" [href]="tenant[0]?.apt_Contract"><img src="assets/images/apartmentImages/delete.svg" /></a>
+                                    <a class="me-3 cursor" target="_blank" [href]="tenant[0]?.apt_Contract"><img
+                                            src="assets/images/apartmentImages/delete.svg" /></a>
                                     <!-- <a class="me-3 cursor" routerLink=""><img src="assets/images/apartmentImages/share.svg" /></a> -->
-                               <!--
+                                    <!--
                                                                     <a class="me-3 cursor" (click)="DownloadTenantContract()"><img src="assets/images/apartmentImages/move.svg" /></a>
 
                                -->
-                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="mx-2">
                         <!-- (click)="RentedSuccessfully = true" *ngIf="!RentedSuccessfully" -->
-                        <button (click)="MarkRented()" class="outline-0 w-100 p-2 mb-3 border-0 text-white d-block rounded" style="background-color: #1f4068" *ngIf="aprt_details?.apt_Status!='Rented'">
-                        Mark as rented
-                      </button>
+                        <button (click)="MarkRented()" class="outline-0 w-100 p-2 mb-3 border-0 text-white d-block rounded"
+                            style="background-color: #1f4068" *ngIf="aprt_details?.apt_Status!='Rented'">
+                            Mark as rented
+                        </button>
                         <!-- <button class="outline-0 w-100 p-2 mb-3 d-block rounded bg-transparent" style="color: #0cb30c; border: 1px solid #1f4068" *ngIf="RentedSuccessfully">
               Rented Successfully
             </button> -->
                         <!-- (click)="markAvailable = true" *ngIf="!markAvailable" -->
-                        <button (click)="MarkAvaliablePublish()" class="outline-0 w-100 p-2 mb-3 border-0 text-white d-block rounded" style="background-color: #1f4068">
-              Mark as available
-            </button>
+                        <button (click)="MarkAvaliablePublish()" class="outline-0 w-100 p-2 mb-3 border-0 text-white d-block rounded"
+                            style="background-color: #1f4068">
+                            Mark as available
+                        </button>
                         <!-- <button class="outline-0 w-100 p-2 mb-3 d-block rounded bg-transparent" style="color: #0cb30c; border: 1px solid #1f4068" *ngIf="markAvailable">
                           available Successfully
             </button> -->
-                        <button (click)="MarkDraft()" class="outline-0 border-0 d-block w-100 p-2 blue rounded" style="background-color: #d2d9e1" *ngIf="aprt_details?.apt_Status!='Rented'">
-              Unpublish
-            </button>
+                        <button (click)="MarkDraft()" class="outline-0 border-0 d-block w-100 p-2 blue rounded"
+                            style="background-color: #d2d9e1" *ngIf="aprt_details?.apt_Status!='Rented'">
+                            Unpublish
+                        </button>
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="rating py-4">
-          <div style="margin-top:10px" class="heading">
-            <h5>Tenant Rating </h5>
-            <p style="margin-bottom: 18px;">view tenant ratings </p>
-        </div>
-         <div class="row g-4">
-          <div class="col-lg-4 col-md-6" *ngFor="let review of AllReviews">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Review</h5>
-                <div class="userData d-flex align-items-center my-2">
-                  <div class="userImage">
-                    <img *ngIf="review.userPhoto" src="{{review.userPhoto}}" alt="" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
-                    <img *ngIf="!review.userPhoto" src="../../../assets/images/Frame 1261154899.svg" alt="" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
-                  </div>
-                  <div class="userInfo ms-3">
-                     <h5 class="py-0 my-0">{{review.userName}}</h5>
-                     <p class="py-0 my-0">{{review?.reviewed_at}}</p>
-                  </div>
-                </div>
-                <ul class="px-0 my-2">
-                  <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                   <span>Apartment / Studio</span>
-                  <div class="rate d-flex align-items-center">
-                    <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">({{review.rate_Apartment}})</span>
-                  </div>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                    <span>Safety</span>
-                  <div class="rate d-flex align-items-center">
-                    <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">({{review.rate_Safety}})</span>
-                  </div>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                    <span>Location</span>
-                  <div class="rate d-flex align-items-center">
-                    <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">({{review.rate_Location}})</span>
-                  </div>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                    <span>Our Service</span>
-                  <div class="rate d-flex align-items-center">
-                    <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">({{review.rate_Service}})</span>
-                  </div>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                    <span>Cleanliness</span>
-                  <div class="rate d-flex align-items-center">
-                    <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">({{review.rate_Cleanliness}})</span>
-                  </div>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                    <span>Communication</span>
-                  <div class="rate d-flex align-items-center">
-                    <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">({{review.rate_Communication}})</span>
-                  </div>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                    <span>Total Rating</span>
-                  <div class="rate d-flex align-items-center">
-                    <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                    <span class="ms-1">(4.0)</span>
-                  </div>
-                  </li>
-                </ul>
-               <div class="comment">
-                <h5 class="mb-1">Additional comment (optional):</h5>
-                <p>{{review.review_Comment}}</p>
-               </div>
-               <div class="d-flex justify-content-between">
-                <button class="btn btn-outline" [disabled]="!review.show_OnApp" (click)="ApproveReview(review.rate_ID,false)">Hide From App</button>
-                <button class="btn btn-color" [disabled]="review.show_OnApp"  (click)="ApproveReview(review.rate_ID,true)">Display On App</button>
-               </div>
-              </div>
+            <div style="margin-top:10px" class="heading">
+                <h5>Tenant Rating </h5>
+                <p style="margin-bottom: 18px;">view tenant ratings </p>
             </div>
-          </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" *ngFor="let review of AllReviews">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Review</h5>
+                            <div class="userData d-flex align-items-center my-2">
+                                <div class="userImage">
+                                    <img *ngIf="review.userPhoto" src="{{ review.userPhoto }}" alt=""
+                                        style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                                    <img *ngIf="!review.userPhoto" src="../../../assets/images/Frame 1261154899.svg" alt=""
+                                        style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                                </div>
+                                <div class="userInfo ms-3">
+                                    <h5 class="py-0 my-0">{{ review.userName }}</h5>
+                                    <p class="py-0 my-0">{{ review?.reviewed_at }}</p>
+                                </div>
+                            </div>
+                            <ul class="px-0 my-2">
+                                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                    <span>Apartment / Studio</span>
+                                    <div class="rate d-flex align-items-center">
+                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
+                                        <span class="ms-1">({{ review.rate_Apartment }})</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                                    <span>Safety</span>
+                                    <div class="rate d-flex align-items-center">
+                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
+                                        <span class="ms-1">({{ review.rate_Safety }})</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                                    <span>Location</span>
+                                    <div class="rate d-flex align-items-center">
+                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
+                                        <span class="ms-1">({{ review.rate_Location }})</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                                    <span>Our Service</span>
+                                    <div class="rate d-flex align-items-center">
+                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
+                                        <span class="ms-1">({{ review.rate_Service }})</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                                    <span>Cleanliness</span>
+                                    <div class="rate d-flex align-items-center">
+                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
+                                        <span class="ms-1">({{ review.rate_Cleanliness }})</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                                    <span>Communication</span>
+                                    <div class="rate d-flex align-items-center">
+                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
+                                        <span class="ms-1">({{ review.rate_Communication }})</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                                    <span>Total Rating</span>
+                                    <div class="rate d-flex align-items-center">
+                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
+                                        <span class="ms-1">(4.0)</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="comment">
+                                <h5 class="mb-1">Additional comment (optional):</h5>
+                                <p>{{ review.review_Comment }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline" [disabled]="!review.show_OnApp"
+                                    (click)="ApproveReview(review.rate_ID,false)">Hide From App</button>
+                                <button class="btn btn-color" [disabled]="review.show_OnApp"
+                                    (click)="ApproveReview(review.rate_ID,true)">Display On App</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-         </div>
+            </div>
         </div>
     </main>
     <!-- end content page  -->
 </div>
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display22}" style="background-color: rgba(90,90,90,0.5);">
-  <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="width:900px;">
-      <div class="modal-content position-relative">
-        <div class="modal-header p-0 m-0 d-flex justify-content-start">
-          <button type="button" class="close" aria-label="Close" (click)="oncloseModal()">
-            <img src="../../../../assets/images/ic_round-close.svg" alt="">
-          </button>
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="width:900px;">
+        <div class="modal-content position-relative">
+            <div class="modal-header p-0 m-0 d-flex justify-content-start">
+                <button type="button" class="close" aria-label="Close" (click)="oncloseModal()">
+                    <img src="../../../../assets/images/ic_round-close.svg" alt="">
+                </button>
             </div>
-          <div class="modal-body p-0 m-0">
-              <img [src]="imageSize" style="width:100%;height: 500px" />
+            <div class="modal-body p-0 m-0">
+                <img [src]="imageSize" style="width:100%;height: 500px" />
 
-          </div>
+            </div>
 
-          <!-- <div class="modal-footer">
+            <!-- <div class="modal-footer">
               <button type="button" class="btn btn-white bbtclose" (click)="oncloseModal()">
 close
 </button>
@@ -703,6 +773,6 @@ close
           </div> -->
 
 
-      </div>
-  </div>
+        </div>
+    </div>
 </div>

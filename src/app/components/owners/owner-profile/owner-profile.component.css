@@ -1,4 +1,18 @@
-    .active {
+.badge{
+  font-size: 13px ;
+  padding: 4px 8px;
+  font-weight: 500;
+}
+.paid	 {
+    color: #027A48;
+    background-color: #ECFDF3;
+}
+
+.unPaid	 {
+    color: #EF2011;
+    background-color: #FCEEEE;
+}
+.active {
         color: #1f4068 !important;
         background-color: #fafcff;
         /* border-left: 3px solid #1f4068; */

@@ -3,9 +3,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { MessageService } from 'primeng/api';
+import { PaginatorModule } from 'primeng/paginator';
 import { Subscription } from 'rxjs';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import * as XLSX from 'xlsx';
+
+interface PageEvent {
+  first: any;
+  rows: any;
+  page: any;
+  pageCount: any;
+}
 
 @Component({
   selector: 'app-payments',
@@ -27,6 +35,10 @@ export class PaymentsComponent implements OnInit {
     rem_Date: new FormControl(null),
     pushTypes: new FormControl(null),
   });
+  checkedUsers: any[] = [];
+  selectedUsersIds: number[] = [];
+  first: number = 1;
+  rows: number = 10;
 
   constructor(
     private messageService: MessageService,
@@ -202,9 +214,21 @@ export class PaymentsComponent implements OnInit {
   pagesize = 10;
   totalofPages = 1;
   totalRecords = 0;
-  tiggerPageChange(event: any) {
+  /*tiggerPageChange(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber = calcPageNumber;
+    console.log(event);
+    this.GetAllPayments();
+  }*/
+  //------------ Islam Paginator --------------//
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+    let calcPageNumber = Math.floor(this.first / this.rows) + 1;
+    this.pageNumber = calcPageNumber;
+    console.log(event);
+    console.log(calcPageNumber);
+
     this.GetAllPayments();
   }
 
@@ -214,7 +238,7 @@ export class PaymentsComponent implements OnInit {
     let data;
     if (this?.rangeDates) {
       data = {
-        page_No: 1,
+        page_No: this.pageNumber,
         page_Size: 10,
         filterKey: this.Date,
         searchKey: this.searchText,
@@ -226,7 +250,7 @@ export class PaymentsComponent implements OnInit {
       };
     } else {
       data = {
-        page_No: 1,
+        page_No: this.pageNumber,
         page_Size: 10,
         filterKey: this.Date,
         searchKey: this.searchText,
@@ -281,6 +305,26 @@ export class PaymentsComponent implements OnInit {
   paymentType: any = 'All';
   userType: any = 'All';
 
+  onCheckboxChange(e: any) {
+    this.checkedUsers = [];
+    if (e.target.checked) {
+      let user = this.payments.find(
+        (ms: { inv_ID: any }) => ms.inv_ID == e.target.value
+      );
+      if (user) {
+        this.checkedUsers.push(user);
+        this.selectedUsersIds.push(user.inv_ID);
+        console.log(this.selectedUsersIds);
+      }
+    } else {
+      let index = this.checkedUsers.findIndex(
+        (sc) => sc.inv_ID == e.target.value
+      );
+      this.checkedUsers.splice(index, 1);
+      this.selectedUsersIds.splice(index, 1);
+    }
+  }
+
   clickPayment(index: any) {
     this.checkindex = index?.target?.value;
     this.paymentFillterSelected = this.paymentFillterSelected.map((data) =>
@@ -308,6 +352,29 @@ export class PaymentsComponent implements OnInit {
       this.GetAllPayments();
     }
   }
+
+  DeleteInvoice(id: any): void {
+    this.subscriptions.push(
+      this._adminservices.DeleteInvoice(id).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+          this.GetAllPayments();
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.error.message}`,
+          });
+        }
+      )
+    );
+  }
+
   clickType(index: any) {
     this.checkindex = index?.target?.value;
     this.TypeFillterSelected = this.TypeFillterSelected.map((data) =>
@@ -387,10 +454,13 @@ export class PaymentsComponent implements OnInit {
   searchTextChange: any;
   search: boolean = false;
   searchAction(event: KeyboardEvent) {
-    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+    if (
+      this.searchText.trim() === '' &&
+      (event.key === 'Backspace' || event.key === ' ')
+    ) {
       event.preventDefault();
       return;
-  }
+    }
     this.GetAllPayments();
   }
   display2 = 'none';
@@ -442,6 +512,57 @@ export class PaymentsComponent implements OnInit {
       )
     );
   }
+
+  MultiPaying() {
+    this.subscriptions.push(
+      this._adminservices.MultiInvoicePaying(this.selectedUsersIds).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: res.message,
+          });
+          setTimeout(() => {
+            this.onCloseModal2();
+            this.GetAllPayments();
+          }, 1000);
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: error.error.message[0],
+          });
+        }
+      )
+    );
+  }
+  inv_code: any;
+  inv_notes: any;
+  inv_desc: any;
+  inv_attach: any;
+  Is_PDF: any;
+  display_details: any;
+
+  oncloseModelDetails() {
+    this.display_details = 'none';
+    this.inv_code = '';
+    this.inv_notes = '';
+    this.inv_desc = '';
+    this.inv_attach = '';
+    this.Is_PDF = false;
+  }
+
+  openModalDetails(data: any) {
+    this.inv_code = data.trans_No;
+    this.inv_notes = data.invoice_Notes;
+    this.inv_desc = data.invoice_Desc;
+    this.inv_attach = data.invoice_Attach;
+    this.display_details = 'block';
+    console.log(data);
+    this.Is_PDF = data.invoice_Attach.includes('pdf') ? true : false;
+  }
+
   fileName = 'FinanceTable.xlsx';
   exportToExcel() {
     let data = document.getElementById('content');

@@ -1,160 +1,173 @@
 <!-- <app-edite-user-details></app-edite-user-details> -->
 <!-- start header  -->
 <header>
-  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Cancelation Inquiries'"></app-head>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Cancelation Inquiries'"></app-head>
 </header>
 <!-- end header  -->
 
 <div class="row m-0">
 
-  <!-- start sidebar  -->
-  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Cancelation Inquiries'"></app-sidebar>
-  <!-- end sidebar  -->
+    <!-- start sidebar  -->
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Cancelation Inquiries'"></app-sidebar>
+    <!-- end sidebar  -->
 
-  <!-- start content page  -->
-  <main class="p-4 col-lg-10 ">
-      <div class="d-md-flex justify-content-between align-items-center dashboard" style="margin-top: 6px; margin-bottom: 24px;">
-          <p class="fw-bold ms-1" style="color: #6c6a6a;color: #6c6a6a;
+    <!-- start content page  -->
+    <main class="p-4 col-lg-10 ">
+        <div class="d-md-flex justify-content-between align-items-center dashboard" style="margin-top: 6px; margin-bottom: 24px;">
+            <p class="fw-bold ms-1" style="color: #6c6a6a;color: #6c6a6a;
           text-align: center;
           align-items: center;
           display: flex;
           justify-content: end;">Cancelation Inquiries </p>
-          <div class="d-flex justify-content-lg-between ">
-              <div class="d-flex justify-content-between ">
+            <div class="d-flex justify-content-lg-between ">
+                <div class="d-flex justify-content-between ">
 
-              </div>
-
-              <app-dropdown  [list]="listDropDown" style="margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
-          </div>
-      </div>
-
-      <p-toast></p-toast>
-      <div class="card">
-          <div class="row d-flex justify-content-between align-items-center px-3">
-              <!-- length Of person -->
-             <div class="col-md-4">
-              <div class="d-flex mx-2 mt-4">
-                <p class="me-2 fs-5 fw-bold ml-8">Cancelation Inquiries</p>
-                <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
-            {{fullRespone?.totalRecords}} {{pagePerson}}
-        </p> -->
-            </div>
-             </div>
-              <!-- search input -->
-              <div class="col-md-5 col-8">
-                <div class="input">
-                  <input type="text" class="form-control py-2" placeholder=" Search by Inquires" (keyup)="searchAction($event)" [(ngModel)]="searchText"  />
-                    <img src="../../../assets/images/search.svg" alt="">
                 </div>
-               </div>
-          </div>
-          <!-- <p-table #dt [value]="partners" [(selection)]="partners" dataKey="id" [filterDelay]="0" /> -->
 
-          <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="termination">
-              <ng-template pTemplate="header" class="text-center">
-                  <tr *ngIf="headerData">
-                      <ng-container>
+                <app-dropdown [list]="listDropDown" style="margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
+            </div>
+        </div>
 
+        <p-toast></p-toast>
+        <div class="card">
+            <div class="row d-flex justify-content-between align-items-center px-3">
+                <!-- length Of person -->
+                <div class="col-md-4">
+                    <div class="d-flex mx-2 mt-4">
+                        <p class="me-2 fs-5 fw-bold ml-8">Cancelation Inquiries</p>
+                        <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
+            {{ fullRespone?.totalRecords }} {{ pagePerson }}
+        </p> -->
+                    </div>
+                </div>
+                <!-- search input -->
+                <div class="col-md-5 col-8">
+                    <div class="input">
+                        <input type="text" class="form-control py-2" placeholder=" Search by Inquires" (keyup)="searchAction($event)"
+                            [(ngModel)]="searchText" />
+                        <img src="../../../assets/images/search.svg" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- <p-table #dt [value]="partners" [(selection)]="partners" dataKey="id" [filterDelay]="0" /> -->
 
-                          <th class="td-name">
-                            User name
-
-                          </th>
-                          <th class="td-name">
-                            Requested  apartment
-
-                          </th>
-                          <th class="td-name">
-                            Contact number
-
-                          </th>
-                          <th class="td-name">
-                            Time period
-
-                          </th>
-                          <th class="td-name">
-                            Status
-
-                          </th>
-
-                          <th class="td-name">
-                          </th>
-                      </ng-container>
-                  </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-termina>
-
-                  <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/cancel-inquire/view-cancel/{{termina.term_ID}}">
+            <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}"
+                [value]="termination">
+                <ng-template pTemplate="header" class="text-center">
+                    <tr *ngIf="headerData">
+                        <ng-container>
 
 
-                      <td>
-                          <img *ngIf="termina.user_Photo"  [src]="termina?.user_Photo" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;">
-                          <img *ngIf="!termina.user_Photo"   src="../../../assets/images/Frame 1261154899.svg" style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">      {{termina?.user_Name}}
+                            <th class="td-name">
+                                User name
 
-                      </td>
-                      <td>
-                          {{termina?.apt_Name}}
-                      </td>
-                      <td>
-                          {{termina?.user_Phone}}
-                      </td>
+                            </th>
+                            <th class="td-name">
+                                Requested apartment
 
-                      <td>
-                          {{termina?.time_Period}}
-                      </td>
-                    <td >
-                      <div>
-                          <span class="rounded-5 px-3 badge 	Accepted" *ngIf="termina?.term_Status=='Accepted'">
-                            <span>
-                              <img src="assets/images/greenDot.svg" alt="">
-                            </span>
-                            {{termina?.term_Status}}
-                        </span>
-                        <span class="rounded-5 px-3 badge Rejected" *ngIf="termina?.term_Status=='Rejected'">
-                          <span>
-                            <img src="assets/images/redDot.svg" alt="">
-                          </span>
-                          {{termina?.term_Status}}
-                      </span>
-                      </div>
-                  </td>
+                            </th>
+                            <th class="td-name">
+                                Contact number
+
+                            </th>
+                            <th class="td-name">
+                                Time period
+
+                            </th>
+                            <th class="td-name">
+                                Status
+
+                            </th>
+
+                            <th class="td-name">
+                            </th>
+                        </ng-container>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-termina>
+
+                    <tr (click)="hidecard()" style="cursor: pointer;" routerLink="/cancel-inquire/view-cancel/{{ termina.term_ID }}">
 
 
+                        <td>
+                            <img *ngIf="termina.user_Photo" [src]="termina?.user_Photo"
+                                style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;">
+                            <img *ngIf="!termina.user_Photo" src="../../../assets/images/Frame 1261154899.svg"
+                                style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                            {{ termina?.user_Name }}
 
-                      <td class="cursor position-relative" style="text-align: center;">
-                          <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,termina.term_ID)">
-        <img src="assets/images/edit.svg">
-    </button>
-                          <div *ngIf="showEdit[termina.term_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                        </td>
+                        <td>
+                            {{ termina?.apt_Name }}
+                        </td>
+                        <td>
+                            {{ termina?.user_Phone }}
+                        </td>
 
-                              <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/cancel-inquire/view-cancel/{{termina.term_ID}}" > View Details  </button>
+                        <td>
+                            {{ termina?.time_Period }}
+                        </td>
+                        <td>
+                            <div>
+                                <span class="rounded-5 px-3 badge 	Pending" *ngIf="termina?.term_Status=='Pending'">
+                                    <span>
+                                        <img src="assets/images/yallowDot.svg" alt="">
+                                    </span>
+                                    {{ termina?.term_Status }}
+                                </span>
+                                <span class="rounded-5 px-3 badge 	Accepted" *ngIf="termina?.term_Status=='Accepted'">
+                                    <span>
+                                        <img src="assets/images/greenDot.svg" alt="">
+                                    </span>
+                                    {{ termina?.term_Status }}
+                                </span>
+                                <span class="rounded-5 px-3 badge Rejected" *ngIf="termina?.term_Status=='Rejected'">
+                                    <span>
+                                        <img src="assets/images/redDot.svg" alt="">
+                                    </span>
+                                    {{ termina?.term_Status }}
+                                </span>
+                            </div>
+                        </td>
 
-                          </div>
 
-                      </td>
+                        <td class="cursor position-relative" style="text-align: center;">
+                            <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,termina.term_ID)">
+                                <img src="assets/images/edit.svg">
+                            </button>
+                            <div *ngIf="showEdit[termina.term_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;"
+                                class="position-absolute z-3 rounded-3 bg-white border edit-button">
 
-                  </tr>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"
+                                    routerLink="/cancel-inquire/view-cancel/{{ termina.term_ID }}"> View Details </button>
 
-              </ng-template>
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </ng-template>
 
 
-              <ng-template pTemplate="emptymessage">
-                  <div class="container text-center mt-4">
-                      <p class="mb-0">No data found.</p>
-                  </div>
-              </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <div class="container text-center mt-4">
+                        <p class="mb-0">No data found.</p>
+                    </div>
+                </ng-template>
 
-          </p-table>
-          <p-paginator *ngIf="termination.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+            </p-table>
+            <p-paginator *ngIf="termination.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize"
+                [totalRecords]="totalRecords"></p-paginator>
 
-          <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
+            <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
         <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
 
             <button (click)="decreamentPage( )" [disabled]="disableperv" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
           Previous
 </button>
         </div>
-        <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{pageNumber}} of {{totalofPages}}</div>
+        <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{ pageNumber }} of {{ totalofPages }}</div>
         <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
 
             <button [disabled]="disablenext" (click)="   incrementpage( )" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
@@ -162,7 +175,7 @@
 </button>
         </div>
     </div> -->
-      </div>
-  </main>
-  <!-- end content page  -->
+        </div>
+    </main>
+    <!-- end content page  -->
 </div>

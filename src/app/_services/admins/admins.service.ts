@@ -113,6 +113,11 @@ export class AdminsService {
 
     return this.http.put(url, id, { headers: this.headers });
   }
+  DeleteInvoice(id: any): Observable<any> {
+    let url = environment.apiUrl + '/Payments/DeleteInvoice?Inv_ID=' + id;
+
+    return this.http.put(url, id, { headers: this.headers });
+  }
   SuspendTenant(id: any): Observable<any> {
     let url = environment.apiUrl + '/Users/SuspendTenant?User_ID=' + id;
 
@@ -477,6 +482,66 @@ export class AdminsService {
     });
   }
 
+  CreateContract(
+    Sec_Name: any,
+    Sec_Desc: any,
+    Sec_Order: any
+  ): Observable<any> {
+    let body = {
+      Sec_Name: Sec_Name,
+      Sec_Desc: Sec_Desc,
+      Sec_Order: Sec_Order,
+    };
+    const url =
+      environment.apiUrl +
+      '/Basics/AddNewContractSection?Sec_Name=' +
+      Sec_Name +
+      '&Sec_Desc=' +
+      Sec_Desc +
+      '&Sec_Order=' +
+      Sec_Order;
+    return this.http.post<any>(url, body, { headers: this.headers });
+  }
+  UpdateContract(
+    Sec_Name: any,
+    Sec_Desc: any,
+    Sec_Order: any,
+    Sec_ID: any
+  ): Observable<any> {
+    let body = {
+      Sec_Name: Sec_Name,
+      Sec_Desc: Sec_Desc,
+      Sec_Order: Sec_Order,
+      Sec_ID: Sec_ID,
+    };
+    const url =
+      environment.apiUrl +
+      '/Basics/UpdateContractSection?Sec_Name=' +
+      Sec_Name +
+      '&Sec_Desc=' +
+      Sec_Desc +
+      '&Sec_Order=' +
+      Sec_Order +
+      '&Sec_ID=' +
+      Sec_ID;
+    return this.http.post<any>(url, body, { headers: this.headers });
+  }
+
+  GetContract(): Observable<any> {
+    const url = environment.apiUrl + '/Basics/GetContractSections';
+
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+  DeleteContract(Sec_ID: any): Observable<any[]> {
+    let body = {
+      Sec_ID: Sec_ID,
+    };
+    const url =
+      environment.apiUrl + '/Basics/DeleteContractSection?Sec_ID=' + Sec_ID;
+
+    return this.http.post<any>(url, body, { headers: this.headers });
+  }
+
   CreateAds(URL: any, Button_Name: any, Photo_Attach: any): Observable<any> {
     const url =
       environment.apiUrl +
@@ -605,6 +670,12 @@ export class AdminsService {
 
     return this.http.post<any>(url, data, { headers: this.headers });
   }
+  MultiInvoicePaying(data: any): Observable<any> {
+    const url = environment.apiUrl + '/Payments/SetMulti_Invoice_Paid';
+
+    return this.http.post<any>(url, data, { headers: this.headers });
+  }
+
   AllPayments(data: any): Observable<any> {
     const url = environment.apiUrl + '/Payments/AllPayments';
 
@@ -899,5 +970,52 @@ export class AdminsService {
     };
 
     return this.http.post<any>(url, body, { headers: this.headers });
+  }
+  //-------------- Cards Services ---------------//
+  ApartmentCard(Module: string, Is_Highest: boolean): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/ApartmentCard';
+    const params = new HttpParams()
+      .set('Is_Highest', Is_Highest)
+      .set('Module', Module);
+
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+  OwnerCard(Is_Highest: boolean): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/OwnerCard';
+    const params = new HttpParams().set('Is_Highest', Is_Highest);
+
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+
+  AgencyCard(Is_Highest: boolean): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/AgencyCard';
+    const params = new HttpParams().set('Is_Highest', Is_Highest);
+
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+  WorkerCard(Module: string, Is_Highest: boolean): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/WorkerCard';
+    const params = new HttpParams()
+      .set('Is_Highest', Is_Highest)
+      .set('Module', Module);
+
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+  TenantCard(Module: string, Is_Highest: boolean): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/TenantCard';
+    const params = new HttpParams()
+      .set('Is_Highest', Is_Highest)
+      .set('Module', Module);
+
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+  AnalysisChart(Module: any, Start: any, End: any): Observable<any[]> {
+    const url = environment.apiUrl + '/Statistics/AnalysisChart';
+    const params = new HttpParams()
+      .set('End', End)
+      .set('Start', Start)
+      .set('Module', Module);
+
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
 }

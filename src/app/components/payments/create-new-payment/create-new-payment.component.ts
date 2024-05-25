@@ -5,7 +5,13 @@ import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
-
+import { FileUploadModule } from 'primeng/fileupload';
+import { ButtonModule } from 'primeng/button';
+import { CommonModule } from '@angular/common';
+import { BadgeModule } from 'primeng/badge';
+import { HttpClientModule } from '@angular/common/http';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'app-create-new-payment',
   templateUrl: './create-new-payment.component.html',
@@ -174,10 +180,13 @@ export class CreateNewPaymentComponent {
   searchText: string = '';
 
   searchAction(event: KeyboardEvent) {
-    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+    if (
+      this.searchText.trim() === '' &&
+      (event.key === 'Backspace' || event.key === ' ')
+    ) {
       event.preventDefault();
       return;
-  }
+    }
     this.GetPayToList();
   }
   onUploadContract(event: any): void {

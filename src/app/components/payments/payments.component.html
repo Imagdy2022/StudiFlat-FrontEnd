@@ -11,18 +11,21 @@
     <!-- start content page  -->
     <main class="p-4 col-lg-10 ">
         <!-- start part 1 in page  -->
-        <div class="fw-inquiries d-flex justify-content-between align-items-center" style="color: #6c6a6a;margin-top: 8px; margin-bottom: 23px;">
+        <div class="fw-inquiries d-flex justify-content-between align-items-center"
+            style="color: #6c6a6a;margin-top: 8px; margin-bottom: 23px;">
             <p class="fw-bold ms-1" style="color: #6c6a6a;">Finance</p>
             <div class="d-md-flex justify-content-between align-items-center">
 
-              <!-- start dropdown button  -->
-              <app-dropdown class="px-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-              <!-- end dropdown button  -->
-              <div class="d-flex align-items-center">
-                <button class="week rounded-start px-3  py-2 bg-w outline-none" (click)="FilterButtons('This Month')" [ngClass]="{'activeButton': monthButton == true}">This Month</button>
-                <button class="week px-3 py-2 outline-none rounded-end" (click)="FilterButtons('Last Week')" [ngClass]="{'activeButton': weekButton == true}">Last Week</button>
-              </div>
-          </div>
+                <!-- start dropdown button  -->
+                <app-dropdown class="px-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
+                <!-- end dropdown button  -->
+                <div class="d-flex align-items-center">
+                    <button class="week rounded-start px-3  py-2 bg-w outline-none" (click)="FilterButtons('This Month')"
+                        [ngClass]="{'activeButton': monthButton == true}">This Month</button>
+                    <button class="week px-3 py-2 outline-none rounded-end" (click)="FilterButtons('Last Week')"
+                        [ngClass]="{'activeButton': weekButton == true}">Last Week</button>
+                </div>
+            </div>
             <!-- start add button (add new apartment) in page  -->
             <!-- end add button (add new apartment) in page  -->
 
@@ -33,166 +36,240 @@
         <!-- start part 2 in page  -->
 
         <div class="row g-4">
-          <!-- start total details cards -->
+            <!-- start total details cards -->
 
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="total-detals">
-              <div class="d-flex align-items-center">
-                  <span class="icon">€</span>
-                  <span class="mx-3 fw-bold">Total Revenue</span>
-              </div>
-              <div>
-                  <h3 class="my-2">{{PaymentCards?.total_Revenue  ?? 0}}</h3>
-                  <div>
-                      <i class="fa fa-arrow-down red" *ngIf="PaymentCards.revenue_Up==false" aria-hidden="true"></i>
-                      <i class="fa fa-arrow-up green" *ngIf="PaymentCards.revenue_Up==true" aria-hidden="true"></i>
-                      <span class="ms-1 fw-bold green" [class.red]="PaymentCards.revenue_Up==false" [class.green]="PaymentCards.revenue_Up==true"
-                      >{{PaymentCards?.revenue_Perc}} %</span>
-                      <span class="mx-3">vs last month</span>
-                  </div>
-              </div>
-          </div>
-          </div>
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="total-detals">
-              <div class="d-flex align-items-center">
-                <span class="icon">€</span>
-                  <span class="mx-3 fw-bold">Total Expenses</span>
-              </div>
-              <div>
-                  <h3 class="my-2">{{PaymentCards?.total_Expenses ?? 0}}</h3>
-                  <div>
-                      <i class="fa fa-arrow-down red" *ngIf="PaymentCards.expenses_Up==false" aria-hidden="true"></i>
-                      <i class="fa fa-arrow-up green" *ngIf="PaymentCards.expenses_Up==true" aria-hidden="true"></i>
-                      <span class="ms-1 fw-bold red" [class.red]="PaymentCards.expenses_Up==false" [class.green]="PaymentCards.expenses_Up==true"
-                      >{{PaymentCards?.expenses_Perc}} %</span>
-                      <span class="mx-3">vs last month</span>
-                  </div>
-              </div>
-          </div>
-          </div>
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="total-detals">
-              <div class="d-flex align-items-center">
-                <span class="icon">€</span>
-                  <span class="mx-3 fw-bold">Net profit
-                   </span>
-              </div>
-              <div>
-                  <h3 class="my-2">{{PaymentCards?.net_Profit ?? 0}}</h3>
-                  <div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="total-detals">
+                    <div class="d-flex align-items-center">
+                        <span class="icon">€</span>
+                        <span class="mx-3 fw-bold">Total Revenue</span>
+                    </div>
                     <div>
-                        <i class="fa fa-arrow-down red" *ngIf="PaymentCards.net_Profit_Up==false" aria-hidden="true"></i>
-                        <i class="fa fa-arrow-up green" *ngIf="PaymentCards.net_Profit_Up==true" aria-hidden="true"></i>
-                        <span class="ms-1 fw-bold green" [class.red]="PaymentCards.net_Profit_Up==false" [class.green]="PaymentCards.net_Profit_Up==true"
-                        >{{PaymentCards?.net_Profit_Perc}} %</span>
-                        <span class="mx-3">vs last month</span>
+                        <h3 class="my-2">{{ PaymentCards?.total_Revenue ?? 0 }}</h3>
+                        <div>
+                            <i class="fa fa-arrow-down red" *ngIf="PaymentCards.revenue_Up==false" aria-hidden="true"></i>
+                            <i class="fa fa-arrow-up green" *ngIf="PaymentCards.revenue_Up==true" aria-hidden="true"></i>
+                            <span class="ms-1 fw-bold green" [class.red]="PaymentCards.revenue_Up==false"
+                                [class.green]="PaymentCards.revenue_Up==true">{{ PaymentCards?.revenue_Perc }} %</span>
+                            <span class="mx-3">vs last month</span>
+                        </div>
                     </div>
                 </div>
-              </div>
-          </div>
-          </div>
-          <!-- end total details cards -->
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="total-detals">
+                    <div class="d-flex align-items-center">
+                        <span class="icon">€</span>
+                        <span class="mx-3 fw-bold">Total Expenses</span>
+                    </div>
+                    <div>
+                        <h3 class="my-2">{{ PaymentCards?.total_Expenses ?? 0 }}</h3>
+                        <div>
+                            <i class="fa fa-arrow-down red" *ngIf="PaymentCards.expenses_Up==false" aria-hidden="true"></i>
+                            <i class="fa fa-arrow-up green" *ngIf="PaymentCards.expenses_Up==true" aria-hidden="true"></i>
+                            <span class="ms-1 fw-bold red" [class.red]="PaymentCards.expenses_Up==false"
+                                [class.green]="PaymentCards.expenses_Up==true">{{ PaymentCards?.expenses_Perc }} %</span>
+                            <span class="mx-3">vs last month</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="total-detals">
+                    <div class="d-flex align-items-center">
+                        <span class="icon">€</span>
+                        <span class="mx-3 fw-bold">Net profit
+                        </span>
+                    </div>
+                    <div>
+                        <h3 class="my-2">{{ PaymentCards?.net_Profit ?? 0 }}</h3>
+                        <div>
+                            <div>
+                                <i class="fa fa-arrow-down red" *ngIf="PaymentCards.net_Profit_Up==false" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up green" *ngIf="PaymentCards.net_Profit_Up==true" aria-hidden="true"></i>
+                                <span class="ms-1 fw-bold green" [class.red]="PaymentCards.net_Profit_Up==false"
+                                    [class.green]="PaymentCards.net_Profit_Up==true">{{ PaymentCards?.net_Profit_Perc }} %</span>
+                                <span class="mx-3">vs last month</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="total-detals">
+                    <div class="d-flex align-items-center">
+                        <span class="icon">€</span>
+                        <span class="mx-3 fw-bold">Total Of Pending In</span>
+                    </div>
+                    <div>
+                        <h3 class="my-2">{{ PaymentCards?.pending_IN ?? 0 }}</h3>
+                        <div>
+                            <i class="fa fa-arrow-down red" *ngIf="PaymentCards.pending_IN_Up==false" aria-hidden="true"></i>
+                            <i class="fa fa-arrow-up green" *ngIf="PaymentCards.pending_IN_Up==true" aria-hidden="true"></i>
+                            <span class="ms-1 fw-bold green" [class.red]="PaymentCards.pending_IN_Up==false"
+                                [class.green]="PaymentCards.pending_IN_Up==true">{{ PaymentCards?.pending_IN_Perc }} %</span>
+                            <span class="mx-3">vs last month</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="total-detals">
+                    <div class="d-flex align-items-center">
+                        <span class="icon">€</span>
+                        <span class="mx-3 fw-bold">Total Of Pending Out</span>
+                    </div>
+                    <div>
+                        <h3 class="my-2">{{ PaymentCards?.pending_Out ?? 0 }}</h3>
+                        <div>
+                            <i class="fa fa-arrow-down red" *ngIf="PaymentCards.pending_Out_Up==false" aria-hidden="true"></i>
+                            <i class="fa fa-arrow-up green" *ngIf="PaymentCards.pending_Out_Up==true" aria-hidden="true"></i>
+                            <span class="ms-1 fw-bold green" [class.red]="PaymentCards.pending_Out_Up==false"
+                                [class.green]="PaymentCards.pending_Out_Up==true">{{ PaymentCards?.pending_Out_Perc }} %</span>
+                            <span class="mx-3">vs last month</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="total-detals">
+                    <div class="d-flex align-items-center">
+                        <span class="icon">€</span>
+                        <span class="mx-3 fw-bold">Difference of Pending In\Out</span>
+                    </div>
+                    <div>
+                        <h3 class="my-2">{{ PaymentCards?.revenue_Pending ?? 0 }}</h3>
+                        <div>
+                            <i class="fa fa-arrow-down red" *ngIf="PaymentCards.revenue_Pending_Up==false" aria-hidden="true"></i>
+                            <i class="fa fa-arrow-up green" *ngIf="PaymentCards.Revenue_Pending_Up==true" aria-hidden="true"></i>
+                            <span class="ms-1 fw-bold green" [class.red]="PaymentCards.revenue_Pending_Up==false"
+                                [class.green]="PaymentCards.revenue_Pending_Up==true">{{ PaymentCards?.revenue_Pending_Perc }} %</span>
+                            <span class="mx-3">vs last month</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end total details cards -->
         </div>
         <!-- start part 3 in page  -->
         <div class="d-flex justify-content-end pb-2 align-items-center">
-          <app-add-new-button  [id]="'/payments/create_new'" style="margin-top: 22px; margin-bottom: 24px;" class="me-2"></app-add-new-button>
-          <button class="btn btn-outline py-2 ms-2"  (click)="exportToExcel()">
-            <img src="../../../assets/images/pajamas_export.svg" alt="" class="me-1">
-            Export</button>
+            <app-add-new-button [id]="'/payments/create_new'" style="margin-top: 22px; margin-bottom: 24px;"
+                class="me-2"></app-add-new-button>
+            <button class="btn btn-outline py-2 ms-2" (click)="exportToExcel()">
+                <img src="../../../assets/images/pajamas_export.svg" alt="" class="me-1">
+                Export</button>
+            <button class="btn btn-outline py-2 ms-2" (click)="MultiPaying()">
+
+                Change Paying Status</button>
         </div>
         <!-- start part 4 in page  -->
 
         <div class="card">
 
-                <div class="d-flex  filterControls my-2 bg-white p-2 flex-column flex-md-row">
-                 <div class="row d-flex justify-content-between align-items-center gx-3 me-2 mb-2 mb-md-2">
-                   <div class="col-6">
-                    <div class="search pt-4">
-                      <input class="form-control fs-6 ps-3"  type="text" (keyup)="searchAction($event)" [(ngModel)]="searchText" placeholder="Search" />
-                    </div>
-                   </div>
-                   <div class="col-6">
-                  <div class="paymentType">
-                    <label for="">Payment Type</label>
-                    <select class="form-select" (change)="clickType($event)">
-                      <option *ngFor="let data of TypeFillterLists; let index=index;" [value]="data.id" [selected]="TypeFillterSelected[index]">{{data.name}}</option>
-
-                    </select>
-                  </div>
-                   </div>
-                 </div>
-                  <div class="row d-flex justify-content-between align-items-center gx-3 me-2 mb-2 mb-md-2">
+            <div class="d-flex  filterControls my-2 bg-white p-2 flex-column flex-md-row">
+                <div class="row d-flex justify-content-between align-items-center gx-3 me-2 mb-2 mb-md-2">
                     <div class="col-6">
-                    <div class="userType">
-                      <label for="">User Type</label>
-                      <select class="form-select" (change)="clickUserType($event)">
-                        <option *ngFor="let data of userFillterLists; let index=index;" [value]="data.id" [selected]="userFillterSelected[index]">{{data.name}}</option>
-
-                      </select>
-                    </div>
+                        <div class="search pt-4">
+                            <input class="form-control fs-6 ps-3" type="text" (keyup)="searchAction($event)" [(ngModel)]="searchText"
+                                placeholder="Search" />
+                        </div>
                     </div>
                     <div class="col-6">
-                    <div class="Type">
-                      <label for="">Type</label>
-                        <select class="form-select" (change)="clickPayment($event)">
-                        <option *ngFor="let data of paymentFillterLists; let index=index;" [value]="data.id" [selected]="paymentFillterSelected[index]">{{data.name}}</option>
+                        <div class="paymentType">
+                            <label for="">Payment Type</label>
+                            <select class="form-select" (change)="clickType($event)">
+                                <option *ngFor="let data of TypeFillterLists; let index=index;" [value]="data.id"
+                                    [selected]="TypeFillterSelected[index]">{{ data.name }}</option>
 
-                      </select>
+                            </select>
+                        </div>
                     </div>
-                    </div>
-                  </div>
-                  <div class="row d-flex justify-content-between align-items-center gx-3 me-2 mb-2 mb-md-2">
-                     <div class="col-7">
-                      <div class="period">
-                        <label for="">Period</label> <br>
-                        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"  [showIcon]="true"></p-calendar>
-                    </div>
-                     </div>
-                     <div class="col-2">
-                          <div class="go pt-4">
-                            <button class="btn btn-color p-2" (click)="FilterButton()">GO</button>
-                           </div>
-                     </div>
-                     <div class="col-3">
-                      <div class="cleraFilter pt-4">
-                        <button class="btn btn-filter p-1" (click)="ClearButton()">clear Filters</button>
-                       </div>
-                     </div>
-                  </div>
                 </div>
+                <div class="row d-flex justify-content-between align-items-center gx-3 me-2 mb-2 mb-md-2">
+                    <div class="col-6">
+                        <div class="userType">
+                            <label for="">User Type</label>
+                            <select class="form-select" (change)="clickUserType($event)">
+                                <option *ngFor="let data of userFillterLists; let index=index;" [value]="data.id"
+                                    [selected]="userFillterSelected[index]">{{ data.name }}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="Type">
+                            <label for="">Type</label>
+                            <select class="form-select" (change)="clickPayment($event)">
+                                <option *ngFor="let data of paymentFillterLists; let index=index;" [value]="data.id"
+                                    [selected]="paymentFillterSelected[index]">{{ data.name }}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-between align-items-center gx-3 me-2 mb-2 mb-md-2">
+                    <div class="col-7">
+                        <div class="period">
+                            <label for="">Period</label> <br>
+                            <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"
+                                [showIcon]="true"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="go pt-4">
+                            <button class="btn btn-color p-2" (click)="FilterButton()">GO</button>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="cleraFilter pt-4">
+                            <button class="btn btn-filter p-1" (click)="ClearButton()">clear Filters</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-            <p-table id="content" #content class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="payments"  [scrollable]="true">
+            <p-table id="content" #content class="table-shopping"
+                [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="payments" [scrollable]="true">
                 <ng-template pTemplate="header" class="text-center">
                     <tr>
                         <ng-container>
 
-                            <th class="td-name"  style="overflow: hidden;
+                            <th class="td-name" style="overflow: hidden;
+                          white-space: nowrap;">
+                                #
+
+
+                            </th>
+
+                            <th class="td-name" style="overflow: hidden;
                             white-space: nowrap;">
                                 Transaction No
                                 <img src="./assets/images/swap_sort 16px.svg" alt="">
 
                             </th>
-                            <th class="td-name"  style="overflow: hidden;
+                            <th class="td-name" style="overflow: hidden;
                             white-space: nowrap;">
-                              Transaction Date
-                              <img src="./assets/images/swap_sort 16px.svg" alt="">
+                                Transaction Date
+                                <img src="./assets/images/swap_sort 16px.svg" alt="">
 
-                          </th>
-                            <th class="td-name"  style="overflow: hidden;
+                            </th>
+                            <th class="td-name" style="overflow: hidden;
                             white-space: nowrap;">
                                 Apartment Name
                                 <img src="./assets/images/swap_sort 16px.svg" alt="">
-                          </th>
-                          <th class="td-name">
-                            Payment
-                      </th>
-                          <th class="td-name">
-                            user type
-                          </th>
+                            </th>
                             <th class="td-name">
-                             Name
+                                Payment
+                            </th>
+                            <th class="td-name">
+                                user type
+                            </th>
+                            <th class="td-name">
+                                Name
                             </th>
 
                             <th class="td-name">
@@ -200,7 +277,7 @@
 
                             </th>
                             <th class="td-name">
-                              Service Fee
+                                Service Fee
 
                             </th>
                             <th class="td-name">
@@ -208,10 +285,10 @@
 
                             </th>
                             <th class="td-name">
-                              Method
+                                Method
                             </th>
                             <th class="td-name">
-                              Phone Number
+                                Phone Number
                             </th>
 
                             <th class="td-name">
@@ -227,79 +304,96 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-payment>
 
-                    <tr style="cursor: pointer;" (click)="hidecard()"  >
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
-                            {{payment?.trans_No}}
-                        </td>
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
-                          {{payment?.trans_Date_Format | date}}
-                      </td>
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
-                            {{payment?.apt_Name}}
-                        </td>
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">{{payment?.payment}}</td>
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">{{payment?.user_Type}}</td>
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">{{payment?.userName}}</td>
+                    <tr style="cursor: pointer;" (click)="hidecard()">
 
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
-                            {{payment?.amount}}
+                        <td class="d-flex align-items-center">
+                            <input type="checkbox" id="selectedUser-{{ payment.inv_ID }}" value="{{ payment.inv_ID }}"
+                                name="selectedUser" (change)="onCheckboxChange($event)" class="me-2" />
+
+
                         </td>
 
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
-                          {{payment?.service_Fee}}
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">
+                            {{ payment?.trans_No }}
                         </td>
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
-                          {{payment?.type}}
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">
+                            {{ payment?.trans_Date_Format | date }}
+                        </td>
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">
+                            {{ payment?.apt_Name }}
+                        </td>
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">{{ payment?.payment }}</td>
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">{{ payment?.user_Type }}</td>
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">{{ payment?.userName }}</td>
+
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">
+                            {{ payment?.amount }}
                         </td>
 
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
-                          <div>
-                              <span class="rounded-5 px-3"*ngIf="payment?.method==	'Stripe'">
-                                <span>
-                                  <img class="payment" src="assets/images/stripe.svg" alt="">
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">
+                            {{ payment?.service_Fee }}
+                        </td>
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">
+                            {{ payment?.type }}
+                        </td>
+
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">
+                            <div>
+                                <span class="rounded-5 px-3" *ngIf="payment?.method==	'Stripe'">
+                                    <span>
+                                        <img class="payment" src="assets/images/stripe.svg" alt="">
+                                    </span>
                                 </span>
-                            </span>
-                            <span class="rounded-5 px-3"*ngIf="payment?.method==	'Visa'">
-                              <span>
-                                <img class="payment" src="assets/images/visa.svg" alt="">
-                              </span>
-                          </span>
-                            <span class="rounded-5 px-3" *ngIf="payment?.method=='Cash'">
-                              Cash
-                          </span>
-                          </div>
-                      </td>
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
-                            {{payment?.phoneNo}}
-                        </td>
-                        <td routerLink="/payments/invoice/{{payment?.inv_ID}}">
-                          <div>
-                              <span class="rounded-5 px-3 badge paid"*ngIf="payment?.status_Paid==true">
-                                <span>
-                                  {{payment?.status_String}}
+                                <span class="rounded-5 px-3" *ngIf="payment?.method==	'Visa'">
+                                    <span>
+                                        <img class="payment" src="assets/images/visa.svg" alt="">
+                                    </span>
                                 </span>
-                                <img src="assets/images/greenMore.svg" alt="">
-                            </span>
-                            <span class="rounded-5 px-3 badge unPaid" *ngIf="payment?.status_Paid==false">
-                              <span>
-                                {{payment?.status_String}}
-                              </span>
-                              <img src="assets/images/redMore.svg" alt="">
-                          </span>
-                          </div>
-                      </td>
+                                <span class="rounded-5 px-3" *ngIf="payment?.method=='Cash'">
+                                    Cash
+                                </span>
+                            </div>
+                        </td>
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">
+                            {{ payment?.phoneNo }}
+                        </td>
+                        <td routerLink="/payments/invoice/{{ payment?.inv_ID }}">
+                            <div>
+                                <span class="rounded-5 px-3 badge paid" *ngIf="payment?.status_Paid==true">
+                                    <span>
+                                        {{ payment?.status_String }}
+                                    </span>
+                                    <img src="assets/images/greenMore.svg" alt="">
+                                </span>
+                                <span class="rounded-5 px-3 badge unPaid" *ngIf="payment?.status_Paid==false">
+                                    <span>
+                                        {{ payment?.status_String }}
+                                    </span>
+                                    <img src="assets/images/redMore.svg" alt="">
+                                </span>
+                            </div>
+                        </td>
                         <td class="cursor position-relative" style="text-align: center;">
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson( $event,payment.inv_ID)">
-                  <img src="assets/images/edit.svg">
-              </button>
-                            <div *ngIf="showEdit[payment.inv_ID]  " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button px-3">
-                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/payments/invoice/{{payment?.inv_ID}}">View Invoice Details  </button>
+                                <img src="assets/images/edit.svg">
+                            </button>
+                            <div *ngIf="showEdit[payment.inv_ID]  "
+                                class="Actions position-absolute z-3 rounded-3 bg-white border edit-button px-3">
+                                <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100"
+                                    routerLink="/payments/invoice/{{ payment?.inv_ID }}">View Invoice Details </button>
                                 <!-- *ngIf="payment?.inv_Paid==true && payment.payment_By=='Cash'" -->
-                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" (click)="MarkPaid(payment?.inv_ID)" *ngIf="payment?.status_Paid==true"> Mark As Unpaid    </button>
-                                 <!-- *ngIf="payment?.inv_Paid==false && payment.payment_By=='Cash'" -->
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="MarkPaid(payment?.inv_ID)" *ngIf="payment?.status_Paid==false">Mark As Paid  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="openModal2(payment?.inv_ID)">Send Reminder  </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100"
+                                    (click)="MarkPaid(payment?.inv_ID)" *ngIf="payment?.status_Paid==true"> Mark As Unpaid </button>
 
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100"
+                                    (click)="DeleteInvoice(payment?.inv_ID)"> Delete Invoice</button>
+                                <!-- *ngIf="payment?.inv_Paid==false && payment.payment_By=='Cash'" -->
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"
+                                    (click)="MarkPaid(payment?.inv_ID)" *ngIf="payment?.status_Paid==false">Mark As Paid </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"
+                                    (click)="openModal2(payment?.inv_ID)">Send Reminder </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"
+                                    (click)="openModalDetails(payment)">Additional Information</button>
                             </div>
                         </td>
 
@@ -315,7 +409,8 @@
                 </ng-template>
 
             </p-table>
-            <p-paginator *ngIf="payments.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+            <p-paginator #paymentlist *ngIf="payments.length > 0" (onPageChange)="onPageChange($event)" [rows]="rows"
+                [totalRecords]="totalRecords" [first]="first"></p-paginator>
 
         </div>
     </main>
@@ -323,62 +418,162 @@
 
 
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" style=" background-color: rgb(23 22 22 / 50%);;">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-          <div class="modal-header d-flex justify-content-end mb-0 pb-0">
-              <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal2()">
-        <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
-</button>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-end mb-0 pb-0">
+                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close"
+                    aria-label="Close" (click)="onCloseModal2()">
+                    <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+                </button>
 
-          </div>
-        <form [formGroup]="reminderForm" (ngSubmit)="SendReminder()">
-          <div class="modal-body pt-0">
-            <div class="mb-3">
-             <label class="form-label gray fw-bold"  style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
-               Select date
-              </label>
-           <input type="date" class="form-control" style="font-size: 14px;" formControlName="rem_Date">
+            </div>
+            <form [formGroup]="reminderForm" (ngSubmit)="SendReminder()">
+                <div class="modal-body pt-0">
+                    <div class="mb-3">
+                        <label class="form-label gray fw-bold"
+                            style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
+                            Select date
+                        </label>
+                        <input type="date" class="form-control" style="font-size: 14px;" formControlName="rem_Date">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label gray fw-bold"
+                            style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
+                            Description
+                        </label>
+                        <textarea class="form-control" placeholder="Enter Description" rows="5" style="font-size: 14px;"
+                            formControlName="rem_Desc"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label gray fw-bold"
+                            style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
+                            Reminders
+                        </label>
+                        <p>These are notifications to remind you of updates you might have missed.</p>
+                        <div class="d-flex">
+                            <div class="form-check form-switch d-flex  align-items-center">
+                                <input class="form-check-input" type="checkbox" role="switch" id="Push" value="Push"
+                                    (change)="handleCheckboxChange('Push')">
+                                <label class="form-check-label" for="Push">Push</label>
+                            </div>
+                            <div class="form-check form-switch  align-items-center mx-5">
+                                <input class="form-check-input" type="checkbox" role="switch" id="Email" value="Email"
+                                    (change)="handleCheckboxChange('Email')">
+                                <label class="form-check-label" for="Email">Email</label>
+                            </div>
+                            <div class="form-check form-switch  align-items-center">
+                                <input class="form-check-input" type="checkbox" role="switch" id="WhatsApp" value="WhatsApp"
+                                    (change)="handleCheckboxChange('WhatsApp')">
+                                <label class="form-check-label" for="WhatsApp">WhatsApp</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between">
+                            <button type="button" (click)="onCloseModal2()" style="margin-right: 210px !important;" class="btn btn-black">
+                                Cancel</button>
+                            <button type="submit" class="btn btn-color">Add Reminder</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display_details}" style=" background-color: rgb(23 22 22 / 50%);;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="    margin-top: 150px;">
+            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;position: relative;">
+                <p class="modal-title"
+                    style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                    <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
+                        Invoice Details
+                    </span>
+                </p>
+                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close"
+                    aria-label="Close" (click)="oncloseModelDetails()">
+                    <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+                </button>
+
+
             </div>
 
-           <div class="mb-3">
-             <label class="form-label gray fw-bold"  style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
-               Description
-              </label>
-              <textarea class="form-control" placeholder="Enter Description" rows="5" style="font-size: 14px;" formControlName="rem_Desc"></textarea>
-           </div>
-           <div class="mb-3">
-             <label class="form-label gray fw-bold"  style="color: #605D62; font-size: 14px; font-weight: 600; line-height: 24px;">
-               Reminders
-              </label>
-              <p>These are notifications to remind you of updates you might have missed.</p>
-              <div class="d-flex">
-                <div class="form-check form-switch d-flex  align-items-center">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Push" value="Push" (change)="handleCheckboxChange('Push')">
-                  <label class="form-check-label" for="Push">Push</label>
-                </div>
-                <div class="form-check form-switch  align-items-center mx-5">
-                  <input class="form-check-input" type="checkbox" role="switch" id="Email" value="Email" (change)="handleCheckboxChange('Email')" >
-                  <label class="form-check-label" for="Email">Email</label>
-                </div>
-                <div class="form-check form-switch  align-items-center">
-                  <input class="form-check-input" type="checkbox" role="switch" id="WhatsApp" value="WhatsApp" (change)="handleCheckboxChange('WhatsApp')" >
-                  <label class="form-check-label" for="WhatsApp">WhatsApp</label>
-                </div>
-              </div>
+            <div class="modal-body">
 
-           </div>
 
-         </div>
+                <div id="Bankdetails">
+                    <!-- <p class="fw-bold mb-0"> Bank account information</p> -->
+                    <p style="color: #605D62 !important;">Additional Information of Invoice</p>
+                </div>
+                <!--start Other Details form-->
 
-         <div class="modal-footer">
-           <div class="d-flex justify-content-between">
-             <div class="d-flex justify-content-between">
-                 <button type="button" (click)="onCloseModal2()" style="margin-right: 210px !important;" class="btn btn-black"> Cancel</button>
-                 <button type="submit" class="btn btn-color" >Add Reminder</button>
-             </div>
-         </div>
-         </div>
-        </form>
-      </div>
-  </div>
+                <div name="bankdetails">
+                    <div class="row ">
+
+                        <div class="col-6  mb-4">
+                            <label class="fw-bold" style="color: #605D62;">Invoice Code</label>
+                            <br>
+
+                            <input readonly disabled value="{{ inv_code }}" class="form-control w-100 bg-white"
+                                type="text">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="note" class="form-label">Invoice Notes </label>
+                            <textarea readonly type="text" rows="6" id="note" class="form-control bg-white">{{ inv_notes }}</textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="note" class="form-label">Invoice Description </label>
+                            <textarea readonly type="text" rows="6" id="note" class="form-control bg-white">{{ inv_desc }}</textarea>
+                        </div>
+
+                        <div class="mb-3 col-12 col-md-12">
+                            <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Invoice Attachment</label>
+                            <div class="row mt-2">
+
+
+                                <div class="col-11 rounded-3   py-2 ms-3" style="border: 1px solid #8fa0b4">
+                                    <div class="row">
+                                        <div class="col-2 d-flex justify-content-center">
+                                            <img width="48px" *ngIf="Is_PDF==true" src="assets/images/pdf-svgrepo-com.svg" />
+                                            <img width="48px" *ngIf="Is_PDF==false" src="assets/images/jpg-svgrepo-com.svg" />
+
+                                        </div>
+                                        <div class="col-8">
+                                            <h6>Invoice Transaction Receipt</h6>
+
+                                        </div>
+                                        <div class="col-2 d-flex align-items-center justify-content-center">
+                                            <div class="">
+                                                <!-- <a class="me-3 cursor" routerLink="/apartments/contract/create-owner-contract"><img src="assets/images/apartmentImages/edit1.svg" /></a> -->
+                                                <a class="me-3 cursor" *ngIf="inv_attach" target="_blank"
+                                                    [href]="inv_attach"><img width="32px"
+                                                        src="assets/images/download-minimalistic-svgrepo-com.svg" /></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>

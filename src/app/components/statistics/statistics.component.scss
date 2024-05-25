@@ -5,7 +5,15 @@
 .h-350{height: 350px !important;}
 .overflow-overlay{overflow: overlay;}
 .h-350{height: 350px !important;}
-
+.btn.btn-color{
+  background-color: #1f4068;
+  padding: 12px, 24px, 12px, 20px;
+  border-radius: 6px;
+  box-shadow: 0px 1px 0px 0px #0000000D;
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+}
 .total-detals {
   padding: 16px;
   border: 1px solid #EBEBEB;
@@ -79,4 +87,11 @@ tr td{
     font-weight: 400;
     line-height: 20px;
   }
+}
+::ng-deep .p-calendar{
+  height: 36px;
+
+}
+.mt-06{
+  margin-top:0.65rem !important;
 }
