@@ -75,4 +75,10 @@ export class OnwerService {
       headers: this.headers,
     });
   }
+
+  GetAreasandCities(): Observable<IOnwer[]> {
+    return this.http.get<IOnwer[]>(`${environment.apiUrl}/Basics/GetAreasandCities`, {headers: this.headers });
+
+  }
+
 }

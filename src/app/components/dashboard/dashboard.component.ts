@@ -239,9 +239,12 @@ export class DashboardComponent {
         case 'Payment':
           this.router.navigate([`/payments/invoice/${actionID}`]);
           break;
-        case 'Booking':
-          this.router.navigate([`/apartments/booking/${actionID}`]);
-          break;
+          case 'Inquiry':
+            this.router.navigate([`/apartments/booking/${actionID}`]);
+            break;
+          case 'Booking':
+            this.router.navigate([`/inquiries/view-inquire/${actionID}`]);
+            break;
     }
   }
 

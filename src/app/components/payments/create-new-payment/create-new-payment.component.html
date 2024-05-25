@@ -23,6 +23,11 @@
 
                 </div>
 
+
+            <div class="input">
+              <input type="text" class="form-control py-2" placeholder="Search Finance" (keyup)="searchAction($event)" [(ngModel)]="searchText" [ngModelOptions]="{standalone:true}" />
+                <img src="../../../assets/images/search.svg" alt="">
+
             </div>
         </div>
         <div class="card px-4 py-3 ">

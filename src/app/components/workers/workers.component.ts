@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
   styleUrls: ['./workers.component.css']
 })
 export class WorkersComponent implements OnInit {
-
+  @ViewChild('closebutton') closebutton: any;
    showEdit: Array<boolean> = [];
   showSide: string = '';
   products!: Array<object>;
@@ -18,6 +18,7 @@ export class WorkersComponent implements OnInit {
   headerData: Array<any> = [];
   loading: boolean = true;
   search:boolean=false;
+  workerId:any;
   subscriptions:Subscription[] = [];
   listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last Week'},{name:'This month'},{name:'This year'}]
 
@@ -82,27 +83,6 @@ tiggerPageChange(event: any) {
     }));
 
   }
-  // DeleteUser(id :any){
-  //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
-  //     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Deleted Successfuly'}` });
-
-  //     this.getAllworkers( );
-
-  //    }, (error) => {
-  //     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-  //   })
-
-  // }
-  // SuspendUser(id:any){
-  //   this._adminservices.SuspendTenant( id).subscribe((res:any) => {
-  //     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Suspended Successfuly'}` });
-
-  //     this.getAllworkers( );
-
-  //    }, (error) => {
-  //     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-  //   })
-  // }
   detailperson(event:any,id: any): void {
     this.showEdit=[]
     event.stopPropagation()
@@ -116,18 +96,27 @@ tiggerPageChange(event: any) {
     this.showEdit=[]
 
  }
- deleteworker( id:any) {
-  this.subscriptions.push(this._adminservices.DeleteWorker(id ).subscribe((res) => {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
+ deleteworker() {
 
+  this.subscriptions.push(this._adminservices.DeleteWorker(this.workerId).subscribe(
+    (res: any) => {
+      this.closebutton.nativeElement.click();
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `${res.message}`,
+      });
 
-    this.getAllworkers()
-
-  }, (err: any) => {
-
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: `${ err.error.message[0]}` });
-
-  }))
+      this.getAllworkers();
+    },
+    (error) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `${error.error.message[0]}`,
+      });
+    }
+  ));
 
 }
 workersRole:any
@@ -171,8 +160,23 @@ searchAction(event: KeyboardEvent) {
 }
   this.getAllworkers();
 }
+
+display = 'none';
+
+
+deleteModal(id: any) {
+  this.display = 'block';
+  this.display = 'flex';
+  this.workerId = id;
+}
+
+onCloseHandled() {
+  this.display = 'none';
+}
+
+
 ngOnDestroy() {
   for(let i=0;i<this.subscriptions.length;i++)
   this.subscriptions[i].unsubscribe();
-}
+} 
 }

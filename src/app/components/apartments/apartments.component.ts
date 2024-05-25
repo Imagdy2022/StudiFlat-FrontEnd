@@ -117,6 +117,7 @@ gotopage( ){
     this.subscriptions.push( this.apartmentSer.AddtoBest( apt_UUID).subscribe((res) => {
       this.messagemessage=res["message"]
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${this.messagemessage}` });
+      this.getAllApartment();
 
     }, (error) => {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
@@ -127,6 +128,7 @@ gotopage( ){
     this.subscriptions.push( this.apartmentSer.RemoveBest( apt_UUID).subscribe((res) => {
       this.messagemessage2=res["message"]
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${this.messagemessage2}` });
+      this.getAllApartment();
 
     }, (error) => {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: `${error.error.message[0]}` });

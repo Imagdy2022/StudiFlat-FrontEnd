@@ -14,7 +14,8 @@ export class GeneralInfoUserComponent {
   @Input() imageUrl: string;
   @Input() title: string = '';
   @Input() loadingButton: boolean = false;
- viewDeleteButtonButton: boolean = false;
+ viewDeleteButtonButton: boolean = true;
+ selectedFileName: string = '';
 
   constructor(private uploadFile: UploadFileService, private http: HttpClient) { }
 
@@ -49,6 +50,7 @@ export class GeneralInfoUserComponent {
       this.loadingButton = false;
     }
   }
+
 
   /**
    * defaultImageUrl

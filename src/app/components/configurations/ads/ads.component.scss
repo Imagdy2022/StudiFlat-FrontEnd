@@ -1,30 +1,32 @@
-.month,
-.week {
-    color: #757a82;
-    background-color: white;
-    border: 1px solid #ebebeb;
+@media (min-width: 776px) {
+    .modal-dialog {
+        max-width: 850px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .xcvddmodel {
+        margin-right: 535px !important;
+    }
 }
 
-.cvxs {
-    text-align: center;
-    color: #1019c6 !important;
-    font-size: 16px;
-    font-family: 'Poppins';
-    font-weight: 500;
-    line-height: 20px;
-    word-wrap: break-word;
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px #8FA0B4 solid;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    display: flex;
+.file {
+    z-index: 3 !important;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.h-124px {
+    height: 124px !important;
+}
+
+.w-145px {
+    width: 145px;
+}
+
+@media (min-width: 768px) {
+    .marmodify {
+        margin-left: 486px;
+    }
 }
 
 td {
@@ -35,41 +37,13 @@ td {
   border-bottom: 1px solid #F6F6F6 !important;
 
 }
-
 th {
     font-size: 14px !important;
+    font-family: 'Poppins';
     border-bottom: 1px solid #F6F6F6 !important;
     background: #F6F6F6 !important  ;
 }
-tr{
-  padding-right: 24px !important;
-  padding-left: 24px !important;
-}
-tr .Actions{
-  width: 150px;
-  z-index: 999;
-  right: 35px;
-  top: 50px;
-}
 
-tr:nth-last-child(2) .Actions{
-  top: -10px;
-}
-
-tr:last-child .Actions{
-  top: -50px;
-}
-
-
-.input{
-  position: relative;
-}
-.input img{
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
 .modal{
   background: rgba(0,0,0, .5);
   justify-content: center;
@@ -86,7 +60,7 @@ tr:last-child .Actions{
       border: 8px solid #FFFBF9;
       background: linear-gradient(0deg, #FCEEEE, #FCEEEE),      linear-gradient(0deg, #FFFBF9, #FFFBF9);
 }
-    img{
+    img.icon{
       width: 24px;
       height: 24px;
     }
@@ -126,12 +100,4 @@ tr:last-child .Actions{
 }
 .modal-footer{
   border-top: unset;
-}
-
-::placeholder{
-  font-size: 13px !important;
-}
-
-* {
-    font-family: 'Poppins'
 }

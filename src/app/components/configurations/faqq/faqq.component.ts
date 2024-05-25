@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
@@ -7,9 +7,10 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
 @Component({
   selector: 'app-faqq',
   templateUrl: './faqq.component.html',
-  styleUrls: ['./faqq.component.css'],
+  styleUrls: ['./faqq.component.scss'],
 })
 export class FaqqComponent implements OnInit {
+  @ViewChild('closebutton') closebutton: any;
   showEdit: Array<boolean> = [];
   showEdit2: Array<boolean> = [];
   home: any;
@@ -19,6 +20,7 @@ export class FaqqComponent implements OnInit {
   headerData: Array<any> = [];
   loading: boolean = true;
   search: boolean = false;
+  faqId:any
   subscriptions:Subscription[] = [];
   listDropDown: Array<object> = [
     { name: 'All  ' },
@@ -120,27 +122,6 @@ export class FaqqComponent implements OnInit {
     ))
 
   }
-  // DeleteUser(id :any){
-  //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
-  //     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Deleted Successfuly'}` });
-
-  //     this.getAllpartners( );
-
-  //    }, (error) => {
-  //     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-  //   })
-
-  // }
-  // SuspendUser(id:any){
-  //   this._adminservices.SuspendTenant( id).subscribe((res:any) => {
-  //     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Suspended Successfuly'}` });
-
-  //     this.getAllpartners( );
-
-  //    }, (error) => {
-  //     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-  //   })
-  // }
   detailperson(event: any, id: any): void {
     this.showEdit = [];
     event.stopPropagation();
@@ -164,44 +145,6 @@ export class FaqqComponent implements OnInit {
     this.showEdit2 = [];
   }
 
-  deletepartner(id: any) {
-    this.subscriptions.push(this._adminservices.DeletePartners(id).subscribe(
-      (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `${res.message}`,
-        });
-      },
-      (err: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${err.error.message[0]}`,
-        });
-      }
-    ))
-
-  }
-  DeleteAds(id: any) {
-    this.subscriptions.push(    this._adminservices.DeleteAds(id).subscribe(
-      (res: any) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: res['message'],
-        });
-        this.GetAds();
-      },
-      (err: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${err.error.message[0]}`,
-        });
-      }
-    ))
-  }
   Question_title: any = '';
   question_answer: any = '';
   display1: any = 'none';
@@ -285,9 +228,10 @@ export class FaqqComponent implements OnInit {
       ))
 
   }
-  DeleteFAQ(id: any) {
-    this.subscriptions.push(this._adminservices.DeleteFAQ(id).subscribe(
+  DeleteFAQ() {
+    this.subscriptions.push(this._adminservices.DeleteFAQ(this.faqId).subscribe(
       (res: any) => {
+        this.closebutton.nativeElement.click();
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
@@ -386,6 +330,15 @@ export class FaqqComponent implements OnInit {
     this.ListFiles = null;
     this.urls = null;
   }
+ display4 = 'none';
+  deleteModal(id: any) {
+    this.display4 = 'block';
+    this.faqId = id;
+  }
+  onCloseHandled() {
+    this.display4 = 'none';
+  }
+
   button_name: any = '';
   CreateAds() {
     const formData = new FormData();
@@ -425,8 +378,7 @@ export class FaqqComponent implements OnInit {
   }
   searchTextChange: any;
   searchAction() {
-    // this.searchTextChange.emit(this.searchText);
-    this.search = false;
+
     this.getAllFAQ();
     this.searchText = '';
   }

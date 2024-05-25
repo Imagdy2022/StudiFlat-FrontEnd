@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class OwnerDetailsComponent {
+  model2: string;
   /** showSide  */
   showSide: string = '';
   /** available  */
@@ -297,20 +298,21 @@ export class OwnerDetailsComponent {
   }
   bindCreateOwner(): void {
     this.createOwner = new FormGroup({
-      owner_FirstName: new FormControl('', [Validators.required]),
-      owner_LastName: new FormControl('', [Validators.required]),
+      owner_FirstName: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)]),
+      owner_LastName: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)]),
       owner_Mail: new FormControl('', [Validators.email, Validators.required]),
-      owner_Address: new FormControl('', [Validators.required]),
-      owner_About: new FormControl('', [Validators.required]),
+      owner_Address: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9,. ]*$/)]),
+      owner_About: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9,. ]*$/)]),
       owner_DOB: new FormControl('', [Validators.required]),
-      owner_Phone: new FormControl('', [Validators.required]),
+      owner_Phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9 ]*$/)]),
       owner_WA_Number: new FormControl(''),
-      owner_Bank: new FormControl('', [Validators.required]),
-      owner_BankAccount: new FormControl('', [Validators.required]),
-      owner_BankSwift: new FormControl('', [Validators.required]),
+      owner_Bank: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)]),
+      owner_BankAccount: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]*$/)]),
+      owner_BankSwift: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9 ]*$/)]),
       owner_Photo: new FormControl('', [Validators.required]),
     });
   }
+
 
   /**
    * scrollTop
@@ -327,6 +329,15 @@ export class OwnerDetailsComponent {
     const day = ('0' + today.getDate()).slice(-2);
     return `${year}-${month}-${day}`;
   }
+
+  display4 = 'none';
+  cancleModal() {
+    this.display4 = 'block';
+  }
+  onCloseHandled() {
+    this.display4 = 'none';
+  }
+
 
   ngOnDestroy() {
     for (let i = 0; i < this.subscriptions.length; i++)
