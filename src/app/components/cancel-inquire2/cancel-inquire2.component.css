@@ -3,6 +3,10 @@
     padding: 4px 8px;
     font-weight: 500;
 }
+.Pending {
+  color: #FFB900;
+  background-color: #FFF9E6;
+}
 
 .Accepted {
     color: #027A48;

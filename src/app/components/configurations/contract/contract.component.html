@@ -1,0 +1,318 @@
+<header>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Contract Section '"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+
+    <!-- start sidebar  -->
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Contract Sections '"></app-sidebar>
+    <!-- end sidebar  -->
+
+    <!-- start content page  -->
+    <main class="p-4 col-lg-10 ">
+        <!-- <div class="row" style="color: #6c6a6a">
+            <p-breadcrumb class="max-w-full" [model]="[{label:'Ads'}]" [home]="home"></p-breadcrumb>
+
+        </div> -->
+        <div class="fw-inquiries d-flex justify-content-between" style="color: #6c6a6a;">
+            <p class="fw-bold ms-1" style="color: #6c6a6a;">Sections</p>
+            <div class="d-flex justify-content-lg-between  ">
+
+                <!-- start dropdown button  -->
+                <!-- <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
+                <!-- end dropdown button  -->
+                <!-- start add button (add new owner) in page  -->
+                <!-- <app-add-new-button [id]="'/owner/create_new'" class="mt-2"></app-add-new-button> -->
+
+                <!-- end add button (add new owner) in page  -->
+            </div>
+            <!-- start add button (add new apartment) in page  -->
+            <!-- end add button (add new apartment) in page  -->
+
+        </div>
+
+        <p-toast></p-toast>
+        <div class="card mt-2">
+            <div class="d-flex justify-content-between align-items-center ps-1 pe-3 pt-1" style="margin-bottom: 12px;">
+                <!-- length Of person -->
+                <div class="d-flex mx-2 mt-4">
+                    <p class="me-2 fs-5 fw-bold ml-8">Sections : {{ numberAds }}</p>
+                    <!-- <p class="mb-3 bg-gray rounded-5 blue px-2 d-flex align-items-center">
+            {{ fullRespone?.totalRecords }} {{ pagePerson }}
+        </p> -->
+                </div>
+                <!-- search input -->
+                <div class="d-flex align-items-center mx-2 mt-2">
+                    <a class="px-3 py-2 rounded border text-white text-decoration-none marmodify"
+                        style="background-color:#1F4068; cursor: pointer;" (click)="openmodel3adds()">
+                        <img src="assets/images/plus.svg" class="me-2 ">Add New
+                    </a>
+                </div>
+            </div>
+            <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="Ads">
+                <ng-template pTemplate="header" class="text-center">
+                    <tr *ngIf="headerData">
+                        <ng-container>
+                            <th class="td-name">
+                                Section Order
+
+                            </th>
+                            <th class="td-name">
+                                Section Name
+
+                            </th>
+                            <th class="td-name">
+                                Section Description
+                            </th>
+
+
+                            <th class="td-name">
+
+                            </th>
+                        </ng-container>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ads>
+
+                    <tr (click)="hidecard2()">
+                        <td>{{ ads?.set_C_Order }}</td>
+                        <td>
+                            {{ ads?.set_C_Name }}
+                        </td>
+                        <td class="truncate-cell">
+                            {{ ads?.set_C_Desc }}
+                        </td>
+
+                        <td class="cursor position-relative" style="text-align: center;">
+                            <button class="border-0 outlin-0 bg-transparent" (click)="detailperson2($event,ads.set_C_ID)">
+                                <img src="assets/images/edit.svg">
+                            </button>
+
+                            <div *ngIf="showEdit2[ads.set_C_ID] " style="width: 150px;z-index: 999;right: 35px;top: 50px;"
+                                class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100"
+                                    (click)="openmodupdateads(ads)">Update</button>
+                                <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100"
+                                    (click)="opendetailsModal(ads)">View Details</button>
+
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"
+                                    (click)="DeleteAds(ads.set_C_ID)">Delete </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </ng-template>
+
+
+                <ng-template pTemplate="emptymessage">
+                    <div class="container text-center mt-4">
+                        <p class="mb-0">No data found.</p>
+                    </div>
+                </ng-template>
+
+            </p-table>
+
+        </div>
+    </main>
+    <!-- end content page  -->
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" style=" background-color: rgb(23 22 22 / 50%);;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="    margin-top: 150px;">
+            <div class="modal-header" style="position: relative;background-color:#ffffff; border-bottom: none !important;">
+                <p class="modal-title"
+                    style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                    <span class="form-label gray fw-bold" style="vertical-align: middle">
+                        Update Section
+                    </span>
+                </p>
+                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close"
+                    aria-label="Close" (click)="onCloseModal2()">
+                    <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+                </button>
+
+
+            </div>
+
+            <div class="modal-body">
+
+
+                <div class="row mt-3">
+                    <div class="mb-3 col-6 col-md-6">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Section Name</label>
+                        <input type="text" [(ngModel)]="sec_name" class="form-control rounded-2 py-2 fs-6" id="exampleInputPricepermonth" />
+
+                    </div>
+                    <div class="mb-3 col-6 col-md-6">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Section Order</label>
+                        <input min="0" type="number" [(ngModel)]="sec_order" class="form-control rounded-2 py-2 fs-6"
+                            id="exampleInputPricepermonth" />
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-12 col-md-12">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Section Description</label>
+                        <textarea type="text" [(ngModel)]="sec_desc" class="form-control rounded-2 py-2 fs-6"
+                            style="height: 10rem !important;"
+                            id="exampleInputPricepermonth" row="6"></textarea>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+
+                <div class="d-flex justify-content-between w-100">
+                    <a (click)="onCloseModal2()" style="    border: 1px solid;"
+                        class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvddmodel">
+                        Cancel
+                    </a>
+                    <button (click)="UpdateContract()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4"
+                        style="background-color: #1f4068 !important">
+                        confirm
+                    </button>
+                </div>
+
+                <!-- Confirm -->
+
+            </div>
+
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}" style=" background-color: rgb(23 22 22 / 50%);;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="    margin-top: 150px;">
+            <div class="modal-header" style="position: relative;background-color:#ffffff; border-bottom: none !important;">
+                <p class="modal-title"
+                    style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                    <span class="form-label gray fw-bold" style="vertical-align: middle;">
+                        Add New Contract Section
+                    </span>
+                </p>
+                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close"
+                    aria-label="Close" (click)="onCloseModal3()">
+                    <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+                </button>
+
+
+            </div>
+
+            <div class="modal-body">
+
+
+                <div class="row mt-3">
+                    <div class="mb-3 col-6 col-md-6">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Section Name</label>
+                        <input type="text" [(ngModel)]="sec_name" class="form-control rounded-2 py-2 fs-6" id="exampleInputPricepermonth" />
+
+                    </div>
+                    <div class="mb-3 col-6 col-md-6">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Section Order</label>
+                        <input min="0" type="number" [(ngModel)]="sec_order" class="form-control rounded-2 py-2 fs-6"
+                            id="exampleInputPricepermonth" />
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-12 col-md-12">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Section Description</label>
+                        <textarea type="text" [(ngModel)]="sec_desc" class="form-control rounded-2 py-2 fs-6"
+                            style="height: 10rem !important;"
+                            id="exampleInputPricepermonth" rows="6"></textarea>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+
+                <div class="d-flex justify-content-between w-100 px-2">
+                    <a (click)="onCloseModal3()" style="    border: 1px solid;"
+                        class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold  xcvddmodel">
+                        Cancel
+                    </a>
+                    <button (click)="CreateAds()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4"
+                        style="background-color: #1f4068 !important">
+                        confirm
+                    </button>
+                </div>
+                <!-- Confirm -->
+
+            </div>
+
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display23}" style=" background-color: rgb(23 22 22 / 50%);;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="    margin-top: 150px;">
+            <div class="modal-header" style="position: relative;background-color:#ffffff; border-bottom: none !important;">
+                <p class="modal-title"
+                    style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                    <span class="form-label gray fw-bold" style="vertical-align: middle">
+                        Contract Section Details
+                    </span>
+                </p>
+                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close"
+                    aria-label="Close" (click)="onCloseModalDetails()">
+                    <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
+                </button>
+
+
+            </div>
+
+            <div class="modal-body">
+
+
+                <div class="row mt-3">
+                    <div class="mb-3 col-6 col-md-6">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Section Name</label>
+                        <input readonly type="text" [(ngModel)]="sec_name" class="form-control rounded-2 py-2 fs-6 bg-white"
+                            id="exampleInputPricepermonth" />
+
+                    </div>
+                    <div class="mb-3 col-6 col-md-6">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Section Order</label>
+                        <input readonly min="0" type="number" [(ngModel)]="sec_order" class="form-control rounded-2 py-2 fs-6 bg-white"
+                            id="exampleInputPricepermonth" />
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-12 col-md-12">
+                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Section Description</label>
+                        <textarea readonly type="text" [(ngModel)]="sec_desc" class="form-control rounded-2 py-2 fs-6 bg-white"
+                            style="height: 10rem !important;"
+                            id="exampleInputPricepermonth" row="6"></textarea>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -9,7 +9,6 @@
     <main class="p-4 col-lg-10">
         <div class="d-md-flex justify-content-between  zswed" style="margin-bottom: 20px;">
             <div class="d-flex" style="margin-left: 77px;">
-
                 <p (click)="backClicked()" class="fw-bold" style="color: black ;cursor: pointer;">Back </p>
             </div>
             <div style="margin-right: 94px;">
@@ -21,99 +20,128 @@
             </div>
         </div>
         <!-- <div class="d-flex">
-            <p class="fw-bold me-2" style="color: #6c6a6a">Back</p>
 
-        </div> -->
-        <div class="card shadow-sm rounded-3 xxcprint" id="MyDIv">
-            <div class="d-flex justify-content-between " style="height: 110px;">
-            <div class="image">
-              <img style="width: 169.17px;" src="./assets/images/logo.svg" />
+
+
+
+
+
+
+
+
+          <p class="fw-bold me-2" style="color: #6c6a6a">Back</p>
+      </div> -->
+        <div class="frist11 xxcprint" id="MyDIv">
+            <div class="frist22"></div>
+            <div class="frist33"></div>
+
+
+            <div class="frist44">
+                <div class="frist55">{{ invoiceDetail?.cust_Type }} </div>
+                <div class="frist66 mt-2" *ngFor="let client of invoiceDetail?.clients
+              ">{{ client }} </div>
             </div>
-            <div class="date">
-              <p class="phonein">Prepared Date: {{_details?.prepared_Date|date: 'dd/MM/yyyy' }}</p>
-              <p class="phonein">Title: {{_details?.invoice_Title}}</p>
-          </div>
-          </div> 
-          <div *ngFor="let invoice of invoices" style="margin-bottom:135px;">
-         
-          <div class="row mb-4">
-            <div class="col-12">
-              <div class="invoiceCard p-4">
-                <div class="mainTitle d-flex justify-content-between align-items-center mb-4">
-                  <div class="title">
-                    <h3 class="invice1">Invoice</h3>
-                  </div>
-                  <div class="InvoiceNo">
-                    <p class="invoicenu">Invoice No.</p>
-                    <p class="invocede"> {{invoiceDetail?.inv_Code}} </p>
-                  </div>
+            <!-- invoice-details -->
 
-                </div>
-                <div class="client d-flex justify-content-between">
-                  <div class="client">
-                    <h4 >Clients</h4>
-                    <p>{{invoiceDetail?.cust_Type}}</p>
-                  </div>
-                  <div>
-                    <div class="InvoiceNo mb-3">
-                      <p class="invoice my-0">Issued on</p>
-                      <div class="dateDetails my-0">{{invoiceDetail?.issued_on| date }} </div>
+            <div name="Invoice_Details_Table" class="invoce2">
+                <div class="row">
+                    <div class="col-8">
+                        <span style="color:#60737D !important;">Description:- {{ invoiceDetail?.apt_Name }}</span>
                     </div>
-                    <div class="InvoiceNo">
-                      <p class="invoice my-0">Payment Due</p>
-                      <div class="dateDetails my-0">{{invoiceDetail?.payment_Due |date}} </div>
+                    <div class="col-2">
+                        <span style="color:#60737D !important;">Price</span>
                     </div>
+                    <div class="col-2">
+                        <span style="color:#60737D !important;">Total</span>
+                    </div>
+                </div>
+                <div class="row mt-4" *ngFor="let invoice of invoices">
+                    <div class="col-8">
+                        <span class="invice5">{{ invoice?.invoice_Desc }}</span>
+                    </div>
+                    <div class="col-2 ">
+                        <span class="invice5 ddfdffd">{{ invoice?.invoice_Amount }}</span>
+                    </div>
+                    <div class="col-2">
+                        <span class="invice5">{{ invoice?.invoice_Total }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngFor="let invoice of invoices">
+                <div class="invice1">Invoice</div>
+                <!--   <div class="invoce2">
+                  <span class="invoce3"> </span><span class="invice4"> </span>
+                  <span class="invice5">{{ invoice?.invoice_Desc }}</span><span class="invoce6"> </span>
+              </div> -->
+                <!--     <div class="price11">Price</div>
+              <div class="total22">Total</div> -->
+                <div class="section33">
+                    <div class="class33">
+                        <div class="invoicenu">Invoice No.</div>
+                        <div class="invocede"> {{ invoiceDetail.inv_Code }} </div>
+                    </div>
+                    <div class="divclassss">
+                        <div class="ttott">
+                            <div class="issue33">Issued on</div>
+                            <div class="datedes">{{ invoiceDetail.issued_on }} </div>
+                        </div>
+                        <div class="ttott">
+                            <div class="issue33">Payment Due</div>
+                            <div class="datedes">{{ invoiceDetail.payment_Due }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="stackkc">
+                  <div
+                      style="flex: 1 1 0; align-self: stretch; padding-right: 17.02px; justify-content: flex-start; align-items: flex-start; gap: 340.58px; display: inline-flex">
+                      <div
+                          style="width: 375.09px; color: #313033; font-size: 18px; font-family: 'Popines'; font-weight: 400; line-height: 24.01px; word-wrap: break-word">
+                          {{ _details.apt_Name }}
+                      </div>
+                      <div class="ddfdffd"> {{ invoice?.invoice_Amount }}</div>
                   </div>
-
-                </div>
               </div>
-            </div>
-          </div>
-          <div class="row p-3">
-            <div class="col-md-8">
-              <h5 class="data"> Invoice </h5>
-                 <div class="desc mb-3" >
-                  <p >{{invoice?.invoice_Desc}}</p>
-
-                 </div>
-            </div>
-            <div class="col-md-2">
-              <div>
-                <h5 class="data"> Price </h5>
-                <div class="desc mb-3" >
-                 <p style="color: #60737D;">{{invoice?.invoice_Amount}}</p>
-                </div>
-              </div>
+              <div class="priceeins"> {{ invoice?.invoice_Amount }}</div> -->
 
             </div>
-            <div class="col-md-2">
-              <div>
-                <h5 class="data"> Total </h5>
-                <div class="desc mb-3" >
-                 <p >{{invoice?.invoice_Total}}</p>
-                </div>
-              </div>
 
-            </div>
-          </div>
-          </div>
 
-          <div class="stysda">
-            <div style="justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
-                <div class="ccarddinvice">Total</div>
-                <div style="justify-content: center; align-items: center; gap: 1.50px; display: flex">
-                    <div class="ccarddinvice">(</div>
-                    <div style="justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="text-align: right; color: #121722; font-size: 15px; font-family: 'Popines'; font-weight: 400; word-wrap: break-word">Euro</div>
+            <!-- total -->
+            <div class="stysda">
+
+
+                <div style="justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
+                    <div class="ccarddinvice">Total</div>
+                    <div style="justify-content: center; align-items: center; gap: 1.50px; display: flex">
+                        <div class="ccarddinvice">(</div>
+                        <div style="justify-content: flex-start; align-items: flex-start; display: flex">
+                            <div
+                                style="text-align: right; color: #121722; font-size: 15px; font-family: 'Popines'; font-weight: 400; word-wrap: break-word">
+                                Euro</div>
+                        </div>
+                        <div class="ccarddinvice">)</div>
                     </div>
-                    <div class="ccarddinvice">)</div>
+                </div>
+                <div class="pricinn">{{ invoiceDetail?.grand_Total }}</div>
+            </div>
+            <!-- prepared by -->
+            <div class="imgheap">
+                <div class="imgginv">
+                    <img style="width: 169.17px; height: 72px" src="./assets/images/logo.svg" />
+                    <div class="prepheap">
+                        <div class="prpee">
+                            <div class="phonein">Prepared Date: {{ _details.prepared_Date|date: 'dd/MM/yyyy' }}</div>
+                            <div class="phonein">Title: {{ _details.invoice_Title }}</div>
+                        </div>
+                        <div>
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="pricinn">{{invoiceDetail?.grand_Total}}</div>
         </div>
-        
-        </div>
-
     </main>
     <!-- end content page  -->
 </div>

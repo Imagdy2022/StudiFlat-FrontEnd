@@ -37,11 +37,14 @@ export class OwnerDetailsComponent {
   // param title page
   pageTitle: any;
   subscriptions: Subscription[] = [];
-  subTitle :string = "Upload owner photo and enter details."
+  subTitle: string = 'Upload owner photo and enter details.';
+  Countries: any[] | undefined;
+  selectedCountry: any;
 
   ngOnInit() {
     this.initCities();
     this.bindCreateOwner();
+    this.GetCountries();
   }
 
   /**
@@ -176,7 +179,22 @@ export class OwnerDetailsComponent {
       { country: 'Paris', code: 'PRS' },
     ];
   }
-
+  GetCountries() {
+    this.subscriptions.push(
+      this._OnwerService.GetCountries().subscribe(
+        (res) => {
+          this.Countries = res;
+        },
+        (err: any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${err.error.message[0]}\n`,
+          });
+        }
+      )
+    );
+  }
   /**
    * addItem
    * @param value
@@ -193,7 +211,24 @@ export class OwnerDetailsComponent {
     this.link = this.link.map((el) => (el == true ? false : false));
     this.link[index] = true;
   }
+  CountryName: any;
+  CountryValue: any;
+  onCountrySelected(event: any) {
+    console.log(event);
+    console.log(event.value.name);
+    console.log(event.value.description);
+    this.CountryName = event.value.description;
+    this.CountryValue = event.value.name;
 
+    console.log(this.selectedCountry);
+    //console.log(this.selectedCountry.description);
+
+    //console.log(event.target.value);
+
+    //this.CountryName = event.target.value.description;
+    // this.CountryValue = event.target.value.value; // look in the console to get the properties
+    // look in the console to get the properties
+  }
   CreateOwner(data: any) {
     /** conver number to string while backend fix this */
     data.value.owner_Phone = String(data.value.owner_Phone);
@@ -204,11 +239,11 @@ export class OwnerDetailsComponent {
         this._OnwerService
           .createOwner({
             ...data.value,
-            ...this.selectedCity,
+            ...this.selectCountry,
             ...{
-              nationality: 'AF',
+              nationality: this.CountryValue,
               Gender: 'UnSpecified',
-              Country: 'UnSpecified',
+              Country: this.CountryValue,
               Status: '1',
             },
           })

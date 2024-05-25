@@ -6,6 +6,8 @@ import { InquiresService } from 'src/app/_services/inquires/inquires.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { Observable, Subscription } from 'rxjs';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 @Component({
   selector: 'app-edite-user-details',
   templateUrl: './edite-user-details.component.html',
@@ -18,7 +20,7 @@ export class EditeUserDetailsComponent {
   selectedCity: any;
   available: boolean = true;
   link: Array<boolean> = [true];
-  subscriptions:Subscription[] = [];
+  subscriptions: Subscription[] = [];
   listAnchors: any = [
     { id: 'Generalinfo', link: 'General info' },
     { id: 'OtherDetails', link: 'Other Details' },
@@ -118,23 +120,24 @@ export class EditeUserDetailsComponent {
   Tenant_Attach: any = [];
   tenant_photo = '';
   GetRequestDetails() {
-    this.subscriptions.push(this._adminservices.TenantDetails(this.param).subscribe(
-      (res) => {
-        this.Tenant_details = res;
-        this.Tenant_Attach = res['documents'];
-        this.FName = res['tenant_FName'];
-        this.LName = res['tenant_LName'];
-        this.PassportID = res['tenant_PassportID'];
-        this.About = res['tenant_About'];
-        this.tenant_photo = res['tenant_photo'];
-        this.comment_leave = res['beh_Comment'];
-        this.ratingnumber = res['rate'];
-      },
-      (error) => {
-        console.error('Error fetching owners:', error);
-      }
-    ));
-
+    this.subscriptions.push(
+      this._adminservices.TenantDetails(this.param).subscribe(
+        (res) => {
+          this.Tenant_details = res;
+          this.Tenant_Attach = res['documents'];
+          this.FName = res['tenant_FName'];
+          this.LName = res['tenant_LName'];
+          this.PassportID = res['tenant_PassportID'];
+          this.About = res['tenant_About'];
+          this.tenant_photo = res['tenant_photo'];
+          this.comment_leave = res['beh_Comment'];
+          this.ratingnumber = res['rate'];
+        },
+        (error) => {
+          console.error('Error fetching owners:', error);
+        }
+      )
+    );
   }
   User_ID: any;
   FName: any;
@@ -144,34 +147,35 @@ export class EditeUserDetailsComponent {
   image: any;
   comment_leave: any = '';
   UpdateTenantInfo() {
-    this.subscriptions.push( this._adminservices
-      .UpdateTenantInfo(
-        this.param,
-        this.FName,
-        this.LName,
-        this.PassportID,
-        this.About,
-        this.ratingnumber,
-        this.comment_leave,
-        this.formData2
-      )
-      .subscribe(
-        (res) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: `${res.message}`,
-          });
-        },
-        (error) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: `${error.error.message[0]}`,
-          });
-        }
-      ));
-
+    this.subscriptions.push(
+      this._adminservices
+        .UpdateTenantInfo(
+          this.param,
+          this.FName,
+          this.LName,
+          this.PassportID,
+          this.About,
+          this.ratingnumber,
+          this.comment_leave,
+          this.formData2
+        )
+        .subscribe(
+          (res) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: `${res.message}`,
+            });
+          },
+          (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${error.error.message[0]}`,
+            });
+          }
+        )
+    );
   }
   /**
    * addItem
@@ -198,12 +202,13 @@ export class EditeUserDetailsComponent {
       formData.append('fileData', selectedFile, selectedFile.name);
       this.formData2.append('User_Img', selectedFile);
 
-      this.subscriptions.push( this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
-        this.imageUrl = img[0].file_Path;
-        this.changeImageUrl?.emit(img[0].file_Path);
-        this.loadingButton = false;
-      }));
-
+      this.subscriptions.push(
+        this.uploadFile.uploadSingleFile(formData).subscribe((img: any) => {
+          this.imageUrl = img[0].file_Path;
+          this.changeImageUrl?.emit(img[0].file_Path);
+          this.loadingButton = false;
+        })
+      );
     } else if (event == 'delete') {
       this.imageUrl = '';
       this.changeImageUrl.emit(this.defaultImageUrl());
@@ -219,7 +224,7 @@ export class EditeUserDetailsComponent {
     return 'https://t4.ftcdn.net/jpg/05/50/60/49/360_F_550604961_BZT4vo52ysIku2cQ3Zn8sAQg1rXHBKv0.jpg';
   }
   gotodetail(id: any) {
-    let url: string = 'invoice/' + id;
+    let url: string = '/payments/invoice/' + id;
     this.router.navigateByUrl(url);
   }
   star: any = {};
@@ -310,30 +315,40 @@ export class EditeUserDetailsComponent {
     const formData = new FormData();
 
     formData.append('AttachFile', this.ListFiles, this.ListFiles.name);
-    this.subscriptions.push( this._adminservices.AddAttach(this.param, this.desk, formData).subscribe(
-      (res: any) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: res['message'],
-        });
-        this.display1 = 'none';
-        this.urls = null;
-        this.ListFiles = null;
-      },
-      (err: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${err.error.message[0]}`,
-        });
-      }
-    ));
-
+    this.subscriptions.push(
+      this._adminservices.AddAttach(this.param, this.desk, formData).subscribe(
+        (res: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: res['message'],
+          });
+          this.display1 = 'none';
+          this.urls = null;
+          this.ListFiles = null;
+        },
+        (err: any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${err.error.message[0]}`,
+          });
+        }
+      )
+    );
   }
-
+  exportAsPDF(divId: any, name: any) {
+    let data = document.getElementById(divId)!;
+    html2canvas(data, { useCORS: true }).then((canvas) => {
+      const contentDataURL = canvas.toDataURL('image/jpeg'); // 'image/jpeg' for lower quality output.
+      let pdf = new jsPDF('l', 'cm', 'a4'); //Generates PDF in landscape mode
+      // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
+      pdf.save(`${{ name }}.pdf`);
+    });
+  }
   ngOnDestroy() {
-    for(let i=0;i<this.subscriptions.length;i++)
-    this.subscriptions[i].unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++)
+      this.subscriptions[i].unsubscribe();
   }
 }

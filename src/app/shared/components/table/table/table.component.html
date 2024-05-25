@@ -1,7 +1,8 @@
 <div class="text-center ">
     <p-progressSpinner *ngIf="spinner == true"></p-progressSpinner>
 
-    <p-table *ngIf="spinner == false" class="table-shopping" [value]="products" [(selection)]="selectedProducts" [dataKey]="dataSelectionKey"
+    <p-table *ngIf="spinner == false" class="table-shopping" [value]="products" [(selection)]="selectedProducts"
+        [dataKey]="dataSelectionKey"
         [paginator]="true" [rows]="5" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplazte="header">
             <tr>
@@ -13,37 +14,37 @@
                     <!-- for other header with sort by  -->
                     <th *ngIf="!head.tableHeaderCheckbox && (head.Name && head.SortableColumn) && head.sortIcon == true"
                         [pSortableColumn]="head.SortableColumn" class="td-name">
-                        {{head.Name}}
-                        <p-sortIcon  [field]="head.SortableColumn"></p-sortIcon>
+                        {{ head.Name }}
+                        <p-sortIcon [field]="head.SortableColumn"></p-sortIcon>
                     </th>
                     <!-- for other header without sort by  -->
                     <th *ngIf="!head.tableHeaderCheckbox && (head.Name && head.SortableColumn) && head.sortIcon != true"
                         class="td-name">
-                        {{head.Name}}
+                        {{ head.Name }}
                     </th>
                 </ng-container>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>
-    
+
             <tr>
                 <td *ngIf="headerData[0].tableHeaderCheckbox === true">
                     <p-tableCheckbox [value]="product" (click)="GetSelectedItem(product)"></p-tableCheckbox>
                 </td>
-    
-                <td>{{product.owner_FirstName}}</td>
-                <td *ngIf="product.name">{{product.name}}</td>
-                <td *ngIf="product.owner_Mail">{{product.owner_Mail}}</td>
-                <td *ngIf="product.owner_Phone">{{product.owner_Phone}}</td>
-                <td *ngIf="product.gender">{{product.gender}}</td>
-                <td *ngIf="product.owner_About">{{product.owner_About}}</td>
-    
+
+                <td>{{ product.owner_FirstName }}</td>
+                <td *ngIf="product.name">{{ product.name }}</td>
+                <td *ngIf="product.owner_Mail">{{ product.owner_Mail }}</td>
+                <td *ngIf="product.owner_Phone">{{ product.owner_Phone }}</td>
+                <td *ngIf="product.gender">{{ product.gender }}</td>
+                <td class="truncate-cell" *ngIf="product.owner_About">{{ product.owner_About }}</td>
+
                 <td *ngIf="product.inventoryStatus">
                     <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
                 </td>
-                <td *ngIf="product.quantity">{{product.quantity}}</td>
+                <td *ngIf="product.quantity">{{ product.quantity }}</td>
             </tr>
-    
+
         </ng-template>
     </p-table>
 </div>

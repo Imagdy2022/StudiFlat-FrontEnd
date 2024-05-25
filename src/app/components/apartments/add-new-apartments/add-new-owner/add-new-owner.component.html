@@ -3,7 +3,8 @@
         <div class="row border bg-white rounded-3">
             <form class="col-md-12 content-details " [formGroup]="createOwner" (ngSubmit)="CreateOwner(createOwner)">
                 <!--General info-->
-                <app-general-info-user [title]="subTitle" [titlePage]="param" [imageUrl]="createOwner.value.owner_Photo" (changeImageUrl)="updateUserImage($event)"></app-general-info-user>
+                <app-general-info-user [title]="subTitle" [titlePage]="param" [imageUrl]="createOwner.value.owner_Photo"
+                    (changeImageUrl)="updateUserImage($event)"></app-general-info-user>
                 <!--start General info form-->
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
@@ -42,14 +43,45 @@
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">* Date of birth</label>
-                        <input formControlName='owner_DOB' class="form-control w-100 " type="date" [value]="formattedDate" style="cursor: pointer;"  [max]="getTodayDate()">
+                        <input formControlName='owner_DOB' class="form-control w-100 " type="date" [value]="formattedDate"
+                            style="cursor: pointer;" [max]="getTodayDate()">
                     </div>
 
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">* Country</label>
+
                         <div class="w-100">
-                            <p-dropdown [options]="cities" [(ngModel)]="selectedCity" [ngModelOptions]="{standalone: true}" optionLabel="country"></p-dropdown>
+                            <p-dropdown (onChange)="onCountrySelected($event)"
+
+                                [options]="Countries"
+                                [(ngModel)]="selectedCountry"
+                                optionLabel="description"
+                                [filter]="true"
+                                filterBy="description"
+                                [showClear]="true"
+                                placeholder="Select a Country">
+                                <ng-template pTemplate="selectedItem" let-selectedOption>
+                                    <div class="flex align-items-center gap-2">
+
+                                        <div>{{ selectedOption.name }}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-country pTemplate="item">
+                                    <div class="flex align-items-center gap-2">
+
+                                        <div>{{ country.description }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
                         </div>
+
+
+                        <!--
+                         <div class="w-100">
+                            <p-dropdown [options]="cities" [(ngModel)]="selectedCity" [ngModelOptions]="{standalone: true}"
+                                optionLabel="country"></p-dropdown>
+                        </div>
+                       -->
                     </div>
 
                 </div>
@@ -79,7 +111,8 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4 ">
                             <div class="position-relative">
                                 <img src="assets/images/apartmentImages/img1.svg" class="w-100 h-100 ">
-                                <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-3 py-1 px-3 " [class.available]="available">Available</p>
+                                <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-3 py-1 px-3 "
+                                    [class.available]="available">Available</p>
                             </div>
                             <div class="bg-white px-2 py-3 details border rounded-bottom">
                                 <div class="fw-bold">Salt Lake City, Apartment Salt Lake City, Apartment </div>
@@ -170,14 +203,15 @@
                             <p style="color: #605D62 !important;">this section display for admins only</p>
                         </div>
                         <button class="outlet-0 bg-transparent downloadAll px-3 py-0 rounded-3"><img
-                src="assets/images/download.svg" alt=""> Download all</button>
+                                src="assets/images/download.svg" alt=""> Download all</button>
                     </div>
 
                 </div>
 
-                <div class="d-flex justify-content-between" >
+                <div class="d-flex justify-content-between">
                     <button (click)=" gotopage2( )" class="outlet-0 bg-transparent rounded-3 px-4 py-2 fw-bold downloadAll">Cancel</button>
-                    <p-button class="outlet-0 text-white border-0 px-4 py-2 rounded-3 sendDataPButton" label="Save" [loading]="loadingButton" type="submit"></p-button>
+                    <p-button class="outlet-0 text-white border-0 px-4 py-2 rounded-3 sendDataPButton" label="Save"
+                        [loading]="loadingButton" type="submit"></p-button>
 
                     <!-- <button class="outlet-0 text-white border-0 px-4 py-2 rounded-3" style="background-color: #1f4068;"
             type="submit">Save</button> -->

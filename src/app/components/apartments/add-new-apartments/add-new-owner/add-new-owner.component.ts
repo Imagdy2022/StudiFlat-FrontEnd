@@ -1,5 +1,9 @@
-
-import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -41,11 +45,12 @@ export class AddNewOwnerComponent {
   // param title page
   pageTitle: any;
   subscriptions: Subscription[] = [];
-  subTitle :string = "Upload owner photo and enter details."
+  subTitle: string = 'Upload owner photo and enter details.';
 
   ngOnInit() {
     this.initCities();
     this.bindCreateOwner();
+    this.GetCountries();
   }
 
   /**
@@ -89,12 +94,29 @@ export class AddNewOwnerComponent {
     // Return an empty string if the value is not a valid Date object
     return '';
   }
-
+  selectedCountry: any;
+  Countries: any = [];
+  GetCountries() {
+    this.subscriptions.push(
+      this._OnwerService.GetCountries().subscribe(
+        (res) => {
+          this.Countries = res;
+        },
+        (err: any) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${err.error.message[0]}\n`,
+          });
+        }
+      )
+    );
+  }
   checkPage(): void {
     if (this.pageTitle == 'owner_details') {
       this.id = this.param;
       this.subscriptions.push(
-        this._OnwerService.getOwner(this.id).subscribe((res:any) => {
+        this._OnwerService.getOwner(this.id).subscribe((res: any) => {
           this.createOwner.patchValue(res);
         })
       );
@@ -109,7 +131,7 @@ export class AddNewOwnerComponent {
     } else if (this.pageTitle == 'edit_owner') {
       this.id = this.param;
       this.subscriptions.push(
-        this._OnwerService.getOwner(this.id).subscribe((res:any) => {
+        this._OnwerService.getOwner(this.id).subscribe((res: any) => {
           this.createOwner.patchValue(res);
         })
       );
@@ -196,47 +218,66 @@ export class AddNewOwnerComponent {
     this.link = this.link.map((el) => (el == true ? false : false));
     this.link[index] = true;
   }
+  onCountrySelected(event: any) {
+    console.log(event);
+    console.log(event.value.name);
+    console.log(event.value.description);
+    this.CountryName = event.value.description;
+    this.CountryValue = event.value.name;
 
+    console.log(this.selectedCountry);
+    //console.log(this.selectedCountry.description);
+
+    //console.log(event.target.value);
+
+    //this.CountryName = event.target.value.description;
+    // this.CountryValue = event.target.value.value; // look in the console to get the properties
+    // look in the console to get the properties
+  }
+  CountryName: any;
+  CountryValue: any;
   CreateOwner(data: any) {
     /** conver number to string while backend fix this */
     data.value.owner_Phone = String(data.value.owner_Phone);
     data.value.owner_WA_Number = String(data.value.owner_WA_Number);
-    this.loadingButton = true;
-    
-      this.subscriptions.push(
-        this._OnwerService
-          .createOwner({
-            ...data.value,
-            ...this.selectedCity,
-            ...{
-              nationality: 'AF',
-              Gender: 'UnSpecified',
-              Country: 'UnSpecified',
-              Status: '1',
-            },
-          })
-          .subscribe(
-            (res) => {
-              this.loadingButton = false;
-              this.messageService.add({
-                severity: 'success',
-                summary: 'Success',
-                detail: `${res.message}`,
-              });
-              this.dataEvent.emit(false);
+    data.value.nationalityString = this.CountryValue;
+    data.value.nationality = this.CountryValue;
 
-            },
-            (err) => {
-              this.loadingButton = false;
-              console.log(err);
-              this.messageService.add({
-                severity: 'error',
-                summary: 'Error',
-                detail: `${err.error.message[0]}`,
-              });
-            }
-          )
-      );
+    this.loadingButton = true;
+
+    this.subscriptions.push(
+      this._OnwerService
+        .createOwner({
+          ...data.value,
+          ...this.selectedCountry,
+          ...{
+            Gender: 'UnSpecified',
+            Nationality: this.CountryValue,
+            Country: this.CountryValue,
+            Status: '1',
+          },
+        })
+        .subscribe(
+          (res) => {
+            this.loadingButton = false;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: `${res.message}`,
+            });
+            this.dataEvent.emit(false);
+          },
+          (err) => {
+            this.loadingButton = false;
+            console.log(err);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${err.error.message[0]}`,
+            });
+          }
+        )
+    );
   }
 
   updateUserImage(event: any) {
@@ -280,4 +321,3 @@ export class AddNewOwnerComponent {
       this.subscriptions[i].unsubscribe();
   }
 }
-

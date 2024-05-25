@@ -53,6 +53,7 @@ import {
 
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import { ContractModule } from './components/configurations/contract/contract.module';
 initializeApp(environment.firebase);
 
 @NgModule({
@@ -85,6 +86,7 @@ initializeApp(environment.firebase);
     AuthModule,
     UserModule,
     OwnersModule,
+    ContractModule,
     GoogleMapsModule,
     BadgeModule,
     FontAwesomeModule,

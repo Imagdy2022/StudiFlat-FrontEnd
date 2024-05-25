@@ -143,7 +143,10 @@ th {
     color: #FFB900;
     background-color: #FFF9E6;
 }
-
+.Completed {
+  color: #457B9D;
+  background-color: #FFF9E6;
+}
 .Cancelled {
     color: #EF2011;
     background-color: #FCEEEE;

@@ -15,7 +15,8 @@
         <div class="d-md-flex justify-content-between">
             <div class="d-flex">
 
-                <p class="fw-bold me-2" style="color: #6c6a6a"><a style="color: black" class="removeUnderLine" href="./owners">Owners </a></p>
+                <p class="fw-bold me-2" style="color: #6c6a6a"><a style="color: black" class="removeUnderLine" href="./owners">Owners </a>
+                </p>
                 <p class="fw-bold me-2">></p>
                 <p class="fw-bold" style="color: black"> owner details</p>
             </div>
@@ -31,11 +32,13 @@
 
         <div class="mt-3 row border bg-white rounded-3 py-3 ">
             <aside class="col-2 p-0 ps-1 position-fixed d-none d-md-block">
-                <a class="d-block text-decoration-none fw-bold px-2 py-3 text-black mb-1 active" *ngFor="let listAnchor of listAnchors ; let index=index" style="color: #605D62 !important; cursor: pointer;" (click)="onClick(listAnchor.id)" [class.active]="link[index]==true"
-                    (click)="changeAnchor(index)">{{listAnchor.link}}</a>
+                <a class="d-block text-decoration-none fw-bold px-2 py-3 text-black mb-1 active"
+                    *ngFor="let listAnchor of listAnchors ; let index=index" style="color: #605D62 !important; cursor: pointer;"
+                    (click)="onClick(listAnchor.id)" [class.active]="link[index]==true"
+                    (click)="changeAnchor(index)">{{ listAnchor.link }}</a>
             </aside>
 
-            <div class="col-md-10 content-details "   [ngClass]="{'OwnerDetails': param === 'Owner details'}">
+            <div class="col-md-10 content-details " [ngClass]="{'OwnerDetails': param === 'Owner details'}">
 
                 <div id="Generalinfo">
                     <p class="fw-bold mb-3">General info</p>
@@ -44,11 +47,11 @@
                 <div class="d-flex mb-5 d-md-block d-flex justify-content-center justify-md-content-start ">
                     <div class=" d-md-flex  align-items-center justify-md-content-start ">
                         <div class="rounded-circle imageOfPerson me-4" style="box-shadow: 0 2px 6px #d1d1d1;">
-                            <img class="imageOfPerson rounded-circle" style="border: 3px solid white;" [src]="imageUrl ? imageUrl : defaultImageUrl()">
+                            <img class="imageOfPerson rounded-circle" style="border: 3px solid white;"
+                                [src]="imageUrl ? imageUrl : defaultImageUrl()">
                         </div>
                         <div class="d-flex mt-4">
                             <div class="d-flex  justify-content-between ">
-
 
 
                             </div>
@@ -71,7 +74,8 @@
                 </div>
                 <div class="mb-4">
                     <label class="fw-bold" style="color: #605D62;">Email</label>
-                    <img  *ngIf="param!='Owner details'" src="assets/images/user/mail.svg" class="position-relative top-icon-input" style="right: 20px;">
+                    <img *ngIf="param!='Owner details'" src="assets/images/user/mail.svg" class="position-relative top-icon-input"
+                        style="right: 20px;">
                     <input readonly disabled [(ngModel)]="OnwerDetail.owner_Mail" class="form-control w-100 bg-white" type="email">
                 </div>
                 <div class="mb-4">
@@ -81,7 +85,8 @@
                 </div>
                 <div>
                     <label class="fw-bold" style="color: #605D62;">About</label>
-                    <textarea readonly disabled [(ngModel)]="OnwerDetail.owner_About" class="form-control border bg-white rounded-3 w-100 p-2" rows="5" style="resize: unset;"></textarea>
+                    <textarea readonly disabled [(ngModel)]="OnwerDetail.owner_About"
+                        class="form-control border bg-white rounded-3 w-100 p-2" rows="5" style="resize: unset;"></textarea>
                 </div>
 
                 <!--end General info form-->
@@ -96,17 +101,17 @@
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">Date of birth</label>
                         <ng-container *ngIf="param!='Owner details'">
-                          <input readonly disabled [(ngModel)]="OnwerDetail.owner_DOB" class="form-control w-100 bg-white" type="date">
+                            <input readonly disabled [(ngModel)]="OnwerDetail.owner_DOB" class="form-control w-100 bg-white" type="date">
                         </ng-container>
                         <ng-container *ngIf="param =='Owner details'">
-                          <p class="form-control w-100">{{OnwerDetail.owner_DOB}}</p>
+                            <p class="form-control w-100">{{ OnwerDetail.owner_DOB }}</p>
                         </ng-container>
 
                     </div>
 
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">Country</label>
-                        <input readonly disabled [(ngModel)]="OnwerDetail.nationality" class="form-control w-100 bg-white" type="text">
+                        <input readonly disabled [(ngModel)]="OnwerDetail.owner_Country" class="form-control w-100 bg-white" type="text">
                     </div>
 
                 </div>
@@ -117,7 +122,8 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="fw-bold" style="color: #605D62">whatsapp number</label>
-                        <input readonly disabled [(ngModel)]="OnwerDetail.owner_WA_Number" class="form-control w-100 bg-white" type="number">
+                        <input readonly disabled [(ngModel)]="OnwerDetail.owner_WA_Number" class="form-control w-100 bg-white"
+                            type="number">
                     </div>
 
                 </div>
@@ -134,31 +140,34 @@
                     <div class="row paroductApartment">
                         <ng-container *ngFor="let item of OnwerDetail?.apt_Owners_list">
 
-                            <div class=" col-12 col-md-6 col-lg-4 mb-4  position-relative px-2 mb-4 h-100" style="height: 393px !important;">
+                            <div class=" col-12 col-md-6 col-lg-4 mb-4  position-relative px-2 mb-4 h-100"
+                                style="height: 393px !important;">
 
-                                <a routerLink="/apartments/apartments-details/{{item?.apt_ID}}" style="height: 46% !important;" class="d-block">
+                                <a routerLink="/apartments/apartments-details/{{ item?.apt_ID }}" style="height: 46% !important;"
+                                    class="d-block">
                                     <img [src]="item.apt_ThumbImage" class="w-100 h-100 apartmentImage">
-                                    <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3 " [class.available]="item.statusString != 'Rented'">{{item.apt_Status}}</p>
+                                    <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3 "
+                                        [class.available]="item.statusString != 'Rented'">{{ item.apt_Status }}</p>
                                 </a>
                                 <div class="bg-white p-3 details h-50 rounded-bottom">
-                                    <div class="fw-bold  ">{{item.apt_Name }}</div>
+                                    <div class="fw-bold  ">{{ item.apt_Name }}</div>
                                     <div class="d-flex">
                                         <img src="assets/images/apartmentImages/location.svg" class="my-3">
-                                        <p class="fw-bold mt-3 text-left mx-1">{{item.apt_Area}}</p>
+                                        <p class="fw-bold mt-3 text-left mx-1">{{ item.apt_Area }}</p>
                                     </div>
                                     <div class="d-flex" style="margin: -25px 0 -10px 0;">
                                         <div class="d-flex justify-content-between">
                                             <img src="assets/images/apartmentImages/room_bed.svg">
-                                            <p class="fw-bold mt-4 mx-2">{{item.rooms_No}}</p>
+                                            <p class="fw-bold mt-4 mx-2">{{ item.rooms_No }}</p>
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <img src="assets/images/apartmentImages/user.svg">
-                                            <p class="fw-bold mt-4 mx-2">{{item.guest_No}}</p>
+                                            <p class="fw-bold mt-4 mx-2">{{ item.guest_No }}</p>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <div class="Price">
-                                          €{{item.apt_Price}} <span class="time">/ month</span>
+                                            €{{ item.apt_Price }} <span class="time">/ month</span>
                                         </div>
 
                                     </div>
@@ -169,35 +178,33 @@
                         <!-- <div class="col-12 col-md-6 col-lg-4 mb-7 " style=" height: 393px !important; margin-bottom: 120px;" *ngFor="let item of Tenant_details.apartments">
                           <div class="position-relative" style=" height: 328px !important;">
                               <img [src]="item.apartment_ThumbImg" class="w-100 h-100 ">
-                              <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-3 py-1 px-3 " [class.available]="available">{{item.apartment_Status}}</p>
+                              <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-3 py-1 px-3 " [class.available]="available">{{ item.apartment_Status }}</p>
                           </div>
                           <div class="bg-white px-2 py-3 details border rounded-bottom">
-                              <div class="fw-bold"> {{item.apartment_Name}} </div>
+                              <div class="fw-bold"> {{ item.apartment_Name }} </div>
                               <div class="d-flex justify-content-between">
                                   <div class="d-flex justify-content-between">
                                       <img src="assets/images/apartmentImages/location.svg">
-                                      <p class="fw-bold mt-3 ms-2">{{item.apartment_Address}}</p>
+                                      <p class="fw-bold mt-3 ms-2">{{ item.apartment_Address }}</p>
                                   </div>
 
                                   <div class="d-flex justify-content-between">
                                       <img src="assets/images/apartmentImages/room_bed.svg">
-                                      <p class="fw-bold mt-3 ms-2">{{item.apartment_LivingRooms}} </p>
+                                      <p class="fw-bold mt-3 ms-2">{{ item.apartment_LivingRooms }} </p>
                                   </div>
                                   <div class="d-flex justify-content-between">
                                       <img src="assets/images/apartmentImages/user.svg">
-                                      <p class="fw-bold mt-3 ms-2">{{item.apartment_Persons}}</p>
+                                      <p class="fw-bold mt-3 ms-2">{{ item.apartment_Persons }}</p>
                                   </div>
                               </div>
                               <div class="d-flex justify-content-between">
                                   <div class="Price">
-                                      ${{item.apartment_Price}} <span class="time">/ month</span>
+                                      ${{ item.apartment_Price }} <span class="time">/ month</span>
                                   </div>
                                </div>
                           </div>
 
                       </div> -->
-
-
 
 
                     </div>
@@ -219,7 +226,8 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="fw-bold" style="color: #605D62">Account Number</label>
-                            <input readonly disabled [(ngModel)]="OnwerDetail.owner_BankAccount" class="form-control w-100 bg-white" type="text">
+                            <input readonly disabled [(ngModel)]="OnwerDetail.owner_BankAccount" class="form-control w-100 bg-white"
+                                type="text">
                         </div>
 
                     </div>
@@ -242,83 +250,106 @@
                 </div>
                 <div class="  mt-4">
 
-                  <p-table class="table-shopping" [scrollable]="true" scrollHeight="400px" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem','height':' 161px'}" [value]="OnwerDetail.invoice_Owners_list">
-                      <ng-template pTemplate="header" class="text-center">
-                          <tr>
-                              <ng-container>
+                    <p-table class="table-shopping" [scrollable]="true" scrollHeight="400px" [selectionPageOnly]="true"
+                        [tableStyle]="{'min-width': '50rem' ,'min-': '50rem','height':' 161px'}" [value]="OnwerDetail.invoice_Owners_list">
+                        <ng-template pTemplate="header" class="text-center">
+                            <tr>
+                                <ng-container>
 
 
-                                  <th class="td-name">
-                                      Apartment name
+                                    <th class="td-name">
+                                        Apartment name
 
-                                  </th>
-                                  <th class="td-name">
-                                      Amount
+                                    </th>
+                                    <th class="td-name">
+                                        Amount
 
-                                  </th>
+                                    </th>
 
-                                  <th class="td-name">
-                                      For
+                                    <th class="td-name">
+                                        For
 
-                                  </th>
+                                    </th>
 
-                                  <th class="td-name">
-                                      Date
+                                    <th class="td-name">
+                                        Date
 
-                                  </th>
-                                  <th class="td-name">
+                                    </th>
+                                    <th class="td-name">
+                                        Status
 
+                                    </th>
+                                    <th class="td-name">
+                                        Download File
 
-                                  </th>
-                              </ng-container>
-                          </tr>
-                      </ng-template>
-                      <ng-template pTemplate="body" let-issue style="height: 200px !important;">
+                                    </th>
+                                </ng-container>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-issue style="height: 200px !important;">
 
-                          <tr>
-
-
-                              <td>
-                                  {{issue?.apt_Name}}
-                              </td>
-                              <td>
-                                  {{issue?.amount}}
-                              </td>
+                            <tr>
 
 
-                              <td>
-                                  {{issue?.for}}
-                              </td>
-                              <td>
-                                  {{issue?.date}}
-                              </td>
-                              <td>
-                                  <a href="{{issue?.download_Path}}"><img src="../../../../assets/images/user/download.svg"> </a>
-
-                              </td>
-                          </tr>
-
-                      </ng-template>
+                                <td>
+                                    {{ issue?.apt_Name }}
+                                </td>
+                                <td>
+                                    {{ issue?.amount }}
+                                </td>
 
 
-                      <ng-template pTemplate="emptymessage">
-                          <div class="container text-center mt-4">
-                              <p class="mb-0">No data found.</p>
-                          </div>
-                      </ng-template>
+                                <td>
+                                    {{ issue?.for }}
+                                </td>
+                                <td>
+                                    {{ issue?.date }}
+                                </td>
+                                <td>
+                                    <div>
+                                        <span class="rounded-5 px-3 badge paid" *ngIf="issue?.status_Paid==true">
+                                            <span>
+                                                Paid
+                                            </span>
+                                            <img src="assets/images/greenMore.svg" alt="">
+                                        </span>
+                                        <span class="rounded-5 px-3 badge unPaid" *ngIf="issue?.status_Paid==false">
+                                            <span>
+                                                Not Paid
+                                            </span>
+                                            <img src="assets/images/redMore.svg" alt="">
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="{{ issue?.download_Path }}"><img src="../../../../assets/images/user/download.svg"> </a>
 
-                  </p-table>
-                  <!-- <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator> -->
+                                </td>
+                            </tr>
+
+                        </ng-template>
 
 
-              </div>
-                <div style="align-self: stretch;  background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.06); border-radius: 8px; overflow: hidden; border: 1px #EBEBEB solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
+                        <ng-template pTemplate="emptymessage">
+                            <div class="container text-center mt-4">
+                                <p class="mb-0">No data found.</p>
+                            </div>
+                        </ng-template>
+
+                    </p-table>
+                    <!-- <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator> -->
+
+
+                </div>
+                <div
+                    style="align-self: stretch;  background: white; box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.06); border-radius: 8px; overflow: hidden; border: 1px #EBEBEB solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
 
 
                 </div>
                 <div class="d-flex justify-content-between" *ngIf="param!='Owner details'">
                     <button (click)=" gotopage2( )" class="outlet-0 bg-transparent rounded-3 px-4 py-2 fw-bold downloadAll">Cancel</button>
-                    <p-button class="outlet-0 text-white border-0 px-4 py-2 rounded-3 sendDataPButton" label="Save" [loading]="loadingButton" type="submit"></p-button>
+                    <p-button class="outlet-0 text-white border-0 px-4 py-2 rounded-3 sendDataPButton" label="Save"
+                        [loading]="loadingButton" type="submit"></p-button>
 
                     <!-- <button class="outlet-0 text-white border-0 px-4 py-2 rounded-3" style="background-color: #1f4068;"
           type="submit">Save</button> -->

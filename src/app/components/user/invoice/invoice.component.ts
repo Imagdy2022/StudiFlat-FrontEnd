@@ -23,13 +23,11 @@ export class InvoiceComponent implements OnInit {
   available: boolean = true;
   link: Array<boolean> = [true];
 
-  subscriptions:Subscription[] = [];
-  invoiceDetail:any;
-  invoices:any[]=[]
-   titlePage: string = '';
-   changeImageUrl:any;
-
-  
+  subscriptions: Subscription[] = [];
+  invoiceDetail: any;
+  invoices: any[] = [];
+  titlePage: string = '';
+  changeImageUrl: any;
 
   imageUrl: string = '';
   loadingButton: boolean = false;
@@ -86,19 +84,44 @@ export class InvoiceComponent implements OnInit {
    * @return void
    */
 
+  DeleteInvoice(id: any): void {
+    this.subscriptions.push(
+      this._adminservices.DeleteInvoice(id).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+          this.GetINVDetails();
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.error.message}`,
+          });
+        }
+      )
+    );
+  }
 
-  _details:any={}
-  GetINVDetails(  ) {
-    this.subscriptions.push(  this._adminservices.GetINVDetails(this.param).subscribe((res) => {
-      this._details = res ;
-      this.invoiceDetail = res
- this.invoices=this.invoiceDetail.invoice_Details;
- console.log(this.invoices)
-      }, (error) => {
-       console.error('Error fetching Invoice Details:', error);
-    }));
-}
-
+  _details: any = {};
+  GetINVDetails() {
+    this.subscriptions.push(
+      this._adminservices.GetINVDetails(this.param).subscribe(
+        (res) => {
+          this._details = res;
+          this.invoiceDetail = res;
+          this.invoices = this.invoiceDetail.invoice_Details;
+          console.log(this.invoices);
+        },
+        (error) => {
+          console.error('Error fetching Invoice Details:', error);
+        }
+      )
+    );
+  }
 
   /**
    * addItem
