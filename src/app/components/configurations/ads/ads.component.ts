@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
@@ -7,9 +7,10 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
 @Component({
   selector: 'app-ads',
   templateUrl: './ads.component.html',
-  styleUrls: ['./ads.component.css'],
+  styleUrls: ['./ads.component.scss'],
 })
 export class AdsComponent implements OnInit {
+  @ViewChild('closebutton') closebutton: any;
   showEdit: Array<boolean> = [];
   showEdit2: Array<boolean> = [];
   home: any;
@@ -19,6 +20,7 @@ export class AdsComponent implements OnInit {
   headerData: Array<any> = [];
   loading: boolean = true;
   search: boolean = false;
+  adsId:any
   subscriptions:Subscription[] = [];
   listDropDown: Array<object> = [
     { name: 'All  ' },
@@ -102,27 +104,6 @@ export class AdsComponent implements OnInit {
     ))
 
   }
-  // DeleteUser(id :any){
-  //   this._adminservices.DeleteTenant( id).subscribe((res:any) => {
-  //     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Deleted Successfuly'}` });
-
-  //     this.getAllpartners( );
-
-  //    }, (error) => {
-  //     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-  //   })
-
-  // }
-  // SuspendUser(id:any){
-  //   this._adminservices.SuspendTenant( id).subscribe((res:any) => {
-  //     this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Suspended Successfuly'}` });
-
-  //     this.getAllpartners( );
-
-  //    }, (error) => {
-  //     this.messageService.add({ severity: 'error', summary: 'Error', detail: `${'error'}` });
-  //   })
-  // }
 
   detailperson2(event: any, id: any): void {
     this.showEdit2 = [];
@@ -139,28 +120,10 @@ export class AdsComponent implements OnInit {
     this.showEdit2 = [];
   }
 
-  deletepartner(id: any) {
-    this.subscriptions.push( this._adminservices.DeletePartners(id).subscribe(
-      (res) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `${res.message}`,
-        });
-      },
-      (err: any) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `${err.error.message[0]}`,
-        });
-      }
-    ))
-
-  }
-  DeleteAds(id: any) {
-    this.subscriptions.push(this._adminservices.DeleteAds(id).subscribe(
+  DeleteAds() {
+    this.subscriptions.push(this._adminservices.DeleteAds(this.adsId).subscribe(
       (res: any) => {
+        this.closebutton.nativeElement.click();
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
@@ -399,6 +362,14 @@ export class AdsComponent implements OnInit {
     this.search = false;
     this.GetAds();
     this.searchText = '';
+  }
+  display4 = 'none';
+  deleteModal(id: any) {
+    this.display4 = 'block';
+    this.adsId = id;
+  }
+  onCloseHandled() {
+    this.display4 = 'none';
   }
 
   ngOnDestroy() {

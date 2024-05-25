@@ -46,7 +46,7 @@
                </div>
                 <div class="col-md-5 col-8">
                   <div class="input">
-                    <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
+                    <input type="text" class="form-control py-2 w-100" placeholder="Search partners" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
                       <img src="../../../assets/images/search.svg" alt="">
                   </div>
               </div>
@@ -126,7 +126,7 @@
                                 <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" *ngIf="partnersRole?.p_Update==true || is_Super==true" routerLink="/partner/edit-partner/{{partners.partner_ID}}">update</button>
 
                                 <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/partner/view-partner/{{partners.partner_ID}}"> View Profile  </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="partnersRole?.p_Delete==true || is_Super==true" (click)="deletepartner(partners.partner_ID)">Delete </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="partnersRole?.p_Delete==true || is_Super==true" (click)="deleteModal(partners.partner_ID)">Delete </button>
 
                             </div>
 
@@ -146,22 +146,28 @@
             </p-table>
             <p-paginator *ngIf="partners.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
 
-            <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
-          <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-              <button (click)="decreamentPage( )" [disabled]="disableperv" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-            Previous
-</button>
-          </div>
-          <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{pageNumber}} of {{totalofPages}}</div>
-          <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-              <button [disabled]="disablenext" (click)="   incrementpage( )" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                Next
-  </button>
-          </div>
-      </div> -->
         </div>
     </main>
     <!-- end content page  -->
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" >
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close2.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/delete2.svg" alt=""></span>
+                  <h5>Confirm Deletion</h5>
+                  <p class="text-muted ">Are you want to delete the partner? </p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete mx-2" data-bs-dismiss="modal" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button" class="btn btn-color mx-2" id="closeModal" (click)="deletepartner()" >Delete</button>
+                  </div>
+     </div>
+      </div>
 </div>

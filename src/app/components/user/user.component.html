@@ -31,16 +31,6 @@
           </div>
         </div>
     </div>
-        <!-- <div class="row justify-content-center align-items-center" style="color: #6c6a6a">
-            <div class="col-10">
-                <p-breadcrumb class="max-w-full" [model]="[{label:'Tenants'}]" [home]="home"></p-breadcrumb>
-
-            </div>
-            <div class="col-2">
-                <app-dropdown class="ms-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
-
-            </div>
-        </div> -->
 
 
         <p-toast></p-toast>
@@ -59,18 +49,8 @@
                </div>
                 <!-- search input -->
               <div class="col-md-5 col-8">
-                  <!-- <ng-container *ngIf="!search; else searchVisible">
-                      <img class="pi pi-search cursor ms-auto" style="margin-right: 2rem;" (click)="search = true" src="../../../assets/images/search.svg">
-
-                  </ng-container>
-                  <ng-template #searchVisible>
-                      <input class="form-control fs-6 ps-3" *ngIf="search" type="text" pInputText [(ngModel)]="searchText" placeholder="Global Search" />
-                      <button class="btn btn-primary ms-2" *ngIf="search" (click)="searchAction()">
-                        Search
-                    </button>
-                  </ng-template> -->
                   <div class="input">
-                    <input type="text" class="form-control py-2 w-100" placeholder="Global Search" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
+                    <input type="text" class="form-control py-2 w-100" placeholder="Search Users" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
                       <img src="../../../assets/images/search.svg" alt="">
                   </div>
               </div>
@@ -178,9 +158,9 @@
           </button>
                             <div *ngIf="showEdit[Tenant.user_ID] " class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
                                 <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" *ngIf="TantsRole?.p_Update==true || is_Super==true" routerLink="/users/app-edite-user-details/{{Tenant?.user_ID}}">Edit</button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteUser(Tenant.user_ID)" *ngIf="TantsRole?.p_Delete==true || is_Super==true"> Delete </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendUser(Tenant.user_ID)">Suspend User </button>
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status==false" (click)="unSuspendUser(Tenant.user_ID)">UnSuspend User </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="deleteModal(Tenant.user_ID)" *ngIf="TantsRole?.p_Delete==true || is_Super==true"> Delete </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status!=false" (click)="SuspendModal(Tenant.user_ID)">Suspend User </button>
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" *ngIf="Tenant?.status==false" (click)="UnSuspendModal(Tenant.user_ID)">UnSuspend User </button>
 
                             </div>
 
@@ -201,24 +181,75 @@
 
             <p-paginator *ngIf="Tenants.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
         </div>
-        <!-- <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="5" [totalRecords]="totalRecords"></p-paginator> -->
 
-        <!-- <div style="width: 100%; height: 72px; padding-top: 12px; padding-bottom: 16px; padding-left: 24px; padding-right: 24px;   justify-content: space-between; align-items: center; display: inline-flex">
-            <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-                <button (click)="decreamentPage( )" [disabled]="disableperv" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                Previous
-  </button>
-            </div>
-            <div style="color: #484649; font-size: 14px; font-family: 'Montserrat'; font-weight: 400; line-height: 20px; word-wrap: break-word">Page {{pageNumber}} of {{totalofPages}}</div>
-            <div style="border-radius: 4px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
-
-                <button [disabled]="disablenext" (click)="   incrementpage( )" class="  cvxs" style="text-align: center; color: #1F4068; font-size: 16px; font-family: 'Montserrat'; font-weight: 500; line-height: 20px; word-wrap: break-word">
-                    Next
-      </button>
-            </div>
-        </div> -->
 
     </main>
     <!-- end content page  -->
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" *ngIf="model1 && !model2 && !model3">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close2.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/delete2.svg" alt=""></span>
+                  <h5>Confirm Deletion</h5>
+                  <p class="text-muted ">Are you want to delete the user? </p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete mx-2" data-bs-dismiss="modal" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button" class="btn btn-color mx-2" id="closeModal" (click)="DeleteUser()" >Delete</button>
+                  </div>
+     </div>
+      </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}"  *ngIf="model2 &&!model1 && !model3">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/block.svg" alt=""></span>
+                  <h5>Confirm Suspension</h5>
+                  <p class="text-muted ">Are you want to suspend the user? </p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete mx-2" data-bs-dismiss="modal" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button" class="btn btn-color mx-2"
+                        id="closeModal" (click)="SuspendUser()" >Suspend
+                  </button>
+                  </div>
+     </div>
+      </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}"  *ngIf="model3 &&!model1 && !model2">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/block.svg" alt=""></span>
+                  <h5>Confirm UnSuspension</h5>
+                  <p class="text-muted ">Are you want to un-suspend the user? </p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button mx-2" class="btn btn-delete" data-bs-dismiss="modal" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button mx-2" class="btn btn-color"
+                        id="closeModal" (click)="unSuspendUser()" >UnSuspend
+                  </button>
+                  </div>
+     </div>
+      </div>
 </div>

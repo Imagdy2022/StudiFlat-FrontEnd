@@ -249,30 +249,38 @@ export class ForthStepComponent {
   imageList:any={}
   urls = new Array<string>();
 
+  counter: number = 0;
   selectFile(event: any): void {
-
     this.message = '';
     this.preview = '';
     this.progress = 0;
     this.selectedFiles = event.target.files;
 
-     let files = event.target.files;
+    let files = event.target.files;
 
     if (files) {
-      for (let file of files) {
-
-        this.ListFiles.push(file);
-         let reader = new FileReader();
-        reader.onload = (e: any) => {
-
-           this.urls.push(e.target.result);
+      if (this.counter + files.length > 4) {
+        this.message = 'Only a maximum of 4 files are allowed.';
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `${this.message}`,
+        });
+      } else {
+        for (let file of files) {
+          this.ListFiles.push(file);
+          this.counter += 1;
+          let reader = new FileReader();
+          reader.onload = (e: any) => {
+            this.urls.push(e.target.result);
+          };
+          reader.readAsDataURL(file);
         }
-        reader.readAsDataURL(file);
+        this.upload();
       }
     }
-    this.upload()
-    this.ListFiles=[]
-   }
+    this.ListFiles = [];
+  }
 
   display22="none"
 

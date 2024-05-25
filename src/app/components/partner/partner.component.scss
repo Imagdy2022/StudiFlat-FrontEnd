@@ -1,55 +1,25 @@
-.active {
-    color: #1f4068 !important;
-    background-color: #fafcff;
-    border-left: 3px solid #1f4068;
-}
+td {
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
 
-.content-details {
-    @media (min-width: 992px) {
-        margin-left: 17%;
-        padding: 0 10% !important;
-    }
 }
-
-.top-icon-input {
-    top: 30px;
+th {
+    font-size: 14px !important;
+    font-family: 'Poppins';
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
 }
-
-.rentedORavailable {
-    background-color: rgb(255 255 255 / 70%);
-    color: #1f4068 !important;
+.input{
+  position: relative;
 }
-
-.rented {
-    color: #1f4068 !important;
-}
-
-.available {
-    color: #12b76a !important;
-}
-
-.p-dropdown {
-    width: 100% !important;
-    height: 40px;
-    .p-dropdown-label {
-        padding: 5px 10px;
-    }
-}
-
-.downloadAll {
-    border: 1px solid#939094 !important;
-    color: #1F4068 !important;
-}
-.btn-date{
-  background-color: #fff !important;
-  right: 5px;
-  top: 5px;
-  outline: none;
-  border: 1px solid #E3E3E3 !important;
-  img {
-    height: 20px;
-    width: 20px;
-  }
+.input img{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .modal{
   background: rgba(0,0,0, .5);
@@ -67,7 +37,7 @@
       border: 8px solid #FFFBF9;
       background: linear-gradient(0deg, #FCEEEE, #FCEEEE),      linear-gradient(0deg, #FFFBF9, #FFFBF9);
 }
-    img.icon{
+    img{
       width: 24px;
       height: 24px;
     }
@@ -108,8 +78,6 @@
 .modal-footer{
   border-top: unset;
 }
-
-* {
-    font-family: 'Poppins'
+::placeholder{
+  font-size: 13px !important;
 }
-

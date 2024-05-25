@@ -95,7 +95,7 @@
                 </ul>
             </div>
         </div>
-        <a tabindex="1" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" style="cursor: pointer" routerLinkActive="active" (click)="onSubmitModal2()">
+        <a tabindex="1" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" style="cursor: pointer" (click)="logoutModal()">
             <img src="../../../../assets/images/navigation/logout.svg"> Logout
         </a>
         <!--APPs navigation-->
@@ -116,3 +116,25 @@
 </div>
 
 <!-- sidebar-menu  -->
+
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close2.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/logout.svg" alt=""></span>
+                  <h5>Logout</h5>
+                  <p class="text-muted ">Are you sure you want to logout? </p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete mx-2" data-bs-dismiss="modal" (click)="onCloseHandled()">Cancel</button>
+                    <button type="button" class="btn btn-color mx-2" id="closeModal" (click)="onSubmitModal2()" >Yes I'm sure</button>
+                  </div>
+     </div>
+      </div>
+</div>

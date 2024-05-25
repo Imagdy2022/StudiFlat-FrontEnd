@@ -44,26 +44,45 @@
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">* First name</label>
                         <input formControlName='owner_FirstName' class="form-control w-100" type="text">
+                        <div class="text-danger mt-3 error d-flex align-items-center"
+                        *ngIf="createOwner.get('owner_FirstName')?.getError('pattern')"  >
+                        <i class="fa-solid fa-ban text-danger mx-2"></i>
+                        <p class="mb-0 text-danger">First name is not valid</p>
+                      </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="fw-bold" style="color: #605D62">* Last name</label>
                         <input formControlName='owner_LastName' class="form-control w-100" type="text">
+                        <div class="text-danger mt-3 error d-flex align-items-center"
+                        *ngIf="createOwner.get('owner_LastName')?.getError('pattern')"  >
+                        <i class="fa-solid fa-ban text-danger mx-2"></i>
+                        <p class="mb-0 text-danger"> Last name is not valid</p>
+                      </div>
                     </div>
 
                 </div>
                 <div class="mb-4">
                     <label class="fw-bold" style="color: #605D62;">* Email</label>
-                    <img src="assets/images/user/mail.svg" class="position-relative top-icon-input" style="right: 45px;">
-                    <input formControlName='owner_Mail' class="form-control w-100" type="email" style="padding-left: 26px;">
+                    <img src="assets/images/user/mail.svg" class="position-relative top-icon-input" style="right: 50px;">
+                    <input formControlName='owner_Mail' class="form-control w-100" type="email" style="padding-left: 30px;">
                 </div>
                 <div class="mb-4">
                     <label class="fw-bold" style="color: #605D62;">* Address</label>
-
                     <input formControlName='owner_Address' class="form-control w-100" type="text">
+                    <div class="text-danger mt-3 error d-flex align-items-center"
+                    *ngIf="createOwner.get('owner_Address')?.getError('pattern')"  >
+                    <i class="fa-solid fa-ban text-danger mx-2"></i>
+                    <p class="mb-0 text-danger">Address is not valid</p>
+                  </div>
                 </div>
                 <div>
                     <label class="fw-bold" style="color: #605D62;">* About</label>
                     <textarea formControlName='owner_About' class="border rounded-3 w-100 p-2" rows="5" style="resize: unset;"></textarea>
+                    <div class="text-danger mt-3 error d-flex align-items-center"
+                    *ngIf="createOwner.get('owner_About')?.getError('pattern')"  >
+                    <i class="fa-solid fa-ban text-danger mx-2"></i>
+                    <p class="mb-0 text-danger">About is not valid</p>
+                  </div>
                 </div>
 
                 <!--end General info form-->
@@ -77,7 +96,15 @@
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">* Date of birth</label>
-                        <input formControlName='owner_DOB' class="form-control w-100 " type="date" [value]="formattedDate" style="cursor: pointer;"  [max]="getTodayDate()">
+                        <input formControlName='owner_DOB' class="form-control w-100 " type="date"  [value]="formattedDate" style="cursor: pointer;"  [max]="getTodayDate()">
+                       <!-- <div class="input-group">
+                        <input class="form-control" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                          formControlName='owner_DOB' [value]="formattedDate" style="cursor: pointer;"  [max]="getTodayDate()"/>
+                        <button  (click)="d.toggle()"
+                          class="bi bi-calendar3 btn-date" type="button">
+                        <img src="../../../../assets/images/date-picker.png" alt="" />
+                        </button>
+                      </div> -->
                     </div>
 
                     <div class="col-12 col-md-6 mb-4">
@@ -91,7 +118,13 @@
                 <div class="row ">
                     <div class="col-12 col-md-6 mb-4">
                         <label class="fw-bold" style="color: #605D62;">* Phone number</label>
-                        <input formControlName='owner_Phone' class="form-control w-100" type="number">
+                        <input formControlName='owner_Phone' class="form-control w-100" type="text">
+
+                     <div class="text-danger mt-3 error d-flex align-items-center"
+                     *ngIf="createOwner.get('owner_Phone')?.getError('pattern')"  >
+                     <i class="fa-solid fa-ban text-danger mx-2"></i>
+                     <p class="mb-0 text-danger"> Phone number is invalid </p>
+                   </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="fw-bold" style="color: #605D62">whatsapp number</label>
@@ -184,16 +217,31 @@
                         <div class="col-12 col-md-6 mb-4">
                             <label class="fw-bold" style="color: #605D62;">* Bank Name</label>
                             <input formControlName='owner_Bank' class="form-control w-100" type="text">
+                            <div class="text-danger mt-3 error d-flex align-items-center"
+                            *ngIf="createOwner.get('owner_Bank')?.getError('pattern')"  >
+                            <i class="fa-solid fa-ban text-danger mx-2"></i>
+                            <p class="mb-0 text-danger"> Bank Name is not valid </p>
+                          </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="fw-bold" style="color: #605D62">* Account Number</label>
                             <input formControlName='owner_BankAccount' class="form-control w-100" type="text">
+                            <div class="text-danger mt-3 error d-flex align-items-center"
+                            *ngIf="createOwner.get('owner_BankAccount')?.getError('pattern')"  >
+                            <i class="fa-solid fa-ban text-danger mx-2"></i>
+                            <p class="mb-0 text-danger"> Account Number is not valid </p>
+                          </div>
                         </div>
 
                     </div>
                     <div class="mb-4">
                         <label class="fw-bold" style="color: #605D62;">* Swift Number</label>
                         <input formControlName='owner_BankSwift' class="form-control w-100" type="text">
+                        <div class="text-danger mt-3 error d-flex align-items-center"
+                        *ngIf="createOwner.get('owner_BankSwift')?.getError('pattern')"  >
+                        <i class="fa-solid fa-ban text-danger mx-2"></i>
+                        <p class="mb-0 text-danger"> Swift Number is not valid </p>
+                      </div>
                     </div>
                 </div>
 
@@ -211,7 +259,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between" *ngIf="param!='Owner details'">
-                    <button (click)=" gotopage2( )" class="outlet-0 bg-transparent rounded-3 px-4 py-2 fw-bold downloadAll">Cancel</button>
+                    <button (click)="cancleModal()" type="button" class="outlet-0 bg-transparent rounded-3 px-4 py-2 fw-bold downloadAll">Cancel</button>
                     <p-button class="outlet-0 text-white border-0 px-4 py-2 rounded-3 sendDataPButton" label="Save" [loading]="loadingButton" type="submit"></p-button>
 
                     <!-- <button class="outlet-0 text-white border-0 px-4 py-2 rounded-3" style="background-color: #1f4068;"
@@ -233,4 +281,26 @@
         </div>
     </main>
     <!-- end content page  -->
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display4}">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px;">
+        <div class="modal-content">
+              <div class="modal-header pb-0 mb-0 d-flex justify-content-end">
+                <button type="button" class="close border-0" aria-label="Close" #closebutton (click)="onCloseHandled()">
+                  <img src="../../../assets/images/close2.svg" alt="">
+                </button>
+                  </div>
+           <div class="modal-body text-center my-0 py-0">
+                  <span><img src="../../../assets/images/cancle.svg" alt=""></span>
+                  <h5>Cancelation</h5>
+                  <p class="text-muted ">Are you sure to Cancel  Owner creation?</p>
+            </div>
+                  <div class="modal-footer text-center mx-auto mt-0 pt-0 mb-2">
+                    <button type="button" class="btn btn-delete mx-2" data-bs-dismiss="modal" (click)="onCloseHandled()">No</button>
+                    <button type="button" class="btn btn-color mx-2" id="closeModal" (click)="gotopage2( )" >Yes</button>
+                  </div>
+     </div>
+      </div>
 </div>

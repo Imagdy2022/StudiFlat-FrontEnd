@@ -58,4 +58,10 @@ export class OnwerService {
   public deleteOwner(id: string): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/Owner/${id}`, { headers: this.headers })
   }
+
+  GetAreasandCities(): Observable<IOnwer[]> {
+    return this.http.get<IOnwer[]>(`${environment.apiUrl}/Basics/GetAreasandCities`, {headers: this.headers });
+
+  }
+
 }

@@ -17,6 +17,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { OwnersRoutingModule } from './owners-routing.module';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const routes: Routes = [];
@@ -37,7 +38,9 @@ const routes: Routes = [];
     ProgressSpinnerModule,
     ButtonModule,
     ToastModule,
-    OwnersRoutingModule
+    OwnersRoutingModule,
+    NgbModule,
+    NgbDatepickerModule
   ],
   exports: [OwnerDetailsComponent,],
   providers: [MessageService],

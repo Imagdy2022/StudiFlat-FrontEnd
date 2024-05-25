@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { ConfirmationService } from 'primeng/api';
+import { Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-data-table',
@@ -27,19 +27,21 @@ export class DataTableComponent {
   @Output() searchTextChange: EventEmitter<string> = new EventEmitter<string>();
   /** searchTextChange */
   @Output() deleteItemDetails: EventEmitter<string> = new EventEmitter<string>();
+  @ViewChild('closebutton') closebutton: any;
   /** showEdit */
   showEdit: Array<boolean> = [];
   /** search  */
   search: boolean = false;
   /** searchText  */
   searchText: string = '';
+  Product:any;
   /**dropdownOption */
   dropdownOption: Array<any> = [];
   disablenext = false;
   disableperv = false;
 
 
-  constructor(public confirmationService: ConfirmationService) { }
+  constructor(public confirmationService: ConfirmationService, private messageService: MessageService) { }
   ngOnInit() {
     this.checkRole()
   }
@@ -133,7 +135,7 @@ export class DataTableComponent {
    * confirmDelte
    * @param event
    */
-  confirmDelete(event: any, product: any) {
+  confirmDelete() {
 
 
     // this.confirmationService.confirm({
@@ -142,7 +144,8 @@ export class DataTableComponent {
     //   icon: 'pi pi-trash', // Change the icon to a trash icon or another suitable delete icon
     //   accept: () => {
         // Delete action
-        this.deleteItem(product);
+        // this.deleteItem(this.Product);
+        // this.closebutton.nativeElement.click();
     //   },
     //   reject: () => {
     //     // Cancel or reject action
@@ -150,12 +153,30 @@ export class DataTableComponent {
     // });
   }
 
+  display = 'none';
+  deleteModal(product: any) {
+    this.display = 'block';
+    this.display = 'flex';
+    this.Product = product;
+  }
+  onCloseHandled() {
+    this.display = 'none';
+  }
+
   /**
    * deleteItem
    * @param product
    */
-  private deleteItem(product: string): void {
-    this.deleteItemDetails.emit(product);
+   deleteItem(){
+    this.deleteItemDetails.emit(this.Product);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: `Owner has deleted Successfuly`,
+    });
+    this.closebutton.nativeElement.click();
+    this.products = this.products.filter((item:any) => item.owner_ID !== this.Product.owner_ID);
+
   }
 
 }
