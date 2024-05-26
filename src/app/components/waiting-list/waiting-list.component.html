@@ -1,0 +1,172 @@
+<!-- start header  -->
+<header>
+    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Waiting List'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+
+    <!-- start sidebar  -->
+    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Waiting List'"></app-sidebar>
+    <!-- end sidebar  -->
+
+    <!-- start content page  -->
+    <main class="p-4 col-lg-10 ">
+        <div class="d-md-flex justify-content-between" style="margin-top: 6px; margin-bottom: 24px;">
+            <div class="d-flex" style="align-items: center;">
+                <p class="fw-bold me-2" style="color: #6c6a6a;margin-bottom: 0px;"><a style="color: #6c6a6a;" class="removeUnderLine"
+                        routerLink="/inquiries">Inquiries </a></p>
+
+                <p class="fw-bold me-2" style="margin-bottom: 0px;color: #605D62;">></p>
+                <p class="fw-bold" style="color: #6c6a6a;margin-bottom: 0px;">Waiting List </p>
+            </div>
+            <div class="d-flex justify-content-lg-between ">
+                <div class="d-flex justify-content-between ">
+
+                </div>
+                <app-dropdown [list]="listDropDown" style="margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
+
+            </div>
+        </div>
+
+
+        <p-toast></p-toast>
+        <div class="card">
+            <div class="row d-block d-md-flex justify-content-between my-2 p-3">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center" style="font-size: 15px;">
+                        <label for="" style="color: #313331;font-weight: 500;font-size: 16px;">Waiting List</label>
+                    </div>
+                </div>
+                <div class="col-md-5 col-8">
+                    <div class="input">
+                        <input type="text" class="form-control py-2" placeholder="Search by Inquires" (keyup)="searchAction($event)"
+                            [(ngModel)]="searchText" />
+                        <img src="../../../assets/images/search.svg" alt="">
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- <p-table #dt [value]="partners" [(selection)]="partners" dataKey="id" [filterDelay]="0" /> -->
+
+            <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}"
+                [value]="List">
+                <ng-template pTemplate="header" class="text-center">
+                    <tr *ngIf="headerData">
+                        <ng-container>
+
+
+                            <th class="td-name">
+                                 ID
+
+                            </th>
+
+                            <th class="td-name">
+                                User name
+
+                            </th>
+
+                            <th class="td-name">
+                                Requested apartment
+
+                            </th>
+
+                            <th class="td-name">
+                                Start date
+
+                            </th>
+                            <th class="td-name">
+                                End date
+
+                            </th>
+                            <th class="td-name">
+                                Status
+
+                            </th>
+
+                            <th class="td-name">
+                            </th>
+                        </ng-container>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-check>
+
+                    <!-- <tr (click)="hidecard()" style="cursor: pointer;">
+                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">{{ check.req_Code }}</td>
+
+                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
+                            <img *ngIf="check.user_Photo" [src]="check?.user_Photo"
+                                style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;">
+                            <img *ngIf="!check.user_Photo" src="../../../assets/images/Frame 1261154899.svg"
+                                style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
+                            {{ check?.user_Name }}
+
+                        </td>
+                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
+                            {{ check?.rented_Apt }}
+                        </td>
+                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
+                            {{ check?.rent_Deposit }}
+                        </td>
+
+                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
+                            {{ check?.start_Date }}
+                        </td>
+                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
+                            {{ check?.end_Date }}
+                        </td>
+
+                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
+                            <span class="spanready" *ngIf="check.status=='Ready'">
+                                <img src="../../../assets/images/ready.svg">
+                                {{ check.status }}</span>
+                            <span class="spanready" style="background-color: #ECFDF3;" *ngIf="check.status=='Completed'">
+                                <img src="../../../assets/images/comp.svg">
+                                {{ check.status }}</span>
+                            <span class="spanready" style="background-color: #FFF4ED;" *ngIf="check.status=='End Soon'">
+                                <img src="../../../assets/images/end.svg">
+                                {{ check.status }}</span>
+
+                        </td>
+
+
+                        <td class="cursor position-relative" style="text-align: center;">
+                            <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,check.req_ID)">
+                                <img src="assets/images/edit.svg">
+                            </button>
+                            <div *ngIf="showEdit[check.req_ID] " style="width: 191px;z-index: 999;right: 98px;"
+                                class="position-absolute z-3 rounded-3 bg-white border edit-button">
+
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"
+                                    routerLink="/checkout-inquire/checkout/{{ check.req_ID }}"> View Details </button>
+
+
+
+                            </div>
+
+                        </td>
+
+                    </tr> -->
+
+                </ng-template>
+
+
+                <ng-template pTemplate="emptymessage">
+                    <div class="container text-center mt-4">
+                        <p class="mb-0">No data found.</p>
+                    </div>
+                </ng-template>
+
+            </p-table>
+            <p-paginator *ngIf="List.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+
+
+        </div>
+    </main>
+    <!-- end content page  -->
+</div>
+
+
+
+

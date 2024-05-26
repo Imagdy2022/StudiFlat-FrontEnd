@@ -1018,4 +1018,21 @@ export class AdminsService {
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
+
+  //Waiting List
+  GetWaitlist(
+    Page_No: number,
+    Page_Size: number,
+    Search: any,
+    FilterKey: any
+  ): Observable<any[]> {
+    const url = environment.apiUrl + '/Requests/GetWaitlist';
+    const params = new HttpParams()
+      .set('Page_No', Page_No)
+      .set('Page_Size', Page_Size)
+      .set('Search', Search)
+      .set('FilterKey', FilterKey);
+
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
 }

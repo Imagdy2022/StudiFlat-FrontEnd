@@ -44,6 +44,14 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'waitingList',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('../../components/waiting-list/waiting-list.module').then(
+            (i) => i.WaitingListModule
+          ),
+      },
+      {
         path: 'cancel-inquire',
         canActivate: [AuthGuard],
         loadChildren: () =>

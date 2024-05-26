@@ -64,7 +64,7 @@ export class SidebarComponent implements OnInit {
     }
     if(this.router.url=='/inquiries'||this.router.url=='/cancel-inquire'||
     this.router.url=='/checkout-inquire' ||this.router.url.includes('/cancel-inquire/view-cancel/') ||
-    this.router.url.includes('/checkout-inquire/checkout/')){
+    this.router.url.includes('/checkout-inquire/checkout/') || this.router.url.includes('/waitingList')){
       this.isFreeze2=true
     }
 

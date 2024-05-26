@@ -83,7 +83,7 @@
             <!-- end total details cards -->
         </div>
         <!-- Analysis Chart-->
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-12">
 
                 <div class="p-3 bg-white border rounded-3 h-650 overflow-overlay">
@@ -128,12 +128,8 @@
             </div>
 
         </div>
-        <div class="col-12 col-md-12  mb-3">
 
-        </div>
-
-        <!--              -->
-        <div class="row mt-2">
+        <div class="row">
             <!--Apartments requests table-->
             <!--  <div class="col-12 col-md-4  mb-3">
                 <div class="p-3 bg-white border rounded-3 h-350 overflow-overlay">
@@ -169,310 +165,322 @@
             </div> -->
             <!--data payment history table-->
 
-            <div class="col-12 col-md-6  mb-3">
-                <div class="p-3 bg-white border rounded-3 h-350 overflow-overlay">
-                    <div class="d-md-flex justify-content-between align-items-center">
-                        <p class="fw-bold ms-1">Tenant payment history</p>
-                        <div class="d-flex mb-2">
-                            <app-dropdown [list]="listDropDownTenantpaymenthistory"
-                                (selected)="selectedPaymentHistory($event)"></app-dropdown>
-                        </div>
-                    </div>
+            <div class="col-12 col-md-6 ">
+              <div class="card ">
+                <div class="p-3 d-flex justify-content-between align-items-center border-1">
+                  <p  class="title pt-2">Tenant payment history</p>
+                  <div class="d-flex mb-2">
+                    <app-dropdown [list]="listDropDownTenantpaymenthistory"
+                        (selected)="selectedPaymentHistory($event)"></app-dropdown>
+                </div>
+                </div>
+                  <div class="h-350 overflow-overlay">
+                    <table class="table table-borderless align-middle table-fixed table-mobile-responsive">
+                      <thead class="align-middle bg-light">
+                        <tr>
+                          <th>Name</th>
+                          <th>Duration</th>
+                          <th>Behaviour</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of rowDatalistTenantpaymenthistory">
+                            <td class="d-flex">
+                                <img [src]="data.user_Photo" class="me-3 rounded-circle" />
+                                <div>
+                                    <h5 class="my-0">{{ data.user_Name }}</h5>
+                                </div>
+                            </td>
+                            <td class="">{{ data.date | date : 'dd/MM/yyyy' }}</td>
+                            <td>
+                                <div>
+                                    <span class="rounded-5 px-3 badge excellent" *ngIf="data?.user_Behavior=='Excellent'">
+                                        {{ data?.user_Behavior }}
+                                    </span>
+                                    <span class="rounded-5 px-3 badge good" *ngIf="data?.user_Behavior=='Good'">
+                                        {{ data?.user_Behavior }}
+                                    </span>
+                                    <span class="rounded-5 px-3  badge poor" *ngIf="data?.user_Behavior=='Poor'">
+                                        {{ data?.user_Behavior }}
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
 
-                    <table class="table  mt-2">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Duration</th>
-                                <th>Behaviour</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let data of rowDatalistTenantpaymenthistory">
-                                <td class="d-flex">
-                                    <img [src]="data.user_Photo" class="me-3 rounded-circle" />
-                                    <div>
-                                        <h5 class="my-0">{{ data.user_Name }}</h5>
-                                    </div>
-                                </td>
-                                <td class="">{{ data.date | date : 'dd/MM/yyyy' }}</td>
-                                <td>
-                                    <div>
-                                        <span class="rounded-5 px-3 badge excellent" *ngIf="data?.user_Behavior=='Excellent'">
-                                            {{ data?.user_Behavior }}
-                                        </span>
-                                        <span class="rounded-5 px-3 badge good" *ngIf="data?.user_Behavior=='Good'">
-                                            {{ data?.user_Behavior }}
-                                        </span>
-                                        <span class="rounded-5 px-3  badge poor" *ngIf="data?.user_Behavior=='Poor'">
-                                            {{ data?.user_Behavior }}
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
+                    </tbody>
                     </table>
+                  </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6  mb-3">
-                <div class="p-3 bg-white border rounded-3 h-350 overflow-overlay">
-                    <div class="d-md-flex justify-content-between align-items-center">
-                        <p class="fw-bold ms-1">User Report Problems</p>
-                        <div class="d-flex mb-2">
-                            <app-dropdown [list]="listDropDownUserProblem" (selected)="selectedUserProblem($event)"></app-dropdown>
-                        </div>
-                    </div>
 
-                    <table class="table  mt-2">
-                        <thead>
-                            <tr>
-                                <th>User name</th>
-                                <th>Apartments name</th>
-                                <th>No. of problem reports</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let data of rowdataListUserreportproblems">
-                                <td>
-                                    <img [src]="data.user_Photo" class="me-3 rounded-circle" />
-                                    <span style=" color: #060D15;font-size: 14px;font-weight: 600;">{{ data.user_Name }}</span>
-                                </td>
-                                <td class="d-flex align-items-center">
-                                    <img [src]="data.apt_Photo" class="me-3 rounded-circle" />
-                                    <div>
-                                        <h5 class="my-0">{{ data.apt_Name }}</h5>
-                                        <p class="gray my-0">{{ data.apt_Area }}</p>
-                                    </div>
-                                </td>
-                                <td>{{ data.issue_Count }}</td>
-                            </tr>
+            <div class="col-12 col-md-6">
+              <div class="card">
+                <div class="p-3 pb-3 d-flex justify-content-between align-items-center border-1">
+                  <p  class="title pt-2">User Report Problems</p>
+                  <div class="d-flex mb-2">
+                    <app-dropdown [list]="listDropDownUserProblem" (selected)="selectedUserProblem($event)"></app-dropdown>
+                </div>
+                </div>
+                <div class="h-350 overflow-overlay">
+                  <table class="table table-borderless align-middle table-fixed table-mobile-responsive ">
+                    <thead class="align-middle bg-light">
+                      <tr>
+                        <th>User name</th>
+                        <th>Apartments name</th>
+                        <th>No. of problem reports</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of rowdataListUserreportproblems">
+                          <td>
+                              <img [src]="data.user_Photo" class="me-3 rounded-circle" />
+                              <span style=" color: #060D15;font-size: 14px;font-weight: 600;">{{ data.user_Name }}</span>
+                          </td>
+                          <td class="d-flex align-items-center">
+                              <img [src]="data.apt_Photo" class="me-3 rounded-circle" />
+                              <div>
+                                  <h5 class="my-0">{{ data.apt_Name }}</h5>
+                                  <p class="gray my-0">{{ data.apt_Area }}</p>
+                              </div>
+                          </td>
+                          <td>{{ data.issue_Count }}</td>
+                      </tr>
 
-                        </tbody>
-                    </table>
+                  </tbody>
+                  </table>
+                </div>
                 </div>
             </div>
+
+
+
         </div>
 
 
         <!--- Islam Cards Statics -->
-        <div class="row mt-2">
+        <div class="row">
             <!--Apartment  table-->
-            <div class="col-12 col-md-4  mb-3">
-                <div class="p-3 bg-white border rounded h-350 overflow-overlay">
-                    <div class="d-md-flex justify-content-between align-items-center">
-                        <p class="fw-bold ms-1">Apartment</p>
-                        <div class="d-flex mb-2">
-                            <app-dropdown [list]="listDropDownApartment" (selected)="SelectApartmentModule($event)"></app-dropdown>
-                            <app-dropdown class="mx-2" [list]="listDropDownOrderBy"
-                                (selected)="SelectApartmentOrderby($event)"></app-dropdown>
+            <div class="col-12 col-md-4 ">
+              <div class="card">
+                <div class="p-3 pb-3 d-flex justify-content-between align-items-center border-1">
+                  <p  class="title pt-2">Apartment</p>
+                  <div class="d-flex mb-2">
+                    <app-dropdown [list]="listDropDownApartment" (selected)="SelectApartmentModule($event)"></app-dropdown>
+                    <app-dropdown class="mx-2" [list]="listDropDownOrderBy"
+                        (selected)="SelectApartmentOrderby($event)"></app-dropdown>
 
-                        </div>
-                    </div>
+                </div>
+                </div>
+                <div class="h-350 overflow-overlay">
+                  <table class="table table-borderless align-middle table-fixed table-mobile-responsive ">
+                    <thead class="align-middle bg-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>Request No</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of ApartmentCards">
+                          <td class="d-flex">
+                              <img [src]="data.apt_Image" class="me-3 rounded-circle" />
+                              <div>
+                                  <h5 class="my-0">{{ data.apt_Name }}</h5>
+                                  <p class="gray my-0">{{ data.apt_Location }}</p>
+                              </div>
+                          </td>
 
-                    <table class="table  mt-2">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Request No</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let data of ApartmentCards">
-                                <td class="d-flex">
-                                    <img [src]="data.apt_Image" class="me-3 rounded-circle" />
-                                    <div>
-                                        <h5 class="my-0">{{ data.apt_Name }}</h5>
-                                        <p class="gray my-0">{{ data.apt_Location }}</p>
-                                    </div>
-                                </td>
+                          <td>{{ data?.count }}</td>
+                      </tr>
 
-                                <td>{{ data?.count }}</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                  </tbody>
+                  </table>
+                </div>
                 </div>
             </div>
             <!--Apartment demands table-->
-            <div class="col-12 col-md-4  mb-3">
-                <div class="p-3 bg-white border rounded h-350 overflow-overlay">
-                    <div class="d-md-flex justify-content-between align-items-center">
-                        <p class="fw-bold ms-1">Apartment Demands</p>
-                        <div class="d-flex mb-2">
-                            <app-dropdown [list]="listDropDownApartmentDemands"
-                                (selected)="selectedApartmentDemands($event)"></app-dropdown>
-                        </div>
-                    </div>
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="p-3 pb-3 d-flex justify-content-between align-items-center border-1">
+                  <p  class="title pt-2">Apartment Demands</p>
+                  <div class="d-flex mb-2">
+                    <app-dropdown [list]="listDropDownApartmentDemands"
+                        (selected)="selectedApartmentDemands($event)"></app-dropdown>
+                </div>
+                </div>
+                <div class="h-350 overflow-overlay">
+                  <table class="table table-borderless align-middle table-fixed table-mobile-responsive ">
+                    <thead class="align-middle bg-light">
+                      <tr>
+                        <th>Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of rowDatalistDemands">
+                          <td class="d-flex">
+                              <img [src]="data.apt_Photo" class="me-3 rounded-circle" />
+                              <div>
+                                  <h5 class="my-0">{{ data.apt_Name }}</h5>
+                                  <p class="gray my-0">{{ data.apt_Area }}</p>
+                              </div>
+                          </td>
+                      </tr>
 
-                    <table class="table  mt-2">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let data of rowDatalistDemands">
-                                <td class="d-flex">
-                                    <img [src]="data.apt_Photo" class="me-3 rounded-circle" />
-                                    <div>
-                                        <h5 class="my-0">{{ data.apt_Name }}</h5>
-                                        <p class="gray my-0">{{ data.apt_Area }}</p>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                  </tbody>
+                  </table>
+                </div>
                 </div>
             </div>
             <!-- End Table -->
             <!--Owners table-->
-            <div class="col-12 col-md-4  mb-3">
-                <div class="p-3 bg-white border rounded h-350 overflow-overlay">
-                    <div class="d-md-flex justify-content-between align-items-center">
-                        <p class="fw-bold ms-1">Owners</p>
-                        <div class="d-flex mb-2">
-                            <app-dropdown [list]="listDropDownApartmentDemands"
-                                (selected)="SelectOwnerOrderby($event)"></app-dropdown>
-                        </div>
-                    </div>
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="p-3 pb-3 d-flex justify-content-between align-items-center border-1">
+                  <p  class="title pt-2">Owners</p>
+                  <div class="d-flex mb-2">
+                    <app-dropdown [list]="listDropDownApartmentDemands"
+                        (selected)="SelectOwnerOrderby($event)"></app-dropdown>
+                </div>
+                </div>
+                <div class="h-350 overflow-overlay">
+                  <table class="table table-borderless align-middle table-fixed table-mobile-responsive ">
+                    <thead class="align-middle bg-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>No.Apartments</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of OwnerCard">
+                          <td class="d-flex">
+                              <img [src]="data.owner_Image" class="me-3 rounded-circle" />
+                              <div>
+                                  <h5 class="my-0">{{ data.owner_Name }}</h5>
+                                  <p class="gray my-0">{{ data.owner_Phone }}</p>
+                              </div>
+                          </td>
+                          <td>{{ data?.count }}</td>
+                      </tr>
 
-                    <table class="table  mt-2">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>No.Apartments</th>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let data of OwnerCard">
-                                <td class="d-flex">
-                                    <img [src]="data.owner_Image" class="me-3 rounded-circle" />
-                                    <div>
-                                        <h5 class="my-0">{{ data.owner_Name }}</h5>
-                                        <p class="gray my-0">{{ data.owner_Phone }}</p>
-                                    </div>
-                                </td>
-                                <td>{{ data?.count }}</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                  </tbody>
+                  </table>
+                </div>
                 </div>
             </div>
+
             <!-- End Table -->
             <!--Agency table-->
-            <div class="col-12 col-md-4  mb-3">
-                <div class="p-3 bg-white border rounded h-350 overflow-overlay">
-                    <div class="d-md-flex justify-content-between align-items-center">
-                        <p class="fw-bold ms-1">Agencies</p>
-                        <div class="d-flex mb-2">
-                            <app-dropdown [list]="listDropDownApartmentDemands"
-                                (selected)="SelectPartnerOrderby($event)"></app-dropdown>
-                        </div>
-                    </div>
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="p-3 pb-3 d-flex justify-content-between align-items-center border-1">
+                  <p  class="title pt-2">Agencies</p>
+                  <div class="d-flex mb-2">
+                    <app-dropdown [list]="listDropDownApartmentDemands"
+                        (selected)="SelectPartnerOrderby($event)"></app-dropdown>
+                </div>
+                </div>
+                <div class="h-350 overflow-overlay">
+                  <table class="table table-borderless align-middle table-fixed table-mobile-responsive ">
+                    <thead class="align-middle bg-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>No.Requests</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of PartnerCard">
+                          <td class="d-flex">
+                              <img [src]="data.agency_Image" class="me-3 rounded-circle" />
+                              <div>
+                                  <h5 class="my-0">{{ data.agency_Name }}</h5>
+                                  <p class="gray my-0">{{ data.agency_Code }}</p>
+                              </div>
+                          </td>
+                          <td>{{ data?.count }}</td>
+                      </tr>
 
-                    <table class="table  mt-2">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>No.Requests</th>
-                            </tr>
+                  </tbody>
+                  </table>
+                </div>
 
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let data of PartnerCard">
-                                <td class="d-flex">
-                                    <img [src]="data.agency_Image" class="me-3 rounded-circle" />
-                                    <div>
-                                        <h5 class="my-0">{{ data.agency_Name }}</h5>
-                                        <p class="gray my-0">{{ data.agency_Code }}</p>
-                                    </div>
-                                </td>
-                                <td>{{ data?.count }}</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
                 </div>
             </div>
             <!-- End Table -->
             <!-- Worker Card-->
-            <div class="col-12 col-md-4  mb-3">
-                <div class="p-3 bg-white border rounded h-350 overflow-overlay">
-                    <div class="d-md-flex justify-content-between align-items-center">
-                        <p class="fw-bold ms-1">Workers</p>
-                        <div class="d-flex mb-2">
-                            <app-dropdown [list]="listDropDownWorker" (selected)="SelectWorkerModule($event)"></app-dropdown>
-                            <app-dropdown class="mx-2" [list]="listDropDownOrderBy"
-                                (selected)="SelectWorkerOrderby($event)"></app-dropdown>
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="p-3 pb-3 d-flex justify-content-between align-items-center border-1">
+                  <p  class="title pt-2">Workers</p>
+                  <div class="d-flex mb-2">
+                    <app-dropdown [list]="listDropDownWorker" (selected)="SelectWorkerModule($event)"></app-dropdown>
+                    <app-dropdown class="mx-2" [list]="listDropDownOrderBy"
+                        (selected)="SelectWorkerOrderby($event)"></app-dropdown>
 
-                        </div>
-                    </div>
+                </div>
+                </div>
+                  <div class="h-350 overflow-overlay">
+                    <table class="table table-borderless align-middle table-fixed table-mobile-responsive ">
+                      <thead class="align-middle bg-light">
+                        <tr>
+                          <th>Name</th>
+                          <th>No.</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of WorkerCard">
+                            <td class="d-flex">
+                                <img [src]="data.worker_Img" class="me-3 rounded-circle" />
+                                <div>
+                                    <h5 class="my-0">{{ data.worker_Name }}</h5>
+                                    <p class="gray my-0">{{ data.worker_Phone }}</p>
+                                </div>
+                            </td>
 
-                    <table class="table  mt-2">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>No.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let data of WorkerCard">
-                                <td class="d-flex">
-                                    <img [src]="data.worker_Img" class="me-3 rounded-circle" />
-                                    <div>
-                                        <h5 class="my-0">{{ data.worker_Name }}</h5>
-                                        <p class="gray my-0">{{ data.worker_Phone }}</p>
-                                    </div>
-                                </td>
+                            <td>{{ data?.count }}</td>
+                        </tr>
 
-                                <td>{{ data?.count }}</td>
-                            </tr>
-
-                        </tbody>
+                    </tbody>
                     </table>
+                  </div>
                 </div>
             </div>
             <!-- End Worker Card-->
             <!-- Tenant Card-->
             <!--Apartment  table-->
-            <div class="col-12 col-md-4  mb-3">
-                <div class="p-3 bg-white border rounded h-350 overflow-overlay">
-                    <div class="d-md-flex justify-content-between align-items-center">
-                        <p class="fw-bold ms-1">Tenants</p>
-                        <div class="d-flex mb-2">
-                            <app-dropdown [list]="listDropDownTenant" (selected)="SelectTenantModule($event)"></app-dropdown>
-                            <app-dropdown class="mx-2" [list]="listDropDownOrderBy"
-                                (selected)="SelectTenantOrderby($event)"></app-dropdown>
+            <div class="col-12 col-md-4">
+              <div class="card">
+                <div class="p-3 pb-3 d-flex justify-content-between align-items-center border-1">
+                  <p  class="title pt-2">Tenants</p>
+                  <div class="d-flex mb-2">
+                    <app-dropdown [list]="listDropDownTenant" (selected)="SelectTenantModule($event)"></app-dropdown>
+                    <app-dropdown class="mx-2" [list]="listDropDownOrderBy"
+                        (selected)="SelectTenantOrderby($event)"></app-dropdown>
 
-                        </div>
-                    </div>
+                </div>
+                </div>
+                  <div class="h-350 overflow-overlay">
+                    <table class="table table-borderless align-middle table-fixed table-mobile-responsive ">
+                      <thead class="align-middle bg-light">
+                        <tr>
+                          <th>Name</th>
+                          <th>No.</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of TenantCard">
+                            <td class="d-flex">
+                                <!--  <img [src]="data.apt_Image" class="me-3 rounded-circle" /> -->
+                                <div>
+                                    <h5 class="my-0">{{ data.tenant_Name }}</h5>
 
-                    <table class="table  mt-2">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>No.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let data of TenantCard">
-                                <td class="d-flex">
-                                    <!--  <img [src]="data.apt_Image" class="me-3 rounded-circle" /> -->
-                                    <div>
-                                        <h5 class="my-0">{{ data.tenant_Name }}</h5>
+                                </div>
+                            </td>
 
-                                    </div>
-                                </td>
+                            <td>{{ data?.count }}</td>
+                        </tr>
 
-                                <td>{{ data?.count }}</td>
-                            </tr>
-
-                        </tbody>
+                    </tbody>
                     </table>
+                  </div>
                 </div>
             </div>
             <!--    End Tenant Card-->

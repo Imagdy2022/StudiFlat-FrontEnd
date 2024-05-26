@@ -5,8 +5,6 @@ import { ViewInquireComponent } from './view-inquire/view-inquire.component';
 import { CreacteContractComponent } from './creacte-contract/creacte-contract.component';
 import { InquireEditComponent } from './inquire-edit/inquire-edit.component';
 import { InquireOfferComponent } from './inquire-offer/inquire-offer.component';
-import { CheckoutInqqComponent } from '../checkout-inqq/checkout-inqq.component';
-import { CheckoutDetailsComponent } from '../checkout-inqq/checkout-details/checkout-details.component';
 
 
 const routes: Routes = [
