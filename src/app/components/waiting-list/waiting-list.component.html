@@ -55,21 +55,10 @@
                 <ng-template pTemplate="header" class="text-center">
                     <tr *ngIf="headerData">
                         <ng-container>
-
-
-                            <th class="td-name">
-                                 ID
-
-                            </th>
+                            <!-- <th class="td-name"> ID </th> -->
 
                             <th class="td-name">
                                 User name
-
-                            </th>
-
-                            <th class="td-name">
-                                Requested apartment
-
                             </th>
 
                             <th class="td-name">
@@ -78,76 +67,58 @@
                             </th>
                             <th class="td-name">
                                 End date
-
                             </th>
                             <th class="td-name">
-                                Status
+                              Rent
+                          </th>
 
-                            </th>
+                          <th class="td-name">
+                            Guests
+                        </th>
 
                             <th class="td-name">
                             </th>
                         </ng-container>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-check>
+                <ng-template pTemplate="body" let-list>
 
-                    <!-- <tr (click)="hidecard()" style="cursor: pointer;">
-                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">{{ check.req_Code }}</td>
+                    <tr (click)="hidecard()" style="cursor: pointer;">
+                        <!-- <td>{{ list.wait_ID }}</td> -->
 
-                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
-                            <img *ngIf="check.user_Photo" [src]="check?.user_Photo"
+                        <td>
+                            <img *ngIf="list.user_Photo" [src]="list?.user_Photo"
                                 style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px; cursor: pointer;">
-                            <img *ngIf="!check.user_Photo" src="../../../assets/images/Frame 1261154899.svg"
+                            <img *ngIf="!list.user_Photo" src="../../../assets/images/Frame 1261154899.svg"
                                 style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
-                            {{ check?.user_Name }}
+                            {{ list?.user_Name }}
 
                         </td>
-                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
-                            {{ check?.rented_Apt }}
+                        <td>
+                            {{ list?.start_Date }}
                         </td>
-                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
-                            {{ check?.rent_Deposit }}
+                        <td>
+                            {{ list?.end_Date }}
                         </td>
-
-                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
-                            {{ check?.start_Date }}
-                        </td>
-                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
-                            {{ check?.end_Date }}
-                        </td>
-
-                        <td routerLink="/checkout-inquire/checkout/{{ check.req_ID }}">
-                            <span class="spanready" *ngIf="check.status=='Ready'">
-                                <img src="../../../assets/images/ready.svg">
-                                {{ check.status }}</span>
-                            <span class="spanready" style="background-color: #ECFDF3;" *ngIf="check.status=='Completed'">
-                                <img src="../../../assets/images/comp.svg">
-                                {{ check.status }}</span>
-                            <span class="spanready" style="background-color: #FFF4ED;" *ngIf="check.status=='End Soon'">
-                                <img src="../../../assets/images/end.svg">
-                                {{ check.status }}</span>
-
-                        </td>
-
+                        <td >
+                          {{ list?.rent }}
+                      </td>
+                      <td >
+                        {{ list?.guests }}
+                    </td>
 
                         <td class="cursor position-relative" style="text-align: center;">
-                            <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,check.req_ID)">
+                            <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,list.wait_ID)">
                                 <img src="assets/images/edit.svg">
                             </button>
-                            <div *ngIf="showEdit[check.req_ID] " style="width: 191px;z-index: 999;right: 98px;"
+                            <div *ngIf="showEdit[list.wait_ID] " style="width: 191px;z-index: 999;right: 98px;"
                                 class="position-absolute z-3 rounded-3 bg-white border edit-button">
-
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"
-                                    routerLink="/checkout-inquire/checkout/{{ check.req_ID }}"> View Details </button>
-
-
-
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"> View Details </button>
                             </div>
 
                         </td>
 
-                    </tr> -->
+                    </tr>
 
                 </ng-template>
 
