@@ -17,6 +17,8 @@ export class WaitingListComponent implements OnInit {
   headerData: Array<any> = [];
   showEdit: Array<boolean> = [];
   subscriptions: Subscription[] = [];
+  waitingListID :any;
+  selectedwaitingList:any;
 
   numbercheckOut = 0;
   afterUploadImage: string;
@@ -90,6 +92,11 @@ export class WaitingListComponent implements OnInit {
         )
     );
   }
+  getWaitingListById(){
+    this._checkOutService.getWaitingListById(this.waitingListID).subscribe((res)=>{
+      this.selectedwaitingList = res
+    })
+  }
   tiggerPageChange(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber = calcPageNumber;
@@ -97,12 +104,15 @@ export class WaitingListComponent implements OnInit {
   }
   ids: any = [];
   detailperson(event: any, id: any) {
+    this.waitingListID=id;
     this.showEdit = [];
     event.stopPropagation();
 
     this.showEdit[id] == true
       ? (this.showEdit[id] = false)
       : (this.showEdit[id] = true);
+      this.getWaitingListById();
+
   }
   showSide: string = '';
 
@@ -141,6 +151,14 @@ export class WaitingListComponent implements OnInit {
       return;
   }
     this.getWaitingList();
+  }
+  display1: any = 'none';
+
+  onOpenmodel() {
+    this.display1 = 'block';
+  }
+  onCloseModal() {
+    this.display1 = 'none';
   }
 
 

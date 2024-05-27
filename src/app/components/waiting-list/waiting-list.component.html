@@ -111,8 +111,8 @@
                             <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event,list.wait_ID)">
                                 <img src="assets/images/edit.svg">
                             </button>
-                            <div *ngIf="showEdit[list.wait_ID]" class="Actions position-absolute z-3 rounded-3 bg-white border edit-button">
-                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2"> View Details </button>
+                            <div *ngIf="showEdit[list.wait_ID]" class="Actions position-absolute z-3 rounded-3 bg-white border edit-button px-2">
+                                <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="onOpenmodel()"> View Details </button>
                             </div>
 
                         </td>
@@ -138,5 +138,78 @@
 </div>
 
 
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header" style="position: relative;background-color:#ffffff; border-bottom: none !important;">
+              <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
+                  <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
+                  Waiting List Details
+      </span>
+              </p>
+              <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal()">
+                  <span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span></button>
+          </div>
+
+          <div class="modal-body">
+              <div class="userData d-flex align-items-center mb-3">
+                <img [src]="selectedwaitingList?.user_Photo" alt="user image" class="rounded-circle">
+                <p class="ms-3 fs-6 pt-3">{{selectedwaitingList?.user_Name}}</p>
+              </div>
+              <div class="row d-flex justify-content-between ">
+                <div class="col md-6">
+                 <div class="mb-2">
+                  <label for="">Star Date</label>
+                  <input type="text" class="form-control" [value]="selectedwaitingList?.start_Date" readonly disabled>
+                 </div>
+
+                 <div class="mb-2">
+                  <label for="">Rent</label>
+                  <input type="text" class="form-control" [value]="selectedwaitingList?.rent" readonly disabled>
+                 </div>
+
+                 <div class="mb-2">
+                  <label for="">Cities</label>
+                  <input type="text" class="form-control" [value]="selectedwaitingList?.cities" readonly disabled>
+                 </div>
+
+                 <div class="mb-2">
+                  <label for="">Suggests Apartments</label>
+                  <input type="text" class="form-control" [value]="selectedwaitingList?.suggests_Apartments" readonly disabled>
+                 </div>
+                </div>
+                <div class="col md-6">
+                  <div class="mb-2">
+                  <label for="">End Date</label>
+                  <input type="text" class="form-control" [value]="selectedwaitingList?.end_Date" readonly disabled>
+                  </div>
+
+                  <div class="mb-2">
+                  <label for="">Guests</label>
+                  <input type="text" class="form-control" [value]="selectedwaitingList?.guests" readonly disabled>
+                  </div>
+
+                  <div class="mb-2">
+                  <label for="">Tell More</label>
+                  <input type="text" class="form-control" [value]="selectedwaitingList?.tellMore" readonly disabled>
+                  </div>
+
+          </div>
+          <div class="modal-footer">
+
+              <div class="d-flex justify-content-end w-100 px-2">
+                      <a (click)="onCloseModal()" style="border: 1px solid;cursor: pointer;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold  xcvddmodel"> Cancel </a>
+                      <!-- <button class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
+                confirm
+  </button> -->
+                  </div>
+              <!-- Confirm -->
+
+          </div>
 
 
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

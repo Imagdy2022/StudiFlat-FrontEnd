@@ -1035,4 +1035,10 @@ export class AdminsService {
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
   }
+
+  getWaitingListById(Wait_ID: number): Observable<any[]> {
+    const url = environment.apiUrl + `/Requests/GetWaitDetails?Wait_ID=${Wait_ID}`;
+
+    return this.http.get<any[]>(url, { headers: this.headers});
+  }
 }
