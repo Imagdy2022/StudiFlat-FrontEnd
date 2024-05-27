@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-waiting-list',
   templateUrl: './waiting-list.component.html',
-  styleUrls: ['./waiting-list.component.css'],
+  styleUrls: ['./waiting-list.component.scss'],
 })
 export class WaitingListComponent implements OnInit {
   List: any = [];

@@ -81,59 +81,8 @@ p{
     line-height: 24px;
 }
 
-.apartmentList {
-    color: #787579;
-    &:hover {
-        border-bottom: 2px solid #1f4068 !important;
-        font-weight: 600;
-        color: #1f4068 !important;
-    }
-}
-
-.paroductApartment {
-    .details {
-        border: 1px solid #dfdfdf;
-        max-height: 220px;
-    }
-    .apartmentImage {
-        border-radius: 8px 8px 0px 0px;
-        max-height: 184px;
-    }
-    .Price {
-        color: #1F4068;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 33.6px;
-        .time {
-            font-size: 16px;
-            line-height: 16px;
-            position: relative;
-            top: -2px;
-        }
-    }
-}
-
 .pointer {
     cursor: pointer;
-}
-
-.rentedORavailable {
-    background-color: rgb(255 255 255 / 70%);
-    color: #1f4068 !important;
-}
-
-.rented {
-    color: #1f4068 !important;
-}
-
-.available {
-    color: #12b76a !important;
-}
-
-.clickApartmentList {
-    color: #1f4068 !important;
-    font-weight: 600;
-    border-bottom: 2px solid #1f4068 !important;
 }
 
 .none {
@@ -145,7 +94,7 @@ p{
 .p-fileupload-buttonbar .p-button {
     margin-bottom: 10px !important;
 }
-
+    
 .cvxs {
     text-align: center;
     color: #1019c6 !important;
@@ -188,6 +137,16 @@ th {
     border-bottom: 1px solid #F6F6F6 !important;
     background: #F6F6F6 !important  ;
 }
+tr{
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+.Actions{
+  width: 150px;
+  z-index: 999;
+  right: 35px;
+  top: 50px;
+}
+}
 
 .spanready{
     padding: 4px;
@@ -200,10 +159,10 @@ th {
 
 .input{
   position: relative;
+  img{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
-.input img{
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
 }
