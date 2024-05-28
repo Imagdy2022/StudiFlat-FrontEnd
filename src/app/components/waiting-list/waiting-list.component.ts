@@ -111,7 +111,7 @@ export class WaitingListComponent implements OnInit {
     this.showEdit[id] == true
       ? (this.showEdit[id] = false)
       : (this.showEdit[id] = true);
-      this.getWaitingListById();
+
 
   }
   showSide: string = '';
@@ -155,6 +155,7 @@ export class WaitingListComponent implements OnInit {
   display1: any = 'none';
 
   onOpenmodel() {
+    this.getWaitingListById();
     this.display1 = 'block';
   }
   onCloseModal() {

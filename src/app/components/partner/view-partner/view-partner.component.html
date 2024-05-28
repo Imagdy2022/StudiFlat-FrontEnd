@@ -38,7 +38,8 @@
                 <div class="row w-100 d-flex mx-0">
                     <div class="col-lg-4 px-0">
                         <div style="width: 350px; padding-top: 1px; padding-bottom: 87px; background: #F9F9F9; border-radius: 8px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
-                            <img style="width: 350px; height: 250px; position: relative; background: linear-gradient(0deg, white 0%, white 100%)" [src]="detil_part?.partner_Photo" />
+                            <img *ngIf="detil_part?.partner_Photo"  style="height: 260px; position: relative; background: linear-gradient(0deg, white 0%, white 100%)" class="w-100" [src]="detil_part?.partner_Photo" />
+                            <img *ngIf="!detil_part?.partner_Photo"  style="height: 260px; position: relative; background:#F9F9F9" class="w-100" src="../../../assets/images/Frame 1261154899.svg" />
                             <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: inline-flex;padding-left: 15px;">
                                 <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
                                     <div style="color: #484649; font-size: 20px; font-family: Poppins; font-weight: 600; line-height: 24px; word-wrap: break-word">{{detil_part?.partner_Name}} </div>
@@ -175,7 +176,7 @@
                                     <div style="align-self: stretch; height: 247px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
                                         <div style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 600; text-transform: capitalize; line-height: 24px; word-wrap: break-word">Passport or national ID</div>
                                         <div style="align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 24px; display: inline-flex">
-                                            <img style="height: 220px; border-radius: 4px" class="w-50" [src]="detil_part?.partner_Attachments" />
+                                            <img style="height: 230px; border-radius: 4px" class="w-50" [src]="detil_part?.partner_Attachments" />
                                             <!-- <img style="flex: 1 1 0; height: 207px; border-radius: 4px" src="https://via.placeholder.com/314x207" /> -->
                                         </div>
                                     </div>
