@@ -192,11 +192,9 @@
           </div>
           <div class="modal-footer">
 
-              <div class="d-flex justify-content-end w-100 px-2">
+              <div class="d-flex justify-content-between w-100 px-2">
                       <a (click)="onCloseModal()" style="border: 1px solid;cursor: pointer;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold  xcvddmodel"> Cancel </a>
-                      <!-- <button class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
-                confirm
-  </button> -->
+                       <button class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important" routerLink="send-offer/{{selectedwaitingList?.wait_ID}}">Send Offer</button>
                   </div>
               <!-- Confirm -->
 

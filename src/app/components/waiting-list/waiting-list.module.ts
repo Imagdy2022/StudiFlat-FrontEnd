@@ -23,10 +23,11 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { WaitingListComponent } from './waiting-list.component';
 import { WaitingListRoutingModule } from './waiting-list-routing.module';
+import { SendOfferComponent } from './send-offer/send-offer.component';
 const routes: Routes = [];
 
 @NgModule({
-  declarations: [WaitingListComponent],
+  declarations: [WaitingListComponent, SendOfferComponent],
 
   imports: [
     CommonModule,
