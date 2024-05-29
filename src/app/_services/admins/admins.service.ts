@@ -339,7 +339,7 @@ export class AdminsService {
       '/Issues/NewAppointment?Issue_ID=' +
       Issue_ID +
       '&Apointment=' +
-      Apointment;
+      Apointment.replace(/,/g, '');
     return this.http.put<any>(url, body, { headers: this.headers });
   }
 
