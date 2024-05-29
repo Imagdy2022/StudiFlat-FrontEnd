@@ -197,7 +197,7 @@ export class CreateNewPaymentComponent {
     this.GetPayToList();
   }
 
-  attachUrls: string[] = [];
+  attachUrls: any[] = [];
 
 onUploadContract(event: Event): void {
   const input = event.target as HTMLInputElement;
@@ -210,7 +210,12 @@ onUploadContract(event: Event): void {
       this.subscriptions.push(
         this.uploadService.uploadSingleFile(formData).subscribe(
           (res: any) => {
-            this.attachUrls.push(res[0].file_Path);
+            this.fileDetails = {
+              url: res[0].file_Path,
+              name: file.name,
+              type: file.type
+            };
+            this.attachUrls.push(this.fileDetails);
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
@@ -226,7 +231,6 @@ onUploadContract(event: Event): void {
           }
         )
       );
-      this.fileDetails = file
     }
   } else {
     this.messageService.add({
@@ -236,7 +240,10 @@ onUploadContract(event: Event): void {
     });
   }
 }
-
+isImage(fileType: string): boolean {
+  const imageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp'];
+  return imageTypes.includes(fileType);
+}
 
 
   ngOnDestroy() {

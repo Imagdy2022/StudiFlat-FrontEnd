@@ -235,7 +235,8 @@
                                         Passport or national ID</div>
                                     <div
                                         style="align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 24px; display: inline-flex">
-                                        <img style="height: 225px; border-radius: 4px;" [src]="dataworker?.worker_Passport" class="w-50" />
+                                        <img *ngIf="dataworker?.worker_Passport" style="height: 225px; border-radius: 4px;" [src]="dataworker?.worker_Passport" class="w-50" />
+                                        <img *ngIf="!dataworker?.worker_Passport" style="height: 230px; border-radius: 4px" class="w-50" src="../../../../assets/images/passport.png" />
                                         <!-- <img style="flex: 1 1 0; height: 207px; border-radius: 4px" src="https://via.placeholder.com/314x207" /> -->
                                     </div>
                                 </div>
