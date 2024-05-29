@@ -118,6 +118,7 @@ export class WaitingListComponent implements OnInit {
 
 
   }
+ 
   showSide: string = '';
 
   addItem(value: string): void {
