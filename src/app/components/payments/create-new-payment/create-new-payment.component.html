@@ -18,11 +18,10 @@
                 <p class="fw-bold me-2" style="margin-bottom: 0px;color: #605D62;">></p>
                 <p class="fw-bold" style="color: #6c6a6a;margin-bottom: 0px;">Add New Payment</p>
             </div>
-            <div class="input">
+            <!-- <div class="input">
                 <input type="text" class="form-control py-2" placeholder="Search Finance" (keyup)="searchAction($event)" [(ngModel)]="searchText" [ngModelOptions]="{standalone:true}" />
                   <img src="../../../assets/images/search.svg" alt="">
-  
-              </div>
+              </div> -->
               </div>
         <div class="card px-4 py-3 ">
             <div class="header d-flex align-items-center">
@@ -192,26 +191,34 @@
 
                 </div>
                 <div>
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label gray fw-bold">Attachment</label>
-                        <div class="image-upload mainimage mt-2">
-                            <input type="file" multiple="multiple" (change)="onUploadContract($event)">
-                            <div class="image-uploads">
-                                <div class="d-flex align-items-center justify-content-center text-center h-100">
-                                    <div *ngIf="!attachUrl" class="text-center imageData pt-2">
-                                        <div class="icon m-auto">
-                                            <img src="/assets/images/upload 1.svg" alt="img">
-                                        </div>
-                                        <p class="mb-0">Click to upload <span class="text-muted fw-normal"> or drag and drop</span></p>
-                                        <p class="text-muted fw-normal">PNG, JPG, PDF, or MP4 (max. 8MB)</p>
-                                    </div>
-                                    <ng-container *ngIf="attachUrl">
-                                        <img *ngIf="attachUrl" [src]="attachUrl" alt="img" style="height: 124px;width:150px;">
-                                    </ng-container>
-                                </div>
+                  <div class="col-md-12 mb-3">
+                    <label class="form-label gray fw-bold">Attachments</label>
+                    <div class="image-upload mainimage mt-2">
+                      <input type="file" multiple (change)="onUploadContract($event)">
+                      <div class="image-uploads">
+                        <div *ngIf="!attachUrls.length" class="d-flex align-items-center justify-content-center text-center h-100">
+                          <div class="text-center imageData pt-2">
+                            <div class="icon m-auto">
+                              <img src="/assets/images/upload 1.svg" alt="Upload icon">
                             </div>
+                            <p class="mb-0">Click to upload <span class="text-muted fw-normal">or drag and drop</span></p>
+                            <p class="text-muted fw-normal">PNG, JPG, PDF, or MP4 (max. 8MB)</p>
+                          </div>
                         </div>
+                        <div class="uploaded-images-container" *ngIf="attachUrls && fileDetails?.type != 'application/pdf'">
+                          <div *ngFor="let url of attachUrls" class="uploaded-image">
+                            <img [src]="url" alt="Uploaded file" style="height: 140px; width: 160px;">
+                          </div>
+                        </div>
+                        <ng-container *ngIf="attachUrls && fileDetails?.type == 'application/pdf'">
+                          <div class="upload-PDF">
+                            <span >{{fileDetails?.name}}</span>
+                          </div>
+                        </ng-container>
+                      </div>
                     </div>
+                  </div>
+
                     <div class="col-md-12">
                         <label for="note" class="form-label">Note </label>
                         <textarea type="text" rows="6" id="note" class="form-control" placeholder="Enter a note..."

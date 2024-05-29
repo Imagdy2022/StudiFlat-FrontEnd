@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { AdminsService } from 'src/app/_services/admins/admins.service';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -26,8 +26,9 @@ export class CreateNewPaymentComponent {
   imageFile: string = '';
   firstIDFound = false;
   secondID: any;
+  fileDetails : any;
   subscriptions: Subscription[] = [];
-  attachUrl: any;
+  attachUrl: any[];
   paymentForm: FormGroup = new FormGroup({
     Pay_To: new FormControl(null),
     Pay_UUID: new FormControl(null),
@@ -68,6 +69,8 @@ export class CreateNewPaymentComponent {
   rows: number = 10;
   disablenext = false;
   disableperv = false;
+  formDataArray: FormData[] = [];
+  imageUrls: string[] = [];
 
   totalRecords = 0;
   paymethod: any;
@@ -157,7 +160,7 @@ export class CreateNewPaymentComponent {
       Payment_Bouns: this.paymentForm.value['Payment_Bouns'],
       Payment_Notes: this.paymentForm.value['Payment_Notes'],
       Payment_Method: this.paymentForm.value['Pay_Method'],
-      Payment_Attachment: this.attachUrl,
+      Payment_Attachment: this.attachUrls,
     };
 
     this.subscriptions.push(
@@ -193,24 +196,21 @@ export class CreateNewPaymentComponent {
     }
     this.GetPayToList();
   }
-  onUploadContract(event: any): void {
-    // get the file
-    const file = event.target.files[0];
-    // convert the file to formdata
-    const formData = new FormData();
-    formData.append('fileData', file, file.name);
-    // check if the file has been uploaded
-    if (file) {
-      // call the onUpload function to get the link to the file
+
+  attachUrls: string[] = [];
+
+onUploadContract(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    for (let i = 0; i < input.files.length; i++) {
+      const file = input.files[i];
+      const formData = new FormData();
+      formData.append('fileData', file, file.name);
+
       this.subscriptions.push(
         this.uploadService.uploadSingleFile(formData).subscribe(
-          // (img: any) => {
-          //   // create url to preview file
-          //   file.url = URL.createObjectURL(file);
-          //   // check wich file uploaded
-
           (res: any) => {
-            this.attachUrl = res[0].file_Path;
+            this.attachUrls.push(res[0].file_Path);
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
@@ -221,13 +221,23 @@ export class CreateNewPaymentComponent {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: `Please try again`,
+              detail: 'Please try again',
             });
           }
         )
       );
+      this.fileDetails = file
     }
+  } else {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'No file selected',
+    });
   }
+}
+
+
 
   ngOnDestroy() {
     for (let i = 0; i < this.subscriptions.length; i++)
