@@ -152,6 +152,17 @@
       transform: translateY(-50%);
   }
   }
+  .uploaded-images-container {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .uploaded-image {
+    margin-right: 10px;
+  }
+  .upload-PDF{
+    margin: 60px 0px;
+  }
   ::placeholder{
     font-size: 13px !important;
   }
