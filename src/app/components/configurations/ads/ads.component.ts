@@ -66,6 +66,8 @@ export class AdsComponent implements OnInit {
   pageNumber = 1;
   pagesize = 10;
   pagesize2 = 10;
+  first: number = 1;
+  rows: number = 10;
 
   totalofPages = 0;
   disablenext = false;
@@ -76,8 +78,10 @@ export class AdsComponent implements OnInit {
   totalRecords = 0;
 
   tiggerPageChange2(event: any) {
-    const calcPageNumber = Math.floor(event.first / event.rows) + 1;
-    this.pageNumber2 = calcPageNumber;
+    this.first = event.first;
+    this.rows = event.rows;
+    let calcPageNumber = Math.floor(this.first / this.rows) + 1;
+    this.pageNumber = calcPageNumber;
     this.GetAds();
   }
   numberFAQ = 0;

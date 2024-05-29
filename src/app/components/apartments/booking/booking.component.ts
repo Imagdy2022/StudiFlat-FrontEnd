@@ -62,6 +62,8 @@ export class BookingComponent implements OnInit {
     totalofPages=0;;
     disablenext=false;
     disableperv=false;
+    first: number = 1;
+    rows: number = 10;
 
     date=""
     totalRecords=0;
@@ -94,8 +96,10 @@ export class BookingComponent implements OnInit {
     }
     tiggerPageChange(event: any) {
 
-          const calcPageNumber = Math.floor(event.first / event.rows) + 1;
-          this.pageNumber=calcPageNumber;
+      this.first = event.first;
+      this.rows = event.rows;
+      let calcPageNumber = Math.floor(this.first / this.rows) + 1;
+      this.pageNumber = calcPageNumber;
           this.getAllbokk();
         }
         ids:any=[]

@@ -20,6 +20,8 @@ export class AssginTicketComponent implements OnInit {
  search:boolean=false
  paramid:any
  subscriptions:Subscription[] = [];
+ first: number = 1;
+ rows: number = 10;
  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last Week'},{name:'This month'},{name:'This year'}]
 
  constructor(public router: Router, private _ActivatedRoute:ActivatedRoute,public _adminservices:AdminsService ,private messageService: MessageService,) {
@@ -91,34 +93,15 @@ export class AssginTicketComponent implements OnInit {
  totalofPages=0;;
  disablenext=false;
  disableperv=false;
- incrementpage(){
 
-   this.pageNumber+=1;
-   if(this.pageNumber<1){
-     this.pageNumber=1;
-
-   }
-   if(this.pageNumber>= this.totalofPages){
-     this.pageNumber=this.totalofPages;
-
-   }
-   // this.getAllworkers( );
- }
- decreamentPage(){
-   this.pageNumber-=1;
-   if(this.pageNumber<1){
-     this.pageNumber=1;
-
-   }
-   // this.getAllworkers( );
-
- }
 workers=[]
 totalRecords=0
 tiggerPageChange(event: any) {
 
-     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
-     this.pageNumber=calcPageNumber;
+  this.first = event.first;
+  this.rows = event.rows;
+  let calcPageNumber = Math.floor(this.first / this.rows) + 1;
+  this.pageNumber = calcPageNumber;
      this.getAllworkers(  )
     }
  numberworkers=0;

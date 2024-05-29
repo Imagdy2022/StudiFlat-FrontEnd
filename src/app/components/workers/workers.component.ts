@@ -53,7 +53,9 @@ export class WorkersComponent implements OnInit {
   statusTenant:any=""
   pageNumber=1;
   pagesize=10;
-  totalofPages=0;;
+  totalofPages=0;
+  first: number = 1;
+  rows: number = 10;
   disablenext=false;
   disableperv=false;
 
@@ -61,8 +63,10 @@ workers=[]
 totalRecords=0
 tiggerPageChange(event: any) {
 
-      const calcPageNumber = Math.floor(event.first / event.rows) + 1;
-      this.pageNumber=calcPageNumber;
+  this.first = event.first;
+  this.rows = event.rows;
+  let calcPageNumber = Math.floor(this.first / this.rows) + 1;
+  this.pageNumber = calcPageNumber;
       this.getAllworkers(  )
      }
   numberworkers=0;
@@ -178,5 +182,5 @@ onCloseHandled() {
 ngOnDestroy() {
   for(let i=0;i<this.subscriptions.length;i++)
   this.subscriptions[i].unsubscribe();
-} 
+}
 }

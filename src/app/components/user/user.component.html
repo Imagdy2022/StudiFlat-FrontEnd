@@ -179,7 +179,8 @@
 
             </p-table>
 
-            <p-paginator *ngIf="Tenants.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+            <p-paginator *ngIf="Tenants.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="rows"
+              [totalRecords]="totalRecords" [first]="first"></p-paginator>
         </div>
 
 

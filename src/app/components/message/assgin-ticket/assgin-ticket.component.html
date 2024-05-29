@@ -98,7 +98,8 @@
                 </ng-template>
 
             </p-table>
-            <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+            <p-paginator (onPageChange)="tiggerPageChange($event)" [rows]="rows"
+            [totalRecords]="totalRecords" [first]="first"></p-paginator>
 
 
             <div class="modal-footer">

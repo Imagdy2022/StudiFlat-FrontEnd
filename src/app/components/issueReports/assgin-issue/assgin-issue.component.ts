@@ -91,6 +91,8 @@ export class AssginIssueComponent implements OnInit {
   statusTenant: any = '';
   pageNumber = 1;
   pagesize = 10;
+  first: number = 1;
+  rows: number = 10;
   totalofPages = 0;
   disablenext = false;
   disableperv = false;
@@ -114,7 +116,9 @@ export class AssginIssueComponent implements OnInit {
   workers = [];
   totalRecords = 0;
   tiggerPageChange(event: any) {
-    const calcPageNumber = Math.floor(event.first / event.rows) + 1;
+    this.first = event.first;
+    this.rows = event.rows;
+    let calcPageNumber = Math.floor(this.first / this.rows) + 1;
     this.pageNumber = calcPageNumber;
     this.getAllworkers();
   }

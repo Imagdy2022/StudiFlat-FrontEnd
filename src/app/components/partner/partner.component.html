@@ -144,7 +144,8 @@
                 </ng-template>
 
             </p-table>
-            <p-paginator *ngIf="partners.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+            <p-paginator *ngIf="partners.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="rows"
+              [totalRecords]="totalRecords" [first]="first"></p-paginator>
 
         </div>
     </main>

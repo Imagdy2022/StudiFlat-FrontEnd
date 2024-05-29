@@ -185,7 +185,8 @@
 
 
             </p-table>
-            <p-paginator *ngIf="issues.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="pagesize" [totalRecords]="totalRecords"></p-paginator>
+            <p-paginator *ngIf="issues.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="rows"
+              [totalRecords]="totalRecords" [first]="first"></p-paginator>
 
 
         </div>
@@ -414,7 +415,7 @@
                             </ng-container>
 
                             <ng-container *ngIf="selectedContractImg && selectedContractImg.type == 'application/pdf'">
-                              <span>{{selectedContractImg.name}}</span> 
+                              <span>{{selectedContractImg.name}}</span>
                             </ng-container>
                           </div>
                         </div>

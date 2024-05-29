@@ -15,6 +15,8 @@ export class SendOfferComponent {
   pagesize=10;
   totalofPages=0;
   totalRecords=0;
+  first: number = 1;
+  rows: number = 10;
 
   constructor(public router: Router,public _ActivatedRoute: ActivatedRoute,private _checkOutService: AdminsService,){
     this.id = _ActivatedRoute.snapshot.paramMap.get('id');
@@ -35,8 +37,10 @@ export class SendOfferComponent {
 
   tiggerPageChange(event: any) {
 
-    const calcPageNumber = Math.floor(event.first / event.rows) + 1;
-    this.pageNumber=calcPageNumber;
+    this.first = event.first;
+    this.rows = event.rows;
+    let calcPageNumber = Math.floor(this.first / this.rows) + 1;
+    this.pageNumber = calcPageNumber;
   }
   onCheckboxChange(event:any){
 
