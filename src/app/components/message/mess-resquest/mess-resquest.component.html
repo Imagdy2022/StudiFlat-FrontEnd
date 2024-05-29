@@ -80,6 +80,10 @@
                         </div>
                         <!-- Sender -->
                         <div class="d-flex justify-content-end py-3" *ngIf="!item.is_Mobile">
+                            <i class="fa-solid fa-check-double text-success mt-4 me-2 pt-2" *ngIf="item?.msg_Body!=null && item?.msg_Body!='' && item.is_Readed"></i>
+                            <i class="fa-solid fa-check-double  mt-4 me-2 pt-2"  *ngIf="item?.msg_Body!=null && item?.msg_Body!='' && !item.is_Readed"></i>
+                            <i class="fa-solid fa-check-double text-success  me-2 pt-2" style="margin-top:120px;" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!='' && item.is_Readed"></i>
+                            <i class="fa-solid fa-check-double  me-2 pt-2"  style="margin-top:120px;" *ngIf="item?.msg_Attachement!=null && item?.msg_Attachement!='' && !item.is_Readed"></i>
                             <div style="margin-bottom: 20px;">
                                 <div class="ml-3 d-flex justify-content-between">
                                     <div>
