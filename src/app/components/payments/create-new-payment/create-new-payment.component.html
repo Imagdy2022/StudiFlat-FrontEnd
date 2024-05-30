@@ -205,16 +205,18 @@
                             <p class="text-muted fw-normal">PNG, JPG, PDF, or MP4 (max. 8MB)</p>
                           </div>
                         </div>
-                        <div class="uploaded-images-container" *ngIf="attachUrls && fileDetails?.type != 'application/pdf'">
-                          <div *ngFor="let url of attachUrls" class="uploaded-image">
-                            <img [src]="url" alt="Uploaded file" style="height: 140px; width: 160px;">
+                        <div class="uploaded-images-container" *ngIf="attachUrls">
+                          <div *ngFor="let file of attachUrls" class="uploaded-image">
+                            <ng-container *ngIf="isImage(file.type)">
+                              <img [src]="file.url" alt="{{ file.name }}" style="height: 140px; width: 160px;">
+                            </ng-container>
+                            <ng-container *ngIf="!isImage(file.type)">
+                              <div class="upload-PDF">
+                                <span>{{ file.name }}</span>
+                              </div>
+                            </ng-container>
                           </div>
                         </div>
-                        <ng-container *ngIf="attachUrls && fileDetails?.type == 'application/pdf'">
-                          <div class="upload-PDF">
-                            <span >{{fileDetails?.name}}</span>
-                          </div>
-                        </ng-container>
                       </div>
                     </div>
                   </div>
