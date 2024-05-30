@@ -1041,8 +1041,8 @@ export class AdminsService {
 
     return this.http.get<any[]>(url, { headers: this.headers});
   }
-  SendOffer(data: any): Observable<any[]> {
-    const url = environment.apiUrl + `/Requests/SendOffer`;
+  SentWaitListOffer(data: any): Observable<any[]> {
+    const url = environment.apiUrl + `/Requests/SentWaitListOffer`;
 
     return this.http.post<any[]>(url, data, { headers: this.headers});
   }

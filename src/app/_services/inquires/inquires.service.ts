@@ -161,5 +161,5 @@ export class InquiresService {
     const url = environment.apiUrl + '/Termination/TerminationApproval?Term_ID=' + id +'&Approval='+Approval+'&Reason='+Reason;
     return this.http.put<any>(url,id, { headers: this.headers });
   }
- 
+
 }
