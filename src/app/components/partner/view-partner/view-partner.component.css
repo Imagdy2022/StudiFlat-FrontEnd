@@ -14,6 +14,10 @@
 .top-icon-input {
     top: 30px;
 }
+.frist2 {
+  position: relative;
+  background: linear-gradient(0deg, white 0%, white 100%)
+}
 
 .rentedORavailable {
     background-color: rgb(255 255 255 / 70%);

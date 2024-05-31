@@ -1,10 +1,8 @@
 
-.month,.week{padding: 5px 10px;}
 .fs-16{font-size: 1rem;}
 .gray{color: #757a82;}
 .h-350{height: 350px !important;}
 .overflow-overlay{overflow: overlay;}
-.h-350{height: 350px !important;}
 .btn.btn-color{
   background-color: #1f4068;
   padding: 12px, 24px, 12px, 20px;
@@ -30,6 +28,7 @@
 .green{
   color: green;
 }
+
 span.icon{
   color: var(--Primary-40, #1F4068);
   font-size: 22.78px;
@@ -45,20 +44,6 @@ span.icon{
   font-size: 14px ;
   padding: 4px 8px;
   font-weight: 500;
-}
-.excellent {
-  color: #027A48;
-  background-color: #ECFDF3;
-}
-
-.poor {
-  color: #FFB900;
-  background-color: #FFF9E6;
-}
-
-.good {
-  color: #175CD3;
-  background-color: #EFF8FF;
 }
 
 tr{
@@ -92,6 +77,27 @@ tr td{
   height: 36px;
 
 }
+td {
+  font-size: 14px !important;
+  padding: 16px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
+
+}
+
+th {
+    padding: 0px 16px !important;
+    font-size: 14px !important;
+    font-family: 'Poppins';
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
+    height: 45px;
+
+}
+
 .mt-06{
   margin-top:0.65rem !important;
 }
+
+

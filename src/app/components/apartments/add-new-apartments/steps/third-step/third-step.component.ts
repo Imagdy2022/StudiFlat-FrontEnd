@@ -289,19 +289,13 @@ export class ThirdStepComponent {
    * @param event
    */
   onUploadContract(event: any, fieldName: string): void {
-    // get the file
     const file = event.target.files[0];
-    // convert the file to formdata
     const formData = new FormData();
     formData.append('fileData', file, file.name);
-    // check if the file has been uploaded
     if (file) {
-      // call the onUpload function to get the link to the file
       this.subscriptions.push( this.uploadService.uploadSingleFile(formData).subscribe(
         (img: any) => {
-          // create url to preview file
           file.url = URL.createObjectURL(file);
-          // check wich file uploaded
           fieldName == 'contract_Path'
             ? (this.selectedContractImg = file)
             : null;

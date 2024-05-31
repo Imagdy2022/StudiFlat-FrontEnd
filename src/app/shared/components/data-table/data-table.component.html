@@ -149,7 +149,7 @@
         </ng-template>
     </p-table>
 
-    <p-paginator *ngIf="products.length >0" (onPageChange)="tiggerPageChange($event)" [rows]="10" [totalRecords]="fullRespone?.totalRecords"></p-paginator>
+    <p-paginator *ngIf="products.length >0" (onPageChange)="tiggerPageChange($event)" [rows]="rows" [first]="first" [totalRecords]="fullRespone?.totalRecords"></p-paginator>
 
 </div>
 

@@ -22,6 +22,8 @@ export class ApartmentsComponent implements OnInit {
   listDropDown: Array<object> = [];
   apartmentList: IApartments[] = [];
   subscriptions:Subscription[] = [];
+  first: number = 1;
+  rows: number = 10;
 
   constructor(private apartmentSer: ApartmentService,public router: Router,private messageService: MessageService,) { }
 
@@ -172,8 +174,10 @@ gotopage( ){
   }
   tiggerPageChange(event: any) {
 
-    const calcPageNumber = Math.floor(event.first / event.rows) + 1;
-    this.pageNumber=calcPageNumber;
+    this.first = event.first;
+    this.rows = event.rows;
+    let calcPageNumber = Math.floor(this.first / this.rows) + 1;
+    this.pageNumber = calcPageNumber;
     this.getAllApartment()
   }
   // clickApartmentList(index: number) {

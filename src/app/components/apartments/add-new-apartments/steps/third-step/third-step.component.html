@@ -22,11 +22,14 @@
                                 <p class="mb-0">Click to upload <span class="text-muted fw-normal"> or drag and drop</span></p>
                                 <p class="text-muted fw-normal">PNG, PDF, word  (max. 4MPpx)</p>
                             </div>
-                            <ng-container *ngIf="selectedContractImg">
+                            <ng-container *ngIf="selectedContractImg &&  (selectedContractImg.type == 'image/png' || selectedContractImg.type == 'image/jpg' || selectedContractImg.type == 'image/jpeg')">
                                 <a (click)="opencloseModal(selectedContractImg.url)">
                                     <img *ngIf="selectedContractImg.url" [src]="selectedContractImg.url" alt="img"
                                         style="height: 124px;width:150px;">
                                 </a>
+                            </ng-container>
+                            <ng-container *ngIf="selectedContractImg && selectedContractImg.type == 'application/pdf'">
+                              <span>{{selectedContractImg.name}}</span>
                             </ng-container>
                         </div>
                     </div>

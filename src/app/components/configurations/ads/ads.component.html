@@ -108,7 +108,8 @@
                 </ng-template>
 
             </p-table>
-            <p-paginator (onPageChange)="tiggerPageChange2($event)" [rows]="pagesize" [totalRecords]="totalRecordsAds"></p-paginator>
+            <p-paginator (onPageChange)="tiggerPageChange2($event)" [rows]="rows"
+            [totalRecords]="totalRecords" [first]="first"></p-paginator>
 
         </div>
     </main>

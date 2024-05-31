@@ -39,6 +39,8 @@ export class DataTableComponent {
   dropdownOption: Array<any> = [];
   disablenext = false;
   disableperv = false;
+  first: number = 1;
+  rows: number = 10;
 
 
   constructor(public confirmationService: ConfirmationService, private messageService: MessageService) { }
@@ -103,8 +105,10 @@ export class DataTableComponent {
    * @param event
    */
   tiggerPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+    let calcPageNumber = Math.floor(this.first / this.rows) + 1;
 
-    const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.onPageChange.emit(calcPageNumber);
   }
 

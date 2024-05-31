@@ -62,9 +62,9 @@ export class SidebarComponent implements OnInit {
     this.router.url=='/push-msgs' || this.router.url.includes('/authorization/')){
       this.isFreeze=true
     }
-    if(this.router.url=='/inquiries'||this.router.url=='/cancel-inquire'||
+    if(this.router.url=='/inquiries'||this.router.url=='/cancel-inquire'|| this.router.url.includes('/inquire-offer') ||
     this.router.url=='/checkout-inquire' ||this.router.url.includes('/cancel-inquire/view-cancel/') ||
-    this.router.url.includes('/checkout-inquire/checkout/')){
+    this.router.url.includes('/checkout-inquire/checkout/') || this.router.url.includes('/waitingList')){
       this.isFreeze2=true
     }
 

@@ -21,7 +21,8 @@
             <div class="row w-100 d-flex mx-0 gx-0">
                 <div class="col-lg-4 px-0">
                     <div class="frist">
-                        <img class="frist2" [src]="dataworker?.worker_Photo" />
+                        <img  *ngIf="dataworker?.worker_Photo"  class="frist2 w-100" [src]="dataworker?.worker_Photo" style="height: 260px;"/>
+                        <img *ngIf="!dataworker?.worker_Photo"  class="frist2 w-100"  src="../../../assets/images/Frame 1261154899.svg" style="height: 260px;">
                         <div class="frist3">
                             <div
                                 style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
@@ -228,13 +229,14 @@
                                     </div>
                                 </div>
                                 <div
-                                    style="align-self: stretch; height: 247px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                                    style="align-self: stretch; height: 247px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
                                     <div
                                         style="color: #484649; font-size: 16px; font-family: Poppins; font-weight: 600; text-transform: capitalize; line-height: 24px; word-wrap: break-word">
                                         Passport or national ID</div>
                                     <div
                                         style="align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 24px; display: inline-flex">
-                                        <img style="height: 220px; border-radius: 4px;" [src]="dataworker?.worker_Passport" class="w-50" />
+                                        <img *ngIf="dataworker?.worker_Passport" style="height: 225px; border-radius: 4px;" [src]="dataworker?.worker_Passport" class="w-50" />
+                                        <img *ngIf="!dataworker?.worker_Passport" style="height: 230px; border-radius: 4px" class="w-50" src="../../../../assets/images/passport.png" />
                                         <!-- <img style="flex: 1 1 0; height: 207px; border-radius: 4px" src="https://via.placeholder.com/314x207" /> -->
                                     </div>
                                 </div>

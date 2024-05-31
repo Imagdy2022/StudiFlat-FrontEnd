@@ -1,0 +1,214 @@
+.month,
+.week {
+    color: #757a82;
+    background-color: white;
+    border: 1px solid #ebebeb;
+}
+.p-fileupload-buttonbar .p-button {
+  margin-bottom: 10px !important;
+}
+.file {
+  z-index: 3 !important;
+  opacity: 0;
+  cursor: pointer;
+}
+.image-upload {
+  border-radius: 12px;
+  border: 1px solid  #CECECE;
+  background: #FFF;
+  position: relative;
+}
+.image-upload input[type=file] {
+  width: 100%;
+  opacity: 0;
+  height: 124px;
+  position: relative;
+  z-index: 9;
+  cursor: pointer;
+}
+.icon{
+display: flex;
+width: 40px;
+height: 40px;
+padding: 10px;
+justify-content: center;
+align-items: center;
+border-radius: 28px;
+border: 6px solid  #F6F6F6;
+background:  #F6F6F6;
+
+}
+.imageData{
+p{
+  color: #1F4068;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+}
+.mainimage {
+  height: 124px;
+
+}
+.image-upload .image-uploads {
+      text-align: center;
+      width: 100%;
+      padding: 0;
+      border-radius: 8px;
+      position: absolute;
+      top: 0;
+      transition: all 0.3s;
+      height: 100%;
+  }
+.image-upload .image-uploads h4 {
+  font-size: 14px;
+  font-weight: 500;
+
+}
+
+@media (min-width: 768px) {
+    .xcvdd {
+        margin-right: 257px !important;
+    }
+}
+
+.buttomstyle {
+    color: var(--Primary-40, #1F4068);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.none {
+    @media (max-width: 992px) {
+        display: none;
+    }
+}
+
+.p-fileupload-buttonbar .p-button {
+    margin-bottom: 10px !important;
+}
+
+.cvxs {
+    text-align: center;
+    color: #1019c6 !important;
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-weight: 500;
+    line-height: 20px;
+    word-wrap: break-word;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px #8FA0B4 solid;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    .cvvvvvvv {
+        margin-right: -898px;
+    }
+}
+
+td {
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
+
+}
+th {
+    font-size: 14px !important;
+    font-family: 'Poppins';
+    border-bottom: 1px solid #F6F6F6 !important;
+    background: #F6F6F6 !important  ;
+}
+tr{
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+.Actions{
+  width: 150px;
+  z-index: 999;
+  right: 35px;
+  top: 50px;
+}
+}
+
+.spanready{
+    padding: 4px;
+    background-color: #F0F9FF ;
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    border-radius: 31px;
+}
+
+.input{
+  position: relative;
+  img{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+}
+
+.modal{
+  background: rgba(0,0,0, .5);
+  justify-content: center;
+     label{
+      line-height: 2;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    input{
+      font-size: 13px;
+      font-weight: 400;
+      background-color: #fff;
+    }
+
+ .modal-footer{
+  button{
+    padding: 12px, 24px, 12px, 24px;
+    box-shadow: 0px 1px 0px 0px #0000000D;
+    border-radius: 6px;
+    border: 1px solid #222;
+  }
+ }
+ .btn.btn-color{
+  background-color: #1F4068;
+  color: #fff;
+}
+.btn.btn-delete{
+  background-color: #fff;
+  color: #1F4068;
+}
+}
+.modal-header
+{
+  border-bottom: unset;
+}
+.modal-footer{
+  border-top: unset;
+}
+
+.userData{
+  img{
+    width: 70px;
+    height: 70px;
+  }
+}

@@ -339,7 +339,7 @@ export class AdminsService {
       '/Issues/NewAppointment?Issue_ID=' +
       Issue_ID +
       '&Apointment=' +
-      Apointment;
+      Apointment.replace(/,/g, '');
     return this.http.put<any>(url, body, { headers: this.headers });
   }
 
@@ -1017,5 +1017,33 @@ export class AdminsService {
       .set('Module', Module);
 
     return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+
+  //Waiting List
+  GetWaitlist(
+    Page_No: number,
+    Page_Size: number,
+    Search: any,
+    FilterKey: any
+  ): Observable<any[]> {
+    const url = environment.apiUrl + '/Requests/GetWaitlist';
+    const params = new HttpParams()
+      .set('Page_No', Page_No)
+      .set('Page_Size', Page_Size)
+      .set('Search', Search)
+      .set('FilterKey', FilterKey);
+
+    return this.http.get<any[]>(url, { headers: this.headers, params: params });
+  }
+
+  getWaitingListById(Wait_ID: number): Observable<any[]> {
+    const url = environment.apiUrl + `/Requests/GetWaitDetails?Wait_ID=${Wait_ID}`;
+
+    return this.http.get<any[]>(url, { headers: this.headers});
+  }
+  SentWaitListOffer(data: any): Observable<any[]> {
+    const url = environment.apiUrl + `/Requests/SentWaitListOffer`;
+
+    return this.http.post<any[]>(url, data, { headers: this.headers});
   }
 }

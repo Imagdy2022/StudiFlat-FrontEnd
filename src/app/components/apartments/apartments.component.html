@@ -111,7 +111,7 @@
 
                     </div>
                 </ng-container>
-                <p-paginator *ngIf="apartmentList.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="itemsPerPage" [totalRecords]="fullRespone?.totalRecords"></p-paginator>
+                <p-paginator *ngIf="apartmentList.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="rows" [first]="first" [totalRecords]="fullRespone?.totalRecords"></p-paginator>
 
             </ng-container>
 

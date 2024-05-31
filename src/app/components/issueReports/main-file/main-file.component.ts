@@ -174,8 +174,12 @@ export class MainFileComponent {
   pageNumber = 1;
   numberissues = 0;
   pagesize = 10;
+  first: number = 1;
+  rows: number = 10;
   tiggerPageChange(event: any) {
-    const calcPageNumber = Math.floor(event.first / event.rows) + 1;
+    this.first = event.first;
+    this.rows = event.rows;
+    let calcPageNumber = Math.floor(this.first / this.rows) + 1;
     this.pageNumber = calcPageNumber;
     this.getAllIssues();
   }
@@ -440,7 +444,7 @@ export class MainFileComponent {
             fieldName == 'contract_Path'
               ? (this.selectedContractImg = file)
               : null;
-
+               console.log(this.selectedContractImg)
               this.issue_attach = this.selectedContractImg.url
             // patch the fieldName in Form
 

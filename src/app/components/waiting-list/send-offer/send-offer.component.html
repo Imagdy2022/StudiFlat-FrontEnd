@@ -1,0 +1,132 @@
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Waiting List'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'Waiting List'"></app-sidebar>
+  <!-- end sidebar  -->
+
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10 ">
+    <p-toast></p-toast>
+    <div class="card">
+
+        <div class="row d-flex justify-content-between align-items-center px-3">
+            <!-- length Of person -->
+           <div class="col-md-4">
+            <div class="d-flex mx-2 mt-4">
+              <p class="me-2 fs-5 fw-bold ml-8">
+                <a routerLink="/messages">
+                  <img src="./../../../../assets/images/arrow_back.svg" alt="" class="me-2">
+                </a>
+                Select Apartments </p>
+          </div>
+           </div>
+            <!-- search input -->
+          <div class="col-md-5 col-8">
+
+              <div class="input">
+                <input type="text" class="form-control py-2 w-100" placeholder="Search Messages" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
+                  <img src="../../../assets/images/search.svg" alt="">
+              </div>
+          </div>
+        </div>
+        <p-table class="table-shopping" [selectionPageOnly]="true" [tableStyle]="{'min-width': '50rem' ,'min-': '50rem'}" [value]="ApartmentsList">
+            <ng-template pTemplate="header" class="text-center">
+                <tr class="tableHead">
+                    <ng-container>
+                        <th class="td-name">
+                          <input type="checkbox" name="selectedContent" class="me-2" disabled  />
+                          Apartment Photo
+                        </th>
+                        <th class="td-name">
+                          Apartment Name
+                        </th>
+                        <th class="td-name">
+                          Area
+                        </th>
+                        <th class="td-name">
+                          Rent Price
+                        </th>
+                        <th class="td-name">
+                          Security Deposit
+                        </th>
+                        <th class="td-name">
+                          Service Fees
+                        </th>
+                    </ng-container>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-List>
+
+                <tr>
+
+                    <td class="d-flex align-items-center">
+                      <input type="checkbox" value="{{List?.apt_UUID}}"
+                      name="selectedApartment"  (change)="selectAppartment(List?.apt_UUID)" class="me-2"/>
+                      <a (click)="opencloseModal(List?.property_Imgs[0]?.apt_imgs)">
+                      <img [src]="List?.property_Imgs[0]?.apt_imgs" alt="appartment image" style="width: 70px;height: 50px;" class="ms-3">
+                      </a>
+                    </td>
+                    <td>
+                      {{List?.apt_Name}}
+                     </td>
+                     <td>
+                      {{List?.apt_Area}}
+                     </td>
+                    <td>
+                     {{List?.apt_Price}}  €
+                    </td>
+                    <td>
+                        {{List?.apt_SecuirtyDep}}
+                    </td>
+                    <td >
+                     {{List?.service_Fees}}
+                    </td>
+                </tr>
+
+            </ng-template>
+
+
+            <ng-template pTemplate="emptymessage">
+                <div class="container text-center mt-4">
+                    <p class="mb-0">No data found.</p>
+                </div>
+            </ng-template>
+
+        </p-table>
+
+        <p-paginator *ngIf="ApartmentsList.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="rows"
+          [totalRecords]="totalRecords" [first]="first"></p-paginator>
+    </div>
+      <div class="d-flex justify-content-between">
+          <button  class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2" routerLink="/waitingList">
+            Cancel
+  </button>
+  <button  class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important" (click)="sendOffer()"> Send</button>
+      </div>
+
+</main>
+  <!-- end content page  -->
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display22}" style="background-color: rgba(90,90,90,0.5);">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="width:900px;">
+      <div class="modal-content position-relative">
+          <div class="modal-header p-0 m-0 d-flex justify-content-start">
+              <button type="button" class="close" aria-label="Close" (click)="oncloseModal()">
+                  <img src="../../../../assets/images/ic_round-close.svg" alt="">
+              </button>
+          </div>
+          <div class="modal-body p-0 m-0">
+              <img [src]="imageSize" style="width:100%;height: 500px" />
+
+          </div>
+
+      </div>
+  </div>
+</div>
