@@ -20,6 +20,51 @@
     overflow: hidden !important;
 }
 
+::ng-deep  .p-steps .p-steps-item .p-menuitem-link .p-steps-number {
+
+  width: 33px;
+  height: 33px;
+  line-height: 2rem;
+  font-size: 1.143rem;
+  z-index: 1;
+  border-radius: 50%;
+  background: #1F4068;
+  color: #fff;
+}
+::ng-deep  .p-steps .p-steps-item.p-disabled  .p-steps-number {
+  color: #90A0B7;
+  border: 1px solid #90A0B7;
+  background: #ffffff;
+}
+
+::ng-deep .p-steps .p-steps-item:before {
+  content: " ";
+  border-top: 3px solid #90A0B7;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  display: block;
+  position: absolute;
+  margin-top: -1rem;
+}
+::ng-deep .p-steps .p-steps-item:after {
+  content: " ";
+  border-top: 3px solid #90A0B7;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  display: block;
+  position: absolute;
+  margin-top: -1rem;
+}
+
+::ng-deep .form-check input[type="checkbox"]{
+  opacity: 1;
+  position: absolute;
+  visibility: visible;
+}
+
+
 @media only screen and (max-width: 768px) {
     .stepper {
         display: none !important;

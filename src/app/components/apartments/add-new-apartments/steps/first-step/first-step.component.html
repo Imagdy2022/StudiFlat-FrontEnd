@@ -20,7 +20,7 @@
         </span>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="mb-3 col-4 col-md-4">
                 <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Price per Month</label>
                 <input formControlName='apt_Price' min="0" type="number" [class.is-invalid]="generalInfoForm.get('apt_Price')!.invalid && generalInfoForm.get('apt_Price')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputPricepermonth" />
@@ -56,7 +56,7 @@
                 </span>
             </div>
 
-        </div>
+        </div> -->
         <!--all bills included ?-->
         <div>
             <p class="d-md-inline-block gray fw-bold mb-0 me-3 pt-0 mt-0">
@@ -203,10 +203,23 @@
             <app-input-field [labelinputs]="LabelTransport" (transport)="transport($event)" [textButton]="'Add New Transport'"></app-input-field>
 
         </div>
+        <div class="row">
+            <p class="d-md-inline-block gray fw-bold mb-0 me-3 pt-0 mt-0">
+              Rental option
+            </p>
+            <div class="form-check ms-3" >
+              <input class="form-check-input" type="checkbox" name="Apartment" value="Apartment" id="createContract"  />
+                <label class="text-dark fs-6" for="Apartment"> Apartment </label>
+            </div>
+            <div class="form-check ms-3" >
+              <input class="form-check-input" type="checkbox" name="Bed" value="Bed" id="createContract"  />
+              <label class="text-dark fs-6" for="Bed"> Bed </label>
+          </div>
+        </div>
         <div>
             <div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label gray fw-bold">Apartment Description</label>
+                    <label for="exampleFormControlTextarea1" class="form-label gray fw-bold">Description</label>
                     <textarea formControlName="apt_Descirpt" [class.is-invalid]="generalInfoForm.get('apt_Descirpt')!.invalid && generalInfoForm.get('apt_Descirpt')!.touched " class="border p-3 pt-3 rounded-2 w-100" rows="5" style="resize: inherit"></textarea>
                     <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Descirpt')!.invalid && generalInfoForm.get('apt_Descirpt')!.touched ">
             this field is required
@@ -232,7 +245,7 @@
                     </div>
                 </div> -->
                 <div class="col-md-12 mb-3">
-                  <label class="form-label gray fw-bold">Upload documents of the Apartment</label>
+                  <!-- <label class="form-label gray fw-bold">Upload documents of the Apartment</label> -->
                   <div class="image-upload mainimage">
                     <input type="file" accept="image/*" multiple="multiple" (change)="selectFile($event)">
                       <div class="image-uploads">
@@ -365,19 +378,48 @@
         this field is required
       </span> -->
             </div>
-            <div class="mb-3 col-12 col-md-6 " *ngIf="addApartment != 'Edit Apartment Name'">
-                <label class="form-label gray fw-bold">Apartment type </label>
-                <!-- start dropdown button  -->
-                <!-- <app-dropdown [list]="listDropDownApartmentType" [holder]="apartmenttype" (selected)="selectedfromDropDownApartmentType($event)"></app-dropdown> -->
-                <!-- end dropdown button  -->
-                <select class="s-cont form-select form-select-sm" name="apt_types" id="apt_types" formControlName="apt_types" (ngModelChange)="onChange($event)">
-                  <option value="null" disabled hidden selected> Select Apartment Type  </option>
+            <div class="row">
+              <div class="mb-3 col-12 col-md-6 " *ngIf="addApartment != 'Edit Apartment Name'">
+                  <label class="form-label gray fw-bold">Apartment type </label>
+                  <!-- start dropdown button  -->
+                  <!-- <app-dropdown [list]="listDropDownApartmentType" [holder]="apartmenttype" (selected)="selectedfromDropDownApartmentType($event)"></app-dropdown> -->
+                  <!-- end dropdown button  -->
+                  <select class="s-cont form-select form-select-sm" name="apt_types" id="apt_types" formControlName="apt_types" (ngModelChange)="onChange($event)">
+                    <option value="null" disabled hidden selected> Select Apartment Type  </option>
 
-                 <option *ngFor="let type of listDropDownApartmentType" value="{{type.name}}"> {{type.name}} </option>
+                  <option *ngFor="let type of listDropDownApartmentType" value="{{type.name}}"> {{type.name}} </option>
+              </select>
+              </div>
+              <div class="mb-3 col-12 col-md-6 ">
+                <label class="form-label gray fw-bold">Elevator </label>
+                <select class="s-cont form-select form-select-sm mb-3" name="apt_Elevator" id="apt_Elevator" formControlName="apt_Elevator">
+                  <option value="null" disabled hidden selected> select Elevator </option>
+                  <option [ngValue]="true"  > yes  </option>
+                  <option [ngValue]="false" > no  </option>
             </select>
+              </div>
             </div>
+
             <div class="col-md-6 "></div>
             <div class="row" [class.none]="showNone">
+              <div *ngIf="isShow">
+                <p class="d-md-inline-block gray fw-bold mb-0 me-3 pt-0 mt-0">
+                  Does the apartment have shared area ?
+                </p>
+                <div class="form-check d-inline-block mb-3" *ngFor="let data of apartmentSharedArea">
+                    <input class="form-check-input" [checked]="apartmentSharedArea[0]" type="radio" name="apartmentSharedArea" value="{{ data }}" id="createContract"  />
+                    <label class="fw-bold me-3" for="apartmentSharedArea"> {{ data }} </label>
+                </div>
+            </div>
+            <div *ngIf="isShow">
+              <p class="d-md-inline-block gray fw-bold mb-0 me-3 pt-0 mt-0">
+                Type Of Sleeping Area
+              </p>
+              <div class="form-check d-inline-block mb-3" *ngFor="let data of sleepingArea">
+                  <input class="form-check-input"  type="radio" [checked]="sleepingArea[0]" name="Sleeping Area" value="{{ data }}" id="createContract"  />
+                  <label class="fw-bold me-3" for="Sleeping Area"> {{ data }} </label>
+              </div>
+          </div>
                 <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
                     <label class="form-label gray fw-bold">No. of Bedrooms</label>
                     <input formControlName="apt_Bedrooms" type="number" [class.is-invalid]="generalInfoForm.get('apt_Bedrooms')!.invalid && generalInfoForm.get('apt_Bedrooms')!.touched " class="form-control rounded-2 py-2 fs-6" />
@@ -389,13 +431,13 @@
           </span>
                 </div>
                 <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
-                    <label class="form-label gray fw-bold">No. of Toilets</label>
+                    <label class="form-label gray fw-bold">No. of Bathrooms</label>
                     <input formControlName="apt_Toilets" type="number" [class.is-invalid]="generalInfoForm.get('apt_Toilets')!.invalid && generalInfoForm.get('apt_Toilets')!.touched " class="form-control rounded-2 py-2 fs-6" />
                     <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Toilets')?.getError('required') && generalInfoForm.get('apt_Toilets')?.touched ">
             this field is required
           </span>
           <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Toilets')?.getError('pattern')" >
-            No. of Toilets should be greater than 0
+            No. of Bathrooms should be greater than 0
           </span>
                 </div>
             </div>
@@ -411,18 +453,18 @@
         </span>
                 </div>
                 <div class="mb-3 col-12 col-md-6" *ngIf="edit=='EditForm'&&aprt_details_Edit?.apt_types=='Apartment'">
-                    <label class="form-label gray fw-bold">No. of Toilets</label>
+                    <label class="form-label gray fw-bold">No. of Bathrooms</label>
                     <input formControlName="apt_Toilets" type="number" [class.is-invalid]="generalInfoForm.get('apt_Toilets')!.invalid && generalInfoForm.get('apt_Toilets')!.touched " class="form-control rounded-2 py-2 fs-6" />
                     <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Toilets')?.getError('required') && generalInfoForm.get('apt_Toilets')?.touched ">
           this field is required
         </span>
         <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Toilets')?.getError('pattern')" >
-          No. of Toilets should be greater than 0
+          No. of Bathrooms should be greater than 0
         </span>
 
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="mb-3 col-12 col-md-6" [class.none]="showNone" *ngIf="isShow">
                     <label class="form-label gray fw-bold">No. of Livingroom</label>
                     <input formControlName="apt_Living" type="number" [class.is-invalid]="generalInfoForm.get('apt_Living')!.invalid && generalInfoForm.get('apt_Living')!.touched " class="form-control rounded-2 py-2 fs-6" />
@@ -443,15 +485,54 @@
           No. of Livingroom should be greater than 0
         </span>
                 </div>
-            </div>
-            <div class="mb-3 col-12 col-md-6 ">
-                  <label class="form-label gray fw-bold">Elevator </label>
-                  <select class="s-cont form-select form-select-sm mb-3" name="apt_Elevator" id="apt_Elevator" formControlName="apt_Elevator">
-                    <option value="null" disabled hidden selected> select Elevator </option>
-                    <option [ngValue]="true"  > yes  </option>
-                    <option [ngValue]="false" > no  </option>
-              </select>
-            </div>
+            </div> -->
+
+        </div>
+        <div class="row" *ngIf="studioShow">
+
+          <div class="mb-3 col-12 col-md-6">
+            <label class="form-label gray fw-bold">No. of beds</label>
+            <input formControlName="apt_Bedrooms" type="number" [class.is-invalid]="generalInfoForm.get('apt_Bedrooms')!.invalid && generalInfoForm.get('apt_Bedrooms')!.touched " class="form-control rounded-2 py-2 fs-6" />
+            <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Bedrooms')?.getError('required') && generalInfoForm.get('apt_Bedrooms')?.touched ">
+    this field is required
+  </span>
+  <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Bedrooms')?.getError('pattern')" >
+    No of beds should be greater than 0
+  </span>
+        </div>
+        <div class="mb-3 col-12 col-md-6">
+            <label class="form-label gray fw-bold">Bed price</label>
+            <input formControlName="apt_Toilets" type="number" [class.is-invalid]="generalInfoForm.get('apt_Toilets')!.invalid && generalInfoForm.get('apt_Toilets')!.touched " class="form-control rounded-2 py-2 fs-6" />
+            <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Toilets')?.getError('required') && generalInfoForm.get('apt_Toilets')?.touched ">
+    this field is required
+  </span>
+  <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_Toilets')?.getError('pattern')" >
+    Bed price should be greater than 0
+  </span>
+        </div>
+
+          <div class="mb-3 col-6 col-md-6">
+            <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Security Deposit</label>
+            <input formControlName="apt_SecuirtyDep" min="0" type="number" [class.is-invalid]="generalInfoForm.get('apt_SecuirtyDep')!.invalid && generalInfoForm.get('apt_SecuirtyDep')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit"
+            />
+            <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_SecuirtyDep')?.getError('required') && generalInfoForm.get('apt_SecuirtyDep')?.touched ">
+               this field is required
+             </span>
+             <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apt_SecuirtyDep')?.getError('pattern')" >
+              Security Deposit should be greater than 0
+            </span>
+        </div>
+          <div class="mb-3 col-6 col-md-6">
+            <label for="exampleInputService_Fees" class="form-label gray fw-bold">Service Fees</label>
+            <input formControlName="service_Fees" min="0" type="number" [class.is-invalid]="generalInfoForm.get('service_Fees')!.invalid && generalInfoForm.get('service_Fees')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees"
+            />
+            <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('service_Fees')?.getError('required') && generalInfoForm.get('service_Fees')?.touched ">
+               this field is required
+             </span>
+             <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('service_Fees')?.getError('pattern')" >
+              Service Fees should be greater than 0
+            </span>
+        </div>
 
         </div>
         <hr />

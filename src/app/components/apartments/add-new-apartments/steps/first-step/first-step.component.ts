@@ -32,6 +32,8 @@ export class FirstStepComponent implements OnInit {
   billinclude: any = true;
   /** listRadiobutton */
   listRadiobutton: Array<string> = ['Yes', 'No'];
+  apartmentSharedArea: Array<string> = ['Yes', 'No'];
+  sleepingArea: Array<string> = ['No sleeping area', 'Bed','Sofa bed'];
   /** listDropDownArea */
   listDropDownArea: any = [];
   /** selectedOwner */
@@ -367,6 +369,8 @@ export class FirstStepComponent implements OnInit {
    */
   initFakeData(): void {
     this.listRadiobutton = ['Yes', 'No'];
+    this.apartmentSharedArea = ['Yes', 'No'];
+    this.sleepingArea = ['No sleeping area', 'Bed','Sofa bed'];
     this.listDropDownFloor = this.rangefrom0to100();
     this.listDropDownApartmentnumber = this.rangefrom0to100();
     this.listDropDownApartmentType = [
@@ -686,19 +690,23 @@ export class FirstStepComponent implements OnInit {
     }
   }
   isShow = false;
+  studioShow = false;
   onChange(deviceValue: any) {
     if (deviceValue == 'Apartment') {
       this.isShow = true;
+      this.studioShow = false;
       this.generalInfoForm.get('apt_Bedrooms')?.setValue(1);
       this.generalInfoForm.get('apt_Toilets')?.setValue(1);
       this.generalInfoForm.get('apt_Living')?.setValue(1);
     } else if (deviceValue == 'Studio') {
       this.isShow = false;
+      this.studioShow = true;
       this.generalInfoForm.get('apt_Bedrooms')?.setValue(1);
       this.generalInfoForm.get('apt_Toilets')?.setValue(1);
       this.generalInfoForm.get('apt_Living')?.setValue(0);
     } else {
       this.isShow = false;
+      this.studioShow = false;
       this.generalInfoForm.get('apt_Bedrooms')?.setValue(0);
       this.generalInfoForm.get('apt_Toilets')?.setValue(0);
       this.generalInfoForm.get('apt_Living')?.setValue(0);
