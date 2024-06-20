@@ -26,7 +26,9 @@
         </div>
         <!--end navigate add new apartments-->
         <div class="card p-4 stepper">
-            <p-steps [model]="items" (Responsive)="true" [(activeIndex)]="activeIndex" [readonly]="true"></p-steps>
+           <div class="w-75">
+            <p-steps [model]="items" (Responsive)="true" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
+           </div>
 
         <div class="pt-4">
       <!--start form of general info-->

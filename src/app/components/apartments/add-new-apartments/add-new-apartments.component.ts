@@ -134,4 +134,5 @@ export class AddNewApartmentsComponent {
   id(value: string) {
     this.UUID = value
   }
+  
 }

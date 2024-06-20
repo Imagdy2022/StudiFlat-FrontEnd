@@ -48,6 +48,7 @@ export class FirstStepComponent implements OnInit {
   listDropDownApartmentType: any = [];
   /** listDropDownElevator */
   listDropDownElevator: any = [];
+  NoOfBedrooms:number = 0;
   /** LabelTransport */
   LabelTransport: object = {
     text1: 'Transport name',
@@ -71,10 +72,12 @@ export class FirstStepComponent implements OnInit {
   generalInfoForm!: FormGroup;
   /**  data of transport in form */
   Createtransport: Array<any> = [];
+  bedrooms: number[] = [];
   /** t_Name */
   t_Name: string = '';
   /** t_Distance */
   t_Distance: string = '';
+  Bedrooms:string;
   /** apt_UUID */
   apt_UUID: any = '';
   @Input() id: string = '';
@@ -406,7 +409,7 @@ export class FirstStepComponent implements OnInit {
       apt_Name: new FormControl('', [Validators.required]),
       apt_AptNo: new FormControl('0', [Validators.required]),
       apt_Price: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-      apt_SecuirtyDep: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apt_SecuirtyDep: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       apt_BillDescirption: new FormControl(''),
       apt_StName: new FormControl('', [Validators.required]),
       apt_BuildingNo: new FormControl('', [Validators.required]),
@@ -420,7 +423,7 @@ export class FirstStepComponent implements OnInit {
       apt_MapLink: new FormControl('', [Validators.required]),
       // 'apt_Long': new FormControl('', [Validators.required]),
       //  'UUID': new FormControl(this.id ),
-      service_Fees: new FormControl('0', [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      service_Fees: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
 
       apt_Bedrooms: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       apt_Toilets: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
@@ -681,6 +684,22 @@ export class FirstStepComponent implements OnInit {
     } else {
       this.isSelected = true;
     }
+  }
+
+  onChangeNoOfBedrooms(event:any){
+    const selectedValue = parseInt(event.target.value, 10);
+    this.bedrooms = Array(selectedValue).fill(0).map((x, i) => i);
+
+  }
+  showBedSection:boolean = false;
+  sectionName:string ="";
+
+  onChangesleepingArea(event:any){
+    this.sectionName= event.target.value
+    if(this.sectionName == "Bed" || this.sectionName == "Sofa bed")
+      this.showBedSection = true;
+    else
+    this.showBedSection = false;
   }
 
   checkValue(event: any, file: any) {

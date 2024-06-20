@@ -29,6 +29,17 @@
 .modal {
     overflow: auto !important;
 }
+.bedSecton{
+  background-color: #F6F6F6;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  input,select{
+    background-color: #fff;
+  }
+}
 
 @media (min-width: 768px) {
     .modal-dialog {
