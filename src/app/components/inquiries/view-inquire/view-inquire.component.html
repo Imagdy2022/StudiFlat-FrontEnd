@@ -25,23 +25,17 @@
         <p-toast></p-toast>
 
         <!-- end part 1 in page  -->
-        <div class="bg-white border rounded-3 p-4">
+        <div class="bg-white  rounded-3 p-4">
             <div class="row">
-                <div class="col-12 col-md-6">
-                    <!--    <div class="rounded mb-3" style="overflow: hidde;height: 325px;">
-                        <img [src]="inquire_details?.apt_thumb_Img" class="w-100 h-100" />
-                    </div> -->
+                <div class="col-12 col-md-7">
+
                     <ng-container>
                         <div class="container testimonial-group ">
                             <div class="row mb-3 vcrr" *ngIf="inquire_details">
 
-                                <!--  <div class="col-md-4  " *ngFor="let img of inquire_details?.apt_Imgs">
 
-                                    <a (click)="viewImage(img?.apt_imgs)" style="cursor: pointer;">
-                                        <img [src]="img?.apt_imgs && img?.apt_imgs.includes('https') ? img?.apt_imgs : '../../../assets/images/apartmentImages/default_apartment.jpg'" alt="Apartment Image" class="w-100 h-100 maxImg">
-                                    </a>
-                                </div> -->
-                                <p-galleria [value]="prop_imgs" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5" class="px-0">
+
+                                <!-- <p-galleria [value]="prop_imgs" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5" class="px-0">
                                     <ng-template pTemplate="item" let-item>
                                         <a (click)="viewImage(item.apt_imgs)" style="cursor: pointer;">
 
@@ -56,27 +50,121 @@
                                         </div>
                                     </ng-template>
 
-                                </p-galleria>
+                                </p-galleria> -->
+
+
+                              <div class="image-gallery" style="max-width: 1500px;">
+                                <div class="main-image">
+                                    <img [src]="prop_imgs[0]?.apt_imgs" style="width: 100%; height: auto; border-radius:13px" />
+                                </div>
+                                <div class="thumbnail-container" style="display: flex; justify-content: space-evenly;gap:20px; margin-top: 20px;">
+                                    <div *ngFor="let item of prop_imgs.slice(1, 5); let i = index" (click)="viewImage(item.apt_imgs)" style="   cursor: pointer;">
+                                        <img [src]="item.apt_imgs" style="height: 120px; width: 360px; border-radius:13px;" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             </div>
                         </div>
                     </ng-container>
 
-                    <div class="d-flex">
-                        <p class="d-lg-inline-block me-3 fw-bold">Rating</p>
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- <div>
+                      <div class="d-flex align-items-center mb-2">
+                          <p class="fw-900 mb-0">Rating ({{ value }})</p>
+                          <div class="ms-2">
+                              <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false" ></p-rating>
+                          </div>
+                      </div>
+
+                      <div>
+                          <p class="fw-bold mb-1">Descriptions</p>
+                          <div>
+                              <p>{{ inquire_details?.apt_Descirpt }}</p>
+                          </div>
+                      </div>
+                  </div> -->
+
+
+
+
+
+                  <div>
+                    <div class="d-flex align-items-center mb-2">
+                        <p class="fw-1000 mt-3 mr-3 mb-3 fs-6">Rating ({{ value }})</p>
+                        <div class="ms-2 ">
+                            <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"   ></p-rating>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="fw-1000 mr-3 mb-3 fs-6">Descriptions</p>
+                        <div class="description-text">
+                            <p class="text-muted small">{{ inquire_details?.apt_Descirpt }}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                    <!-- <div class="d-flex">
+                        <p class="d-lg-inline-block me-3 fw-500">Rating</p>
                         <div class="mt-0">
                             <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
                         </div>
                     </div>
 
                     <div>
-                        <p class="d-lg-inline-block me-3 fw-bold">Descriptions</p>
-                        <div class="mt-0">
+                        <p class="d-lg-inline-block me-3 fw-bold ">Descriptions</p>
+                        <div class="mt-0 ">
                             <p class="d-lg-inline-block me-3  ">{{ inquire_details?.apt_Descirpt }} </p>
                         </div>
-                    </div>
-                    <hr />
+                    </div> -->
+
+
+
+
+
                 </div>
                 <div class="col-12 col-md-5">
+
                     <div class="mt-0">
                         <h4 class="fw-bold my-0">{{ inquire_details?.apt_Name }}</h4>
                         <p class="gray mt-0">{{ inquire_details?.apt_StName }}</p>
@@ -100,7 +188,7 @@
                     </div>
                     <div class="d-flex mt-0">
                         <img src="assets/images/apartmentImages/schedule time.svg" />
-                        <p class="gray mt-3 ms-2">Duration: {{ inquire_details?.apt_TimePeriod }} </p>
+                        <p class="gray mt-3 ms-2">Time period: {{ inquire_details?.apt_TimePeriod }} </p>
                     </div>
                     <div class="d-flex mt-0">
                         <p class="fw-bold my-0">Requested Appartment</p>
@@ -115,6 +203,61 @@
                             <div class="text-neutral-400 text-sm font-normal font-['Montserrat'] leading-tight"></div>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="container mt-4 requestd">
+                      <h5 class="fw-bold">Request Details</h5>
+                      <form>
+                          <div class="row g-3 mb-3">
+                              <div class="col-md-6">
+                                  <label for="startDate" class="form-label">Start Date</label>
+                                  <input type="text" class="form-control" id="startDate"  value="{{ inquire_details?.start_Date }}" >
+                              </div>
+                              <div class="col-md-6">
+                                  <label for="endDate" class="form-label">End Date</label>
+                                  <input type="text" class="form-control" id="endDate" value="{{ inquire_details?.end_Date }}">
+                              </div>
+                          </div>
+                          <div class="row g-3 mb-3">
+                              <div class="col-md-6">
+                                  <label for="numberOfGuests" class="form-label">Number of Guests</label>
+                                  <input type="text" class="form-control" id="numberOfGuests" value="{{ inquire_details?.req_GuestNo }}">
+                              </div>
+                              <div class="col-md-6">
+                                  <label for="agencyCode" class="form-label">Agency / broker code</label>
+                                  <input type="text" class="form-control" id="agencyCode" value="{{ inquire_details?.agency_Code}}">
+                              </div>
+                          </div>
+                          <div class="mb-3">
+                              <label for="selectRole" class="form-label">Select Your Role</label>
+                              <input type="text" class="form-control" id="selectRole" value="{{ inquire_details?.role}}">
+                          </div>
+                          <div class="mb-3">
+                              <label for="universityName" class="form-label">University Name</label>
+                              <input type="text" class="form-control" id="universityName" value="{{ inquire_details?.purpose_Coming}}">
+                          </div>
+
+                              <button type="button" class="btn btn-primary btn-block mb-0  fs-6" style=" width: 100%; border-radius:10px; padding:11px">Confirm</button>
+                              <button type="button" class="btn btn-block fs-6  " style="width: 100%; border-radius:10px; background-color:#D2D9E1;    color: #1F4068; padding:11px">Reject</button>
+
+                      </form>
+                  </div>
+
+
+
+
+
+
+
                     <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
 
                         <div class="accordion-item">
@@ -502,3 +645,182 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+
+<div class="row m-0">
+
+  <div class="col-lg-2"></div>
+  <div class=" col-lg-10 ">
+<div class="container mt-4  p-4  m-2 " >
+  <div class="card bookingdetails">
+    <div class="card-header">
+      <h4 class="fs-5 fw-bold">Booking Details</h4>
+    </div>
+
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <div class="d-flex justify-content-between">
+            <div class="fw-bold">Bed No</div>
+            <div class=" fw-bold">Room type</div>
+            <div class=" fw-bold">Bed price</div>
+            <div class=" fw-bold">Security deposit</div>
+            <div class=" fw-bold">Service fee</div>
+            <div class=" fw-bold">Status</div>
+          </div>
+          </div>
+          </div>
+
+         
+
+
+
+
+
+      <div class="row border p-0 dropdown" id="main-toggle" >
+        <div class="col-12 m-0 p-0">
+          <div class="d-flex justify-content-between align-items-center m-0 p-3 bg-white rounded">
+            <div>Bed 1</div>
+            <div>Single room</div>
+            <div>€ 300</div>
+            <div>€ 100</div>
+            <div>€ 50</div>
+            <div class="badge badge-success text-info"  (click)="toggleContent()">Rented</div>
+          </div>
+        </div>
+        <hr class="m-0"/>
+
+        <div class="row bg-white m-0 p-4 mb-3" id="details-content" style="display: none;">
+          <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
+            <div class="row align-items-center">
+              <div class="col-auto">
+                <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile Image">
+              </div>
+              <div class="col-lg-3 border-end">
+                <h5 class="m-0">Osman Ahmed</h5>
+                <p class="m-0 text-muted">osman2025@gmail.com</p>
+              </div>
+              <div class="col-lg-3 text-right border-end">
+                <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
+              </div>
+              <div class="col-lg-3 text-right border-end">
+                <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
+              </div>
+              <div class="col-lg-2 text-right">
+                <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3" id="booking-process" style="display: none;">
+          <h5>Booking Process</h5>
+          <div class="list-group">
+            <div class="card p-3 pb-1 pt-1 align-items-center ">
+              <!-- <span>Passport</span>
+              <div class="card mb-3"> -->
+
+
+
+  <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentpass()">
+    <div class="d-flex align-items-center justify-content-start">
+      <div class="rounded-circle bg-success p-2">
+        <i class="fas fa-check text-success"></i>
+      </div>
+      <span class="ml-2">Passport</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-end">
+      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+      <span class="badge badge-light text-success">Uploaded</span>
+      <i class="fas fa-chevron-down ml-2"></i>
+    </div>
+  </div>
+
+
+
+  <div id="collapseOne" class="collapse" [class.show]="isContentVisible">
+    <!-- <div class="card-body d-flex align-items-center"> -->
+      <hr />
+      <div class="card-body d-grid align-items-center">
+        <div class="row">
+      <img src="https://via.placeholder.com/150" class="img-fluid col-6 imgpass" alt="Passport Image">
+      <div class="col-5 border-start">
+        <div class="paddingpass">
+        <h5 class="card-title">Passport of tenant</h5>
+        <p class="card-text">Please review passport then confirm or reject it</p>
+        <button class="btn btn-primary mr-2">Confirm</button>
+        <button class="btn btn-outline-secondary">Reject</button>
+      </div>
+      </div>
+    </div>
+    </div>
+  <!-- </div> -->
+</div>
+
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Security Deposit</span>
+              <i class="pi pi-check-circle text-success"></i>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Sign Contract</span>
+              <i class="pi pi-check-circle text-success"></i>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Arriving Details</span>
+              <i class="pi pi-check-circle text-success"></i>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Check In Process</span>
+              <i class="pi pi-check-circle text-success"></i>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Scanning Bed QR Code</span>
+              <i class="pi pi-check-circle text-success"></i>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Confirm Identity</span>
+              <i class="pi pi-times-circle text-danger"></i>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Payments</span>
+              <i class="pi pi-times-circle text-danger"></i>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Handover Protocols</span>
+              <i class="pi pi-times-circle text-danger"></i>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Apartment Rules</span>
+              <i class="pi pi-times-circle text-danger"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+  </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
