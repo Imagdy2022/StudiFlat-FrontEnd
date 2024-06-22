@@ -18,6 +18,7 @@ export class ForthStepComponent {
   /** checkedstripe */
   checkedstripe: boolean = true;
   checkedOnline: boolean = true;
+  checkSecurityDeposit :boolean = true
 
   /** checkedPayPal */
   checkedPayPal: boolean = true;
