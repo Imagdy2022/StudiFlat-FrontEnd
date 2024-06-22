@@ -66,6 +66,37 @@ export class ViewInquireComponent implements OnInit {
     this.isContentVisible = !this.isContentVisible;
   }
 
+  isDepositVisible:any;
+  toggleContentdeposit(): void {
+    this.isDepositVisible = !this.isDepositVisible;
+  }
+
+  isContractVisible:any;
+  toggleContentContract(): void {
+    this.isContractVisible = !this.isContractVisible;
+  }
+  isArriveVisible:any;
+  toggleContentArrive(): void {
+    this.isArriveVisible = !this.isArriveVisible;
+  }
+  isCheckinVisible:any;
+  toggleContentCheckin(): void {
+    this.isCheckinVisible = !this.isCheckinVisible;
+  }
+  isinsideCheckinVisible:any;
+  toggleContentinsideCheckin(): void {
+    this.isinsideCheckinVisible= !this. isinsideCheckinVisible;
+  }
+  isidentityVisible:any;
+  toggleContentidentity(): void {
+    this.isidentityVisible= !this.isidentityVisible;
+  }
+
+  isPaymentsVisible:any;
+  toggleContentPayments(): void {
+    this.isPaymentsVisible= !this.isPaymentsVisible;
+  }
+
 
 
   inquiresRole: any;

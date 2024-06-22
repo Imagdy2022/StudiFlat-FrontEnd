@@ -672,7 +672,7 @@
           </div>
           </div>
 
-         
+
 
 
 
@@ -717,6 +717,7 @@
         <div class="col-12 mb-3" id="booking-process" style="display: none;">
           <h5>Booking Process</h5>
           <div class="list-group">
+             <!-- passport -->
             <div class="card p-3 pb-1 pt-1 align-items-center ">
               <!-- <span>Passport</span>
               <div class="card mb-3"> -->
@@ -742,7 +743,7 @@
 
   <div id="collapseOne" class="collapse" [class.show]="isContentVisible">
     <!-- <div class="card-body d-flex align-items-center"> -->
-      <hr />
+      <hr class="m-0" />
       <div class="card-body d-grid align-items-center">
         <div class="row">
       <img src="https://via.placeholder.com/150" class="img-fluid col-6 imgpass" alt="Passport Image">
@@ -750,8 +751,9 @@
         <div class="paddingpass">
         <h5 class="card-title">Passport of tenant</h5>
         <p class="card-text">Please review passport then confirm or reject it</p>
-        <button class="btn btn-primary mr-2">Confirm</button>
-        <button class="btn btn-outline-secondary">Reject</button>
+
+        <button type="button" class="btn btn-primary btn-block mb-0  fs-6" style=" width: 80%; border-radius:10px; padding:11px">Confirm</button>
+        <button type="button" class="btn btn-block fs-6  " style="width: 80%; border-radius:10px; background-color:#D2D9E1;    color: #1F4068; padding:11px">Reject</button>
       </div>
       </div>
     </div>
@@ -760,34 +762,382 @@
 </div>
 
             </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Security Deposit</span>
-              <i class="pi pi-check-circle text-success"></i>
+
+<!-- Security Deposit -->
+   <div class="card p-3 pb-1 pt-1 align-items-center ">
+
+
+  <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentdeposit()">
+    <div class="d-flex align-items-center justify-content-start">
+      <div class="rounded-circle bg-success p-2">
+        <i class="fas fa-check text-success"></i>
+      </div>
+      <span class="ml-2">Security Deposit</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-end">
+      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+      <span class="badge badge-light text-success">paid</span>
+      <i class="fas fa-chevron-down ml-2"></i>
+    </div>
+  </div>
+
+
+
+  <div id="collapseOne" class="collapse" [class.show]="isDepositVisible">
+    <div class="container mt-3">
+      <table class="table table-borderless">
+        <thead  >
+          <tr class="texttable">
+            <th>Invoice Number</th>
+            <th>Duration</th>
+            <th>Amount</th>
+            <th>Payment Methods</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Invoice435</td>
+            <td>April 27 - May 27, 2023</td>
+            <td>$35.00</td>
+            <td>Visa</td>
+            <td><span class="badge bg-success text-white">paid</span></td>
+            <td><i class="fas fa-download"></i></td>
+          </tr>
+          <tr>
+            <td>Invoice435</td>
+            <td>April 27 - May 27, 2023</td>
+            <td>$35.00</td>
+            <td>Apple Pay</td>
+            <td><span class="badge bg-danger text-white">unpaid</span></td>
+            <td><i class="fas fa-download"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>
+ </div>
+
+
+<!-- end Security Deposit -->
+ <!-- Sign Contract -->
+ <div class="card p-3 pb-1 pt-1 align-items-center ">
+
+
+  <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentContract()">
+    <div class="d-flex align-items-center justify-content-start">
+      <div class="rounded-circle bg-success p-2">
+        <i class="fas fa-check text-success"></i>
+      </div>
+      <span class="ml-2">Sign Contract</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-end">
+      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+      <span class="badge badge-light text-success">signed</span>
+      <i class="fas fa-chevron-down ml-2"></i>
+    </div>
+  </div>
+
+
+
+  <div id="collapseOne" class="collapse" [class.show]="isContractVisible">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-between align-items-center border p-3 rounded mb-3">
+        <div class="d-flex align-items-center">
+          <div class="rounded-circle bg-light p-2">
+            <i class="fas fa-lock text-primary"></i>
+          </div>
+          <div class="ml-2 mr-3">Contract.pdf</div>
+
+        </div>
+        <div class="d-flex align-items-center">
+          <a href="#" class="text-decoration-none text-primary mx-2">
+            <i class="fas fa-eye"></i> View
+          </a>
+          <a href="#" class="text-decoration-none text-primary mx-2">
+            <i class="fas fa-download"></i> Download
+          </a>
+          <button class="btn custom-btn-outline-primary ml-3">reassign contract</button>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+ </div>
+
+
+<!-- end Sign Contract -->
+
+ <!-- Arriving Details -->
+ <div class="card p-3 pb-1 pt-1 align-items-center ">
+
+
+  <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentArrive()">
+    <div class="d-flex align-items-center justify-content-start">
+      <div class="rounded-circle bg-success p-2">
+        <i class="fas fa-check text-success"></i>
+      </div>
+      <span class="ml-2">Arriving Details</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-end">
+      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+      <span class="badge badge-light text-success">completed</span>
+      <i class="fas fa-chevron-down ml-2"></i>
+    </div>
+  </div>
+
+
+
+  <div id="collapseOne" class="collapse" [class.show]="isArriveVisible">
+    <hr class="m-0"/>
+    <div class="container mt-3 mb-3">
+      <h5>Arriving Details</h5>
+      <p class="text-muted">View tenant arrival date and transportation requirements, if needed</p>
+      <div class="p-3 rounded bg-light">
+        <div class="row">
+          <div class="col border-start">
+            <div class="text-muted">Check In Date</div>
+            <div class="font-weight-bold">12 Jun, 2024</div>
+          </div>
+          <div class="col border-start">
+            <div class="text-muted">Check In Time</div>
+            <div class="font-weight-bold">10:35 PM</div>
+          </div>
+          <div class="col border-start">
+            <div class="text-muted">Transportation</div>
+            <div class="font-weight-bold">Yes</div>
+          </div>
+          <div class="col border-start">
+            <div class="text-muted">Airport</div>
+            <div class="font-weight-bold">Berlin Airport</div>
+          </div>
+          <div class="col border-start">
+            <div class="text-muted">Flight Number</div>
+            <div class="font-weight-bold">#1525335</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</div>
+ </div>
+
+
+<!-- end Arriving Details -->
+
+ <!-- Check In Process-->
+ <div class="card p-3 pb-1 pt-1 align-items-center ">
+
+
+  <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentCheckin()">
+    <div class="d-flex align-items-center justify-content-start">
+      <div class="rounded-circle bg-success p-2">
+        <i class="fas fa-check text-success"></i>
+      </div>
+      <span class="ml-2">Check In Process</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-end">
+      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+      <span class="badge badge-light text-success">completed</span>
+      <i class="fas fa-chevron-down ml-2"></i>
+    </div>
+  </div>
+
+
+
+  <div id="collapseOne" class="collapse" [class.show]="isCheckinVisible">
+    <hr class="m-0"/>
+    <div class="container mt-3">
+      <h5>Check In Process</h5>
+      <p class="text-muted">View tenant check-in process from scanning bed QR code to signing the contract and completing the payment process.</p>
+
+
+      <div class="card p-3 pb-1 pt-1 align-items-center ">
+
+
+        <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentinsideCheckin()">
+          <div class="d-flex align-items-center justify-content-start">
+            <div class="rounded-circle bg-success p-2">
+              <i class="fas fa-check text-success"></i>
             </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Sign Contract</span>
-              <i class="pi pi-check-circle text-success"></i>
+            <span class="ml-2">Scanning bed QR code</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-end">
+            <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+            <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+            <span class="badge badge-light text-success">complete</span>
+            <i class="fas fa-chevron-down ml-2"></i>
+          </div>
+        </div>
+
+
+
+        <div id="collapseOne" class="collapse" [class.show]="isinsideCheckinVisible">
+          <hr class="m-0"/>
+          <div class="container mt-3 mb-3">
+            <div class="d-flex justify-content-between align-items-center p-3 rounded bg-light">
+              <div>
+                <strong>bed QR code:</strong> 363401
+              </div>
+              <div class="d-flex align-items-center">
+                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+                  <i class="fas fa-eye mr-1"></i> View
+                </a>
+                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+                  <i class="fas fa-download mr-1"></i> Download
+                </a>
+                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+                  <i class="fas fa-share-alt mr-1"></i> Share
+                </a>
+              </div>
             </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Arriving Details</span>
-              <i class="pi pi-check-circle text-success"></i>
+          </div>
+
+
+
+
+      </div>
+       </div>
+<!-- Confirm Identity -->
+
+       <div class="card p-3 pb-1 pt-1 align-items-center ">
+
+
+        <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentidentity()">
+          <div class="d-flex align-items-center justify-content-start">
+            <div class="rounded-circle bg-success p-2">
+              <i class="fas fa-check text-success"></i>
             </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Check In Process</span>
-              <i class="pi pi-check-circle text-success"></i>
+            <span class="ml-2">Confirm Identity</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-end">
+            <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+            <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+            <span class="badge badge-light text-success">complete</span>
+            <i class="fas fa-chevron-down ml-2"></i>
+          </div>
+        </div>
+
+
+
+        <div id="collapseOne" class="collapse" [class.show]="isidentityVisible">
+          <hr class="m-0"/>
+          <div class="container mt-3">
+            <h5>Passport of tenant</h5>
+            <p class="text-muted">Please review passport and tenant image then confirm or reject it</p>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <img src="https://via.placeholder.com/300x200"  style=" width: 100%; border-radius:10px; " class="img-fluid rounded" alt="Passport Image">
+              </div>
+              <div class="col-md-6">
+                <img src="https://via.placeholder.com/300x200" style=" width: 100%; border-radius:10px; " class="img-fluid rounded" alt="Tenant Image">
+                <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary btn-block mb-0  fs-6 m-1" style=" width: 80%; border-radius:10px; padding:10px;">Confirm</button>
+                <button type="button" class="btn btn-block fs-6  m-1" style="width: 80%; border-radius:10px; background-color:#D2D9E1;    color: #1F4068; padding:10px">Reject</button>
+              </div>
+              </div>
             </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Scanning Bed QR Code</span>
-              <i class="pi pi-check-circle text-success"></i>
-            </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Confirm Identity</span>
-              <i class="pi pi-times-circle text-danger"></i>
-            </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Payments</span>
-              <i class="pi pi-times-circle text-danger"></i>
-            </div>
+
+          </div>
+
+
+
+
+
+      </div>
+       </div>
+<!-- end Confirm Identity -->
+
+<!-- Payments -->
+
+<div class="card p-3 pb-1 pt-1 align-items-center ">
+
+
+  <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentPayments()">
+    <div class="d-flex align-items-center justify-content-start">
+      <div class="rounded-circle bg-success p-2">
+        <i class="fas fa-check text-success"></i>
+      </div>
+      <span class="ml-2">Payments</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-end">
+      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+      <span class="badge badge-light text-success">complete</span>
+      <i class="fas fa-chevron-down ml-2"></i>
+    </div>
+  </div>
+
+
+
+  <div id="collapseOne" class="collapse" [class.show]="isPaymentsVisible">
+    <hr class="m-0"/>
+    <div class="container mt-3">
+      <table class="table table-borderless">
+        <thead>
+          <tr class="texttable">
+            <th>Invoice Number</th>
+            <th>Duration</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Payment Methods</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Invoice435</td>
+            <td>April 27 - May 27, 2023</td>
+            <td>Security Deposit</td>
+            <td>$35.00</td>
+            <td>Visa</td>
+            <td><span class="badge badge-success bg-success">paid</span></td>
+            <td><i class="fas fa-download"></i></td>
+          </tr>
+          <tr>
+            <td>Invoice435</td>
+            <td>April 27 - May 27, 2023</td>
+            <td>Monthly Rent</td>
+            <td>$35.00</td>
+            <td>Apple Pay</td>
+            <td><span class="badge badge-success bg-success">paid</span></td>
+            <td><i class="fas fa-download"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+</div>
+ </div>
+<!-- end Payments -->
+
+
+    </div>
+
+
+
+
+</div>
+ </div>
+
+
+<!-- end Check In Process -->
+
+
             <div class="list-group-item d-flex justify-content-between align-items-center">
               <span>Handover Protocols</span>
               <i class="pi pi-times-circle text-danger"></i>
