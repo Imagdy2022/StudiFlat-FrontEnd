@@ -25,6 +25,8 @@ import { PaginatorModule } from 'primeng/paginator';
 import { GalleriaModule } from 'primeng/galleria';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ChipModule } from 'primeng/chip';
+import { CardModule } from 'primeng/card';
+import { RatingModule } from 'primeng/rating';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -56,7 +58,9 @@ const routes: Routes = [];
     BreadcrumbModule,
     ChipModule,
     PdfViewerModule,
-    InquiriesoutingModule
+    InquiriesoutingModule,
+    CardModule,
+    RatingModule
   ],
   exports: [],
   providers: [MessageService],

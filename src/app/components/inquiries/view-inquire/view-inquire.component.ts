@@ -45,6 +45,60 @@ export class ViewInquireComponent implements OnInit {
     this.GetRequestDetails();
     this.checkRole();
   }
+
+
+  toggleContent(): void {
+    const detailsContent = document.getElementById("details-content");
+    const bookingProcess = document.getElementById("booking-process");
+
+    if (detailsContent && bookingProcess) {
+      if (detailsContent.style.display === "none") {
+        detailsContent.style.display = "block";
+        bookingProcess.style.display = "block";
+      } else {
+        detailsContent.style.display = "none";
+        bookingProcess.style.display = "none";
+      }
+    }
+  }
+  isContentVisible:any;
+  toggleContentpass(): void {
+    this.isContentVisible = !this.isContentVisible;
+  }
+
+  isDepositVisible:any;
+  toggleContentdeposit(): void {
+    this.isDepositVisible = !this.isDepositVisible;
+  }
+
+  isContractVisible:any;
+  toggleContentContract(): void {
+    this.isContractVisible = !this.isContractVisible;
+  }
+  isArriveVisible:any;
+  toggleContentArrive(): void {
+    this.isArriveVisible = !this.isArriveVisible;
+  }
+  isCheckinVisible:any;
+  toggleContentCheckin(): void {
+    this.isCheckinVisible = !this.isCheckinVisible;
+  }
+  isinsideCheckinVisible:any;
+  toggleContentinsideCheckin(): void {
+    this.isinsideCheckinVisible= !this. isinsideCheckinVisible;
+  }
+  isidentityVisible:any;
+  toggleContentidentity(): void {
+    this.isidentityVisible= !this.isidentityVisible;
+  }
+
+  isPaymentsVisible:any;
+  toggleContentPayments(): void {
+    this.isPaymentsVisible= !this.isPaymentsVisible;
+  }
+
+
+
   inquiresRole: any;
   is_Super: any;
   checkRole() {
@@ -315,4 +369,20 @@ export class ViewInquireComponent implements OnInit {
     for(let i=0;i<this.subscriptions.length;i++)
     this.subscriptions[i].unsubscribe();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
