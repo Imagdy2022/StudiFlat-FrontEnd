@@ -615,15 +615,16 @@
 
 
 
-      <div class="row border p-0 dropdown" id="main-toggle" >
-        <div class="col-12 m-0 p-0">
+      <div class="row border p-0 dropdown" id="main-toggle"  >
+        <div class="col-12 m-0 p-0" (click)="toggleContent()">
           <div class="d-flex justify-content-between align-items-center m-0 p-3 bg-white rounded">
             <div class=" fw-bold">Bed 1</div>
             <div>Single room</div>
             <div>€ 300</div>
             <div>€ 100</div>
             <div>€ 50</div>
-            <div class="badge badge-success text-info"  (click)="toggleContent()">Rented</div>
+            <div class="badge badge-success text-info"  >Rented <i class="fas fa-chevron-down ml-2"></i></div>
+
           </div>
         </div>
         <hr class="m-0"/>
