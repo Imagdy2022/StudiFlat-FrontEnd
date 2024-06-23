@@ -55,7 +55,7 @@
 
                               <div class="image-gallery" style="max-width: 1500px;">
                                 <div class="main-image">
-                                    <img [src]="prop_imgs[0]?.apt_imgs" style="width: 100%; height: auto; border-radius:13px" />
+                                    <img [src]="prop_imgs[0]?.apt_imgs" style="width: 100%; height:500px; border-radius:13px" />
                                 </div>
                                 <div class="thumbnail-container" style="display: flex; justify-content: space-evenly;gap:20px; margin-top: 20px;">
                                     <div *ngFor="let item of prop_imgs.slice(1, 5); let i = index" (click)="viewImage(item.apt_imgs)" style="   cursor: pointer;">
@@ -101,21 +101,6 @@
 
 
 
-                    <!-- <div>
-                      <div class="d-flex align-items-center mb-2">
-                          <p class="fw-900 mb-0">Rating ({{ value }})</p>
-                          <div class="ms-2">
-                              <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false" ></p-rating>
-                          </div>
-                      </div>
-
-                      <div>
-                          <p class="fw-bold mb-1">Descriptions</p>
-                          <div>
-                              <p>{{ inquire_details?.apt_Descirpt }}</p>
-                          </div>
-                      </div>
-                  </div> -->
 
 
 
@@ -144,19 +129,6 @@
 
 
 
-                    <!-- <div class="d-flex">
-                        <p class="d-lg-inline-block me-3 fw-500">Rating</p>
-                        <div class="mt-0">
-                            <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
-                        </div>
-                    </div>
-
-                    <div>
-                        <p class="d-lg-inline-block me-3 fw-bold ">Descriptions</p>
-                        <div class="mt-0 ">
-                            <p class="d-lg-inline-block me-3  ">{{ inquire_details?.apt_Descirpt }} </p>
-                        </div>
-                    </div> -->
 
 
 
@@ -258,7 +230,7 @@
 
 
 
-                    <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
+                    <!-- <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
@@ -308,11 +280,7 @@
                                             <div class="w-80 text-zinc-800 text-sm font-semibold font-['Montserrat'] leading-tight"> {{item?.guest_Name}}</div>
                                         </div>
                                         <div class="w-96 h-44 flex-col justify-start items-start gap-4 flex text-center">
-                                            <!--     <a  (click)="showPassport()" style="cursor: pointer;" *ngIf="item. isFile==false">
-                                            <img style="width:100%" class="self-stretch grow shrink basis-0 border border-stone-300" *ngIf="item.passport_Img" [src]="item?.passport_Img" />
-                                            <img style="width:100%;height: 200px;" class="self-stretch grow shrink basis-0 border border-stone-300" *ngIf="item.passport_Img==''||item.passport_Img==null" src="../../../../assets/images/passport not uploaded.png" />
 
-                                          </a> -->
                                             <a [href]="'#'+item?.pS_ID" type="" class="" data-bs-toggle="modal" [attr.data-bs-target]="'#'+item?.pS_ID" *ngIf="item. isFile==false">
                                                 <img style="width:100%" class="self-stretch grow shrink basis-0 border border-stone-300" *ngIf="item.passport_Img" [src]="item?.passport_Img" />
                                                 <img style="width:100%;height: 200px;" class="self-stretch grow shrink basis-0 border border-stone-300" *ngIf="item.passport_Img==''||item.passport_Img==null" src="../../../../assets/images/passport not uploaded.png" />
@@ -326,7 +294,7 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <!--        include image here-->
+
                                                             <img style="width:100%" class="self-stretch grow shrink basis-0 border border-stone-300 img-thumbnail" *ngIf="item.passport_Img" [src]="item?.passport_Img" />
                                                             <img style="width:100%;height: 200px;" class="self-stretch grow shrink basis-0 border border-stone-300" *ngIf="item.passport_Img==''||item.passport_Img==null" src="../../../../assets/images/passport not uploaded.png" />
                                                         </div>
@@ -337,21 +305,7 @@
                                                 </div>
                                             </div>
 
-                                            <!--  <div [style.display]="showPassportModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h4 class="modal-title" id="myModalLabel">Passport preview</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                  <img [src]="item?.passport_Img" id="imagepreview"  >
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-default" data-dismiss="modal" (click) = "hidePassport()">Close</button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            </div> -->
+
                                             <a target="_blank" href="{{ item.passport_Img }}" *ngIf="item. isFile==true" style="text-align: center;font-size: xx-large">
                                               Show Passport
                                           </a>
@@ -448,7 +402,7 @@
                     <div class="row" *ngIf="inquire_details?.approved!=false">
                         <div>
                             <div class="  position-relative h-124px mb-3" style="margin-top: 22px;padding:0px">
-                                <!-- start single img upload and preview -->
+
                                 <div *ngIf="inquire_details?.paid==true">
                                     <ng-container>
 
@@ -474,31 +428,17 @@
 
                                             </div>
                                         </div>
-                                        <!-- <input type="file" accept="image/*" multiple="multiple" (change)="selectFile($event)" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                                  <img *ngIf="!selectedContractImg" src="../../../../assets/images/apartmentImages/11.png" class="position-absolute" width="100%" style="    border: 1px solid #c3bcbcc9;border-radius: 5px;">
-                             -->
+
 
                                     </ng-container>
                                 </div>
                                 <div>
                                     <ng-container *ngIf="selectedContractImg">
-                                        <!-- <div>
-                                      <input type="file" accept=".pdf, image/*" (change)="selectFile($event)" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                                      <a *ngIf="inquire_details?.contract_Type == 'pdf'" class="position-absolute imgPreviewUploader" [href]="selectedContractImg" target="_blank" style="font-size: large;z-index: 999999;    margin-left: 160px;">View PDF</a>
 
-                                      <img *ngIf="inquire_details?.contract_Type != 'pdf'" [src]="selectedContractImg" style=" margin-left: 150px;" class="position-absolute imgPreviewUploader" width="100%">
-
-                                  </div> -->
-                                        <!-- <div *ngIf="selectedContractImg=== 'application/pdf'">
-                                      <a [href]="selectedContractImg" target="_blank" style="font-size: large;">View PDF</a>
-                                      <input type="file" accept=".pdf, image/*" (change)="selectFile($event)" class="ng-star-inserted d-block w-100 h-124px file position-absolute">
-                                      <img src="assets/images/apartmentImages/_File upload base.svg" class="position-absolute h-100" width="90%" style="margin-left: 21px;">
-
-                                  </div> -->
 
                                     </ng-container>
                                 </div>
-                                <!-- end single img upload and preview -->
+
                             </div>
                         </div>
                     </div>
@@ -514,15 +454,15 @@
   &nbsp;&nbsp;   Re-Sign Contract
 </button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
         </div>
     </main>
-    <!-- end content page  -->
+
 </div>
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" style=" background-color: rgb(23 22 22 / 50%);;">
+<!-- <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" style=" background-color: rgb(23 22 22 / 50%);;">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="    margin-top: 150px;">
             <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;position: relative;">
@@ -548,11 +488,7 @@
                         <textarea class="border p-3 pt-3 rounded-2 w-100" rows="4" style="resize: inherit" placeholder="please enter reason  " [(ngModel)]="Reason"></textarea>
 
                     </div>
-                    <!-- <div class="mb-3 col-12 col-md-12">
-                    <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Role discerption</label>
-                    <textarea class="border p-3 pt-3 rounded-2 w-100" rows="5" style="resize: inherit"></textarea>
 
-                </div> -->
                 </div>
 
             </div>
@@ -573,15 +509,15 @@
         </button>
                     </div>
                 </div>
-                <!-- Confirm -->
+
 
             </div>
 
 
         </div>
-        <!-- /.modal-content -->
+
     </div>
-    <!-- /.modal-dialog -->
+
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" style=" background-color: rgb(23 22 22 / 50%);;">
@@ -610,11 +546,7 @@
                         <textarea class="border p-3 pt-3 rounded-2 w-100" rows="4" style="resize: inherit" placeholder="please enter reason  " [(ngModel)]="Reason2"></textarea>
 
                     </div>
-                    <!-- <div class="mb-3 col-12 col-md-12">
-                  <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Role discerption</label>
-                  <textarea class="border p-3 pt-3 rounded-2 w-100" rows="5" style="resize: inherit"></textarea>
 
-              </div> -->
                 </div>
 
             </div>
@@ -635,16 +567,21 @@
       </button>
                     </div>
                 </div>
-                <!-- Confirm -->
+
 
             </div>
 
 
         </div>
-        <!-- /.modal-content -->
+
     </div>
-    <!-- /.modal-dialog -->
-</div>
+
+</div> -->
+
+
+
+
+
 
 
 <div class="row m-0">
@@ -681,7 +618,7 @@
       <div class="row border p-0 dropdown" id="main-toggle" >
         <div class="col-12 m-0 p-0">
           <div class="d-flex justify-content-between align-items-center m-0 p-3 bg-white rounded">
-            <div>Bed 1</div>
+            <div class=" fw-bold">Bed 1</div>
             <div>Single room</div>
             <div>€ 300</div>
             <div>€ 100</div>
@@ -719,8 +656,7 @@
           <div class="list-group">
              <!-- passport -->
             <div class="card p-3 pb-1 pt-1 align-items-center ">
-              <!-- <span>Passport</span>
-              <div class="card mb-3"> -->
+
 
 
 
@@ -1036,13 +972,13 @@
             <p class="text-muted">Please review passport and tenant image then confirm or reject it</p>
             <div class="row mb-3">
               <div class="col-md-6">
-                <img src="https://via.placeholder.com/300x200"  style=" width: 100%; border-radius:10px; " class="img-fluid rounded" alt="Passport Image">
+                <img src="https://via.placeholder.com/300x200"  style=" width: 90%;height:220px; border-radius:10px; " class="img-fluid rounded" alt="Passport Image">
               </div>
               <div class="col-md-6">
-                <img src="https://via.placeholder.com/300x200" style=" width: 100%; border-radius:10px; " class="img-fluid rounded" alt="Tenant Image">
-                <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-primary btn-block mb-0  fs-6 m-1" style=" width: 80%; border-radius:10px; padding:10px;">Confirm</button>
-                <button type="button" class="btn btn-block fs-6  m-1" style="width: 80%; border-radius:10px; background-color:#D2D9E1;    color: #1F4068; padding:10px">Reject</button>
+                <img src="https://via.placeholder.com/300x200" style=" width: 90%; height:220px; border-radius:10px; " class="img-fluid rounded" alt="Tenant Image">
+                <div class="d-flex   mt-3">
+                <button type="button" class="btn btn-primary btn-block mb-0  fs-6 m-1" style=" width:44%; border-radius:10px; padding:10px;">Confirm</button>
+                <button type="button" class="btn btn-block fs-6  m-1" style="width: 44%; border-radius:10px; background-color:#D2D9E1;    color: #1F4068; padding:10px">Reject</button>
               </div>
               </div>
             </div>
@@ -1125,6 +1061,110 @@
  </div>
 <!-- end Payments -->
 
+<!-- Handover Protocols -->
+
+<div class="card p-3 pb-1 pt-1 align-items-center ">
+
+
+  <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentHandover()">
+    <div class="d-flex align-items-center justify-content-start">
+      <div class="rounded-circle bg-success p-2">
+        <i class="fas fa-check text-success"></i>
+      </div>
+      <span class="ml-2">Handover Protocols</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-end">
+      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+      <span class="badge badge-light text-success">complete</span>
+      <i class="fas fa-chevron-down ml-2"></i>
+    </div>
+  </div>
+
+
+
+  <div id="collapseOne" class="collapse" [class.show]="isHandoverVisible">
+    <hr class="m-0"/>
+    <div class="container mt-3 mb-3">
+      <div class="d-flex justify-content-between align-items-center p-3 rounded bg-light border">
+        <div>
+          <strong>Handover Protocols</strong>
+        </div>
+        <div class="d-flex align-items-center">
+          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+            <i class="fas fa-eye mr-1"></i> View
+          </a>
+          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+            <i class="fas fa-download mr-1"></i> Download
+          </a>
+          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+            <i class="fas fa-share-alt mr-1"></i> Share
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+</div>
+ </div>
+<!-- end Handover Protocols -->
+
+<!-- Handover Protocols -->
+
+<div class="card p-3 pb-1 pt-1 align-items-center ">
+
+
+  <div class="card-header d-grid passport p-2 " id="headingOne" (click)="toggleContentRules()">
+    <div class="d-flex align-items-center justify-content-start">
+      <div class="rounded-circle bg-success p-2">
+        <i class="fas fa-check text-success"></i>
+      </div>
+      <span class="ml-2">Apartment Rules</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-end">
+      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
+      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
+      <span class="badge badge-light text-success">complete</span>
+      <i class="fas fa-chevron-down ml-2"></i>
+    </div>
+  </div>
+
+
+
+  <div id="collapseOne" class="collapse" [class.show]="isRulesVisible">
+    <hr class="m-0"/>
+    <div class="container mt-3 mb-3">
+      <div class="d-flex justify-content-between align-items-center p-3 rounded bg-light border">
+        <div>
+          <strong>Apartment Rules</strong>
+        </div>
+        <div class="d-flex align-items-center">
+          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+            <i class="fas fa-eye mr-1"></i> View
+          </a>
+          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+            <i class="fas fa-download mr-1"></i> Download
+          </a>
+          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+            <i class="fas fa-share-alt mr-1"></i> Share
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+</div>
+ </div>
+<!-- end Handover Protocols -->
+
 
     </div>
 
@@ -1133,21 +1173,65 @@
 
 </div>
  </div>
-
-
 <!-- end Check In Process -->
+</div>
 
 
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Handover Protocols</span>
-              <i class="pi pi-times-circle text-danger"></i>
-            </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <span>Apartment Rules</span>
-              <i class="pi pi-times-circle text-danger"></i>
+
+
+
+
+
+
+
+</div>
+
+
+<div class="row bg-white m-0 p-4" id="more-details" style="display: none;"   >
+  <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
+    <div class="row align-items-center">
+      <div class="container mt-3">
+        <h5>More details</h5>
+        <p class="text-muted">View tenant passport and reported problems, invoices</p>
+        <div class="accordion" id="accordionExample">
+
+          <div class="container mt-3">
+            <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+              <div>
+                <strong>Problem reports (2)</strong>
+              </div>
+              <div>
+                <i class="fas fa-chevron-down text-muted"></i>
+              </div>
             </div>
           </div>
+          <div class="container mt-3">
+            <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+              <div>
+                <strong> Fixed problem (0)</strong>
+              </div>
+              <div>
+                <i class="fas fa-chevron-down text-muted"></i>
+              </div>
+            </div>
+          </div>
+
         </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
+          <button class="btn btn-primary" style="border-radius:10px; font-size:14px;">Mark as Available</button>
+        </div>
+
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
       </div>
 
 

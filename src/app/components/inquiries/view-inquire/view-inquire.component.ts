@@ -50,14 +50,17 @@ export class ViewInquireComponent implements OnInit {
   toggleContent(): void {
     const detailsContent = document.getElementById("details-content");
     const bookingProcess = document.getElementById("booking-process");
+    const moreDetails = document.getElementById("more-details");
 
-    if (detailsContent && bookingProcess) {
+    if (detailsContent && bookingProcess && moreDetails) {
       if (detailsContent.style.display === "none") {
         detailsContent.style.display = "block";
         bookingProcess.style.display = "block";
+        moreDetails.style.display = "block";
       } else {
         detailsContent.style.display = "none";
         bookingProcess.style.display = "none";
+        moreDetails.style.display = "none";
       }
     }
   }
@@ -95,6 +98,14 @@ export class ViewInquireComponent implements OnInit {
   isPaymentsVisible:any;
   toggleContentPayments(): void {
     this.isPaymentsVisible= !this.isPaymentsVisible;
+  }
+  isHandoverVisible:any;
+  toggleContentHandover(): void {
+    this.isHandoverVisible= !this.isHandoverVisible;
+  }
+  isRulesVisible:any;
+  toggleContentRules(): void {
+    this.isRulesVisible= !this.isRulesVisible;
   }
 
 
