@@ -45,7 +45,7 @@ export class ViewInquireComponent implements OnInit {
     this.GetRequestDetails();
     this.checkRole();
   }
-
+  isAccordionOpen: boolean = false;
 
   toggleContent(): void {
     const detailsContent = document.getElementById("details-content");

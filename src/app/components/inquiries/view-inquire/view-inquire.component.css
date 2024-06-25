@@ -1,6 +1,96 @@
 
 
 
+/* :host ::ng-deep .p-accordion .p-accordion-content .bed {
+  background: none !important;
+} */
+/* :host ::ng-deep #bed .p-accordion-content {
+  background: none !important;
+} */
+
+/* .gapp {
+  display: flex;
+  gap: 500px;
+}
+
+@media (max-width: 1600px) {
+  .gapp {
+    gap: 350px;
+  }
+}
+
+
+
+@media (max-width: 1200px) {
+  .gapp {
+    gap: 250px;
+  }
+}
+
+
+
+@media (max-width: 992px) {
+  .gapp {
+    gap: 150px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .gapp {
+    gap: 80px;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .gapp {
+    gap: 100px;
+  }
+} */
+
+.bgcolor{
+  background-color: rgb(162, 239, 162);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+:host ::ng-deep #bed > .p-accordion .p-accordion-content {
+  background-color: #f4f3f3 !important;
+}
+
+:host ::ng-deep #bed .p-accordion .p-accordion .p-accordion-content {
+  background: #fff !important;
+}
+
+
+.booking-process-container {
+  background-color: #f4f3f3 !important;
+  padding: 1rem;
+  border-radius: 0.25rem;
+   margin: 0;
+}
+
+.booking-process-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.booking-process-subtext {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6c757d;
+  margin: 0;
+}
+
+
 
 .p-rating .pi-star,
 .p-rating .pi-star-o {
