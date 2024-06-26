@@ -31,6 +31,8 @@ import { RatingModule } from 'primeng/rating';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { InquiriesoutingModule } from './inquiries-routing.module';
+
+import { AccordionModule } from 'primeng/accordion';
 const routes: Routes = [];
 
 @NgModule({
@@ -60,7 +62,8 @@ const routes: Routes = [];
     PdfViewerModule,
     InquiriesoutingModule,
     CardModule,
-    RatingModule
+    RatingModule,
+    AccordionModule
   ],
   exports: [],
   providers: [MessageService],
