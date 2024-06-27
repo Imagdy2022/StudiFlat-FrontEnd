@@ -590,7 +590,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12 mb-3">
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between px-4">
                 <div class="fw-bold">Bed No</div>
                 <div class="fw-bold">Room type</div>
                 <div class="fw-bold">Bed price</div>
@@ -601,9 +601,10 @@
             </div>
           </div>
 
-          <p-accordion id="bed"  >
+        <div class="mb-4">
+          <p-accordion id="bed" [multiple]="true" [activeIndex]="[0]" >
             <!-- Bed 1 Section -->
-            <p-accordionTab   [selected]="true" [headerStyle]="{'background-color': '#fff' }">
+            <p-p-accordionTab  [selected]="true" [headerStyle]="{'background-color': '#fff' }">
               <ng-template pTemplate="header"  >
                 <div class="d-flex justify-content-between align-items-center m-0  rounded w-100">
                   <div class="fw-bold">Bed 1</div>
@@ -611,7 +612,7 @@
                   <div>€ 300</div>
                   <div>€ 100</div>
                   <div>€ 50</div>
-                  <div class="badge badge-success text-info">Rented <i class="fas fa-chevron-down ml-2"></i></div>
+                  <div class="badge rented">Rented <img src="/assets/images/expand_more.svg" alt=""></div>
                 </div>
               </ng-template>
               <!-- <hr class="m-0"/> -->
@@ -622,7 +623,7 @@
                       <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile Image">
                     </div>
                     <div class="col-lg-3 border-end">
-                      <h5 class="m-0">Osman Ahmed</h5>
+                      <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
                       <p class="m-0 text-muted">osman2025@gmail.com</p>
                     </div>
                     <div class="col-lg-3 text-right border-end">
@@ -650,9 +651,9 @@
                     <ng-template pTemplate="header"  >
 
                         <div class="d-flex align-items-center justify-content-end w-100">
-                          <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                          <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                          <span class="badge badge-light text-success">Uploaded</span>
+                          <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                            <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                          <span class="badge approve">Approved</span>
                           <img  src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                           <!-- <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
                         </div>
@@ -691,9 +692,9 @@
                     <div class="d-flex align-items-center justify-content-end w-100">
 
 
-                      <span class="mx-2 "><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                      <span class="mx-2 "><i class="fas fa-clock"></i> 10:35 PM</span>
-                      <span class="badge badge-light text-success ">paid</span>
+                      <span class="mx-2 "><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                      <span class="mx-4 "><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                      <span class="badge unpaid ">unpaid</span>
                       <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                       <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
 
@@ -721,7 +722,7 @@
                             <td>$35.00</td>
                             <td>Visa</td>
                             <td><span class="badge bg-success text-white">paid</span></td>
-                            <td><i class="fas fa-download"></i></td>
+                            <td><img src="/assets/images/download.svg" alt=""></td>
                           </tr>
                           <tr>
                             <td>Invoice435</td>
@@ -729,7 +730,7 @@
                             <td>$35.00</td>
                             <td>Apple Pay</td>
                             <td><span class="badge bg-danger text-white">unpaid</span></td>
-                            <td><i class="fas fa-download"></i></td>
+                            <td><img src="/assets/images/download.svg" alt=""></td>
                           </tr>
                         </tbody>
                       </table>
@@ -740,26 +741,31 @@
                   <p-accordionTab header="Sign Contract" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                     <div class="d-flex align-items-center justify-content-end w-100">
-                      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                      <span class="badge badge-light text-success">signed</span>
+                      <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                        <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                      <span class="badge approve">signed</span>
                       <!-- <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid"> -->
                       <img  src="assets/img/check.svg" alt="icon" class="img-fluid">
                     </div>
                   </ng-template>
                     <div class="container mt-3">
+                      <p class="ps-2 text-secondary fw-bold">Contract</p>
                       <div class="d-flex justify-content-between align-items-center border p-3 rounded mb-3">
+                      <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
                           <div class="rounded-circle bg-light p-2">
-                            <i class="fas fa-lock text-primary"></i>
+                          <img src="/assets/images/_File upload icon.svg" alt="">
                           </div>
                           <div class="ml-2 mr-3">Contract.pdf</div>
                         </div>
-                        <div class="d-flex align-items-center">
-                          <a href="#" class="text-decoration-none text-primary mx-2"><i class="fas fa-eye"></i> View</a>
-                          <a href="#" class="text-decoration-none text-primary mx-2"><i class="fas fa-download"></i> Download</a>
-                          <button class="btn custom-btn-outline-primary ml-3">Reassign Contract</button>
+                        <div class="d-flex align-items-center ms-5">
+                          <a href="#" class="text-decoration-none text-primary mx-2"> <img src="/assets/images/view.svg" class="me-1" alt="">View</a>
+                          <a href="#" class="text-decoration-none text-primary mx-2"> <img src="/assets/images/download.svg" alt="" class="me-1" >Download</a>
                         </div>
+                      </div>
+                      <div>
+                        <button class="btn custom-btn-outline-primary ml-3">Reassign Contract</button>
+                      </div>
                       </div>
                     </div>
                   </p-accordionTab>
@@ -768,9 +774,9 @@
                   <p-accordionTab header="Arriving Details" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">completed</span>
                         <img  src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <!-- <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
                       </div>
@@ -810,9 +816,9 @@
                   <p-accordionTab   header="Check In Process" [selected]="true" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">completed</span>
                         <img src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <!-- <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
                       </div>
@@ -820,7 +826,7 @@
                     <!-- <hr class="m-0"/> -->
                      <div class="m-0 p-0"   >
                     <div class="container m-0"   >
-                      <h5>Check In Process</h5>
+                      <h6 class="fw-bold text-lowercase">Check In Process</h6>
                       <p class="text-muted">View tenant check-in process from scanning bed QR code to signing the contract and completing the payment process.</p>
                       <p-accordion   >
                         <!-- Scanning Bed QR Code Section -->
@@ -828,9 +834,9 @@
                           <!-- <hr class="m-0"/> -->
                           <ng-template pTemplate="header"  >
                             <div class="d-flex align-items-center justify-content-end w-100">
-                              <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                              <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                              <span class="badge badge-light text-success">completed</span>
+                              <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                                <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                              <span class="badge approve">completed</span>
                               <!-- <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid"> -->
                               <img src="assets/img/check.svg" alt="icon" class="img-fluid">
                             </div>
@@ -840,13 +846,13 @@
                               <div><strong>Bed QR code:</strong> 363401</div>
                               <div class="d-flex align-items-center">
                                 <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                                  <i class="fas fa-eye mr-1"></i> View
+                                  <img src="/assets/images/view.svg" class="me-1" alt=""> View
                                 </a>
                                 <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                                  <i class="fas fa-download mr-1"></i> Download
+                                  <img src="/assets/images/download.svg" alt="" class="me-1" > Download
                                 </a>
                                 <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                                  <i class="fas fa-share-alt mr-1"></i> Share
+                                  <img src="/assets/images/share.svg" alt="" class="me-1" > Share
                                 </a>
                               </div>
                             </div>
@@ -857,9 +863,9 @@
                   <p-accordionTab header="Confirm Identity" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">completed</span>
                         <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid"> -->
                         <img  src="assets/img/check.svg" alt="icon" class="img-fluid">
                       </div>
@@ -888,9 +894,9 @@
                     <!-- <hr class="m-0"/> -->
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">completed</span>
                         <img  src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <!-- <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
                       </div>
@@ -916,7 +922,7 @@
                             <td>$35.00</td>
                             <td>Visa</td>
                             <td><span class="badge badge-success bg-success">paid</span></td>
-                            <td><i class="fas fa-download"></i></td>
+                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
                           <tr>
                             <td>Invoice435</td>
@@ -925,7 +931,7 @@
                             <td>$35.00</td>
                             <td>Apple Pay</td>
                             <td><span class="badge badge-success bg-success">paid</span></td>
-                            <td><i class="fas fa-download"></i></td>
+                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
                         </tbody>
                       </table>
@@ -937,9 +943,9 @@
                     <!-- <hr class="m-0"/> -->
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">completed</span>
                         <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid"> -->
                         <img  src="assets/img/check.svg" alt="icon" class="img-fluid">
                       </div>
@@ -952,10 +958,10 @@
                             <i class="fas fa-eye mr-1"></i> View
                           </a>
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-download mr-1"></i> Download
+                            <img src="/assets/images/download.svg" alt="" class="me-1" > Download
                           </a>
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-share-alt mr-1"></i> Share
+                            <img src="/assets/images/share.svg" alt="" class="me-1" > Share
                           </a>
                         </div>
                       </div>
@@ -967,9 +973,9 @@
                     <!-- <hr class="m-0"/> -->
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">completed</span>
                         <img  src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <!-- <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
                       </div>
@@ -979,13 +985,13 @@
                         <div><strong>Apartment Rules</strong></div>
                         <div class="d-flex align-items-center">
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-eye mr-1"></i> View
+                            <img src="/assets/images/view.svg" class="me-1" alt=""> View
                           </a>
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-download mr-1"></i> Download
+                            <img src="/assets/images/download.svg" alt="" class="me-1" > Download
                           </a>
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-share-alt mr-1"></i> Share
+                            <img src="/assets/images/share.svg" alt="" class="me-1" > Share
                           </a>
                         </div>
                       </div>
@@ -1007,7 +1013,7 @@
               <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
                 <div class="row align-items-center">
                   <div class="container mt-3">
-                    <h5>More details</h5>
+                    <h6 class="fw-bold text-lowercase">More details</h6>
                     <p class="text-muted">View tenant passport and reported problems, invoices</p>
                     <div class="accordion" id="accordionExample">
                       <div class="container mt-3">
@@ -1031,7 +1037,7 @@
                 </div>
               </div>
             </div>
-            </p-accordionTab>
+            </p-p-accordionTab>
 
             <!-- end Booking Process Section -->
 
@@ -1039,38 +1045,10 @@
 
           </p-accordion>
 
-
         </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-
-<div class="row m-0">
-  <div class="col-lg-2"></div>
-  <div class="col-lg-10">
-    <div class="container mt-4 p-4 m-2">
-      <div class="card bookingdetails">
-        <div class="card-header">
-          <h4 class="fs-5 fw-bold">Booking Details</h4>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 mb-3">
-              <div class="d-flex justify-content-between">
-                <div class="fw-bold">Bed No</div>
-                <div class="fw-bold">Room type</div>
-                <div class="fw-bold">Bed price</div>
-                <div class="fw-bold">Security deposit</div>
-                <div class="fw-bold">Service fee</div>
-                <div class="fw-bold">Status</div>
-              </div>
-            </div>
-          </div>
-
-          <p-accordion id="bed"  >
+        <div class="mb-4">
+          <p-accordion id="bed">
             <!-- Bed 1 Section -->
             <p-accordionTab   [selected]="true" [headerStyle]="{'background-color': '#fff' }">
               <ng-template pTemplate="header"  >
@@ -1080,7 +1058,7 @@
                   <div>€ 300</div>
                   <div>€ 100</div>
                   <div>€ 50</div>
-                  <div class="badge badge-success text-info">Rented <i class="fas fa-chevron-down ml-2"></i></div>
+                  <div class="badge rented">Rented <img src="/assets/images/expand_more.svg" alt=""></div>
                 </div>
               </ng-template>
               <!-- <hr class="m-0"/> -->
@@ -1091,7 +1069,7 @@
                       <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile Image">
                     </div>
                     <div class="col-lg-3 border-end">
-                      <h5 class="m-0">Osman Ahmed</h5>
+                      <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
                       <p class="m-0 text-muted">osman2025@gmail.com</p>
                     </div>
                     <div class="col-lg-3 text-right border-end">
@@ -1126,9 +1104,9 @@
                           <span class="ml-2">Passport</span>
                         </div> -->
                         <div class="d-flex align-items-center justify-content-end w-100">
-                          <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                          <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                          <span class="badge badge-light text-success">Uploaded</span>
+                          <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                            <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                          <span class="badge approve">Uploaded</span>
                           <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                           <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
                         </div>
@@ -1167,9 +1145,9 @@
                     <div class="d-flex align-items-center justify-content-end w-100">
 
 
-                      <span class="mx-2 "><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                      <span class="mx-2 "><i class="fas fa-clock"></i> 10:35 PM</span>
-                      <span class="badge badge-light text-success ">paid</span>
+                      <span class="mx-2 "><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                      <span class="mx-2 "><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                      <span class="badge approve ">paid</span>
                       <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                       <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
 
@@ -1197,7 +1175,7 @@
                             <td>$35.00</td>
                             <td>Visa</td>
                             <td><span class="badge bg-success text-white">paid</span></td>
-                            <td><i class="fas fa-download"></i></td>
+                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
                           <tr>
                             <td>Invoice435</td>
@@ -1205,7 +1183,7 @@
                             <td>$35.00</td>
                             <td>Apple Pay</td>
                             <td><span class="badge bg-danger text-white">unpaid</span></td>
-                            <td><i class="fas fa-download"></i></td>
+                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
                         </tbody>
                       </table>
@@ -1216,9 +1194,9 @@
                   <p-accordionTab header="Sign Contract" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                     <div class="d-flex align-items-center justify-content-end w-100">
-                      <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                      <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                      <span class="badge badge-light text-success">signed</span>
+                      <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                        <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                      <span class="badge approve">signed</span>
                       <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                       <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
                     </div>
@@ -1232,8 +1210,8 @@
                           <div class="ml-2 mr-3">Contract.pdf</div>
                         </div>
                         <div class="d-flex align-items-center">
-                          <a href="#" class="text-decoration-none text-primary mx-2"><i class="fas fa-eye"></i> View</a>
-                          <a href="#" class="text-decoration-none text-primary mx-2"><i class="fas fa-download"></i> Download</a>
+                          <a href="#" class="text-decoration-none text-primary mx-2"><img src="/assets/images/view.svg" class="me-1" alt="">View</a>
+                          <a href="#" class="text-decoration-none text-primary mx-2"> <img src="/assets/images/download.svg" alt="" class="me-1" >Download</a>
                           <button class="btn custom-btn-outline-primary ml-3">Reassign Contract</button>
                         </div>
                       </div>
@@ -1244,9 +1222,9 @@
                   <p-accordionTab header="Arriving Details" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">signed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">signed</span>
                         <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
                       </div>
@@ -1286,9 +1264,9 @@
                   <p-accordionTab   header="Check In Process" [selected]="true" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">signed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">signed</span>
                         <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
                       </div>
@@ -1296,7 +1274,7 @@
                     <!-- <hr class="m-0"/> -->
                      <div class="m-0 p-0"   >
                     <div class="container m-0"   >
-                      <h5>Check In Process</h5>
+                      <h6 class="fw-bold text-lowercase">Check In Process</h6>
                       <p class="text-muted">View tenant check-in process from scanning bed QR code to signing the contract and completing the payment process.</p>
                       <p-accordion   >
                         <!-- Scanning Bed QR Code Section -->
@@ -1304,9 +1282,9 @@
                           <!-- <hr class="m-0"/> -->
                           <ng-template pTemplate="header"  >
                             <div class="d-flex align-items-center justify-content-end w-100">
-                              <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                              <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                              <span class="badge badge-light text-success">signed</span>
+                              <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                                <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                              <span class="badge approve">signed</span>
                               <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                               <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
                             </div>
@@ -1316,13 +1294,13 @@
                               <div><strong>Bed QR code:</strong> 363401</div>
                               <div class="d-flex align-items-center">
                                 <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                                  <i class="fas fa-eye mr-1"></i> View
+                                  <img src="/assets/images/view.svg" class="me-1" alt=""> View
                                 </a>
                                 <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                                  <i class="fas fa-download mr-1"></i> Download
+                                  <img src="/assets/images/download.svg" alt="" class="me-1" > Download
                                 </a>
                                 <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                                  <i class="fas fa-share-alt mr-1"></i> Share
+                                  <img src="/assets/images/share.svg" alt="" class="me-1" > Share
                                 </a>
                               </div>
                             </div>
@@ -1333,9 +1311,9 @@
                   <p-accordionTab header="Confirm Identity" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">signed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">signed</span>
                         <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
                       </div>
@@ -1364,9 +1342,9 @@
                     <!-- <hr class="m-0"/> -->
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">signed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">signed</span>
                         <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
                       </div>
@@ -1392,7 +1370,7 @@
                             <td>$35.00</td>
                             <td>Visa</td>
                             <td><span class="badge badge-success bg-success">paid</span></td>
-                            <td><i class="fas fa-download"></i></td>
+                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
                           <tr>
                             <td>Invoice435</td>
@@ -1401,7 +1379,7 @@
                             <td>$35.00</td>
                             <td>Apple Pay</td>
                             <td><span class="badge badge-success bg-success">paid</span></td>
-                            <td><i class="fas fa-download"></i></td>
+                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
                         </tbody>
                       </table>
@@ -1413,9 +1391,9 @@
                     <!-- <hr class="m-0"/> -->
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">signed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">signed</span>
                         <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
                       </div>
@@ -1425,13 +1403,13 @@
                         <div><strong>Handover Protocols</strong></div>
                         <div class="d-flex align-items-center">
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-eye mr-1"></i> View
+                            <img src="/assets/images/view.svg" class="me-1" alt=""> View
                           </a>
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-download mr-1"></i> Download
+                            <img src="/assets/images/download.svg" alt="" class="me-1" > Download
                           </a>
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-share-alt mr-1"></i> Share
+                            <img src="/assets/images/share.svg" alt="" class="me-1" > Share
                           </a>
                         </div>
                       </div>
@@ -1443,9 +1421,9 @@
                     <!-- <hr class="m-0"/> -->
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-end w-100">
-                        <span class="mx-2"><i class="fas fa-calendar-alt"></i> 12 Jun,2024</span>
-                        <span class="mx-2"><i class="fas fa-clock"></i> 10:35 PM</span>
-                        <span class="badge badge-light text-success">signed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
+                        <span class="badge approve">signed</span>
                         <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
                       </div>
@@ -1458,10 +1436,10 @@
                             <i class="fas fa-eye mr-1"></i> View
                           </a>
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-download mr-1"></i> Download
+                            <img src="/assets/images/download.svg" alt="" class="me-1" > Download
                           </a>
                           <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <i class="fas fa-share-alt mr-1"></i> Share
+                            <img src="/assets/images/view.svg" class="me-1" alt=""> Share
                           </a>
                         </div>
                       </div>
@@ -1483,7 +1461,7 @@
               <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
                 <div class="row align-items-center">
                   <div class="container mt-3">
-                    <h5>More details</h5>
+                    <h6 class="fw-bold text-lowercase">More details</h6>
                     <p class="text-muted">View tenant passport and reported problems, invoices</p>
                     <div class="accordion" id="accordionExample">
                       <div class="container mt-3">
@@ -1514,6 +1492,8 @@
 
 
           </p-accordion>
+        </div>
+
 
 
         </div>
@@ -1521,6 +1501,7 @@
     </div>
   </div>
 </div>
+
 
 
 
