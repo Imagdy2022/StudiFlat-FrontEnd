@@ -281,3 +281,26 @@
   border-top-color: #000000;
   animation: spinner .8s linear infinite;
 }
+.badge{
+  font-size: 13px ;
+  padding: 4px 8px;
+  font-weight: 500;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.rented {
+  color: #1F4068;
+  background-color: #DAEBFF80;
+}
+.approve {
+  color: #027A48;
+  background-color: #ECFDF3;
+}
+.unpaid {
+  color: #EF2011;
+  background-color: #FCEEEE;
+}
