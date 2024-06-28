@@ -645,7 +645,7 @@
 
 
               <!-- <p-accordionTab header="Booking Process"> -->
-                <p-accordion    [style]="{'background-color': '#f4f3f3'}"  >
+                <p-accordion    [style]="{'background-color': '#f4f3f3'}"  [multiple]="true" [activeIndex]="[0]" >
                   <!-- Passport Section -->
                   <p-accordionTab header="Passport" id="pass"  class="custom-accordion-tab" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false" >
                     <ng-template pTemplate="header"  >

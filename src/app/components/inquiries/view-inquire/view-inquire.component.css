@@ -304,3 +304,16 @@
   color: #EF2011;
   background-color: #FCEEEE;
 }
+  ::ng-deep .p-accordion-toggle-icon {
+    position: absolute;
+    right: 5px;
+    margin-top: -5px;  }
+    .img-fluid
+    {
+      margin-right:15px;
+    }
+
+    ::ng-deep .p-accordion-header-link {
+            box-shadow: none !important;
+          }
+        
