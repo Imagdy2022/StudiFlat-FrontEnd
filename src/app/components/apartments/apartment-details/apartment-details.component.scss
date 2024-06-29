@@ -1,3 +1,281 @@
+
+
+.ui-accordion .ui-accordion-header {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000000;
+  padding: 1rem;
+  border: none;
+  background: none;
+}
+
+
+.ui-accordion .ui-accordion-header:hover {
+  background-color: #f1f1f1;
+}
+
+
+.ui-accordion .ui-accordion-header .ui-icon {
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  color: #000000;
+}
+
+
+.ui-accordion .ui-accordion-content {
+  padding: 1rem;
+  border-top: none;
+  font-size: 0.875rem;
+  color: #6c6a6a;
+}
+
+
+.ui-accordion .ui-accordion-header.ui-state-active {
+  background: none;
+  color: #1f4068;
+  font-weight: bold;
+}
+
+
+
+.custom-apartment-details {
+  max-width: 500px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-apartment-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f4068;
+  margin-bottom: 0.5rem;
+}
+
+.custom-apartment-type {
+  font-size: 0.9rem;
+  color: #6c6a6a;
+  margin-bottom: 1rem;
+}
+
+.custom-apartment-price {
+  font-size: 1.5rem;
+  color: #1f4068;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.custom-apartment-price span {
+  font-size: 0.9rem;
+  color: #6c6a6a;
+}
+
+.custom-apartment-info {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.custom-info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.custom-info-item img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.custom-info-item p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6c6a6a;
+}
+
+.custom-apartment-actions {
+  margin-top: 1rem;
+}
+
+.custom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 15px;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+
+
+}
+
+.custom-btn-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.custom-btn-edit {
+  background-color: #d2d9e1;
+  color: #1f4068;
+}
+
+.custom-btn-share {
+  background-color: #d2d9e1;
+  color: #1f4068;
+}
+
+
+.custom-image-gallery {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.custom-thumbnail {
+  border-radius: 10px;
+  overflow: hidden;
+  flex: 1;
+  max-width: 120px;
+  max-height: 120px;
+}
+
+.custom-thumbnail img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.custom-thumbnail img:hover {
+  transform: scale(1.05);  
+}
+
+.custom-transport-info {
+
+
+  padding: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.custom-transport-item {
+  margin-bottom: 20px;
+}
+
+.custom-transport-distance {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 5px;
+}
+
+.custom-transport-box {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+.custom-property-info {
+  background-color: #ffffff;
+
+  padding: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.custom-property-item {
+  margin-bottom: 20px;
+}
+
+.custom-property-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 5px;
+}
+
+.custom-property-box {
+
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+
+.custom-apartment-buttons {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.custom-btn-rented {
+  background-color: #1f4068;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.custom-btn-delete {
+  background-color: #d2d9e1;
+  color: #1f4068;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.custom-btn-delete .custom-btn-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .p-rating .p-rating-icon.p-rating-icon-active {
     color: #ffce00;
 }
