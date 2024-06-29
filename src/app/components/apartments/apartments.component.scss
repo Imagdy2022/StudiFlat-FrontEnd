@@ -9,7 +9,15 @@
   border-radius: 0.25rem;
 
 }
-
+.week {
+  color: #605D62;
+  border: 1px solid #ebebeb;
+  background-color: #fff;
+}
+.activeButton{
+  background-color: #1F4068;
+  color: #fff
+}
 .custom-paginator-button {
   font-size: 16px;
   padding: 0.375rem 1rem;

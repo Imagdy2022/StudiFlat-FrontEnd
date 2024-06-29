@@ -34,7 +34,8 @@ export class ApartmentsComponent implements OnInit {
   subscriptions: Subscription[] = [];
   first: number = 1;
   rows: number = 10;
-
+  monthButton: boolean = true;
+  weekButton: boolean = false;
   constructor(private apartmentSer: ApartmentService, public router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
