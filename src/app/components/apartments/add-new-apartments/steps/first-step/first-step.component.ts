@@ -73,18 +73,18 @@ export class FirstStepComponent implements OnInit {
   /**  data of transport in form */
   Createtransport: Array<any> = [];
   bedrooms: number[] = [];
-  /** t_Name */
-  t_Name: string = '';
-  /** t_Distance */
-  t_Distance: string = '';
+  /** transport_Name */
+  transport_Name: string = '';
+  /** transport_Distance */
+  transport_Distance: string = '';
   Bedrooms:string;
-  /** apt_UUID */
-  apt_UUID: any = '';
+  /** apartment_ID */
+  apartment_ID: any = '';
   @Input() id: string = '';
   /** n_ofbedroom */
   n_ofbedroom: number = 0;
-  /** apt_Toilets */
-  apt_Toilets: number = 0;
+  /** apartment_BathroomNo */
+  apartment_BathroomNo: number = 0;
   /** n_ofLiving */
   n_ofLiving: number = 0;
   /** apt_imgs */
@@ -120,7 +120,7 @@ export class FirstStepComponent implements OnInit {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
 
     if (this.addApartment != 'add new apartments') {
-      // this.apt_UUID= localStorage.getItem("apt_UUID");
+      // this.apartment_ID= localStorage.getItem("apartment_ID");
       //   this.storedImages = JSON.parse(localStorage.getItem("imagesAPT")||'{}');
       this.getAowners();
 
@@ -132,7 +132,7 @@ export class FirstStepComponent implements OnInit {
       this.getApartmentDetails();
     } else {
       this.edit = '';
-      this.apt_UUID = localStorage.getItem('apt_UUID');
+      this.apartment_ID = localStorage.getItem('apartment_ID');
       this.storedImages = JSON.parse(localStorage.getItem('imagesAPT') || '{}');
       // this.apt_imgs= JSON.parse(localStorage.getItem("imagesAPT")||'{}');
       this.initFakeData();
@@ -158,9 +158,9 @@ export class FirstStepComponent implements OnInit {
       .subscribe((res) => {
         this.aprt_details_Edit = res.general_Info;
         this.apt_imgs = res.general_Info['property_Imgs'];
-        this.billinclude = res.general_Info['apt_AllBillsIncludes'];
+        this.billinclude = res.general_Info['apartment_All_Bill_Included'];
         this.generalInfoForm
-          .get('apt_Imgs')
+          .get('apartment_Images')
           ?.patchValue(res.general_Info['property_Imgs']);
           this.subscriptions.push(this._ApartmentService.getOwnerDropList().subscribe((res) => {
             this.listDropDownPropertyowner = res.list;
@@ -181,23 +181,23 @@ export class FirstStepComponent implements OnInit {
 
     if (data !== null) {
       let parsedData = JSON.parse(data);
-      if (parsedData.apt_types == 'Apartment') {
+      if (parsedData.apartment_Type == 'Apartment') {
         this.isShow = true;
       } else {
         this.isShow = false;
       }
       this.generalInfoForm.patchValue(parsedData);
-      this.generalInfoForm.get('apt_Imgs')?.patchValue(parsedData.apt_Imgs);
-      this.apt_imgs = parsedData.apt_Imgs;
+      this.generalInfoForm.get('apartment_Images')?.patchValue(parsedData.apartment_Images);
+      this.apt_imgs = parsedData.apartment_Images;
       this.bills = parsedData.bills;
 
-      this.billinclude = parsedData.apt_AllBillsIncludes;
+      this.billinclude = parsedData.apartment_All_Bill_Included;
 
-      this.generalInfoForm.get('apt_Area')?.setValue(parsedData.apt_Area);
-      this.selectedfromDropDownArea(parsedData.apt_Area, 'update');
+      this.generalInfoForm.get('apartment_Area')?.setValue(parsedData.apartment_Area);
+      this.selectedfromDropDownArea(parsedData.apartment_Area, 'update');
 
-      // this.localapt_Transports = parsedData.apt_Transports;
-      this.Createtransport == parsedData.apt_Transports;
+      // this.localapt_Transports = parsedData.apartment_Transports;
+      this.Createtransport == parsedData.apartment_Transports;
     }
     if (data2 !== null) {
       let parsedData2 = JSON.parse(data2);
@@ -209,8 +209,8 @@ export class FirstStepComponent implements OnInit {
    */
   getApartmentCode() {
    this.subscriptions.push(  this._ApartmentService.getApartmentcode().subscribe((res) => {
-    this.apt_UUID = res;
-    localStorage.setItem('apt_UUID', this.apt_UUID);
+    this.apartment_ID = res;
+    localStorage.setItem('apartment_ID', this.apartment_ID);
   }));
 
   }
@@ -229,8 +229,8 @@ export class FirstStepComponent implements OnInit {
    * @param value
    */
   selectedfromDropDownPropertyowner(value: any): void {
-    this.generalInfoForm.get('apt_Owner')?.setValue(value.id);
-    localStorage.setItem('apt_Owner', value.name);
+    this.generalInfoForm.get('apartment_Owner')?.setValue(value.id);
+    localStorage.setItem('apartment_Owner', value.name);
   }
 
   /**
@@ -249,41 +249,38 @@ export class FirstStepComponent implements OnInit {
    */
   selectedfromDropDownArea(value: any, ifUpdaa: any): void {
     if (ifUpdaa == 'update') {
-      this.generalInfoForm.get('apt_Area')?.setValue(value);
+      this.generalInfoForm.get('apartment_Area')?.setValue(value);
     } else {
-      this.generalInfoForm.get('apt_Area')?.setValue(value.name);
+      this.generalInfoForm.get('apartment_Area')?.setValue(value.name);
     }
   }
 
   selectedfromDropDownFloor(value: any): void {
-    this.generalInfoForm.get('apt_FloorNo')?.setValue(+value.name);
+    this.generalInfoForm.get('apartment_Floor')?.setValue(+value.name);
   }
   selectedfromDropDownApartmentnumber(value: any): void {
-    this.generalInfoForm.get('apt_AptNo')?.setValue(+value.name);
+    this.generalInfoForm.get('apartment_No')?.setValue(+value.name);
   }
 
   selectedfromDropDownApartmentType(value: any): void {
-    this.generalInfoForm.get('apt_types')?.setValue(value.name);
+    this.generalInfoForm.get('apartment_Type')?.setValue(value.name);
     if (value.name == 'Apartment') {
       this.showNone = false;
-      this.generalInfoForm.get('apt_Bedrooms')?.setValue(1);
-      this.generalInfoForm.get('apt_Toilets')?.setValue(1);
-      this.generalInfoForm.get('apt_Living')?.setValue(1);
+      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
+      this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
     } else if (value.name == 'Studio') {
-      this.generalInfoForm.get('apt_Bedrooms')?.setValue(1);
-      this.generalInfoForm.get('apt_Toilets')?.setValue(1);
-      this.generalInfoForm.get('apt_Living')?.setValue(0);
+      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
+      this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
       this.showNone = true;
     } else {
-      this.generalInfoForm.get('apt_Bedrooms')?.setValue(0);
-      this.generalInfoForm.get('apt_Toilets')?.setValue(0);
-      this.generalInfoForm.get('apt_Living')?.setValue(0);
+      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(0);
+      this.generalInfoForm.get('apartment_BathroomNo')?.setValue(0);
       this.showNone = true;
     }
   }
   selectedfromDropDownElevator(value: any): void {
     this.generalInfoForm
-      .get('apt_Elevator')
+      .get('apartment_Elevator')
       ?.setValue(value.name == 'yes' ? true : false);
   }
   /**
@@ -317,7 +314,7 @@ export class FirstStepComponent implements OnInit {
           this.apt_imgs.push({ apt_imgs: file.name });
         }
         this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
-        this.generalInfoForm.get('apt_Imgs')?.patchValue(this.apt_imgs);
+        this.generalInfoForm.get('apartment_Images')?.patchValue(this.apt_imgs);
       }));
   }
 
@@ -403,39 +400,61 @@ export class FirstStepComponent implements OnInit {
 
   bindCreateGeneral(): void {
     this.generalInfoForm = new FormGroup({
-      apt_Area: new FormControl('0', [Validators.required]),
+      apartment_Area: new FormControl('0', [Validators.required]),
 
-      apt_FloorNo: new FormControl('0', [Validators.required]),
-      apt_Name: new FormControl('', [Validators.required]),
-      apt_AptNo: new FormControl('0', [Validators.required]),
-      apt_Price: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apartment_Floor: new FormControl('0', [Validators.required]),
+      apartment_Name: new FormControl('', [Validators.required]),
+      apartment_Code: new FormControl(''),
+      apartment_No: new FormControl('0', [Validators.required]),
+      apartment_Price: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       apt_SecuirtyDep: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-      apt_BillDescirption: new FormControl(''),
-      apt_StName: new FormControl('', [Validators.required]),
-      apt_BuildingNo: new FormControl('', [Validators.required]),
-      apt_CityorPostal: new FormControl('', [Validators.required]),
-      apt_SquareMeters: new FormControl(0, [Validators.required]),
-      apt_MaxGuest: new FormControl(0, [Validators.required]),
-      apt_Imgs: new FormControl(this.apt_imgs, Validators.required),
-      apt_Descirpt: new FormControl('', [Validators.required]),
-      apt_VideoLink: new FormControl('', [Validators.required]),
-      apt_360D: new FormControl('', [Validators.required]),
-      apt_MapLink: new FormControl('', [Validators.required]),
-      // 'apt_Long': new FormControl('', [Validators.required]),
+      apartment_Bill_Descirption: new FormControl(''),
+      apartment_StreetName: new FormControl('', [Validators.required]),
+      apartment_BuildingName: new FormControl('', [Validators.required]),
+      apartment_City: new FormControl('', [Validators.required]),
+      apartment_Area_Square: new FormControl(0, [Validators.required]),
+      apartment_Images: new FormControl(this.apt_imgs, Validators.required),
+      apartment_Description: new FormControl('', [Validators.required]),
+      apartment_VideoLink: new FormControl('', [Validators.required]),
+      apartment_360DLink: new FormControl('', [Validators.required]),
+      apartment_GoogleLocation: new FormControl('', [Validators.required]),
       //  'UUID': new FormControl(this.id ),
       service_Fees: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
 
-      apt_Bedrooms: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-      apt_Toilets: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-      apt_Living: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-      apt_AllBillsIncludes: new FormControl(true, [Validators.required]), //true
-      apt_Elevator: new FormControl(true, [Validators.required]),
-      // 'apt_Lat': new FormControl('', [Validators.required]),//0
-      // 'apt_Long': new FormControl('', [Validators.required]),//0
-      apt_types: new FormControl('Select Type', [Validators.required]),
-      apt_Owner: new FormControl('0', [Validators.required]), //string
+      apartment_BedRoomsNo: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apartment_BathroomNo: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apartment_All_Bill_Included: new FormControl(true, [Validators.required]), //true
+      apartment_Elevator: new FormControl(true, [Validators.required]),
+      // 'apartment_Lat': new FormControl('', [Validators.required]),//0
+      // 'apartment_Long': new FormControl('', [Validators.required]),//0
+      apartment_Type: new FormControl('Select Type', [Validators.required]),
+      apartment_Owner: new FormControl('0', [Validators.required]), //string
+      apartment_Manager: new FormControl('0', [Validators.required]), //string
       apt_Status: new FormControl('', [Validators.required]), //Rented
       apt_ThumbImg: new FormControl('', [Validators.required]),
+      apartment_RentBy_Apartment: new FormControl(true, [Validators.required]), //true
+      apartment_RentBy_Bed: new FormControl(true, [Validators.required]), //true
+      apartment_SharedArea: new FormControl(true, [Validators.required]), //true
+      apartment_SleepingArea: new FormControl('0'), //string
+      apartment_Rooms: new FormGroup({
+        room_Type: new FormControl(null),
+        beds_No: new FormControl(0, [
+          Validators.required,
+          Validators.pattern(/^[1-9]\d*$/)
+        ]),
+        bed_Price: new FormControl(0, [
+          Validators.required,
+          Validators.pattern(/^[1-9]\d*$/)
+        ]),
+        bed_SecuirtyDeposit: new FormControl(0, [
+          Validators.required,
+          Validators.pattern(/^[1-9]\d*$/)
+        ]),
+        bed_Service_Fees: new FormControl(0, [
+          Validators.required,
+          Validators.pattern(/^[1-9]\d*$/)
+        ]),
+      }),
     });
   }
 
@@ -455,11 +474,11 @@ export class FirstStepComponent implements OnInit {
     //      this.generalInfoForm.get('apt_ThumbImg')?.patchValue(this.apt_imgs[0].apt_imgs);
     //      data.value.apt_ThumbImg=this.apt_imgs[0].apt_imgs;
     // }
-    data.value.apt_AllBillsIncludes = this.billinclude;
+    data.value.apartment_All_Bill_Included = this.billinclude;
     // data.value.apt_Lat = 0
     data.value.apt_Status = 'Rented';
 
-    // this.Createtransport.push({ t_Name: this.t_Name, t_Distance: this.t_Distance });
+    // this.Createtransport.push({ transport_Name: this.transport_Name, transport_Distance: this.transport_Distance });
     localStorage.setItem(
       'Createtransport',
       JSON.stringify(this.Createtransport)
@@ -469,7 +488,7 @@ export class FirstStepComponent implements OnInit {
       'generalInfoForm',
       JSON.stringify({
         ...this.generalInfoForm.value,
-        apt_Transports: this.Createtransport,
+        apartment_Transports: this.Createtransport,
         bills: this.bills,
       })
     );
@@ -477,8 +496,7 @@ export class FirstStepComponent implements OnInit {
     if (this.addApartment != 'add new apartments') {
       this.subscriptions.push( this._ApartmentService
         .createPostSec1(
-          { ...data.value, apt_Transports: this.Createtransport },
-          this.idParamterEdit
+          { ...data.value, apartment_Transports: this.Createtransport },
         )
         .subscribe(
           (res) => {
@@ -487,13 +505,12 @@ export class FirstStepComponent implements OnInit {
               summary: 'Success',
               detail: `${res?.message}`,
             });
-            this.n_ofbedroom = data.value.apt_Bedrooms;
-            this.apt_Toilets = data.value.apt_Toilets;
-            this.n_ofLiving = data.value.apt_Living;
+            this.n_ofbedroom = data.value.apartment_BedRoomsNo;
+            this.apartment_BathroomNo = data.value.apartment_BathroomNo;
 
             this.submitSecondForm();
             this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
-            this.jumbToNextSteb2_apt_Toilets.emit(this.apt_Toilets);
+            this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
             this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
             this.getId.emit(res.uuid);
           },
@@ -509,8 +526,7 @@ export class FirstStepComponent implements OnInit {
     } else {
       this.subscriptions.push(this._ApartmentService
         .createPostSec1(
-          { ...data.value, apt_Transports: this.Createtransport },
-          this.id
+          { ...data.value, apartment_Transports: this.Createtransport },
         )
         .subscribe(
           (res) => {
@@ -519,13 +535,12 @@ export class FirstStepComponent implements OnInit {
               summary: 'Success',
               detail: `${res?.message}`,
             });
-            this.n_ofbedroom = data.value.apt_Bedrooms;
-            this.apt_Toilets = data.value.apt_Toilets;
-            this.n_ofLiving = data.value.apt_Living;
+            this.n_ofbedroom = data.value.apartment_BedRoomsNo;
+            this.apartment_BathroomNo = data.value.apartment_BathroomNo;
 
             this.submitSecondForm();
             this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
-            this.jumbToNextSteb2_apt_Toilets.emit(this.apt_Toilets);
+            this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
             this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
             this.getId.emit(res.uuid);
           },
@@ -651,7 +666,7 @@ export class FirstStepComponent implements OnInit {
           this.apt_imgs.push({ apt_imgs: file.name });
         }
         // this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
-        this.generalInfoForm.get('apt_Imgs')?.patchValue(this.apt_imgs);
+        this.generalInfoForm.get('apartment_Images')?.patchValue(this.apt_imgs);
         localStorage.setItem('imagesAPT', JSON.stringify(this.apt_imgs));
         this.spinner = false;
       }));
@@ -714,25 +729,22 @@ export class FirstStepComponent implements OnInit {
     if (deviceValue == 'Apartment') {
       this.isShow = true;
       this.studioShow = false;
-      this.generalInfoForm.get('apt_Bedrooms')?.setValue(1);
-      this.generalInfoForm.get('apt_Toilets')?.setValue(1);
-      this.generalInfoForm.get('apt_Living')?.setValue(1);
+      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
+      this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
     } else if (deviceValue == 'Studio') {
       this.isShow = false;
       this.studioShow = true;
-      this.generalInfoForm.get('apt_Bedrooms')?.setValue(1);
-      this.generalInfoForm.get('apt_Toilets')?.setValue(1);
-      this.generalInfoForm.get('apt_Living')?.setValue(0);
+      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
+      this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
     } else {
       this.isShow = false;
       this.studioShow = false;
-      this.generalInfoForm.get('apt_Bedrooms')?.setValue(0);
-      this.generalInfoForm.get('apt_Toilets')?.setValue(0);
-      this.generalInfoForm.get('apt_Living')?.setValue(0);
+      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(0);
+      this.generalInfoForm.get('apartment_BathroomNo')?.setValue(0)
     }
   }
   SetOwnerName(event: any) {
-    localStorage.setItem('apt_owner', event.target.selectedOptions[0].text);
+    localStorage.setItem('apartment_Owner', event.target.selectedOptions[0].text);
   }
 
   gotopage() {

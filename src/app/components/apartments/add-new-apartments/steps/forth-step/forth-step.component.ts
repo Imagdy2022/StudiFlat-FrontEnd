@@ -231,7 +231,7 @@ export class ForthStepComponent {
     localStorage.setItem("PostBackupInfo", JSON.stringify({ ...payloadData, CreateapartmentCurrentlyExisting: this.CreateapartmentCurrentlyExisting }))
     this.checkValidData()
 
-    this.subscriptions.push( this._ApartmentService.createPostSec4(payloadData, this.id).subscribe((res) => {
+    this.subscriptions.push( this._ApartmentService.createPostSec4(payloadData).subscribe((res) => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
       this.router.navigate(['apartments']);
     }, (err: any) => {

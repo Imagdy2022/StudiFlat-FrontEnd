@@ -480,7 +480,7 @@ export class SecondStepComponent {
 
     if (this.addApartment != 'add new apartments') {
       this.subscriptions.push(this._ApartmentService
-        .createPostSec2(objectData, this.idParamterEdit)
+        .createPostSec2(objectData)
         .subscribe(
           (res) => {
             localStorage.setItem(
@@ -505,7 +505,7 @@ export class SecondStepComponent {
         ));
 
     } else {
-      this.subscriptions.push(this._ApartmentService.createPostSec2(objectData, this.id).subscribe(
+      this.subscriptions.push(this._ApartmentService.createPostSec2(objectData).subscribe(
         (res) => {
           localStorage.setItem('create_Apart_Equ', JSON.stringify(objectData));
 

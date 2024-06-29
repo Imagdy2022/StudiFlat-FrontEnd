@@ -47,37 +47,34 @@ export class ApartmentService {
 
     return this.http.get<any>(url, { headers: this.headers, params: params });
   }
-  createPostSec1(data: any, id: any): Observable<any> {
+  createPostSec1(data: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl + '/Apartment/PostSec1?UUID=' + id}`,
+      `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step1'}`,
       data,
       { headers: this.headers }
     );
   }
-  createPostSec2(data: any, id: string): Observable<any> {
-    const params = new HttpParams().set('UUID', id);
+  createPostSec2(data: any): Observable<any> {
 
     return this.http.post(
-      `${environment.apiUrl + '/Apartment/PostSec2'}`,
+      `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step2'}`,
       data,
-      { params: params, headers: this.headers }
+      { headers: this.headers }
     );
   }
-  createPostSec3(data: any, id: string): Observable<any> {
-    const params = new HttpParams().set('UUID', id);
+  createPostSec3(data: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl + '/Apartment/PostSec3'}`,
+      `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step3'}`,
       data,
-      { params: params, headers: this.headers }
+      {headers: this.headers }
     );
   }
-  createPostSec4(data: any, id: string): Observable<any> {
-    const params = new HttpParams().set('UUID', id);
+  createPostSec4(data: any): Observable<any> {
 
     return this.http.post(
-      `${environment.apiUrl + '/Apartment/PostSec4'}`,
+      `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step4'}`,
       data,
-      { params: params, headers: this.headers }
+      { headers: this.headers }
     );
   }
   createApartmentGeneralInfo(data: any): Observable<any> {
