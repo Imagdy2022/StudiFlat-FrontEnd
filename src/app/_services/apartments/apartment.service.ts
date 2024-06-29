@@ -19,34 +19,41 @@ export class ApartmentService {
 
   constructor(private http: HttpClient) {}
 
-  getAllApartnents(
-    PageNumber: number,
-    PageSize: number
-  ): Observable<IApartments[]> {
-    const url = `${environment.apiUrl}/Apartment`;
-    const params = new HttpParams()
-      .set('PageNumber', PageNumber)
-      .set('PageSize', PageSize);
+   
 
-    return this.http.get<IApartments[]>(url, { params: params });
-  }
-  FilterApartmentsFront(
-    FilterKey: any,
-    PageNumber: number,
-    PageSize: number,
-    Apt_Statuss: any,
-    SearchKey: any
-  ): Observable<any> {
-    const url = `${environment.apiUrl}/Apartment/FilterApartmentsFront`;
-    const params = new HttpParams()
-      .set('FilterKey', FilterKey)
-      .set('PageNo', PageNumber)
-      .set('PageSize', PageSize)
-      .set('Apt_Statuss', Apt_Statuss)
-      .set('SearchKey', SearchKey);
+///////////////////////
 
-    return this.http.get<any>(url, { headers: this.headers, params: params });
-  }
+ getAllApartments(PageNumber: number, PageSize: number): Observable<IApartments[]> {
+  const url = `${environment.apiUrl}/ApartmentV2/GetListApartments`;
+  const params = new HttpParams()
+    .set('Page_No', PageNumber.toString())
+    .set('Page_Size', PageSize.toString());
+
+  return this.http.get<IApartments[]>(url, { params: params });
+}
+
+
+FilterApartmentsFront(FilterKey: any, PageNumber: number, PageSize: number, Apt_Statuss: any, SearchKey: any): Observable<any> {
+  const url = `${environment.apiUrl}/ApartmentV2/GetListApartments`;
+  const params = new HttpParams()
+    .set('FilterKey', FilterKey)
+    .set('Page_No', PageNumber.toString())
+    .set('Page_Size', PageSize.toString())
+    .set('Apt_Statuss', Apt_Statuss)
+    .set('SearchKey', SearchKey);
+
+  return this.http.get<any>(url, { headers: this.headers, params: params });
+}
+
+////////////////////////////
+
+
+
+
+
+
+
+
   createPostSec1(data: any, id: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl + '/Apartment/PostSec1?UUID=' + id}`,

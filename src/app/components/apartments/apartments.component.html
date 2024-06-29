@@ -1,212 +1,133 @@
 <!-- start header  -->
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Apartments'"></app-head>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Apartments'"></app-head>
 </header>
 <!-- end header  -->
 
 <div class="row m-0 CCCCFSMILY">
-    <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'apartments'"></app-sidebar>
-    <!-- end sidebar  -->
-    <!-- start content page  -->
-    <main class="p-4 col-lg-10 " (click)="hidecard()">
-        <!-- start part 1 in page  -->
-        <div class="fw-bold d-flex justify-content-between align-items-center" style="color: #6c6a6a; margin-top: 7px; margin-bottom: 24px;">
-            <p>Apartments</p>
-            <!-- start add button (add new apartment) in page  -->
-            <div class="d-flex justify-content-lg-between ">
-              <!-- start dropdown button  -->
-              <app-dropdown class="me-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)" ></app-dropdown>
-              <!-- end dropdown button  -->
-              <!-- start add button (add new owner) in page  -->
-              <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true  || is_Super==true"[id]="'apartments/page/add-new-apartments'" class="mt-2"></app-add-new-button>
-              <!-- end add button (add new owner) in page  -->
-          </div>
-            <!-- end add button (add new apartment) in page  -->
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'apartments'"></app-sidebar>
+  <!-- end sidebar  -->
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10 " (click)="hidecard()">
+    <!-- start part 1 in page  -->
+
+    <div class="fw-bold d-flex justify-content-between align-items-center" style="color: #6c6a6a; margin-top: 7px; margin-bottom: 24px;">
+      <p class="mt-1">Apartments</p>
+      <!-- start add button (add new apartment) in page  -->
+      <div class="d-flex justify-content-lg-between align-items-center">
+        <!-- start dropdown button  -->
+        <button class="btn custom-button mx-0">This Month</button>
+        <button class="btn custom-button mx-0">Last Week</button>
+        <div class="d-flex align-items-center custom-today-btn mx-1">
+          <button class="btn custom-button d-flex align-items-center">
+            Today
+            <img src="assets/images/down-arrow.svg" alt="arrow" class="ms-1 custom-icon">
+          </button>
         </div>
-        <!-- end part 1 in page  -->
-        <!-- start part 2 in page  -->
-        <div class="card">
-            <!-- <p-table #dt [value]="apartmentList" [(selection)]="apartmentList" dataKey="id" [filterDelay]="0" /> -->
+        <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true  || is_Super==true" [id]="'apartments/page/add-new-apartments'" class="mx-1"></app-add-new-button>
+      </div>
+      <!-- end add button (add new apartment) in page  -->
+    </div>
 
-            <div class="row d-block d-md-flex justify-content-between my-2 px-3 py-2">
-                <!-- start apartmentLists button  -->
+    <!-- end part 1 in page  -->
+    <!-- start part 2 in page  -->
+    <div class="card">
+      <div class="row d-block d-md-flex justify-content-between my-2 px-3 py-2">
 
-              <div class="col-md-4">
-                <div class="d-flex align-items-center" style="font-size: 15px;">
-                  <label for="" style="color: #313331;font-weight: 500;font-size: 16px;">Appartment</label>
-                  <img src="assets/images/line.svg" class="mx-3" >
-                  <select class="form-select" (change)="clickApartmentList($event)">
-                    <option *ngFor="let data of apartmentFillterLists; let index=index;" [value]="data.id" [selected]="apartmentFillterSelected[index]">{{data.name}}</option>
-                  </select>
+        <div class="col-md-4">
+          <div class="d-flex align-items-center" style="font-size: 15px;">
+            <label for="" style="color: #313331; font-weight: 500; font-size: 16px;">Apartment</label>
+            <img src="assets/images/line.svg" class="mx-3">
+            <select class="form-select" (change)="clickApartmentList($event)">
+              <option *ngFor="let data of apartmentFillterLists; let index=index;" [value]="data.id" [selected]="apartmentFillterSelected[index]">{{data.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-5 col-8">
+          <div class="input">
+            <input type="text" class="form-control py-2" placeholder="Search by apartment location" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
+            <img src="../../../assets/images/search.svg" alt="">
+          </div>
+        </div>
+        <p-toast></p-toast>
+      </div>
+    </div>
+    <!-- start part 3 to display apartment details in page  -->
+    <div class="row paroductApartment px-1" style="margin-top: 5px;">
+      <ng-container *ngIf="apartmentList.length > 0; else noData">
+        <ng-container *ngFor="let item of apartmentList;">
+          <div class="col-12 col-md-6 col-lg-3 mb-2 position-relative px-2 h-100" style="height: 393px !important; cursor: pointer;">
+            <a style="height: 46% !important;" class="d-block" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">
+              <img [src]="item.apartment_Image || '../../../assets/images/apartmentImages/default_apartment.jpg'" class="w-100 h-100 apartmentImage">
+              <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3" [class.available]="item.statusString != 'Rented'">{{item.statusString || 'Unknown Status'}}</p>
+            </a>
+            <div class="bg-white p-3 details h-50 rounded-bottom">
+              <div class="fw-bold" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">{{item.apartment_Name || 'Unnamed Apartment'}}</div>
+              <div class="d-flex" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">
+                <img src="assets/images/apartmentImages/location.svg" class="my-3">
+                <p class="fw-bold mt-3 text-left mx-1">{{item.apartment_Location || 'Unknown Street'}}</p>
+              </div>
+              <div class="d-flex" style="margin: -25px 0 -10px 0;" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">
+                <div class="d-flex justify-content-between">
+                  <img src="assets/images/apartmentImages/room_bed.svg">
+                  <p class="fw-bold mt-4 mx-2">{{item.apartment_No_Bedrooms || 0}}</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <img src="assets/images/apartmentImages/user.svg">
+                  <p class="fw-bold mt-4 mx-2">{{item.apartment_Persons_No || 0}}</p>
                 </div>
               </div>
-               <div class="col-md-5 col-8">
-                <div class="input">
-                  <input type="text" class="form-control py-2" placeholder=" Search by appartment location" (keyup)="searchAction($event)" [(ngModel)]="searchText" />
-                    <img src="../../../assets/images/search.svg" alt="">
+
+
+
+
+
+              <div class="d-flex justify-content-between">
+                <div class="Price" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">
+                  € {{item.apartment_Area_Square || 0}} <span class="time">/ month</span>
                 </div>
-               </div>
-
-                <p-toast></p-toast>
-
-                <!-- end apartmentLists button  -->
-            </div>
-        </div>
-        <!-- start part 3 to display paroduct Apartment details in page  -->
-        <div class="row paroductApartment px-1" style="margin-top: 5px;">
-            <!-- <p-progressSpinner *ngIf="spinner == true"></p-progressSpinner> -->
-
-            <ng-container *ngIf="apartmentList">
-                <ng-container *ngFor="let item of apartmentList;">
-
-                    <div class=" col-12 col-md-6 col-lg-3 mb-2  position-relative px-2 h-100" style="height: 393px !important;cursor: pointer;">
-
-                        <a  style="height: 46% !important;" class="d-block" routerLink="/apartments/apartments-details/{{item?.apt_UUID}}" >
-                            <img [src]="item.apt_ThumbImg.includes('http') ? item.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'" class="w-100 h-100 apartmentImage">
-                            <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3 " [class.available]="item.statusString != 'Rented'">{{item.statusString}}</p>
-                        </a>
-                        <div class="bg-white p-3 details h-50 rounded-bottom" >
-                            <div class="fw-bold  " routerLink="/apartments/apartments-details/{{item?.apt_UUID}}">{{item?.apt_Name }}</div>
-                            <div class="d-flex" routerLink="/apartments/apartments-details/{{item?.apt_UUID}}">
-                                <img src="assets/images/apartmentImages/location.svg" class="my-3">
-                                <p class="fw-bold mt-3 text-left mx-1">{{item?.apt_StName}}</p>
-                            </div>
-                            <div class="d-flex" style="margin: -25px 0 -10px 0;" routerLink="/apartments/apartments-details/{{item.apt_UUID}}">
-                                <div class="d-flex justify-content-between">
-                                    <img src="assets/images/apartmentImages/room_bed.svg">
-                                    <p class="fw-bold mt-4 mx-2">{{item.apt_Bedrooms}}</p>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <img src="assets/images/apartmentImages/user.svg">
-                                    <p class="fw-bold mt-4 mx-2">{{item.apt_MaxGuest}}</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="Price" routerLink="/apartments/apartments-details/{{item.apt_UUID}}">
-                                  € {{item.apt_Price}} <span class="time">/ month</span>
-                                </div>
-                                <div>
-                                    <div class="cursor position-relative">
-                                        <button class="border-0 outlin-0 bg-transparent" (click)="detailperson( $event,item.apt_UUID)">
-                            <img src="assets/images/edit.svg">
-                        </button>
-                                        <div *ngIf="xx==item.apt_UUID" style="width: 191px;z-index: 999;right: 10px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                                            <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/apartments/booking/{{item.apt_UUID}}">view bookings </button>
-                                            <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/apartments/page/{{item.apt_UUID}}">Edit</button>
-                                            <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/apartments/apartments-details/{{item.apt_UUID}}">View details </button>
-
-                                            <button *ngIf="item.is_Best == false" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="AddtoBest(item.apt_UUID)">Add to best offers </button>
-
-                                            <button *ngIf="item.is_Best == true" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="RemoveBest(item.apt_UUID)">Remove  Best  offer </button>
-
-                                            <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteApartment(item.apt_UUID)"> Delete   </button>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                <div>
+                  <div class="cursor position-relative">
+                    <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event, item.apartment_ID)">
+                      <img src="assets/images/edit.svg">
+                    </button>
+                    <div *ngIf="xx == item.apartment_ID" style="width: 191px; z-index: 999; right: 10px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                      <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/apartments/booking/{{item.apartment_ID}}">View bookings</button>
+                      <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/apartments/page/{{item.apartment_ID}}">Edit</button>
+                      <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">View details</button>
+                      <button *ngIf="item.is_Best == false" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="AddtoBest(item.apartment_ID)">Add to best offers</button>
+                      <button *ngIf="item.is_Best == true" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="RemoveBest(item.apartment_ID)">Remove Best offer</button>
+                      <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteApartment(item.apartment_ID)">Delete</button>
                     </div>
-                </ng-container>
-                <p-paginator *ngIf="apartmentList.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="rows" [first]="first" [totalRecords]="fullRespone?.totalRecords"></p-paginator>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-template #noData>
+        <p>No apartments available</p>
+      </ng-template>
+    </div>
 
-            </ng-container>
+    <div class="custom-paginator">
+      <button class="custom-paginator-button" (click)="previousPage()">Previous</button>
+      <span class="custom-paginator-text">Page {{pageNumber}} of {{totalofPages}}</span>
+      <button class="custom-paginator-button" (click)="nextPage()">Next</button>
+    </div>
 
 
-        </div>
-        <!-- end part 3 to display paroduct Apartment details in page  -->
-    </main>
-    <!-- end content page  -->
+
+  </main>
+  <!-- end content page  -->
 </div>
 
 
-<!-- ***************************draft************************************ -->
-<!--
-          <div class="col-12 col-md-6 col-lg-3  px-2 mb-4" >
-            <a routerLink="" class="position-relative d-block">
-              <img src="assets/images/apartmentImages/img1.svg" class="w-100 h-100 ">
-              <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-3 py-1 px-3 "[class.available]="!available">Rented</p>
-            </a>
-            <div class="bg-white px-2 py-3 details rounded-bottom">
-              <div class="fw-bold">Salt Lake City, Apartment Salt Lake City, Apartment </div>
-              <div class="d-flex justify-content-between" >
-                <div class="d-flex justify-content-between">
-                  <img src="assets/images/apartmentImages/location.svg">
-                  <p class="fw-bold mt-3 ms-2">Alt-Moabit</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <img src="assets/images/apartmentImages/room_bed.svg">
-                  <p class="fw-bold mt-3 ms-2">3</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <img src="assets/images/apartmentImages/user.svg">
-                  <p class="fw-bold mt-3 ms-2">2</p>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div><img src="assets/images/Price.svg"></div>
-                <div><img class="pointer" src="assets/images/more_vert_FILL.svg"></div>
-              </div>
-            </div>
 
-          </div>
-          <div class="col-12 col-md-6 col-lg-3  px-2 mb-4" >
-            <a routerLink="" class="position-relative d-block">
-              <img src="assets/images/apartmentImages/img1.svg" class="w-100 h-100 ">
-              <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-3 py-1 px-3 "[class.available]="available">Available</p>
-            </a>
-            <div class="bg-white px-2 py-3 details rounded-bottom">
-              <div class="fw-bold">Salt Lake City, Apartment Salt Lake City, Apartment </div>
-              <div class="d-flex justify-content-between" >
-                <div class="d-flex justify-content-between">
-                  <img src="assets/images/apartmentImages/location.svg">
-                  <p class="fw-bold mt-3 ms-2">Alt-Moabit</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <img src="assets/images/apartmentImages/room_bed.svg">
-                  <p class="fw-bold mt-3 ms-2">3</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <img src="assets/images/apartmentImages/user.svg">
-                  <p class="fw-bold mt-3 ms-2">2</p>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div><img src="assets/images/Price.svg"></div>
-                <div><img class="pointer" src="assets/images/more_vert_FILL.svg"></div>
-              </div>
-            </div>
 
-          </div>
-          <div class="col-12 col-md-6 col-lg-3  px-2 mb-4" >
-            <a routerLink="" class="position-relative d-block">
-              <img src="assets/images/apartmentImages/img1.svg" class="w-100 h-100 ">
-              <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-3 py-1 px-3 "[class.available]="available">Available</p>
-            </a>
-            <div class="bg-white px-2 py-3 details rounded-bottom">
-              <div class="fw-bold">Salt Lake City, Apartment Salt Lake City, Apartment </div>
-              <div class="d-flex justify-content-between" >
-                <div class="d-flex justify-content-between">
-                  <img src="assets/images/apartmentImages/location.svg">
-                  <p class="fw-bold mt-3 ms-2">Alt-Moabit</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <img src="assets/images/apartmentImages/room_bed.svg">
-                  <p class="fw-bold mt-3 ms-2">3</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <img src="assets/images/apartmentImages/user.svg">
-                  <p class="fw-bold mt-3 ms-2">2</p>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div><img src="assets/images/Price.svg"></div>
-                <div><img class="pointer" src="assets/images/more_vert_FILL.svg"></div>
-              </div>
-            </div>
 
-          </div>
- -->
+
+
+ 
