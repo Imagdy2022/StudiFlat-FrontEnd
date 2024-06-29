@@ -45,6 +45,7 @@ import { ApartmentsRoutingModule } from './appartments-routing.module';
 import { OwnersModule } from '../owners/owners.module';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AddNewOwnerComponent } from './add-new-apartments/add-new-owner/add-new-owner.component';
+import { AccordionModule } from 'primeng/accordion';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { AddNewOwnerComponent } from './add-new-apartments/add-new-owner/add-new
     ForthStepComponent,
     CreateContractComponent,
     AddNewOwnerComponent,
+
 
   ],
   exports: [AddNewApartmentsComponent, ApartmentsComponent],
@@ -79,6 +81,7 @@ import { AddNewOwnerComponent } from './add-new-apartments/add-new-owner/add-new
     FieldsetModule,
     ToastModule,
     ApartmentsRoutingModule,
+    AccordionModule,
   ],
   providers: [HttpClientModule, MessageService]
 })

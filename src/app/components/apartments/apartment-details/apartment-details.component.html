@@ -15,652 +15,187 @@
             <a href="javascript:void(0)" routerLink="/apartments" class="removeUnderLine">
                 <p class="fw-bold ml-8">Apartments</p>
             </a>
-
+            <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true  || is_Super==true" [id]="'apartments/page/add-new-apartments'" class="mx-1"></app-add-new-button>
         </div>
         <p-toast></p-toast>
 
         <!-- end part 1 in page  -->
-        <div class="bg-white border rounded-3 mt-3 p-3">
-            <div class="row">
-                <div class="col-12 col-md-6 me-4">
-                    <div class="rounded mb-3" style="overflow: hidde;height: 325px;">
-                        <img [src]="aprt_details?.apt_ThumbImg.includes('https') ? aprt_details?.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'"
-                            class="w-100 h-100" />
-                    </div>
-                    <ng-container>
-                        <div class="container testimonial-group">
-                            <div class="row mb-3  vcrr" *ngIf="aprt_details">
 
-                                <div class="col-md-4  " *ngFor="let img of aprt_details?.property_Imgs">
-                                    <a (click)="viewImage(img?.apt_imgs)" style="cursor: pointer;">
-                                        <img [src]="img?.apt_imgs && img?.apt_imgs.includes('https') ? img?.apt_imgs : '../../../assets/images/apartmentImages/default_apartment.jpg'"
-                                            alt="Apartment Image" class="w-100 h-100 maxImg">
-                                    </a>
-                                </div>
 
-                            </div>
+        <div class="bg-white border rounded-3 mt-3 p-3 p-4">
+          <div class="row">
+            <div class="col-12 col-md-7">
+
+              <ng-container>
+                <div class="container testimonial-group">
+                  <div class="row mb-3 vcrr"  >
+                    <div class="image-gallery" style="max-width: 1500px;">
+                      <div class="main-image">
+                        <img [src]="aprt_details?.apt_ThumbImg.includes('https') ? aprt_details?.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'" style="width: 100%; height:500px; border-radius:13px" />
+                      </div>
+                      <div class="thumbnail-container" style="display: flex; justify-content: space-evenly;gap:20px; margin-top: 20px;">
+                        <div *ngFor="let img of aprt_details?.property_Imgs" style="cursor: pointer;">
+                          <img [src]="img?.apt_imgs && img?.apt_imgs.includes('https') ? img?.apt_imgs : '../../../assets/images/apartmentImages/default_apartment.jpg'" style="height: 120px; width: 360px; border-radius:13px;" />
                         </div>
-
-                    </ng-container>
-
-                    <div class="d-flex">
-                        <p class="d-lg-inline-block me-3 fw-bold">Rating ( {{ rating_count }} )</p>
-                        <div class="mt-0">
-                            <p-rating [(ngModel)]="rating_total" [readonly]="true" [cancel]="false"></p-rating>
-                        </div>
+                      </div>
                     </div>
-
-                    <div>
-                        <p class="d-lg-inline-block me-3 fw-bold">Descriptions</p>
-                        <div class="mt-0">
-                            <p class="d-lg-inline-block me-3  ">{{ aprt_details?.apt_Descirpt }} </p>
-                        </div>
-                    </div>
-                    <hr />
+                  </div>
                 </div>
-                <div class="col-12 col-md-5">
-                    <div class="mt-0">
-                        <h4 class="fw-bold my-0">{{ aprt_details?.apt_Name }}</h4>
-                        <p class="gray mt-0">{{ aprt_details?.apt_StName }}</p>
-                        <h5 class="blue fw-bold my-0">
-                            {{ aprt_details?.apt_Price }} € / Month
-                        </h5>
-                        <div class="d-flex">
-                            <div class="d-flex justify-content-between me-3">
-                                <img src="assets/images/apartmentImages/location.svg" />
-                                <p class="mt-3 ms-2 gray">{{ aprt_details?.apt_Address }}</p>
-                            </div>
-                            <div class="d-flex justify-content-between me-3">
-                                <img src="assets/images/apartmentImages/room_bed.svg" />
-                                <p class="mt-3 gray ms-2">{{ aprt_details?.apt_Bedrooms }}</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <img src="assets/images/apartmentImages/user.svg" />
-                                <p class="gray mt-3 ms-2">{{ aprt_details?.apt_MaxGuest }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex mt-0">
-                        <img src="assets/images/apartmentImages/schedule time.svg" />
-                        <p class="gray mt-3 ms-2">Duration: {{ contract_Main?.contractDate_Start |date: 'dd/MM/yyyy' }} -
-                            {{ contract_Main?.contractDate_End |date: 'dd/MM/yyyy' }} - {{ request_code }}
-                        </p>
-                    </div>
-                    <div class="d-flex mt-0">
-                        <img src="assets/images/apartmentImages/publish.svg" />
-                        <p class="gray mt-3 ms-2">Published: &nbsp; {{ aprt_details?.apt_PublishDate| date :'medium' }}</p>
-                    </div>
-                    <div class="row">
-                        <a *ngIf="ApartmentsRole?.p_Update==true || is_Super==true"
-                            class="col-12 border-0 outline-0 rounded-3 me-3 py-2 blue text-decoration-none text-center"
-                            routerLink="/apartments/page/{{ this.apt_UUID }}" style="background-color: #d2d9e1"><img
-                                src="assets/images/apartmentImages/edit.svg" />Edit </a>
-
-                        <!-- <div class="col-4">
-                            <app-share-button></app-share-button>
-                        </div> -->
-                    </div>
+              </ng-container>
+              <div class="d-flex align-items-center mb-2">
+                <p class="fw-1000 mt-3 mr-3 mb-3 fs-6 fw-semibold">Rating ({{ rating_count }})</p>
+                <div class="ms-2">
+                  <p-rating [(ngModel)]="rating_total" [readonly]="true" [cancel]="false"></p-rating>
                 </div>
+              </div>
+              <div>
+                <p class="fw-1000 mr-3 mb-3 fs-6 fw-semibold">Descriptions</p>
+                <div class="description-text">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mus mauris ultricies nullam cras ut orci. Facilisi duis dis auctor ut massa nunc aliquet ultricies senectus. Eu et posuere commodo, sodales.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mus mauris ultricies nullam cras ut orci. Facilisi duis dis auctor ut massa nunc aliquet ultricies senectus. Eu et posuere commodo, sodales.</p>
+
+                </div>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-6 me-4">
-                    <!-- <app-accordion></app-accordion> -->
 
-                    <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
-                        <div style="margin-top:10px" class="dataHeader">
-                            <h5>General info</h5>
-                            <p>you can public transport and video link </p>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1transport" aria-expanded="false"
-                                    aria-controls="flush-collapseOne1transport">
-                                    Public transport
-                                </button>
-                            </h2>
-                            <div id="flush-collapseOne1transport" class="accordion-collapse collapse mt-3"
-                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3" *ngFor="let data  of trasponrts ">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Transport within {{ data.t_Distance }}</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{ data.t_Name }}</div>
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne2Video" aria-expanded="false"
-                                    aria-controls="flush-collapseOne2Video">
-                                    Video Link
-                                </button>
-                            </h2>
-                            <div id="flush-collapseOne2Video" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne"
-                                data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
 
-                                    <iframe width="500" height="315" [src]="transform(aprt_details?.apt_VideoLink) "></iframe>
-                                </div>
+            <div class="col-12 col-md-5">
 
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne3Location" aria-expanded="false"
-                                    aria-controls="flush-collapseOne3Location">
-                                    Location
-                                </button>
-                            </h2>
-                            <div id="flush-collapseOne3Location" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne"
-                                data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-                                    <!-- <p class="fw-bold" style="color: #605D62 !important;">Link</p> -->
-                                    <!-- <div class="form-control w-100 fs-6 pt-2">{{ aprt_details?.apt_MapLink }}</div> -->
-                                    <google-map [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)">
-                                        <map-marker [position]="center">
-                                        </map-marker>
-                                    </google-map>
-                                </div>
 
-                            </div>
-                        </div>
-                        <div style="margin-top:30px" class="dataHeader">
-                            <h5>Apartment details</h5>
-                            <p>you can view details</p>
-                        </div>
-                        <div class="accordion-item" *ngFor="let data  of roomsBedRoom ; let i=index ">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnerooms'+i" aria-expanded="false"
-                                    aria-controls="flush-collapseOnerooms">
-                                    bedroom {{ i+1 }}
-                                </button>
-                            </h2>
 
-                            <div [id]="'flush-collapseOnerooms'+i" class="accordion-collapse collapse mt-3"
-                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">{{ data?.room_Name }}</p>
 
-                                    <div *ngFor="let datax  of data.room_Tools let x=index" style="margin-top:5px"
-                                        class="form-control w-100 fs-6 pt-2"> {{ datax?.tool_Name }}</div>
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="accordion-item" *ngFor="let data  of roomsLiving ; let i=index ">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOneLiving'+i" aria-expanded="false"
-                                    aria-controls="flush-collapseOneLiving">
-                                    living room {{ i+1 }}
-                                </button>
-                            </h2>
+              <div class="custom-apartment-details bg-white border rounded-3 p-3">
 
-                            <div [id]="'flush-collapseOneLiving'+i" class="accordion-collapse collapse mt-3"
-                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">{{ data?.room_Name }}</p>
-
-                                    <div *ngFor="let datax  of data.room_Tools ; let n=index " style="margin-top:5px"
-                                        class="form-control w-100 fs-6 pt-2">{{ datax?.tool_Name }}</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="accordion-item" *ngFor="let data  of bath_Room ; let i=index ">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnebathroom'+i" aria-expanded="false"
-                                    aria-controls="flush-collapseOnebathroom">
-                                    bathroom {{ i+1 }}
-                                </button>
-                            </h2>
-
-                            <div [id]="'flush-collapseOnebathroom'+i" class="accordion-collapse collapse mt-3"
-                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">{{ data?.bath_Name }}</p>
-
-                                    <div *ngFor="let datax  of data.bath_Tools ; let n=index " style="margin-top:5px"
-                                        class="form-control w-100 fs-6 pt-2">{{ datax?.tool_Name }}</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="accordion-item" *ngFor="let data  of kitchen_Tools ; let i=index ">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnekitchen'+i" aria-expanded="false"
-                                    aria-controls="flush-collapseOnekitchen">
-                                    kitchen
-                                </button>
-                            </h2>
-
-                            <div [id]="'flush-collapseOnekitchen'+i" class="accordion-collapse collapse mt-3"
-                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-                                    <!-- <p class="fw-bold" style="color: #605D62 !important;">{{ data?.bath_Name }}</p> -->
-
-                                    <div *ngFor="let datax  of data.kit_tool ; let n=index " style="margin-top:5px"
-                                        class="form-control w-100 fs-6 pt-2">{{ datax?.description }}</div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="accordion-item" *ngFor="let data  of features ; let i=index ">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnefeatures'+i" aria-expanded="false"
-                                    aria-controls="flush-collapseOnefeatures">
-                                    feature details
-                                </button>
-                            </h2>
-
-                            <div [id]="'flush-collapseOnefeatures'+i" class="accordion-collapse collapse mt-3"
-                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-
-                                    <div *ngFor="let datax  of data.fet_Names ; let n=index " style="margin-top:5px"
-                                        class="form-control w-100 fs-6 pt-2">{{ datax?.description }}</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="accordion-item" *ngFor="let data  of facilities ; let i=index ">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOnefacilities'+i" aria-expanded="false"
-                                    aria-controls="flush-collapseOnefacilities">
-                                    facilities
-                                </button>
-                            </h2>
-
-                            <div [id]="'flush-collapseOnefacilities'+i" class="accordion-collapse collapse mt-3"
-                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-                                    <!-- <p class="fw-bold" style="color: #605D62 !important;">{{ data?.bath_Name }}</p> -->
-
-                                    <div *ngFor="let datax  of data.fac_Names ; let n=index " style="margin-top:5px"
-                                        class="form-control w-100 fs-6 pt-2">{{ datax?.description }}</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div style="margin-top:30px" class="dataHeader">
-                            <h5>other details</h5>
-                            <p>you can show more details.</p>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOnebackup_Info" aria-expanded="false"
-                                    aria-controls="flush-collapseOnebackup_Info">
-                                    backup information
-                                </button>
-                            </h2>
-
-                            <div id="flush-collapseOnebackup_Info" class="accordion-collapse collapse mt-3"
-                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <!-- <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">pictures for current damage</p>
-
-                                    <div>
-                                        <div *ngFor="let datax  of backup_Info.dmgs_Imgs ; let n=index " class="accordion-body mb-3">
-                                            <img [src]="datax.pic_URL" width="100px" class="me-2">
-                                        </div>
-                                    </div>
-                                    <p class="fw-bold" style="color: #605D62 !important;">Damage Description </p>
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ backup_Info?.apt_Dmgs_Desc }}</div>
-
-                                </div> -->
-                                <div>
-                                    <div class="  mb-3">
-                                        <p class="fw-bold" style="color: #605D62 !important;">Electricity meter number </p>
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{ backup_Info?.elec_Meter_Num }}
-                                        </div>
-                                    </div>
-                                    <div class="  mb-3">
-                                        <p class="fw-bold" style="color: #605D62 !important;">Electricity meter consumption</p>
-
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{ backup_Info?.elec_Meter_Cons }}
-                                        </div>
-
-                                    </div>
-                                    <div class="  mb-3  " *ngFor="let x of backup_Info?.inputFields ; let i=index">
-                                        <p class="fw-bold" style="color: #605D62 !important;">{{ x?.field_Name }} </p>
-
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ x?.field_Content }}</div>
-
-                                    </div>
-                                    <div class="   mb-3">
-                                        <p class="fw-bold" style="color: #605D62 !important;">Water meter number</p>
-
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{ backup_Info?.water_Meter_Num }}
-                                        </div>
-
-                                    </div>
-                                    <div class="  mb-3">
-                                        <p class="fw-bold" style="color: #605D62 !important;">Water meter consumption</p>
-
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">
-                                            {{ backup_Info?.water_Meter_Cons }}
-                                        </div>
-
-                                    </div>
-                                    <div class="   mb-3 ">
-                                        <p class="fw-bold" style="color: #605D62 !important;">Gas meter number</p>
-
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2"> {{ backup_Info?.gas_Meter_Num }}
-                                        </div>
-
-                                    </div>
-                                    <div class="  mb-3  ">
-                                        <p class="fw-bold" style="color: #605D62 !important;">Gas meter consumption</p>
-
-                                        <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ backup_Info?.gas_Meter_Cons }}
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOnerentalroles" aria-expanded="false"
-                                    aria-controls="flush-collapseOnerentalroles">
-                                    rental rules and Check in
-                                </button>
-                            </h2>
-
-                            <div id="flush-collapseOnerentalroles" class="accordion-collapse collapse mt-3"
-                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="  mb-3  " *ngFor="let x of rent_Rules?.apt_rules ; let i=index">
-                                    <p class="fw-bold" style="color: #605D62 !important;"> rule description : {{ i+1 }} </p>
-
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ x?.rule_Desc }}</div>
-
-                                </div>
-                                <div class="  mb-3  " *ngFor="let x of rent_Rules?.apt_inputfields ; let i=index">
-                                    <p class="fw-bold" style="color: #605D62 !important;">{{ x?.field_Name }} </p>
-
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ x?.field_Content }}</div>
-
-                                </div>
-                                <div class="  mb-3  ">
-                                    <p class="fw-bold" style="color: #605D62 !important;"> check Type </p>
-
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.checkType }}</div>
-
-                                </div>
-
-                                <div class="  mb-3  ">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Wi-Fi name</p>
-
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.wifi_Name }}</div>
-
-                                </div>
-                                <div class="  mb-3  ">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Wi-Fi password</p>
-
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.wifi_Password }}</div>
-
-                                </div>
-                                <div class="  mb-3  ">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Wi-Fi password</p>
-
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.wifi_Password }}</div>
-
-                                </div>
-                                <div class="  mb-3  ">
-                                    <p class="fw-bold" style="color: #605D62 !important;">mailBox Number</p>
-
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.mailBox_Num }}</div>
-
-                                </div>
-                                <div class="  mb-3  ">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Number of Doors </p>
-
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.numof_Doors }}</div>
-
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">building image</p>
-
-                                    <div>
-                                        <div class="accordion-body mb-3">
-                                            <img [src]="rent_Rules?.building_Img" style="width:500px;height: 300px;" class="me-2">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="  mb-3  ">
-                                    <p class="fw-bold" style="color: #605D62 !important;"> safe_Code </p>
-
-                                    <div style="margin-top:5px" class="form-control w-100 fs-6 pt-2">{{ rent_Rules?.safe_Code }}</div>
-
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">safe image</p>
-
-                                    <div>
-                                        <div class="accordion-body mb-3">
-                                            <img [src]="rent_Rules?.safe_Img" style="width:500px;height: 300px;" class="me-2">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">apartment door image</p>
-
-                                    <div>
-                                        <div class="accordion-body mb-3">
-                                            <img [src]="rent_Rules?.door_Img" style="width:500px;height: 300px;" class="me-2">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">pictures for trash Location</p>
-
-                                    <div>
-
-                                        <ng-container>
-                                            <div class="container testimonial-group">
-                                                <div class="row mb-3  vcrr">
-
-                                                    <div class="col-md-4  "
-                                                        *ngFor="let datax  of rent_Rules?.tarsh_Pin_Imgs ; let n=index ">
-                                                        <a (click)=" viewimageinModel(datax?.pic_URL)" style="cursor: pointer;">
-                                                            <img [src]="datax?.pic_URL" alt="Apartment Image" class="w-100 h-100 maxImg">
-                                                        </a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </ng-container>
-                                    </div>
-                                    <p class="fw-bold" style="color: #605D62 !important;">Description of trash Location</p>
-                                    <div style="margin-top:5px" class="  w-100 fs-6 pt-2"> {{ rent_Rules?.trash_Location }}</div>
-
-                                </div>
-                                <div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOnedamages" aria-expanded="false"
-                                    aria-controls="flush-collapseOnedamages">
-                                    apartment damages
-                                </button>
-                            </h2>
-
-                            <div id="flush-collapseOnedamages" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne"
-                                data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">pictures for current damage</p>
-
-                                    <div>
-                                        <ng-container>
-                                            <div class="container testimonial-group">
-                                                <div class="row mb-3  vcrr">
-
-                                                    <div class="col-md-4  " *ngFor="let datax  of backup_Info?.dmgs_Imgs ; let n=index ">
-                                                        <a (click)=" viewimageinModel(datax.pic_URL)" style="cursor: pointer;">
-
-                                                            <img [src]="datax?.pic_URL" alt="Apartment Image" class="w-100 h-100 maxImg">
-                                                        </a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </ng-container>
-
-                                    </div>
-                                    <p class="fw-bold" style="color: #605D62 !important;">Damage Description </p>
-                                    <div style="margin-top:5px" class=" w-100 fs-6 pt-2">{{ backup_Info?.apt_Dmgs_Desc }}</div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-                    <!-- end  -->
+                <h3 class="custom-apartment-title">Salt Lake City, Apartment Salt Lake City, Apartment</h3>
+                <p class="custom-apartment-type">Rentals · Apartment / Condo</p>
+                <h4 class="custom-apartment-price">€25,00 <span>/ month</span></h4>
+                <div class="custom-apartment-info d-flex mb-0">
+                  <div class="custom-info-item d-flex align-items-center me-4">
+                    <img src="assets/images/apartmentImages/location.svg" alt="Location">
+                    <p>Alt-Moabit, Alt-Moabit</p>
+                  </div>
+                  <div class="custom-info-item d-flex align-items-center me-4">
+                    <img src="assets/images/apartmentImages/room_bed.svg" alt="Bedrooms">
+                    <p>3</p>
+                  </div>
+                  <div class="custom-info-item d-flex align-items-center">
+                    <img src="assets/images/apartmentImages/user.svg" alt="Guests">
+                    <p>Living: 2 persons</p>
+                  </div>
                 </div>
-                <div class="col-12 col-md-5 aboutOwner">
-                    <div>
-                        <div class="mt-4">
-                            <p class="fw-bold m-0">About Owner</p>
-                            <div class="row p-2 mt-2 rounded-3" style="background-color: #f5f6f8">
-                                <div class="col-4">
-
-                                    <a routerLink="/owners/owner-profile/{{ OwnerDtail?.owner_ID }}">
-
-                                        <img *ngIf="OwnerDtail?.owner_Photo==null||OwnerDtail?.owner_Photo==''"
-                                            src="assets/images/apartmentImages/Rectangle 34624164.svg" />
-                                        <img [src]="OwnerDtail?.owner_Photo" />
-                                    </a>
-                                </div>
-                                <div class="col-8">
-                                    <h6 class="fw-bold mt-2">{{ OwnerDtail?.owner_FirstName }}&nbsp; {{ OwnerDtail?.owner_LastName }}</h6>
-                                    <div class="mt-4">
-                                        <div class="mb-2 d-flex">
-                                            <img src="assets/images/apartmentImages/call.svg" />
-                                            <div class="gray ms-2">{{ OwnerDtail?.owner_Phone }} </div>
-                                        </div>
-                                        <div>
-                                            <img src="assets/images/apartmentImages/mail.svg" />
-                                            <span class="gray ms-2">{{ OwnerDtail?.owner_Mail }} </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row rounded-3 my-4 p-2 pt-3 pb-0" style="border: 1px solid #8fa0b4">
-                            <div class="col-12 col-md-7">
-                                <h6>owner contract</h6>
-                                <p>This contract includes all the necessary information.</p>
-                            </div>
-                            <div class="col-12 col-md-5 d-flex align-items-center justify-content-end">
-                                <div class="mb-3">
-                                    <!-- <a class="me-3 cursor" routerLink="/apartments/contract/create-owner-contract"><img src="assets/images/apartmentImages/edit1.svg" /></a> -->
-                                    <a class="me-3 cursor" *ngIf="contract_Main?.contract_Path" target="_blank"
-                                        [href]="contract_Main?.contract_Path"><img src="assets/images/apartmentImages/delete.svg" /></a>
-                                    <a class="me-3 cursor" *ngIf="contract_Main?.contract_Path==''||contract_Main?.contract_Path==null"><img
-                                            src="assets/images/apartmentImages/delete.svg" /></a>
-
-
-                                    <a class="me-3 cursor" *ngIf="owner_contract_file_name!=null||owner_contract_file_name!=''"
-                                        href="{{ contract_Main?.contract_Path }}" download="{{ owner_contract_file_name }}"><img
-                                            src="assets/images/apartmentImages/move.svg" /></a>
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div *ngIf="aprt_details?.apt_Status=='Rented'">
-                        <div>
-                            <p class="fw-bold m-0">About Tenant</p>
-                            <div class="row p-2 mt-2 rounded-3" style="background-color: #f5f6f8">
-                                <div class="col-4">
-                                    <img routerLink="/users/app-edite-user-details/{{ tenant[0]?.user_ID }}"
-                                        [src]="tenant[0]?.user_Photo!=''?tenant[0]?.user_Photo:'assets/images/apartmentImages/Rectangle 34624164.svg'" />
-                                </div>
-                                <div class="col-8">
-                                    <h6 class="fw-bold mt-2">{{ tenant[0]?.user_Name }}</h6>
-                                    <div class="mt-4">
-                                        <div class="mb-2 d-flex">
-                                            <img src="assets/images/apartmentImages/call.svg" />
-                                            <div class="gray ms-2">{{ tenant[0]?.mobile_No }}</div>
-                                        </div>
-                                        <div>
-                                            <img src="assets/images/apartmentImages/mail.svg" />
-                                            <span class="gray ms-2">{{ tenant[0]?.email }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row rounded-3 my-4 p-2 pt-3 pb-0" style="border: 1px solid #8fa0b4">
-                            <div class="col-12 col-md-7">
-                                <h6>Tenant contract</h6>
-                                <p>This contract includes all the necessary information.</p>
-                            </div>
-                            <div class="col-12 col-md-5 d-flex align-items-center justify-content-end">
-                                <div class="mb-3">
-                                    <!-- <a class="me-3 cursor" routerLink="/apartments/contract/create-tenant-contract"><img src="assets/images/apartmentImages/edit1.svg" /></a> -->
-                                    <a class="me-3 cursor" target="_blank" [href]="tenant[0]?.apt_Contract"><img
-                                            src="assets/images/apartmentImages/delete.svg" /></a>
-                                    <!-- <a class="me-3 cursor" routerLink=""><img src="assets/images/apartmentImages/share.svg" /></a> -->
-                                    <!--
-                                                                    <a class="me-3 cursor" (click)="DownloadTenantContract()"><img src="assets/images/apartmentImages/move.svg" /></a>
-
-                               -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mx-2">
-                        <!-- (click)="RentedSuccessfully = true" *ngIf="!RentedSuccessfully" -->
-                        <button (click)="MarkRented()" class="outline-0 w-100 p-2 mb-3 border-0 text-white d-block rounded"
-                            style="background-color: #1f4068" *ngIf="aprt_details?.apt_Status!='Rented'">
-                            Mark as rented
-                        </button>
-                        <!-- <button class="outline-0 w-100 p-2 mb-3 d-block rounded bg-transparent" style="color: #0cb30c; border: 1px solid #1f4068" *ngIf="RentedSuccessfully">
-              Rented Successfully
-            </button> -->
-                        <!-- (click)="markAvailable = true" *ngIf="!markAvailable" -->
-                        <button (click)="MarkAvaliablePublish()" class="outline-0 w-100 p-2 mb-3 border-0 text-white d-block rounded"
-                            style="background-color: #1f4068">
-                            Mark as available
-                        </button>
-                        <!-- <button class="outline-0 w-100 p-2 mb-3 d-block rounded bg-transparent" style="color: #0cb30c; border: 1px solid #1f4068" *ngIf="markAvailable">
-                          available Successfully
-            </button> -->
-                        <button (click)="MarkDraft()" class="outline-0 border-0 d-block w-100 p-2 blue rounded"
-                            style="background-color: #d2d9e1" *ngIf="aprt_details?.apt_Status!='Rented'">
-                            Unpublish
-                        </button>
-                    </div>
+                <div class="custom-info-item">
+                  <img src="assets/images/apartmentImages/schedule time.svg" alt="Duration">
+                  <p>Duration: 27/04/2023 - 28/04/2023</p>
                 </div>
+                <div class="custom-info-item">
+                  <img src="assets/images/apartmentImages/schedule time.svg" alt="Published">
+                  <p>Published: 27/04/2023 - 04:14 PM</p>
+                </div>
+                <div class="custom-apartment-actions d-flex justify-content-between mb-5">
+                  <button class="custom-btn custom-btn-edit w-75">
+                    <img src="assets/images/apartmentImages/edit.svg" alt="Edit" class="custom-btn-icon">Edit
+                  </button>
+                  <button class="custom-btn custom-btn-share w-25">
+                    <img src="assets/images/apartmentImages/share.svg" alt="Share" class="custom-btn-icon">Share
+                  </button>
+                </div>
+
+
+                <p-accordion class="mt-3">
+                  <p-accordionTab header="Public transport" [headerStyle]="{'background-color': '#fff' }" >
+                    <!-- <ng-template pTemplate="header">
+
+                      <span>Public transport</span>
+                      <i class="pi pi-bus"></i>
+                    </ng-template> -->
+                    <div class="custom-transport-info">
+                      <div class="custom-transport-item">
+                        <p class="custom-transport-distance">Transport within 270 m</p>
+                        <div class="custom-transport-box">1 bus</div>
+                      </div>
+                      <div class="custom-transport-item">
+                        <p class="custom-transport-distance">Transport within 520 m</p>
+                        <div class="custom-transport-box">Tram 2</div>
+                      </div>
+                    </div>
+
+
+
+                  </p-accordionTab>
+                  <p-accordionTab header="Other detail" [headerStyle]="{'background-color': '#fff' }" >
+                    <div class="custom-property-info">
+                      <div class="custom-property-item">
+                        <p class="custom-property-label">Property square feet</p>
+                        <div class="custom-property-box">2356 sq ft</div>
+                      </div>
+                      <div class="custom-property-item">
+                        <p class="custom-property-label">Laundry type</p>
+                        <div class="custom-property-box">Laundry in building</div>
+                      </div>
+                      <div class="custom-property-item">
+                        <p class="custom-property-label">Date available</p>
+                        <div class="custom-property-box">Jun 2, 2023 - July 2, 2023</div>
+                      </div>
+                      <div class="custom-property-item">
+                        <p class="custom-property-label">Parking type</p>
+                        <div class="custom-property-box">Garage parking</div>
+                      </div>
+                      <div class="custom-property-item">
+                        <p class="custom-property-label">Air conditioning type</p>
+                        <div class="custom-property-box">Central AC</div>
+                      </div>
+                      <div class="custom-property-item">
+                        <p class="custom-property-label">Heating type</p>
+                        <div class="custom-property-box">Central heating</div>
+                      </div>
+                    </div>
+
+                  </p-accordionTab>
+                  <p-accordionTab header="Passport of tenant" [headerStyle]="{'background-color': '#fff' }" >
+                    <div class="custom-image-gallery">
+                      <div class="custom-thumbnail">
+                        <img src="https://via.placeholder.com/120" alt="Image 1">
+                      </div>
+                      <div class="custom-thumbnail">
+                        <img src="https://via.placeholder.com/120" alt="Image 2">
+                      </div>
+                      <div class="custom-thumbnail">
+                        <img src="https://via.placeholder.com/120" alt="Image 3">
+                      </div>
+                      <div class="custom-thumbnail">
+                        <img src="https://via.placeholder.com/120" alt="Image 4">
+                      </div>
+                    </div>
+                  </p-accordionTab>
+                  <p-accordionTab header="Problem reports (2)" [headerStyle]="{'background-color': '#fff' }" >
+                    <p>Content for Problem reports</p>
+                  </p-accordionTab>
+                  <p-accordionTab header="Fixed problem (0)" [headerStyle]="{'background-color': '#fff' }" >
+                    <p>Content for Fixed problem</p>
+                  </p-accordionTab>
+                </p-accordion>
+
+                <div class="custom-apartment-buttons mt-5">
+                  <button class="custom-btn-rented">Mark as rented</button>
+                  <button class="custom-btn-delete">
+
+                    <img src="assets/images/delete3.svg">Delete
+                  </button>
+                </div>
+
+              </div>
+
+
             </div>
+          </div>
 
         </div>
-        <div class="rating py-4">
+
+
+
+        <!-- <div class="rating py-4">
             <div style="margin-top:10px" class="heading">
                 <h5>Tenant Rating </h5>
                 <p style="margin-bottom: 18px;">view tenant ratings </p>
@@ -748,11 +283,11 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
     </main>
     <!-- end content page  -->
 </div>
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display22}" style="background-color: rgba(90,90,90,0.5);">
+<!-- <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display22}" style="background-color: rgba(90,90,90,0.5);">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="width:900px;">
         <div class="modal-content position-relative">
             <div class="modal-header p-0 m-0 d-flex justify-content-start">
@@ -765,14 +300,9 @@
 
             </div>
 
-            <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-white bbtclose" (click)="oncloseModal()">
-close
-</button>
 
-          </div> -->
 
 
         </div>
     </div>
-</div>
+</div> -->
