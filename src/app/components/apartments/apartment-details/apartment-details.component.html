@@ -1,319 +1,322 @@
 <!-- start header  -->
 <header>
-    <app-head (newItemEvent)="addItem($event)" [titleModule]="'Apartments'"></app-head>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Apartments'"></app-head>
 </header>
 <!-- end header  -->
 
-<div class="row m-0">
-    <!-- start sidebar  -->
-    <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'apartments'"></app-sidebar>
-    <!-- end sidebar  -->
-    <!-- start content page  -->
-    <main class="p-4 col-lg-10">
-        <!-- start part 1 in page  -->
-        <div class="fw-bold d-flex justify-content-between" style="color: #6c6a6a">
-            <a href="javascript:void(0)" routerLink="/apartments" class="removeUnderLine">
-                <p class="fw-bold ml-8">Apartments</p>
-            </a>
-            <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true  || is_Super==true" [id]="'apartments/page/add-new-apartments'" class="mx-1"></app-add-new-button>
-        </div>
-        <p-toast></p-toast>
+<div class="row m-0" >
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'apartments'"></app-sidebar>
+  <!-- end sidebar  -->
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10">
+    <!-- start part 1 in page  -->
+    <div class="fw-bold d-flex justify-content-between" style="color: #6c6a6a">
+      <a href="javascript:void(0)" routerLink="/apartments" class="removeUnderLine">
+        <p class="fw-bold ml-8">Apartments</p>
+      </a>
+      <!-- <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true  || is_Super==true"
+        [id]="'apartments/page/add-new-apartments'" class="mx-1"></app-add-new-button> -->
+    </div>
+    <p-toast></p-toast>
 
-        <!-- end part 1 in page  -->
+    <!-- end part 1 in page  -->
 
 
 
-        <div class="bg-white border rounded-3 mt-3 p-3 p-4">
-          <div class="row">
-            <div class="col-12 col-md-7">
+    <div class="bg-white border rounded-3 mt-3 p-3 p-4">
+      <div class="row" >
+        <div class="col-12 col-md-7">
 
-              <ng-container>
-                <div class="container testimonial-group">
-                  <div class="row mb-3 vcrr"  >
-                    <div class="image-gallery" style="max-width: 1500px;">
-                      <div class="main-image">
-                        <img [src]="aprt_details?.apt_ThumbImg.includes('https') ? aprt_details?.apt_ThumbImg : '../../../assets/images/apartmentImages/default_apartment.jpg'" style="width: 100%; height:500px; border-radius:13px" />
-                      </div>
-                      <div class="thumbnail-container" style="display: flex; justify-content: space-evenly;gap:20px; margin-top: 20px;">
-                        <div *ngFor="let img of aprt_details?.property_Imgs" style="cursor: pointer;">
-                          <img [src]="img?.apt_imgs && img?.apt_imgs.includes('https') ? img?.apt_imgs : '../../../assets/images/apartmentImages/default_apartment.jpg'" style="height: 120px; width: 360px; border-radius:13px;" />
-                        </div>
-                      </div>
+          <ng-container>
+            <div class="container testimonial-group">
+              <div class="row mb-3 vcrr">
+                <div class="image-gallery" style="max-width: 1500px;">
+                  <div class="main-image">
+                    <img
+                      [src]="aprt_Imgs[0].includes('https') ? aprt_Imgs[0] : '../../../assets/images/apartmentImages/default_apartment.jpg'"
+                      style="width: 100%; height:500px; border-radius:13px" />
+                  </div>
+                  <div class="thumbnail-container" style="display: flex; justify-content: start; margin-top: 20px;">
+                    <div *ngFor="let img of aprt_Imgs;let i=index" style="cursor: pointer;">
+                      <img *ngIf="i>0"
+                        [src]="img && img.includes('https') ? img : '../../../assets/images/apartmentImages/default_apartment.jpg'"
+                        style="height: 120px; width: 100%; border-radius:13px;" />
                     </div>
                   </div>
                 </div>
-              </ng-container>
-              <div class="d-flex align-items-center mb-2">
-                <p class="fw-1000 mt-3 mr-3 mb-3 fs-6 fw-semibold">Rating ({{ rating_count }})</p>
-                <div class="ms-2">
-                  <p-rating [(ngModel)]="rating_total" [readonly]="true" [cancel]="false"></p-rating>
-                </div>
               </div>
-              <div>
-                <p class="fw-1000 mr-3 mb-3 fs-6 fw-semibold">Descriptions</p>
-                <div class="description-text">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mus mauris ultricies nullam cras ut orci. Facilisi duis dis auctor ut massa nunc aliquet ultricies senectus. Eu et posuere commodo, sodales.</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mus mauris ultricies nullam cras ut orci. Facilisi duis dis auctor ut massa nunc aliquet ultricies senectus. Eu et posuere commodo, sodales.</p>
+            </div>
+          </ng-container>
+          <div class="d-flex align-items-center mb-2">
+            <p class="fw-1000 mt-3 mr-3 mb-3 fs-6 fw-semibold">Rating ({{ rating_count }})</p>
+            <div class="ms-2">
+              <p-rating [(ngModel)]="rating_total" [readonly]="true" [cancel]="false"></p-rating>
+            </div>
+          </div>
+          <div>
+            <p class="fw-1000 mr-3 mb-3 fs-6 fw-semibold">Description</p>
+            <div class="description-text">
+              <p>{{aprt_details}}</p>
+            </div>
+          </div>
+        </div>
 
-                </div>
+
+
+        <div class="col-12 col-md-5">
+
+
+
+
+
+          <div class="custom-apartment-details bg-white  rounded-3 p-3">
+
+            <h3 class="custom-apartment-title">{{aprt.apartment_Name}}</h3>
+            <p class="custom-apartment-type">{{aprt.apartment_Type}}</p>
+            <h4 class="custom-apartment-price">€{{aprt.apartment_Price}} <span>/ month</span></h4>
+            <div class="custom-apartment-info d-flex mb-0">
+              <div class="custom-info-item d-flex align-items-center me-4">
+                <img src="assets/images/apartmentImages/location.svg" alt="Location">
+                <p>{{aprt.apartment_Location}}</p>
               </div>
+              <div class="custom-info-item d-flex align-items-center me-4">
+                <img src="assets/images/apartmentImages/room_bed.svg" alt="Bedrooms">
+                <p>{{aprt.apartment_BedRoomsNo}}</p>
+              </div>
+              <div class="custom-info-item d-flex align-items-center">
+                <img src="assets/images/apartmentImages/user.svg" alt="Guests">
+                <p>Living: {{aprt.apartment_BedRoomsNo}} persons</p>
+              </div>
+            </div>
+            <div class="custom-info-item">
+              <img src="assets/images/apartmentImages/schedule time.svg" alt="Duration">
+              <p>Duration: 27/04/2023 - 28/04/2023</p>
+            </div>
+            <div class="custom-info-item">
+              <img src="assets/images/apartmentImages/schedule time.svg" alt="Published">
+              <p>Published: 27/04/2023 - 04:14 PM</p>
+            </div>
+            <div class="custom-apartment-actions d-flex justify-content-between mb-5">
+              <button class="custom-btn custom-btn-edit w-75">
+                <img src="assets/images/apartmentImages/edit.svg" alt="Edit" class="custom-btn-icon">Edit
+              </button>
+              <button class="custom-btn custom-btn-share w-25">
+                <img src="assets/images/apartmentImages/share.svg" alt="Share" class="custom-btn-icon">Share
+              </button>
             </div>
 
 
-
-            <div class="col-12 col-md-5">
-
-
-
-
-
-              <div class="custom-apartment-details bg-white  rounded-3 p-3">
-
-                <h3 class="custom-apartment-title">Salt Lake City, Apartment Salt Lake City, Apartment</h3>
-                <p class="custom-apartment-type">Rentals · Apartment / Condo</p>
-                <h4 class="custom-apartment-price">€25,00 <span>/ month</span></h4>
-                <div class="custom-apartment-info d-flex mb-0">
-                  <div class="custom-info-item d-flex align-items-center me-4">
-                    <img src="assets/images/apartmentImages/location.svg" alt="Location">
-                    <p>Alt-Moabit, Alt-Moabit</p>
-                  </div>
-                  <div class="custom-info-item d-flex align-items-center me-4">
-                    <img src="assets/images/apartmentImages/room_bed.svg" alt="Bedrooms">
-                    <p>3</p>
-                  </div>
-                  <div class="custom-info-item d-flex align-items-center">
-                    <img src="assets/images/apartmentImages/user.svg" alt="Guests">
-                    <p>Living: 2 persons</p>
-                  </div>
-                </div>
-                <div class="custom-info-item">
-                  <img src="assets/images/apartmentImages/schedule time.svg" alt="Duration">
-                  <p>Duration: 27/04/2023 - 28/04/2023</p>
-                </div>
-                <div class="custom-info-item">
-                  <img src="assets/images/apartmentImages/schedule time.svg" alt="Published">
-                  <p>Published: 27/04/2023 - 04:14 PM</p>
-                </div>
-                <div class="custom-apartment-actions d-flex justify-content-between mb-5">
-                  <button class="custom-btn custom-btn-edit w-75">
-                    <img src="assets/images/apartmentImages/edit.svg" alt="Edit" class="custom-btn-icon">Edit
-                  </button>
-                  <button class="custom-btn custom-btn-share w-25">
-                    <img src="assets/images/apartmentImages/share.svg" alt="Share" class="custom-btn-icon">Share
-                  </button>
-                </div>
-
-
-                <p-accordion class=" mt-3">
-                  <p-accordionTab header="Public transport" [headerStyle]="{'background-color': '#fff' }" >
-                    <!-- <ng-template pTemplate="header">
+            <p-accordion class=" mt-3">
+              <p-accordionTab header="Public transport" [headerStyle]="{'background-color': '#fff' }">
+                <!-- <ng-template pTemplate="header">
 
                       <span>Public transport</span>
                       <i class="pi pi-bus"></i>
                     </ng-template> -->
-                    <div class="custom-transport-info">
-                      <div class="custom-transport-item">
-                        <p class="custom-transport-distance">Transport within 270 m</p>
-                        <div class="custom-transport-box">1 bus</div>
-                      </div>
-                      <div class="custom-transport-item">
-                        <p class="custom-transport-distance">Transport within 520 m</p>
-                        <div class="custom-transport-box">Tram 2</div>
-                      </div>
-                    </div>
-
-
-
-                  </p-accordionTab>
-                  <p-accordionTab header="Other detail" [headerStyle]="{'background-color': '#fff' }" >
-                    <div class="custom-property-info">
-                      <div class="custom-property-item">
-                        <p class="custom-property-label">Property square feet</p>
-                        <div class="custom-property-box">2356 sq ft</div>
-                      </div>
-                      <div class="custom-property-item">
-                        <p class="custom-property-label">Laundry type</p>
-                        <div class="custom-property-box">Laundry in building</div>
-                      </div>
-                      <div class="custom-property-item">
-                        <p class="custom-property-label">Date available</p>
-                        <div class="custom-property-box">Jun 2, 2023 - July 2, 2023</div>
-                      </div>
-                      <div class="custom-property-item">
-                        <p class="custom-property-label">Parking type</p>
-                        <div class="custom-property-box">Garage parking</div>
-                      </div>
-                      <div class="custom-property-item">
-                        <p class="custom-property-label">Air conditioning type</p>
-                        <div class="custom-property-box">Central AC</div>
-                      </div>
-                      <div class="custom-property-item">
-                        <p class="custom-property-label">Heating type</p>
-                        <div class="custom-property-box">Central heating</div>
-                      </div>
-                    </div>
-
-                  </p-accordionTab>
-
-                </p-accordion>
-                <div class="accord"></div>
-                <div class="custom-apartment-buttons mt-5 ">
-                  <button class="custom-btn-rented">Mark as rented</button>
-                  <button class="custom-btn-delete">
-
-                    <img src="assets/images/delete3.svg">Delete
-                  </button>
+                <div class="custom-transport-info">
+                  <div class="custom-transport-item" *ngFor="let item of aprt.apartment_Transports">
+                    <p class="custom-transport-distance">Transport within {{item.transport_Distance}}</p>
+                    <div class="custom-transport-box">{{item.transport_Name}}</div>
+                  </div>
                 </div>
 
-              </div>
 
 
-            </div>
-          </div>
-          <div class="qr-code-container">
-            <div class="qr-code-details">
-              <span class="qr-title">Apartment QR Code :</span>
-              <span class="qr-code">36340</span>
-            </div>
-            <div class="qr-actions">
-              <a href="#" class="qr-action">
-                <i class="pi pi-eye"></i> View
-              </a>
-              <a href="#" class="qr-action">
-                <i class="pi pi-download"></i> Download
-              </a>
-              <a href="#" class="qr-action">
-                <i class="pi pi-share-alt"></i> Share
-              </a>
-              <button class="btn-assign">Assign worker</button>
-            </div>
-          </div>
-          
-
-          <div class="row m-0">
-            <!-- <div class="col-lg-2"></div> -->
-            <div class="col-lg-12">
-              <div class="  mt-4    ">
-                <div class="card bookingdetails">
-                  <div class="card-header">
-                    <h4 class="fs-5 fw-bold">Beds Details</h4>
+              </p-accordionTab>
+              <p-accordionTab header="Other detail" [headerStyle]="{'background-color': '#fff' }">
+                <div class="custom-property-info">
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">Property square feet</p>
+                    <div class="custom-property-box">{{aprt.apartment_Area_Square}} sq ft</div>
                   </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-12 mb-3">
-                        <div class="d-flex justify-content-between px-4">
-                          <div class="fw-bold">Bed No</div>
-                          <div class="fw-bold">Room type</div>
-                          <div class="fw-bold">Bed price</div>
-                          <div class="fw-bold">Security deposit</div>
-                          <div class="fw-bold">Service fee</div>
-                          <div class="fw-bold">Status</div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">Laundry type</p>
+                    <div class="custom-property-box">Laundry in building</div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">Date available</p>
+                    <div class="custom-property-box">Jun 2, 2023 - July 2, 2023</div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">Parking type</p>
+                    <div class="custom-property-box">Garage parking</div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">Air conditioning type</p>
+                    <div class="custom-property-box">Central AC</div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">Heating type</p>
+                    <div class="custom-property-box">Central heating</div>
+                  </div>
+                </div>
+
+              </p-accordionTab>
+
+            </p-accordion>
+            <div class="accord"></div>
+            <div class="custom-apartment-buttons mt-5 ">
+              <button class="custom-btn-rented">Mark as rented</button>
+              <button class="custom-btn-delete">
+
+                <img src="assets/images/delete3.svg">Delete
+              </button>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+      <div class="qr-code-container">
+        <div class="qr-code-details">
+          <span class="qr-title">Apartment QR Code :</span>
+          <span class="qr-code">{{aprt.apartment_QRCode}}</span>
+        </div>
+        <div class="qr-actions">
+          <a  class="qr-action" (click)="onOpenQrModal(aprt.apartment_QR_Img)">
+            <i class="pi pi-eye"></i> View
+          </a>
+          <a  class="qr-action">
+            <i class="pi pi-download"></i> Download
+          </a>
+          <a  class="qr-action">
+            <i class="pi pi-share-alt"></i> Share
+          </a>
+          <button class="btn-assign">Assign worker</button>
+        </div>
+      </div>
+
+
+      <div class="row m-0" >
+        <!-- <div class="col-lg-2"></div> -->
+        <div class="col-lg-12">
+          <div class="  mt-4    ">
+            <div class="card bookingdetails">
+              <div class="card-header">
+                <h4 class="fs-5 fw-bold">Beds Details</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 mb-3">
+                    <div class="d-flex justify-content-between px-4">
+                      <div class="fw-bold">Bed No</div>
+                      <div class="fw-bold">Room type</div>
+                      <div class="fw-bold">Bed price</div>
+                      <div class="fw-bold">Security deposit</div>
+                      <div class="fw-bold">Service fee</div>
+                      <div class="fw-bold">Status</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <p-accordion id="bed" [multiple]="true" [activeIndex]="[0]">
+                    <!-- Bed 1 Section -->
+                    <p-accordionTab [selected]="true" [headerStyle]="{'background-color': '#fff' }"
+                      *ngFor="let room of aprt.apartment_Rooms">
+                      <ng-template pTemplate="header">
+                        <div class="d-flex justify-content-between align-items-center m-0  rounded w-100">
+                          <div class="fw-bold">{{room.beds_No}}</div>
+                          <div>{{room.room_Type}}</div>
+                          <div>€ {{room.bed_Price}}</div>
+                          <div>€ {{room.bed_SecuirtyDeposit}}</div>
+                          <div>€ {{room.bed_Service_Fees}}</div>
+                          <div class="badge rented" *ngIf="room.room_Available==false">Rented <img
+                              src="/assets/images/expand_more.svg" alt=""></div>
+                          <div class="badge rented" *ngIf="room.room_Available==true">Available <img
+                              src="/assets/images/expand_more.svg" alt=""></div>
+                        </div>
+                      </ng-template>
+                      <!-- <hr class="m-0"/> -->
+                      <div class="row bg-white m-0 p-4 mb-3">
+                        <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
+                          <div class="row align-items-center">
+                            <div class="col-auto">
+                              <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile Image">
+                            </div>
+                            <div class="col-lg-3 border-end">
+                              <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
+                              <p class="m-0 text-muted">osman2025@gmail.com</p>
+                            </div>
+                            <div class="col-lg-3 text-right border-end">
+                              <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
+                            </div>
+                            <div class="col-lg-3 text-right border-end">
+                              <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
+                            </div>
+                            <div class="col-lg-2 text-right">
+                              <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                  <div class="mb-4">
-                    <p-accordion id="bed" [multiple]="true" [activeIndex]="[0]" >
-                      <!-- Bed 1 Section -->
-                      <p-accordionTab  [selected]="true" [headerStyle]="{'background-color': '#fff' }">
-                        <ng-template pTemplate="header"  >
-                          <div class="d-flex justify-content-between align-items-center m-0  rounded w-100">
-                            <div class="fw-bold">Bed 1</div>
-                            <div>Single room</div>
-                            <div>€ 300</div>
-                            <div>€ 100</div>
-                            <div>€ 50</div>
-                            <div class="badge rented">Rented <img src="/assets/images/expand_more.svg" alt=""></div>
+                      <div class="tenant-documents m-0">
+                        <div class="header">
+                          <h3>Tenant Documents</h3>
+                          <p>View tenant Documents</p>
+                        </div>
+                        <div class="documents-container row">
+                          <div class="col-md-6">
+                            <div class="document-header">QR Details</div>
+                            <div class="document-content">
+                              <div class="doc-info">
+                                <!-- <img src="assets/images/qr-code.svg" alt="QR Code" /> -->
+                                <p>Qr Code:{{room.room_QRCode}}</p>
+                              </div>
+                              <div class="doc-actions">
+                                <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                                <button class="btn-share"><i class="pi pi-share"></i> Share</button>
+                              </div>
+                            </div>
                           </div>
-                        </ng-template>
-                        <!-- <hr class="m-0"/> -->
-                        <div class="row bg-white m-0 p-4 mb-3">
-                          <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
-                            <div class="row align-items-center">
-                              <div class="col-auto">
-                                <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile Image">
+                          <div class="col-md-6">
+                            <div class="document-header">Contract</div>
+                            <div class="document-content">
+                              <div class="doc-info">
+                                <img src="assets/images/document.svg" alt="Contract" />
+                                <p>Contract.pdf</p>
                               </div>
-                              <div class="col-lg-3 border-end">
-                                <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
-                                <p class="m-0 text-muted">osman2025@gmail.com</p>
+                              <div class="doc-actions">
+                                <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                <button class="btn-download"><i class="pi pi-download"></i> Download</button>
                               </div>
-                              <div class="col-lg-3 text-right border-end">
-                                <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="document-header">Handover protocols</div>
+                            <div class="document-content ">
+                              <div class="doc-info">
+                                <img src="assets/images/document.svg" alt="Handover protocols" />
+                                <p>Handover protocols.pdf</p>
                               </div>
-                              <div class="col-lg-3 text-right border-end">
-                                <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
+                              <div class="doc-actions">
+                                <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                <button class="btn-download"><i class="pi pi-download"></i> Download</button>
                               </div>
-                              <div class="col-lg-2 text-right">
-                                <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="document-header">Rental Rules</div>
+                            <div class="document-content">
+                              <div class="doc-info">
+                                <!-- <img src="assets/images/qr-code.svg" alt="QR Code" /> -->
+                                <p>Qr Code:{{room.room_QRCode}}</p>
+                              </div>
+                              <div class="doc-actions">
+                                <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                <button class="btn-download"><i class="pi pi-download"></i> Download</button>
                               </div>
                             </div>
                           </div>
                         </div>
-
-                        <div class="tenant-documents m-0">
-                          <div class="header">
-                            <h3>Tenant Documents</h3>
-                            <p>View tenant Documents</p>
-                          </div>
-                          <div class="documents-container">
-                            <div class="document-item">
-                              <div class="document-header">QR Details</div>
-                              <div class="document-content">
-                                <div class="doc-info">
-                                  <!-- <img src="assets/images/qr-code.svg" alt="QR Code" /> -->
-                                  <p>Qr Code: 363401</p>
-                                </div>
-                                <div class="doc-actions">
-                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
-                                  <button class="btn-download"><i class="pi pi-download"></i> Download</button>
-                                  <button class="btn-share"><i class="pi pi-share"></i> Share</button>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="document-item">
-                              <div class="document-header">Contract</div>
-                              <div class="document-content">
-                                <div class="doc-info">
-                                  <img src="assets/images/document.svg" alt="Contract" />
-                                  <p>Contract.pdf</p>
-                                </div>
-                                <div class="doc-actions">
-                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
-                                  <button class="btn-download"><i class="pi pi-download"></i> Download</button>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="document-item">
-                              <div class="document-header">Handover protocols</div>
-                              <div class="document-content">
-                                <div class="doc-info">
-                                  <img src="assets/images/document.svg" alt="Handover protocols" />
-                                  <p>Handover protocols.pdf</p>
-                                </div>
-                                <div class="doc-actions">
-                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
-                                  <button class="btn-download"><i class="pi pi-download"></i> Download</button>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="document-item">
-                              <div class="document-header">Rental Rules</div>
-                              <div class="document-content">
-                                <div class="doc-info">
-                                  <!-- <img src="assets/images/qr-code.svg" alt="QR Code" /> -->
-                                  <p>Qr Code: 363401</p>
-                                </div>
-                                <div class="doc-actions">
-                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
-                                  <button class="btn-download"><i class="pi pi-download"></i> Download</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                      </div>
 
 
-                      <div class="row bg-white m-0 p-4" id="more-details"  >
+                      <div class="row bg-white m-0 p-4" id="more-details">
                         <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
                           <div class="row align-items-center">
                             <div class="container mt-3">
@@ -332,14 +335,14 @@
                                     <div><i class="fas fa-chevron-down text-muted"></i></div>
                                   </div>
                                 </div>
-                               
+
                                 <div class="container mt-3">
                                   <div class="d-flex justify-content-between align-items-center border-bottom py-2">
                                     <div><strong>Fixed problem (0)</strong></div>
                                     <div><i class="fas fa-chevron-down text-muted"></i></div>
                                   </div>
                                 </div>
-                                
+
                                 <div class="container mt-3">
                                   <div class="d-flex justify-content-between align-items-center border-bottom py-2">
                                     <div><strong>Pending Invoices</strong></div>
@@ -349,40 +352,65 @@
                               </div>
                               <div class="d-flex justify-content-end mt-3">
                                 <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
-                                <button class="btn btn-primary" style="border-radius: 10px; font-size: 14px;">Mark as Available</button>
+                                <button class="btn btn-primary" style="border-radius: 10px; font-size: 14px;">Mark as
+                                  Available</button>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      </p-accordionTab>
+                    </p-accordionTab>
 
-                      <!-- end Booking Process Section -->
-
-
-
-                    </p-accordion>
-
-                  </div>
+                    <!-- end Booking Process Section -->
 
 
 
+                  </p-accordion>
 
-
-                  </div>
                 </div>
+
+
+
+
+
               </div>
             </div>
           </div>
-
         </div>
+      </div>
+
+    </div>
 
 
 
 
-    </main>
+  </main>
 
 
-    <!-- end content page  -->
+  <!-- end content page  -->
+</div>
+<div *ngIf="qrCodeImg!=''" class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayQr}"
+  style=" background-color: rgb(23 22 22 / 50%);;">
+  <div class="modal-dialog" role="document" style="    max-width: 371px;">
+    <div class="modal-content" style="    margin-top:  150px;">
+              <button _ngcontent-ng-c460821523="" type="button" aria-label="Close" class="close" style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;"><span _ngcontent-ng-c460821523="" aria-hidden="true" style="color: #000000; font-size: 35px;" (click)="onCloseQrModal()">×</span></button>
+<div class="modal-body">
+        <div class="row text-center">
+<p>Scan this code</p>
+<img [src]="qrCodeImg" width="180" height="180">
+<p class="mt-4">Or enter the number manually</p>
+<div class="custom-apartment-buttons mt-1">
+  <button class="custom-btn-delete">
+    140490
+  </button>
+  <button class="custom-btn-rented mt-4">Download</button>
+  
 </div>
 
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

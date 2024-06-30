@@ -121,7 +121,7 @@ FilterApartmentsFront(FilterKey: any, PageNumber: number, PageSize: number, Apt_
 
   getApartDetail(id: string): Observable<any> {
     return this.http.get(
-      `${environment.apiUrl + '/Apartment/GetApartment?' + `id=${id}`}`,
+      `${environment.apiUrl + '/ApartmentV2/GetApartmentDetails?' + `Apartment_ID=${id}`}`,
       { headers: this.headers }
     );
   }

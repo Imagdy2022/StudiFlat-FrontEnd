@@ -28,9 +28,12 @@ export class ApartmentDetailsComponent implements OnInit {
   /** aprt_details */
   aprt_details: any;
   /** apt_UUID */
+  aprt_Imgs:any[]=[];
   apt_UUID: any;
-  subscriptions: Subscription[] = [];
-
+  subscriptions: Subscription[] = []; 
+  displayQr:any;
+  qrCodeImg!:string;
+aprt:any;
   constructor(
     public _ApartmentService: ApartmentService,
     public _ActivatedRoute: ActivatedRoute,
@@ -41,7 +44,8 @@ export class ApartmentDetailsComponent implements OnInit {
   ) {
     this.apt_UUID = _ActivatedRoute.snapshot.paramMap.get('id');
   }
-
+ 
+  
   ngOnInit(): void {
     this.getApartmentDetails();
     this.GetApartmentReview();
@@ -49,6 +53,16 @@ export class ApartmentDetailsComponent implements OnInit {
     this.scrollTop();
     this.checkRole();
   }
+  onOpenQrModal(imgLink:string ) {
+    this.qrCodeImg=imgLink;
+    this.displayQr = 'block';
+ }
+ onCloseQrModal() {
+
+    this.qrCodeImg='';
+   this.displayQr = 'none';
+  
+ }
   ApartmentsRole: any;
   is_Super: any;
   checkRole() {
@@ -165,14 +179,18 @@ export class ApartmentDetailsComponent implements OnInit {
   getApartmentDetails() {
     this.subscriptions.push(
       this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
-        this.subscriptions.push(
-          this._OnwerService
-            .getOwner(res.general_Info['apt_Owner'])
-            .subscribe((res) => {
-              this.OwnerDtail = res;
-            })
-        );
-        this.aprt_details = res.general_Info;
+                console.log(res);
+
+        // this.subscriptions.push(
+        //   this._OnwerService
+        //     .getOwner(res.apartment_Owner)
+        //     .subscribe((res) => {
+        //       this.OwnerDtail = res;
+        //     })
+        // );
+        this.aprt=res;
+        this.aprt_details = res.apartment_Description;
+        this.aprt_Imgs=res.apartment_Images;
         this.trasponrts = res.trasponrts;
         this.rent_Rules = res.rent_Rules;
         this.features = res.features;
