@@ -12,16 +12,16 @@
             <div class="row">
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Electricity meter number</label>
-                    <input formControlName='elec_Meter_Num' type="string" [class.is-invalid]="PostBackupInfo.get('elec_Meter_Num')!.invalid && PostBackupInfo.get('elec_Meter_Num')!.touched " class="form-control rounded-2 py-2 fs-6">
-                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('elec_Meter_Num')!.invalid && PostBackupInfo.get('elec_Meter_Num')!.touched ">
+                    <input formControlName='apartment_Electricity_Meter_No' type="string" [class.is-invalid]="PostBackupInfo.get('apartment_Electricity_Meter_No')!.invalid && PostBackupInfo.get('apartment_Electricity_Meter_No')!.touched " class="form-control rounded-2 py-2 fs-6">
+                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('apartment_Electricity_Meter_No')!.invalid && PostBackupInfo.get('apartment_Electricity_Meter_No')!.touched ">
                         this field is required
                     </span>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Electricity meter
                         consumption</label>
-                    <input formControlName='elec_Meter_Cons' type="number" [class.is-invalid]="PostBackupInfo.get('elec_Meter_Cons')!.invalid && PostBackupInfo.get('elec_Meter_Cons')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit">
-                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('elec_Meter_Cons')!.invalid && PostBackupInfo.get('elec_Meter_Cons')!.touched ">
+                    <input formControlName='apartment_Electricity_Meter_Consumption' type="number" [class.is-invalid]="PostBackupInfo.get('apartment_Electricity_Meter_Consumption')!.invalid && PostBackupInfo.get('apartment_Electricity_Meter_Consumption')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit">
+                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('apartment_Electricity_Meter_Consumption')!.invalid && PostBackupInfo.get('apartment_Electricity_Meter_Consumption')!.touched ">
                         this field is required
                     </span>
                 </div>
@@ -30,15 +30,15 @@
             <div class="row">
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Water meter number</label>
-                    <input formControlName='water_Meter_Num' type="text" [class.is-invalid]="PostBackupInfo.get('water_Meter_Num')!.invalid && PostBackupInfo.get('water_Meter_Num')!.touched " class="form-control rounded-2 py-2 fs-6">
-                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('water_Meter_Num')!.invalid && PostBackupInfo.get('water_Meter_Num')!.touched ">
+                    <input formControlName='apartment_Water_Meter_No' type="text" [class.is-invalid]="PostBackupInfo.get('apartment_Water_Meter_No')!.invalid && PostBackupInfo.get('apartment_Water_Meter_No')!.touched " class="form-control rounded-2 py-2 fs-6">
+                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('apartment_Water_Meter_No')!.invalid && PostBackupInfo.get('apartment_Water_Meter_No')!.touched ">
                         this field is required
                     </span>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Water meter consumption</label>
-                    <input formControlName='water_Meter_Cons' type="number" [class.is-invalid]="PostBackupInfo.get('water_Meter_Cons')!.invalid && PostBackupInfo.get('water_Meter_Cons')!.touched " class="form-control rounded-2 py-2 fs-6">
-                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('water_Meter_Cons')!.invalid && PostBackupInfo.get('water_Meter_Cons')!.touched ">
+                    <input formControlName='apartment_Water_Meter_Consumption' type="number" [class.is-invalid]="PostBackupInfo.get('apartment_Water_Meter_Consumption')!.invalid && PostBackupInfo.get('apartment_Water_Meter_Consumption')!.touched " class="form-control rounded-2 py-2 fs-6">
+                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('apartment_Water_Meter_Consumption')!.invalid && PostBackupInfo.get('apartment_Water_Meter_Consumption')!.touched ">
                         this field is required
                     </span>
                 </div>
@@ -47,15 +47,15 @@
             <div class="row" *ngIf="addApartment != 'Edit Apartment Name' ">
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Gas meter number</label>
-                    <input formControlName='gas_Meter_Num' type="text" [class.is-invalid]="PostBackupInfo.get('gas_Meter_Num')!.invalid && PostBackupInfo.get('gas_Meter_Num')!.touched " class="form-control rounded-2 py-2 fs-6">
-                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('gas_Meter_Num')!.invalid && PostBackupInfo.get('gas_Meter_Num')!.touched ">
+                    <input formControlName='apartment_Gas_Meter_No' type="text" [class.is-invalid]="PostBackupInfo.get('apartment_Gas_Meter_No')!.invalid && PostBackupInfo.get('apartment_Gas_Meter_No')!.touched " class="form-control rounded-2 py-2 fs-6">
+                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('apartment_Gas_Meter_No')!.invalid && PostBackupInfo.get('apartment_Gas_Meter_No')!.touched ">
                         this field is required
                     </span>
                 </div>
                 <div class="mb-3  col-12 col-md-6">
                     <label class="form-label gray fw-bold">Gas meter consumption</label>
-                    <input formControlName='gas_Meter_Cons' type="number" [class.is-invalid]="PostBackupInfo.get('gas_Meter_Cons')!.invalid && PostBackupInfo.get('gas_Meter_Cons')!.touched " class="form-control rounded-2 py-2 fs-6">
-                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('gas_Meter_Cons')!.invalid && PostBackupInfo.get('gas_Meter_Cons')!.touched ">
+                    <input formControlName='apartment_Gas_Meter_Consumption' type="number" [class.is-invalid]="PostBackupInfo.get('apartment_Gas_Meter_Consumption')!.invalid && PostBackupInfo.get('apartment_Gas_Meter_Consumption')!.touched " class="form-control rounded-2 py-2 fs-6">
+                    <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('apartment_Gas_Meter_Consumption')!.invalid && PostBackupInfo.get('apartment_Gas_Meter_Consumption')!.touched ">
                         this field is required
                     </span>
                 </div>
@@ -354,7 +354,7 @@
                     </div>
                 </div>
                 <div class="row" *ngIf="edit=='EditForm'">
-                    <div class="col-md-2 card33" *ngFor="let image of aprt_details_Edit?.dmgs_Imgs;  index as i ">
+                    <div class="col-md-2 card33" *ngFor="let image of aprt_details_Edit?.apartment_Damages_Imgs;  index as i ">
 
                         <a (click)="opencloseModal(image.pic_URL)">
                             <img [src]="image.pic_URL" alt="Avatar" style="width:339px;height:205px ; " class="cursor">
@@ -406,7 +406,7 @@
             <div>
                 <div class="mb-3 mt-4">
                     <label for="exampleFormControlTextarea1" class="form-label gray">Description</label>
-                    <textarea formControlName="apt_Dmgs_Desc" class=" border p-3 rounded-2 w-100" rows="5" style="resize: inherit;"></textarea>
+                    <textarea formControlName="apartment_Description" class=" border p-3 rounded-2 w-100" rows="5" style="resize: inherit;"></textarea>
                 </div>
 
             </div>
@@ -425,12 +425,12 @@
                 <div class="col-12 pt-3">
                   <div class="d-flex">
                     <p class="me-3 mt-1 fw-bold gray">Security Deposit</p>
-                    <p-inputSwitch [(ngModel)]="checkSecurityDeposit" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+                    <p-inputSwitch  formControlName="apartment_Is_Security_Payment" ></p-inputSwitch>
 
                 </div>
                     <div class="d-flex">
                       <p class="me-3 mt-1 fw-bold gray">Online</p>
-                        <p-inputSwitch [(ngModel)]="checkedOnline" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+                        <p-inputSwitch formControlName="apartment_Is_Online_Payment"></p-inputSwitch>
                     </div>
                     <!-- <div class="d-flex">
                         <p-inputSwitch [(ngModel)]="checkedstripe" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
@@ -442,7 +442,7 @@
                     </div> -->
                     <div class="d-flex">
                       <p class="me-3 mt-1 fw-bold gray">Cash</p>
-                        <p-inputSwitch [(ngModel)]="checkedCash" [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+                        <p-inputSwitch formControlName="apartment_Is_Cash_Payment"></p-inputSwitch>
                     </div>
 
                 </div>
@@ -451,7 +451,7 @@
             <!-- General comment -->
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label gray">General comment</label>
-                <textarea formControlName='apt_General_Comments' class=" border p-3 rounded-2 w-100" rows="5" style="resize: inherit;"></textarea>
+                <textarea formControlName='apartment_General_Description' class=" border p-3 rounded-2 w-100" rows="5" style="resize: inherit;"></textarea>
             </div>
         </div>
 

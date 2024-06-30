@@ -471,7 +471,7 @@ export class FirstStepComponent implements OnInit {
     // }
 
   let apartment = {
-    apartment_ID: this.generalInfoForm.value['apartment_ID'] ?? 0,
+    apartment_ID: this.id,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
     apartment_Floor:this.generalInfoForm.value['apartment_Floor'],
     apartment_Name: this.generalInfoForm.value['apartment_Name'],
@@ -745,7 +745,7 @@ export class FirstStepComponent implements OnInit {
   }
 
   onChangeNoOfBedrooms(event:any){
-    const selectedValue = parseInt(event.target.value, 10);
+    const selectedValue = parseInt(event.target?.value, 10);
     this.bedrooms = Array(selectedValue).fill(0).map((x, i) => i);
 
   }

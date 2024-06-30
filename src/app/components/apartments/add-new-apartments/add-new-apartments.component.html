@@ -32,9 +32,7 @@
 
         <div class="pt-4">
       <!--start form of general info-->
-        <app-first-step *ngIf="activeIndex == 0" (jumbToNextSteb)="changeItem(1)" (jumbToNextSteb2n_ofbedroom)="jumbToNextSteb2($event)"
-        (jumbToNextSteb2_apt_Toilets)="jumbToNextSteb2_apt_Toilets($event)" (getId)="id($event)"
-        (jumbToNextSteb2_n_ofLiving)="jumbToNextSteb2_n_ofLiving($event)"
+        <app-first-step *ngIf="activeIndex == 0" (jumbToNextSteb)="changeItem(1)" (getId)="id($event)"
         [addApartment]="param" [id]="UUID"></app-first-step>
     <!--end form of general info-->
 
