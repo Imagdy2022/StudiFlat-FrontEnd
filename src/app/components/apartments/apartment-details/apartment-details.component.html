@@ -22,6 +22,7 @@
         <!-- end part 1 in page  -->
 
 
+
         <div class="bg-white border rounded-3 mt-3 p-3 p-4">
           <div class="row">
             <div class="col-12 col-md-7">
@@ -66,7 +67,7 @@
 
 
 
-              <div class="custom-apartment-details bg-white border rounded-3 p-3">
+              <div class="custom-apartment-details bg-white  rounded-3 p-3">
 
                 <h3 class="custom-apartment-title">Salt Lake City, Apartment Salt Lake City, Apartment</h3>
                 <p class="custom-apartment-type">Rentals · Apartment / Condo</p>
@@ -103,7 +104,7 @@
                 </div>
 
 
-                <p-accordion class="mt-3">
+                <p-accordion class=" mt-3">
                   <p-accordionTab header="Public transport" [headerStyle]="{'background-color': '#fff' }" >
                     <!-- <ng-template pTemplate="header">
 
@@ -153,31 +154,10 @@
                     </div>
 
                   </p-accordionTab>
-                  <p-accordionTab header="Passport of tenant" [headerStyle]="{'background-color': '#fff' }" >
-                    <div class="custom-image-gallery">
-                      <div class="custom-thumbnail">
-                        <img src="https://via.placeholder.com/120" alt="Image 1">
-                      </div>
-                      <div class="custom-thumbnail">
-                        <img src="https://via.placeholder.com/120" alt="Image 2">
-                      </div>
-                      <div class="custom-thumbnail">
-                        <img src="https://via.placeholder.com/120" alt="Image 3">
-                      </div>
-                      <div class="custom-thumbnail">
-                        <img src="https://via.placeholder.com/120" alt="Image 4">
-                      </div>
-                    </div>
-                  </p-accordionTab>
-                  <p-accordionTab header="Problem reports (2)" [headerStyle]="{'background-color': '#fff' }" >
-                    <p>Content for Problem reports</p>
-                  </p-accordionTab>
-                  <p-accordionTab header="Fixed problem (0)" [headerStyle]="{'background-color': '#fff' }" >
-                    <p>Content for Fixed problem</p>
-                  </p-accordionTab>
-                </p-accordion>
 
-                <div class="custom-apartment-buttons mt-5">
+                </p-accordion>
+                <div class="accord"></div>
+                <div class="custom-apartment-buttons mt-5 ">
                   <button class="custom-btn-rented">Mark as rented</button>
                   <button class="custom-btn-delete">
 
@@ -190,119 +170,219 @@
 
             </div>
           </div>
+          <div class="qr-code-container">
+            <div class="qr-code-details">
+              <span class="qr-title">Apartment QR Code :</span>
+              <span class="qr-code">36340</span>
+            </div>
+            <div class="qr-actions">
+              <a href="#" class="qr-action">
+                <i class="pi pi-eye"></i> View
+              </a>
+              <a href="#" class="qr-action">
+                <i class="pi pi-download"></i> Download
+              </a>
+              <a href="#" class="qr-action">
+                <i class="pi pi-share-alt"></i> Share
+              </a>
+              <button class="btn-assign">Assign worker</button>
+            </div>
+          </div>
+          
+
+          <div class="row m-0">
+            <!-- <div class="col-lg-2"></div> -->
+            <div class="col-lg-12">
+              <div class="  mt-4    ">
+                <div class="card bookingdetails">
+                  <div class="card-header">
+                    <h4 class="fs-5 fw-bold">Booking Details</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 mb-3">
+                        <div class="d-flex justify-content-between px-4">
+                          <div class="fw-bold">Bed No</div>
+                          <div class="fw-bold">Room type</div>
+                          <div class="fw-bold">Bed price</div>
+                          <div class="fw-bold">Security deposit</div>
+                          <div class="fw-bold">Service fee</div>
+                          <div class="fw-bold">Status</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  <div class="mb-4">
+                    <p-accordion id="bed" [multiple]="true" [activeIndex]="[0]" >
+                      <!-- Bed 1 Section -->
+                      <p-accordionTab  [selected]="true" [headerStyle]="{'background-color': '#fff' }">
+                        <ng-template pTemplate="header"  >
+                          <div class="d-flex justify-content-between align-items-center m-0  rounded w-100">
+                            <div class="fw-bold">Bed 1</div>
+                            <div>Single room</div>
+                            <div>€ 300</div>
+                            <div>€ 100</div>
+                            <div>€ 50</div>
+                            <div class="badge rented">Rented <img src="/assets/images/expand_more.svg" alt=""></div>
+                          </div>
+                        </ng-template>
+                        <!-- <hr class="m-0"/> -->
+                        <div class="row bg-white m-0 p-4 mb-3">
+                          <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
+                            <div class="row align-items-center">
+                              <div class="col-auto">
+                                <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile Image">
+                              </div>
+                              <div class="col-lg-3 border-end">
+                                <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
+                                <p class="m-0 text-muted">osman2025@gmail.com</p>
+                              </div>
+                              <div class="col-lg-3 text-right border-end">
+                                <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
+                              </div>
+                              <div class="col-lg-3 text-right border-end">
+                                <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
+                              </div>
+                              <div class="col-lg-2 text-right">
+                                <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="tenant-documents m-0">
+                          <div class="header">
+                            <h3>Tenant Documents</h3>
+                            <p>View tenant Documents</p>
+                          </div>
+                          <div class="documents-container">
+                            <div class="document-item">
+                              <div class="document-header">QR Details</div>
+                              <div class="document-content">
+                                <div class="doc-info">
+                                  <!-- <img src="assets/images/qr-code.svg" alt="QR Code" /> -->
+                                  <p>Qr Code: 363401</p>
+                                </div>
+                                <div class="doc-actions">
+                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                  <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                                  <button class="btn-share"><i class="pi pi-share"></i> Share</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="document-item">
+                              <div class="document-header">Contract</div>
+                              <div class="document-content">
+                                <div class="doc-info">
+                                  <img src="assets/images/document.svg" alt="Contract" />
+                                  <p>Contract.pdf</p>
+                                </div>
+                                <div class="doc-actions">
+                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                  <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="document-item">
+                              <div class="document-header">Handover protocols</div>
+                              <div class="document-content">
+                                <div class="doc-info">
+                                  <img src="assets/images/document.svg" alt="Handover protocols" />
+                                  <p>Handover protocols.pdf</p>
+                                </div>
+                                <div class="doc-actions">
+                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                  <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="document-item">
+                              <div class="document-header">Rental Rules</div>
+                              <div class="document-content">
+                                <div class="doc-info">
+                                  <!-- <img src="assets/images/qr-code.svg" alt="QR Code" /> -->
+                                  <p>Qr Code: 363401</p>
+                                </div>
+                                <div class="doc-actions">
+                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                  <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      <div class="row bg-white m-0 p-4" id="more-details"  >
+                        <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
+                          <div class="row align-items-center">
+                            <div class="container mt-3">
+                              <h6 class="fw-bold text-lowercase">More details</h6>
+                              <p class="text-muted">View tenant passport and reported problems, invoices</p>
+                              <div class="accordion" id="accordionExample">
+                                <div class="container mt-3">
+                                  <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                    <div><strong>Passport of tenent</strong></div>
+                                    <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                  </div>
+                                </div>
+                                <div class="container mt-3">
+                                  <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                    <div><strong>Problem reports (2)</strong></div>
+                                    <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                  </div>
+                                </div>
+                               
+                                <div class="container mt-3">
+                                  <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                    <div><strong>Fixed problem (0)</strong></div>
+                                    <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                  </div>
+                                </div>
+                                
+                                <div class="container mt-3">
+                                  <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                    <div><strong>Pending Invoices</strong></div>
+                                    <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="d-flex justify-content-end mt-3">
+                                <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
+                                <button class="btn btn-primary" style="border-radius: 10px; font-size: 14px;">Mark as Available</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </p-accordionTab>
+
+                      <!-- end Booking Process Section -->
+
+
+
+                    </p-accordion>
+
+                  </div>
+
+
+
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
 
 
 
-        <!-- <div class="rating py-4">
-            <div style="margin-top:10px" class="heading">
-                <h5>Tenant Rating </h5>
-                <p style="margin-bottom: 18px;">view tenant ratings </p>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6" *ngFor="let review of AllReviews">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Review</h5>
-                            <div class="userData d-flex align-items-center my-2">
-                                <div class="userImage">
-                                    <img *ngIf="review.userPhoto" src="{{ review.userPhoto }}" alt=""
-                                        style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
-                                    <img *ngIf="!review.userPhoto" src="../../../assets/images/Frame 1261154899.svg" alt=""
-                                        style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
-                                </div>
-                                <div class="userInfo ms-3">
-                                    <h5 class="py-0 my-0">{{ review.userName }}</h5>
-                                    <p class="py-0 my-0">{{ review?.reviewed_at }}</p>
-                                </div>
-                            </div>
-                            <ul class="px-0 my-2">
-                                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                                    <span>Apartment / Studio</span>
-                                    <div class="rate d-flex align-items-center">
-                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                                        <span class="ms-1">({{ review.rate_Apartment }})</span>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                                    <span>Safety</span>
-                                    <div class="rate d-flex align-items-center">
-                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                                        <span class="ms-1">({{ review.rate_Safety }})</span>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                                    <span>Location</span>
-                                    <div class="rate d-flex align-items-center">
-                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                                        <span class="ms-1">({{ review.rate_Location }})</span>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                                    <span>Our Service</span>
-                                    <div class="rate d-flex align-items-center">
-                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                                        <span class="ms-1">({{ review.rate_Service }})</span>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                                    <span>Cleanliness</span>
-                                    <div class="rate d-flex align-items-center">
-                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                                        <span class="ms-1">({{ review.rate_Cleanliness }})</span>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                                    <span>Communication</span>
-                                    <div class="rate d-flex align-items-center">
-                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                                        <span class="ms-1">({{ review.rate_Communication }})</span>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                                    <span>Total Rating</span>
-                                    <div class="rate d-flex align-items-center">
-                                        <img src="../../../../assets/images/star.svg" alt="" class="mb-1">
-                                        <span class="ms-1">(4.0)</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="comment">
-                                <h5 class="mb-1">Additional comment (optional):</h5>
-                                <p>{{ review.review_Comment }}</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-outline" [disabled]="!review.show_OnApp"
-                                    (click)="ApproveReview(review.rate_ID,false)">Hide From App</button>
-                                <button class="btn btn-color" [disabled]="review.show_OnApp"
-                                    (click)="ApproveReview(review.rate_ID,true)">Display On App</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
-        </div> -->
     </main>
+
+
     <!-- end content page  -->
 </div>
-<!-- <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display22}" style="background-color: rgba(90,90,90,0.5);">
-    <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="width:900px;">
-        <div class="modal-content position-relative">
-            <div class="modal-header p-0 m-0 d-flex justify-content-start">
-                <button type="button" class="close" aria-label="Close" (click)="oncloseModal()">
-                    <img src="../../../../assets/images/ic_round-close.svg" alt="">
-                </button>
-            </div>
-            <div class="modal-body p-0 m-0">
-                <img [src]="imageSize" style="width:100%;height: 500px" />
 
-            </div>
-
-
-
-
-        </div>
-    </div>
-</div> -->
