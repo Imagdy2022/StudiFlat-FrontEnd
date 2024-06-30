@@ -34,6 +34,9 @@ export class FirstStepComponent implements OnInit {
   listRadiobutton: Array<string> = ['Yes', 'No'];
   apartmentSharedArea: Array<string> = ['Yes', 'No'];
   sleepingArea: Array<string> = ['No sleeping area', 'Bed','Sofa bed'];
+  defaultSleepingArea="No sleeping area";
+  defaultapartmentSharedArea="Yes";
+  SharedAreaInclude: any = true;
   /** listDropDownArea */
   listDropDownArea: any = [];
   /** selectedOwner */
@@ -341,6 +344,8 @@ export class FirstStepComponent implements OnInit {
   }
 
   DoyouCreatebills(value: any) {
+    console.log(value.target.value)
+
     this.bills = value.target.value;
     this.billinclude = value.target.value == 'Yes' ? true : false;
   }
@@ -407,7 +412,7 @@ export class FirstStepComponent implements OnInit {
       apartment_Code: new FormControl(''),
       apartment_No: new FormControl('0', [Validators.required]),
       apartment_Price: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-      apt_SecuirtyDep: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      // apt_SecuirtyDep: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       apartment_Bill_Descirption: new FormControl(''),
       apartment_StreetName: new FormControl('', [Validators.required]),
       apartment_BuildingName: new FormControl('', [Validators.required]),
@@ -419,7 +424,7 @@ export class FirstStepComponent implements OnInit {
       apartment_360DLink: new FormControl('', [Validators.required]),
       apartment_GoogleLocation: new FormControl('', [Validators.required]),
       //  'UUID': new FormControl(this.id ),
-      service_Fees: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      // service_Fees: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
 
       apartment_BedRoomsNo: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       apartment_BathroomNo: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
@@ -430,31 +435,21 @@ export class FirstStepComponent implements OnInit {
       apartment_Type: new FormControl('Select Type', [Validators.required]),
       apartment_Owner: new FormControl('0', [Validators.required]), //string
       apartment_Manager: new FormControl('0', [Validators.required]), //string
-      apt_Status: new FormControl('', [Validators.required]), //Rented
-      apt_ThumbImg: new FormControl('', [Validators.required]),
+      // apt_Status: new FormControl('', [Validators.required]), //Rented
+      // apt_ThumbImg: new FormControl('', [Validators.required]),
       apartment_RentBy_Apartment: new FormControl(true, [Validators.required]), //true
       apartment_RentBy_Bed: new FormControl(true, [Validators.required]), //true
       apartment_SharedArea: new FormControl(true, [Validators.required]), //true
-      apartment_SleepingArea: new FormControl('0'), //string
-      apartment_Rooms: new FormGroup({
+      apartment_SleepingArea: new FormControl(null), //string
+      apartment_Rooms: new FormControl(null),
         room_Type: new FormControl(null),
-        beds_No: new FormControl(0, [
-          Validators.required,
-          Validators.pattern(/^[1-9]\d*$/)
-        ]),
-        bed_Price: new FormControl(0, [
-          Validators.required,
-          Validators.pattern(/^[1-9]\d*$/)
-        ]),
-        bed_SecuirtyDeposit: new FormControl(0, [
-          Validators.required,
-          Validators.pattern(/^[1-9]\d*$/)
-        ]),
-        bed_Service_Fees: new FormControl(0, [
-          Validators.required,
-          Validators.pattern(/^[1-9]\d*$/)
-        ]),
-      }),
+        beds_No: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+        bed_Price: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+        bed_SecuirtyDeposit: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+        bed_Service_Fees: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+        apartment_Transports: new FormControl(null),
+        transport_Name: new FormControl(null),
+        transport_Distance:new FormControl(null),
     });
   }
 
@@ -474,9 +469,57 @@ export class FirstStepComponent implements OnInit {
     //      this.generalInfoForm.get('apt_ThumbImg')?.patchValue(this.apt_imgs[0].apt_imgs);
     //      data.value.apt_ThumbImg=this.apt_imgs[0].apt_imgs;
     // }
-    data.value.apartment_All_Bill_Included = this.billinclude;
-    // data.value.apt_Lat = 0
-    data.value.apt_Status = 'Rented';
+
+  let apartment = {
+    apartment_ID: this.generalInfoForm.value['apartment_ID'] ?? 0,
+    apartment_Area: this.generalInfoForm.value['apartment_Area'],
+    apartment_Floor:this.generalInfoForm.value['apartment_Floor'],
+    apartment_Name: this.generalInfoForm.value['apartment_Name'],
+    apartment_Code: this.generalInfoForm.value['apartment_Code'],
+    apartment_Price: this.generalInfoForm.value['apartment_Price'],
+    apartment_All_Bill_Included: this.generalInfoForm.value['apartment_All_Bill_Included'],
+    apartment_Bill_Descirption: this.generalInfoForm.value['apartment_Bill_Descirption'],
+    apartment_StreetName: this.generalInfoForm.value['apartment_StreetName'],
+    apartment_BuildingName: this.generalInfoForm.value['apartment_BuildingName'],
+    apartment_City: this.generalInfoForm.value['apartment_City'],
+    apartment_Area_Square:this.generalInfoForm.value['apartment_Area_Square'],
+    apartment_No: this.generalInfoForm.value['apartment_No'],
+    apartment_Manager: this.generalInfoForm.value['apartment_Manager'],
+    apartment_Owner: this.generalInfoForm.value['apartment_Owner'],
+    apartment_Transports:[
+      {
+        transport_Name: this.generalInfoForm.value['transport_Name'],
+        transport_Distance: this.generalInfoForm.value['transport_Distance']
+      }],
+    apartment_RentBy_Apartment: this.generalInfoForm.value['apartment_RentBy_Apartment'],
+    apartment_RentBy_Bed: this.generalInfoForm.value['apartment_RentBy_Bed'],
+    apartment_Description: this.generalInfoForm.value['apartment_Description'],
+    apartment_Images: this.apt_imgs,
+    apartment_VideoLink: this.generalInfoForm.value['apartment_VideoLink'],
+    apartment_GoogleLocation: this.generalInfoForm.value['apartment_GoogleLocation'],
+    apartment_Lat:  this.center.lat,
+    apartment_Long:  this.center.lng,
+    apartment_360DLink: this.generalInfoForm.value['apartment_360DLink'],
+    apartment_SharedArea:this.generalInfoForm.value['apartment_SharedArea'],
+    apartment_SleepingArea: this.generalInfoForm.value['apartment_SleepingArea'],
+    apartment_Elevator: this.generalInfoForm.value['apartment_Elevator'],
+    apartment_Type: this.generalInfoForm.value['apartment_Type'],
+    apartment_BedRoomsNo:this.generalInfoForm.value['apartment_BedRoomsNo'],
+    apartment_BathroomNo: this.generalInfoForm.value['apartment_BathroomNo'],
+     apartment_Rooms : [
+      {
+        room_Type: this.generalInfoForm.value['room_Type'],
+        beds_No: this.generalInfoForm.value['beds_No'],
+        bed_Price: this.generalInfoForm.value['bed_Price'],
+        bed_SecuirtyDeposit:this.generalInfoForm.value['bed_SecuirtyDeposit'],
+        bed_Service_Fees: this.generalInfoForm.value['bed_Service_Fees'],
+      }
+    ]
+  };
+
+    // data.value.apartment_All_Bill_Included = this.billinclude;
+    // data.value.apartment_Lat = 0
+    // data.value.apt_Status = 'Rented';
 
     // this.Createtransport.push({ transport_Name: this.transport_Name, transport_Distance: this.transport_Distance });
     localStorage.setItem(
@@ -496,7 +539,7 @@ export class FirstStepComponent implements OnInit {
     if (this.addApartment != 'add new apartments') {
       this.subscriptions.push( this._ApartmentService
         .createPostSec1(
-          { ...data.value, apartment_Transports: this.Createtransport },
+          { apartment },
         )
         .subscribe(
           (res) => {
@@ -518,7 +561,7 @@ export class FirstStepComponent implements OnInit {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: `${err?.error?.message[0]}`,
+              detail: err,
             });
           }
         ));
@@ -526,7 +569,7 @@ export class FirstStepComponent implements OnInit {
     } else {
       this.subscriptions.push(this._ApartmentService
         .createPostSec1(
-          { ...data.value, apartment_Transports: this.Createtransport },
+          { apartment},
         )
         .subscribe(
           (res) => {
@@ -586,8 +629,8 @@ export class FirstStepComponent implements OnInit {
     if (event.latLng != null) this.display1 = event.latLng.toJSON();
     this.center.lat = this.display1.lat;
     this.center.lng = this.display1.lng;
-    this.generalInfoForm.get('apt_Long')?.setValue(this.display1.lng);
-    this.generalInfoForm.get('apt_Lat')?.setValue(this.display1.lat);
+    this.generalInfoForm.get('apartment_Long')?.setValue(this.display1.lng);
+    this.generalInfoForm.get('apartment_Lat')?.setValue(this.display1.lat);
   }
 
   move(event: google.maps.MapMouseEvent) {
@@ -709,13 +752,22 @@ export class FirstStepComponent implements OnInit {
   showBedSection:boolean = false;
   sectionName:string ="";
 
-  onChangesleepingArea(event:any){
-    this.sectionName= event.target.value
-    if(this.sectionName == "Bed" || this.sectionName == "Sofa bed")
-      this.showBedSection = true;
-    else
-    this.showBedSection = false;
+  onChangesArea(event:any){
+    this.defaultapartmentSharedArea = event.target.value;
+    this.SharedAreaInclude = event.target.value == 'Yes' ? true : false;
+
+    console.log(this.defaultapartmentSharedArea)
+
   }
+
+  onChangesleepingArea(event: any): void {
+    const selectedValue = event.target.value;
+    this.sectionName = selectedValue;
+
+    this.showBedSection = (this.sectionName === 'Bed' || this.sectionName === 'Sofa bed');
+}
+
+
 
   checkValue(event: any, file: any) {
     if (event.target.checked == true) {

@@ -109,9 +109,16 @@ export class ApartmentService {
     });
   }
 
+  // getApartDetail(id: string): Observable<any> {
+  //   return this.http.get(
+  //     `${environment.apiUrl + '/Apartment/GetApartment?' + `id=${id}`}`,
+  //     { headers: this.headers }
+  //   );
+  // }
+
   getApartDetail(id: string): Observable<any> {
     return this.http.get(
-      `${environment.apiUrl + '/Apartment/GetApartment?' + `id=${id}`}`,
+      `${environment.apiUrl + '/ApartmentV2/Apartment_InDetails?' + `id=${id}`}`,
       { headers: this.headers }
     );
   }
