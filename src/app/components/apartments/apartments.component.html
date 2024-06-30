@@ -20,13 +20,15 @@
         <!-- start dropdown button  -->
         <app-dropdown class="px-3" [list]="listDropDown" (selected)="selectedfromDropDown($event)"></app-dropdown>
         <!-- end dropdown button  -->
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center px-3">
           <!-- (click)="FilterButtons('This Month')" (click)="FilterButtons('Last Week')" -->
             <button class="week rounded-start px-3  py-2 bg-w outline-none" 
                 [ngClass]="{'activeButton': monthButton == true}">This Month</button>
             <button class="week px-3 py-2 outline-none rounded-end" 
                 [ngClass]="{'activeButton': weekButton == true}">Last Week</button>
         </div>
+        <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true  || is_Super==true"[id]="'apartments/page/add-new-apartments'" ></app-add-new-button>
+
     </div>
       <!-- end add button (add new apartment) in page  -->
     </div>

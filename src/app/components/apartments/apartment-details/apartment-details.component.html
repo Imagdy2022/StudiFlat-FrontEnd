@@ -267,7 +267,7 @@
                                 <p>Qr Code:{{room.room_QRCode}}</p>
                               </div>
                               <div class="doc-actions">
-                                <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                <button class="btn-view" (click)="onOpenQrModal(room.room_QR_Img)"><i class="pi pi-eye"></i> View</button>
                                 <button class="btn-download"><i class="pi pi-download"></i> Download</button>
                                 <button class="btn-share"><i class="pi pi-share"></i> Share</button>
                               </div>
@@ -307,7 +307,7 @@
                                 <p>Qr Code:{{room.room_QRCode}}</p>
                               </div>
                               <div class="doc-actions">
-                                <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                <button class="btn-view" (click)="onOpenQrModal(room.room_QR_Img)"><i class="pi pi-eye"></i> View</button>
                                 <button class="btn-download"><i class="pi pi-download"></i> Download</button>
                               </div>
                             </div>
