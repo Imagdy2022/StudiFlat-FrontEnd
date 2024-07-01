@@ -2,13 +2,20 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ApartmentService } from '../../../_services/apartments/apartment.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';
 import * as FileSaver from 'file-saver';
 import { Guid } from 'guid-typescript';
 import { Reviews } from 'src/app/models/reviews';
 import { Subscription } from 'rxjs';
+
+interface ApartmentDetails {
+  // apt_ThumbImg?: string;
+  apt_Lat?: number;
+  apt_Long?: number;
+  [key: string]: any;
+}
 
 @Component({
   selector: 'app-apartment-details',
@@ -17,23 +24,54 @@ import { Subscription } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class ApartmentDetailsComponent implements OnInit {
-  /** showSide */
   showSide: string = '';
-  /** value */
   value: number = 3;
-  /** RentedSuccessfully */
   RentedSuccessfully: boolean = false;
-  /** markAvailable */
   markAvailable: boolean = false;
-  /** aprt_details */
-  aprt_details: any;
-  /** apt_UUID */
-  aprt_Imgs:any[]=[];
+  aprt_details: ApartmentDetails = {};
+  aprt_Imgs: string[] = [];
   apt_UUID: any;
-  subscriptions: Subscription[] = []; 
-  displayQr:any;
-  qrCodeImg!:string;
-aprt:any;
+  subscriptions: Subscription[] = [];
+  displayQr: any;
+  qrCodeImg!: string;
+  aprt: any = {};
+  apartmentsEquipment: any = {};
+  apartmentsContract: any = {};
+  apartmentsCheckRules: any = {};
+  roomsBedRoom: any[] = [];
+  roomsLiving: any[] = [];
+  ApartmentsRole: any;
+  is_Super: any;
+  isAccordionOpen: boolean = false;
+  isContentVisible: any;
+  isDepositVisible: any;
+  isContractVisible: any;
+  isArriveVisible: any;
+  isCheckinVisible: any;
+  isinsideCheckinVisible: any;
+  isidentityVisible: any;
+  isPaymentsVisible: any;
+  isHandoverVisible: any;
+  isRulesVisible: any;
+  trasponrts: any[] = [];
+  rent_Rules: any;
+  features: any;
+  facilities: any;
+  contract_Main: any;
+  bath_Room: any;
+  backup_Info: any;
+  kitchen_Tools: any[] = [];
+  AllReviews: Reviews[] = [];
+  tenant: any = {};
+  request_code: any;
+  rating_total: any;
+  rating_count: any;
+  owner_contract_file_name: any;
+  tenant_contract_file_name: any;
+  center: any = {};
+  display22: any = 'none';
+  imageSize: string = '';
+
   constructor(
     public _ApartmentService: ApartmentService,
     public _ActivatedRoute: ActivatedRoute,
@@ -44,46 +82,116 @@ aprt:any;
   ) {
     this.apt_UUID = _ActivatedRoute.snapshot.paramMap.get('id');
   }
- 
-  
+
   ngOnInit(): void {
     this.getApartmentDetails();
     this.GetApartmentReview();
-
     this.scrollTop();
     this.checkRole();
   }
-  onOpenQrModal(imgLink:string ) {
-    this.qrCodeImg=imgLink;
-    this.displayQr = 'block';
- }
- onCloseQrModal() {
 
-    this.qrCodeImg='';
-   this.displayQr = 'none';
-  
- }
-  ApartmentsRole: any;
-  is_Super: any;
+  getApartmentDetails() {
+    this.subscriptions.push(
+      this._ApartmentService.getApartDetail(this.apt_UUID).subscribe(
+        (res) => {
+          console.log('API response:', res);
+
+          this.aprt = res.apartment_Basic_Info || {};
+          this.aprt_details = this.aprt || {};
+          this.aprt_Imgs = this.aprt.apartment_Images || [];
+          this.trasponrts = this.aprt.apartment_Transports || [];
+          this.rent_Rules = res.apartment_Check_Rules?.apt_rules || [];
+          this.features = res.apartment_Equipments?.apartment_Features || [];
+          this.facilities = res.apartment_Equipments?.apartment_Facilites || [];
+          this.contract_Main = res.apartment_Contract || {};
+          this.bath_Room = res.apartment_Equipments?.bathroom_Details || [];
+          this.backup_Info = res.apartment_Backup_Info || {};
+          this.owner_contract_file_name = res.file_Name;
+          this.tenant_contract_file_name = res.tenant?.file_Name || '';
+          this.center = {
+            lat: this.aprt.apartment_Lat || 0,
+            lng: this.aprt.apartment_Long || 0,
+          };
+          this.kitchen_Tools = res.apartment_Equipments?.kitchen_Details || [];
+          this.tenant = res.tenant || {};
+          this.rating_total = res.rating_Total;
+          this.rating_count = res.rating_Count;
+          this.request_code = res.request_Code;
+          this.transform(this.aprt.apartment_VideoLink || '');
+
+          this.apartmentsEquipment = res.apartment_Equipments || {};
+          this.apartmentsContract = res.apartment_Contract || {};
+          this.apartmentsCheckRules = res.apartment_Check_Rules || {};
+
+          console.log('Apartment details:', this.aprt);
+          console.log( this.aprt_details);
+
+          console.log('Apartment equipment:', this.apartmentsEquipment);
+          console.log('Apartment contract:', this.apartmentsContract);
+          console.log('Apartment check rules:', this.apartmentsCheckRules);
+
+          if (Array.isArray(this.aprt.apartment_Rooms)) {
+            for (let i = 0; i < this.aprt.apartment_Rooms.length; i++) {
+              if (this.aprt.apartment_Rooms[i].room_Type === 'Bedroom') {
+                this.roomsBedRoom.push(this.aprt.apartment_Rooms[i]);
+              } else {
+                this.roomsLiving.push(this.aprt.apartment_Rooms[i]);
+              }
+            }
+          } else {
+            console.warn('apartment_Rooms is not an array:', this.aprt.apartment_Rooms);
+          }
+
+          console.log('Bedrooms:', this.roomsBedRoom);
+          console.log('Living rooms:', this.roomsLiving);
+        },
+        (error) => {
+          console.error('Error fetching apartment details:', error);
+        }
+      )
+    );
+  }
+
+  GetApartmentReview() {
+    this.subscriptions.push(
+      this._ApartmentService.GetApartmentReview(this.apt_UUID).subscribe(
+        (res) => {
+          this.AllReviews = res;
+        },
+        (error) => {
+          console.error('Error fetching apartment reviews:', error);
+        }
+      )
+    );
+  }
+
+  onOpenQrModal(imgLink: string) {
+    this.qrCodeImg = imgLink;
+    this.displayQr = 'block';
+  }
+
+  onCloseQrModal() {
+    this.qrCodeImg = '';
+    this.displayQr = 'none';
+  }
+
   checkRole() {
     const data = localStorage.getItem('user');
     if (data !== null) {
       let parsedData = JSON.parse(data);
       this.is_Super = parsedData.is_Super;
-      if (parsedData.is_Super == false) {
+      if (parsedData.is_Super === false) {
         for (let i = 0; i < parsedData.permissions.length; i++) {
-          if (parsedData.permissions[i].page_Name == 'Apartments') {
+          if (parsedData.permissions[i].page_Name === 'Apartments') {
             this.ApartmentsRole = parsedData.permissions[i];
           }
         }
-        if (this.ApartmentsRole.p_View == false && this.is_Super == false) {
+        if (this.ApartmentsRole.p_View === false && this.is_Super === false) {
           this.gotopage();
         }
       }
     }
   }
-
-  isAccordionOpen: boolean = false;
 
   toggleContent(): void {
     const detailsContent = document.getElementById("details-content");
@@ -102,196 +210,87 @@ aprt:any;
       }
     }
   }
-  isContentVisible:any;
+
   toggleContentpass(): void {
     this.isContentVisible = !this.isContentVisible;
   }
 
-  isDepositVisible:any;
   toggleContentdeposit(): void {
     this.isDepositVisible = !this.isDepositVisible;
   }
 
-  isContractVisible:any;
   toggleContentContract(): void {
     this.isContractVisible = !this.isContractVisible;
   }
-  isArriveVisible:any;
+
   toggleContentArrive(): void {
     this.isArriveVisible = !this.isArriveVisible;
   }
-  isCheckinVisible:any;
+
   toggleContentCheckin(): void {
     this.isCheckinVisible = !this.isCheckinVisible;
   }
-  isinsideCheckinVisible:any;
+
   toggleContentinsideCheckin(): void {
-    this.isinsideCheckinVisible= !this. isinsideCheckinVisible;
+    this.isinsideCheckinVisible = !this.isinsideCheckinVisible;
   }
-  isidentityVisible:any;
+
   toggleContentidentity(): void {
-    this.isidentityVisible= !this.isidentityVisible;
+    this.isidentityVisible = !this.isidentityVisible;
   }
 
-  isPaymentsVisible:any;
   toggleContentPayments(): void {
-    this.isPaymentsVisible= !this.isPaymentsVisible;
+    this.isPaymentsVisible = !this.isPaymentsVisible;
   }
-  isHandoverVisible:any;
+
   toggleContentHandover(): void {
-    this.isHandoverVisible= !this.isHandoverVisible;
+    this.isHandoverVisible = !this.isHandoverVisible;
   }
-  isRulesVisible:any;
+
   toggleContentRules(): void {
-    this.isRulesVisible= !this.isRulesVisible;
+    this.isRulesVisible = !this.isRulesVisible;
   }
-
-
-
 
   gotopage() {
     let url: string = 'unlegal';
     this.router.navigateByUrl(url);
   }
-  /**
-   * getApartmentDetails
-   */
-  trasponrts: any = [];
-  roomsBedRoom: any = [];
-  roomsLiving: any = [];
-  roomsLivingTool: any = [];
-  roomsBedRoomTool: any = [];
-  OwnerDtail: any;
-  rent_Rules: any;
-  features: any;
-  facilities: any;
-  contract_Main: any;
-  bath_Room: any;
-  backup_Info: any;
-  kitchen_Tools: any = [];
-  AllReviews: Reviews[] = [];
-  tenant: any;
-  request_code: any;
-  rating_total: any;
-  rating_count: any;
-  owner_contract_file_name: any;
-  tenant_contract_file_name: any;
-  getApartmentDetails() {
-    this.subscriptions.push(
-      this._ApartmentService.getApartDetail(this.apt_UUID).subscribe((res) => {
-                console.log(res);
 
-        // this.subscriptions.push(
-        //   this._OnwerService
-        //     .getOwner(res.apartment_Owner)
-        //     .subscribe((res) => {
-        //       this.OwnerDtail = res;
-        //     })
-        // );
-        this.aprt=res;
-        this.aprt_details = res.apartment_Description;
-        this.aprt_Imgs=res.apartment_Images;
-        this.trasponrts = res.trasponrts;
-        this.rent_Rules = res.rent_Rules;
-        this.features = res.features;
-        this.facilities = res.facilities;
-        this.contract_Main = res.contract_Main;
-        this.bath_Room = res.bath_Room;
-        this.backup_Info = res.backup_Info;
-        this.owner_contract_file_name = res.file_Name;
-        this.tenant_contract_file_name = res.tenant.file_Name;
-        this.center = {
-          lat: this.aprt_details['apt_Lat'],
-          lng: this.aprt_details['apt_Long'],
-        };
-        this.kitchen_Tools = res.kitchen_Tools;
-        this.tenant = res.tenant;
-        this.rating_total = res.rating_Total;
-        this.rating_count = res.rating_Count;
-        this.request_code = res.request_Code;
-        this.transform(res.general_Info['apt_VideoLink']);
-        for (let i = 0; i < res.rooms.length; i++) {
-          if (res.rooms[i].room_Type == 'Bedroom') {
-            this.roomsBedRoom.push(res.rooms[i]);
-          } else {
-            this.roomsLiving.push(res.rooms[i]);
-          }
-        }
-      })
-    );
-  }
-
-  GetApartmentReview() {
-    this.subscriptions.push(
-      this._ApartmentService
-        .GetApartmentReview(this.apt_UUID)
-        .subscribe((res) => {
-          this.AllReviews = res;
-        })
-    );
-  }
-  DownloadTenantContract() {
-    let ID = Guid.create();
-    let FileName = ID + '.pdf';
-    this.subscriptions.push(
-      this._ApartmentService
-        .CreateContractPDF(this.tenant[0].req_ID)
-        .subscribe((data) => saveAs(data, FileName))
-    );
-  }
   transform(videoURL: string) {
     let srclink = videoURL;
-
     if (srclink?.startsWith('https://www.youtube.com/watch?v=')) {
       let embedlink = srclink?.replace('watch?v=', 'embed/');
       return this.sanitizer.bypassSecurityTrustResourceUrl(embedlink);
     } else if (srclink?.startsWith('https://youtu.be')) {
-      let embedlink = srclink?.replace(
-        'https://youtu.be',
-        'https://www.youtube.com/embed/'
-      );
+      let embedlink = srclink?.replace('https://youtu.be', 'https://www.youtube.com/embed/');
       return this.sanitizer.bypassSecurityTrustResourceUrl(embedlink);
     } else {
       return this.sanitizer.bypassSecurityTrustResourceUrl(srclink);
     }
   }
+
   transform2(url: any) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
-  /**
-   * addItem
-   * @param value
-   */
+
   addItem(value: any) {
     this.showSide = value;
   }
 
-  /**
-   * scrollTop
-   * to make screen scroll to top
-   * @return void
-   */
   scrollTop(): void {
     window.scrollTo(0, 0);
   }
 
-  display1: any;
-  center: any;
-  zoom = 10;
-  moveMap(event: google.maps.MapMouseEvent) {
-    if (event.latLng != null) this.display1 = event.latLng.toJSON();
-    this.center.lat = this.display1.lat;
-    this.center.lng = this.display1.lng;
-  }
-  imageSize: any;
   viewImage(image: any) {
-    this.aprt_details['apt_ThumbImg'] = image;
+    if (this.aprt_details) {
+      this.aprt_details['apt_ThumbImg'] = image;
+    }
   }
+
   viewimageinModel(image: any) {
     this.display22 = 'block';
     this.imageSize = image;
   }
-  display22 = 'none';
 
   oncloseModal() {
     this.display22 = 'none';
@@ -311,7 +310,7 @@ aprt:any;
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: `${error.message[0]}`,
+            detail: `${error.message}`,
           });
         }
       )
@@ -338,8 +337,6 @@ aprt:any;
       )
     );
   }
-  reviewID: any;
-  reviewapproved: any;
 
   MarkAvaliablePublish() {
     this.subscriptions.push(
@@ -403,6 +400,7 @@ aprt:any;
       )
     );
   }
+
   downloadImage(url: any) {
     fetch(url, {
       mode: 'no-cors',
@@ -418,25 +416,20 @@ aprt:any;
         a.remove();
       });
   }
-  // download(){
-  //   const a = document.createElement('a');
-  //   a.href = URL.createObjectURL(res);
-  //   a.download = title;
-  //   document.body.appendChild(a);
-  //   a.click();
-  // }
+
   DownloadProfilePic(downloadLink: any) {
     FileSaver.saveAs(downloadLink, 'image.jpg');
   }
+
   downloadImage2(downloadLink: any) {
-    const a = document?.createElement('a');
+    const a = document.createElement('a');
     a.href = window.URL.createObjectURL(downloadLink);
     a.download = 'cc';
     document.body.appendChild(a);
     a.click();
   }
+
   ngOnDestroy() {
-    for (let i = 0; i < this.subscriptions.length; i++)
-      this.subscriptions[i].unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++) this.subscriptions[i].unsubscribe();
   }
 }
