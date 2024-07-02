@@ -111,6 +111,7 @@ export class FirstStepComponent implements OnInit {
   edit: any = '';
   storedImages: any;
   display11:boolean=false;
+  noOfBedroom:string = "";
   constructor(
     private _ApartmentService: ApartmentService,
     private uploadService: UploadFileService,
@@ -344,8 +345,6 @@ export class FirstStepComponent implements OnInit {
   }
 
   DoyouCreatebills(value: any) {
-    console.log(value.target.value)
-
     this.bills = value.target.value;
     this.billinclude = value.target.value == 'Yes' ? true : false;
   }
@@ -471,7 +470,7 @@ export class FirstStepComponent implements OnInit {
     // }
 
   let apartment = {
-    apartment_ID: this.id,
+    apartment_ID: this.apartment_ID,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
     apartment_Floor:this.generalInfoForm.value['apartment_Floor'],
     apartment_Name: this.generalInfoForm.value['apartment_Name'],
@@ -591,7 +590,7 @@ export class FirstStepComponent implements OnInit {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: `${err?.error?.message[0]}`,
+              detail: err,
             });
           }
         ));
@@ -755,8 +754,6 @@ export class FirstStepComponent implements OnInit {
   onChangesArea(event:any){
     this.defaultapartmentSharedArea = event.target.value;
     this.SharedAreaInclude = event.target.value == 'Yes' ? true : false;
-
-    console.log(this.defaultapartmentSharedArea)
 
   }
 

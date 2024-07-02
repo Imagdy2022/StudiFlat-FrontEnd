@@ -478,8 +478,8 @@
               <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
                   <label class="form-label gray fw-bold">No. of Bedrooms</label>
 
-                  <select   class="form-select rounded-2 py-2 fs-6" (change)="onChangeNoOfBedrooms($event)" formControlName="apartment_BedRoomsNo">
-                    <option value="null" disabled hidden selected> Select No. of Bedrooms </option>
+                  <select   class="form-select rounded-2 py-2 fs-6" (change)="onChangeNoOfBedrooms($event)" formControlName="apartment_BedRoomsNo" [ngModel]="noOfBedroom">
+                    <option value="" disabled selected> Select No. of Bedrooms </option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
