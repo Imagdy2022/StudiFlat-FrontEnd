@@ -575,7 +575,7 @@ this.ID= Guid.create();
     } else {
       this.subscriptions.push(this._ApartmentService
         .createPostSec1(
-          { apartment},
+          { ...apartment},
         )
         .subscribe(
           (res) => {
