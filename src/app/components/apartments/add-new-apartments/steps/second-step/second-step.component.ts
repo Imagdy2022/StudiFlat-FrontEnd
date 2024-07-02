@@ -73,8 +73,8 @@ export class SecondStepComponent {
   SpecialFeatures: Array<object> = [];
   /** Facility */
   Facility: Array<object> = [];
-  /** room_Tools */
-  room_Tools: Array<object> = [{ tool_Name: '' }];
+  /** rooms_Details */
+  rooms_Details: Array<object> = [];
   /** ActionButtonField */
   ActionButtonField: any = [false];
   /** LabelKitchen */
@@ -146,35 +146,36 @@ export class SecondStepComponent {
       this.arraynewFieldRoomDetails = [];
       let arrRoom = [];
       this.arrNamesbedroom = [];
-      for (let i = 0; i < parsedData.room_Tools.length; i++) {
-        if (parsedData.room_Tools[i].room_Type == 'bedroom') {
-          this.arrNamesbedroom.push(parsedData.room_Tools[i].room_Name);
-          for (let j = 0; j < parsedData.room_Tools[i].room_Tools.length; j++) {
+      for (let i = 0; i < parsedData.rooms_Details.length; i++) {
+        if (parsedData.rooms_Details[i].room_Type == 'bedroom') {
+          this.arrNamesbedroom.push(parsedData.rooms_Details[i].room_Name);
+          for (let j = 0; j < parsedData.rooms_Details[i].rooms_Details.length; j++) {
             arrRoom.push({
               label: 'room detail ' + (j + 1),
               contentnewFieldRoomDetails:
-                parsedData.room_Tools[i].room_Tools[j].tool_Name,
+                parsedData.rooms_Details[i].rooms_Details[j],
             });
           }
           this.arraynewFieldRoomDetails.push(arrRoom);
-          this.roomType[i] = parsedData.room_Tools[i].room_Type;
+          this.roomType[i] = parsedData.rooms_Details[i].room_Type;
           arrRoom = [];
         }
       }
       // section of bathroom
       this.arraynewFieldBathroom = [];
       let arrBathroom = [];
-      for (let i = 0; i < parsedData.bathRoom_Tools.length; i++) {
+      console.log(parsedData)
+      for (let i = 0; i < parsedData.bathroom_Details.length; i++) {
         for (
           let j = 0;
-          j < parsedData.bathRoom_Tools[i].bath_Tool.length;
+          j < parsedData.bathroom_Details[i].bathroom_Details.length;
           j++
         ) {
 
           arrBathroom.push({
             label: 'bathroom Tool' + (j + 1),
             contentnewFieldBathroom:
-              parsedData.bathRoom_Tools[i].bath_Tool[j].tool_Name,
+              parsedData.bathroom_Details[i].bathroom_Details[j],
           });
         }
         this.arraynewFieldBathroom.push(arrBathroom);
@@ -185,15 +186,15 @@ export class SecondStepComponent {
       this.arraynewFieldLivingRoomDetails = [];
       let arrLiving = [];
       this.arrNamesLiving = [];
-      for (let i = 0; i < parsedData.room_Tools.length; i++) {
-        if (parsedData.room_Tools[i].room_Type == 'living') {
-          this.arrNamesLiving.push(parsedData.room_Tools[i].room_Name);
+      for (let i = 0; i < parsedData.rooms_Details.length; i++) {
+        if (parsedData.rooms_Details[i].room_Type == 'living') {
+          this.arrNamesLiving.push(parsedData.rooms_Details[i].room_Name);
 
-          for (let j = 0; j < parsedData.room_Tools[i].room_Tools.length; j++) {
+          for (let j = 0; j < parsedData.rooms_Details[i].rooms_Details.length; j++) {
             arrLiving.push({
               label: 'room detail' + (j + 1),
               contentnewFieldLivingRoomDetails:
-                parsedData.room_Tools[i].room_Tools[j].tool_Name,
+                parsedData.rooms_Details[i].rooms_Details[j],
             });
           }
           this.arraynewFieldLivingRoomDetails.push(arrLiving);
@@ -203,28 +204,28 @@ export class SecondStepComponent {
 
       // section of Feature
       this.newFieldSpecialFeatures = [];
-      for (let i = 0; i < parsedData.apt_Feature.length; i++) {
+      for (let i = 0; i < parsedData.apartment_Features.length; i++) {
         this.newFieldSpecialFeatures.push({
           label: 'Feature ' + (i + 1),
-          description: parsedData.apt_Feature[i].description,
+          description: parsedData.apartment_Features[i].description,
         });
       }
 
       // section of Facility
       this.newFieldFacility = [];
-      for (let i = 0; i < parsedData.apt_Facilities.length; i++) {
+      for (let i = 0; i < parsedData.apartment_Facilites.length; i++) {
         this.newFieldFacility.push({
           label: 'Facility ' + (i + 1),
-          description: parsedData.apt_Facilities[i].description,
+          description: parsedData.apartment_Facilites[i].description,
         });
       }
 
       // section of kitchen
       this.newFieldkitchen = [];
-      for (let i = 0; i < parsedData.kitchen_Tools.length; i++) {
+      for (let i = 0; i < parsedData.kitchen_Details.length; i++) {
         this.newFieldkitchen.push({
           label: 'kitchen tool ' + (i + 1),
-          description: parsedData.kitchen_Tools[i].description,
+          description: parsedData.kitchen_Details[i].description,
         });
       }
     }
@@ -244,11 +245,11 @@ export class SecondStepComponent {
         parsedData.rooms[i].room_Type == 'Bedroom'
       ) {
         this.arrNamesbedroom.push(parsedData.rooms[i].room_Name);
-        for (let j = 0; j < parsedData.rooms[i].room_Tools.length; j++) {
+        for (let j = 0; j < parsedData.rooms[i].rooms_Details.length; j++) {
           arrRoom.push({
             label: 'room detail ' + (j + 1),
             contentnewFieldRoomDetails:
-              parsedData.rooms[i].room_Tools[j].tool_Name,
+              parsedData.rooms[i].rooms_Details[j],
           });
         }
         this.arraynewFieldRoomDetails.push(arrRoom);
@@ -265,7 +266,7 @@ export class SecondStepComponent {
         arrBathroom.push({
           label: 'bathroom Tool' + (j + 1),
           contentnewFieldBathroom:
-            parsedData.bath_Room[i].bath_Tools[j].tool_Name,
+            parsedData.bath_Room[i].bath_Tools[j],
         });
       }
       this.arraynewFieldBathroom.push(arrBathroom);
@@ -283,11 +284,11 @@ export class SecondStepComponent {
       ) {
         this.arrNamesLiving.push(parsedData.rooms[i].room_Name);
 
-        for (let j = 0; j < parsedData.rooms[i].room_Tools.length; j++) {
+        for (let j = 0; j < parsedData.rooms[i].rooms_Details.length; j++) {
           arrLiving.push({
             label: 'room detail' + (j + 1),
             contentnewFieldLivingRoomDetails:
-              parsedData.rooms[i].room_Tools[j].tool_Name,
+              parsedData.rooms[i].rooms_Details[j],
           });
         }
         this.arraynewFieldLivingRoomDetails.push(arrLiving);
@@ -319,11 +320,11 @@ export class SecondStepComponent {
 
     // section of kitchen
     this.newFieldkitchen = [];
-    for (let i = 0; i < parsedData.kitchen_Tools.length; i++) {
-      for (let j = 0; j < parsedData.kitchen_Tools[i].kit_tool.length; j++) {
+    for (let i = 0; i < parsedData.kitchen_Details.length; i++) {
+      for (let j = 0; j < parsedData.kitchen_Details[i].kit_tool.length; j++) {
         this.newFieldkitchen.push({
           label: 'kitchen tool ' + (i + 1),
-          description: parsedData.kitchen_Tools[i].kit_tool[j].description,
+          description: parsedData.kitchen_Details[i].kit_tool[j].description,
         });
       }
     }
@@ -390,13 +391,13 @@ export class SecondStepComponent {
   bindCreateApart_Equ(): void {
     this.create_Apart_Equ = new FormGroup({
       room_Name: new FormControl(''),
-      room_Type: new FormControl(''),
-      room_Tools: new FormControl(''),
-      bath_Name: new FormControl(''),
-      bath_Tool: new FormControl(''),
-      kitchen_Tools: new FormControl(''),
-      apt_Feature: new FormControl(''),
-      apt_Facilities: new FormControl(''),
+      // room_Type: new FormControl(''),
+      rooms_Details: new FormControl(''),
+      bathroom_Name: new FormControl(''),
+      bathroom_Details: new FormControl(''),
+      kitchen_Details: new FormControl(''),
+      apartment_Features: new FormControl(''),
+      apartment_Facilites: new FormControl(''),
     });
   }
   Create_Apart_Equipment(data: any) {
@@ -410,27 +411,27 @@ export class SecondStepComponent {
       };
       let arr: any = [];
 
-      Array.from(this.arraynewFieldRoomDetails[j]).forEach((res: any) => {
-        arr.push({ tool_Name: res.contentnewFieldRoomDetails });
-      });
+      this.arraynewFieldRoomDetails[j].forEach((res: any) => {
+        arr.push(res.contentnewFieldRoomDetails);
+    });
       this.room.push({
         ...obj,
-        room_Tools: arr,
+        rooms_Details: arr,
       });
     }
 
     for (let j = 0; j < this.arraynewFieldBathroom.length; j++) {
       let obj = {
-        bath_Name: 'Bathroom Tool',
+        bathroom_Name: 'Bathroom Tool',
       };
       let arr: any = [];
 
-      Array.from(this.arraynewFieldBathroom[j]).forEach((res: any) => {
-        arr.push({ tool_Name: res.contentnewFieldBathroom });
-      });
+      this.arraynewFieldBathroom[j].forEach((res: any) => {
+        arr.push(res.contentnewFieldBathroom);
+    });
       this.bathroom.push({
         ...obj,
-        bath_Tool: arr,
+        bathroom_Details: arr,
       });
     }
     this.livingRoom = [];
@@ -441,15 +442,15 @@ export class SecondStepComponent {
         room_Type: 'living',
       };
       let arr: any = [];
-      Array.from(this.arraynewFieldLivingRoomDetails[j]).forEach((res: any) => {
-        arr.push({ tool_Name: res.contentnewFieldLivingRoomDetails });
-      });
+      this.arraynewFieldLivingRoomDetails[j].forEach((res: any) => {
+        arr.push(res.contentnewFieldLivingRoomDetails);
+    });
       // this.livingRoom.push({
       //  living_Tool: arr
       // })
       this.room.push({
         ...obj,
-        room_Tools: arr,
+        rooms_Details: arr,
       });
     }
 
@@ -470,17 +471,17 @@ export class SecondStepComponent {
     });
 
     let objectData = {
-      room_Tools: this.room,
-      bathRoom_Tools: this.bathroom,
+      rooms_Details: this.room,
+      bathroom_Details: this.bathroom,
       // "livigroom":this.livingRoom,
-      kitchen_Tools: kitchenDesc,
-      apt_Feature: feature,
-      apt_Facilities: otherFacility,
+      kitchen_Details: kitchenDesc,
+      apartment_Features: feature,
+      apartment_Facilites: otherFacility,
     };
 
     if (this.addApartment != 'add new apartments') {
       this.subscriptions.push(this._ApartmentService
-        .createPostSec2(objectData, this.idParamterEdit)
+        .createPostSec2(objectData)
         .subscribe(
           (res) => {
             localStorage.setItem(
@@ -505,7 +506,7 @@ export class SecondStepComponent {
         ));
 
     } else {
-      this.subscriptions.push(this._ApartmentService.createPostSec2(objectData, this.id).subscribe(
+      this.subscriptions.push(this._ApartmentService.createPostSec2(objectData).subscribe(
         (res) => {
           localStorage.setItem('create_Apart_Equ', JSON.stringify(objectData));
 

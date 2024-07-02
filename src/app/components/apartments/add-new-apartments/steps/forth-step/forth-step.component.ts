@@ -24,8 +24,8 @@ export class ForthStepComponent {
   checkedPayPal: boolean = true;
   /** checkedCash */
   checkedCash: boolean = true;
-  /** gas_Meter_Cons */
-  gas_Meter_Cons: boolean = false
+  /** apartment_Gas_Meter_Consumption */
+  apartment_Gas_Meter_Consumption: boolean = false
   /** Labelfield */
   Labelfield: any = { text1: 'Input Field Name', text2: 'Input Field Content' };
   /** PostBackupInfo */
@@ -79,19 +79,19 @@ export class ForthStepComponent {
 
 
        this.PostBackupInfo.patchValue(res.backup_Info);
-       this.inputField=res.backup_Info["inputFields"]
-       if(res.backup_Info["payment_Methods"][0].payment_Method_Name=='false'){
-        this.checkedOnline=false
-       }else{
-        this.checkedOnline=true
+       this.inputField=res.backup_Info["apartment_Addons_Fields"]
+      //  if(res.backup_Info["payment_Methods"][0].payment_Method_Name=='false'){
+      //   this.checkedOnline=false
+      //  }else{
+      //   this.checkedOnline=true
 
-       }
-       if(res.backup_Info["payment_Methods"][1].payment_Method_Name=='false'){
-        this.checkedCash=false
-       }else{
-        this.checkedCash=true
+      //  }
+      //  if(res.backup_Info["payment_Methods"][1].payment_Method_Name=='false'){
+      //   this.checkedCash=false
+      //  }else{
+      //   this.checkedCash=true
 
-       }
+      //  }
       // this.checkedOnline = Boolean(res.backup_Info["payment_Methods"][0].payment_Method_Name)
       //  this.checkedPayPal =  Boolean(res.backup_Info["payment_Methods"][1].payment_Method_Name)
      //  this.checkedCash =  Boolean(res.backup_Info["payment_Methods"][1].payment_Method_Name)
@@ -111,7 +111,7 @@ export class ForthStepComponent {
       this.PostBackupInfo.patchValue(parsedData);
 
       this.CreateapartmentCurrentlyExisting = parsedData.CreateapartmentCurrentlyExisting;
-      this.selectedContract = { 'url': parsedData.dmgs_Imgs[0].pic_URL }
+      this.selectedContract = { 'url': parsedData.apartment_Damages_Imgs[0].pic_URL }
       // payment till we make finale one
       this.checkedOnline = Boolean(parsedData.payment_Methods[0].payment_Method_Name);
       // this.checkedPayPal = Boolean(parsedData.payment_Methods[1].payment_Method_Name);
@@ -127,7 +127,7 @@ export class ForthStepComponent {
     this.CreateapartmentCurrentlyExisting = value.target.value
     let check
     this.CreateapartmentCurrentlyExisting == 'Yes' ? check = true : check = false
-    this.PostBackupInfo.get('apt_Exist_Dmg')?.setValue(check);
+    this.PostBackupInfo.get('apartment_has_Damages')?.setValue(check);
   }
 
   /**
@@ -146,7 +146,7 @@ export class ForthStepComponent {
       this.subscriptions.push( this.uploadService.uploadSingleFile(formData).subscribe((img: any) => {
         file.url = URL.createObjectURL(file);
         this.selectedContract = file;
-        this.PostBackupInfo.get('dmgs_Imgs')?.patchValue(
+        this.PostBackupInfo.get('apartment_Damages_Imgs')?.patchValue(
           [{
             "pic_URL": img[0].file_Path
           }]);
@@ -178,7 +178,7 @@ export class ForthStepComponent {
 
     const payloadData: any = {
       ...this.PostBackupInfo.value,
-      "inputFields": this.inputField,
+      "apartment_Addons_Fields": this.inputField,
       "payment_Methods":
         [
           { "payment_Method_Name": String(this.checkedOnline) },
@@ -192,16 +192,19 @@ export class ForthStepComponent {
   }
   bindCreatePostBackupInfo(): void {
     this.PostBackupInfo = new FormGroup({
-      'elec_Meter_Num': new FormControl(''),
-      'elec_Meter_Cons': new FormControl(0),
-      'water_Meter_Num': new FormControl(''),
-      'water_Meter_Cons': new FormControl(0),
-      'gas_Meter_Num': new FormControl(''),
-      'gas_Meter_Cons': new FormControl(0),
-      'apt_Exist_Dmg': new FormControl(true),
-      'dmgs_Imgs': new FormControl([]),
-      'apt_General_Comments': new FormControl(''),
-      'apt_Dmgs_Desc': new FormControl('')
+      'apartment_Electricity_Meter_No': new FormControl(''),
+      'apartment_Electricity_Meter_Consumption': new FormControl(0),
+      'apartment_Water_Meter_No': new FormControl(''),
+      'apartment_Water_Meter_Consumption': new FormControl(0),
+      'apartment_Gas_Meter_No': new FormControl(''),
+      'apartment_Gas_Meter_Consumption': new FormControl(0),
+      'apartment_has_Damages': new FormControl(true),
+      'apartment_Damages_Imgs': new FormControl([]),
+      'apartment_General_Description': new FormControl(''),
+      'apartment_Description': new FormControl(''),
+      'apartment_Is_Online_Payment': new FormControl(true),
+      'apartment_Is_Security_Payment': new FormControl(true),
+      'apartment_Is_Cash_Payment': new FormControl(true)
     })
 
 
@@ -219,19 +222,13 @@ export class ForthStepComponent {
   Create_PostBackupInfo(data: any) {
     const payloadData: any = {
       ...data.value,
-      "inputFields": this.inputField,
-      "payment_Methods":
-        [
-          { "payment_Method_Name": String(this.checkedOnline) },
-          // { "payment_Method_Name": String(this.checkedPayPal) },
-          { "payment_Method_Name": String(this.checkedCash) }
-        ]
+      "apartment_Addons_Fields": this.inputField,
     }
 
     localStorage.setItem("PostBackupInfo", JSON.stringify({ ...payloadData, CreateapartmentCurrentlyExisting: this.CreateapartmentCurrentlyExisting }))
     this.checkValidData()
 
-    this.subscriptions.push( this._ApartmentService.createPostSec4(payloadData, this.id).subscribe((res) => {
+    this.subscriptions.push( this._ApartmentService.createPostSec4(payloadData).subscribe((res) => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
       this.router.navigate(['apartments']);
     }, (err: any) => {
@@ -349,7 +346,7 @@ storedImages:any
             this.apt_imgs.push({ 'pic_URL': file.name });
           }
           // this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
-          this.PostBackupInfo.get('dmgs_Imgs')?.patchValue(this.apt_imgs);
+          this.PostBackupInfo.get('apartment_Damages_Imgs')?.patchValue(this.apt_imgs);
           localStorage.setItem("imagesAPT11", JSON.stringify(this.apt_imgs));
           this.spinner=false;
 

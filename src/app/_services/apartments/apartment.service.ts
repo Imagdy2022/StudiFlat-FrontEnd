@@ -38,41 +38,57 @@ export class ApartmentService {
 
     return this.http.get<any>(url, { headers: this.headers, params: params });
   }
+<<<<<<< HEAD
 
   createPostSec1(data: any, id: any): Observable<any> {
+=======
+  createPostSec1(data: any): Observable<any> {
+>>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
     return this.http.post(
-      `${environment.apiUrl + '/Apartment/PostSec1?UUID=' + id}`,
+      `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step1'}`,
       data,
       { headers: this.headers }
     );
   }
+<<<<<<< HEAD
 
   createPostSec2(data: any, id: string): Observable<any> {
     const params = new HttpParams().set('UUID', id);
+=======
+  createPostSec2(data: any): Observable<any> {
+>>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
 
     return this.http.post(
-      `${environment.apiUrl + '/Apartment/PostSec2'}`,
+      `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step2'}`,
       data,
-      { params: params, headers: this.headers }
+      { headers: this.headers }
     );
   }
+<<<<<<< HEAD
 
   createPostSec3(data: any, id: string): Observable<any> {
     const params = new HttpParams().set('UUID', id);
+=======
+  createPostSec3(data: any): Observable<any> {
+>>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
     return this.http.post(
-      `${environment.apiUrl + '/Apartment/PostSec3'}`,
+      `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step3'}`,
       data,
-      { params: params, headers: this.headers }
+      {headers: this.headers }
     );
   }
+<<<<<<< HEAD
 
   createPostSec4(data: any, id: string): Observable<any> {
     const params = new HttpParams().set('UUID', id);
+=======
+  createPostSec4(data: any): Observable<any> {
+>>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
 
     return this.http.post(
-      `${environment.apiUrl + '/Apartment/PostSec4'}`,
+      `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step4'}`,
       data,
-      { params: params, headers: this.headers }
+      { headers: this.headers }
     );
   }
 
@@ -111,9 +127,20 @@ export class ApartmentService {
     });
   }
 
+  // getApartDetail(id: string): Observable<any> {
+  //   return this.http.get(
+  //     `${environment.apiUrl + '/Apartment/GetApartment?' + `id=${id}`}`,
+  //     { headers: this.headers }
+  //   );
+  // }
+
   getApartDetail(id: string): Observable<any> {
     return this.http.get(
+<<<<<<< HEAD
       `${environment.apiUrl + '/ApartmentV2/Apartment_InDetails?' + `Apartment_ID=${id}`}`,
+=======
+      `${environment.apiUrl + '/ApartmentV2/Apartment_InDetails?' + `id=${id}`}`,
+>>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
       { headers: this.headers }
     );
   }

@@ -449,7 +449,6 @@ export class ThirdStepComponent {
       this.subscriptions.push( this._ApartmentService
         .createPostSec3(
           { ...this.create_Apart_contract.value, ...res },
-          this.idParamterEdit
         )
         .subscribe(
           (res) => {
@@ -473,7 +472,6 @@ export class ThirdStepComponent {
       this.subscriptions.push( this._ApartmentService
         .createPostSec3(
           { ...this.create_Apart_contract.value, ...res },
-          this.id
         )
         .subscribe(
           (res) => {
