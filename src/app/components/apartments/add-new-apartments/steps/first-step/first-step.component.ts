@@ -477,8 +477,7 @@ export class FirstStepComponent implements OnInit {
     if (this.addApartment != 'add new apartments') {
       this.subscriptions.push( this._ApartmentService
         .createPostSec1(
-          { ...data.value, apt_Transports: this.Createtransport },
-          this.idParamterEdit
+          { ...data.value, apt_Transports: this.Createtransport }
         )
         .subscribe(
           (res) => {
@@ -509,8 +508,7 @@ export class FirstStepComponent implements OnInit {
     } else {
       this.subscriptions.push(this._ApartmentService
         .createPostSec1(
-          { ...data.value, apt_Transports: this.Createtransport },
-          this.id
+          { ...data.value, apt_Transports: this.Createtransport }
         )
         .subscribe(
           (res) => {
