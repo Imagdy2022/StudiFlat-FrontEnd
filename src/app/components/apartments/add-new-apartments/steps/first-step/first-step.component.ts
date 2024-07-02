@@ -15,6 +15,7 @@ import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.serv
 import { FileUpload } from 'primeng/fileupload';
 import { Observable, Subscription, concatMap, map, range } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-first-step',
@@ -111,6 +112,7 @@ export class FirstStepComponent implements OnInit {
   edit: any = '';
   storedImages: any;
   display11:boolean=false;
+  ID:any;
   constructor(
     private _ApartmentService: ApartmentService,
     private uploadService: UploadFileService,
@@ -121,6 +123,7 @@ export class FirstStepComponent implements OnInit {
 
   ngOnInit(): void {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
+this.ID= Guid.create();
 
     if (this.addApartment != 'add new apartments') {
       // this.apartment_ID= localStorage.getItem("apartment_ID");
@@ -314,7 +317,7 @@ export class FirstStepComponent implements OnInit {
         });
 
         for (let file of data) {
-          this.apt_imgs.push({ apt_imgs: file.name });
+          this.apt_imgs.push( file.name );
         }
         this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
         this.generalInfoForm.get('apartment_Images')?.patchValue(this.apt_imgs);
@@ -469,13 +472,13 @@ export class FirstStepComponent implements OnInit {
     //      this.generalInfoForm.get('apt_ThumbImg')?.patchValue(this.apt_imgs[0].apt_imgs);
     //      data.value.apt_ThumbImg=this.apt_imgs[0].apt_imgs;
     // }
-
+   
   let apartment = {
-    apartment_ID: this.id,
+    apartment_ID:this.ID.value,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
-    apartment_Floor:this.generalInfoForm.value['apartment_Floor'],
+    apartment_Floor:Number(this.generalInfoForm.value['apartment_Floor']),
     apartment_Name: this.generalInfoForm.value['apartment_Name'],
-    apartment_Code: this.generalInfoForm.value['apartment_Code'],
+    apartment_Code:    localStorage.getItem('apartment_ID') ,
     apartment_Price: this.generalInfoForm.value['apartment_Price'],
     apartment_All_Bill_Included: this.generalInfoForm.value['apartment_All_Bill_Included'],
     apartment_Bill_Descirption: this.generalInfoForm.value['apartment_Bill_Descirption'],
@@ -483,13 +486,15 @@ export class FirstStepComponent implements OnInit {
     apartment_BuildingName: this.generalInfoForm.value['apartment_BuildingName'],
     apartment_City: this.generalInfoForm.value['apartment_City'],
     apartment_Area_Square:this.generalInfoForm.value['apartment_Area_Square'],
-    apartment_No: this.generalInfoForm.value['apartment_No'],
+    apartment_No:Number(this.generalInfoForm.value['apartment_No']),
     apartment_Manager: this.generalInfoForm.value['apartment_Manager'],
     apartment_Owner: this.generalInfoForm.value['apartment_Owner'],
     apartment_Transports:[
       {
-        transport_Name: this.generalInfoForm.value['transport_Name'],
-        transport_Distance: this.generalInfoForm.value['transport_Distance']
+        // this.generalInfoForm.value['transport_Name']
+        transport_Name:'tran name',
+        transport_Distance:"120" 
+        // this.generalInfoForm.value['transport_Distance']
       }],
     apartment_RentBy_Apartment: this.generalInfoForm.value['apartment_RentBy_Apartment'],
     apartment_RentBy_Bed: this.generalInfoForm.value['apartment_RentBy_Bed'],
@@ -501,14 +506,16 @@ export class FirstStepComponent implements OnInit {
     apartment_Long:  this.center.lng,
     apartment_360DLink: this.generalInfoForm.value['apartment_360DLink'],
     apartment_SharedArea:this.generalInfoForm.value['apartment_SharedArea'],
-    apartment_SleepingArea: this.generalInfoForm.value['apartment_SleepingArea'],
+    apartment_SleepingArea:'test',
+    // this.generalInfoForm.value['apartment_SleepingArea'],
     apartment_Elevator: this.generalInfoForm.value['apartment_Elevator'],
     apartment_Type: this.generalInfoForm.value['apartment_Type'],
     apartment_BedRoomsNo:this.generalInfoForm.value['apartment_BedRoomsNo'],
     apartment_BathroomNo: this.generalInfoForm.value['apartment_BathroomNo'],
      apartment_Rooms : [
+      // this.generalInfoForm.value['room_Type']
       {
-        room_Type: this.generalInfoForm.value['room_Type'],
+        room_Type:'single',
         beds_No: this.generalInfoForm.value['beds_No'],
         bed_Price: this.generalInfoForm.value['bed_Price'],
         bed_SecuirtyDeposit:this.generalInfoForm.value['bed_SecuirtyDeposit'],
@@ -539,7 +546,7 @@ export class FirstStepComponent implements OnInit {
     if (this.addApartment != 'add new apartments') {
       this.subscriptions.push( this._ApartmentService
         .createPostSec1(
-          { apartment },
+        {...apartment}
         )
         .subscribe(
           (res) => {
@@ -706,7 +713,7 @@ export class FirstStepComponent implements OnInit {
         });
 
         for (let file of data) {
-          this.apt_imgs.push({ apt_imgs: file.name });
+          this.apt_imgs.push( file.name );
         }
         // this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
         this.generalInfoForm.get('apartment_Images')?.patchValue(this.apt_imgs);
