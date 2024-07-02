@@ -38,25 +38,16 @@ export class ApartmentService {
 
     return this.http.get<any>(url, { headers: this.headers, params: params });
   }
-<<<<<<< HEAD
 
-  createPostSec1(data: any, id: any): Observable<any> {
-=======
   createPostSec1(data: any): Observable<any> {
->>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
     return this.http.post(
       `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step1'}`,
       data,
       { headers: this.headers }
     );
   }
-<<<<<<< HEAD
 
-  createPostSec2(data: any, id: string): Observable<any> {
-    const params = new HttpParams().set('UUID', id);
-=======
   createPostSec2(data: any): Observable<any> {
->>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
 
     return this.http.post(
       `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step2'}`,
@@ -64,26 +55,16 @@ export class ApartmentService {
       { headers: this.headers }
     );
   }
-<<<<<<< HEAD
 
-  createPostSec3(data: any, id: string): Observable<any> {
-    const params = new HttpParams().set('UUID', id);
-=======
   createPostSec3(data: any): Observable<any> {
->>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
     return this.http.post(
       `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step3'}`,
       data,
       {headers: this.headers }
     );
   }
-<<<<<<< HEAD
 
-  createPostSec4(data: any, id: string): Observable<any> {
-    const params = new HttpParams().set('UUID', id);
-=======
   createPostSec4(data: any): Observable<any> {
->>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
 
     return this.http.post(
       `${environment.apiUrl + '/ApartmentV2/Apartment_Add_Step4'}`,
@@ -127,20 +108,9 @@ export class ApartmentService {
     });
   }
 
-  // getApartDetail(id: string): Observable<any> {
-  //   return this.http.get(
-  //     `${environment.apiUrl + '/Apartment/GetApartment?' + `id=${id}`}`,
-  //     { headers: this.headers }
-  //   );
-  // }
-
   getApartDetail(id: string): Observable<any> {
     return this.http.get(
-<<<<<<< HEAD
       `${environment.apiUrl + '/ApartmentV2/Apartment_InDetails?' + `Apartment_ID=${id}`}`,
-=======
-      `${environment.apiUrl + '/ApartmentV2/Apartment_InDetails?' + `id=${id}`}`,
->>>>>>> 0154c1ddf401953335d4efdc5ca896fb7145c7db
       { headers: this.headers }
     );
   }
@@ -171,7 +141,9 @@ export class ApartmentService {
 
   MarkAvaliablePublish(id: string): Observable<any> {
     return this.http.put(
-      `${environment.apiUrl + '/Apartment/MarkAvaliablePublish?' + `Apt_ID=${id}`}`,
+      `${
+        environment.apiUrl + '/Apartment/MarkAvaliablePublish?' + `Apt_ID=${id}`
+      }`,
       id,
       { headers: this.headers }
     );
@@ -179,7 +151,12 @@ export class ApartmentService {
 
   ApproveReview(id: string, approve: boolean): Observable<any> {
     return this.http.put(
-      `${environment.apiUrl + '/Apartment/ApproveReview?' + `Review_ID=${id}&Approved=${approve}`}`,
+      `${
+        environment.apiUrl +
+        '/Apartment/ApproveReview?' +
+        `Review_ID=${id}` +
+        `&Approved=${approve}`
+      }`,
       id,
       { headers: this.headers }
     );
@@ -201,7 +178,7 @@ export class ApartmentService {
     );
   }
 
-  AddRoomTools(data: any): Observable<any> {
+  AddRoomTools(data: any) {
     return this.http.post(
       `${environment.apiUrl + '/Apartment/AddRoomTools'}`,
       data,
@@ -209,15 +186,14 @@ export class ApartmentService {
     );
   }
 
-  AddBathRoomTools(data: any): Observable<any> {
+  AddBathRoomTools(data: any) {
     return this.http.post(
       `${environment.apiUrl + '/Apartment/AddBathRoomTools'}`,
       data,
       { headers: this.headers }
     );
   }
-
-  AddKitchenTools(data: any): Observable<any> {
+  AddKitchenTools(data: any) {
     return this.http.post(
       `${environment.apiUrl + '/Apartment/AddKitchenTools'}`,
       data,
@@ -225,42 +201,39 @@ export class ApartmentService {
     );
   }
 
-  AddFeatures(data: any): Observable<any> {
+  AddFeatures(data: any) {
     return this.http.post(
       `${environment.apiUrl + '/Apartment/AddFeatures'}`,
       data,
       { headers: this.headers }
     );
   }
-
-  AddFacilities(data: any): Observable<any> {
+  AddFacilities(data: any) {
     return this.http.post(
       `${environment.apiUrl + '/Apartment/AddFacilities'}`,
       data,
       { headers: this.headers }
     );
   }
-
-  AddPostBackupInfo(data: any): Observable<any> {
+  AddPostBackupInfo(data: any) {
     return this.http.post(
       `${environment.apiUrl + '/Apartment/PostBackupInfo'}`,
       data,
       { headers: this.headers }
     );
   }
-
   DownloadFile(Path: any): Observable<any> {
     const url = environment.apiUrl + '/Basics/DownloadFile?Path=' + Path;
 
     return this.http.get<any>(url, { headers: this.headers });
   }
-
   CreateContractPDF(id: any): Observable<any> {
-    const url = environment.apiUrl + '/Basics/CreateContractPDF?Request_ID=' + id;
+    const url =
+      environment.apiUrl + '/Basics/CreateContractPDF?Request_ID=' + id;
     return this.http.get(url, { headers: this.headers, responseType: 'blob' });
   }
 
-  DeleteApartment(ID: any): Observable<any> {
+  DeleteApartment(ID: any) {
     const url = environment.apiUrl + '/Apartment/DeleteApartment?ID=' + ID;
 
     return this.http.delete(url, { headers: this.headers });
