@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApartmentService } from '../../../../../_services/apartments/apartment.service';
 import { MessageService } from 'primeng/api';
@@ -6,12 +6,13 @@ import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.serv
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
 import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-third-step',
   templateUrl: './third-step.component.html',
   styleUrls: ['./third-step.component.scss'],
 })
-export class ThirdStepComponent {
+export class ThirdStepComponent implements OnInit, OnDestroy {
   /** date */
   date: any;
   /** CreateContract */
@@ -33,7 +34,7 @@ export class ThirdStepComponent {
   /** create_Apart_contract */
   create_Apart_contract!: FormGroup;
   apt_imgs: any = [];
-  subscriptions:Subscription[] = [];
+  subscriptions: Subscription[] = [];
 
   /** apt_UUID */
   apt_UUID: string = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
@@ -84,9 +85,11 @@ export class ThirdStepComponent {
     private _OnwerService: OnwerService,
     public router: Router
   ) {}
+
   idParamterEdit: any = '';
   afterUploadImage = 'true';
   aprt_details_Edit: any;
+
   ngOnInit() {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
     this.listDropDownFloorNumber = this.rangefrom0to100();
@@ -101,11 +104,11 @@ export class ThirdStepComponent {
 
       this.bindCreatecontract();
       this.pushContractDetails();
-      // this.initial_apt_inputfields()
       this.initial_apt_rules();
       this.getLocalStorage();
     }
   }
+
   rangefrom0to100(): Array<object> {
     let list = [];
     for (let i = 0; i <= 100; i++) {
@@ -127,15 +130,15 @@ export class ThirdStepComponent {
   issshowbuilding: any = '';
   issshowsafe: any = '';
   dataEdit: any;
+
   getApartmentDetails() {
-    this.subscriptions.push( this._ApartmentService
-      .getApartDetail(this.idParamterEdit)
-      .subscribe((res) => {
-        this.subscriptions.push(this._OnwerService
-          .getOwner(res.general_Info['apt_Owner'])
-          .subscribe((res) => {
+    this.subscriptions.push(
+      this._ApartmentService.getApartDetail(this.idParamterEdit).subscribe((res) => {
+        this.subscriptions.push(
+          this._OnwerService.getOwner(res.general_Info['apt_Owner']).subscribe((res) => {
             // this.nameOwner=res.owner_FirstName +" "+res.owner_LastName;
-          }));
+          })
+        );
         this.dataEdit = res;
         this.nameApartment = res.general_Info['apt_Name'];
         this.nameAddress = res.general_Info['apt_Address'];
@@ -151,7 +154,6 @@ export class ThirdStepComponent {
         this.create_Apart_contract
           .get('digital_Contract')
           ?.setValue(res.contract_Main['digital_Contract']);
-        // this.create_Apart_contract.get('landLord')?.setValue(localStorage.getItem('apt_owner'));
         this.create_Apart_contract.get('tenantName')?.setValue('StudiFlats');
         this.create_Apart_contract
           .get('rent_Fees')
@@ -168,12 +170,8 @@ export class ThirdStepComponent {
         this.create_Apart_contract
           .get('trash_pin_image')
           ?.setValue(res.rent_Rules['tarsh_Pin_Imgs']);
-        this.create_Apart_contract
-          .get('checkType')
-          ?.setValue(res.rent_Rules['checkType']);
-        this.create_Apart_contract
-          .get('landLord')
-          ?.setValue(res.contract_Main['landLord']);
+        this.create_Apart_contract.get('checkType')?.setValue(res.rent_Rules['checkType']);
+        this.create_Apart_contract.get('landLord')?.setValue(res.contract_Main['landLord']);
         this.nameOwner = res.contract_Main['landLord'];
 
         if (res.rent_Rules['checkType'] == 'Self_Check_In') {
@@ -198,9 +196,10 @@ export class ThirdStepComponent {
           this.CreateContract = 'No';
           this.createcontractpage = false;
         }
-      }));
-
+      })
+    );
   }
+
   bindCreatecontract(): void {
     this.create_Apart_contract = new FormGroup({
       digital_Contract: new FormControl(true),
@@ -224,35 +223,36 @@ export class ThirdStepComponent {
       trash_pin_image: new FormControl([]),
     });
   }
+
   DoyouCreateContract(value: any) {
     this.CreateContract = value.target.value;
     this.CreateContract == 'Yes'
       ? (this.createcontractpage = true)
       : (this.createcontractpage = false);
-    this.create_Apart_contract
-      .get('digital_Contract')
-      ?.setValue(this.createcontractpage);
+    this.create_Apart_contract.get('digital_Contract')?.setValue(this.createcontractpage);
   }
+
   pushContractDetails(): void {
     for (let i = 0; i < this.size; i++) {
       this.contractDetails.push({ sec_Name: '', sec_Desc: '' });
     }
   }
+
   oncloseModal() {
     this.display22 = 'none';
   }
+
   imageSize: any;
 
   openModelImage(image: any) {
     this.display22 = 'block';
     this.imageSize = image;
   }
-  // initial_apt_inputfields():void{
-  //   this.apt_inputfields.push({field_Name:'',field_Content:''})
-  // }
+
   initial_apt_rules(): void {
     this.apt_roles.push({ label: 'Rule 1', rule_Desc: '' });
   }
+
   DoyouCreateacheckintype(value: any) {
     this.Createcheckintype = value.target.value;
     let checkin;
@@ -261,9 +261,8 @@ export class ThirdStepComponent {
       : (checkin = 'Service_check_In');
     this.create_Apart_contract.get('checkType')?.setValue(checkin);
   }
-  selectedfromDropDownFloorNumber(value: any): void {
 
-  }
+  selectedfromDropDownFloorNumber(value: any): void {}
 
   ActionButtonContractSectionbutton() {
     this.ActionButtonContractSection = true;
@@ -293,50 +292,47 @@ export class ThirdStepComponent {
     const formData = new FormData();
     formData.append('fileData', file, file.name);
     if (file) {
-      this.subscriptions.push( this.uploadService.uploadSingleFile(formData).subscribe(
-        (img: any) => {
-          file.url = URL.createObjectURL(file);
-          fieldName == 'contract_Path'
-            ? (this.selectedContractImg = file)
-            : null;
-          fieldName == 'safe_Img' ? (this.selectedSafeImg = file) : null;
-          fieldName == 'door_Img' ? (this.selectedDoorImg = file) : null;
-          fieldName == 'building_Img'
-            ? (this.selectedBuildingImg = file)
-            : null;
-          if (fieldName == 'safe_Img') {
-            this.issshowsafe = '';
-          }
-          if (fieldName == 'door_Img') {
-            this.issshowdoor = '';
-          }
-          if (fieldName == 'building_Img') {
-            this.issshowbuilding = '';
-          }
-          // patch the fieldName in Form
-          this.create_Apart_contract
-            .get(fieldName)
-            ?.patchValue(img[0].file_Path);
-            (res :any) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: `${res.message}`,
-          });
-        }
-          this.afterUploadImage = 'true';
-        },
-        (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: `Please try again`,
-          });
-        }
-      ));
+      this.subscriptions.push(
+        this.uploadService.uploadSingleFile(formData).subscribe(
+          (img: any) => {
+            if (img && img.length > 0) {
+              file.url = URL.createObjectURL(file);
+              if (fieldName === 'contract_Path') this.selectedContractImg = file;
+              if (fieldName === 'safe_Img') this.selectedSafeImg = file;
+              if (fieldName === 'door_Img') this.selectedDoorImg = file;
+              if (fieldName === 'building_Img') this.selectedBuildingImg = file;
+              if (fieldName === 'safe_Img') this.issshowsafe = '';
+              if (fieldName === 'door_Img') this.issshowdoor = '';
+              if (fieldName === 'building_Img') this.issshowbuilding = '';
 
+              
+              this.create_Apart_contract.get(fieldName)?.patchValue(img[0].file_Path);
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: `File uploaded successfully`,
+              });
+              this.afterUploadImage = 'true';
+            } else {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: `No file uploaded. Please try again.`,
+              });
+            }
+          },
+          (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `Please try again`,
+            });
+          }
+        )
+      );
     }
   }
+
 
   /**
    * PrevPage
@@ -349,19 +345,23 @@ export class ThirdStepComponent {
 
   listDropDownPropertyowner: any = [];
   nameOwner: any = '';
-  getAowners(id: any) {
-    this.subscriptions.push(this._ApartmentService.getOwnerDropList().subscribe((res) => {
-      this.listDropDownPropertyowner = res.list;
-      for (let i = 0; i < this.listDropDownPropertyowner.length; i++) {
-        if (id == this.listDropDownPropertyowner[i].id) {
-          this.nameOwner = this.listDropDownPropertyowner[i].name;
-        }
-      }
-    }));
 
+  getAowners(id: any) {
+    this.subscriptions.push(
+      this._ApartmentService.getOwnerDropList().subscribe((res) => {
+        this.listDropDownPropertyowner = res.list;
+        for (let i = 0; i < this.listDropDownPropertyowner.length; i++) {
+          if (id == this.listDropDownPropertyowner[i].id) {
+            this.nameOwner = this.listDropDownPropertyowner[i].name;
+          }
+        }
+      })
+    );
   }
+
   idwner: any;
-  // get  local storage
+
+ 
   getLocalStorage(): void {
     this.storedImages = [];
 
@@ -389,21 +389,14 @@ export class ThirdStepComponent {
         this.CreateContract = 'No';
         this.createcontractpage = false;
       }
-      this.create_Apart_contract
-        .get('checkType')
-        ?.setValue(parseData.checkType);
+      this.create_Apart_contract.get('checkType')?.setValue(parseData.checkType);
       if (parseData.checkType == 'Self_Check_In') {
         this.Createcheckintype = 'self check in';
       } else {
         this.Createcheckintype = 'service check in';
       }
-      // this.CreateContract = parseData.CreateContract
-      // this.Createcheckintype = parseData.Createcheckintype
-      //  if there is contractDetails in this question {{Do you want create contract ?}}
       this.contractDetails = parseData.contractDetails;
-      //  if there is inputfield in self check in
       this.apt_inputfields = parseData.apt_inputfields;
-      // if there is roles in Rental Roles
       for (let i = 0; i < parseData.apt_rules.length; i++) {
         this.apt_roles[i] = {
           label: `Rule ` + (i + 1),
@@ -424,17 +417,28 @@ export class ThirdStepComponent {
   isContractInLocalStorage(): boolean {
     return 'contract' in localStorage;
   }
+
+  
   Create_Apart_Contract(data: any) {
     let rules: any = [];
     this.apt_roles.forEach((element) => {
       rules.push({ rule_Desc: element.rule_Desc });
     });
+
     let res = {
       contractDetails: this.contractDetails,
       apt_inputfields: this.apt_inputfields,
       apt_rules: rules,
     };
 
+    const payload = {
+      ...this.create_Apart_contract.value,
+      ...res,
+      apartment_ID: this.apt_UUID,
+    };
+
+    // Log the payload to verify data structure
+    console.log('Payload:', JSON.stringify(payload, null, 2));
 
     localStorage.setItem(
       'contract',
@@ -445,53 +449,33 @@ export class ThirdStepComponent {
         CreateContract: this.CreateContract,
       })
     );
-    if (this.addApartment != 'add new apartments') {
-      this.subscriptions.push( this._ApartmentService
-        .createPostSec3(
-          { ...this.create_Apart_contract.value, ...res },
-        )
-        .subscribe(
-          (res) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: `${res.message}`,
-            });
-            this.submitSecondForm();
-          },
-          (err: any) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: `${err.error.message[0]}`,
-            });
-          }
-        ));
 
-    } else {
-      this.subscriptions.push( this._ApartmentService
-        .createPostSec3(
-          { ...this.create_Apart_contract.value, ...res },
-        )
-        .subscribe(
-          (res) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: `${res.message}`,
-            });
-            this.submitSecondForm();
-          },
-          (err: any) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: `${err.error.message[0]}`,
-            });
-          }
-        ));
-    }
+    this.subscriptions.push(
+      this._ApartmentService.createPostSec3(payload).subscribe(
+        (res) => {
+          // Log the response for debugging
+          console.log('Response:', res);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+          this.submitSecondForm();
+        },
+        (err: any) => {
+          // Log the error for debugging
+          console.error('Error:', err);
+
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `An error occurred: ${err.message || err}`,
+          });
+        }
+      )
+    );
   }
+
 
   /**
    * submitSecondForm
@@ -501,9 +485,9 @@ export class ThirdStepComponent {
   submitSecondForm(): void {
     this.jumbToNextSteb.emit();
   }
+
   pushinputfields(value: any): void {
     this.apt_inputfields.push(value);
-
   }
 
   saveActionButtonnewapt_rules() {
@@ -523,29 +507,8 @@ export class ThirdStepComponent {
   imageList: any = {};
   urls = new Array<string>();
 
-  // selectFile(event: any): void {
-
-  //   this.message = '';
-  //   this.preview = '';
-  //   this.progress = 0;
-  //   this.selectedFiles = event.target.files;
-
-  //    let files = event.target.files;
-
-  //   if (files) {
-  //     for (let file of files) {
-
-  //       this.ListFiles.push(file);
-  //        let reader = new FileReader();
-  //       reader.onload = (e: any) => {
-
-  //          this.urls.push(e.target.result);
-  //       }
-  //       reader.readAsDataURL(file);
-  //     }
-  //   }
-  // }
   counter: number = 0;
+
   selectFile(event: any): void {
     this.message = '';
     this.preview = '';
@@ -577,33 +540,22 @@ export class ThirdStepComponent {
     }
     this.ListFiles = [];
   }
-  //   display22="none"
 
-  //   oncloseModal() {
-  // this.display22="none"
-
-  //   }
-  //   imageSize:any
   opencloseModal(photo: any) {
     this.display22 = 'block';
     this.imageSize = photo;
   }
+
   removeItem(imageName: any) {
     let index2343 = this.apt_imgs.findIndex(
       (element: any) => element.pic_URL == imageName
     );
     this.apt_imgs.splice(index2343, 1);
-
-    //  this.ListFiles.splice(index2343, 1);
     this.urls.splice(index2343, 1);
   }
-  //   removeItem(imageName:any){
 
-  //  let index2343 = this.ListFiles.findIndex((element:any) => element.name   == imageName);
-  //  this.ListFiles.splice(index2343, 1);
-  //  this.urls.splice(index2343, 1);
-  //   }
   isSelected = true;
+
   selected(flie: any, sel: any) {
     if (sel == 'select') {
       this.isSelected = false;
@@ -612,11 +564,8 @@ export class ThirdStepComponent {
     }
   }
 
-  checkValue(event: any, file: any) {
-    if (event.target.checked == true) {
-    } else {
-    }
-  }
+  checkValue(event: any, file: any) {}
+
   isShow = false;
   storedImages: any;
 
@@ -627,13 +576,13 @@ export class ThirdStepComponent {
       this.isShow = false;
     }
   }
+
   spinner: boolean = false;
 
   upload(): void {
     this.spinner = true;
-    this.subscriptions.push( this.uploadService
-      .uploadMultiFile(this.convertFileToFormData(this.ListFiles))
-      .subscribe((data) => {
+    this.subscriptions.push(
+      this.uploadService.uploadMultiFile(this.convertFileToFormData(this.ListFiles)).subscribe((data) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
@@ -643,14 +592,13 @@ export class ThirdStepComponent {
         for (let file of data) {
           this.apt_imgs.push({ pic_URL: file.name });
         }
-        // this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
-        this.create_Apart_contract
-          .get('trash_pin_image')
-          ?.patchValue(this.apt_imgs);
+        this.create_Apart_contract.get('trash_pin_image')?.patchValue(this.apt_imgs);
         localStorage.setItem('imagesAPT12', JSON.stringify(this.apt_imgs));
         this.spinner = false;
-      }));
+      })
+    );
   }
+
   convertFileToFormData(files: any[]) {
     const formData = new FormData();
 
@@ -660,18 +608,22 @@ export class ThirdStepComponent {
 
     return formData;
   }
+
   /** uploadedFiles */
   uploadedFiles: any[] = [];
 
   removeSection(number: any) {
     this.contractDetails.splice(number, 1);
   }
+
   gotopage() {
     let url: string = 'apartments';
     this.router.navigateByUrl(url);
   }
+
   ngOnDestroy() {
-    for(let i=0;i<this.subscriptions.length;i++)
-    this.subscriptions[i].unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++) {
+      this.subscriptions[i].unsubscribe();
+    }
   }
 }

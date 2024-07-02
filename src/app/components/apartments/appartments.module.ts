@@ -13,6 +13,11 @@ import { ToastModule } from 'primeng/toast';
 import { StepsModule } from 'primeng/steps';
 import {  CUSTOM_ELEMENTS_SCHEMA,NgModule } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
+
+
 
 
 
@@ -82,6 +87,9 @@ import { AccordionModule } from 'primeng/accordion';
     ToastModule,
     ApartmentsRoutingModule,
     AccordionModule,
+    CheckboxModule,
+    InputTextModule,
+    CardModule,
   ],
   providers: [HttpClientModule, MessageService]
 })

@@ -23,6 +23,15 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
   encapsulation: ViewEncapsulation.None,
 })
 export class FirstStepComponent implements OnInit {
+  sharedAreaYes: boolean;
+  sharedAreaNo: boolean;
+  sleepingAreaNone: boolean;
+  sleepingAreaBed: boolean;
+  sleepingAreaSofaBed: boolean;
+
+
+
+
   /** CreateContract */
   CreateContract: string = '';
   /** Createapartmentcurre */
@@ -117,7 +126,13 @@ export class FirstStepComponent implements OnInit {
     private messageService: MessageService,
     private _ActivatedRoute: ActivatedRoute,
     public router: Router
-  ) {}
+  ) {
+    this.sharedAreaYes = false;
+    this.sharedAreaNo = false;
+    this.sleepingAreaNone = false;
+    this.sleepingAreaBed = false;
+    this.sleepingAreaSofaBed = false;
+  }
 
   ngOnInit(): void {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];

@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 })
 export class AddNewApartmentsComponent {
 
+
   /** showSide */
   showSide: string = '';
   /** activeIndex */
@@ -134,5 +135,5 @@ export class AddNewApartmentsComponent {
   id(value: string) {
     this.UUID = value
   }
-  
+
 }

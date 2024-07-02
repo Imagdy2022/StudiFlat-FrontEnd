@@ -30,6 +30,24 @@
             <p-steps [model]="items" (Responsive)="true" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
            </div>
 
+           <!-- <div class="w-75 custom-step">
+            <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false">
+              <ng-template pTemplate="item" let-item let-i="index">
+                <div class="Frame1597884028">
+                  <div class="Frame">
+                    <div class="custom-icon">
+                      <div class="Vector"></div>
+                    </div>
+                  </div>
+                  <div class="Yes" [ngClass]="{'ui-state-active': activeIndex === i, 'No': activeIndex !== i}">
+                    {{item.label}}
+                  </div>
+                </div>
+              </ng-template>
+            </p-steps>
+          </div> -->
+
+
         <div class="pt-4">
       <!--start form of general info-->
         <app-first-step *ngIf="activeIndex == 0" (jumbToNextSteb)="changeItem(1)" (getId)="id($event)"
