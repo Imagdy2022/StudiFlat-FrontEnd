@@ -114,48 +114,85 @@ export class FirstStepComponent implements OnInit {
   display11:boolean=false;
   noOfBedroom:string = "";
   ID:any;
-  constructor(
-    private _ApartmentService: ApartmentService,
-    private uploadService: UploadFileService,
-    private messageService: MessageService,
-    private _ActivatedRoute: ActivatedRoute,
-    public router: Router
-  ) {}
+//   constructor(
+//     private _ApartmentService: ApartmentService,
+//     private uploadService: UploadFileService,
+//     private messageService: MessageService,
+//     private _ActivatedRoute: ActivatedRoute,
+//     public router: Router
+//   ) {}
 
-  ngOnInit(): void {
-    this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
-this.ID= Guid.create();
+//   ngOnInit(): void {
+//     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
+// this.ID= Guid.create();
 
-    if (this.addApartment != 'add new apartments') {
-      // this.apartment_ID= localStorage.getItem("apartment_ID");
-      //   this.storedImages = JSON.parse(localStorage.getItem("imagesAPT")||'{}');
-      this.getAowners();
+//     if (this.addApartment != 'add new apartments') {
 
-      this.initFakeData();
-      this.bindCreateGeneral();
+//       this.getAowners();
 
-      this.getArea();
-      this.edit = 'EditForm';
-      this.getApartmentDetails();
+//       this.initFakeData();
+//       this.bindCreateGeneral();
+
+//       this.getArea();
+//       this.edit = 'EditForm';
+//       this.getApartmentDetails();
+//     } else {
+//       this.edit = '';
+//       this.apartment_ID = localStorage.getItem('apartment_ID');
+//       this.storedImages = JSON.parse(localStorage.getItem('imagesAPT') || '{}');
+
+//       this.initFakeData();
+//       this.bindCreateGeneral();
+//       this.getAowners();
+
+//       this.getArea();
+
+//       if (this.id == null || this.id == '') {
+//         this.getApartmentCode();
+//         this.storedImages = [];
+//       } else {
+//         this.getLocalStorage();
+//       }
+//     }
+//   }
+constructor(
+  private _ApartmentService: ApartmentService,
+  private uploadService: UploadFileService,
+  private messageService: MessageService,
+  private _ActivatedRoute: ActivatedRoute,
+  public router: Router
+) {}
+
+ngOnInit(): void {
+  this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
+  this.ID= Guid.create();
+
+  if (this.addApartment != 'add new apartments') {
+    this.getAowners();
+    this.initFakeData();
+    this.bindCreateGeneral();
+    this.getArea();
+    this.edit = 'EditForm';
+    this.getApartmentDetails();
+  } else {
+    this.edit = '';
+    this.apartment_ID = localStorage.getItem('apartment_ID');
+    this.storedImages = JSON.parse(localStorage.getItem('imagesAPT') || '{}');
+    this.initFakeData();
+    this.bindCreateGeneral();
+    this.getAowners();
+    this.getArea();
+
+    if (this.id == null || this.id == '') {
+      this.getApartmentCode();
+      this.storedImages = [];
     } else {
-      this.edit = '';
-      this.apartment_ID = localStorage.getItem('apartment_ID');
-      this.storedImages = JSON.parse(localStorage.getItem('imagesAPT') || '{}');
-      // this.apt_imgs= JSON.parse(localStorage.getItem("imagesAPT")||'{}');
-      this.initFakeData();
-      this.bindCreateGeneral();
-      this.getAowners();
-
-      this.getArea();
-
-      if (this.id == null || this.id == '') {
-        this.getApartmentCode();
-        this.storedImages = [];
-      } else {
-        this.getLocalStorage();
-      }
+      this.getLocalStorage();
     }
   }
+}
+
+
   Address: any = '';
   aprt_details_Edit: any = {};
   apt_types_show: any = '';
@@ -465,145 +502,230 @@ this.ID= Guid.create();
       return;
     }
   }
+  // Create_Apart_General(data: any) {
+
+
+  // let apartment = {
+  //   apartment_ID:this.ID.value,
+  //   apartment_Area: this.generalInfoForm.value['apartment_Area'],
+  //   apartment_Floor:Number(this.generalInfoForm.value['apartment_Floor']),
+  //   apartment_Name: this.generalInfoForm.value['apartment_Name'],
+  //   apartment_Code:    localStorage.getItem('apartment_ID') ,
+  //   apartment_Price: this.generalInfoForm.value['apartment_Price'],
+  //   apartment_All_Bill_Included: this.generalInfoForm.value['apartment_All_Bill_Included'],
+  //   apartment_Bill_Descirption: this.generalInfoForm.value['apartment_Bill_Descirption'],
+  //   apartment_StreetName: this.generalInfoForm.value['apartment_StreetName'],
+  //   apartment_BuildingName: this.generalInfoForm.value['apartment_BuildingName'],
+  //   apartment_City: this.generalInfoForm.value['apartment_City'],
+  //   apartment_Area_Square:this.generalInfoForm.value['apartment_Area_Square'],
+  //   apartment_No:Number(this.generalInfoForm.value['apartment_No']),
+  //   apartment_Manager: this.generalInfoForm.value['apartment_Manager'],
+  //   apartment_Owner: this.generalInfoForm.value['apartment_Owner'],
+  //   apartment_Transports:[
+  //     {
+
+  //       transport_Name:'tran name',
+  //       transport_Distance:"120"
+
+  //     }],
+  //   apartment_RentBy_Apartment: this.generalInfoForm.value['apartment_RentBy_Apartment'],
+  //   apartment_RentBy_Bed: this.generalInfoForm.value['apartment_RentBy_Bed'],
+  //   apartment_Description: this.generalInfoForm.value['apartment_Description'],
+  //   apartment_Images: this.apt_imgs,
+  //   apartment_VideoLink: this.generalInfoForm.value['apartment_VideoLink'],
+  //   apartment_GoogleLocation: this.generalInfoForm.value['apartment_GoogleLocation'],
+  //   apartment_Lat:  this.center.lat,
+  //   apartment_Long:  this.center.lng,
+  //   apartment_360DLink: this.generalInfoForm.value['apartment_360DLink'],
+  //   apartment_SharedArea:this.generalInfoForm.value['apartment_SharedArea'],
+  //   apartment_SleepingArea:'test',
+
+  //   apartment_Elevator: this.generalInfoForm.value['apartment_Elevator'],
+  //   apartment_Type: this.generalInfoForm.value['apartment_Type'],
+  //   apartment_BedRoomsNo:this.generalInfoForm.value['apartment_BedRoomsNo'],
+  //   apartment_BathroomNo: this.generalInfoForm.value['apartment_BathroomNo'],
+  //    apartment_Rooms : [
+
+  //     {
+  //       room_Type:'single',
+  //       beds_No: this.generalInfoForm.value['beds_No'],
+  //       bed_Price: this.generalInfoForm.value['bed_Price'],
+  //       bed_SecuirtyDeposit:this.generalInfoForm.value['bed_SecuirtyDeposit'],
+  //       bed_Service_Fees: this.generalInfoForm.value['bed_Service_Fees'],
+  //     }
+  //   ]
+  // };
+
+
+  //   localStorage.setItem(
+  //     'Createtransport',
+  //     JSON.stringify(this.Createtransport)
+  //   );
+
+  //   localStorage.setItem(
+  //     'generalInfoForm',
+  //     JSON.stringify({
+  //       ...this.generalInfoForm.value,
+  //       apartment_Transports: this.Createtransport,
+  //       bills: this.bills,
+  //     })
+  //   );
+
+  //   if (this.addApartment != 'add new apartments') {
+  //     this.subscriptions.push( this._ApartmentService
+  //       .createPostSec1(
+  //       {...apartment}
+  //       )
+  //       .subscribe(
+  //         (res) => {
+  //           this.messageService.add({
+  //             severity: 'success',
+  //             summary: 'Success',
+  //             detail: `${res?.message}`,
+  //           });
+  //           this.n_ofbedroom = data.value.apartment_BedRoomsNo;
+  //           this.apartment_BathroomNo = data.value.apartment_BathroomNo;
+
+  //           this.submitSecondForm();
+  //           this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
+  //           this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
+  //           this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
+  //           this.getId.emit(res.uuid);
+  //         },
+  //         (err: any) => {
+  //           this.messageService.add({
+  //             severity: 'error',
+  //             summary: 'Error',
+  //             detail: err,
+  //           });
+  //         }
+  //       ));
+
+  //   } else {
+  //     this.subscriptions.push(this._ApartmentService
+  //       .createPostSec1(
+  //         { ...apartment},
+  //       )
+  //       .subscribe(
+  //         (res) => {
+  //           this.messageService.add({
+  //             severity: 'success',
+  //             summary: 'Success',
+  //             detail: `${res?.message}`,
+  //           });
+  //           this.n_ofbedroom = data.value.apartment_BedRoomsNo;
+  //           this.apartment_BathroomNo = data.value.apartment_BathroomNo;
+
+  //           this.submitSecondForm();
+  //           this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
+  //           this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
+  //           this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
+  //           this.getId.emit(res.uuid);
+  //         },
+  //         (err: any) => {
+  //           this.messageService.add({
+  //             severity: 'error',
+  //             summary: 'Error',
+  //             detail: err,
+  //           });
+  //         }
+  //       ));
+
+  //   }
+  // }
+
+
+
   Create_Apart_General(data: any) {
-    // this.checkValidData()
-    // if(data.value.apt_ThumbImg==''||data.value.apt_ThumbImg==null||data.value.apt_ThumbImg==undefined){
-    //      this.generalInfoForm.get('apt_ThumbImg')?.patchValue(this.apt_imgs[0].apt_imgs);
-    //      data.value.apt_ThumbImg=this.apt_imgs[0].apt_imgs;
-    // }
+    let apartment = {
+      apartment_ID: this.ID.value,
+      apartment_Area: this.generalInfoForm.value['apartment_Area'],
+      apartment_Floor: Number(this.generalInfoForm.value['apartment_Floor']),
+      apartment_Name: this.generalInfoForm.value['apartment_Name'],
+      apartment_Code: localStorage.getItem('apartment_ID'),
+      apartment_Price: this.generalInfoForm.value['apartment_Price'],
+      apartment_All_Bill_Included: this.generalInfoForm.value['apartment_All_Bill_Included'],
+      apartment_Bill_Descirption: this.generalInfoForm.value['apartment_Bill_Descirption'],
+      apartment_StreetName: this.generalInfoForm.value['apartment_StreetName'],
+      apartment_BuildingName: this.generalInfoForm.value['apartment_BuildingName'],
+      apartment_City: this.generalInfoForm.value['apartment_City'],
+      apartment_Area_Square: this.generalInfoForm.value['apartment_Area_Square'],
+      apartment_No: Number(this.generalInfoForm.value['apartment_No']),
+      apartment_Manager: this.generalInfoForm.value['apartment_Manager'],
+      apartment_Owner: this.generalInfoForm.value['apartment_Owner'],
+      apartment_Transports: [
+        {
+          transport_Name: 'tran name',
+          transport_Distance: "120"
+        }
+      ],
+      apartment_RentBy_Apartment: this.generalInfoForm.value['apartment_RentBy_Apartment'],
+      apartment_RentBy_Bed: this.generalInfoForm.value['apartment_RentBy_Bed'],
+      apartment_Description: this.generalInfoForm.value['apartment_Description'],
+      apartment_Images: this.apt_imgs,
+      apartment_VideoLink: this.generalInfoForm.value['apartment_VideoLink'],
+      apartment_GoogleLocation: this.generalInfoForm.value['apartment_GoogleLocation'],
+      apartment_Lat: this.center.lat,
+      apartment_Long: this.center.lng,
+      apartment_360DLink: this.generalInfoForm.value['apartment_360DLink'],
+      apartment_SharedArea: this.generalInfoForm.value['apartment_SharedArea'],
+      apartment_SleepingArea: 'test',
+      apartment_Elevator: this.generalInfoForm.value['apartment_Elevator'],
+      apartment_Type: this.generalInfoForm.value['apartment_Type'],
+      apartment_BedRoomsNo: this.generalInfoForm.value['apartment_BedRoomsNo'],
+      apartment_BathroomNo: this.generalInfoForm.value['apartment_BathroomNo'],
+      apartment_Rooms: [
+        {
+          room_Type: 'single',
+          beds_No: this.generalInfoForm.value['beds_No'],
+          bed_Price: this.generalInfoForm.value['bed_Price'],
+          bed_SecuirtyDeposit: this.generalInfoForm.value['bed_SecuirtyDeposit'],
+          bed_Service_Fees: this.generalInfoForm.value['bed_Service_Fees'],
+        }
+      ]
+    };
 
-  let apartment = {
-    apartment_ID:this.ID.value,
-    apartment_Area: this.generalInfoForm.value['apartment_Area'],
-    apartment_Floor:Number(this.generalInfoForm.value['apartment_Floor']),
-    apartment_Name: this.generalInfoForm.value['apartment_Name'],
-    apartment_Code:    localStorage.getItem('apartment_ID') ,
-    apartment_Price: this.generalInfoForm.value['apartment_Price'],
-    apartment_All_Bill_Included: this.generalInfoForm.value['apartment_All_Bill_Included'],
-    apartment_Bill_Descirption: this.generalInfoForm.value['apartment_Bill_Descirption'],
-    apartment_StreetName: this.generalInfoForm.value['apartment_StreetName'],
-    apartment_BuildingName: this.generalInfoForm.value['apartment_BuildingName'],
-    apartment_City: this.generalInfoForm.value['apartment_City'],
-    apartment_Area_Square:this.generalInfoForm.value['apartment_Area_Square'],
-    apartment_No:Number(this.generalInfoForm.value['apartment_No']),
-    apartment_Manager: this.generalInfoForm.value['apartment_Manager'],
-    apartment_Owner: this.generalInfoForm.value['apartment_Owner'],
-    apartment_Transports:[
-      {
-        // this.generalInfoForm.value['transport_Name']
-        transport_Name:'tran name',
-        transport_Distance:"120"
-        // this.generalInfoForm.value['transport_Distance']
-      }],
-    apartment_RentBy_Apartment: this.generalInfoForm.value['apartment_RentBy_Apartment'],
-    apartment_RentBy_Bed: this.generalInfoForm.value['apartment_RentBy_Bed'],
-    apartment_Description: this.generalInfoForm.value['apartment_Description'],
-    apartment_Images: this.apt_imgs,
-    apartment_VideoLink: this.generalInfoForm.value['apartment_VideoLink'],
-    apartment_GoogleLocation: this.generalInfoForm.value['apartment_GoogleLocation'],
-    apartment_Lat:  this.center.lat,
-    apartment_Long:  this.center.lng,
-    apartment_360DLink: this.generalInfoForm.value['apartment_360DLink'],
-    apartment_SharedArea:this.generalInfoForm.value['apartment_SharedArea'],
-    apartment_SleepingArea:'test',
-    // this.generalInfoForm.value['apartment_SleepingArea'],
-    apartment_Elevator: this.generalInfoForm.value['apartment_Elevator'],
-    apartment_Type: this.generalInfoForm.value['apartment_Type'],
-    apartment_BedRoomsNo:this.generalInfoForm.value['apartment_BedRoomsNo'],
-    apartment_BathroomNo: this.generalInfoForm.value['apartment_BathroomNo'],
-     apartment_Rooms : [
-      // this.generalInfoForm.value['room_Type']
-      {
-        room_Type:'single',
-        beds_No: this.generalInfoForm.value['beds_No'],
-        bed_Price: this.generalInfoForm.value['bed_Price'],
-        bed_SecuirtyDeposit:this.generalInfoForm.value['bed_SecuirtyDeposit'],
-        bed_Service_Fees: this.generalInfoForm.value['bed_Service_Fees'],
+    // localStorage.setItem(
+    //   'Createtransport',
+    //   JSON.stringify(this.Createtransport)
+    // );
+
+    // localStorage.setItem(
+    //   'generalInfoForm',
+    //   JSON.stringify({
+    //     ...this.generalInfoForm.value,
+    //     apartment_Transports: this.Createtransport,
+    //     bills: this.bills,
+    //   })
+    // );
+
+    this._ApartmentService.createPostSec1({ ...apartment }).subscribe(
+      (res) => {
+        localStorage.setItem('apartmentResponse', JSON.stringify(res));
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `${res?.message}`,
+        });
+        this.n_ofbedroom = data.value.apartment_BedRoomsNo;
+        this.apartment_BathroomNo = data.value.apartment_BathroomNo;
+
+        this.submitSecondForm();
+        this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
+        this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
+        this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
+        this.getId.emit(res.uuid);
+      },
+      (err: any) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err,
+        });
       }
-    ]
-  };
-
-    // data.value.apartment_All_Bill_Included = this.billinclude;
-    // data.value.apartment_Lat = 0
-    // data.value.apt_Status = 'Rented';
-
-    // this.Createtransport.push({ transport_Name: this.transport_Name, transport_Distance: this.transport_Distance });
-    localStorage.setItem(
-      'Createtransport',
-      JSON.stringify(this.Createtransport)
     );
-
-    localStorage.setItem(
-      'generalInfoForm',
-      JSON.stringify({
-        ...this.generalInfoForm.value,
-        apartment_Transports: this.Createtransport,
-        bills: this.bills,
-      })
-    );
-
-    if (this.addApartment != 'add new apartments') {
-      this.subscriptions.push( this._ApartmentService
-        .createPostSec1(
-        {...apartment}
-        )
-        .subscribe(
-          (res) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: `${res?.message}`,
-            });
-            this.n_ofbedroom = data.value.apartment_BedRoomsNo;
-            this.apartment_BathroomNo = data.value.apartment_BathroomNo;
-
-            this.submitSecondForm();
-            this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
-            this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
-            this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
-            this.getId.emit(res.uuid);
-          },
-          (err: any) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: err,
-            });
-          }
-        ));
-
-    } else {
-      this.subscriptions.push(this._ApartmentService
-        .createPostSec1(
-          { ...apartment},
-        )
-        .subscribe(
-          (res) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: `${res?.message}`,
-            });
-            this.n_ofbedroom = data.value.apartment_BedRoomsNo;
-            this.apartment_BathroomNo = data.value.apartment_BathroomNo;
-
-            this.submitSecondForm();
-            this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
-            this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
-            this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
-            this.getId.emit(res.uuid);
-          },
-          (err: any) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: err,
-            });
-          }
-        ));
-
-    }
   }
+
 
   /**
    * submitSecondForm

@@ -1,3 +1,4 @@
+
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router'
@@ -36,7 +37,7 @@ export class AddNewApartmentsComponent {
 
     this.param = _ActivatedRoute.snapshot.paramMap.get('id');
     this.param == 'add-new-apartments' ? this.param = 'add new apartments' : this.param = 'Edit Apartment Name';
-    this.initStpper();
+    // this.initStpper();
     this.checkRole()
   }
 
@@ -86,33 +87,50 @@ export class AddNewApartmentsComponent {
    * initStpper
    * @returns void
    */
-  initStpper(): void {
-    this.items = [{
-      label: 'General info',
-      command: (event: any) => {
-        this.activeIndex = 0;
-      }
-    },
-    {
-      label: 'Appartment Equipment Details',
-      command: (event: any) => {
-        this.activeIndex = 1;
-      }
-    },
-    {
-      label: 'Contract And Rental Roles',
-      command: (event: any) => {
-        this.activeIndex = 2;
-      }
-    },
-    {
-      label: 'Backup information',
-      command: (event: any) => {
-        this.activeIndex = 3;
-      }
-    }
+  ngOnInit() {
+    // this.initStpper();
+    this.items = [
+      { label: 'General Info' },
+      { label: 'Apartment Equipment Details' },
+      { label: 'Contract & Rental Roles' },
+      { label: 'Backup Information' }
     ];
-  }
+
+
+}
+onStepChange(event: any) {
+  this.activeIndex = event.index;
+}
+
+  // initStpper(): void {
+  //   this.items = [{
+  //     label: 'General info',
+  //     command: (event: any) => {
+  //       this.activeIndex = 0;
+  //     }
+  //   },
+  //   {
+  //     label: 'Appartment Equipment Details',
+  //     command: (event: any) => {
+  //       this.activeIndex = 1;
+  //     }
+  //   },
+  //   {
+  //     label: 'Contract And Rental Roles',
+  //     command: (event: any) => {
+  //       this.activeIndex = 2;
+  //     }
+  //   },
+  //   {
+  //     label: 'Backup information',
+  //     command: (event: any) => {
+  //       this.activeIndex = 3;
+  //     }
+  //   },
+
+  //   ];
+  // }
+
   /**
    * changeItem
    * @description change stepper state (number of pages changed)

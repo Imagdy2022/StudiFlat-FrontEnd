@@ -27,8 +27,14 @@
         <!--end navigate add new apartments-->
         <div class="card p-4 stepper">
            <div class="w-75">
-            <p-steps [model]="items" (Responsive)="true" [(activeIndex)]="activeIndex" [readonly]="true"></p-steps>
+            <p-steps [model]="items" (Responsive)="true" [(activeIndex)]="activeIndex" [readonly]="false" (onChange)="onStepChange($event)"></p-steps>
+
            </div>
+
+
+
+           <!--////////////////////////////////-->
+
 
            <!-- <div class="w-75 custom-step">
             <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false">

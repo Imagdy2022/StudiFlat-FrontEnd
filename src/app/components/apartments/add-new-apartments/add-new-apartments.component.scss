@@ -50,11 +50,15 @@
 ::ng-deep .p-steps .p-steps-item .p-menuitem-link .p-steps-title {
   margin-top: 0.5rem;
   color: #90A0B7;
+  font-size: 16px ;
 }
 ::ng-deep .p-steps .p-steps-item .p-menuitem-link:not(.p-disabled):focus {
-  outline: 0 none;
-  outline-offset: 0;
-  box-shadow: 0 0 0 0.2rem #BFDBFE;
+  outline: 0 none !important;
+  outline-offset: 0 !important;
+
+  // box-shadow: 0 0 0 0.2rem #BFDBFE;
+
+
 }
 ::ng-deep .p-steps .p-steps-item.p-highlight .p-steps-number {
   background: #1F4068;
@@ -96,7 +100,6 @@
 .pi{
   font-family: 'primeicons' !important;
 }
-
 
 
 
