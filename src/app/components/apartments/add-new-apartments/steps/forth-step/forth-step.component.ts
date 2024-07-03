@@ -197,14 +197,16 @@ export class ForthStepComponent {
 
   }
   bindCreatePostBackupInfo(): void {
+    console.log(this.apt_UUID);
+    
     this.PostBackupInfo = new FormGroup({
       'apartment_ID':new FormControl(this.apt_UUID),
       'apartment_Electricity_Meter_No': new FormControl('10'),
-      'apartment_Electricity_Meter_Consumption': new FormControl(0),
+      'apartment_Electricity_Meter_Consumption': new FormControl('10'),
       'apartment_Water_Meter_No': new FormControl('20'),
-      'apartment_Water_Meter_Consumption': new FormControl(0),
+      'apartment_Water_Meter_Consumption': new FormControl('10'),
       'apartment_Gas_Meter_No': new FormControl('30'),
-      'apartment_Gas_Meter_Consumption': new FormControl(0),
+      'apartment_Gas_Meter_Consumption': new FormControl('10'),
       'apartment_has_Damages': new FormControl(true),
       'apartment_Damages_Imgs': new FormControl([]),
       'apartment_General_Description': new FormControl(''),
@@ -242,11 +244,11 @@ export class ForthStepComponent {
   Create_PostBackupInfo(data: any) {
     if(this.room_Devices != null){
       this.Rooms_Devices.push({
-        room_ID: this.romeDetails.rooms_IDs[0],
-        rooms_Names: this.romeDetails.rooms_Names[0],
-        room_Devices: [{device_Name: this.room_Devices, device_Description:"test"}]
+        room_ID: this.romeDetails?.rooms_IDs[0],
+        rooms_Names: this.romeDetails?.rooms_Names[0],
+        room_Devices:[]
       });
-
+      // [{device_Name: this.room_Devices, device_Description:"test"}]
     }
     const payloadData: any = {
       ...data.value,
