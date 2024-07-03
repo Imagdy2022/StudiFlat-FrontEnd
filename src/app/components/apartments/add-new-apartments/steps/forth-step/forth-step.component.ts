@@ -35,6 +35,7 @@ export class ForthStepComponent {
   /** selectedContract */
   selectedContract: any;
   subscriptions:Subscription[] = [];
+  romeDetails : any
 
   /** addApartment */
   @Input() addApartment: string = '';
@@ -45,6 +46,9 @@ export class ForthStepComponent {
   /** jumbToPrevSteb */
   @Output() jumbToPrevSteb = new EventEmitter<void>();
 
+  apt_UUID: any;
+ Rooms_Devices : Array<any> = [];
+
   constructor(
     public _ApartmentService: ApartmentService,
     private router: Router,
@@ -52,7 +56,9 @@ export class ForthStepComponent {
     private uploadService: UploadFileService,
     private _ActivatedRoute: ActivatedRoute
 
-  ) { }
+  ) {
+    this.apt_UUID = localStorage.getItem('Apartment_ID');
+   }
 
   idParamterEdit:any=""
   ngOnInit() {
@@ -102,7 +108,9 @@ export class ForthStepComponent {
   // get  local storage
   getLocalStorage(): void {
     const data = localStorage.getItem("PostBackupInfo");
+    this.romeDetails = JSON.parse(localStorage.getItem('apartmentResponse')!);
     this.storedImages =[]
+
 
     this.storedImages = JSON.parse(localStorage.getItem("imagesAPT11")||'{}');
 
@@ -113,9 +121,9 @@ export class ForthStepComponent {
       this.CreateapartmentCurrentlyExisting = parsedData.CreateapartmentCurrentlyExisting;
       this.selectedContract = { 'url': parsedData.apartment_Damages_Imgs[0].pic_URL }
       // payment till we make finale one
-      this.checkedOnline = Boolean(parsedData.payment_Methods[0].payment_Method_Name);
-      // this.checkedPayPal = Boolean(parsedData.payment_Methods[1].payment_Method_Name);
-      this.checkedCash = Boolean(parsedData.payment_Methods[1].payment_Method_Name);
+      this.checkedOnline = Boolean(parsedData.apartment_Is_Online_Payment);
+      this.checkSecurityDeposit = Boolean(parsedData.apartment_Is_Security_Payment);
+      this.checkedCash = Boolean(parsedData.apartment_Is_Cash_Payment);
 
 
 
@@ -147,9 +155,7 @@ export class ForthStepComponent {
         file.url = URL.createObjectURL(file);
         this.selectedContract = file;
         this.PostBackupInfo.get('apartment_Damages_Imgs')?.patchValue(
-          [{
-            "pic_URL": img[0].file_Path
-          }]);
+          [ img[0].file_Path]);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `damage Upload Successfuly` });
       }, (err) => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: `Please try again` });
@@ -192,11 +198,12 @@ export class ForthStepComponent {
   }
   bindCreatePostBackupInfo(): void {
     this.PostBackupInfo = new FormGroup({
-      'apartment_Electricity_Meter_No': new FormControl(''),
+      'apartment_ID':new FormControl(this.apt_UUID),
+      'apartment_Electricity_Meter_No': new FormControl('10'),
       'apartment_Electricity_Meter_Consumption': new FormControl(0),
-      'apartment_Water_Meter_No': new FormControl(''),
+      'apartment_Water_Meter_No': new FormControl('20'),
       'apartment_Water_Meter_Consumption': new FormControl(0),
-      'apartment_Gas_Meter_No': new FormControl(''),
+      'apartment_Gas_Meter_No': new FormControl('30'),
       'apartment_Gas_Meter_Consumption': new FormControl(0),
       'apartment_has_Damages': new FormControl(true),
       'apartment_Damages_Imgs': new FormControl([]),
@@ -209,6 +216,19 @@ export class ForthStepComponent {
 
 
   }
+  room_Devices : string[] = [];
+
+  updateCheckedItems(item: any) {
+    if (item.target.checked) {
+      this.room_Devices.push(item.target.name);
+    } else {
+      const index = this.room_Devices.indexOf(item.target.name);
+      if (index > -1) {
+        this.room_Devices.splice(index, 1);
+      }
+    }
+  }
+
   checkValidData() {
     if (this.PostBackupInfo.invalid) {
       Object.values(this.PostBackupInfo.controls).forEach(control => {
@@ -220,9 +240,18 @@ export class ForthStepComponent {
     }
   }
   Create_PostBackupInfo(data: any) {
+    if(this.room_Devices != null){
+      this.Rooms_Devices.push({
+        room_ID: this.romeDetails.rooms_IDs[0],
+        rooms_Names: this.romeDetails.rooms_Names[0],
+        room_Devices: [{device_Name: this.room_Devices, device_Description:"test"}]
+      });
+
+    }
     const payloadData: any = {
       ...data.value,
       "apartment_Addons_Fields": this.inputField,
+      "apartment_Rooms_Devices": this.Rooms_Devices
     }
 
     localStorage.setItem("PostBackupInfo", JSON.stringify({ ...payloadData, CreateapartmentCurrentlyExisting: this.CreateapartmentCurrentlyExisting }))
@@ -343,7 +372,7 @@ storedImages:any
           this.messageService.add({ severity: 'success', summary: 'Success', detail: `${'Images Upload Successfully'}` });
 
           for (let file of data) {
-            this.apt_imgs.push({ 'pic_URL': file.name });
+            this.apt_imgs.push( file.name);
           }
           // this.generalInfoForm.get('apt_ThumbImg')?.patchValue(data[0].name);
           this.PostBackupInfo.get('apartment_Damages_Imgs')?.patchValue(this.apt_imgs);

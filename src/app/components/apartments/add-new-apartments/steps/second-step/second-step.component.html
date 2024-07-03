@@ -125,30 +125,30 @@
               <p class="gray">Add Kitchen equipment's and tools details.</p>
           </div>
           <div class="p-3 mb-3 rounded">
-              <div class="row">
-                  <ng-container *ngFor="let data of newFieldkitchen ; let i = index">
-                      <div class="mb-3 col-12 col-md-6">
-                          <label class="form-label gray fw-bold">Kitchen {{ i + 1 }}</label>
-                          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data[0]" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
-                      </div>
-                  </ng-container>
-              </div>
-              <div class="row mb-3" *ngIf="ActionButtonFieldkitchen == true">
-                  <div class="col-12 col-md-6">
-                      <label class="form-label gray fw-bold">Kitchen Tool {{ newFieldkitchen.length + 1 }}</label>
-                      <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="descriptionOfKitchen" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
-                  </div>
-                  <div class="mb-0 mt-3 col-12 col-md-6 d-flex align-items-center">
-                      <div>
-                          <button type="button" class="outline-0 bg-transparent blue borderCancel px-3 py-2 me-3 rounded-3 fw-bold" (click)="ActionButtonFieldkitchen = false">Cancel</button>
-                          <button type="button" class="outline-0 text-white bg-blue px-4 fw-bold py-2 rounded-2 border-0 background" (click)="saveActionButtonnewFieldKitchen()">Save</button>
-                      </div>
-                  </div>
-              </div>
-              <a class="bg-transparent cursor text-decoration-none outline-0 border-0 blue fw-bold mb-3" (click)="ActionButtonFieldkitchen = true">
-                  <img src="assets/images/apartmentImages/ic_baseline-add.svg" /> Add New Kitchen Tool
-              </a>
-          </div>
+            <div class="row">
+                <ng-container *ngFor="let data of newFieldkitchen">
+                    <div class="mb-3 col-12 col-md-6">
+                        <label class="form-label gray fw-bold">{{ data.label }}</label>
+                        <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data.description" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
+                    </div>
+                </ng-container>
+            </div>
+            <div class="row mb-3" *ngIf="ActionButtonFieldkitchen == true">
+                <div class="col-12 col-md-6">
+                    <label class="form-label gray fw-bold">Kitchen Tool {{ newFieldkitchen.length + 1 }}</label>
+                    <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="descriptionOfKitchen" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
+                </div>
+                <div class="mb-0 mt-3 col-12 col-md-6 d-flex align-items-center">
+                    <div>
+                        <button type="button" class="outline-0 bg-transparent blue borderCancel px-3 py-2 me-3 rounded-3 fw-bold" (click)="ActionButtonFieldkitchen = false">Cancel</button>
+                        <button type="button" class="outline-0 text-white bg-blue px-4 fw-bold py-2 rounded-2 border-0 background" (click)="saveActionButtonnewFieldKitchen()">Save</button>
+                    </div>
+                </div>
+            </div>
+            <a class="bg-transparent cursor text-decoration-none outline-0 border-0 blue fw-bold mb-3" (click)="ActionButtonFieldkitchen = true">
+                <img src="assets/images/apartmentImages/ic_baseline-add.svg" /> Add New Kitchen Tool
+            </a>
+        </div>
       </div>
 
       <!--Special Features section-->

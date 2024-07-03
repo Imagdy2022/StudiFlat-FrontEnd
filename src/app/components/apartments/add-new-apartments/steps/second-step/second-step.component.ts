@@ -143,6 +143,7 @@ export class SecondStepComponent {
   getLocalStorage(): void {
     if ('apartmentResponse' in localStorage) {
       const data = JSON.parse(localStorage.getItem('apartmentResponse')!);
+      console.log(data)
       this.roomType = [];
 
       // Section of room
@@ -164,68 +165,68 @@ export class SecondStepComponent {
         }
       }
 
-      // Section of bathroom
-      // this.arraynewFieldBathroom = [];
-      // let arrBathroom = [];
-      // for (let i = 0; i < data.bathroom_Details?.length; i++) {
-      //   for (let j = 0; j < data.bathroom_Details[i]?.bathroom_Details?.length; j++) {
-      //     arrBathroom.push({
-      //       label: 'bathroom Tool ' + (j + 1),
-      //       contentnewFieldBathroom: data.bathroom_Details[i]?.bathroom_Details[j],
-      //     });
-      //   }
-      //   this.arraynewFieldBathroom.push(arrBathroom);
-      //   arrBathroom = [];
-      // }
+      //Section of bathroom
+    //   this.arraynewFieldBathroom = [];
+    //   let arrBathroom = [];
+    //   for (let i = 0; i < data.bathroom_Details?.length; i++) {
+    //     for (let j = 0; j < data.bathroom_Details[i]?.bathroom_Details?.length; j++) {
+    //       arrBathroom.push({
+    //         label: 'bathroom Tool ' + (j + 1),
+    //         contentnewFieldBathroom: data.bathroom_Details[i]?.bathroom_Details[j],
+    //       });
+    //     }
+    //     this.arraynewFieldBathroom.push(arrBathroom);
+    //     arrBathroom = [];
+    //   }
 
-      // // Section of living room
-      // this.arraynewFieldLivingRoomDetails = [];
-      // let arrLiving = [];
-      // this.arrNamesLiving = [];
-      // for (let i = 0; i < data.livingRoom_Details.length; i++) {
-      //   this.arrNamesLiving.push(data.livingRoom_Details[i].livingRoom_Name);
-      //   for (let j = 0; j < data.livingRoom_Details[i].livingRoom_Tools.length; j++) {
-      //     arrLiving.push({
-      //       label: 'living room detail ' + (j + 1),
-      //       contentnewFieldLivingRoomDetails: data.livingRoom_Details[i].livingRoom_Tools[j],
-      //     });
-      //   }
-      //   this.arraynewFieldLivingRoomDetails.push(arrLiving);
-      //   arrLiving = [];
-      // }
+    //   // Section of living room
+    //   this.arraynewFieldLivingRoomDetails = [];
+    //   let arrLiving = [];
+    //   this.arrNamesLiving = [];
+    //   for (let i = 0; i < data.livingRoom_Details?.length; i++) {
+    //     this.arrNamesLiving.push(data.livingRoom_Details[i]?.livingRoom_Name);
+    //     for (let j = 0; j < data.livingRoom_Details[i].livingRoom_Tools?.length; j++) {
+    //       arrLiving.push({
+    //         label: 'living room detail ' + (j + 1),
+    //         contentnewFieldLivingRoomDetails: data.livingRoom_Details[i]?.livingRoom_Tools[j],
+    //       });
+    //     }
+    //     this.arraynewFieldLivingRoomDetails.push(arrLiving);
+    //     arrLiving = [];
+    //   }
 
-      // Section of kitchen
-      this.newFieldkitchen = [];
-      for (let i = 0; i < data.kitchen_Details.length; i++) {
-        this.newFieldkitchen.push({
-          label: 'kitchen tool ' + (i + 1),
-          description: data.kitchen_Details[i].description,
-        });
-        this.newFieldkitchenToApi.push(data.kitchen_Details[i].description)
-      }
+    //   //Section of kitchen
+    //   this.newFieldkitchen = [];
+    //   for (let i = 0; i < data.kitchen_Details?.length; i++) {
+    //     this.newFieldkitchen.push({
+    //       label: 'kitchen tool ' + (i + 1),
+    //       description: data.kitchen_Details[i]?.description,
+    //     });
+    //     this.newFieldkitchenToApi.push(data.kitchen_Details[i]?.description)
+    //   }
 
-      // Section of special features
-      this.newFieldSpecialFeatures = [];
-      this.newFieldSpecialFeaturesToApi=[];
-      for (let i = 0; i < data.specialFeatures_Details.length; i++) {
-        this.newFieldSpecialFeatures.push({
-          label: 'Feature ' + (i + 1),
-          description: data.specialFeatures_Details[i].description,
-        });
-        this.newFieldSpecialFeaturesToApi.push(data.specialFeatures_Details[i].description)
+    //   //Section of special features
+    //   this.newFieldSpecialFeatures = [];
+    //   this.newFieldSpecialFeaturesToApi=[];
+    //   for (let i = 0; i < data.specialFeatures_Details?.length; i++) {
+    //     this.newFieldSpecialFeatures.push({
+    //       label: 'Feature ' + (i + 1),
+    //       description: data.specialFeatures_Details[i]?.description,
+    //     });
+    //     this.newFieldSpecialFeaturesToApi.push(data.specialFeatures_Details[i]?.description)
 
-      }
+    //   }
 
-      // Section of facilities
-      this.newFieldFacility = [];
-      for (let i = 0; i < data.facilities_Details.length; i++) {
-        this.newFieldFacility.push({
-          label: 'Facility ' + (i + 1),
-          description: data.facilities_Details[i].description,
-        });
-        this.newFieldFacilityToApi.push(data.facilities_Details[i].description)
-      }
-    }
+    //   //Section of facilities
+    //   this.newFieldFacility = [];
+    //   for (let i = 0; i < data.facilities_Details?.length; i++) {
+    //     this.newFieldFacility.push({
+    //       label: 'Facility ' + (i + 1),
+    //       description: data.facilities_Details[i]?.description,
+    //     });
+    //     this.newFieldFacilityToApi.push(data.facilities_Details[i]?.description)
+    //   }
+     }
   }
 
   getDataFromEdit(data: any) {
