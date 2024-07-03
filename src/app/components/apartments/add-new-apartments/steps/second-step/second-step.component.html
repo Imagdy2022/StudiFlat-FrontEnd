@@ -92,7 +92,7 @@
               <div class="px-3 bg-section mb-3 rounded">
                   <p *ngIf="n_ofToilets > 1" class="fw-bold mb-4">bathroom {{ index1 + 1 }}</p>
                   <div class="row">
-                      <ng-container *ngFor="let data of arraynewFieldBathroom[index1]">
+                      <ng-container *ngFor="let data of arraynewFieldBathroom">
                           <div class="mb-3 col-12 col-md-6">
                               <label class="form-label gray fw-bold">{{ data.label }}</label>
                               <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data.contentnewFieldBathroom" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
@@ -101,7 +101,7 @@
                   </div>
                   <div class="row mb-3" *ngIf="ActionButtonFieldBathroom[index1] == true">
                       <div class="col-12 col-md-6">
-                          <label class="form-label gray fw-bold">Bathroom Tool {{ arraynewFieldBathroom[index1].length ? arraynewFieldBathroom[index1].length + 1 : 0 }}</label>
+                          <label class="form-label gray fw-bold">Bathroom Tool {{ arraynewFieldBathroom.length ? arraynewFieldBathroom.length + 1 : 0 }}</label>
                           <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="contentnewFieldBathroom" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
                       </div>
                       <div class="mb-0 mt-3 col-12 col-md-6 d-flex align-items-center">
@@ -126,10 +126,10 @@
           </div>
           <div class="p-3 mb-3 rounded">
               <div class="row">
-                  <ng-container *ngFor="let data of newFieldkitchen">
+                  <ng-container *ngFor="let data of newFieldkitchen ; let i = index">
                       <div class="mb-3 col-12 col-md-6">
-                          <label class="form-label gray fw-bold">{{ data.label }}</label>
-                          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data.description" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
+                          <label class="form-label gray fw-bold">Kitchen {{ i + 1 }}</label>
+                          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data[0]" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
                       </div>
                   </ng-container>
               </div>

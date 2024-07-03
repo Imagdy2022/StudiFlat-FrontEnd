@@ -715,6 +715,7 @@ ngOnInit(): void {
         this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
         this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
         this.getId.emit(res.uuid);
+        localStorage.setItem("Apartment_ID",res.uuid)
       },
       (err: any) => {
         this.messageService.add({
