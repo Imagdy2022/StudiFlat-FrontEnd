@@ -29,11 +29,16 @@ export class SecondStepComponent {
   /** arraynewFieldLivingRoomDetails */
   arraynewFieldLivingRoomDetails: Array<any> = [];
   /** newFieldkitchen */
-  newFieldkitchen: Array<any> = [];
+  newFieldkitchen: Array<any> = [{ label: 'Kitchen Tool 1', description: '' }];
+  newFieldkitchenToApi:any[]=[];
   /** newFieldSpecialFeatures */
-  newFieldSpecialFeatures: Array<any> = [];
+  newFieldSpecialFeatures: Array<any> = [
+    { label: 'Feature 1', description: '' },
+  ];
+  newFieldSpecialFeaturesToApi:any[]=[]
   /** newFieldFacility */
-  newFieldFacility: Array<any> = [];
+  newFieldFacility: Array<any> = [{ label: 'Facility 1', description: '' }];
+  newFieldFacilityToApi:any[]=[];
   /** descriptionOfKitchen */
   descriptionOfKitchen = '';
   /** contentnewFieldBathroom */
@@ -189,23 +194,37 @@ export class SecondStepComponent {
       //   arrLiving = [];
       // }
 
-      // // Section of kitchen
-      // this.newFieldkitchen = [];
-      // for (let i = 0; i < data.kitchen_Details.length; i++) {
-      //   this.newFieldkitchen.push(data.kitchen_Details[i]);
-      // }
+      // Section of kitchen
+      this.newFieldkitchen = [];
+      for (let i = 0; i < data.kitchen_Details.length; i++) {
+        this.newFieldkitchen.push({
+          label: 'kitchen tool ' + (i + 1),
+          description: data.kitchen_Details[i].description,
+        });
+        this.newFieldkitchenToApi.push(data.kitchen_Details[i].description)
+      }
 
-      // // Section of special apartment_Features
-      // this.newFieldSpecialFeatures = [];
-      // for (let i = 0; i < data.specialFeatures_Details.length; i++) {
-      //   this.newFieldSpecialFeatures.push(data.specialFeatures_Details[i]);
-      // }
+      // Section of special features
+      this.newFieldSpecialFeatures = [];
+      this.newFieldSpecialFeaturesToApi=[];
+      for (let i = 0; i < data.specialFeatures_Details.length; i++) {
+        this.newFieldSpecialFeatures.push({
+          label: 'Feature ' + (i + 1),
+          description: data.specialFeatures_Details[i].description,
+        });
+        this.newFieldSpecialFeaturesToApi.push(data.specialFeatures_Details[i].description)
 
-      // // Section of apartment_Facilites
-      // this.newFieldFacility = [];
-      // for (let i = 0; i < data.facilities_Details.length; i++) {
-      //   this.newFieldFacility.push(data.facilities_Details[i]);
-      // }
+      }
+
+      // Section of facilities
+      this.newFieldFacility = [];
+      for (let i = 0; i < data.facilities_Details.length; i++) {
+        this.newFieldFacility.push({
+          label: 'Facility ' + (i + 1),
+          description: data.facilities_Details[i].description,
+        });
+        this.newFieldFacilityToApi.push(data.facilities_Details[i].description)
+      }
     }
   }
 
@@ -274,23 +293,43 @@ export class SecondStepComponent {
 
     // Section of special apartment_Features
     this.newFieldSpecialFeatures = [];
-    for (let i = 0; i < parsedData.apartment_Features.length; i++) {
-        this.newFieldSpecialFeatures.push(parsedData.apartment_Features[i]);
+    this.newFieldSpecialFeaturesToApi=[];
+    for (let i = 0; i < parsedData.features.length; i++) {
+      for (let j = 0; j < parsedData.features[i].fet_Names.length; j++) {
+        this.newFieldSpecialFeatures.push({
+          label: 'Feature ' + (i + 1),
+          description: parsedData.features[i].fet_Names[j].description,
+        });
+        this.newFieldSpecialFeaturesToApi.push(data.specialFeatures_Details[i].description)
+
       }
+    }
 
     // Section of apartment_Facilites
     this.newFieldFacility = [];
-    for (let i = 0; i < parsedData.apartment_Facilites.length; i++) {
-        this.newFieldFacility.push(parsedData.apartment_Facilites[i]);
-    }
+    for (let i = 0; i < parsedData.facilities.length; i++) {
+      for (let j = 0; j < parsedData.facilities[i].fac_Names.length; j++) {
+        this.newFieldFacility.push({
+          label: 'Facility ' + (i + 1),
+          description: parsedData.facilities[i].fac_Names[j].description,
+        });
+        this.newFieldFacilityToApi.push(data.facilities_Details[i].description)
 
+      }
+    }
 
     // Section of kitchen
     this.newFieldkitchen = [];
     for (let i = 0; i < parsedData.kitchen_Details.length; i++) {
-        this.newFieldkitchen.push(parsedData.kitchen_Details[i]);
-    }
+      for (let j = 0; j < parsedData.kitchen_Details[i].kit_tool.length; j++) {
+        this.newFieldkitchen.push({
+          label: 'kitchen tool ' + (i + 1),
+          description: parsedData.kitchen_Details[i].kit_tool[j].description,
+        });
+        this.newFieldkitchenToApi.push(data.kitchen_Details[i].description)
 
+      }
+    }
   }
 
 
@@ -407,37 +446,33 @@ export class SecondStepComponent {
       });
     }
 
+    let kitchenDesc: any = [];
+    this.newFieldkitchen.forEach((element) => {
+      kitchenDesc.push({ description: element.description });
+      this.newFieldkitchenToApi.push(element.description);
 
-    // this.newFieldkitchen.forEach((element) => {
-    //   kitchenDesc.push(element);
-    // });
-
-  let kitchenDesc: any = [];
-    for (let j = 0; j < this.newFieldkitchen.length; j++) {
-      let arr: any = [];
-      this.newFieldkitchen[j].forEach((res: any) => {
-        arr.push(res);
-      });
-      kitchenDesc.push(arr);
-    }
+    });
 
     let feature: any = [];
     this.newFieldSpecialFeatures.forEach((element) => {
-      feature.push(element);
+      feature.push({ description: element.description });
+      this.newFieldSpecialFeaturesToApi.push(element.description);
+
     });
 
     let otherFacility: any = [];
     this.newFieldFacility.forEach((element) => {
-      otherFacility.push(element);
+      otherFacility.push({ description: element.description });
+      this.newFieldFacilityToApi.push(element.description);
     });
 
     let objectData = {
       apartment_ID : this.apt_UUID,
       rooms_Details: this.room,
       bathroom_Details: this.bathroom,
-      kitchen_Details: kitchenDesc,
-      apartment_Features: feature,
-      apartment_Facilites: otherFacility,
+      kitchen_Details: this.newFieldkitchenToApi,
+      apartment_Features:this.newFieldSpecialFeaturesToApi,
+      apartment_Facilites: this.newFieldFacilityToApi,
     };
 
     if (this.addApartment != 'add new apartments') {
