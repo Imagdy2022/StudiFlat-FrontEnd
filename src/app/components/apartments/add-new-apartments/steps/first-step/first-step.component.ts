@@ -525,10 +525,12 @@ this.ID= Guid.create();
     apartment_Transports: [
       {
 
-        transport_Name: this.transport_Name,
-        transport_Distance: this.transport_Distance,
+       transport_Name: "tran name",
+            transport_Distance: "120"
 
       }
+      // transport_Name: this.transport_Name,
+      // transport_Distance: this.transport_Distance,
     ],
     apartment_RentBy_Apartment: this.generalInfoForm.value['apartment_RentBy_Apartment'],
     apartment_RentBy_Bed: this.generalInfoForm.value['apartment_RentBy_Bed'],
@@ -536,8 +538,8 @@ this.ID= Guid.create();
     apartment_Images: this.apt_imgs,
     apartment_VideoLink: this.generalInfoForm.value['apartment_VideoLink'],
     apartment_GoogleLocation: this.generalInfoForm.value['apartment_GoogleLocation'],
-    apartment_Lat:  this.center.lat,
-    apartment_Long:  this.center.lng,
+    apartment_Lat:  0,
+    apartment_Long:  0,
     apartment_360DLink: this.generalInfoForm.value['apartment_360DLink'],
     apartment_SharedArea:this.generalInfoForm.value['apartment_SharedArea'],
     apartment_SleepingArea: this.sectionName,
