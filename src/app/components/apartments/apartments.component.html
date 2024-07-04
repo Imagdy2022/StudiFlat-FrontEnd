@@ -9,7 +9,7 @@
   <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'apartments'"></app-sidebar>
   <!-- end sidebar  -->
   <!-- start content page  -->
-  <main class="p-4 col-lg-10 " (click)="hidecard()">
+  <main class="p-4 col-lg-10 ">
     <!-- start part 1 in page  -->
 
     <div class="fw-bold d-flex justify-content-between align-items-center" style="color: #6c6a6a; margin-top: 7px; margin-bottom: 24px;">
@@ -22,9 +22,9 @@
         <!-- end dropdown button  -->
         <div class="d-flex align-items-center px-3">
           <!-- (click)="FilterButtons('This Month')" (click)="FilterButtons('Last Week')" -->
-            <button class="week rounded-start px-3  py-2 bg-w outline-none" 
+            <button class="week rounded-start px-3  py-2 bg-w outline-none"
                 [ngClass]="{'activeButton': monthButton == true}">This Month</button>
-            <button class="week px-3 py-2 outline-none rounded-end" 
+            <button class="week px-3 py-2 outline-none rounded-end"
                 [ngClass]="{'activeButton': weekButton == true}">Last Week</button>
         </div>
         <app-add-new-button *ngIf="ApartmentsRole?.p_Add==true  || is_Super==true"[id]="'apartments/page/add-new-apartments'" ></app-add-new-button>
@@ -35,7 +35,7 @@
 
     <!-- end part 1 in page  -->
     <!-- start part 2 in page  -->
-    <div class="card">
+    <div class="card"  >
       <div class="row d-block d-md-flex justify-content-between my-2 px-3 py-2">
 
         <div class="col-md-4">
@@ -61,24 +61,24 @@
       <ng-container *ngIf="apartmentList.length > 0; else noData">
         <ng-container *ngFor="let item of apartmentList;">
           <div class="col-12 col-md-6 col-lg-3 mb-2 position-relative px-2 h-100" style="height: 393px !important; cursor: pointer;">
-            <a style="height: 46% !important;" class="d-block" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">
-              <img [src]="item.apartment_Image || '../../../assets/images/apartmentImages/default_apartment.jpg'" class="w-100 h-100 apartmentImage">
-              <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3" [class.available]="item.statusString != 'Rented'">{{item.statusString || 'Unknown Status'}}</p>
+            <a style="height: 46% !important;" class="d-block" routerLink="/apartments/apartments-details/{{item?.apartment_ID}}">
+              <img [src]="item?.apartment_Image || '../../../assets/images/apartmentImages/default_apartment.jpg'" class="w-100 h-100 apartmentImage">
+              <p class="fw-bold position-absolute rentedORavailable rounded-pill top-0 m-2 py-1 px-3" [class.available]="item?.statusString != 'Rented'">{{item?.statusString || 'Unknown Status'}}</p>
             </a>
-            <div class="bg-white p-3 details h-50 rounded-bottom">
-              <div class="fw-bold" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">{{item.apartment_Name || 'Unnamed Apartment'}}</div>
-              <div class="d-flex" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">
+            <div class="bg-white p-3 details h-50 rounded-bottom" (click)="hidecard()">
+              <div class="fw-bold" routerLink="/apartments/apartments-details/{{item?.apartment_ID}}">{{item?.apartment_Name || 'Unnamed Apartment'}}</div>
+              <div class="d-flex" routerLink="/apartments/apartments-details/{{item?.apartment_ID}}">
                 <img src="assets/images/apartmentImages/location.svg" class="my-3">
-                <p class="fw-bold mt-3 text-left mx-1">{{item.apartment_Location || 'Unknown Street'}}</p>
+                <p class="fw-bold mt-3 text-left mx-1">{{item?.apartment_Location || 'Unknown Street'}}</p>
               </div>
-              <div class="d-flex" style="margin: -25px 0 -10px 0;" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">
+              <div class="d-flex" style="margin: -25px 0 -10px 0;" routerLink="/apartments/apartments-details/{{item?.apartment_ID}}">
                 <div class="d-flex justify-content-between">
                   <img src="assets/images/apartmentImages/room_bed.svg">
-                  <p class="fw-bold mt-4 mx-2">{{item.apartment_No_Bedrooms || 0}}</p>
+                  <p class="fw-bold mt-4 mx-2">{{item?.apartment_No_Bedrooms || 0}}</p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <img src="assets/images/apartmentImages/user.svg">
-                  <p class="fw-bold mt-4 mx-2">{{item.apartment_Persons_No || 0}}</p>
+                  <p class="fw-bold mt-4 mx-2">{{item?.apartment_Persons_No || 0}}</p>
                 </div>
               </div>
 
@@ -87,21 +87,21 @@
 
 
               <div class="d-flex justify-content-between">
-                <div class="Price" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">
-                  € {{item.apartment_Area_Square || 0}} <span class="time">/ month</span>
+                <div class="Price" routerLink="/apartments/apartments-details/{{item?.apartment_ID}}">
+                  € {{item?.apartment_Area_Square || 0}} <span class="time">/ month</span>
                 </div>
                 <div>
                   <div class="cursor position-relative">
-                    <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event, item.apartment_ID)">
+                    <button class="border-0 outlin-0 bg-transparent" (click)="detailperson($event, item?.apartment_ID)">
                       <img src="assets/images/edit.svg">
                     </button>
-                    <div *ngIf="xx == item.apartment_ID" style="width: 191px; z-index: 999; right: 10px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
-                      <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/apartments/booking/{{item.apartment_ID}}">View bookings</button>
-                      <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/apartments/page/{{item.apartment_ID}}">Edit</button>
-                      <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/apartments/apartments-details/{{item.apartment_ID}}">View details</button>
-                      <button *ngIf="item.is_Best == false" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="AddtoBest(item.apartment_ID)">Add to best offers</button>
-                      <button *ngIf="item.is_Best == true" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="RemoveBest(item.apartment_ID)">Remove Best offer</button>
-                      <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteApartment(item.apartment_ID)">Delete</button>
+                    <div  *ngIf="xx == item?.apartment_ID" style="width: 191px; z-index: 999; right: 10px;" class="position-absolute z-3 rounded-3 bg-white border edit-button">
+                      <button class="d-block border-0 outlin-0 bg-transparent button text-start py-2 w-100" routerLink="/apartments/booking/{{item?.apartment_ID}}">View bookings</button>
+                      <button class="d-block border-0 outlin-0 bg-transparent my-2 button text-start py-2 w-100" routerLink="/apartments/page/{{item?.apartment_ID}}">Edit</button>
+                      <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" routerLink="/apartments/apartments-details/{{item?.apartment_ID}}">View details</button>
+                      <button *ngIf="item?.is_Best == false" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="AddtoBest(item?.apartment_ID)">Add to best offers</button>
+                      <button *ngIf="item?.is_Best == true" class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="RemoveBest(item?.apartment_ID)">Remove Best offer</button>
+                      <button class="d-block border-0 outlin-0 bg-transparent button w-100 text-start py-2" (click)="DeleteApartment(item?.apartment_ID)">Delete</button>
                     </div>
                   </div>
                 </div>
@@ -115,11 +115,14 @@
       </ng-template>
     </div>
 
-    <div class="custom-paginator">
+    <!-- <div class="custom-paginator">
       <button class="custom-paginator-button" (click)="previousPage()">Previous</button>
       <span class="custom-paginator-text">Page {{pageNumber}} of {{totalofPages}}</span>
       <button class="custom-paginator-button" (click)="nextPage()">Next</button>
-    </div>
+    </div> -->
+
+    <p-paginator *ngIf="apartmentFillterLists.length > 0" (onPageChange)="tiggerPageChange($event)" [rows]="rows"
+      [totalRecords]="totalRecords" [first]="first"></p-paginator>
 
 
 
@@ -133,4 +136,3 @@
 
 
 
- 

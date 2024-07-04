@@ -101,9 +101,10 @@ export class ApartmentsComponent implements OnInit {
   fullRespone: IApartments; // تعديل هنا
   pageNumber: number = 1;
   filterStatus: any = "All";
-  itemsPerPage: number = 8;
+  itemsPerPage: number = 10;
   pagesize = 8;
   totalofPages = 0;
+  totalRecords = 0;
   disablenext = false;
   disableperv = false;
   messagemessage: any;
@@ -164,6 +165,7 @@ export class ApartmentsComponent implements OnInit {
         this.fullRespone = res;
         this.apartmentList = res.data;
         this.totalofPages = res.totalPages;
+        this.totalRecords = res.totalRecords
         this.disablenext = this.totalofPages === this.pageNumber;
         this.disableperv = this.pageNumber === 1;
         this.spinner = false;
@@ -232,8 +234,7 @@ export class ApartmentsComponent implements OnInit {
     this.xx = "";
     this.showEdit = [];
   }
-
-  searchText: any = '';
+    searchText: any = '';
 
   searchKey(data: string) {
     this.searchText = data;

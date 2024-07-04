@@ -30,11 +30,11 @@ export class ApartmentService {
   FilterApartmentsFront(FilterKey: any, PageNumber: number, PageSize: number, Apt_Statuss: any, SearchKey: any): Observable<any> {
     const url = `${environment.apiUrl}/ApartmentV2/GetListApartments`;
     const params = new HttpParams()
-      .set('FilterKey', FilterKey)
+      .set('Filter', FilterKey)
       .set('Page_No', PageNumber.toString())
       .set('Page_Size', PageSize.toString())
-      .set('Apt_Statuss', Apt_Statuss)
-      .set('SearchKey', SearchKey);
+      .set('status', Apt_Statuss)
+      .set('Search', SearchKey);
 
     return this.http.get<any>(url, { headers: this.headers, params: params });
   }
