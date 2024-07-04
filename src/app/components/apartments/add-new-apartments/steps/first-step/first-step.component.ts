@@ -214,7 +214,7 @@ this.ID= Guid.create();
         this.Address = res.general_Info['apt_Address'];
         //  this.localapt_Transports=res.trasponrts
 
-        this.Createtransport = res.trasponrts;
+        this.Createtransport = res?.trasponrts;
       }));
 
   }
@@ -241,7 +241,7 @@ this.ID= Guid.create();
       this.selectedfromDropDownArea(parsedData.apartment_Area, 'update');
 
       // this.localapt_Transports = parsedData.apartment_Transports;
-      this.Createtransport == parsedData.apartment_Transports;
+       this.Createtransport == parsedData.apartment_Transports;
     }
     if (data2 !== null) {
       let parsedData2 = JSON.parse(data2);
@@ -466,8 +466,8 @@ this.ID= Guid.create();
       //  'UUID': new FormControl(this.id ),
       // service_Fees: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
 
-      apartment_BedRoomsNo: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-      apartment_BathroomNo: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apartment_BedRoomsNo: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apartment_BathroomNo: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       apartment_All_Bill_Included: new FormControl(true, [Validators.required]), //true
       apartment_Elevator: new FormControl(true, [Validators.required]),
       // 'apartment_Lat': new FormControl('', [Validators.required]),//0
@@ -480,13 +480,13 @@ this.ID= Guid.create();
       apartment_RentBy_Apartment: new FormControl(true, [Validators.required]), //true
       apartment_RentBy_Bed: new FormControl(true, [Validators.required]), //true
       apartment_SharedArea: new FormControl(true, [Validators.required]), //true
-      apartment_SleepingArea: new FormControl(null), //string
+      apartment_SleepingArea: new FormControl(this.sectionName), //string
       apartment_Rooms: new FormControl(null),
         room_Type: new FormControl(null),
-        beds_No: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-        bed_Price: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-        bed_SecuirtyDeposit: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-        bed_Service_Fees: new FormControl(0, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+        beds_No: new FormControl(10, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+        bed_Price: new FormControl(10, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+        bed_SecuirtyDeposit: new FormControl(10, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+        bed_Service_Fees: new FormControl(10, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
         apartment_Transports: new FormControl(null),
         transport_Name: new FormControl(null),
         transport_Distance:new FormControl(null),
@@ -525,8 +525,8 @@ this.ID= Guid.create();
     apartment_Transports: [
       {
 
-        transport_Name: this.generalInfoForm.value['transport_Name'],
-        transport_Distance: this.generalInfoForm.value['transport_Distance'],
+        transport_Name: this.transport_Name,
+        transport_Distance: this.transport_Distance,
 
       }
     ],
@@ -540,7 +540,7 @@ this.ID= Guid.create();
     apartment_Long:  this.center.lng,
     apartment_360DLink: this.generalInfoForm.value['apartment_360DLink'],
     apartment_SharedArea:this.generalInfoForm.value['apartment_SharedArea'],
-    apartment_SleepingArea:'test',
+    apartment_SleepingArea: this.sectionName,
 
     apartment_Elevator: this.generalInfoForm.value['apartment_Elevator'],
     apartment_Type: this.generalInfoForm.value['apartment_Type'],
@@ -549,7 +549,7 @@ this.ID= Guid.create();
      apartment_Rooms : [
 
       {
-        room_Type: this.generalInfoForm.value['room_Type'],
+        room_Type: this.generalInfoForm.value['room_Type'] ?? 'Single',
         beds_No: this.generalInfoForm.value['beds_No'],
         bed_Price: this.generalInfoForm.value['bed_Price'],
         bed_SecuirtyDeposit:this.generalInfoForm.value['bed_SecuirtyDeposit'],
@@ -563,7 +563,7 @@ this.ID= Guid.create();
       'Createtransport',
       JSON.stringify(this.Createtransport)
     );
-    console.log(this.generalInfoForm.value);
+
 
     localStorage.setItem(
       'generalInfoForm',
