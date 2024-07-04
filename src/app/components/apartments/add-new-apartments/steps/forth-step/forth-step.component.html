@@ -124,7 +124,7 @@
                               <input class="form-check-input" type="checkbox" [id]="'checkbox' + i" [(ngModel)]="item!.checked" [ngModelOptions]="{standalone: true}" (change)="updateCheckedItems(item)" />
                               <label class="text-dark fs-6" [for]="'checkbox' + i">{{ item.device_Name }}</label>
                           </div>
-                          <div (click)="removeField(i)">
+                          <div (click)="removeField(i)" style="cursor: pointer;">
                               <img src="/assets/images/remove.svg" alt="" >
                               <span class="text-muted small">Remove</span>
                           </div>
