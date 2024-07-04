@@ -119,7 +119,7 @@ export class ForthStepComponent {
       this.PostBackupInfo.patchValue(parsedData);
 
       this.CreateapartmentCurrentlyExisting = parsedData.CreateapartmentCurrentlyExisting;
-      this.selectedContract = { 'url': parsedData.apartment_Damages_Imgs[0].pic_URL }
+      this.selectedContract = { 'url': parsedData.apartment_Damages_Imgs[0] }
       // payment till we make finale one
       this.checkedOnline = Boolean(parsedData.apartment_Is_Online_Payment);
       this.checkSecurityDeposit = Boolean(parsedData.apartment_Is_Security_Payment);
@@ -198,7 +198,7 @@ export class ForthStepComponent {
   }
   bindCreatePostBackupInfo(): void {
     console.log(this.apt_UUID);
-    
+
     this.PostBackupInfo = new FormGroup({
       'apartment_ID':new FormControl(this.apt_UUID),
       'apartment_Electricity_Meter_No': new FormControl('10'),
@@ -218,16 +218,57 @@ export class ForthStepComponent {
 
 
   }
-  room_Devices : string[] = [];
+  room_Devices : any[] = [];
+
+  items: any[] = [
+    { device_Name: 'Heater', device_Description: '' },
+    { device_Name: 'Mold',  device_Description: '' },
+    { device_Name: 'Devices',device_Description: '' },
+    { device_Name: 'Walls', device_Description: '' },
+    { device_Name: 'Shower',  device_Description: '' },
+    { device_Name: 'Floor',  device_Description: '' },
+    { device_Name: 'Cleaning', device_Description: '' },
+    { device_Name: 'Mold', device_Description: '' },
+    { device_Name: 'Mold', device_Description: '' },
+  ];
+
+
+  toggleSelectAll(event: any) {
+    const checked = event.target.checked;
+    this.items.forEach(item => item.checked = checked);
+    this.updateSelectedItems();
+  }
 
   updateCheckedItems(item: any) {
-    if (item.target.checked) {
-      this.room_Devices.push(item.target.name);
+    if (item.checked) {
+      if (!this.room_Devices.includes(item)) {
+        this.room_Devices.push({
+                device_Name: item.device_Name,
+                device_Description: item.device_Description
+              });
+      }
     } else {
-      const index = this.room_Devices.indexOf(item.target.name);
+      const index = this.room_Devices.indexOf(item);
       if (index > -1) {
         this.room_Devices.splice(index, 1);
       }
+    }
+  }
+
+  updateSelectedItems() {
+    this.room_Devices = this.items.filter(item => item.checked);
+  }
+
+  createNewField() {
+    const newItem: any = { device_Name: 'New Field', device_Description: '' };
+    this.items.push(newItem);
+  }
+
+  removeField(index: number) {
+    const removedItem = this.items.splice(index, 1)[0];
+    const selectedIndex = this.room_Devices.indexOf(removedItem);
+    if (selectedIndex > -1) {
+      this.room_Devices.splice(selectedIndex, 1);
     }
   }
 
@@ -246,9 +287,9 @@ export class ForthStepComponent {
       this.Rooms_Devices.push({
         room_ID: this.romeDetails?.rooms_IDs[0],
         rooms_Names: this.romeDetails?.rooms_Names[0],
-        room_Devices:[]
+        room_Devices: this.room_Devices
       });
-      // [{device_Name: this.room_Devices, device_Description:"test"}]
+
     }
     const payloadData: any = {
       ...data.value,
@@ -329,7 +370,7 @@ this.display22="none"
       removeItem(imageName:any){
 
 
-        let index2343 = this.apt_imgs.findIndex((element:any) => element.pic_URL   == imageName);
+        let index2343 = this.apt_imgs.findIndex((element:any) => element   == imageName);
         this.apt_imgs.splice(index2343, 1);
 
        //  this.ListFiles.splice(index2343, 1);
