@@ -52,14 +52,7 @@
   color: #90A0B7;
   font-size: 16px ;
 }
-::ng-deep .p-steps .p-steps-item .p-menuitem-link:not(.p-disabled):focus {
-  outline: 0 none !important;
-  outline-offset: 0 !important;
 
-  // box-shadow: 0 0 0 0.2rem #BFDBFE;
-
-
-}
 ::ng-deep .p-steps .p-steps-item.p-highlight .p-steps-number {
   background: #1F4068;
   color: #fff;
@@ -68,16 +61,41 @@
   font-weight: 700;
   color: #1F4068;
 }
-::ng-deep .p-steps .p-steps-item:before {
+
+::ng-deep .p-steps .p-steps-item:not(:last-child):before {
   content: " ";
   border-top: 3px solid #90A0B7;
-  width: 100%;
+  width: 50%;
   top: 50%;
-  left: 0;
+  left: 50%;
   display: block;
   position: absolute;
   margin-top: -1rem;
 }
+::ng-deep .p-steps .p-steps-item:not(:first-child):after {
+  content: " ";
+  border-top: 3px solid #90A0B7;
+  width: 50%;
+  top: 50%;
+  right: 50%;
+  display: block;
+  position: absolute;
+  margin-top: -1rem;
+}
+::ng-deep .p-steps .p-steps-item:last-child::before {
+  content: " ";
+  border-top: 3px solid #90A0B7;
+  width: 0%;
+  top: 50%;
+  right: 0;
+  display: block;
+  position: absolute;
+  margin-top: -1rem;
+}
+  ::ng-deep .p-menuitem-link{
+  box-shadow: none!important;
+}
+
 
 
 ::ng-deep .form-check input[type="checkbox"]{
@@ -100,6 +118,11 @@
 .pi{
   font-family: 'primeicons' !important;
 }
+
+
+
+
+
 
 
 
