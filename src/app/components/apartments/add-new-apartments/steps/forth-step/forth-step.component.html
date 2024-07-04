@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Electricity meter number</label>
-                    <input formControlName='apartment_Electricity_Meter_No' type="number" [class.is-invalid]="PostBackupInfo.get('apartment_Electricity_Meter_No')!.invalid && PostBackupInfo.get('apartment_Electricity_Meter_No')!.touched " class="form-control rounded-2 py-2 fs-6">
+                    <input formControlName='apartment_Electricity_Meter_No' type="string" [class.is-invalid]="PostBackupInfo.get('apartment_Electricity_Meter_No')!.invalid && PostBackupInfo.get('apartment_Electricity_Meter_No')!.touched " class="form-control rounded-2 py-2 fs-6">
                     <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('apartment_Electricity_Meter_No')!.invalid && PostBackupInfo.get('apartment_Electricity_Meter_No')!.touched ">
                         this field is required
                     </span>
@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Water meter number</label>
-                    <input formControlName='apartment_Water_Meter_No' type="number" [class.is-invalid]="PostBackupInfo.get('apartment_Water_Meter_No')!.invalid && PostBackupInfo.get('apartment_Water_Meter_No')!.touched " class="form-control rounded-2 py-2 fs-6">
+                    <input formControlName='apartment_Water_Meter_No' type="string" [class.is-invalid]="PostBackupInfo.get('apartment_Water_Meter_No')!.invalid && PostBackupInfo.get('apartment_Water_Meter_No')!.touched " class="form-control rounded-2 py-2 fs-6">
                     <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('apartment_Water_Meter_No')!.invalid && PostBackupInfo.get('apartment_Water_Meter_No')!.touched ">
                         this field is required
                     </span>
@@ -47,7 +47,7 @@
             <div class="row" *ngIf="addApartment != 'Edit Apartment Name' ">
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Gas meter number</label>
-                    <input formControlName='apartment_Gas_Meter_No' type="number" [class.is-invalid]="PostBackupInfo.get('apartment_Gas_Meter_No')!.invalid && PostBackupInfo.get('apartment_Gas_Meter_No')!.touched " class="form-control rounded-2 py-2 fs-6">
+                    <input formControlName='apartment_Gas_Meter_No' type="string" [class.is-invalid]="PostBackupInfo.get('apartment_Gas_Meter_No')!.invalid && PostBackupInfo.get('apartment_Gas_Meter_No')!.touched " class="form-control rounded-2 py-2 fs-6">
                     <span class="text-danger d-block m-2 " *ngIf="PostBackupInfo.get('apartment_Gas_Meter_No')!.invalid && PostBackupInfo.get('apartment_Gas_Meter_No')!.touched ">
                         this field is required
                     </span>
