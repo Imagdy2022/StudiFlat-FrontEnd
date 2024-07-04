@@ -114,83 +114,83 @@ export class FirstStepComponent implements OnInit {
   display11:boolean=false;
   noOfBedroom:string = "";
   ID:any;
-//   constructor(
-//     private _ApartmentService: ApartmentService,
-//     private uploadService: UploadFileService,
-//     private messageService: MessageService,
-//     private _ActivatedRoute: ActivatedRoute,
-//     public router: Router
-//   ) {}
+  constructor(
+    private _ApartmentService: ApartmentService,
+    private uploadService: UploadFileService,
+    private messageService: MessageService,
+    private _ActivatedRoute: ActivatedRoute,
+    public router: Router
+  ) {}
 
-//   ngOnInit(): void {
-//     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
-// this.ID= Guid.create();
+  ngOnInit(): void {
+    this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
+this.ID= Guid.create();
 
-//     if (this.addApartment != 'add new apartments') {
+    if (this.addApartment != 'add new apartments') {
 
-//       this.getAowners();
+      this.getAowners();
 
-//       this.initFakeData();
-//       this.bindCreateGeneral();
+      this.initFakeData();
+      this.bindCreateGeneral();
 
-//       this.getArea();
-//       this.edit = 'EditForm';
-//       this.getApartmentDetails();
-//     } else {
-//       this.edit = '';
-//       this.apartment_ID = localStorage.getItem('apartment_ID');
-//       this.storedImages = JSON.parse(localStorage.getItem('imagesAPT') || '{}');
-
-//       this.initFakeData();
-//       this.bindCreateGeneral();
-//       this.getAowners();
-
-//       this.getArea();
-
-//       if (this.id == null || this.id == '') {
-//         this.getApartmentCode();
-//         this.storedImages = [];
-//       } else {
-//         this.getLocalStorage();
-//       }
-//     }
-//   }
-constructor(
-  private _ApartmentService: ApartmentService,
-  private uploadService: UploadFileService,
-  private messageService: MessageService,
-  private _ActivatedRoute: ActivatedRoute,
-  public router: Router
-) {}
-
-ngOnInit(): void {
-  this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
-  this.ID= Guid.create();
-
-  if (this.addApartment != 'add new apartments') {
-    this.getAowners();
-    this.initFakeData();
-    this.bindCreateGeneral();
-    this.getArea();
-    this.edit = 'EditForm';
-    this.getApartmentDetails();
-  } else {
-    this.edit = '';
-    this.apartment_ID = localStorage.getItem('apartment_ID');
-    this.storedImages = JSON.parse(localStorage.getItem('imagesAPT') || '{}');
-    this.initFakeData();
-    this.bindCreateGeneral();
-    this.getAowners();
-    this.getArea();
-
-    if (this.id == null || this.id == '') {
-      this.getApartmentCode();
-      this.storedImages = [];
+      this.getArea();
+      this.edit = 'EditForm';
+      this.getApartmentDetails();
     } else {
-      this.getLocalStorage();
+      this.edit = '';
+      this.apartment_ID = localStorage.getItem('apartment_ID');
+      this.storedImages = JSON.parse(localStorage.getItem('imagesAPT') || '{}');
+
+      this.initFakeData();
+      this.bindCreateGeneral();
+      this.getAowners();
+
+      this.getArea();
+
+      if (this.id == null || this.id == '') {
+        this.getApartmentCode();
+        this.storedImages = [];
+      } else {
+        this.getLocalStorage();
+      }
     }
   }
-}
+// constructor(
+//   private _ApartmentService: ApartmentService,
+//   private uploadService: UploadFileService,
+//   private messageService: MessageService,
+//   private _ActivatedRoute: ActivatedRoute,
+//   public router: Router
+// ) {}
+
+// ngOnInit(): void {
+//   this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
+//   this.ID= Guid.create();
+
+//   if (this.addApartment != 'add new apartments') {
+//     this.getAowners();
+//     this.initFakeData();
+//     this.bindCreateGeneral();
+//     this.getArea();
+//     this.edit = 'EditForm';
+//     this.getApartmentDetails();
+//   } else {
+//     this.edit = '';
+//     this.apartment_ID = localStorage.getItem('apartment_ID');
+//     this.storedImages = JSON.parse(localStorage.getItem('imagesAPT') || '{}');
+//     this.initFakeData();
+//     this.bindCreateGeneral();
+//     this.getAowners();
+//     this.getArea();
+
+//     if (this.id == null || this.id == '') {
+//       this.getApartmentCode();
+//       this.storedImages = [];
+//     } else {
+//       this.getLocalStorage();
+//     }
+//   }
+// }
 
 
   Address: any = '';
@@ -251,6 +251,7 @@ ngOnInit(): void {
   /**
    * getApartmentCode
    */
+
   getApartmentCode() {
    this.subscriptions.push(  this._ApartmentService.getApartmentcode().subscribe((res) => {
     this.apartment_ID = res;
@@ -562,14 +563,11 @@ ngOnInit(): void {
       'Createtransport',
       JSON.stringify(this.Createtransport)
     );
+    console.log(this.generalInfoForm.value);
 
     localStorage.setItem(
       'generalInfoForm',
-      JSON.stringify({
-        ...this.generalInfoForm.value,
-        apartment_Transports: this.Createtransport,
-        bills: this.bills,
-      })
+      JSON.stringify({...this.generalInfoForm.value})
     );
 
     if (this.addApartment != 'add new apartments') {
@@ -579,6 +577,7 @@ ngOnInit(): void {
         )
         .subscribe(
           (res) => {
+            localStorage.setItem('apartmentResponse', JSON.stringify(res));
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
@@ -609,6 +608,7 @@ ngOnInit(): void {
         )
         .subscribe(
           (res) => {
+            localStorage.setItem('apartmentResponse', JSON.stringify(res));
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
