@@ -163,6 +163,7 @@ export class ApartmentsComponent implements OnInit {
       this.apartmentSer.FilterApartmentsFront(this.Date, this.pageNumber, this.itemsPerPage, this.filterStatus, this.searchText).subscribe((res) => {
 
         this.fullRespone = res;
+        if(res.data[0]!=null)
         this.apartmentList = res.data;
         this.totalofPages = res.totalPages;
         this.totalRecords = res.totalRecords
