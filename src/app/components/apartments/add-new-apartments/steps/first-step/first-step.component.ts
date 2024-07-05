@@ -16,6 +16,7 @@ import { FileUpload } from 'primeng/fileupload';
 import { Observable, Subscription, concatMap, map, range } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Guid } from 'guid-typescript';
+import { AdminsService } from 'src/app/_services/admins/admins.service';
 
 @Component({
   selector: 'app-first-step',
@@ -59,6 +60,7 @@ export class FirstStepComponent implements OnInit {
     text2: 'Transport distance',
   };
   /**  addApartment */
+  workers:any[]=[];
   @Input() addApartment: string = '';
   /**  jumbToNextSteb */
   @Output() jumbToNextSteb = new EventEmitter<void>();
@@ -119,7 +121,8 @@ export class FirstStepComponent implements OnInit {
     private uploadService: UploadFileService,
     private messageService: MessageService,
     private _ActivatedRoute: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public _adminservices:AdminsService 
   ) {}
 
   ngOnInit(): void {
@@ -129,6 +132,7 @@ this.ID= Guid.create();
     if (this.addApartment != 'add new apartments') {
 
       this.getAowners();
+      this.getAllworkers();
 
       this.initFakeData();
       this.bindCreateGeneral();
@@ -144,6 +148,8 @@ this.ID= Guid.create();
       this.initFakeData();
       this.bindCreateGeneral();
       this.getAowners();
+      this.getAllworkers();
+
 
       this.getArea();
 
@@ -267,6 +273,14 @@ this.ID= Guid.create();
     this.subscriptions.push(this._ApartmentService.getOwnerDropList().subscribe((res) => {
       this.listDropDownPropertyowner = res.list;
     }));
+  }
+  getAllworkers(  ) {
+    this.subscriptions.push(this._adminservices.GetAllWorkers( 1,1000,'').subscribe((res:any) => {
+      this.workers = res["data"];
+     }, (error) => {
+       console.error('Error fetching owners:', error);
+    }));
+
   }
 
   /**
@@ -735,6 +749,8 @@ this.ID= Guid.create();
 
   transport(value: any): void {
     this.Createtransport.push(value);
+    console.log(value);
+    
   }
   RemoveActionButton(index: number) {
     this.Createtransport.slice(0, index);
@@ -920,6 +936,9 @@ this.ID= Guid.create();
   }
   SetOwnerName(event: any) {
     localStorage.setItem('apartment_Owner', event.target.selectedOptions[0].text);
+  }
+  SetManagerName(event: any) {
+    localStorage.setItem('apartment_Manager', event.target.selectedOptions[0].text);
   }
 
   gotopage() {

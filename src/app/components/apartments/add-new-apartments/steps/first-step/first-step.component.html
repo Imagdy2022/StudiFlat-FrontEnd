@@ -160,10 +160,10 @@
                 <label class="form-label gray fw-bold">Property manager</label>
 
               </div>
-              <select class="s-cont form-select form-select-sm" name="apartment_Manager" id="apartment_Manager" formControlName="apartment_Manager" (change)="SetOwnerName($event)">
+              <select class="s-cont form-select form-select-sm" name="apartment_Manager" id="apartment_Manager" formControlName="apartment_Manager" (change)="SetManagerName($event)">
                 <option value="0" disabled selected>Select Property manager</option>
 
-               <option *ngFor="let type of listDropDownPropertyowner" value="{{type.id}}"> {{type.name}} </option>
+                <option *ngFor="let worker of workers" value="{{worker.id}}"> {{worker.fullName}} </option>
 
           </select>
 
