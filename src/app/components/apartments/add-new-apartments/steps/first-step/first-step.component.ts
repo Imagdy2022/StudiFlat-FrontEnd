@@ -76,6 +76,7 @@ export class FirstStepComponent implements OnInit {
   generalInfoForm!: FormGroup;
   /**  data of transport in form */
   Createtransport: Array<any> = [];
+  // Createtransport: Array<{ transport_Name: string, transport_Distance: string }> = [];
   bedrooms: number[] = [];
   /** transport_Name */
   transport_Name: string = '';
@@ -487,7 +488,8 @@ this.ID= Guid.create();
         bed_Price: new FormControl(10, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
         bed_SecuirtyDeposit: new FormControl(10, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
         bed_Service_Fees: new FormControl(10, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
-        apartment_Transports: new FormControl(null),
+        // apartment_Transports: new FormControl(null),
+        apartment_Transports: new FormControl(this.Createtransport) ,
         transport_Name: new FormControl(null),
         transport_Distance:new FormControl(null),
     });
@@ -503,10 +505,22 @@ this.ID= Guid.create();
       return;
     }
   }
+
+  // addTransport(): void {
+  //   this.Createtransport.push({ transport_Name: '', transport_Distance: '' });
+  // }
+
+
   Create_Apart_General(data: any) {
+
+    localStorage.setItem(
+      'Createtransport',
+      JSON.stringify(this.Createtransport)
+    );
 
 
   let apartment = {
+    // apartment_ID:null,
     apartment_ID:this.ID.value,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
     apartment_Floor:Number(this.generalInfoForm.value['apartment_Floor']),
@@ -522,16 +536,17 @@ this.ID= Guid.create();
     apartment_No:Number(this.generalInfoForm.value['apartment_No']),
     apartment_Manager: this.generalInfoForm.value['apartment_Manager'],
     apartment_Owner: this.generalInfoForm.value['apartment_Owner'],
-    apartment_Transports: [
-      {
+    // apartment_Transports: [
+    //   {
 
-       transport_Name: "tran name",
-            transport_Distance: "120"
 
-      }
-      // transport_Name: this.transport_Name,
-      // transport_Distance: this.transport_Distance,
-    ],
+    //   transport_Name: this.transport_Name,
+    //   transport_Distance: this.transport_Distance,
+
+    //   }
+
+    // ],
+    apartment_Transports: this.Createtransport,
     apartment_RentBy_Apartment: this.generalInfoForm.value['apartment_RentBy_Apartment'],
     apartment_RentBy_Bed: this.generalInfoForm.value['apartment_RentBy_Bed'],
     apartment_Description: this.generalInfoForm.value['apartment_Description'],
@@ -560,11 +575,8 @@ this.ID= Guid.create();
     ]
   };
 
+  console.log(this.ID.value);
 
-    localStorage.setItem(
-      'Createtransport',
-      JSON.stringify(this.Createtransport)
-    );
 
 
     localStorage.setItem(
