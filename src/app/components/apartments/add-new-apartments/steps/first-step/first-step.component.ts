@@ -748,9 +748,17 @@ this.ID= Guid.create();
   }
 
   transport(value: any): void {
-    this.Createtransport.push(value);
-    console.log(value);
+    let updatedApartment = {
+      ...value,  // Spread all existing properties
+      transport_Name:value.t_Name,
+     transport_Distance:value.t_Distance  // Assign value of old key to new key
+    };
     
+    // Remove old key if needed
+    delete updatedApartment.t_Name;
+    delete updatedApartment.t_Distance
+        this.Createtransport.push(updatedApartment);      
+
   }
   RemoveActionButton(index: number) {
     this.Createtransport.slice(0, index);
