@@ -522,16 +522,7 @@ this.ID= Guid.create();
     apartment_No:Number(this.generalInfoForm.value['apartment_No']),
     apartment_Manager: this.generalInfoForm.value['apartment_Manager'],
     apartment_Owner: this.generalInfoForm.value['apartment_Owner'],
-    apartment_Transports: [
-      {
-
-       transport_Name: "tran name",
-            transport_Distance: "120"
-
-      }
-      // transport_Name: this.transport_Name,
-      // transport_Distance: this.transport_Distance,
-    ],
+    apartment_Transports:this.Createtransport,
     apartment_RentBy_Apartment: this.generalInfoForm.value['apartment_RentBy_Apartment'],
     apartment_RentBy_Bed: this.generalInfoForm.value['apartment_RentBy_Bed'],
     apartment_Description: this.generalInfoForm.value['apartment_Description'],

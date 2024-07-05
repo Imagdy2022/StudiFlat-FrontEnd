@@ -192,22 +192,21 @@
           <!-- create new field Transport-->
 
           <div class="row" *ngFor="let transportData of Createtransport">
-              <div class="mb-3 col-12 col-md-6">
-                  <label class="form-label gray fw-bold">Transport name </label>
-                  <input  [(ngModel)]="transport_Name" [ngModelOptions]="{standalone: true}"   type="text" class="form-control rounded-2 py-2 fs-6" />
+            <div class="mb-3 col-12 col-md-6">
+                <label class="form-label gray fw-bold">Transport name </label>
+                <input [ngModelOptions]="{standalone: true}" [(ngModel)]="transportData.t_Name" type="text" class="form-control rounded-2 py-2 fs-6" />
 
-              </div>
-              <div class="mb-3 col-12 col-md-6">
-                  <label class="form-label gray fw-bold"> Transport Distance
-        </label>
-                  <input  [(ngModel)]="transport_Distance" [ngModelOptions]="{standalone: true}"  type="text" class="form-control rounded-2 py-2 fs-6" />
-              </div>
+            </div>
+            <div class="mb-3 col-12 col-md-6">
+                <label class="form-label gray fw-bold"> Transport Distance
+      </label>
+                <input [ngModelOptions]="{standalone: true}" [(ngModel)]="transportData.t_Distance" type="text" class="form-control rounded-2 py-2 fs-6" />
+            </div>
 
-          </div>
+        </div>
 
 
-          <app-input-field [labelinputs]="LabelTransport" (transport)="transport($event)" [textButton]="'Add New Transport'"></app-input-field>
-
+        <app-input-field [labelinputs]="LabelTransport" (transport)="transport($event)" [textButton]="'Add New Transport'"></app-input-field>
       </div>
       <div class="row">
           <p class="d-md-inline-block gray fw-bold mb-0 me-3 pt-0 mt-0">
