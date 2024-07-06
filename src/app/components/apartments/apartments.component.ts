@@ -101,7 +101,7 @@ export class ApartmentsComponent implements OnInit {
   fullRespone: IApartments; // تعديل هنا
   pageNumber: number = 1;
   filterStatus: any = "All";
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 8;
   pagesize = 8;
   totalofPages = 0;
   totalRecords = 0;
