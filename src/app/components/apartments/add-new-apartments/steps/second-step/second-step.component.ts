@@ -113,9 +113,11 @@ export class SecondStepComponent {
   ngOnInit() {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
 
-    if (this.n_ofToilets == 0 || this.n_ofToilets == null) {
-      this.n_ofToilets = 1;
-    }
+   
+      if(Number(localStorage.getItem('BathroomNo'))>1)
+        this.n_ofToilets =Number(localStorage.getItem('BathroomNo'));
+    else
+    this.n_ofToilets = 1;
     if (this.n_ofbedRoom == 0 || this.n_ofbedRoom == null) {
       this.n_ofbedRoom = 1;
     }

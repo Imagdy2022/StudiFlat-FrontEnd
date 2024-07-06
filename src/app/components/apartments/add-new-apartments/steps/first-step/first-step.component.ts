@@ -594,7 +594,7 @@ this.ID= Guid.create();
             });
             this.n_ofbedroom = data.value.apartment_BedRoomsNo;
             this.apartment_BathroomNo = data.value.apartment_BathroomNo;
-            
+            localStorage.setItem('BathroomNo',this.apartment_BathroomNo.toString())
             this.submitSecondForm();
             this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
             this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
@@ -625,6 +625,7 @@ this.ID= Guid.create();
             });
             this.n_ofbedroom = data.value.apartment_BedRoomsNo;
             this.apartment_BathroomNo = data.value.apartment_BathroomNo;
+            localStorage.setItem('BathroomNo',this.apartment_BathroomNo.toString())
 
             this.submitSecondForm();
             this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
