@@ -53,7 +53,6 @@ export class FirstStepComponent implements OnInit {
   listDropDownApartmentType: any = [];
   /** listDropDownElevator */
   listDropDownElevator: any = [];
-  NoOfBedrooms:number = 0;
   /** LabelTransport */
   LabelTransport: object = {
     text1: 'Transport name',
@@ -328,14 +327,14 @@ this.ID= Guid.create();
     this.generalInfoForm.get('apartment_Type')?.setValue(value.name);
     if (value.name == 'Apartment') {
       this.showNone = false;
-      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
+      // this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
       this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
     } else if (value.name == 'Studio') {
-      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
+      // this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
       this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
       this.showNone = true;
     } else {
-      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(0);
+      // this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(0);
       this.generalInfoForm.get('apartment_BathroomNo')?.setValue(0);
       this.showNone = true;
     }
@@ -483,7 +482,7 @@ this.ID= Guid.create();
       //  'UUID': new FormControl(this.id ),
       // service_Fees: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
 
-      apartment_BedRoomsNo: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      apartment_BedRoomsNo: new FormControl(null, [Validators.required]),
       apartment_BathroomNo: new FormControl(1, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       apartment_All_Bill_Included: new FormControl(true, [Validators.required]), //true
       apartment_Elevator: new FormControl(true, [Validators.required]),
@@ -845,17 +844,17 @@ this.ID= Guid.create();
     if (deviceValue == 'Apartment') {
       this.isShow = true;
       this.studioShow = false;
-      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
+      // this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
       this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
     } else if (deviceValue == 'Studio') {
       this.isShow = false;
       this.studioShow = true;
-      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
+      // this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
       this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
     } else {
       this.isShow = false;
       this.studioShow = false;
-      this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(0);
+      // this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(0);
       this.generalInfoForm.get('apartment_BathroomNo')?.setValue(0)
     }
   }

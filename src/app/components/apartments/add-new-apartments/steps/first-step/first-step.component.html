@@ -475,19 +475,13 @@
               <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
                   <label class="form-label gray fw-bold">No. of Bedrooms</label>
 
-                  <select   class="form-select rounded-2 py-2 fs-6" (change)="onChangeNoOfBedrooms($event)" formControlName="apartment_BedRoomsNo" [ngModel]="noOfBedroom">
-                    <option value="" disabled selected> Select No. of Bedrooms </option>
+                  <select   class="form-select rounded-2 py-2 fs-6" (change)="onChangeNoOfBedrooms($event)" name="apartment_BedRoomsNo"  formControlName="apartment_BedRoomsNo">
+                    <option value="null"  disabled  selected> Select No. of Bedrooms </option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                   </select>
-                  <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apartment_BedRoomsNo')?.getError('required') && generalInfoForm.get('apartment_BedRoomsNo')?.touched ">
-          this field is required
-        </span>
-        <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apartment_BedRoomsNo')?.getError('pattern')" >
-          No. of Bedrooms should be greater than 0
-        </span>
               </div>
               <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
                   <label class="form-label gray fw-bold">No. of Bathrooms</label>
@@ -509,7 +503,7 @@
                   <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
                     <label class="form-label gray fw-bold">Room type</label>
 
-                    <select  formControlName="room_Type"  [class.is-invalid]="generalInfoForm.get('room_Type')!.invalid && generalInfoForm.get('room_Type')!.touched " class="form-select rounded-2 py-2 fs-6" (ngModelChange)="onChangeNoOfBedrooms($event)">
+                    <select  formControlName="room_Type"  [class.is-invalid]="generalInfoForm.get('room_Type')!.invalid && generalInfoForm.get('room_Type')!.touched " class="form-select rounded-2 py-2 fs-6" >
                       <option value="null" disabled hidden selected> Select Room type </option>
                       <option value="Single">Single</option>
                       <option value="Double">Double</option>
