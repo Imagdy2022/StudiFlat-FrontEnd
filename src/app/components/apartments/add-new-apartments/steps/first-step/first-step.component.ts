@@ -887,6 +887,24 @@ this.display11=false
   {
 this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
   }
+  setBedNo(key:any,value:any,id:number)
+  {  
+    
+      
+    if(value=='Single')
+    {this.bedroomsToApi[id]['beds_No']=1;
+    }
+    else if(value=='Double')
+      {    this.bedroomsToApi[id]['beds_No']=2;
+  }
+    else if(value=='Trible')
+      {    this.bedroomsToApi[id]['beds_No']=3;
+  }
+    else
+    {  this.bedroomsToApi[id]['beds_No']=0;
+    }
+    
+  }
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
     this.subscriptions[i].unsubscribe();
