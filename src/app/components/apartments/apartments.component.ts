@@ -100,8 +100,8 @@ export class ApartmentsComponent implements OnInit {
 
   fullRespone: IApartments; // تعديل هنا
   pageNumber: number = 1;
-  filterStatus: any = "All";
-  itemsPerPage: number = 10;
+  filterStatus : any  = "All";
+  itemsPerPage: number = 8;
   pagesize = 8;
   totalofPages = 0;
   totalRecords = 0;
@@ -190,34 +190,46 @@ export class ApartmentsComponent implements OnInit {
     this.showSide = value;
   }
 
-  checkindex = 0;
-  clickApartmentList(index: any) {
-    this.checkindex = index?.target?.value;
-    this.apartmentFillterSelected = this.apartmentFillterSelected.map((data) => data == true ? false : false);
-    this.apartmentFillterSelected[index?.target?.value] = true;
-    this.itemsPerPage = 10;
-    this.pageNumber = 1;
-    switch (index?.target?.value) {
-      case 0:
-        this.filterStatus = "All";
-        break;
-      case 1:
-        this.filterStatus = "Rented";
-        break;
-      case 2:
-        this.filterStatus = "Available";
-        break;
-      case 3:
-        this.filterStatus = "Pending";
-        break;
-      case 4:
-        this.filterStatus = "Draft";
-        break;
-      case 5:
-        this.filterStatus = "RentEndSoon";
-        break;
-      default:
-        this.filterStatus = "All";
+  checkindex=0;
+  clickApartmentList(index:any){
+    this.checkindex=index?.target?.value;
+    this.apartmentFillterSelected = this.apartmentFillterSelected.map((data) => data == true ? false : false)
+
+    this.apartmentFillterSelected[index?.target?.value] = true
+    if(index?.target?.value == 0){
+      this.filterStatus = "All";
+      this.getAllApartment();
+    }
+    if(index?.target?.value == 1){
+      this.filterStatus = "Rented";
+      this.getAllApartment();
+    }
+   if(index?.target?.value == 2){
+      this.filterStatus = "Available";
+      this.getAllApartment();
+    }
+   if(index?.target?.value == 3){
+      this.filterStatus = "Pending";
+      this.getAllApartment();
+    }
+  if(index?.target?.value == 4){
+      this.filterStatus = "Draft";
+      this.getAllApartment();
+    }
+  if(index?.target?.value == 5){
+      this.filterStatus = "RentEndSoon";
+      this.getAllApartment();
+    }
+  }
+
+  FilterButtons(value:any){
+    this.Date=value;
+    if(this.Date == 'This Month'){
+      this.monthButton = true;
+      this.weekButton = false
+    }else{
+      this.monthButton = false;
+      this.weekButton = true;
     }
     this.getAllApartment();
   }
