@@ -33,7 +33,7 @@ export class ApartmentService {
       .set('Filter', FilterKey)
       .set('Page_No', PageNumber.toString())
       .set('Page_Size', PageSize.toString())
-      // .set('status', Apt_Statuss)
+      .set('status', Apt_Statuss)
        .set('Search', SearchKey);
 
     return this.http.get<any>(url, { headers: this.headers, params: params });
