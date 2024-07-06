@@ -595,7 +595,7 @@ this.ID= Guid.create();
             this.apartment_BathroomNo = data.value.apartment_BathroomNo;
 
             this.submitSecondForm();
-            this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
+            this.jumbToNextSteb2n_ofbedroom.emit(this.bedroomsToApi.length);
             this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
             this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
             this.getId.emit(res.uuid);
@@ -626,7 +626,7 @@ this.ID= Guid.create();
             this.apartment_BathroomNo = data.value.apartment_BathroomNo;
 
             this.submitSecondForm();
-            this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
+            this.jumbToNextSteb2n_ofbedroom.emit(this.bedroomsToApi.length);
             this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
             this.jumbToNextSteb2_n_ofLiving.emit(this.n_ofLiving);
             this.getId.emit(res.uuid);
