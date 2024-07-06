@@ -494,7 +494,7 @@
         </span>
               </div>
 
-             <ng-container *ngIf="isShow">
+             <ng-container *ngIf="isShow || bedNumber > 0">
               <div class="card bedSecton p-3 mt-3" *ngFor="let bedroom of bedrooms; let i = index">
                 <p class="fw-bold mb-0 me-3 pt-0 mt-0">Bed room {{ i + 1 }}</p>
                 <span class="text-muted">Please add room info</span>
@@ -503,19 +503,14 @@
                   <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
                     <label class="form-label gray fw-bold">Room type</label>
 
-                    <select  formControlName="room_Type"  [class.is-invalid]="generalInfoForm.get('room_Type')!.invalid && generalInfoForm.get('room_Type')!.touched " class="form-select rounded-2 py-2 fs-6" (ngModelChange)="onChangeNoOfBedrooms($event);setBedRoom('room_Type',$event,i)">
+                    <select  formControlName="room_Type"  [class.is-invalid]="generalInfoForm.get('room_Type')!.invalid && generalInfoForm.get('room_Type')!.touched " class="form-select rounded-2 py-2 fs-6" (ngModelChange)="setBedRoom('room_Type',$event,i)">
                       <option value="null" disabled hidden selected> Select Room type </option>
-                      <option value="Single"  >Single</option>
+                      <option value="Single">Single</option>
                       <option value="Double">Double</option>
                       <option value="Trible">Trible</option>
                       <option value="Custom">Custom</option>
                     </select>
-                    <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apartment_BedRoomsNo')?.getError('required') && generalInfoForm.get('apartment_BedRoomsNo')?.touched ">
-            this field is required
-          </span>
-          <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apartment_BedRoomsNo')?.getError('pattern')" >
-            Room type should be greater than 0
-          </span> -->
+
                 </div>
 
                   <div class="mb-3 col-12 col-md-6">

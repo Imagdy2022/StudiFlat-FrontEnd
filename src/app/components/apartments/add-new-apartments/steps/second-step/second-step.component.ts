@@ -139,11 +139,10 @@ export class SecondStepComponent {
       }));
 
   }
-
   getLocalStorage(): void {
     if ('apartmentResponse' in localStorage) {
       const data = JSON.parse(localStorage.getItem('apartmentResponse')!);
-      console.log(data)
+      this.n_ofbedRoom = data?.rooms_Names.length
       this.roomType = [];
 
       // Section of room

@@ -119,6 +119,7 @@ export class FirstStepComponent implements OnInit {
   SecurityDeposit:number = 1;
   ServiceFees:number = 1;
   bedroomsToApi:any[]=[];
+  bedNumber :number = 0;
   constructor(
     private _ApartmentService: ApartmentService,
     private uploadService: UploadFileService,
@@ -234,6 +235,7 @@ this.ID= Guid.create();
 
     if (data !== null) {
       let parsedData = JSON.parse(data);
+      this.bedNumber = parsedData.apartment_BedRoomsNo
       if (parsedData.apartment_Type == 'Apartment') {
         this.isShow = true;
       } else {
@@ -574,7 +576,7 @@ this.ID= Guid.create();
 
     localStorage.setItem(
       'generalInfoForm',
-      JSON.stringify({...this.generalInfoForm.value})
+      JSON.stringify({...apartment})
     );
 
     if (this.addApartment != 'add new apartments') {
@@ -814,7 +816,7 @@ this.ID= Guid.create();
         bed_SecuirtyDeposit: 0,
         bed_Service_Fees: 0
       });
-    }    
+    }
   }
 
   showBedSection:boolean = false;
