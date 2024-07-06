@@ -100,7 +100,7 @@ export class ApartmentsComponent implements OnInit {
 
   fullRespone: IApartments; // تعديل هنا
   pageNumber: number = 1;
-  filterStatus: any = "All";
+  filterStatus : any  = "All";
   itemsPerPage: number = 8;
   pagesize = 8;
   totalofPages = 0;
@@ -200,26 +200,38 @@ export class ApartmentsComponent implements OnInit {
       this.filterStatus = "All";
       this.getAllApartment();
     }
-   else if(index?.target?.value == 1){
+    if(index?.target?.value == 1){
       this.filterStatus = "Rented";
       this.getAllApartment();
     }
-   else if(index?.target?.value == 2){
+   if(index?.target?.value == 2){
       this.filterStatus = "Available";
       this.getAllApartment();
     }
-   else if(index?.target?.value == 3){
+   if(index?.target?.value == 3){
       this.filterStatus = "Pending";
       this.getAllApartment();
     }
-   else if(index?.target?.value == 4){
+  if(index?.target?.value == 4){
       this.filterStatus = "Draft";
       this.getAllApartment();
     }
-   else if(index?.target?.value == 5){
+  if(index?.target?.value == 5){
       this.filterStatus = "RentEndSoon";
       this.getAllApartment();
     }
+  }
+
+  FilterButtons(value:any){
+    this.Date=value;
+    if(this.Date == 'This Month'){
+      this.monthButton = true;
+      this.weekButton = false
+    }else{
+      this.monthButton = false;
+      this.weekButton = true;
+    }
+    this.getAllApartment();
   }
 
   xx: any;

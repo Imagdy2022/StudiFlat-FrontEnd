@@ -441,36 +441,34 @@
             <div class="row pt-3">
               <div class="mb-3 col-12 col-md-6">
                 <label class="form-label gray fw-bold">Bed price</label>
-                <input formControlName="bed_Price" type="number" [class.is-invalid]="generalInfoForm.get('bed_Price')!.invalid && generalInfoForm.get('bed_Price')!.touched " class="form-control rounded-2 py-2 fs-6" />
-                <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Price')?.getError('required') && generalInfoForm.get('bed_Price')?.touched ">
+                <input  type="number"class="form-control rounded-2 py-2 fs-6" [ngModelOptions]="{standalone: true}" [(ngModel)]="bedPrice" />
+                <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Price')?.getError('required') && generalInfoForm.get('bed_Price')?.touched ">
         this field is required
       </span>
       <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Price')?.getError('pattern')" >
         Bed price should be greater than 0
-      </span>
+      </span> -->
             </div>
 
               <div class="mb-3 col-6 col-md-6">
                 <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Security Deposit</label>
-                <input formControlName="bed_SecuirtyDeposit" min="0" type="number" [class.is-invalid]="generalInfoForm.get('bed_SecuirtyDeposit')!.invalid && generalInfoForm.get('bed_SecuirtyDeposit')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit"
-                />
-                <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_SecuirtyDeposit')?.getError('required') && generalInfoForm.get('bed_SecuirtyDeposit')?.touched ">
+                <input f min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit" [ngModelOptions]="{standalone: true}" [(ngModel)]="SecurityDeposit"/>
+                <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_SecuirtyDeposit')?.getError('required') && generalInfoForm.get('bed_SecuirtyDeposit')?.touched ">
                    this field is required
                  </span>
                  <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_SecuirtyDeposit')?.getError('pattern')" >
                   Security Deposit should be greater than 0
-                </span>
+                </span> -->
             </div>
               <div class="mb-3 col-6 col-md-6">
                 <label for="exampleInputService_Fees" class="form-label gray fw-bold">Service Fees</label>
-                <input formControlName="bed_Service_Fees" min="0" type="number" [class.is-invalid]="generalInfoForm.get('bed_Service_Fees')!.invalid && generalInfoForm.get('bed_Service_Fees')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees"
-                />
-                <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Service_Fees')?.getError('required') && generalInfoForm.get('bed_Service_Fees')?.touched ">
+                <input  min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees" [ngModelOptions]="{standalone: true}" [(ngModel)]="ServiceFees"/>
+                <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Service_Fees')?.getError('required') && generalInfoForm.get('bed_Service_Fees')?.touched ">
                    this field is required
                  </span>
                  <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Service_Fees')?.getError('pattern')" >
                   Service Fees should be greater than 0
-                </span>
+                </span> -->
             </div>
             </div>
           </div>
