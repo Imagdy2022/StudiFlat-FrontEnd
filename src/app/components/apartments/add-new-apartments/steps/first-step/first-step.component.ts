@@ -551,7 +551,7 @@ this.ID= Guid.create();
 
     apartment_Elevator: this.generalInfoForm.value['apartment_Elevator'],
     apartment_Type: this.generalInfoForm.value['apartment_Type'],
-    apartment_BedRoomsNo:this.generalInfoForm.value['apartment_BedRoomsNo'],
+    apartment_BedRoomsNo:Number(this.generalInfoForm.value['apartment_BedRoomsNo']),
     apartment_BathroomNo: this.generalInfoForm.value['apartment_BathroomNo'],
      apartment_Rooms : [
 

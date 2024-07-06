@@ -163,7 +163,7 @@
               <select class="s-cont form-select form-select-sm" name="apartment_Manager" id="apartment_Manager" formControlName="apartment_Manager" (change)="SetManagerName($event)">
                 <option value="0" disabled selected>Select Property manager</option>
 
-                <option *ngFor="let worker of workers" value="{{worker.id}}"> {{worker.fullName}} </option>
+                <option *ngFor="let worker of workers" value="{{worker.worker_ID}}"> {{worker.fullName}} </option>
 
           </select>
 
