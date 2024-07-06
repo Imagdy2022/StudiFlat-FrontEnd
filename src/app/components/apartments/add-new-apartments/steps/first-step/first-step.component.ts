@@ -119,6 +119,7 @@ export class FirstStepComponent implements OnInit {
   bedPrice:number = 1;
   SecurityDeposit:number = 1;
   ServiceFees:number = 1;
+  bedroomsToApi:any[]=[];
   constructor(
     private _ApartmentService: ApartmentService,
     private uploadService: UploadFileService,
@@ -561,15 +562,7 @@ this.ID= Guid.create();
     apartment_Type: this.generalInfoForm.value['apartment_Type'],
     apartment_BedRoomsNo:Number(this.generalInfoForm.value['apartment_BedRoomsNo']),
     apartment_BathroomNo: this.generalInfoForm.value['apartment_BathroomNo'],
-    apartment_Rooms : [
-      {
-        room_Type: this.generalInfoForm.value['room_Type'] ?? 'Single',
-        beds_No: this.generalInfoForm.value['beds_No'],
-        bed_Price: this.generalInfoForm.value['bed_Price'],
-        bed_SecuirtyDeposit:this.generalInfoForm.value['bed_SecuirtyDeposit'],
-        bed_Service_Fees: this.generalInfoForm.value['bed_Service_Fees'],
-      }
-  ]
+    apartment_Rooms : this.bedroomsToApi
 
   };
 
@@ -814,6 +807,15 @@ this.ID= Guid.create();
     if (!isNaN(selectedValue) && selectedValue > 0) {
       this.bedrooms = Array(selectedValue).fill(0).map((x, i) => i);
     }
+    for (let i = 0; i < selectedValue; i++) {
+      this.bedroomsToApi.push({
+        room_Type: "",
+        beds_No: 0,
+        bed_Price: 0,
+        bed_SecuirtyDeposit: 0,
+        bed_Service_Fees: 0
+      });
+    }    
   }
 
   showBedSection:boolean = false;
@@ -879,6 +881,10 @@ this.ID= Guid.create();
   {
   this.getAowners();
 this.display11=false
+  }
+  setBedRoom(key:any,value:any,id:number)
+  {
+this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
   }
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
