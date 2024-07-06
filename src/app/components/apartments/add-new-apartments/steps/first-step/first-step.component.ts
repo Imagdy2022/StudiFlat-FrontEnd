@@ -275,8 +275,8 @@ this.ID= Guid.create();
     }));
   }
   getAllworkers(  ) {
-    this.subscriptions.push(this._adminservices.GetAllWorkers( 1,1000,'').subscribe((res:any) => {
-      this.workers = res["data"];
+    this.subscriptions.push(this._adminservices.getAllAdmins('','').subscribe((res:any) => {
+      this.workers = res;
      }, (error) => {
        console.error('Error fetching owners:', error);
     }));
