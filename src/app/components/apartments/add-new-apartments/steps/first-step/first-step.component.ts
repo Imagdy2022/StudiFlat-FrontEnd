@@ -594,7 +594,7 @@ this.ID= Guid.create();
             });
             this.n_ofbedroom = data.value.apartment_BedRoomsNo;
             this.apartment_BathroomNo = data.value.apartment_BathroomNo;
-
+            
             this.submitSecondForm();
             this.jumbToNextSteb2n_ofbedroom.emit(this.n_ofbedroom);
             this.jumbToNextSteb2_apt_Toilets.emit(this.apartment_BathroomNo);
@@ -885,24 +885,46 @@ this.display11=false
   }
   setBedRoom(key:any,value:any,id:number)
   {
-this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
+    this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
+      
   }
   setBedNo(key:any,value:any,id:number)
   {  
     
+    if(this.generalInfoForm.value[key]=='Single')
+      {this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
+
+        this.bedroomsToApi[id]['beds_No']=1;
+        
+      }
+      else if(this.generalInfoForm.value[key]=='Double')
+        {  this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
+          this.bedroomsToApi[id]['beds_No']=2;
+
+    }
+      else if(this.generalInfoForm.value[key]=='Trible')
+        {  this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
+          this.bedroomsToApi[id]['beds_No']=3;
+
+    }
+      else if(this.generalInfoForm.value[key]=='Custom')
+      { this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
+        this.bedroomsToApi[id]['beds_No']=0;
+
+      }   
+    
+  }
+  changeBedNo(key:any,value:any,id:number)
+  {  
+    
+    if(this.generalInfoForm.value['room_Type']=='Custom')
+      {this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]        
+      }
+      else if(this.generalInfoForm.value['room_Type']!='Custom')
+        {  this.bedroomsToApi[id][key]=this.bedroomsToApi[id].beds_No
+
+    }
       
-    if(value=='Single')
-    {this.bedroomsToApi[id]['beds_No']=1;
-    }
-    else if(value=='Double')
-      {    this.bedroomsToApi[id]['beds_No']=2;
-  }
-    else if(value=='Trible')
-      {    this.bedroomsToApi[id]['beds_No']=3;
-  }
-    else
-    {  this.bedroomsToApi[id]['beds_No']=0;
-    }
     
   }
   ngOnDestroy() {

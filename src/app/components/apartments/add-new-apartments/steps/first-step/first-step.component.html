@@ -503,7 +503,7 @@
                   <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
                     <label class="form-label gray fw-bold">Room type</label>
 
-                    <select  formControlName="room_Type"  [class.is-invalid]="generalInfoForm.get('room_Type')!.invalid && generalInfoForm.get('room_Type')!.touched " class="form-select rounded-2 py-2 fs-6" (ngModelChange)="setBedRoom('room_Type',$event,i);setBedNo('beds_No',$event,i)">
+                    <select  formControlName="room_Type"  [class.is-invalid]="generalInfoForm.get('room_Type')!.invalid && generalInfoForm.get('room_Type')!.touched " class="form-select rounded-2 py-2 fs-6" (click)="setBedNo('room_Type',$event,i)">
                       <option value="null" disabled hidden selected> Select Room type </option>
                       <option value="Single">Single</option>
                       <option value="Double">Double</option>
@@ -515,10 +515,20 @@
 
                   <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">No of beds</label>
-                    <input formControlName="beds_No" type="number" [class.is-invalid]="generalInfoForm.get('beds_No')!.invalid && generalInfoForm.get('beds_No')!.touched " class="form-control rounded-2 py-2 fs-6" (keyup)="setBedRoom('beds_No',$event.key,i)" [(ngModel)]="bedroomsToApi[i].beds_No" name="{{ i }}"/>
-                    <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('beds_No')?.getError('required') && generalInfoForm.get('beds_No')?.touched ">
+                    <select formControlName="beds_No"  class="form-select rounded-2 py-2 fs-6"  
+                    (click)="changeBedNo('beds_No',$event,i)">
+                      <option value="null" disabled hidden selected> {{bedroomsToApi[i].beds_No}}</option> 
+                      <ng-container *ngIf="bedroomsToApi[i].room_Type=='Custom'"><option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option></ng-container>
+                      
+                    </select>
+                    <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('beds_No')?.getError('required') && generalInfoForm.get('beds_No')?.touched ">
             this field is required
-          </span>
+          </span> -->
           <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('beds_No')?.getError('pattern')" >
             No of beds should be greater than 0
           </span> -->
