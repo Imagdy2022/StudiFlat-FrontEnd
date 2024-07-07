@@ -162,7 +162,6 @@ export class SecondStepComponent {
         // { this.arrNamesbedroom[j]['room_ID']=data?.rooms_IDs[j];}
        
 
-      console.log( this.arrNamesbedroom);
 
       //Section of bathroom
     //   this.arraynewFieldBathroom = [];
@@ -399,10 +398,10 @@ export class SecondStepComponent {
   }
   saveRoomDetail(id:any)
   {
+    
 let setId= this.arrNamesbedroom[id].room_Details.length;
     this.arrNamesbedroom[id].room_Details[setId]=this.roomDetailInput; 
-    this.roomDetailInput=''
-console.log(this.arrNamesbedroom);
+    this.roomDetailInput='';
 
   }
   Create_Apart_Equipment(data: any) {
