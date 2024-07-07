@@ -99,7 +99,9 @@ export class SecondStepComponent {
   /** jumbToPrevSteb */
   @Output() jumbToPrevSteb = new EventEmitter<void>();
   arrNamesbedroom: any[]= [];
-  roomDetailInput:string=''
+  arrNamesbathroom: any[]= [];
+  roomDetailInput:string='';
+  bathroomDetailInput:string='';
   constructor(
     public _ApartmentService: ApartmentService,
     private messageService: MessageService,
@@ -225,6 +227,13 @@ export class SecondStepComponent {
     //     this.newFieldFacilityToApi.push(data.facilities_Details[i]?.description)
     //   }
      }
+     for (let i = 1; i <=this.n_ofToilets; i++) {
+      this.arrNamesbathroom.push({
+        bathroom_Name:'bathroom'+ i,
+        bathroom_Details: [] 
+});
+
+}
   }
 
   getDataFromEdit(data: any) {
@@ -404,6 +413,14 @@ let setId= this.arrNamesbedroom[id].room_Details.length;
     this.roomDetailInput='';
 
   }
+  saveBathroomDetail(id:any)
+  {
+    
+let setId= this.arrNamesbathroom[id].bathroom_Details.length;
+    this.arrNamesbathroom[id].bathroom_Details[setId]=this.bathroomDetailInput; 
+    this.bathroomDetailInput='';
+
+  }
   Create_Apart_Equipment(data: any) {
     for (let j = 0; j < this.arraynewFieldBathroom.length; j++) {
       let obj = {
@@ -457,7 +474,7 @@ let setId= this.arrNamesbedroom[id].room_Details.length;
     let objectData = {
       apartment_ID : this.apt_UUID,
       rooms_Details:this.arrNamesbedroom,
-      bathroom_Details: this.bathroom,
+      bathroom_Details:this.arrNamesbathroom,
       kitchen_Details: this.newFieldkitchenToApi,
       apartment_Features:this.newFieldSpecialFeaturesToApi,
       apartment_Facilites: this.newFieldFacilityToApi,

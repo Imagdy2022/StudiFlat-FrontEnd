@@ -88,34 +88,37 @@
               <p class="fw-bold mb-0">Bathrooms</p>
               <p class="gray">Add Bathrooms equipment's and tools details.</p>
           </div>
-          <ng-container *ngFor="let i of getrange(n_ofToilets); let index1 = index">
-              <div class="px-3 bg-section mb-3 rounded">
-                  <p *ngIf="n_ofToilets > 1" class="fw-bold mb-4">bathroom {{ index1 + 1 }}</p>
-                  <div class="row">
-                      <ng-container *ngFor="let data of arraynewFieldBathroom">
-                          <div class="mb-3 col-12 col-md-6">
-                              <label class="form-label gray fw-bold">{{ data.label }}</label>
-                              <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data.contentnewFieldBathroom" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
-                          </div>
-                      </ng-container>
-                  </div>
-                  <div class="row mb-3" *ngIf="ActionButtonFieldBathroom[index1] == true">
-                      <div class="col-12 col-md-6">
-                          <label class="form-label gray fw-bold">Bathroom Tool {{ arraynewFieldBathroom.length ? arraynewFieldBathroom.length + 1 : 0 }}</label>
-                          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="contentnewFieldBathroom" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
-                      </div>
-                      <div class="mb-0 mt-3 col-12 col-md-6 d-flex align-items-center">
-                          <div>
-                              <button type="button" class="outline-0 bg-transparent blue borderCancel px-3 py-2 me-3 rounded-3 fw-bold" (click)="RemoveActionButtonnewFieldBathroom(index1)">Cancel</button>
-                              <button type="button" class="outline-0 text-white bg-blue px-4 fw-bold py-2 rounded-2 border-0 background" (click)="saveActionButtonnewFieldBathroom(index1)">Save</button>
-                          </div>
-                      </div>
-                  </div>
-                  <a class="bg-transparent cursor text-decoration-none outline-0 border-0 blue fw-bold mb-3" (click)="ActionButtonFieldBathroom[index1] = true">
-                      <img src="assets/images/apartmentImages/ic_baseline-add.svg" /> Add New Bathroom Tool
-                  </a>
-              </div>
-          </ng-container>
+          <ng-container *ngFor="let i of arrNamesbathroom; let index1 = index">
+            <div class="px-3 mb-3 rounded">
+                <div class="mb-3 col-12 col-md-6">
+                    <label class="form-label gray fw-bold">BathRoom Name</label>
+                    <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbathroom[index1].bathroom_Name" class="form-control bg-white rounded-2 py-2 fs-6">
+                </div>
+                <div class="row gx-0">
+                    <ng-container *ngFor="let data of arrNamesbathroom[index1].bathroom_Details;let j=index">
+                        <div class="mb-3 col-12 col-md-6" *ngIf="data[j]!=null">
+                            <label class="form-label gray fw-bold">Detail {{j+1}}</label>
+                            <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbathroom[index1].bathroom_Details[j]" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="row mb-3" *ngIf="ActionButtonField[index1] == true">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label gray fw-bold">Bathroom Detail {{ arrNamesbathroom[index1].bathroom_Details.length ? arrNamesbathroom[index1].bathroom_Details.length + 1 : 0 }}</label>
+                        <input type="text" [ngModelOptions]="{ standalone: true }"  [(ngModel)]="bathroomDetailInput" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
+                    </div>
+                    <div class="mb-0 mt-3 col-12 col-md-6 d-flex align-items-center">
+                        <div>
+                            <button type="button" class="outline-0 bg-transparent blue borderCancel px-3 py-2 me-3 rounded-3 fw-bold" (click)="RemoveActionButton(index1)">Cancel</button>
+                            <button type="button" class="outline-0 text-white bg-blue px-4 fw-bold py-2 rounded-2 border-0 background" (click)="saveBathroomDetail(index1)">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <a class="bg-transparent text-decoration-none cursor outline-0 border-0 blue fw-bold mb-3" (click)="ActionButtonField[index1] = true">
+                    <img src="assets/images/apartmentImages/ic_baseline-add.svg" /> Add New Bathroom Detail
+                </a>
+            </div>
+        </ng-container>
       </div>
 
       <!--Kitchen section-->
