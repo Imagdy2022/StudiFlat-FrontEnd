@@ -9,29 +9,29 @@
               <p class="gray">Add Rooms Details.</p>
           </div>
 
-          <ng-container *ngFor="let i of getrange(n_ofbedRoom); let index1 = index">
+          <ng-container *ngFor="let i of arrNamesbedroom; let index1 = index">
               <div class="px-3 mb-3 rounded">
                   <div class="mb-3 col-12 col-md-6">
                       <label class="form-label gray fw-bold">BedRoom Name</label>
-                      <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbedroom[index1]" class="form-control bg-white rounded-2 py-2 fs-6">
+                      <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbedroom[index1].room_Name" class="form-control bg-white rounded-2 py-2 fs-6">
                   </div>
                   <div class="row gx-0">
-                      <ng-container *ngFor="let data of arraynewFieldRoomDetails[index1]">
+                      <ng-container *ngFor="let data of arrNamesbedroom[index1].room_Details;let j=index">
                           <div class="mb-3 col-12 col-md-6">
                               <label class="form-label gray fw-bold">{{ data.label }}</label>
-                              <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data.contentnewFieldRoomDetails" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
+                              <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data[j]" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
                           </div>
                       </ng-container>
                   </div>
                   <div class="row mb-3" *ngIf="ActionButtonField[index1] == true">
                       <div class="col-12 col-md-6">
-                          <label class="form-label gray fw-bold">Room Detail {{ arraynewFieldRoomDetails[index1].length ? arraynewFieldRoomDetails[index1].length + 1 : 0 }}</label>
-                          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="contentnewFieldRoomDetails" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
+                          <label class="form-label gray fw-bold">Room Detail {{ arrNamesbedroom[index1].room_Details.length ? arrNamesbedroom[index1].room_Details.length + 1 : 0 }}</label>
+                          <input  [(ngModel)]="roomDetailInput" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
                       </div>
                       <div class="mb-0 mt-3 col-12 col-md-6 d-flex align-items-center">
                           <div>
                               <button type="button" class="outline-0 bg-transparent blue borderCancel px-3 py-2 me-3 rounded-3 fw-bold" (click)="RemoveActionButton(index1)">Cancel</button>
-                              <button type="button" class="outline-0 text-white bg-blue px-4 fw-bold py-2 rounded-2 border-0 background" (click)="saveActionButton(index1)">Save</button>
+                              <button type="button" class="outline-0 text-white bg-blue px-4 fw-bold py-2 rounded-2 border-0 background" (click)="saveRoomDetail(index1)">Save</button>
                           </div>
                       </div>
                   </div>

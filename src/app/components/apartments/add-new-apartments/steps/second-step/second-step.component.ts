@@ -98,7 +98,8 @@ export class SecondStepComponent {
   @Output() jumbToNextSteb = new EventEmitter<void>();
   /** jumbToPrevSteb */
   @Output() jumbToPrevSteb = new EventEmitter<void>();
-
+  arrNamesbedroom: any[]= [];
+  roomDetailInput:string=''
   constructor(
     public _ApartmentService: ApartmentService,
     private messageService: MessageService,
@@ -112,8 +113,6 @@ export class SecondStepComponent {
 
   ngOnInit() {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
-
-   
       if(Number(localStorage.getItem('BathroomNo'))>1)
         this.n_ofToilets =Number(localStorage.getItem('BathroomNo'));
     else
@@ -144,27 +143,26 @@ export class SecondStepComponent {
   getLocalStorage(): void {
     if ('apartmentResponse' in localStorage) {
       const data = JSON.parse(localStorage.getItem('apartmentResponse')!);
-      this.n_ofbedRoom = data?.rooms_Names.length
-      this.roomType = [];
-
+      // this.n_ofbedRoom = data?.rooms_Names.length
+      this.roomType = [];      
       // Section of room
       this.arraynewFieldRoomDetails = [];
-      let arrRoom = [];
-      this.arrNamesbedroom = [];
-      for (let i = 0; i < data.rooms_Names.length; i++) {
-        if (data.rooms_Names[i] == 'single') {
-          this.arrNamesbedroom.push(data.rooms_Names[i]);
-          for (let j = 0; j < data.rooms_IDs.length; j++) {
-            arrRoom.push({
-              label: 'room detail ' + (j + 1),
-              contentnewFieldRoomDetails: data.rooms_IDs[j],
-            });
-          }
-          this.arraynewFieldRoomDetails.push(arrRoom);
-          this.roomType[i] = 'bedroom';
-          arrRoom = [];
+      // let arrRoom = [];
+      // this.arrNamesbedroom.length=data.rooms_IDs.length;
+      for (let i = 0; i <data.rooms_Names.length; i++) {
+                  this.arrNamesbedroom.push({
+            room_ID:data?.rooms_IDs[i], 
+            room_Name:data?.rooms_Names[i],
+            room_Details: [] 
+          });
+
         }
-      }
+        // for (let j = 0; j<data.rooms_IDs.length; j++) 
+
+        // { this.arrNamesbedroom[j]['room_ID']=data?.rooms_IDs[j];}
+       
+
+      console.log( this.arrNamesbedroom);
 
       //Section of bathroom
     //   this.arraynewFieldBathroom = [];
@@ -399,26 +397,15 @@ export class SecondStepComponent {
       apartment_Facilites: new FormControl(''),
     });
   }
+  saveRoomDetail(id:any)
+  {
+let setId= this.arrNamesbedroom[id].room_Details.length;
+    this.arrNamesbedroom[id].room_Details[setId]=this.roomDetailInput; 
+    this.roomDetailInput=''
+console.log(this.arrNamesbedroom);
 
+  }
   Create_Apart_Equipment(data: any) {
-    this.room = [];
-    this.bathroom = [];
-    this.livingRoom = [];
-    for (let j = 0; j < this.arraynewFieldRoomDetails.length; j++) {
-      let obj = {
-        room_Name: this.arrNamesbedroom[j],
-        room_Type: 'bedroom',
-      };
-      let arr: any = [];
-      this.arraynewFieldRoomDetails[j].forEach((res: any) => {
-        arr.push(res.contentnewFieldRoomDetails);
-      });
-      this.room.push({
-        ...obj,
-        rooms_Details: arr,
-      });
-    }
-
     for (let j = 0; j < this.arraynewFieldBathroom.length; j++) {
       let obj = {
         bathroom_Name: 'Bathroom Tool',
@@ -470,7 +457,7 @@ export class SecondStepComponent {
 
     let objectData = {
       apartment_ID : this.apt_UUID,
-      rooms_Details: this.room,
+      rooms_Details:this.arrNamesbedroom,
       bathroom_Details: this.bathroom,
       kitchen_Details: this.newFieldkitchenToApi,
       apartment_Features:this.newFieldSpecialFeaturesToApi,
@@ -606,7 +593,7 @@ export class SecondStepComponent {
     this.arrNamesLiving.push(this.Living_name);
   }
 
-  arrNamesbedroom: any = [];
+
   modelChanged1(inputName: any) {
     this.arrNamesbedroom.push(this.Room_name);
   }
