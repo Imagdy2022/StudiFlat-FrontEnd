@@ -101,44 +101,41 @@
         </div>
         <hr>
 
-
-        <div class="room">
+        <div class="room" *ngFor="let room of rooms; let i = index">
           <div class="d-flex justify-content-between">
-              <p class="fw-bold">Room 1</p>
-              <div class="buttons d-flex align-items-center">
-                  <div class="form-check me-3">
-                      <input class="form-check-input" type="checkbox" id="selectAll" (change)="toggleSelectAll($event)" />
-                      <label class="text-dark fs-6" for="selectAll"> Select all </label>
-                  </div>
-                  <a class="bg-transparent outline-0 text-decoration-none cursor border-0 blue fw-bold" (click)="createNewField()">
-                      <img src="assets/images/apartmentImages/ic_baseline-add.svg"> Create new field
-                  </a>
+            <p class="fw-bold">Room {{i + 1}}</p>
+            <div class="buttons d-flex align-items-center">
+              <div class="form-check me-3">
+                <input class="form-check-input" type="checkbox" id="selectAll{{i}}" (change)="toggleSelectAll($event, i)" />
+                <label class="text-dark fs-6" [for]="'selectAll' + i">Select all</label>
               </div>
+              <a class="bg-transparent outline-0 text-decoration-none border-0 blue fw-bold" style="cursor: pointer;" (click)="createNewField(i)">
+                <img src="assets/images/apartmentImages/ic_baseline-add.svg"> Create new field
+              </a>
+            </div>
           </div>
 
           <div class="row g-4 py-3">
-              <div class="col-md-4" *ngFor="let item of items; let i = index">
-                  <div class="box">
-                      <div class="header d-flex justify-content-between align-items-center">
-                          <div class="form-check me-3">
-                              <input class="form-check-input" type="checkbox" [id]="'checkbox' + i" [(ngModel)]="item!.checked" [ngModelOptions]="{standalone: true}" (change)="updateCheckedItems(item)" />
-                              <label class="text-dark fs-6" [for]="'checkbox' + i">{{ item.device_Name }}</label>
-                          </div>
-                          <div (click)="removeField(i)" style="cursor: pointer;">
-                              <img src="/assets/images/remove.svg" alt="" >
-                              <span class="text-muted small">Remove</span>
-                          </div>
-                      </div>
-                      <div class="data">
-                          <textarea name="Description" [id]="'description' + i" placeholder="Description" class="form-control" rows="4" [(ngModel)]="item!.device_Description" [ngModelOptions]="{standalone: true}"></textarea>
-                      </div>
+            <div class="col-md-4" *ngFor="let item of room.items; let j = index">
+              <div class="box">
+                <div class="header d-flex justify-content-between align-items-center">
+                  <div class="form-check me-3">
+                    <input class="form-check-input" type="checkbox" [id]="'checkbox' + i + '-' + j" [(ngModel)]="item.checked" [ngModelOptions]="{standalone: true}" (change)="updateCheckedItems(item, i)" />
+                    <label class="text-dark fs-6" [for]="'checkbox' + i + '-' + j">{{ item.device_Name }}</label>
                   </div>
+                  <div (click)="removeField(i, j)" style="cursor: pointer;">
+                    <img src="/assets/images/remove.svg" alt="">
+                    <span class="text-muted small">Remove</span>
+                  </div>
+                </div>
+                <div class="data">
+                  <textarea name="Description" [id]="'description' + i + '-' + j" placeholder="Description" class="form-control" rows="4" [(ngModel)]="item.device_Description" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
               </div>
+            </div>
           </div>
-      </div>
-
-
-
+          <hr>
+        </div>
 
         <div>
             <p class="d-md-inline-block gray fw-bold mb-0 me-3">Does apartment currently have any existing damage?</p>
