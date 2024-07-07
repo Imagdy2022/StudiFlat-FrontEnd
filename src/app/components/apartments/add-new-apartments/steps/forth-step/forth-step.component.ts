@@ -228,6 +228,8 @@ export class ForthStepComponent {
   }
   room_Devices : any[] = [];
   rooms: any[] = [];
+  public roomIndexValue :any;
+
 
   initializeRooms() {
     for (let i = 0; i < this.selectedRooms; i++) {
@@ -255,6 +257,7 @@ export class ForthStepComponent {
   }
 
   updateCheckedItems(item: any, roomIndex: number) {
+    this.roomIndexValue = roomIndex;
     if (item.checked) {
       if (!this.rooms[roomIndex].room_Devices.includes(item)) {
         this.rooms[roomIndex].room_Devices.push(item);
@@ -299,7 +302,7 @@ export class ForthStepComponent {
       this.Rooms_Devices.push({
         room_ID: this.romeDetails?.rooms_IDs,
         rooms_Names: this.romeDetails?.rooms_Names,
-        room_Devices: this.rooms
+        room_Devices: this.room_Devices
       });
 
     }
