@@ -108,7 +108,7 @@ export class SecondStepComponent {
     private _ActivatedRoute: ActivatedRoute,
     public router: Router
   ) {
-    this.apt_UUID = localStorage.getItem('Apartment_ID');
+    this.apt_UUID = localStorage.getItem('apartment_ID');
   }
 
   idParamterEdit: any = '';
@@ -472,7 +472,7 @@ let setId= this.arrNamesbathroom[id].bathroom_Details.length;
     });
 
     let objectData = {
-      apartment_ID : this.apt_UUID,
+      apartment_ID :JSON.parse(localStorage.getItem('apartmentResponse')!).uuid,
       rooms_Details:this.arrNamesbedroom,
       bathroom_Details:this.arrNamesbathroom,
       kitchen_Details: this.newFieldkitchenToApi,
