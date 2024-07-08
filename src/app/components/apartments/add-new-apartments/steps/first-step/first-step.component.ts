@@ -805,6 +805,7 @@ this.ID= Guid.create();
   apartmentRooms : any[]=[]
 
   onChangeNoOfBedrooms(event: any): void {
+    this.bedroomsToApi=[];
     const selectedValue = parseInt(event.target?.value, 10);
     if (!isNaN(selectedValue) && selectedValue > 0) {
       this.bedrooms = Array(selectedValue).fill(0).map((x, i) => i);
