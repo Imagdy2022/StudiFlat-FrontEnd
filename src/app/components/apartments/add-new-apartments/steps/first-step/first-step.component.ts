@@ -835,13 +835,16 @@ this.bedroomsToApi.push(this.sharedBed)
     this.sectionName = selectedValue;
 
     this.showBedSection = (this.sectionName === 'Bed' || this.sectionName === 'Sofa bed');
-    this.sharedBed={
+    if(this.sectionName === 'Bed' || this.sectionName === 'Sofa bed')
+    { this.sharedBed=null;
+       this.sharedBed={
       room_Type:"Shared Area "+' '+this.sectionName ,
       beds_No:1,
       bed_Price:Number(this.bedPrice),
       bed_SecuirtyDeposit:Number(this.sectionName),
       bed_Service_Fees:Number(this.ServiceFees)
-    }
+    }}
+   
 }
 
 

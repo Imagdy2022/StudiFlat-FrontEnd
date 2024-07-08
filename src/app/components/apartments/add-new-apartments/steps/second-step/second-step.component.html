@@ -5,14 +5,14 @@
       <!--Rooms section-->
       <div>
           <div>
-              <p class="fw-bold mb-0">BedRooms</p>
+              <p class="fw-bold mb-0">Rooms</p>
               <p class="gray">Add Rooms Details.</p>
           </div>
 
           <ng-container *ngFor="let i of arrNamesbedroom; let index1 = index">
               <div class="px-3 mb-3 rounded">
                   <div class="mb-3 col-12 col-md-6">
-                      <label class="form-label gray fw-bold">BedRoom Name</label>
+                      <label class="form-label gray fw-bold">Room Name</label>
                       <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbedroom[index1].room_Name" class="form-control bg-white rounded-2 py-2 fs-6" [disabled]="true">
                   </div>
                   <div class="row gx-0">
@@ -25,7 +25,7 @@
                   </div>
                   <div class="row mb-3" *ngIf="ActionButtonField[index1] == true">
                       <div class="col-12 col-md-6">
-                          <label class="form-label gray fw-bold">Room Detail {{ arrNamesbedroom[index1].room_Details.length ? arrNamesbedroom[index1].room_Details.length + 1 : 0 }}</label>
+                          <label class="form-label gray fw-bold">Room Detail </label>
                           <input type="text" [ngModelOptions]="{ standalone: true }"  [(ngModel)]="roomDetailInput" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
                       </div>
                       <div class="mb-0 mt-3 col-12 col-md-6 d-flex align-items-center">
@@ -104,7 +104,7 @@
                 </div>
                 <div class="row mb-3" *ngIf="ActionButtonField[index1] == true">
                     <div class="col-12 col-md-6">
-                        <label class="form-label gray fw-bold">Bathroom Detail {{ arrNamesbathroom[index1].bathroom_Details.length ? arrNamesbathroom[index1].bathroom_Details.length + 1 : 0 }}</label>
+                        <label class="form-label gray fw-bold">Bathroom Detail</label>
                         <input type="text" [ngModelOptions]="{ standalone: true }"  [(ngModel)]="bathroomDetailInput" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
                     </div>
                     <div class="mb-0 mt-3 col-12 col-md-6 d-flex align-items-center">
@@ -129,16 +129,16 @@
           </div>
           <div class="p-3 mb-3 rounded">
             <div class="row">
-                <ng-container *ngFor="let data of newFieldkitchen">
+                <ng-container *ngFor="let data of newFieldkitchen;let id=index">
                     <div class="mb-3 col-12 col-md-6">
-                        <label class="form-label gray fw-bold">{{ data.label }}</label>
+                        <label class="form-label gray fw-bold">Kitchen Tool</label>
                         <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data.description" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
                     </div>
                 </ng-container>
             </div>
             <div class="row mb-3" *ngIf="ActionButtonFieldkitchen == true">
                 <div class="col-12 col-md-6">
-                    <label class="form-label gray fw-bold">Kitchen Tool {{ newFieldkitchen.length + 1 }}</label>
+                    <label class="form-label gray fw-bold">Tool</label>
                     <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="descriptionOfKitchen" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
                 </div>
                 <div class="mb-0 mt-3 col-12 col-md-6 d-flex align-items-center">
