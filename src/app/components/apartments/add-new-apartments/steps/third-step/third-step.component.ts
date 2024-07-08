@@ -135,7 +135,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this._ApartmentService.getApartDetail(this.idParamterEdit).subscribe((res) => {
         this.subscriptions.push(
-          this._OnwerService.getOwner(res.general_Info['apt_Owner']).subscribe((res) => {
+          this._OnwerService.getOwner(res.general_Info['apartment_Owner']).subscribe((res) => {
             // this.nameOwner=res.owner_FirstName +" "+res.owner_LastName;
           })
         );
@@ -201,9 +201,9 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
   }
 
   bindCreatecontract(): void {
+ 
     this.create_Apart_contract = new FormGroup({
       digital_Contract: new FormControl(true),
-      landLord: new FormControl(localStorage.getItem('apt_owner')),
       tenantName: new FormControl('StudiFlats'),
       contractDate_Start: new FormControl(''),
       contractDate_End: new FormControl(''),
@@ -435,6 +435,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
       ...this.create_Apart_contract.value,
       ...res,
       apartment_ID: this.apt_UUID,
+      landLord:localStorage.getItem('apartment_Owner')
     };
 
     // Log the payload to verify data structure
@@ -446,7 +447,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
         ...this.create_Apart_contract.value,
         ...res,
         Createcheckintype: this.Createcheckintype,
-        CreateContract: this.CreateContract,
+        CreateContract: this.CreateContract
       })
     );
 
