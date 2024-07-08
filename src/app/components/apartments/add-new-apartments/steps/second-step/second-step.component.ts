@@ -587,19 +587,19 @@ let setId= this.arrNamesbathroom[id].bathroom_Details.length;
   }
 
   saveActionButtonnewFieldKitchen() {
-    this.newFieldkitchen.push(this.descriptionOfKitchen);
+    this.newFieldkitchen.push({ label: 'Kitchen', description:this.descriptionOfKitchen});
     this.descriptionOfKitchen = '';
     this.ActionButtonFieldkitchen = false;
   }
 
   saveActionButtonnewFieldSpecialFeatures() {
-    this.newFieldSpecialFeatures.push(this.descriptionOfSpecialFeatures);
+    this.newFieldSpecialFeatures.push({ label: 'Feature ', description:this.descriptionOfSpecialFeatures});
     this.descriptionOfSpecialFeatures = '';
     this.ActionButtonFieldSpecialFeatures = false;
   }
 
-  saveActionButtonnewFieldSpecialFecility() {
-    this.newFieldFacility.push(this.descriptionOfFacility);
+  saveActionButtonnewFieldSpecialFecility() {    
+    this.newFieldFacility.push({ label: 'Facility ', description:this.descriptionOfFacility});
     this.descriptionOfFacility = '';
     this.ActionButtonFieldFacility = false;
   }

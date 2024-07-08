@@ -344,7 +344,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
   }
 
   listDropDownPropertyowner: any = [];
-  nameOwner: any = '';
+  nameOwner: any =localStorage.getItem('apartment_Owner');
 
   getAowners(id: any) {
     this.subscriptions.push(
@@ -434,7 +434,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
     const payload = {
       ...this.create_Apart_contract.value,
       ...res,
-      apartment_ID: this.apt_UUID,
+      apartment_ID:JSON.parse(localStorage.getItem('apartmentResponse')!).uuid,
       landLord:localStorage.getItem('apartment_Owner')
     };
 

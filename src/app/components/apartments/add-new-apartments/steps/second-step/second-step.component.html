@@ -13,13 +13,13 @@
               <div class="px-3 mb-3 rounded">
                   <div class="mb-3 col-12 col-md-6">
                       <label class="form-label gray fw-bold">BedRoom Name</label>
-                      <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbedroom[index1].room_Name" class="form-control bg-white rounded-2 py-2 fs-6">
+                      <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbedroom[index1].room_Name" class="form-control bg-white rounded-2 py-2 fs-6" [disabled]="true">
                   </div>
                   <div class="row gx-0">
                       <ng-container *ngFor="let data of arrNamesbedroom[index1].room_Details;let j=index">
                           <div class="mb-3 col-12 col-md-6" *ngIf="data[j]!=null">
                               <label class="form-label gray fw-bold">Detail {{j+1}}</label>
-                              <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbedroom[index1].room_Details[j]" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
+                              <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbedroom[index1].room_Details[j]" type="text" class="form-control bg-white rounded-2 py-2 fs-6" >
                           </div>
                       </ng-container>
                   </div>
@@ -92,7 +92,7 @@
             <div class="px-3 mb-3 rounded">
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">BathRoom Name</label>
-                    <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbathroom[index1].bathroom_Name" class="form-control bg-white rounded-2 py-2 fs-6">
+                    <input type="text" [ngModelOptions]="{ standalone: true }" [(ngModel)]="arrNamesbathroom[index1].bathroom_Name" class="form-control bg-white rounded-2 py-2 fs-6" [disabled]="true">
                 </div>
                 <div class="row gx-0">
                     <ng-container *ngFor="let data of arrNamesbathroom[index1].bathroom_Details;let j=index">
@@ -195,10 +195,10 @@
           </div>
           <div class="p-3 mb-3 rounded">
               <div class="row">
-                  <ng-container *ngFor="let data of newFieldFacility">
+                  <ng-container *ngFor="let data of newFieldFacility;let id=index">
                       <div class="mb-3 col-12 col-md-6">
                           <label class="form-label gray fw-bold">{{ data.label }}</label>
-                          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="data.description" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
+                          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="newFieldFacility[id].description" type="text" class="form-control bg-white rounded-2 py-2 fs-6">
                       </div>
                   </ng-container>
               </div>

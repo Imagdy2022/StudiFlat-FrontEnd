@@ -200,7 +200,7 @@ export class ForthStepComponent {
     console.log(this.apt_UUID);
 
     this.PostBackupInfo = new FormGroup({
-      'apartment_ID':new FormControl(this.apt_UUID),
+      'apartment_ID':new FormControl(JSON.parse(localStorage.getItem('apartmentResponse')!).uuid),
       'apartment_Electricity_Meter_No': new FormControl(''),
       'apartment_Electricity_Meter_Consumption': new FormControl(''),
       'apartment_Water_Meter_No': new FormControl(''),
