@@ -115,10 +115,11 @@ export class FirstStepComponent implements OnInit {
   display11:boolean=false;
   noOfBedroom:string = "";
   ID:any;
-  bedPrice:number = 1;
-  SecurityDeposit:number = 1;
-  ServiceFees:number = 1;
+  bedPrice:number = 0;
+  SecurityDeposit:number = 0;
+  ServiceFees:number = 0;
   bedroomsToApi:any[]=[];
+  sharedBed:any;
   bedNumber :number = 0;
   constructor(
     private _ApartmentService: ApartmentService,
@@ -529,7 +530,7 @@ this.ID= Guid.create();
       bed_SecuirtyDeposit : this.SecurityDeposit,
       bed_Service_Fees: this.ServiceFees
     }
-
+this.bedroomsToApi.push(this.sharedBed)
   let apartment = {
     apartment_ID:this.ID.value,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
@@ -805,6 +806,7 @@ this.ID= Guid.create();
   apartmentRooms : any[]=[]
 
   onChangeNoOfBedrooms(event: any): void {
+    this.bedroomsToApi=[];
     const selectedValue = parseInt(event.target?.value, 10);
     if (!isNaN(selectedValue) && selectedValue > 0) {
       this.bedrooms = Array(selectedValue).fill(0).map((x, i) => i);
@@ -833,6 +835,16 @@ this.ID= Guid.create();
     this.sectionName = selectedValue;
 
     this.showBedSection = (this.sectionName === 'Bed' || this.sectionName === 'Sofa bed');
+    if(this.sectionName === 'Bed' || this.sectionName === 'Sofa bed')
+    { this.sharedBed={};
+       this.sharedBed={
+      room_Type:"shared_area",
+      beds_No:1,
+      bed_Price:Number(this.bedPrice),
+      bed_SecuirtyDeposit:Number(this.sectionName),
+      bed_Service_Fees:Number(this.ServiceFees)
+    }}
+   
 }
 
 

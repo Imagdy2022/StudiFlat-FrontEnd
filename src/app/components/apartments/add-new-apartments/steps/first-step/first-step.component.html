@@ -412,7 +412,7 @@
                 Does the apartment have shared area ?
               </p>
               <div class="form-check d-inline-block mb-3" *ngFor="let data of apartmentSharedArea">
-                <input class="form-check-input" [checked]="defaultapartmentSharedArea === data" type="radio" name="apartmentSharedArea" value="{{ data }}" id="createContract" (change)="onChangesArea($event)" />
+                <input class="form-check-input" [checked]="data==='No'" type="radio" name="apartmentSharedArea" value="{{ data }}" id="createContract" (change)="onChangesArea($event)" />
                 <label class="fw-bold me-3" for="createbills"> {{ data }} </label>
             </div>
           </div>
