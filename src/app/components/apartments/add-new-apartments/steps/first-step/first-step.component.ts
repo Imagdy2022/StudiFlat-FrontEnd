@@ -530,7 +530,9 @@ this.ID= Guid.create();
       bed_SecuirtyDeposit : this.SecurityDeposit,
       bed_Service_Fees: this.ServiceFees
     }
-this.bedroomsToApi.push(this.sharedBed)
+    if(this.sharedBed){
+      this.bedroomsToApi.push(this.sharedBed)
+    }
   let apartment = {
     apartment_ID:this.ID.value,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
@@ -835,16 +837,24 @@ this.bedroomsToApi.push(this.sharedBed)
     this.sectionName = selectedValue;
 
     this.showBedSection = (this.sectionName === 'Bed' || this.sectionName === 'Sofa bed');
-    if(this.sectionName === 'Bed' || this.sectionName === 'Sofa bed')
-    { this.sharedBed={};
-       this.sharedBed={
-      room_Type:"shared_area",
-      beds_No:1,
-      bed_Price:Number(this.bedPrice),
-      bed_SecuirtyDeposit:Number(this.sectionName),
-      bed_Service_Fees:Number(this.ServiceFees)
-    }}
-   
+  if (this.showBedSection) {
+    this.sharedBed = {};
+  }
+  this.checkAndSaveSharedBed();
+}
+
+checkAndSaveSharedBed(): void {
+  if (this.showBedSection && this.bedPrice != null && this.SecurityDeposit !=null && this.ServiceFees !=null) {
+    this.sharedBed = {
+      room_Type: "shared_area",
+      beds_No: 1,
+      bed_Price: Number(this.bedPrice),
+      bed_SecuirtyDeposit: Number(this.SecurityDeposit),
+      bed_Service_Fees: Number(this.ServiceFees)
+    };
+  } else if (!this.showBedSection) {
+    this.sharedBed = {};
+  }
 }
 
 
@@ -899,16 +909,16 @@ this.display11=false
   setBedRoom(key:any,value:any,id:number)
   {
     this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
-      
+
   }
   setBedNo(key:any,value:any,id:number)
-  {  
-    
+  {
+
     if(this.generalInfoForm.value[key]=='Single')
       {this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
 
         this.bedroomsToApi[id]['beds_No']=1;
-        
+
       }
       else if(this.generalInfoForm.value[key]=='Double')
         {  this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
@@ -924,21 +934,21 @@ this.display11=false
       { this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
         this.bedroomsToApi[id]['beds_No']=0;
 
-      }   
-    
+      }
+
   }
   changeBedNo(key:any,value:any,id:number)
-  {  
-    
+  {
+
     if(this.generalInfoForm.value['room_Type']=='Custom')
-      {this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]        
+      {this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
       }
       else if(this.generalInfoForm.value['room_Type']!='Custom')
         {  this.bedroomsToApi[id][key]=this.bedroomsToApi[id].beds_No
 
     }
-      
-    
+
+
   }
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)

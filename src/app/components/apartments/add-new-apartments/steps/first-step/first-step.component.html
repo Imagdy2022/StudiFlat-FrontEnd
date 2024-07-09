@@ -441,7 +441,7 @@
             <div class="row pt-3">
               <div class="mb-3 col-12 col-md-6">
                 <label class="form-label gray fw-bold">Bed price</label>
-                <input  type="number"class="form-control rounded-2 py-2 fs-6" [ngModelOptions]="{standalone: true}" [(ngModel)]="bedPrice" />
+                <input  type="number"class="form-control rounded-2 py-2 fs-6" [ngModelOptions]="{standalone: true}" [(ngModel)]="bedPrice" (ngModelChange)="checkAndSaveSharedBed()"/>
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Price')?.getError('required') && generalInfoForm.get('bed_Price')?.touched ">
         this field is required
       </span>
@@ -452,7 +452,7 @@
 
               <div class="mb-3 col-6 col-md-6">
                 <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Security Deposit</label>
-                <input f min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit" [ngModelOptions]="{standalone: true}" [(ngModel)]="SecurityDeposit"/>
+                <input f min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit" [ngModelOptions]="{standalone: true}" [(ngModel)]="SecurityDeposit" (ngModelChange)="checkAndSaveSharedBed()"/>
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_SecuirtyDeposit')?.getError('required') && generalInfoForm.get('bed_SecuirtyDeposit')?.touched ">
                    this field is required
                  </span>
@@ -462,7 +462,7 @@
             </div>
               <div class="mb-3 col-6 col-md-6">
                 <label for="exampleInputService_Fees" class="form-label gray fw-bold">Service Fees</label>
-                <input  min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees" [ngModelOptions]="{standalone: true}" [(ngModel)]="ServiceFees"/>
+                <input  min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees" [ngModelOptions]="{standalone: true}" [(ngModel)]="ServiceFees" (ngModelChange)="checkAndSaveSharedBed()"/>
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Service_Fees')?.getError('required') && generalInfoForm.get('bed_Service_Fees')?.touched ">
                    this field is required
                  </span>
@@ -515,16 +515,16 @@
 
                   <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">No of beds</label>
-                    <select formControlName="beds_No"  class="form-select rounded-2 py-2 fs-6"  
+                    <select formControlName="beds_No"  class="form-select rounded-2 py-2 fs-6"
                     (click)="changeBedNo('beds_No',$event,i)">
-                      <option value="null" disabled hidden selected> {{bedroomsToApi[i].beds_No}}</option> 
+                      <option value="null" disabled hidden selected> {{bedroomsToApi[i].beds_No}}</option>
                       <ng-container *ngIf="bedroomsToApi[i].room_Type=='Custom'"><option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
                       <option value="5">5</option>
                       <option value="6">6</option></ng-container>
-                      
+
                     </select>
                     <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('beds_No')?.getError('required') && generalInfoForm.get('beds_No')?.touched ">
             this field is required
