@@ -48,6 +48,7 @@ export class ForthStepComponent {
 
   apt_UUID: any;
  Rooms_Devices : Array<any> = [];
+ selectedRooms: any;
 
   constructor(
     public _ApartmentService: ApartmentService,
@@ -58,11 +59,18 @@ export class ForthStepComponent {
 
   ) {
     this.apt_UUID = localStorage.getItem('Apartment_ID');
+    const data = localStorage.getItem('generalInfoForm');
+    if (data !== null) {
+      let parsedData = JSON.parse(data);
+      this.selectedRooms = parsedData.apartment_BedRoomsNo
+    }
+
    }
 
   idParamterEdit:any=""
   ngOnInit() {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id']
+    this.initializeRooms();
      if(this.addApartment !="add new apartments" ){
       this.edit="EditForm"
       this.bindCreatePostBackupInfo();
@@ -219,56 +227,63 @@ export class ForthStepComponent {
 
   }
   room_Devices : any[] = [];
-
-  items: any[] = [
-    { device_Name: 'Heater', device_Description: '' },
-    { device_Name: 'Mold',  device_Description: '' },
-    { device_Name: 'Devices',device_Description: '' },
-    { device_Name: 'Walls', device_Description: '' },
-    { device_Name: 'Shower',  device_Description: '' },
-    { device_Name: 'Floor',  device_Description: '' },
-    { device_Name: 'Cleaning', device_Description: '' },
-    { device_Name: 'Mold', device_Description: '' },
-    { device_Name: 'Mold', device_Description: '' },
-  ];
+  rooms: any[] = [];
+  public roomIndexValue :any;
 
 
-  toggleSelectAll(event: any) {
-    const checked = event.target.checked;
-    this.items.forEach(item => item.checked = checked);
-    this.updateSelectedItems();
+  initializeRooms() {
+    for (let i = 0; i < this.selectedRooms; i++) {
+      this.rooms.push({
+        items:  [
+          { device_Name: 'Heater', device_Description: ''},
+          { device_Name: 'Mold', device_Description: '' },
+          { device_Name: 'Devices', device_Description: ''},
+          { device_Name: 'Walls', device_Description: '' },
+          { device_Name: 'Shower', device_Description: ''},
+          { device_Name: 'Floor', device_Description: '' },
+          { device_Name: 'Cleaning', device_Description: ''},
+          { device_Name: 'Mold', device_Description: '' },
+          { device_Name: 'Mold', device_Description: '' },
+        ],
+        room_Devices: []
+      });
+    }
   }
 
-  updateCheckedItems(item: any) {
+  toggleSelectAll(event: any, roomIndex: number) {
+    const checked = event.target.checked;
+    this.rooms[roomIndex].items.forEach((item:any) => item.checked = checked);
+    this.updateSelectedItems(roomIndex);
+  }
+
+  updateCheckedItems(item: any, roomIndex: number) {
+    this.roomIndexValue = roomIndex;
     if (item.checked) {
-      if (!this.room_Devices.includes(item)) {
-        this.room_Devices.push({
-                device_Name: item.device_Name,
-                device_Description: item.device_Description
-              });
+      if (!this.rooms[roomIndex].room_Devices.includes(item)) {
+        this.rooms[roomIndex].room_Devices.push(item);
       }
     } else {
-      const index = this.room_Devices.indexOf(item);
+      const index = this.rooms[roomIndex].room_Devices.indexOf(item);
       if (index > -1) {
-        this.room_Devices.splice(index, 1);
+        this.rooms[roomIndex].room_Devices.splice(index, 1);
       }
     }
   }
 
-  updateSelectedItems() {
-    this.room_Devices = this.items.filter(item => item.checked);
+  updateSelectedItems(roomIndex: number) {
+    this.rooms[roomIndex].room_Devices = this.rooms[roomIndex].items.filter((item:any) => item.checked);
   }
 
-  createNewField() {
+  createNewField(roomIndex: number) {
     const newItem: any = { device_Name: 'New Field', device_Description: '' };
-    this.items.push(newItem);
+    this.rooms[roomIndex].items.push(newItem);
   }
 
-  removeField(index: number) {
-    const removedItem = this.items.splice(index, 1)[0];
-    const selectedIndex = this.room_Devices.indexOf(removedItem);
+  removeField(roomIndex: number, itemIndex: number) {
+    const removedItem = this.rooms[roomIndex].items.splice(itemIndex, 1)[0];
+    const selectedIndex = this.rooms[roomIndex].room_Devices.indexOf(removedItem);
     if (selectedIndex > -1) {
-      this.room_Devices.splice(selectedIndex, 1);
+      this.rooms[roomIndex].room_Devices.splice(selectedIndex, 1);
     }
   }
 
@@ -285,8 +300,8 @@ export class ForthStepComponent {
   Create_PostBackupInfo(data: any) {
     if(this.room_Devices != null){
       this.Rooms_Devices.push({
-        room_ID: this.romeDetails?.rooms_IDs[0],
-        rooms_Names: this.romeDetails?.rooms_Names[0],
+        room_ID: this.romeDetails?.rooms_IDs,
+        rooms_Names: this.romeDetails?.rooms_Names,
         room_Devices: this.room_Devices
       });
 

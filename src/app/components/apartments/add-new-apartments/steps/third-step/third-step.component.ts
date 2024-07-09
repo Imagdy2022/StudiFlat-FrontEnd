@@ -201,7 +201,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
   }
 
   bindCreatecontract(): void {
- 
+
     this.create_Apart_contract = new FormGroup({
       digital_Contract: new FormControl(true),
       tenantName: new FormControl('StudiFlats'),
@@ -305,7 +305,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
               if (fieldName === 'door_Img') this.issshowdoor = '';
               if (fieldName === 'building_Img') this.issshowbuilding = '';
 
-              
+
               this.create_Apart_contract.get(fieldName)?.patchValue(img[0].file_Path);
               this.messageService.add({
                 severity: 'success',
@@ -361,7 +361,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
 
   idwner: any;
 
- 
+
   getLocalStorage(): void {
     this.storedImages = [];
 
@@ -418,7 +418,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
     return 'contract' in localStorage;
   }
 
-  
+
   Create_Apart_Contract(data: any) {
     let rules: any = [];
     this.apt_roles.forEach((element) => {
@@ -591,7 +591,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
         });
 
         for (let file of data) {
-          this.apt_imgs.push({ pic_URL: file.name });
+          this.apt_imgs.push(file.name);
         }
         this.create_Apart_contract.get('trash_pin_image')?.patchValue(this.apt_imgs);
         localStorage.setItem('imagesAPT12', JSON.stringify(this.apt_imgs));

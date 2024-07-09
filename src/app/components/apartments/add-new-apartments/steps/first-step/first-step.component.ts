@@ -211,21 +211,21 @@ this.ID= Guid.create();
     this.subscriptions.push(this._ApartmentService
       .getApartDetail(this.idParamterEdit)
       .subscribe((res) => {
-        this.aprt_details_Edit = res.general_Info;
-        this.apt_imgs = res.general_Info['property_Imgs'];
-        this.billinclude = res.general_Info['apartment_All_Bill_Included'];
+        this.aprt_details_Edit = res.apartment_Basic_Info;
+        this.apt_imgs = res.apartment_Basic_Info['apartment_Images'];
+        this.billinclude = res.apartment_Basic_Info['apartment_All_Bill_Included'];
         this.generalInfoForm
           .get('apartment_Images')
-          ?.patchValue(res.general_Info['property_Imgs']);
+          ?.patchValue(res.apartment_Basic_Info['property_Imgs']);
           this.subscriptions.push(this._ApartmentService.getOwnerDropList().subscribe((res) => {
             this.listDropDownPropertyowner = res.list;
           }))
 
-        this.generalInfoForm.patchValue(res.general_Info);
-        this.Address = res.general_Info['apt_Address'];
+        this.generalInfoForm.patchValue(res.apartment_Basic_Info);
+        this.Address = res.apartment_Basic_Info['apartment_Location'];
         //  this.localapt_Transports=res.trasponrts
 
-        this.Createtransport = res?.trasponrts;
+        this.Createtransport = res?.apartment_Basic_Info.apartment_Transports;
       }));
 
   }
@@ -530,7 +530,9 @@ this.ID= Guid.create();
       bed_SecuirtyDeposit : this.SecurityDeposit,
       bed_Service_Fees: this.ServiceFees
     }
-this.bedroomsToApi.push(this.sharedBed)
+    if(this.sharedBed){
+      this.bedroomsToApi.push(this.sharedBed)
+    }
   let apartment = {
     apartment_ID:this.ID.value,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
@@ -835,16 +837,24 @@ this.bedroomsToApi.push(this.sharedBed)
     this.sectionName = selectedValue;
 
     this.showBedSection = (this.sectionName === 'Bed' || this.sectionName === 'Sofa bed');
-    if(this.sectionName === 'Bed' || this.sectionName === 'Sofa bed')
-    { this.sharedBed={};
-       this.sharedBed={
-      room_Type:"shared_area",
-      beds_No:1,
-      bed_Price:Number(this.bedPrice),
-      bed_SecuirtyDeposit:Number(this.sectionName),
-      bed_Service_Fees:Number(this.ServiceFees)
-    }}
-   
+  if (this.showBedSection) {
+    this.sharedBed = {};
+  }
+  this.checkAndSaveSharedBed();
+}
+
+checkAndSaveSharedBed(): void {
+  if (this.showBedSection && this.bedPrice != null && this.SecurityDeposit !=null && this.ServiceFees !=null) {
+    this.sharedBed = {
+      room_Type: "shared_area",
+      beds_No: 1,
+      bed_Price: Number(this.bedPrice),
+      bed_SecuirtyDeposit: Number(this.SecurityDeposit),
+      bed_Service_Fees: Number(this.ServiceFees)
+    };
+  } else if (!this.showBedSection) {
+    this.sharedBed = {};
+  }
 }
 
 
@@ -899,16 +909,16 @@ this.display11=false
   setBedRoom(key:any,value:any,id:number)
   {
     this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
-      
+
   }
   setBedNo(key:any,value:any,id:number)
-  {  
-    
+  {
+
     if(this.generalInfoForm.value[key]=='Single')
       {this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
 
         this.bedroomsToApi[id]['beds_No']=1;
-        
+
       }
       else if(this.generalInfoForm.value[key]=='Double')
         {  this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
@@ -924,21 +934,21 @@ this.display11=false
       { this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
         this.bedroomsToApi[id]['beds_No']=0;
 
-      }   
-    
+      }
+
   }
   changeBedNo(key:any,value:any,id:number)
-  {  
-    
+  {
+
     if(this.generalInfoForm.value['room_Type']=='Custom')
-      {this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]        
+      {this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
       }
       else if(this.generalInfoForm.value['room_Type']!='Custom')
         {  this.bedroomsToApi[id][key]=this.bedroomsToApi[id].beds_No
 
     }
-      
-    
+
+
   }
   ngOnDestroy() {
     for(let i=0;i<this.subscriptions.length;i++)
