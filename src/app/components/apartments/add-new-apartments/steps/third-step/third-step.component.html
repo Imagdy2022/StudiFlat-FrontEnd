@@ -168,11 +168,11 @@
               <div class="card1">
                 <div class="row">
                   <div class="col-md-2 mt-4 card33" *ngFor="let image of apt_imgs; index as i">
-                    <a (click)="removeItem(image.pic_URL)" style="border: none; margin-bottom: 10px; position: absolute;">
+                    <a (click)="removeItem(image)" style="border: none; margin-bottom: 10px; position: absolute;">
                       <img class="imageRemove" src="../../../../../../assets/images/delete.svg" width="32px" height="32px" />
                     </a>
-                    <a (click)="opencloseModal(image.pic_URL)">
-                      <img class="star" [src]="image.pic_URL" alt="Avatar" style="width: 339px; height: 205px;" class="cursor" />
+                    <a (click)="opencloseModal(image)">
+                      <img class="star" [src]="image" alt="Avatar" style="width: 339px; height: 205px;" class="cursor" />
                     </a>
                   </div>
                 </div>

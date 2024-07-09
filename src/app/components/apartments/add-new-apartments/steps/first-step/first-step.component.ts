@@ -211,21 +211,21 @@ this.ID= Guid.create();
     this.subscriptions.push(this._ApartmentService
       .getApartDetail(this.idParamterEdit)
       .subscribe((res) => {
-        this.aprt_details_Edit = res.general_Info;
-        this.apt_imgs = res.general_Info['property_Imgs'];
-        this.billinclude = res.general_Info['apartment_All_Bill_Included'];
+        this.aprt_details_Edit = res.apartment_Basic_Info;
+        this.apt_imgs = res.apartment_Basic_Info['apartment_Images'];
+        this.billinclude = res.apartment_Basic_Info['apartment_All_Bill_Included'];
         this.generalInfoForm
           .get('apartment_Images')
-          ?.patchValue(res.general_Info['property_Imgs']);
+          ?.patchValue(res.apartment_Basic_Info['property_Imgs']);
           this.subscriptions.push(this._ApartmentService.getOwnerDropList().subscribe((res) => {
             this.listDropDownPropertyowner = res.list;
           }))
 
-        this.generalInfoForm.patchValue(res.general_Info);
-        this.Address = res.general_Info['apt_Address'];
+        this.generalInfoForm.patchValue(res.apartment_Basic_Info);
+        this.Address = res.apartment_Basic_Info['apartment_Location'];
         //  this.localapt_Transports=res.trasponrts
 
-        this.Createtransport = res?.trasponrts;
+        this.Createtransport = res?.apartment_Basic_Info.apartment_Transports;
       }));
 
   }
