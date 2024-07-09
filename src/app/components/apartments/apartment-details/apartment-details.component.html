@@ -383,9 +383,9 @@
                           <div>€ {{ room.bed_Price }}</div>
                           <div>€ {{ room.bed_SecuirtyDeposit }}</div>
                           <div>€ {{ room.bed_Service_Fees }}</div>
-                          <div class="badge rented" *ngIf="!room.room_Available">Rented <img
+                          <div class="badge rented" *ngIf="!bed.bed_Available">Rented <img
                               src="/assets/images/expand_more.svg" alt=""></div>
-                          <div class="badge rented" *ngIf="room.room_Beds.bed_Available">Available <img
+                          <div class="badge rented" *ngIf="bed.bed_Available">Available <img
                               src="/assets/images/expand_more.svg" alt=""></div>
                         </div>
                       </ng-template>
