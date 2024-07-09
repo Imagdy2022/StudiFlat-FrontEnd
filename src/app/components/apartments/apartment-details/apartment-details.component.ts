@@ -34,6 +34,7 @@ export class ApartmentDetailsComponent implements OnInit {
   subscriptions: Subscription[] = [];
   displayQr: any;
   qrCodeImg!: string;
+  qrCode:string;
   aprt: any = {};
   apartmentsEquipment: any = {};
   apartmentsContract: any = {};
@@ -165,9 +166,10 @@ export class ApartmentDetailsComponent implements OnInit {
     );
   }
 
-  onOpenQrModal(imgLink: string) {
+  onOpenQrModal(imgLink: string, qrCode:string) {
     this.qrCodeImg = imgLink;
     this.displayQr = 'block';
+    this.qrCode=qrCode;
   }
 
   onCloseQrModal() {

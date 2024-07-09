@@ -147,7 +147,7 @@
           <span class="qr-code">{{ aprt.apartment_QRCode }}</span>
         </div>
         <div class="qr-actions">
-          <a class="qr-action" (click)="onOpenQrModal(aprt.apartment_QR_Img)">
+          <a class="qr-action" (click)="onOpenQrModal(aprt.apartment_QR_Img, aprt.apartment_QRCode)">
             <i class="pi pi-eye"></i> View
           </a>
           <a class="qr-action">
@@ -207,7 +207,7 @@
                             </div>
                             <div class="col-lg-3 border-end">
                               <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
-                              <p class="m-0 text-muted">osman2025@gmail.com</p>
+                              <p class="m-0 text-muted">osman2025&#64;gmail.com</p>
                             </div>
                             <div class="col-lg-3 text-right border-end">
                               <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
@@ -222,8 +222,16 @@
                         </div>
                       </div>
 
-                      <div class="tenant-documents m-0">
+
+
+
+
+
+                      <div class="tenant-documents m-0 mb-3"  *ngFor="let bed of room.room_Beds">
+
                         <div class="header">
+                          <h3>bed {{bed.bed_No}}</h3>
+                          <hr/>
                           <h3>Tenant Documents</h3>
                           <p>View tenant Documents</p>
                         </div>
@@ -232,11 +240,11 @@
                             <div class="document-header">QR Details</div>
                             <div class="document-content">
                               <div class="doc-info">
-                                <p>Qr Code:{{ room.room_QRCode }}</p>
+                                <p>Qr Code:{{ bed.bed_QRCode }}</p>
                               </div>
                               <div class="doc-actions">
-                                <button class="btn-view" (click)="onOpenQrModal(room.room_QR_Img)"><i class="pi pi-eye"></i> View</button>
-                                <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                                <button class="btn-view" (click)="onOpenQrModal(bed.bed_QR_Img, bed.bed_QRCode)"><i class="pi pi-eye"></i> View</button>
+                                <button class="btn-download" (click)="downloadImage(bed.bed_QR_Img)"><i class="pi pi-download" ></i> Download</button>
                                 <button class="btn-share"><i class="pi pi-share"></i> Share</button>
                               </div>
                             </div>
@@ -270,11 +278,19 @@
                           <div class="col-md-6">
                             <div class="document-header">Rental Rules</div>
                             <div class="document-content">
-                              <div class="doc-info">
+                              <!-- <div class="doc-info">
                                 <p>Qr Code:{{ room.room_QRCode }}</p>
                               </div>
                               <div class="doc-actions">
                                 <button class="btn-view" (click)="onOpenQrModal(room.room_QR_Img)"><i class="pi pi-eye"></i> View</button>
+                                <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                              </div> -->
+                              <div class="doc-info">
+                                <img src="assets/images/document.svg" alt="Handover protocols" />
+                                <p>Rental Rules.pdf</p>
+                              </div>
+                              <div class="doc-actions">
+                                <button class="btn-view"><i class="pi pi-eye"></i> View</button>
                                 <button class="btn-download"><i class="pi pi-download"></i> Download</button>
                               </div>
                             </div>
@@ -343,13 +359,13 @@
         <span aria-hidden="true" style="color: #000000; font-size: 35px;" (click)="onCloseQrModal()">×</span>
       </button>
       <div class="modal-body">
-        <div class="row text-center">
+        <div class="row text-center justify-content-center">
           <p>Scan this code</p>
-          <img [src]="qrCodeImg" width="180" height="180">
+          <img [src]="qrCodeImg"   class="qrfix" >
           <p class="mt-4">Or enter the number manually</p>
           <div class="custom-apartment-buttons mt-1">
-            <button class="custom-btn-delete">140490</button>
-            <button class="custom-btn-rented mt-4">Download</button>
+            <button class="custom-btn-delete">{{qrCode}}</button>
+            <button class="custom-btn-rented mt-4" (click)="downloadImage(qrCodeImg)">Download</button>
           </div>
         </div>
       </div>
