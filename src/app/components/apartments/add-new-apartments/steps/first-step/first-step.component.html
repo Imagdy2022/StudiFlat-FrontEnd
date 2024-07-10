@@ -500,7 +500,7 @@
                 <span class="text-muted">Please add room info</span>
 
                 <div class="row pt-3">
-                  <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
+                  <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Room type</label>
 
                     <select  formControlName="room_Type"  [class.is-invalid]="generalInfoForm.get('room_Type')!.invalid && generalInfoForm.get('room_Type')!.touched " class="form-select rounded-2 py-2 fs-6" (click)="setBedNo('room_Type',$event,i)">
@@ -517,7 +517,7 @@
                     <label class="form-label gray fw-bold">No of beds</label>
                     <select formControlName="beds_No"  class="form-select rounded-2 py-2 fs-6"
                     (click)="changeBedNo('beds_No',$event,i)">
-                      <option value="null" disabled hidden selected> {{bedroomsToApi[i].beds_No}}</option>
+                      <option value="null" disabled hidden selected> {{bedroomsToApi[i]?.beds_No}}</option>
                       <ng-container *ngIf="bedroomsToApi[i].room_Type=='Custom'"><option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
