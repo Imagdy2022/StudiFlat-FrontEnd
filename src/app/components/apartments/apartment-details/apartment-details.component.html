@@ -533,12 +533,12 @@
                               <div class="card-body">
                                 <div class="row">
                                   <div class="col-12 mb-3">
-                                    <div class="d-flex justify-content-between px-4">
+                                    <div class="d-flex justify-content-between px-2">
                                       <div class="fw-bold">Bed No</div>
-                                      <div class="fw-bold">Room type</div>
-                                      <div class="fw-bold">Bed price</div>
-                                      <div class="fw-bold">Security deposit</div>
-                                      <div class="fw-bold">Service fee</div>
+                                      <!-- <div class="fw-bold">Room type</div> -->
+                                      <!-- <div class="fw-bold">Bed price</div> -->
+                                      <div class="fw-bold">Check In</div>
+                                      <div class="fw-bold">Check Out</div>
                                       <div class="fw-bold">Status</div>
                                     </div>
                                   </div>
@@ -550,11 +550,11 @@
                                       <p-accordionTab [selected]="true" [headerStyle]="{'background-color': '#fff' }">
                                         <ng-template pTemplate="header">
                                           <div
-                                            class="d-flex justify-content-between align-items-center m-0 rounded w-100">
+                                            class="d-flex justify-content-between align-items-center m-0  rounded w-100">
                                             <div class="fw-bold">{{ bed.bed_No }} </div>
                                             <!-- <div> Tenant Name</div> -->
-                                            <div>Check In Date</div>
-                                            <div>Check Out Date</div>
+                                            <div>11/2/2024</div>
+                                            <div>22/3/2024</div>
                                             <!-- <div>€ {{ room.bed_Service_Fees }}</div> -->
                                             <div class="badge rented" *ngIf="!bed.bed_Available">Rented <img
                                                 src="/assets/images/expand_more.svg" alt=""></div>
@@ -565,7 +565,7 @@
 
                                         <div class="row bg-white m-0 p-4 mb-3">
                                           <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
-                                            <div class="row align-items-center">
+                                            <div class="row align-items-center ">
                                               <div class="col-auto">
                                                 <img src="https://via.placeholder.com/50" class="rounded-circle"
                                                   alt="Profile Image">
@@ -574,12 +574,12 @@
                                                 <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
                                                 <p class="m-0 text-muted">osman2025&#64;gmail.com</p>
                                               </div>
-                                              <div class="col-lg-3 text-right border-end">
+                                              <!-- <div class="col-lg-3 text-right border-end">
                                                 <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
                                               </div>
                                               <div class="col-lg-3 text-right border-end">
                                                 <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
-                                              </div>
+                                              </div> -->
                                               <div class="col-lg-2 text-right">
                                                 <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
                                               </div>
@@ -953,10 +953,12 @@
         <span aria-hidden="true" style="color: #000000; font-size: 35px;" (click)="onCloseQrModal()">×</span>
       </button>
       <div class="modal-body">
-        <div class="row text-center justify-content-center" id="qrToPdf">
+        <div class="row text-center justify-content-center " id="qrToPdf">
 
-          <div class="d-flex justify-content-between fw-bold">
-            <div>{{roomType}}.R</div>
+
+          <div class="d-flex justify-content-center  fw-bold">
+            <div class="mr-3">{{roomType}}.R</div>
+            <div style="width:170px"></div>
             <div>ID-{{aprtCode}}</div>
           </div>
           <p class="mt-4">Scan this code</p>
