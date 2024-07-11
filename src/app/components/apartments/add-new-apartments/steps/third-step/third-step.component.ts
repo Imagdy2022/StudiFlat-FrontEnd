@@ -591,7 +591,8 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
         });
 
         for (let file of data) {
-          this.apt_imgs.push(file.name);
+
+          this.apt_imgs.push({"pic_URL": file.name});
         }
         this.create_Apart_contract.get('trash_pin_image')?.patchValue(this.apt_imgs);
         localStorage.setItem('imagesAPT12', JSON.stringify(this.apt_imgs));
