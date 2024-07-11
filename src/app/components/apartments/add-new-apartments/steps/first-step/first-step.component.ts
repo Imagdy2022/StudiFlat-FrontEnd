@@ -211,6 +211,10 @@ this.ID= Guid.create();
     this.subscriptions.push(this._ApartmentService
       .getApartDetail(this.idParamterEdit)
       .subscribe((res) => {
+        if(res.apartment_Basic_Info['apartment_Rooms']){
+          this.bedrooms= [...res.apartment_Basic_Info['apartment_Rooms']]
+
+        }
         this.aprt_details_Edit = res.apartment_Basic_Info;
         this.apt_imgs = res.apartment_Basic_Info['apartment_Images'];
         this.billinclude = res.apartment_Basic_Info['apartment_All_Bill_Included'];
@@ -233,6 +237,7 @@ this.ID= Guid.create();
   getLocalStorage(): void {
     const data = localStorage.getItem('generalInfoForm');
     const data2 = localStorage.getItem('Createtransport');
+    const bedroomsToApi = localStorage.getItem('bedroomsToApi');
 
     if (data !== null) {
       let parsedData = JSON.parse(data);
@@ -241,6 +246,12 @@ this.ID= Guid.create();
         this.isShow = true;
       } else {
         this.isShow = false;
+      }
+      if(parsedData.apartment_Rooms){
+        this.bedrooms.length = parsedData.apartment_Rooms.length
+      }
+      if(parsedData.apartment_Rooms){
+        this.bedroomsToApi = parsedData.apartment_Rooms
       }
       this.generalInfoForm.patchValue(parsedData);
       this.generalInfoForm.get('apartment_Images')?.patchValue(parsedData.apartment_Images);
@@ -568,7 +579,6 @@ this.ID= Guid.create();
     apartment_Rooms : this.bedroomsToApi
 
   };
-
 
     localStorage.setItem(
       'Createtransport',
