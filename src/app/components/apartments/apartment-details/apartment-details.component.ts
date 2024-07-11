@@ -10,6 +10,13 @@ import { Guid } from 'guid-typescript';
 import { Reviews } from 'src/app/models/reviews';
 import { Subscription } from 'rxjs';
 
+
+import htmlToPdfmake from 'html-to-pdfmake';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+
+
 interface ApartmentDetails {
   // apt_ThumbImg?: string;
   apt_Lat?: number;
@@ -26,6 +33,7 @@ interface ApartmentDetails {
 export class ApartmentDetailsComponent implements OnInit {
   showSide: string = '';
   value: number = 3;
+  bedNumber: number = 0;
   RentedSuccessfully: boolean = false;
   markAvailable: boolean = false;
   aprt_details: ApartmentDetails = {};
@@ -34,7 +42,9 @@ export class ApartmentDetailsComponent implements OnInit {
   subscriptions: Subscription[] = [];
   displayQr: any;
   qrCodeImg!: string;
-  qrCode:string;
+  qrCode: string;
+  roomType: string;
+  aprtCode: string;
   aprt: any = {};
   apartmentsEquipment: any = {};
   apartmentsContract: any = {};
@@ -125,17 +135,39 @@ export class ApartmentDetailsComponent implements OnInit {
           this.apartmentsCheckRules = res.apartment_Check_Rules || {};
 
           console.log('Apartment details:', this.aprt);
-          console.log( this.aprt_details);
+          console.log(this.aprt_details);
 
           console.log('Apartment equipment:', this.apartmentsEquipment);
           console.log('Apartment contract:', this.apartmentsContract);
           console.log('Apartment check rules:', this.apartmentsCheckRules);
 
           if (Array.isArray(this.aprt.apartment_Rooms)) {
+            let bedno = 0;
             for (let i = 0; i < this.aprt.apartment_Rooms.length; i++) {
-              if (this.aprt.apartment_Rooms[i].room_Type === 'Bedroom') {
+              // if (this.aprt.apartment_Rooms[i].room_Type === 'Bedroom') {
+              // bedno++;
+              // this.roomsBedRoom.push(this.aprt.apartment_Rooms[i]);
+              // } else {
+              //   this.roomsLiving.push(this.aprt.apartment_Rooms[i]);
+              // }
+
+              if (!this.aprt.apartment_Rooms[i].room_Type.includes('Shared Area')) {
+
                 this.roomsBedRoom.push(this.aprt.apartment_Rooms[i]);
+                for (let x = 0; x < this.roomsBedRoom[i].room_Beds.length; x++) {
+                  bedno++;
+
+                  this.roomsBedRoom[i].room_Beds[x] = { ...this.roomsBedRoom[i].room_Beds[x], "bed_number": bedno };
+                  // console.log( this.roomsBedRoom[i].room_Beds[x])
+
+                }
               } else {
+
+                for (let x = 0; x < this.aprt.apartment_Rooms[i].room_Beds.length; x++) {
+                  bedno++;
+                  this.aprt.apartment_Rooms[i].room_Beds[x] = { ...this.aprt.apartment_Rooms[i].room_Beds[x], "bed_number": bedno };
+                  //  console.log( this.roomsLiving[i]);
+                }
                 this.roomsLiving.push(this.aprt.apartment_Rooms[i]);
               }
             }
@@ -166,10 +198,12 @@ export class ApartmentDetailsComponent implements OnInit {
     );
   }
 
-  onOpenQrModal(imgLink: string, qrCode:string) {
+  onOpenQrModal(imgLink: string, qrCode: string, roomType: string, apartCode: string) {
     this.qrCodeImg = imgLink;
     this.displayQr = 'block';
-    this.qrCode=qrCode;
+    this.qrCode = qrCode;
+    this.roomType = roomType.substring(0, 1);
+    this.aprtCode = apartCode;
   }
 
   onCloseQrModal() {
@@ -403,6 +437,7 @@ export class ApartmentDetailsComponent implements OnInit {
     );
   }
 
+
   downloadImage(url: any) {
     fetch(url, {
       mode: 'no-cors',
@@ -418,6 +453,140 @@ export class ApartmentDetailsComponent implements OnInit {
         a.remove();
       });
   }
+
+  qrToPdf() {
+    // Example HTML content
+    const html = document.getElementsByClassName("qrToPdf");
+
+    const elements = document.getElementsByClassName('qrToPdf');
+    if (elements.length > 0) {
+      const html = elements[0].innerHTML;
+      pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+      // Convert the HTML to a PDFMake document definition
+      const pdfMakeDocDefinition = {
+        content: htmlToPdfmake(html)
+      };
+
+      // Generate the PDF and download it
+      pdfMake.createPdf(pdfMakeDocDefinition).download('document.pdf');
+    } else {
+      console.error('No element found with the specified class.');
+    }
+
+  }
+
+  async convertHtmlToPdf(url: any) {
+    try {
+      // Fetch and convert the QR code image to base64
+      const imgElement = document.getElementById('qr_image_e') as HTMLImageElement;
+       const base64Image = await this.convertImageToBase64(`${url}`);
+
+      imgElement.src = base64Image;
+
+      // Fetch the HTML content from the DOM
+      const element = document.getElementById('qrToPdf');
+      if (element) {
+        const html = element.innerHTML;
+
+        // Convert the HTML to a PDFMake document definition
+        const pdfMakeContent = htmlToPdfmake(html);
+        const docDefinition = {
+          content: pdfMakeContent
+        };
+
+        // Generate the PDF and download it
+        pdfMake.createPdf(docDefinition).download('document.pdf');
+      } else {
+        console.error('No element found with the specified ID.');
+      }
+    } catch (error) {
+      console.error('Error fetching and converting image:', error);
+    }
+  }
+
+  private async convertImageToBase64(url: string): Promise<string> {
+    const response = await fetch(url , {mode: "no-cors"});
+    const blob = await response.blob();
+    console.log(url);
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          const base64data = reader.result as string;
+          if (!base64data.startsWith('data:image/')) {
+            reject(new Error('Unknown image format.'));
+          } else {
+            resolve(base64data);
+          }
+        };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  }
+
+
+  // downloadImage(url: any) {
+  //   const xhr = new XMLHttpRequest();
+  //   xhr.open('GET', url, true);
+  //   xhr.responseType = 'blob';
+
+  //   xhr.onload = function() {
+  //     if (xhr.status === 200) {
+  //       const blob = xhr.response;
+  //       const blobUrl = URL.createObjectURL(blob);
+  //       const a = document.createElement('a');
+  //       a.href = blobUrl;
+  //       a.download = url.split('/').pop()  ;
+  //       document.body.appendChild(a);
+  //       a.click();
+  //       document.body.removeChild(a);
+  //       URL.revokeObjectURL(blobUrl);
+  //     } else {
+  //       console.error('Failed to download image. Status: ' + xhr.status);
+  //     }
+  //   };
+
+  //   xhr.onerror = function() {
+  //     console.error('An error occurred while trying to download the image.');
+  //   };
+
+  //   xhr.send();
+  // }
+
+
+
+
+
+
+  //   downloadImageV()  {
+  //     const url = 'https://devapi.studiflats.com/Uploads/QR983874.png'; // Replace with your local image URL
+  //     const filename = 'downloaded_image.jpg';
+
+  //     fetch(url, {
+  //           mode: 'no-cors',
+  //         })
+  //         .then(response => {
+  //             if (!response.ok) {
+  //                 throw new Error('Network response was not ok');
+  //             }
+  //             return response.blob();
+  //         })
+  //         .then(blob => {
+  //             const blobUrl = URL.createObjectURL(blob);
+  //             const a = document.createElement('a');
+  //             a.href = blobUrl;
+  //             a.download = filename;
+  //             document.body.appendChild(a);
+  //             a.click();
+  //             document.body.removeChild(a);
+  //             URL.revokeObjectURL(blobUrl);
+  //         })
+  //         .catch(err => console.error('Download failed:', err));
+  // }
+
+
 
   DownloadProfilePic(downloadLink: any) {
     FileSaver.saveAs(downloadLink, 'image.jpg');

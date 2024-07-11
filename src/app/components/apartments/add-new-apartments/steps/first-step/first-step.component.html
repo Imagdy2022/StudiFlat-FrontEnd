@@ -416,7 +416,7 @@
                 <label class="fw-bold me-3" for="createbills"> {{ data }} </label>
             </div>
           </div>
-          <div *ngIf="isShow">
+          <div *ngIf="this.SharedAreaInclude">
             <p class="d-md-inline-block gray fw-bold mb-0 me-3 pt-0 mt-0">
               Type Of Sleeping Area
             </p>
@@ -438,7 +438,7 @@
             <p class="fw-bold mb-0 me-3 pt-0 mt-0">{{sectionName}} 1</p>
             <span class="text-muted">Please add bed info</span>
 
-            <div class="row pt-3">
+            <div class="row pt-3" *ngIf="showBedSection">
               <div class="mb-3 col-12 col-md-6">
                 <label class="form-label gray fw-bold">Bed price</label>
                 <input  type="number"class="form-control rounded-2 py-2 fs-6" [ngModelOptions]="{standalone: true}" [(ngModel)]="bedPrice" (ngModelChange)="checkAndSaveSharedBed()"/>

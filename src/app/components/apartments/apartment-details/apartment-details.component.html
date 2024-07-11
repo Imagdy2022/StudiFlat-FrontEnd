@@ -27,7 +27,8 @@
               <div class="row mb-3 vcrr">
                 <div class="image-gallery" style="max-width: 1500px;">
                   <div class="main-image">
-                    <img [src]="aprt_Imgs[0].includes('https') ? aprt_Imgs[0] : '../../../assets/images/apartmentImages/default_apartment.jpg'"
+                    <img
+                      [src]="aprt_Imgs[0].includes('https') ? aprt_Imgs[0] : '../../../assets/images/apartmentImages/default_apartment.jpg'"
                       style="width: 100%; height:500px; border-radius:13px" />
                   </div>
                   <div class="thumbnail-container" style="display: flex; justify-content: start; margin-top: 20px;">
@@ -76,7 +77,8 @@
             </div>
             <div class="custom-info-item">
               <img src="assets/images/apartmentImages/schedule time.svg" alt="Duration">
-              <p>Duration: {{ apartmentsContract?.contractDate_Start | date: 'dd/MM/yyyy' }} - {{ apartmentsContract?.contractDate_End | date: 'dd/MM/yyyy' }}</p>
+              <p>Duration: {{ apartmentsContract?.contractDate_Start | date: 'dd/MM/yyyy' }} - {{
+                apartmentsContract?.contractDate_End | date: 'dd/MM/yyyy' }}</p>
             </div>
             <div class="custom-info-item">
               <img src="assets/images/apartmentImages/schedule time.svg" alt="Published">
@@ -147,7 +149,8 @@
           <span class="qr-code">{{ aprt.apartment_QRCode }}</span>
         </div>
         <div class="qr-actions">
-          <a class="qr-action" (click)="onOpenQrModal(aprt.apartment_QR_Img, aprt.apartment_QRCode)">
+          <a class="qr-action"
+            (click)="onOpenQrModal(aprt.apartment_QR_Img, aprt.apartment_QRCode,aprt.apartment_Type,aprt.apartment_Code)">
             <i class="pi pi-eye"></i> View
           </a>
           <a class="qr-action">
@@ -160,6 +163,8 @@
         </div>
       </div>
 
+      <!--
+    hide room Details
       <div class="row m-0">
         <div class="col-lg-12">
           <div class="mt-4">
@@ -207,7 +212,7 @@
                             </div>
                             <div class="col-lg-3 border-end">
                               <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
-                              <p class="m-0 text-muted">osman2025&#64;gmail.com</p>
+                              <p class="m-0 text-muted">osman2025@gmail.com</p>
                             </div>
                             <div class="col-lg-3 text-right border-end">
                               <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
@@ -222,16 +227,8 @@
                         </div>
                       </div>
 
-
-
-
-
-
-                      <div class="tenant-documents m-0 mb-3"  *ngFor="let bed of room.room_Beds">
-
+                      <div class="tenant-documents m-0">
                         <div class="header">
-                          <h3>bed {{bed.bed_No}}</h3>
-                          <hr/>
                           <h3>Tenant Documents</h3>
                           <p>View tenant Documents</p>
                         </div>
@@ -240,11 +237,11 @@
                             <div class="document-header">QR Details</div>
                             <div class="document-content">
                               <div class="doc-info">
-                                <p>Qr Code:{{ bed.bed_QRCode }}</p>
+                                <p>Qr Code:{{ room.room_QRCode }}</p>
                               </div>
                               <div class="doc-actions">
-                                <button class="btn-view" (click)="onOpenQrModal(bed.bed_QR_Img, bed.bed_QRCode)"><i class="pi pi-eye"></i> View</button>
-                                <button class="btn-download" (click)="downloadImage(bed.bed_QR_Img)"><i class="pi pi-download" ></i> Download</button>
+                                <button class="btn-view" (click)="onOpenQrModal(room.room_QR_Img)"><i class="pi pi-eye"></i> View</button>
+                                <button class="btn-download"><i class="pi pi-download"></i> Download</button>
                                 <button class="btn-share"><i class="pi pi-share"></i> Share</button>
                               </div>
                             </div>
@@ -278,13 +275,7 @@
                           <div class="col-md-6">
                             <div class="document-header">Rental Rules</div>
                             <div class="document-content">
-                              <!-- <div class="doc-info">
-                                <p>Qr Code:{{ room.room_QRCode }}</p>
-                              </div>
-                              <div class="doc-actions">
-                                <button class="btn-view" (click)="onOpenQrModal(room.room_QR_Img)"><i class="pi pi-eye"></i> View</button>
-                                <button class="btn-download"><i class="pi pi-download"></i> Download</button>
-                              </div> -->
+
                               <div class="doc-info">
                                 <img src="assets/images/document.svg" alt="Handover protocols" />
                                 <p>Rental Rules.pdf</p>
@@ -347,9 +338,405 @@
           </div>
         </div>
       </div>
+    -->
+
+      <div class="row m-0">
+        <div class="col-lg-12">
+          <div class="mt-4">
+            <div class="card bookingdetails">
+              <div class="card-header">
+                <h4 class="fs-5 fw-bold">Rooms Details</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 mb-3">
+                    <div class="d-flex justify-content-between px-4">
+                      <div class="fw-bold">Bed No</div>
+                      <div class="fw-bold">Room type</div>
+                      <div class="fw-bold">Bed price</div>
+                      <div class="fw-bold">Security deposit</div>
+                      <div class="fw-bold">Service fee</div>
+                      <div class="fw-bold">Status</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <p-accordion id="bed" [multiple]="true" [activeIndex]="[0]">
+                    <p-accordionTab [selected]="true" [headerStyle]="{'background-color': '#fff' }"
+                      *ngFor="let room of aprt.apartment_Rooms">
+                      <ng-template pTemplate="header">
+                        <div class="d-flex justify-content-between align-items-center m-0 rounded w-100">
+                          <div class="fw-bold">{{ room.beds_No }}</div>
+                          <div>{{ room.room_Type }}</div>
+                          <div>€ {{ room.bed_Price }}</div>
+                          <div>€ {{ room.bed_SecuirtyDeposit }}</div>
+                          <div>€ {{ room.bed_Service_Fees }}</div>
+                          <div class="badge rented" *ngIf="!room.room_Available">Rented <img
+                              src="/assets/images/expand_more.svg" alt=""></div>
+                          <div class="badge rented" *ngIf="room.room_Available">Available <img
+                              src="/assets/images/expand_more.svg" alt=""></div>
+                        </div>
+                      </ng-template>
+
+                      <!-- <div class="row bg-white m-0 p-4 mb-3">
+                      <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
+                            <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile Image">
+                          </div>
+                          <div class="col-lg-3 border-end">
+                            <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
+                            <p class="m-0 text-muted">osman2025&#64;gmail.com</p>
+                          </div>
+                          <div class="col-lg-3 text-right border-end">
+                            <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
+                          </div>
+                          <div class="col-lg-3 text-right border-end">
+                            <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
+                          </div>
+                          <div class="col-lg-2 text-right">
+                            <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
 
 
+
+
+
+                    <div class="tenant-documents m-0 mb-3"  *ngFor="let bed of room.room_Beds">
+
+                      <div class="header">
+                        <h3>bed {{bed.bed_No}}</h3>
+                        <hr/>
+                        <h3>Tenant Documents</h3>
+                        <p>View tenant Documents</p>
+                      </div>
+                      <div class="documents-container row">
+                        <div class="col-md-6">
+                          <div class="document-header">QR Details</div>
+                          <div class="document-content">
+                            <div class="doc-info">
+                              <p>Qr Code:{{ bed.bed_QRCode }}</p>
+                            </div>
+                            <div class="doc-actions">
+                              <button class="btn-view" (click)="onOpenQrModal(bed.bed_QR_Img, bed.bed_QRCode)"><i class="pi pi-eye"></i> View</button>
+                              <button class="btn-download" (click)="downloadImage(bed.bed_QR_Img)"><i class="pi pi-download" ></i> Download</button>
+                              <button class="btn-share"><i class="pi pi-share"></i> Share</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="document-header">Contract</div>
+                          <div class="document-content">
+                            <div class="doc-info">
+                              <img src="assets/images/document.svg" alt="Contract" />
+                              <p>Contract.pdf</p>
+                            </div>
+                            <div class="doc-actions">
+                              <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                              <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="document-header">Handover protocols</div>
+                          <div class="document-content">
+                            <div class="doc-info">
+                              <img src="assets/images/document.svg" alt="Handover protocols" />
+                              <p>Handover protocols.pdf</p>
+                            </div>
+                            <div class="doc-actions">
+                              <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                              <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="document-header">Rental Rules</div>
+                          <div class="document-content">
+
+                            <div class="doc-info">
+                              <img src="assets/images/document.svg" alt="Handover protocols" />
+                              <p>Rental Rules.pdf</p>
+                            </div>
+                            <div class="doc-actions">
+                              <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                              <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row bg-white m-0 p-4" id="more-details">
+                      <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
+                        <div class="row align-items-center">
+                          <div class="container mt-3">
+                            <h6 class="fw-bold text-lowercase">More details</h6>
+                            <p class="text-muted">View tenant passport and reported problems, invoices</p>
+                            <div class="accordion" id="accordionExample">
+                              <div class="container mt-3">
+                                <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                  <div><strong>Passport of tenent</strong></div>
+                                  <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                </div>
+                              </div>
+                              <div class="container mt-3">
+                                <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                  <div><strong>Problem reports (2)</strong></div>
+                                  <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                </div>
+                              </div>
+                              <div class="container mt-3">
+                                <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                  <div><strong>Fixed problem (0)</strong></div>
+                                  <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                </div>
+                              </div>
+                              <div class="container mt-3">
+                                <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                  <div><strong>Pending Invoices</strong></div>
+                                  <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="d-flex justify-content-end mt-3">
+                              <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
+                              <button class="btn btn-primary" style="border-radius: 10px; font-size: 14px;">Mark as
+                                Available</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+
+
+                      <div class="row m-0">
+                        <div class="col-lg-12">
+                          <div class="mt-4">
+                            <div class="card bookingdetails">
+                              <div class="card-header">
+                                <h4 class="fs-5 fw-bold">Beds Details</h4>
+                              </div>
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-12 mb-3">
+                                    <div class="d-flex justify-content-between px-2">
+                                      <div class="fw-bold">Bed No</div>
+                                      <!-- <div class="fw-bold">Room type</div> -->
+                                      <!-- <div class="fw-bold">Bed price</div> -->
+                                      <div class="fw-bold">Check In</div>
+                                      <div class="fw-bold">Check Out</div>
+                                      <div class="fw-bold">Status</div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="mb-4">
+                                  <p-accordion id="bed" [multiple]="true" [activeIndex]="[]">
+                                    <ng-container *ngFor="let bed of room.room_Beds ">
+                                      <p-accordionTab [selected]="true" [headerStyle]="{'background-color': '#fff' }">
+                                        <ng-template pTemplate="header">
+                                          <div
+                                            class="d-flex justify-content-between align-items-center m-0  rounded w-100">
+                                            <div class="fw-bold">{{ bed.bed_No }} </div>
+                                            <!-- <div> Tenant Name</div> -->
+                                            <div>11/2/2024</div>
+                                            <div>22/3/2024</div>
+                                            <!-- <div>€ {{ room.bed_Service_Fees }}</div> -->
+                                            <div class="badge rented" *ngIf="!bed.bed_Available">Rented <img
+                                                src="/assets/images/expand_more.svg" alt=""></div>
+                                            <div class="badge rented" *ngIf="bed.bed_Available">Available <img
+                                                src="/assets/images/expand_more.svg" alt=""></div>
+                                          </div>
+                                        </ng-template>
+
+                                        <div class="row bg-white m-0 p-4 mb-3">
+                                          <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
+                                            <div class="row align-items-center ">
+                                              <div class="col-auto">
+                                                <img src="https://via.placeholder.com/50" class="rounded-circle"
+                                                  alt="Profile Image">
+                                              </div>
+                                              <div class="col-lg-3 border-end">
+                                                <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
+                                                <p class="m-0 text-muted">osman2025&#64;gmail.com</p>
+                                              </div>
+                                              <!-- <div class="col-lg-3 text-right border-end">
+                                                <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
+                                              </div>
+                                              <div class="col-lg-3 text-right border-end">
+                                                <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
+                                              </div> -->
+                                              <div class="col-lg-2 text-right">
+                                                <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+
+
+
+
+
+                                        <div class="tenant-documents m-0 mb-3">
+
+                                          <div class="header">
+                                            <h3>bed {{bed.bed_No}}</h3>
+                                            <hr />
+                                            <h3>Tenant Documents</h3>
+                                            <p>View tenant Documents</p>
+                                          </div>
+                                          <div class="documents-container row">
+                                            <div class="col-md-6">
+                                              <div class="document-header">QR Details</div>
+                                              <div class="document-content">
+                                                <div class="doc-info">
+                                                  <p>Qr Code:{{ bed.bed_QRCode }}</p>
+                                                </div>
+                                                <div class="doc-actions">
+                                                  <button class="btn-view"
+                                                    (click)="onOpenQrModal(bed.bed_QR_Img, bed.bed_QRCode,room.room_Type,aprt.apartment_Code)"><i
+                                                      class="pi pi-eye"></i> View</button>
+                                                  <button class="btn-download capture"
+                                                    (click)="downloadImage(bed.bed_QR_Img)"><i
+                                                      class="pi pi-download"></i> Download</button>
+                                                  <!-- <p>{{bed.bed_QR_Img}}</p> -->
+                                                  <button class="btn-share"><i class="pi pi-share"></i> Share</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="document-header">Contract</div>
+                                              <div class="document-content">
+                                                <div class="doc-info">
+                                                  <img src="assets/images/document.svg" alt="Contract" />
+                                                  <p>Contract.pdf</p>
+                                                </div>
+                                                <div class="doc-actions">
+                                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                                  <button class="btn-download"><i class="pi pi-download"></i>
+                                                    Download</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="document-header">Handover protocols</div>
+                                              <div class="document-content">
+                                                <div class="doc-info">
+                                                  <img src="assets/images/document.svg" alt="Handover protocols" />
+                                                  <p>Handover protocols.pdf</p>
+                                                </div>
+                                                <div class="doc-actions">
+                                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                                  <button class="btn-download"><i class="pi pi-download"></i>
+                                                    Download</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="document-header">Rental Rules</div>
+                                              <div class="document-content">
+                                                <!-- <div class="doc-info">
+                                              <p>Qr Code:{{ room.room_QRCode }}</p>
+                                            </div>
+                                            <div class="doc-actions">
+                                              <button class="btn-view" (click)="onOpenQrModal(room.room_QR_Img)"><i class="pi pi-eye"></i> View</button>
+                                              <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                                            </div> -->
+                                                <div class="doc-info">
+                                                  <img src="assets/images/document.svg" alt="Handover protocols" />
+                                                  <p>Rental Rules.pdf</p>
+                                                </div>
+                                                <div class="doc-actions">
+                                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                                  <button class="btn-download"><i class="pi pi-download"></i>
+                                                    Download</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="row bg-white m-0 p-4" id="more-details">
+                                          <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
+                                            <div class="row align-items-center">
+                                              <div class="container mt-3">
+                                                <h6 class="fw-bold text-lowercase">More details</h6>
+                                                <p class="text-muted">View tenant passport and reported problems,
+                                                  invoices</p>
+                                                <div class="accordion" id="accordionExample">
+                                                  <div class="container mt-3">
+                                                    <div
+                                                      class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                                      <div><strong>Passport of tenent</strong></div>
+                                                      <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="container mt-3">
+                                                    <div
+                                                      class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                                      <div><strong>Problem reports (2)</strong></div>
+                                                      <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="container mt-3">
+                                                    <div
+                                                      class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                                      <div><strong>Fixed problem (0)</strong></div>
+                                                      <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="container mt-3">
+                                                    <div
+                                                      class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                                      <div><strong>Pending Invoices</strong></div>
+                                                      <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end mt-3">
+                                                  <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
+                                                  <button class="btn btn-primary"
+                                                    style="border-radius: 10px; font-size: 14px;">Mark as
+                                                    Available</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </p-accordionTab>
+                                    </ng-container>
+                                  </p-accordion>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                    </p-accordionTab>
+
+                  </p-accordion>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <!--
       <div class="row m-0">
         <div class="col-lg-12">
           <div class="mt-4">
@@ -373,12 +760,12 @@
 
                 <div class="mb-4">
                   <p-accordion id="bed" [multiple]="true" [activeIndex]="[0]">
-                    <ng-container *ngFor="let room of aprt.apartment_Rooms">
+                    <ng-container *ngFor="let room of aprt.apartment_Rooms; ">
                     <p-accordionTab [selected]="true" [headerStyle]="{'background-color': '#fff' }"
-                    *ngFor="let bed of room.room_Beds" >
+                    *ngFor="let bed of room.room_Beds ;  index  " >
                       <ng-template pTemplate="header">
                         <div class="d-flex justify-content-between align-items-center m-0 rounded w-100">
-                          <div class="fw-bold">{{ room.beds_No }}</div>
+                          <div class="fw-bold">{{ bed.bed_number }}  </div>
                           <div>{{ room.room_Type }}</div>
                           <div>€ {{ room.bed_Price }}</div>
                           <div>€ {{ room.bed_SecuirtyDeposit }}</div>
@@ -435,7 +822,8 @@
                               </div>
                               <div class="doc-actions">
                                 <button class="btn-view" (click)="onOpenQrModal(bed.bed_QR_Img, bed.bed_QRCode)"><i class="pi pi-eye"></i> View</button>
-                                <button class="btn-download" (click)="downloadImage(bed.bed_QR_Img)"><i class="pi pi-download" ></i> Download</button>
+                                <button class="btn-download capture" (click)="downloadImage(bed.bed_QR_Img)"><i class="pi pi-download" ></i> Download</button>
+
                                 <button class="btn-share"><i class="pi pi-share"></i> Share</button>
                               </div>
                             </div>
@@ -469,13 +857,7 @@
                           <div class="col-md-6">
                             <div class="document-header">Rental Rules</div>
                             <div class="document-content">
-                              <!-- <div class="doc-info">
-                                <p>Qr Code:{{ room.room_QRCode }}</p>
-                              </div>
-                              <div class="doc-actions">
-                                <button class="btn-view" (click)="onOpenQrModal(room.room_QR_Img)"><i class="pi pi-eye"></i> View</button>
-                                <button class="btn-download"><i class="pi pi-download"></i> Download</button>
-                              </div> -->
+
                               <div class="doc-info">
                                 <img src="assets/images/document.svg" alt="Handover protocols" />
                                 <p>Rental Rules.pdf</p>
@@ -538,7 +920,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
 
 
@@ -554,22 +936,36 @@
   <!-- end content page  -->
 </div>
 
-<div *ngIf="qrCodeImg !== ''" class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayQr}" style="background-color: rgb(23 22 22 / 50%);">
+<div *ngIf="qrCodeImg !== ''" class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayQr}"
+  style="background-color: rgb(23 22 22 / 50%);">
   <div class="modal-dialog" role="document" style="max-width: 371px;">
     <div class="modal-content" style="margin-top: 150px;">
-      <button type="button" aria-label="Close" class="close" style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;">
+      <button type="button" aria-label="Close" class="close"
+        style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;">
         <span aria-hidden="true" style="color: #000000; font-size: 35px;" (click)="onCloseQrModal()">×</span>
       </button>
       <div class="modal-body">
+        <div class="row text-center justify-content-center " id="qrToPdf">
+
+
+          <div class="d-flex justify-content-center  fw-bold">
+            <div class="mr-3">{{roomType}}.R</div>
+            <div style="width:170px"></div>
+            <div>ID-{{aprtCode}}</div>
+          </div>
+          <p class="mt-4">Scan this code</p>
+          <img id="qr_image_e" [src]="qrCodeImg" class="qrfix">
+          <div class="fw-semibold">QR Code : <span class="fw-normal" style="color:#B3261E;">{{qrCode}}</span> </div>
+
+        </div>
         <div class="row text-center justify-content-center">
-          <p>Scan this code</p>
-          <img [src]="qrCodeImg"   class="qrfix" >
-          <p class="mt-4">Or enter the number manually</p>
+          <p class="mt-4 text-center">Or enter the number manually</p>
           <div class="custom-apartment-buttons mt-1">
             <button class="custom-btn-delete">{{qrCode}}</button>
-            <button class="custom-btn-rented mt-4" (click)="downloadImage(qrCodeImg)">Download</button>
+            <button class="custom-btn-rented mt-4" (click)="convertHtmlToPdf(qrCodeImg)">Download</button>
           </div>
         </div>
+
       </div>
     </div>
   </div>

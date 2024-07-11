@@ -38,7 +38,7 @@ export class FirstStepComponent implements OnInit {
   sleepingArea: Array<string> = ['No sleeping area', 'Bed','Sofa bed'];
   defaultSleepingArea="No sleeping area";
   defaultapartmentSharedArea="Yes";
-  SharedAreaInclude: any = true;
+  SharedAreaInclude: any = false;
   /** listDropDownArea */
   listDropDownArea: any = [];
   /** selectedOwner */
@@ -510,9 +510,9 @@ this.ID= Guid.create();
       apartment_Manager: new FormControl('0', [Validators.required]), //string
       // apt_Status: new FormControl('', [Validators.required]), //Rented
       // apt_ThumbImg: new FormControl('', [Validators.required]),
-      apartment_RentBy_Apartment: new FormControl(true, [Validators.required]), //true
+      apartment_RentBy_Apartment: new FormControl(false, [Validators.required]), //true
       apartment_RentBy_Bed: new FormControl(true, [Validators.required]), //true
-      apartment_SharedArea: new FormControl(true, [Validators.required]), //true
+      apartment_SharedArea: new FormControl(false, [Validators.required]), //true
       apartment_SleepingArea: new FormControl(this.sectionName), //string
       apartment_Rooms: new FormControl(null),
         room_Type: new FormControl(null),
@@ -574,7 +574,6 @@ this.ID= Guid.create();
     apartment_360DLink: this.generalInfoForm.value['apartment_360DLink'],
     apartment_SharedArea:this.generalInfoForm.value['apartment_SharedArea'],
     apartment_SleepingArea: this.sectionName,
-
     apartment_Elevator: this.generalInfoForm.value['apartment_Elevator'],
     apartment_Type: this.generalInfoForm.value['apartment_Type'],
     apartment_BedRoomsNo:Number(this.generalInfoForm.value['apartment_BedRoomsNo']),
@@ -601,6 +600,8 @@ this.ID= Guid.create();
         )
         .subscribe(
           (res) => {
+            localStorage.removeItem('create_Apart_Equ');
+      localStorage.removeItem('BathroomNo');
             localStorage.setItem('apartmentResponse', JSON.stringify(res));
             this.messageService.add({
               severity: 'success',
@@ -632,6 +633,8 @@ this.ID= Guid.create();
         )
         .subscribe(
           (res) => {
+            localStorage.removeItem('create_Apart_Equ');
+      localStorage.removeItem('BathroomNo');
             localStorage.setItem('apartmentResponse', JSON.stringify(res));
             this.messageService.add({
               severity: 'success',
