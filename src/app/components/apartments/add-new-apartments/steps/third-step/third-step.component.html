@@ -21,14 +21,17 @@
                 <p class="mb-0">Click to upload <span class="text-muted fw-normal"> or drag and drop</span></p>
                 <p class="text-muted fw-normal">PNG, PDF, word (max. 4MPpx)</p>
               </div>
-              <ng-container *ngIf="selectedContractImg && (selectedContractImg.type == 'image/png' || selectedContractImg.type == 'image/jpg' || selectedContractImg.type == 'image/jpeg')">
-                <a (click)="opencloseModal(selectedContractImg.url)">
-                  <img *ngIf="selectedContractImg.url" [src]="selectedContractImg.url" alt="img" style="height: 124px;width:150px;" />
-                </a>
+              <ng-container *ngIf="selectedContractImg">
+                <ng-container *ngIf="selectedContractImg.url.includes('.jpg') || selectedContractImg.type == 'image/png' || selectedContractImg.type == 'image/jpg' || selectedContractImg.type == 'image/jpeg' ">
+                  <a (click)="opencloseModal(selectedContractImg.url)">
+                    <img *ngIf="selectedContractImg.url" [src]="selectedContractImg.url" alt="img" style="height: 124px; width: 150px;" />
+                  </a>
+                </ng-container>
+                <ng-container *ngIf="selectedContractImg.url.includes('.pdf') || selectedContractImg.type == 'application/pdf'">
+                  <span>{{ selectedContractImg.name }}</span>
+                </ng-container>
               </ng-container>
-              <ng-container *ngIf="selectedContractImg && selectedContractImg.type == 'application/pdf'">
-                <span>{{ selectedContractImg.name }}</span>
-              </ng-container>
+
             </div>
           </div>
         </div>
@@ -168,17 +171,17 @@
               <div class="card1">
                 <div class="row">
                   <div class="col-md-2 mt-4 card33" *ngFor="let image of apt_imgs; index as i">
-                    <a (click)="removeItem(image)" style="border: none; margin-bottom: 10px; position: absolute;">
+                    <a (click)="removeItem(image.pic_URL)" style="border: none; margin-bottom: 10px; position: absolute;">
                       <img class="imageRemove" src="../../../../../../assets/images/delete.svg" width="32px" height="32px" />
                     </a>
                     <a (click)="opencloseModal(image)">
-                      <img class="star" [src]="image" alt="Avatar" style="width: 339px; height: 205px;" class="cursor" />
+                      <img class="star" [src]="image.pic_URL" alt="Avatar" style="width: 339px; height: 205px;" class="cursor" />
                     </a>
                   </div>
                 </div>
 
                 <div class="row" *ngIf="edit == 'EditForm'">
-                  <div class="col-md-2 card33" *ngFor="let image of aprt_details_Edit?.tarsh_Pin_Imgs; index as i">
+                  <div class="col-md-2 card33" *ngFor="let image of aprt_details_Edit?.trash_pin_image; index as i">
                     <a (click)="opencloseModal(image.pic_URL)">
                       <img [src]="image.pic_URL" alt="Avatar" style="width: 339px; height: 205px;" class="cursor" />
                     </a>
