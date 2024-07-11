@@ -252,6 +252,8 @@ this.ID= Guid.create();
       }
       if(parsedData.apartment_Rooms){
         this.bedroomsToApi = parsedData.apartment_Rooms
+        console.log(this.bedroomsToApi[0])
+        console.log(this.bedroomsToApi[1])
       }
       this.generalInfoForm.patchValue(parsedData);
       this.generalInfoForm.get('apartment_Images')?.patchValue(parsedData.apartment_Images);
