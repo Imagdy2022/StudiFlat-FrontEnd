@@ -306,6 +306,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
               if (fieldName === 'building_Img') this.issshowbuilding = '';
 
 
+
               this.create_Apart_contract.get(fieldName)?.patchValue(img[0].file_Path);
               this.messageService.add({
                 severity: 'success',
@@ -382,6 +383,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
       this.selectedSafeImg = { url: parseData.safe_Img };
       this.selectedDoorImg = { url: parseData.door_Img };
       this.selectedBuildingImg = { url: parseData.building_Img };
+      this.apt_imgs = parseData.trash_pin_image;
       if (parseData.digital_Contract == true) {
         this.CreateContract = 'Yes';
         this.createcontractpage = true;
@@ -404,7 +406,6 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
         };
       }
     }
-
     const data1 = localStorage.getItem('generalInfoForm');
 
     if (data1 !== null) {
@@ -439,7 +440,7 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
     };
 
     // Log the payload to verify data structure
-    console.log('Payload:', JSON.stringify(payload, null, 2));
+    // console.log('Payload:', JSON.stringify(payload, null, 2));
 
     localStorage.setItem(
       'contract',
@@ -455,7 +456,6 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
       this._ApartmentService.createPostSec3(payload).subscribe(
         (res) => {
           // Log the response for debugging
-          console.log('Response:', res);
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
@@ -465,7 +465,6 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
         },
         (err: any) => {
           // Log the error for debugging
-          console.error('Error:', err);
 
           this.messageService.add({
             severity: 'error',
