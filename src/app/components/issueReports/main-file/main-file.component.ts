@@ -444,7 +444,6 @@ export class MainFileComponent {
             fieldName == 'contract_Path'
               ? (this.selectedContractImg = file)
               : null;
-               console.log(this.selectedContractImg)
               this.issue_attach = this.selectedContractImg.url
             // patch the fieldName in Form
 

@@ -440,7 +440,6 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
     };
 
     // Log the payload to verify data structure
-    // console.log('Payload:', JSON.stringify(payload, null, 2));
 
     localStorage.setItem(
       'contract',

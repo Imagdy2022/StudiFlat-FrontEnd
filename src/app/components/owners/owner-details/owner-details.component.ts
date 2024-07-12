@@ -215,16 +215,10 @@ export class OwnerDetailsComponent {
   CountryName: any;
   CountryValue: any;
   onCountrySelected(event: any) {
-    console.log(event);
-    console.log(event.value.name);
-    console.log(event.value.description);
     this.CountryName = event.value.description;
     this.CountryValue = event.value.name;
 
-    console.log(this.selectedCountry);
-    //console.log(this.selectedCountry.description);
 
-    //console.log(event.target.value);
 
     //this.CountryName = event.target.value.description;
     // this.CountryValue = event.target.value.value; // look in the console to get the properties
@@ -255,7 +249,6 @@ export class OwnerDetailsComponent {
             },
             (err) => {
               this.loadingButton = false;
-              console.log(err);
               this.messageService.add({
                 severity: 'error',
                 summary: 'Error',

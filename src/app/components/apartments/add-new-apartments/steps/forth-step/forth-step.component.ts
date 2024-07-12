@@ -48,6 +48,7 @@ export class ForthStepComponent {
 
   apt_UUID: any;
  Rooms_Devices : Array<any> = [];
+ Devices: Array<any> = [];
  selectedRooms: any;
 
   constructor(
@@ -205,8 +206,6 @@ export class ForthStepComponent {
 
   }
   bindCreatePostBackupInfo(): void {
-    console.log(this.apt_UUID);
-
     this.PostBackupInfo = new FormGroup({
       'apartment_ID':new FormControl(JSON.parse(localStorage.getItem('apartmentResponse')!).uuid),
       'apartment_Electricity_Meter_No': new FormControl(''),
@@ -259,13 +258,13 @@ export class ForthStepComponent {
   updateCheckedItems(item: any, roomIndex: number) {
     this.roomIndexValue = roomIndex;
     if (item.checked) {
-      if (!this.rooms[roomIndex].room_Devices.includes(item)) {
-        this.rooms[roomIndex].room_Devices.push(item);
+      if (!this.Devices.includes({roomIndex:roomIndex,item:item})) {
+        this.Devices.push({roomIndex:roomIndex,item:item});
       }
     } else {
-      const index = this.rooms[roomIndex].room_Devices.indexOf(item);
+      const index = this.Devices.indexOf({roomIndex:roomIndex,item:item});
       if (index > -1) {
-        this.rooms[roomIndex].room_Devices.splice(index, 1);
+        this.Devices.splice(index, 1);
       }
     }
   }
@@ -297,15 +296,27 @@ export class ForthStepComponent {
       return
     }
   }
-  Create_PostBackupInfo(data: any) {
-    if(this.room_Devices != null){
-      this.Rooms_Devices.push({
-        room_ID: this.romeDetails?.rooms_IDs,
-        rooms_Names: this.romeDetails?.rooms_Names,
-        room_Devices: this.room_Devices
+  Create_PostBackupInfo(data: any) { 
+    this.Rooms_Devices=[];   
+    for(let i=0;i<this.rooms.length;i++)
+    {
+      let itemDevices=[];
+      for(let j=0;j<this.Devices.length;j++)
+      {if(this.Devices[j]?.roomIndex===i)
+      {
+        let device=this.Devices[j]?.item;
+        delete device?.checked;
+        itemDevices.push(device) } 
+      }
+    this.Rooms_Devices.push({
+      room_ID:JSON.parse(localStorage.getItem('apartmentResponse')!).rooms_IDs[i],
+      room_Name: JSON.parse(localStorage.getItem('apartmentResponse')!).rooms_Names[i],
+      room_Devices: itemDevices
       });
-
+      itemDevices=[]
     }
+      
+
     const payloadData: any = {
       ...data.value,
       "apartment_Addons_Fields": this.inputField,

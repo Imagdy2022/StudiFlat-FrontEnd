@@ -288,7 +288,6 @@ export class CheckoutInqqComponent implements OnInit {
   Refund_Attachment: any;
   ChangeRefund_ID(event: Event) {
     this.Refund_Transaction_ID = (event.target as HTMLInputElement).value;
-    console.log(this.Refund_Transaction_ID);
   }
 
   onUploadContract(event: any, fieldName: string): void {
@@ -311,7 +310,6 @@ export class CheckoutInqqComponent implements OnInit {
               : null;
 
             this.Refund_Attachment = img[0].file_Path;
-            console.log(img[0].file_Path);
             // patch the fieldName in Form
 
             this.messageService.add({

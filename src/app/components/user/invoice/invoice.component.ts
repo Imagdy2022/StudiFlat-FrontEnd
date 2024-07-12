@@ -114,7 +114,6 @@ export class InvoiceComponent implements OnInit {
           this._details = res;
           this.invoiceDetail = res;
           this.invoices = this.invoiceDetail.invoice_Details;
-          console.log(this.invoices);
         },
         (error) => {
           console.error('Error fetching Invoice Details:', error);

@@ -217,7 +217,6 @@ export class PaymentsComponent implements OnInit {
   /*tiggerPageChange(event: any) {
     const calcPageNumber = Math.floor(event.first / event.rows) + 1;
     this.pageNumber = calcPageNumber;
-    console.log(event);
     this.GetAllPayments();
   }*/
   //------------ Islam Paginator --------------//
@@ -226,8 +225,6 @@ export class PaymentsComponent implements OnInit {
     this.rows = event.rows;
     let calcPageNumber = Math.floor(this.first / this.rows) + 1;
     this.pageNumber = calcPageNumber;
-    console.log(event);
-    console.log(calcPageNumber);
 
     this.GetAllPayments();
   }
@@ -314,7 +311,6 @@ export class PaymentsComponent implements OnInit {
       if (user) {
         this.checkedUsers.push(user);
         this.selectedUsersIds.push(user.inv_ID);
-        console.log(this.selectedUsersIds);
       }
     } else {
       let index = this.checkedUsers.findIndex(
@@ -559,7 +555,6 @@ export class PaymentsComponent implements OnInit {
     this.inv_desc = data.invoice_Desc;
     this.inv_attach = data.invoice_Attach;
     this.display_details = 'block';
-    console.log(data);
     this.Is_PDF = data.invoice_Attach.includes('pdf') ? true : false;
   }
 

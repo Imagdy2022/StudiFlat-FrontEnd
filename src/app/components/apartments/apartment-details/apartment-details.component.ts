@@ -105,8 +105,6 @@ export class ApartmentDetailsComponent implements OnInit {
     this.subscriptions.push(
       this._ApartmentService.getApartDetail(this.apt_UUID).subscribe(
         (res) => {
-          console.log('API response:', res);
-
           this.aprt = res.apartment_Basic_Info || {};
           this.aprt_details = this.aprt || {};
           this.aprt_Imgs = this.aprt.apartment_Images || [];
@@ -133,14 +131,6 @@ export class ApartmentDetailsComponent implements OnInit {
           this.apartmentsEquipment = res.apartment_Equipments || {};
           this.apartmentsContract = res.apartment_Contract || {};
           this.apartmentsCheckRules = res.apartment_Check_Rules || {};
-
-          console.log('Apartment details:', this.aprt);
-          console.log(this.aprt_details);
-
-          console.log('Apartment equipment:', this.apartmentsEquipment);
-          console.log('Apartment contract:', this.apartmentsContract);
-          console.log('Apartment check rules:', this.apartmentsCheckRules);
-
           if (Array.isArray(this.aprt.apartment_Rooms)) {
             let bedno = 0;
             for (let i = 0; i < this.aprt.apartment_Rooms.length; i++) {
@@ -158,7 +148,6 @@ export class ApartmentDetailsComponent implements OnInit {
                   bedno++;
 
                   this.roomsBedRoom[i].room_Beds[x] = { ...this.roomsBedRoom[i].room_Beds[x], "bed_number": bedno };
-                  // console.log( this.roomsBedRoom[i].room_Beds[x])
 
                 }
               } else {
@@ -166,7 +155,6 @@ export class ApartmentDetailsComponent implements OnInit {
                 for (let x = 0; x < this.aprt.apartment_Rooms[i].room_Beds.length; x++) {
                   bedno++;
                   this.aprt.apartment_Rooms[i].room_Beds[x] = { ...this.aprt.apartment_Rooms[i].room_Beds[x], "bed_number": bedno };
-                  //  console.log( this.roomsLiving[i]);
                 }
                 this.roomsLiving.push(this.aprt.apartment_Rooms[i]);
               }
@@ -174,9 +162,6 @@ export class ApartmentDetailsComponent implements OnInit {
           } else {
             console.warn('apartment_Rooms is not an array:', this.aprt.apartment_Rooms);
           }
-
-          console.log('Bedrooms:', this.roomsBedRoom);
-          console.log('Living rooms:', this.roomsLiving);
         },
         (error) => {
           console.error('Error fetching apartment details:', error);
@@ -508,7 +493,6 @@ export class ApartmentDetailsComponent implements OnInit {
   private async convertImageToBase64(url: string): Promise<string> {
     const response = await fetch(url , {mode: "no-cors"});
     const blob = await response.blob();
-    console.log(url);
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(blob);

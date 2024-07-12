@@ -382,7 +382,6 @@ export class ContractComponent implements OnInit {
     this.sec_name = item.set_C_Name;
     this.sec_desc = item.set_C_Desc;
     this.sec_order = item.set_C_Order;
-    console.log(item);
     this.display2 = 'block';
   }
 

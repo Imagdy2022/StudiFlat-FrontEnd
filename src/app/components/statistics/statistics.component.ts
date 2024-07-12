@@ -353,7 +353,6 @@ export class StatisticsComponent implements OnInit {
 
   options: any;
   ModuelChartClick(module: any) {
-    // console.log(this?.rangeDates[0]);
     this.subscriptions.push(
       this._adminservices
         .AnalysisChart(
@@ -440,8 +439,6 @@ export class StatisticsComponent implements OnInit {
       },
     };
 
-    console.log(this.Chart_Module);
-    console.log(this.data);
   }
   AnalysisChartFinance() {
     const documentStyle = getComputedStyle(document.documentElement);

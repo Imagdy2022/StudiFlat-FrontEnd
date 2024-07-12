@@ -56,7 +56,7 @@
 
         <div class="pt-4">
       <!--start form of general info-->
-        <app-first-step *ngIf="activeIndex == 0" (jumbToNextSteb)="changeItem(1)" (getId)="id($event)"
+        <app-first-step *ngIf="activeIndex == 3" (jumbToNextSteb)="changeItem(1)" (getId)="id($event)"
         [addApartment]="param" [id]="UUID"></app-first-step>
     <!--end form of general info-->
 
@@ -70,7 +70,7 @@
       </app-third-step>
 
     <!--start form of Backup information-->
-    <app-forth-step [id]="UUID" *ngIf="activeIndex == 3" (jumbToNextSteb)="changeItem(0)" (jumbToPrevSteb)="changeItem(2)"
+    <app-forth-step [id]="UUID" *ngIf="activeIndex == 0" (jumbToNextSteb)="changeItem(0)" (jumbToPrevSteb)="changeItem(2)"
         [addApartment]="param">
     </app-forth-step>
     <!--end form of Backup information-->
