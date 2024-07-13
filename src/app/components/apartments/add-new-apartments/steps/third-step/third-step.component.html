@@ -181,7 +181,7 @@
                 </div>
 
                 <div class="row" *ngIf="edit == 'EditForm'">
-                  <div class="col-md-2 card33" *ngFor="let image of aprt_details_Edit?.trash_pin_image; index as i">
+                  <div class="col-md-2 card33" *ngFor="let image of aprt_details_Edit?.tarsh_Pin_Imgs; index as i">
                     <a (click)="opencloseModal(image.pic_URL)">
                       <img [src]="image.pic_URL" alt="Avatar" style="width: 339px; height: 205px;" class="cursor" />
                     </a>

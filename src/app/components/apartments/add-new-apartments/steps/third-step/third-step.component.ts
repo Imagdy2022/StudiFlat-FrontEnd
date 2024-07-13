@@ -135,61 +135,61 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this._ApartmentService.getApartDetail(this.idParamterEdit).subscribe((res) => {
         this.subscriptions.push(
-          this._OnwerService.getOwner(res.general_Info['apartment_Owner']).subscribe((res) => {
+          this._OnwerService.getOwner(res.apartment_Basic_Info['apartment_Owner']).subscribe((res) => {
             // this.nameOwner=res.owner_FirstName +" "+res.owner_LastName;
           })
         );
         this.dataEdit = res;
-        this.nameApartment = res.general_Info['apt_Name'];
-        this.nameAddress = res.general_Info['apt_Address'];
+        this.nameApartment = res.apartment_Basic_Info['apartment_Name'];
+        this.nameAddress = res.apartment_Basic_Info['apartment_Location'];
         this.localapt_Transports = res.trasponrts;
         this.afterUploadImage = 'false';
 
-        this.passContract = res.contract_Main['contract_Path'];
-        this.apt_FloorNo = res.general_Info['apt_FloorNo'];
-        this.aprt_details_Edit = res.rent_Rules;
-        this.apt_inputfields = res.rent_Rules['apt_inputfields'];
+        this.passContract = res.apartment_Contract['contract_Path'];
+        this.apt_FloorNo = res.apartment_Basic_Info['apartment_Floor'];
+        this.aprt_details_Edit = res.apartment_Check_Rules;
+        this.apt_inputfields = res.apartment_Check_Rules['apt_inputfields'];
 
-        this.create_Apart_contract.patchValue(res.rent_Rules);
+        this.create_Apart_contract.patchValue(res.apartment_Check_Rules);
         this.create_Apart_contract
           .get('digital_Contract')
-          ?.setValue(res.contract_Main['digital_Contract']);
+          ?.setValue(res.apartment_Contract['digital_Contract']);
         this.create_Apart_contract.get('tenantName')?.setValue('StudiFlats');
         this.create_Apart_contract
           .get('rent_Fees')
-          ?.setValue(res.contract_Main['rent_Fees']);
+          ?.setValue(res.apartment_Contract['rent_Fees']);
         this.create_Apart_contract
           .get('contractDate_Start')
-          ?.setValue(new Date(res.contract_Main['contractDate_Start']));
+          ?.setValue(new Date(res.apartment_Contract['contractDate_Start']));
         this.create_Apart_contract
           .get('contractDate_End')
-          ?.setValue(new Date(res.contract_Main['contractDate_End']));
+          ?.setValue(new Date(res.apartment_Contract['contractDate_End']));
         this.create_Apart_contract
           .get('contract_Path')
-          ?.setValue(res.contract_Main['contract_Path']);
+          ?.setValue(res.apartment_Contract['contract_Path']);
         this.create_Apart_contract
           .get('trash_pin_image')
-          ?.setValue(res.rent_Rules['tarsh_Pin_Imgs']);
-        this.create_Apart_contract.get('checkType')?.setValue(res.rent_Rules['checkType']);
-        this.create_Apart_contract.get('landLord')?.setValue(res.contract_Main['landLord']);
-        this.nameOwner = res.contract_Main['landLord'];
+          ?.setValue(res.apartment_Check_Rules['tarsh_Pin_Imgs']);
+        this.create_Apart_contract.get('checkType')?.setValue(res.apartment_Check_Rules['checkType']);
+        this.create_Apart_contract.get('landLord')?.setValue(res.apartment_Contract['landLord']);
+        this.nameOwner = res.apartment_Contract['landLord'];
 
-        if (res.rent_Rules['checkType'] == 'Self_Check_In') {
+        if (res.apartment_Check_Rules['checkType'] == 'Self_Check_In') {
           this.Createcheckintype = 'self check in';
         } else {
           this.Createcheckintype = 'service check in';
         }
 
-        this.door_Img = res.rent_Rules['door_Img'];
-        this.safe_Img = res.rent_Rules['safe_Img'];
-        this.building_Img = res.rent_Rules['building_Img'];
-        this.apt_roles = res.rent_Rules['apt_rules'];
-        this.contractDetails = res.contract_Main['contractDetails'];
+        this.door_Img = res.apartment_Check_Rules['door_Img'];
+        this.safe_Img = res.apartment_Check_Rules['safe_Img'];
+        this.building_Img = res.apartment_Check_Rules['building_Img'];
+        this.apt_roles = res.apartment_Check_Rules['apt_rules'];
+        this.contractDetails = res.apartment_Contract['contractDetails'];
 
         this.issshowdoor = 'door';
         this.issshowbuilding = 'building';
         this.issshowsafe = 'safe';
-        if (res.contract_Main['digital_Contract'] == true) {
+        if (res.apartment_Contract['digital_Contract'] == true) {
           this.CreateContract = 'Yes';
           this.createcontractpage = true;
         } else {
