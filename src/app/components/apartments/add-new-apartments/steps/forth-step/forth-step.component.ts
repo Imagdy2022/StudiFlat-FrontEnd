@@ -89,12 +89,12 @@ export class ForthStepComponent {
   getApartmentDetails() {
     this.subscriptions.push(this._ApartmentService.getApartDetail(this.idParamterEdit).subscribe((res) => {
 
-      this.aprt_details_Edit = res.backup_Info
+      this.aprt_details_Edit = res.apartment_Backup_Info
       this.wifi = res.rent_Rules
 
 
-       this.PostBackupInfo.patchValue(res.backup_Info);
-       this.inputField=res.backup_Info["apartment_Addons_Fields"]
+       this.PostBackupInfo.patchValue(res.apartment_Backup_Info);
+       this.inputField=res.apartment_Backup_Info["apartment_Addons_Fields"]
       //  if(res.backup_Info["payment_Methods"][0].payment_Method_Name=='false'){
       //   this.checkedOnline=false
       //  }else{
@@ -296,8 +296,8 @@ export class ForthStepComponent {
       return
     }
   }
-  Create_PostBackupInfo(data: any) { 
-    this.Rooms_Devices=[];   
+  Create_PostBackupInfo(data: any) {
+    this.Rooms_Devices=[];
     for(let i=0;i<this.rooms.length;i++)
     {
       let itemDevices=[];
@@ -306,7 +306,7 @@ export class ForthStepComponent {
       {
         let device=this.Devices[j]?.item;
         delete device?.checked;
-        itemDevices.push(device) } 
+        itemDevices.push(device) }
       }
     this.Rooms_Devices.push({
       room_ID:JSON.parse(localStorage.getItem('apartmentResponse')!).rooms_IDs[i],
@@ -315,7 +315,7 @@ export class ForthStepComponent {
       });
       itemDevices=[]
     }
-      
+
 
     const payloadData: any = {
       ...data.value,

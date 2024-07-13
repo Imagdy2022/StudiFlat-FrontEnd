@@ -231,8 +231,8 @@
                   </div>
                 </div>
               </div>
-              <img *ngIf="edit == 'EditForm' && afterUploadImage == 'false' && dataEdit.c_Type != 'File'" [src]="passContract" style="margin-bottom: 25px;" class="imgPreviewUploader cursor" />
-              <a [href]="passContract" *ngIf="edit == 'EditForm' && afterUploadImage == 'false' && dataEdit.c_Type == 'File'" style="font-size: large;" target="_blank">View PDF</a>
+              <img *ngIf="edit == 'EditForm' && afterUploadImage == 'false' && dataEdit.c_Type != 'File'" [src]="safe_Img" style="margin-bottom: 25px;" class="imgPreviewUploader cursor" />
+              <a [href]="safe_Img" *ngIf="edit == 'EditForm' && afterUploadImage == 'false' && dataEdit.c_Type == 'File'" style="font-size: large;" target="_blank">View PDF</a>
             </div>
           </div>
 
