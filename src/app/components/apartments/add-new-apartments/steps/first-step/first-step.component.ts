@@ -731,8 +731,8 @@ this.ID= Guid.create();
     let files = event.target.files;
 
     if (files) {
-      if (this.counter + files.length > 4) {
-        this.message = 'Only a maximum of 4 files are allowed.';
+      if (this.counter + files.length > 7) {
+        this.message = 'Only a maximum of 7 files are allowed.';
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
