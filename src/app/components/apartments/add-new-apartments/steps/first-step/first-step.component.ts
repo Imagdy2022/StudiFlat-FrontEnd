@@ -921,8 +921,7 @@ this.display11=false
   }
   setBedRoom(key:any,value:any,id:number)
   {
-    this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
-
+    this.bedroomsToApi[id][key]=value.target.value;
   }
   setBedNo(key:any,value:any,id:number)
   {
