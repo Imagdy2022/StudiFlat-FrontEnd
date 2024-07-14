@@ -241,7 +241,6 @@ this.n_ofToilets=numOfBath;
     //  const data =JSON.parse(localStorage.getItem("create_Apart_Equ")!);
     let parsedData = data.apartment_Equipments;
     this.roomType = [];
-   console.log(parsedData)
     // section of room
     this.arraynewFieldRoomDetails = [];
     let arrRoom = [];

@@ -64,6 +64,8 @@ export class ForthStepComponent {
     if (data !== null) {
       let parsedData = JSON.parse(data);
       this.selectedRooms = parsedData.apartment_BedRoomsNo
+
+
     }
 
    }
@@ -85,13 +87,22 @@ export class ForthStepComponent {
   }
   edit =""
   aprt_details_Edit :any
+  storedRooms:any;
   wifi:any
   getApartmentDetails() {
     this.subscriptions.push(this._ApartmentService.getApartDetail(this.idParamterEdit).subscribe((res) => {
 
       this.aprt_details_Edit = res.apartment_Backup_Info
-      this.wifi = res.rent_Rules
+      this.wifi = res.apartment_Check_Rules
+      this.storedRooms = res.apartment_Backup_Info?.apartment_Rooms_Devices || [];
 
+      this.rooms = this.storedRooms.map((storedRoom:any) => ({
+        ...storedRoom,
+        items: storedRoom.room_Devices.map((device:any) => ({
+          ...device,
+          checked: true
+        }))
+      }));
 
        this.PostBackupInfo.patchValue(res.apartment_Backup_Info);
        this.inputField=res.apartment_Backup_Info["apartment_Addons_Fields"]
@@ -114,6 +125,7 @@ export class ForthStepComponent {
 
 
   }
+
   // get  local storage
   getLocalStorage(): void {
     const data = localStorage.getItem("PostBackupInfo");
@@ -127,15 +139,13 @@ export class ForthStepComponent {
       let parsedData = JSON.parse(data);
       this.PostBackupInfo.patchValue(parsedData);
 
+
       this.CreateapartmentCurrentlyExisting = parsedData.CreateapartmentCurrentlyExisting;
       this.selectedContract = { 'url': parsedData.apartment_Damages_Imgs[0] }
       // payment till we make finale one
       this.checkedOnline = Boolean(parsedData.apartment_Is_Online_Payment);
       this.checkSecurityDeposit = Boolean(parsedData.apartment_Is_Security_Payment);
       this.checkedCash = Boolean(parsedData.apartment_Is_Cash_Payment);
-
-
-
 
     }
   }
