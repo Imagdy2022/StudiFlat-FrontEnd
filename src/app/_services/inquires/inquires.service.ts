@@ -37,7 +37,7 @@ export class InquiresService {
   }
 
   GetRequestDetails(id: any): Observable<any> {
-    const url = environment.apiUrl + '/Requests/GetInquiryDetails?ID=' + id;
+    const url = environment.apiUrl + '/ApartmentV2/Booking_InDetails?Booking_ID=' + id;
     return this.http.get<any>(url, { headers: this.headers });
   }
 
@@ -90,6 +90,37 @@ export class InquiresService {
     const url = environment.apiUrl + '/Requests/ApproveRequest?Req_ID=' + id;
     return this.http.put<any>(url, id, { headers: this.headers });
   }
+
+/***    */
+requestApproval(reqId: string, valid: boolean, rejectReason: string = ''): Observable<any> {
+  const url = environment.apiUrl + '/ApartmentV2/RequestApproval';
+  let params = new HttpParams()
+    .set('Req_ID', reqId)
+    .set('Valid', valid.toString());
+
+  if (!valid) {
+    params = params.set('Reject_Reason', rejectReason);
+  }
+
+  return this.http.post(url, {}, { params });
+}
+
+validatePassport(passportId: string, isValid: boolean, rejectReason: string = ''): Observable<any> {
+  const body = [
+    {
+      passport_ID: passportId,
+      is_Valid: isValid,
+      reject_Reason: rejectReason
+    }
+  ];
+  const url = environment.apiUrl + '/ApartmentV2/ValidatePassport';
+
+  return this.http.post(url, body);
+}
+/** */
+
+
+
   ResginContract(id: any): Observable<any> {
     const url = environment.apiUrl + '/Requests/ResignContract?Req_ID=' + id;
     return this.http.post<any>(url, id, { headers: this.headers });

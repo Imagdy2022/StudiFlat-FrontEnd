@@ -248,10 +248,20 @@ this.ID= Guid.create();
         this.isShow = false;
       }
       if(parsedData.apartment_Rooms){
-        this.bedrooms.length = parsedData.apartment_Rooms.length
-      }
-      if(parsedData.apartment_Rooms){
         this.bedroomsToApi = parsedData.apartment_Rooms;
+        for(let i=0;i<this.bedroomsToApi.length;i++)
+        {
+          if(this.bedroomsToApi[i].room_Type=='shared_area')
+          {
+         this.bedPrice=this.bedroomsToApi[i].bed_Price;
+         this.ServiceFees=this.bedroomsToApi[i].bed_Service_Fees;
+         this.SecurityDeposit=this.bedroomsToApi[i].bed_SecuirtyDeposit;
+         this.isShow=true; 
+         this.showBedSection=true;
+         this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
+           }
+        }
+        this.bedrooms= this.bedroomsToApi;
       }
       this.generalInfoForm.patchValue(parsedData);
       this.generalInfoForm.get('apartment_Images')?.patchValue(parsedData.apartment_Images);
@@ -731,7 +741,7 @@ this.ID= Guid.create();
     let files = event.target.files;
 
     if (files) {
-      if (this.counter + files.length > 7) {
+      if (this.counter + files.length > 30) {
         this.message = 'Only a maximum of 7 files are allowed.';
         this.messageService.add({
           severity: 'error',
