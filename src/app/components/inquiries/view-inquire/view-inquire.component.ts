@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  ViewChild , ElementRef} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import saveAs from 'file-saver';
 import { MenuItem, MessageService } from 'primeng/api';
@@ -6,23 +6,38 @@ import { Observable, Subscription } from 'rxjs';
 import { InquiresService } from 'src/app/_services/inquires/inquires.service';
 import { Guid } from 'guid-typescript';
 
+import { ConfirmationService, ConfirmEventType } from 'primeng/api';
+
 @Component({
   selector: 'app-view-inquire',
   templateUrl: './view-inquire.component.html',
   styleUrls: ['./view-inquire.component.css'],
+  providers: [ConfirmationService, MessageService]
 })
 export class ViewInquireComponent implements OnInit {
+  @ViewChild('confirmPopup') confirmPopup: ElementRef;
+
   home: MenuItem | undefined;
   gfg: MenuItem[] | undefined;
   showPassportModal: any;
   subscriptions:Subscription[] = [];
+
+  rejectReason: string = '';
+  showRejectReasonDialog: boolean = false;
+  currentAction: string = '';
+
+
+  showConfirmDialog: boolean = false;
+  reqId: string = '';
+
+
 
   param: any;
   constructor(
     private _inquiresService: InquiresService,
     private _ActivatedRoute: ActivatedRoute,
     private messageService: MessageService,
-
+    private confirmationService: ConfirmationService,
     public router: Router
   ) {
     this.param = _ActivatedRoute.snapshot.paramMap.get('id');
@@ -45,6 +60,105 @@ export class ViewInquireComponent implements OnInit {
     this.GetRequestDetails();
     this.checkRole();
   }
+
+
+  /****888888888 */
+
+
+  showConfirm(action: string) {
+    this.currentAction = action;
+    if (action === 'confirm') {
+      this.showConfirmDialog = true;
+    } else if (action === 'reject') {
+      this.showRejectReasonDialog = true;
+    }
+  }
+
+  // confirmApproval() {
+
+  //   console.log('Approval confirmed');
+  //   this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Approval confirmed' });
+  //   this.showConfirmDialog = false;
+  // }
+
+
+  confirmApproval() {
+    this._inquiresService.requestApproval(this.reqId, true).subscribe(
+      response => {
+        console.log('Approval confirmed', response);
+        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Approval confirmed' });
+        this.showConfirmDialog = false;
+      },
+      error => {
+        console.error('Error confirming approval', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Approval confirmation failed' });
+      }
+    );
+  }
+
+  // rejectApproval() {
+
+  //   console.log('Approval rejected with reason:', this.rejectReason);
+  //   this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReason}` });
+  //   console.log(this.rejectReason)
+  //   this.showRejectReasonDialog = false;
+  // }
+
+
+  rejectApproval() {
+    this._inquiresService.requestApproval(this.reqId, false, this.rejectReason).subscribe(
+      response => {
+        console.log('Approval rejected with reason:', this.rejectReason, response);
+        this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReason}` });
+        this.showRejectReasonDialog = false;
+      },
+      error => {
+        console.error('Error rejecting approval', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Approval rejection failed' });
+      }
+    );
+  }
+
+  onCloseRejectDialog() {
+    this.showRejectReasonDialog = false;
+  }
+
+  onCloseConfirmDialog() {
+    this.showConfirmDialog = false;
+  }
+ /****888888888 */
+passportId:string='';
+
+ handleAction(isValid: boolean) {
+  let rejectReason = '';
+  if (!isValid) {
+    rejectReason = this.rejectReason;
+  }
+
+  this._inquiresService.validatePassport(this.passportId, isValid, rejectReason).subscribe(
+    response => {
+      if (isValid) {
+        console.log('Approval confirmed', response);
+        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Approval confirmed' });
+        this.showConfirmDialog = false;
+      } else {
+        console.log('Approval rejected with reason:', this.rejectReason, response);
+        this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReason}` });
+        this.showRejectReasonDialog = false;
+      }
+    },
+    error => {
+      console.error('Error processing request', error);
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Request failed' });
+    }
+  );
+}
+
+ /**888888888 */
+
+
+
+
   isAccordionOpen: boolean = false;
 
   toggleContent(): void {
@@ -148,10 +262,21 @@ export class ViewInquireComponent implements OnInit {
   GetRequestDetails() {
     this.subscriptions.push(    this._inquiresService.GetRequestDetails(this.param).subscribe(
       (res) => {
-        this.inquire_details = res[0];
-        this.selectedContractImg = res[0].contract_Path;
-        this.prop_imgs = res[0].apt_Imgs;
-        this.hidepassport = res[0].paid;
+        console.log(res);
+        // console.log(res.booking_ID);
+        // this.inquire_details = res[0];
+        // this.selectedContractImg = res[0].contract_Path;
+        // this.prop_imgs = res[0].apt_Imgs;
+        // this.hidepassport = res[0].paid;
+
+        this.reqId=res.booking_ID;
+        // this.passportId=res.booking_Beds.guest_Passport.
+        this.inquire_details = res;
+        this.selectedContractImg = res.apartment_Pictures[0];
+        this.prop_imgs = res.apartment_Pictures;
+        this.hidepassport = res.booking_Beds[0]?.guest_Passport?.passport_Approved;
+        this.value = res.apartment_Rating;
+
       },
       (error) => {
         console.error('Error fetching owners:', error);

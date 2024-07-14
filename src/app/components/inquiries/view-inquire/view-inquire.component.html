@@ -117,7 +117,7 @@
                     <div>
                         <p class="fw-1000 mr-3 mb-3 fs-6">Descriptions</p>
                         <div class="description-text">
-                            <p class="text-muted small">{{ inquire_details?.apt_Descirpt }}</p>
+                            <p class="text-muted small">{{ inquire_details?.apartment_Description }}</p>
                         </div>
                     </div>
                 </div>
@@ -138,29 +138,29 @@
                 <div class="col-12 col-md-5">
 
                     <div class="mt-0">
-                        <h4 class="fw-bold my-0">{{ inquire_details?.apt_Name }}</h4>
-                        <p class="gray mt-0">{{ inquire_details?.apt_StName }}</p>
+                        <h4 class="fw-bold my-0">{{ inquire_details?.apartment_Name }}</h4>
+                        <!-- <p class="gray mt-0">{{ inquire_details?.apartment_Location }}</p> -->
                         <h5 class="blue fw-bold my-0">
-                            {{ inquire_details?.apt_Price }} / month
+                            {{ inquire_details?.apartment_Price}} / month
                         </h5>
                         <div class="d-flex">
                             <div class="d-flex justify-content-between me-3">
                                 <img src="assets/images/apartmentImages/location.svg" />
-                                <p class="mt-3 ms-2 gray">{{ inquire_details?.apt_Address }}</p>
+                                <p class="mt-3 ms-2 gray">{{ inquire_details?.apartment_Location }}</p>
                             </div>
                             <div class="d-flex justify-content-between me-3">
                                 <img src="assets/images/apartmentImages/room_bed.svg" />
-                                <p class="mt-3 gray ms-2">{{ inquire_details?.apt_Bedrooms }}</p>
+                                <p class="mt-3 gray ms-2">{{ inquire_details?.apartment_RoomsNo }}</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <img src="assets/images/apartmentImages/user.svg" />
-                                <p class="gray mt-3 ms-2">{{ inquire_details?.apt_GuestNum}}</p>
+                                <p class="gray mt-3 ms-2">{{ inquire_details?.apartment_PersonsNo}}</p>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex mt-0">
                         <img src="assets/images/apartmentImages/schedule time.svg" />
-                        <p class="gray mt-3 ms-2">Time period: {{ inquire_details?.apt_TimePeriod }} </p>
+                        <p class="gray mt-3 ms-2">Time period: {{ inquire_details?.booking_Start_Date }} to {{ inquire_details?.booking_End_Date }} </p>
                     </div>
                     <div class="d-flex mt-0">
                         <p class="fw-bold my-0">Requested Appartment</p>
@@ -192,34 +192,112 @@
                           <div class="row g-3 mb-3">
                               <div class="col-md-6">
                                   <label for="startDate" class="form-label">Start Date</label>
-                                  <input type="text" class="form-control" id="startDate"  value="{{ inquire_details?.start_Date }}" >
+                                  <input type="text" class="form-control" id="startDate"  value="{{ inquire_details?.booking_Start_Date }}" >
                               </div>
                               <div class="col-md-6">
                                   <label for="endDate" class="form-label">End Date</label>
-                                  <input type="text" class="form-control" id="endDate" value="{{ inquire_details?.end_Date }}">
+                                  <input type="text" class="form-control" id="endDate" value="{{ inquire_details?.booking_End_Date }}">
                               </div>
                           </div>
                           <div class="row g-3 mb-3">
                               <div class="col-md-6">
                                   <label for="numberOfGuests" class="form-label">Number of Guests</label>
-                                  <input type="text" class="form-control" id="numberOfGuests" value="{{ inquire_details?.req_GuestNo }}">
+                                  <input type="text" class="form-control" id="numberOfGuests" value="{{ inquire_details?.booking_Guests_NOs }}">
                               </div>
                               <div class="col-md-6">
                                   <label for="agencyCode" class="form-label">Agency / broker code</label>
-                                  <input type="text" class="form-control" id="agencyCode" value="{{ inquire_details?.agency_Code}}">
+                                  <input type="text" class="form-control" id="agencyCode" value="" placeholder="agency code">
                               </div>
                           </div>
                           <div class="mb-3">
                               <label for="selectRole" class="form-label">Select Your Role</label>
-                              <input type="text" class="form-control" id="selectRole" value="{{ inquire_details?.role}}">
+                              <input type="text" class="form-control" id="selectRole" value="{{ inquire_details?.booking_Guest_Role}}">
                           </div>
                           <div class="mb-3">
                               <label for="universityName" class="form-label">University Name</label>
-                              <input type="text" class="form-control" id="universityName" value="{{ inquire_details?.purpose_Coming}}">
+                              <input type="text" class="form-control" id="universityName" value="{{ inquire_details?.booking_University}}">
                           </div>
+<!--
+                          <p-confirmPopup #confirmPopup>
+                            <ng-template pTemplate="content" let-message>
+                                <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                                    <i [class]="message.icon" class="text-6xl text-primary-500"></i>
+                                    <p>{{ message.message }}</p>
+                                    <div *ngIf="message.showReasonInput">
+                                        <input type="text" pInputText placeholder="Enter reason" [(ngModel)]="rejectReason"/>
+                                    </div>
+                                </div>
+                                <button type="button" (click)="onSubmit(message.action)" class="btn btn-primary">Submit</button>
+                            </ng-template>
+                        </p-confirmPopup> -->
+                        <p-confirmPopup></p-confirmPopup>
 
-                              <button type="button" class="btn btn-primary btn-block mb-0  fs-6" style=" width: 100%; border-radius:10px; padding:11px">Confirm</button>
-                              <button type="button" class="btn btn-block fs-6  " style="width: 100%; border-radius:10px; background-color:#D2D9E1;    color: #1F4068; padding:11px">Reject</button>
+                              <!-- <button type="button" class="btn btn-primary btn-block mb-0  fs-6" style=" width: 100%; border-radius:10px; padding:11px">Confirm</button>
+                              <button type="button" class="btn btn-block fs-6  " style="width: 100%; border-radius:10px; background-color:#D2D9E1;    color: #1F4068; padding:11px">Reject</button> -->
+                              <!-- <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirm('confirm')">Confirm</button>
+                              <button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirm('reject')">Reject</button>
+
+                              <p-dialog header="Provide Reject Reason" [(visible)]="showRejectReasonDialog" [modal]="true" [closable]="false">
+                                <div class="ui-g">
+                                  <div class="ui-g-12">
+                                    <input type="text" pInputText placeholder="Enter reason" [(ngModel)]="rejectReason" class="w-full"/>
+                                  </div>
+                                  <div class="ui-g-12 text-center mt-4">
+                                    <button type="button" pButton label="Submit" (click)="rejectApproval()"></button>
+                                  </div>
+                                </div>
+                              </p-dialog> -->
+                 <!-- Buttons to trigger confirmation and rejection -->
+<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirm('confirm')">Confirm</button>
+<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirm('reject')">Reject</button>
+
+<!-- Confirm Dialog -->
+<div *ngIf="showConfirmDialog" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
+  <div class="modal-dialog" role="document" style="max-width: 371px;">
+    <div class="modal-content" style="margin-top: 150px;">
+      <button type="button" aria-label="Close" class="close"
+        style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;"
+        (click)="onCloseConfirmDialog()">
+        <span aria-hidden="true" style="color: #000000; font-size: 35px;">×</span>
+      </button>
+      <div class="modal-body">
+        <div class="row text-center justify-content-center">
+          <p>Are you sure you want to confirm?</p>
+          <div class="ui-g-12 text-center mt-4">
+            <button type="button" pButton label="Yes" (click)="confirmApproval()"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reject Reason Dialog -->
+<div *ngIf="showRejectReasonDialog" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
+  <div class="modal-dialog" role="document" style="max-width: 371px;">
+    <div class="modal-content" style="margin-top: 150px;">
+      <button type="button" aria-label="Close" class="close"
+        style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;"
+        (click)="onCloseRejectDialog()">
+        <span aria-hidden="true" style="color: #000000; font-size: 35px;">×</span>
+      </button>
+      <div class="modal-body">
+        <div class="row text-center justify-content-center">
+          <div class="ui-g-12">
+            <!-- <input type="text" pInputText placeholder="Enter reason" [(ngModel)]="rejectReason" class="w-full"/> -->
+
+            <input type="text" pInputText  [(ngModel)]="rejectReason" name="rejectReason" placeholder="Enter reason" class="form-control w-full"  />
+
+          </div>
+          <div class="ui-g-12 text-center mt-4">
+            <button type="button" pButton label="Submit" (click)="rejectApproval()"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
                       </form>
                   </div>
@@ -601,18 +679,18 @@
             </div>
           </div>
 
-        <div class="mb-4">
+        <div class="mb-4" *ngFor="let bed of inquire_details?.booking_Beds">
           <p-accordion id="bed">
             <!-- Bed 1 Section -->
             <p-accordionTab   [selected]="true" [headerStyle]="{'background-color': '#fff' }">
               <ng-template pTemplate="header"  >
                 <div class="d-flex justify-content-between align-items-center m-0  rounded w-100 px-2">
-                  <div class="fw-bold">Bed 1</div>
-                  <div>Single room</div>
-                  <div>€ 300</div>
-                  <div>€ 100</div>
-                  <div>€ 50</div>
-                  <div class="badge rented">Rented</div>
+                  <div class="fw-bold">{{ bed.bed_No }}</div>
+                  <div>{{ bed.room_Type }}</div>
+                  <div>€ {{ bed.bed_Price }}</div>
+                  <div>€ {{ bed.secuirty_Deposit }}</div>
+                  <div>€ {{ bed.service_Fees }}</div>
+                  <div class="badge" [ngClass]="{'rented': bed.status === 'Rented', 'available': bed.status !== 'Rented'}">{{ bed.status }}</div>
                 </div>
               </ng-template>
               <!-- <hr class="m-0"/> -->
@@ -623,17 +701,17 @@
                       <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile Image">
                     </div>
                     <div class="col-lg-3 border-end">
-                      <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
-                      <p class="m-0 text-muted">osman2025@gmail.com</p>
+                      <h6 class="fw-bold text-lowercase">{{ bed.guest_Data.guest_Name }}</h6>
+                      <p class="m-0 text-muted">{{ bed.guest_Data.guest_Mail }}</p>
                     </div>
                     <div class="col-lg-3 text-right border-end">
-                      <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
+                      <p class="m-0"><strong>Check In Date</strong><br>{{ bed.guest_Data.check_In }}</p>
                     </div>
                     <div class="col-lg-3 text-right border-end">
-                      <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
+                      <p class="m-0"><strong>Check Out Date</strong><br>{{ bed.guest_Data.check_Out }}</p>
                     </div>
                     <div class="col-lg-2 text-right">
-                      <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
+                      <p class="m-0"><strong>Phone Number</strong><br>{{ bed.guest_Data.phone_Number }}</p>
                     </div>
                   </div>
                 </div>
@@ -651,14 +729,18 @@
                   <p-accordionTab id="pass"  class="custom-accordion-tab" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false" >
                     <ng-template pTemplate="header"  >
                         <div class="d-flex align-items-center justify-content-start">
-                          <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                          <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                          <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                          <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
+                          <img *ngIf="bed.guest_Passport.passport_Approved" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                          <img *ngIf="!bed.guest_Passport.passport_Approved" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                           <span class="ml-2">Passport</span>
                         </div>
                         <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                          <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                            <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                          <span class="badge approve">Approved</span>
+                          <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.guest_Passport.passport_Date }}</span>
+                            <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.guest_Passport.passport_Time }}</span>
+                          <!-- <span class="badge approve">Approved</span> -->
+                          <span class="badge approve" *ngIf="bed.guest_Passport.passport_Approved">Approved</span>
+                          <span class="badge reject" *ngIf="!bed.guest_Passport.passport_Approved">Rejected</span>
                         </div>
 
 
@@ -666,13 +748,63 @@
                     </ng-template>
                     <div class="card-body d-grid align-items-center">
                       <div class="row">
-                        <img src="https://via.placeholder.com/150" class="img-fluid col-6 imgpass" alt="Passport Image">
+                        <img [src]="bed.guest_Passport.passport_Photo || 'https://via.placeholder.com/150'" class="img-fluid col-6 imgpass" alt="Passport Image">
                         <div class="col-5 border-start">
                           <div class="paddingpass">
                             <h5 class="card-title">Passport of tenant</h5>
                             <p class="card-text">Please review passport then confirm or reject it</p>
-                            <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 80%; border-radius:10px; padding:11px">Confirm</button>
-                            <button type="button" class="btn btn-block fs-6" style="width: 80%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px">Reject</button>
+                            <!-- <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 80%; border-radius:10px; padding:11px">Confirm</button>
+                            <button type="button" class="btn btn-block fs-6" style="width: 80%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px">Reject</button> -->
+                           <!-- Buttons to trigger approval and rejection -->
+<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirm('confirm')">Approve Passport</button>
+<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirm('reject')">Reject Passport</button>
+
+<!-- Confirm Dialog -->
+<div *ngIf="showConfirmDialog" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
+  <div class="modal-dialog" role="document" style="max-width: 371px;">
+    <div class="modal-content" style="margin-top: 150px;">
+      <button type="button" aria-label="Close" class="close"
+        style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;"
+        (click)="onCloseConfirmDialog()">
+        <span aria-hidden="true" style="color: #000000; font-size: 35px;">×</span>
+      </button>
+      <div class="modal-body">
+        <div class="row text-center justify-content-center">
+          <p>Are you sure you want to approve this passport?</p>
+          <div class="ui-g-12 text-center mt-4">
+            <button type="button" class="btn btn-primary" (click)="handleAction(true)">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reject Reason Dialog -->
+<div *ngIf="showRejectReasonDialog" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
+  <div class="modal-dialog" role="document" style="max-width: 371px;">
+    <div class="modal-content" style="margin-top: 150px;">
+      <button type="button" aria-label="Close" class="close"
+        style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;"
+        (click)="onCloseRejectDialog()">
+        <span aria-hidden="true" style="color: #000000; font-size: 35px;">×</span>
+      </button>
+      <div class="modal-body">
+        <div class="row text-center justify-content-center">
+          <div class="ui-g-12">
+            <input type="text" [(ngModel)]="rejectReason" placeholder="Enter reason" class="form-control w-full"/>
+          </div>
+          <div class="ui-g-12 text-center mt-4">
+            <button type="button" class="btn btn-primary" (click)="handleAction(false)">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
                           </div>
                         </div>
                       </div>
@@ -1084,487 +1216,7 @@
 
         </div>
 
-        <div class="mb-4">
-          <p-accordion id="bed">
-            <!-- Bed 1 Section -->
-            <p-accordionTab   [selected]="true" [headerStyle]="{'background-color': '#fff' }">
-              <ng-template pTemplate="header"  >
-                <div class="d-flex justify-content-between align-items-center m-0  rounded w-100 px-2">
-                  <div class="fw-bold">Bed 1</div>
-                  <div>Single room</div>
-                  <div>€ 300</div>
-                  <div>€ 100</div>
-                  <div>€ 50</div>
-                  <div class="badge rented">Rented</div>
-                </div>
-              </ng-template>
-              <!-- <hr class="m-0"/> -->
-              <div class="row bg-white m-0 p-4 mb-3">
-                <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
-                      <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile Image">
-                    </div>
-                    <div class="col-lg-3 border-end">
-                      <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
-                      <p class="m-0 text-muted">osman2025@gmail.com</p>
-                    </div>
-                    <div class="col-lg-3 text-right border-end">
-                      <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
-                    </div>
-                    <div class="col-lg-3 text-right border-end">
-                      <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
-                    </div>
-                    <div class="col-lg-2 text-right">
-                      <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p-accordion  [style]="{'background-color': '#f4f3f3'}">
-                <div class="booking-process-container">
-                  <h5 class="booking-process-header">Booking Process</h5>
-                  <p class="booking-process-subtext">View tenant booking process</p>
-                </div>
 
-
-              <!-- <p-accordionTab header="Booking Process"> -->
-                <p-accordion    [style]="{'background-color': '#f4f3f3'}"  >
-                  <!-- Passport Section -->
-                  <p-accordionTab  id="pass"  class="custom-accordion-tab" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false" >
-                    <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Passport</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Approved</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                    <div class="card-body d-grid align-items-center">
-                      <div class="row">
-                        <img src="https://via.placeholder.com/150" class="img-fluid col-6 imgpass" alt="Passport Image">
-                        <div class="col-5 border-start">
-                          <div class="paddingpass">
-                            <h5 class="card-title">Passport of tenant</h5>
-                            <p class="card-text">Please review passport then confirm or reject it</p>
-                            <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 80%; border-radius:10px; padding:11px">Confirm</button>
-                            <button type="button" class="btn btn-block fs-6" style="width: 80%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px">Reject</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </p-accordionTab>
-
-                  <!-- Security Deposit Section -->
-
-                  <p-accordionTab class="custom-accordion-tab" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
-                    <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Security Deposit</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge unpaid">Unpaid</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                    <div class="container mt-3">
-                      <table class="table table-borderless">
-                        <thead>
-                          <tr class="texttable">
-                            <th>Invoice Number</th>
-                            <th>Duration</th>
-                            <th>Amount</th>
-                            <th>Payment Methods</th>
-                            <th>Status</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Invoice435</td>
-                            <td>April 27 - May 27, 2023</td>
-                            <td>$35.00</td>
-                            <td>Visa</td>
-                            <td><span class="badge approve">paid</span></td>
-                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
-                          </tr>
-                          <tr>
-                            <td>Invoice435</td>
-                            <td>April 27 - May 27, 2023</td>
-                            <td>$35.00</td>
-                            <td>Apple Pay</td>
-                            <td><span class="badge unpaid">unpaid</span></td>
-                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </p-accordionTab>
-
-                  <!-- Sign Contract Section -->
-                  <p-accordionTab [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
-                    <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Sign Contract</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">signed</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                    <div class="container mt-3">
-                      <div class="d-flex justify-content-between align-items-center border p-3 rounded mb-3">
-                        <div class="d-flex align-items-center">
-                          <div class="rounded-circle bg-light p-2">
-                           <img src="/assets/images/_File upload icon.svg" alt="">
-                          </div>
-                          <div class="ml-2 mr-3">Contract.pdf</div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <a href="#" class="text-decoration-none text-primary mx-2"><img src="/assets/images/view.svg" class="me-1" alt="">View</a>
-                          <a href="#" class="text-decoration-none text-primary mx-2"> <img src="/assets/images/download.svg" alt="" class="me-1" >Download</a>
-                          <button class="btn custom-btn-outline-primary ml-3">Reassign Contract</button>
-                        </div>
-                      </div>
-                    </div>
-                  </p-accordionTab>
-
-                  <!-- Arriving Details Section -->
-                  <p-accordionTab [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
-                       <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Arriving Details</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                    <!-- <hr class="m-0"/> -->
-                    <div class="container mt-3 mb-3">
-                     <h6 class="fw-bold text-lowercase">Arriving Details</h6>
-                      <p class="text-muted">View tenant arrival date and transportation requirements, if needed</p>
-                      <div class="p-3 rounded bg-light">
-                        <div class="row">
-                          <div class="col border-start">
-                            <div class="text-muted">Check In Date</div>
-                            <div class="font-weight-bold">12 Jun, 2024</div>
-                          </div>
-                          <div class="col border-start">
-                            <div class="text-muted">Check In Time</div>
-                            <div class="font-weight-bold">10:35 PM</div>
-                          </div>
-                          <div class="col border-start">
-                            <div class="text-muted">Transportation</div>
-                            <div class="font-weight-bold">Yes</div>
-                          </div>
-                          <div class="col border-start">
-                            <div class="text-muted">Airport</div>
-                            <div class="font-weight-bold">Berlin Airport</div>
-                          </div>
-                          <div class="col border-start">
-                            <div class="text-muted">Flight Number</div>
-                            <div class="font-weight-bold">#1525335</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </p-accordionTab>
-
-                  <!-- Check In Process Section -->
-                  <p-accordionTab [selected]="true" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
-                    <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Check In Process</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                    <!-- <hr class="m-0"/> -->
-                     <div class="m-0 p-0"   >
-                    <div class="container m-0"   >
-                      <h6 class="fw-bold text-lowercase">Check In Process</h6>
-                      <p class="text-muted">View tenant check-in process from scanning bed QR code to signing the contract and completing the payment process.</p>
-                      <p-accordion   >
-                        <!-- Scanning Bed QR Code Section -->
-                        <p-accordionTab [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
-                          <!-- <hr class="m-0"/> -->
-                         <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Scanning Bed QR Code</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                          <div class="container mt-3 mb-3">
-                            <div class="d-flex justify-content-between align-items-center p-3 rounded bg-light">
-                              <div><strong>Bed QR code:</strong> 363401</div>
-                              <div class="d-flex align-items-center">
-                                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                                  <img src="/assets/images/view.svg" class="me-1" alt=""> View
-                                </a>
-                                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                                  <img src="/assets/images/download.svg" alt="" class="me-1" > Download
-                                </a>
-                                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                                  <img src="/assets/images/share.svg" alt="" class="me-1" > Share
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </p-accordionTab>
-
-                                <!-- Confirm Identity Section -->
-                  <p-accordionTab [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
-                    <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Confirm Identity</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                    <!-- <hr class="m-0"/> -->
-                    <div class="container mt-3">
-                      <h5>Passport of tenant</h5>
-                      <p class="text-muted">Please review passport and tenant image then confirm or reject it</p>
-                      <div class="row mb-3">
-                        <div class="col-md-6">
-                          <img src="https://via.placeholder.com/300x200" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Passport Image">
-                        </div>
-                        <div class="col-md-6">
-                          <img src="https://via.placeholder.com/300x200" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Tenant Image">
-                          <div class="d-flex mt-3">
-                            <button type="button" class="btn btn-primary btn-block mb-0 fs-6 m-1" style="width: 44%; border-radius: 10px; padding: 10px;">Confirm</button>
-                            <button type="button" class="btn btn-block fs-6 m-1" style="width: 44%; border-radius: 10px; background-color: #D2D9E1; color: #1F4068; padding: 10px;">Reject</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </p-accordionTab>
-
-                  <!-- Payments Section -->
-                  <p-accordionTab  [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
-                    <!-- <hr class="m-0"/> -->
-                     <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Payments</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                    <div class="container mt-3">
-                      <table class="table table-borderless">
-                        <thead>
-                          <tr class="texttable">
-                            <th>Invoice Number</th>
-                            <th>Duration</th>
-                            <th>Type</th>
-                            <th>Amount</th>
-                            <th>Payment Methods</th>
-                            <th>Status</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Invoice435</td>
-                            <td>April 27 - May 27, 2023</td>
-                            <td>Security Deposit</td>
-                            <td>$35.00</td>
-                            <td>Visa</td>
-                            <td><span class="badge approve">paid</span></td>
-                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
-                          </tr>
-                          <tr>
-                            <td>Invoice435</td>
-                            <td>April 27 - May 27, 2023</td>
-                            <td>Monthly Rent</td>
-                            <td>$35.00</td>
-                            <td>Apple Pay</td>
-                            <td><span class="badge approve">paid</span></td>
-                            <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </p-accordionTab>
-
-                  <!-- Handover Protocols Section -->
-                  <p-accordionTab [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
-                    <!-- <hr class="m-0"/> -->
-                     <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Handover Protocols</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                    <div class="container mt-3 mb-3">
-                      <div class="d-flex justify-content-between align-items-center p-3 rounded bg-light border">
-                        <div><strong>Handover Protocols</strong></div>
-                        <div class="d-flex align-items-center">
-                          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <img src="/assets/images/view.svg" class="me-1" alt=""> View
-                          </a>
-                          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <img src="/assets/images/download.svg" alt="" class="me-1" > Download
-                          </a>
-                          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <img src="/assets/images/share.svg" alt="" class="me-1" > Share
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </p-accordionTab>
-
-                  <!-- Apartment Rules Section -->
-                  <p-accordionTab  [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
-                    <!-- <hr class="m-0"/> -->
-                     <ng-template pTemplate="header"  >
-                      <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <span class="ml-2">Apartment Rules</span>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
-                      </div>
-
-
-                    <!-- </div> -->
-                  </ng-template>
-                    <div class="container mt-3 mb-3">
-                      <div class="d-flex justify-content-between align-items-center p-3 rounded bg-light border">
-                        <div><strong>Apartment Rules</strong></div>
-                        <div class="d-flex align-items-center">
-                          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <img src="/assets/images/view.svg" class="me-1" alt="">  View
-                          </a>
-                          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <img src="/assets/images/download.svg" alt="" class="me-1" > Download
-                          </a>
-                          <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
-                            <img src="/assets/images/share.svg" class="me-1" alt=""> Share
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </p-accordionTab>
-                        </p-accordion>
-
-                    </div>
-                  </div>
-                  </p-accordionTab>
-
-
-                </p-accordion>
-
-
-            </p-accordion>
-
-            <div class="row bg-white m-0 p-4" id="more-details"  >
-              <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
-                <div class="row align-items-center">
-                  <div class="container mt-3">
-                    <h6 class="fw-bold text-lowercase">More details</h6>
-                    <p class="text-muted">View tenant passport and reported problems, invoices</p>
-                    <div class="accordion" id="accordionExample">
-                      <div class="container mt-3">
-                        <div class="d-flex justify-content-between align-items-center border-bottom py-2">
-                          <div><strong>Problem reports (2)</strong></div>
-                          <div><img src="/assets/images/expand_more.svg" alt=""></div>
-                        </div>
-                      </div>
-                      <div class="container mt-3">
-                        <div class="d-flex justify-content-between align-items-center border-bottom py-2">
-                          <div><strong>Fixed problem (0)</strong></div>
-                          <div><img src="/assets/images/expand_more.svg" alt=""></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="d-flex justify-content-end mt-3">
-                      <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
-                      <button class="btn btn-primary" style="border-radius: 10px; font-size: 14px;">Mark as Available</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </p-accordionTab>
-
-            <!-- end Booking Process Section -->
-
-
-
-          </p-accordion>
-        </div>
 
 
 

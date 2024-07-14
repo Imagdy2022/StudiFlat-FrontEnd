@@ -1,5 +1,6 @@
 import { InquiriesComponent } from './inquiries.component';
 
+
 import { ViewInquireComponent } from './view-inquire/view-inquire.component';
 import { InquireOfferComponent } from './inquire-offer/inquire-offer.component';
 import { InquireEditComponent } from './inquire-edit/inquire-edit.component';
@@ -33,6 +34,14 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { InquiriesoutingModule } from './inquiries-routing.module';
 
 import { AccordionModule } from 'primeng/accordion';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+
+
+import { ConfirmationService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { DialogModule } from 'primeng/dialog';
+
+
 const routes: Routes = [];
 
 @NgModule({
@@ -63,10 +72,13 @@ const routes: Routes = [];
     InquiriesoutingModule,
     CardModule,
     RatingModule,
-    AccordionModule
+    AccordionModule,
+    ConfirmPopupModule,
+    MessagesModule,
+    DialogModule,
   ],
   exports: [],
-  providers: [MessageService],
+  providers: [MessageService,ConfirmationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class InquiriesModule {}
