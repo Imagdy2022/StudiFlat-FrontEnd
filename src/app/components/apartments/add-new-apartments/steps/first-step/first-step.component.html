@@ -535,7 +535,7 @@
                 </div>
                   <div class="mb-3 col-12 col-md-6">
                     <label class="form-label gray fw-bold">Bed price</label>
-                    <input formControlName="bed_Price" [(ngModel)]="bedroomsToApi[i]!.bed_Price" type="number" [class.is-invalid]="generalInfoForm.get('bed_Price')!.invalid && generalInfoForm.get('bed_Price')!.touched " class="form-control rounded-2 py-2 fs-6" (keyup)="setBedRoom('bed_Price',$event.key,i)"/>
+                    <input  [ngModelOptions]="{standalone: true}" [(ngModel)]="bedroomsToApi[i]!.bed_Price" type="number" [class.is-invalid]="generalInfoForm.get('bed_Price')!.invalid && generalInfoForm.get('bed_Price')!.touched " class="form-control rounded-2 py-2 fs-6" (blur)="setBedRoom('bed_Price',$event,i)" />
                     <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Price')?.getError('required') && generalInfoForm.get('bed_Price')?.touched ">
             this field is required
           </span>
@@ -546,8 +546,8 @@
 
                   <div class="mb-3 col-6 col-md-6">
                     <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Security Deposit</label>
-                    <input formControlName="bed_SecuirtyDeposit" [(ngModel)]="bedroomsToApi[i]!.bed_SecuirtyDeposit" min="0" type="number" [class.is-invalid]="generalInfoForm.get('bed_SecuirtyDeposit')!.invalid && generalInfoForm.get('bed_SecuirtyDeposit')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit"
-                    (keyup)="setBedRoom('bed_SecuirtyDeposit',$event.key,i)"/>
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="bedroomsToApi[i]!.bed_SecuirtyDeposit" min="0" type="number" [class.is-invalid]="generalInfoForm.get('bed_SecuirtyDeposit')!.invalid && generalInfoForm.get('bed_SecuirtyDeposit')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit"
+                    (blur)="setBedRoom('bed_SecuirtyDeposit',$event,i)"/>
                     <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_SecuirtyDeposit')?.getError('required') && generalInfoForm.get('bed_SecuirtyDeposit')?.touched ">
                        this field is required
                      </span>
@@ -557,8 +557,8 @@
                 </div>
                   <div class="mb-3 col-6 col-md-6">
                     <label for="exampleInputService_Fees" class="form-label gray fw-bold">Service Fees</label>
-                    <input formControlName="bed_Service_Fees" [(ngModel)]="bedroomsToApi[i]!.bed_Service_Fees" min="0" type="number" [class.is-invalid]="generalInfoForm.get('bed_Service_Fees')!.invalid && generalInfoForm.get('bed_Service_Fees')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees"
-                    (keyup)="setBedRoom('bed_Service_Fees',$event.target,i)"/>
+                    <input  [ngModelOptions]="{standalone: true}" [(ngModel)]="bedroomsToApi[i]!.bed_Service_Fees" min="0" type="number" [class.is-invalid]="generalInfoForm.get('bed_Service_Fees')!.invalid && generalInfoForm.get('bed_Service_Fees')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees"
+                    (blur)="setBedRoom('bed_Service_Fees',$event.target,i)"/>
                     <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Service_Fees')?.getError('required') && generalInfoForm.get('bed_Service_Fees')?.touched ">
                        this field is required
                      </span>
