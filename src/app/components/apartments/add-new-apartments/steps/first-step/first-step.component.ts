@@ -566,8 +566,14 @@ this.ID= Guid.create();
       };
       this.bedroomsToApi.push(studio)
     }
+    let id=null;
+   
+    if(this.idParamterEdit)
+      id=this.idParamterEdit; 
+    else if(JSON.parse(localStorage.getItem('apartmentResponse')!))
+      id=JSON.parse(localStorage.getItem('apartmentResponse')!).uuid;
   let apartment = {
-    apartment_ID:this.ID.value,
+    apartment_ID:id,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
     apartment_Floor:Number(this.generalInfoForm.value['apartment_Floor']),
     apartment_Name: this.generalInfoForm.value['apartment_Name'],
@@ -943,7 +949,7 @@ this.display11=false
   }
   setBedRoom(key:any,value:any,id:number)
   {
-    this.bedroomsToApi[id][key]=value.target.value;
+    this.bedroomsToApi[id][key]=value.target?.value;
   }
   setBedNo(key:any,value:any,id:number)
   {

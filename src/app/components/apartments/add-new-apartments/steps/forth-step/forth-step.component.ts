@@ -329,6 +329,7 @@ export class ForthStepComponent {
     this.subscriptions.push( this._ApartmentService.createPostSec4(payloadData).subscribe((res) => {
       localStorage.removeItem('create_Apart_Equ');
       localStorage.removeItem('BathroomNo');
+      localStorage.removeItem('apartmentResponse');
       this.messageService.add({ severity: 'success', summary: 'Success', detail: `${res.message}` });
       this.router.navigate(['apartments']);
     }, (err: any) => {
