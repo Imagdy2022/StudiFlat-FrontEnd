@@ -150,7 +150,7 @@
         </div>
         <div class="qr-actions">
           <a class="qr-action"
-            (click)="onOpenQrModal(aprt.apartment_QR_Img, aprt.apartment_QRCode,aprt.apartment_Type,aprt.apartment_Code)">
+            (click)="onOpenQrModal(aprt.apartment_QR_Img, aprt.apartment_QRCode,aprt.apartment_Type,aprt.apartment_Code,1)">
             <i class="pi pi-eye"></i> View
           </a>
           <a class="qr-action">
@@ -364,7 +364,7 @@
                 <div class="mb-4">
                   <p-accordion id="bed" [multiple]="true" [activeIndex]="[0]">
                     <p-accordionTab [selected]="true" [headerStyle]="{'background-color': '#fff' }"
-                      *ngFor="let room of aprt.apartment_Rooms">
+                      *ngFor="let room of aprt.apartment_Rooms let i = index">
                       <ng-template pTemplate="header">
                         <div class="d-flex justify-content-between align-items-center m-0 rounded w-100">
                           <div class="fw-bold">{{ room.beds_No }}</div>
@@ -538,7 +538,7 @@
 
                                 <div class="mb-4">
                                   <p-accordion id="bed" [multiple]="true" [activeIndex]="[]">
-                                    <ng-container *ngFor="let bed of room.room_Beds ">
+                                    <ng-container *ngFor="let bed of room.room_Beds   ">
                                       <p-accordionTab [selected]="true" [headerStyle]="{'background-color': '#fff' }">
                                         <ng-template pTemplate="header">
                                           <div
@@ -601,10 +601,10 @@
                                                 </div>
                                                 <div class="doc-actions">
                                                   <button class="btn-view"
-                                                    (click)="onOpenQrModal(bed.bed_QR_Img, bed.bed_QRCode,room.room_Type,aprt.apartment_Code)"><i
+                                                    (click)="onOpenQrModal(bed.bed_QR_Img, bed.bed_QRCode,room.room_Type,aprt.apartment_Code,i+1)"><i
                                                       class="pi pi-eye"></i> View</button>
                                                   <button class="btn-download capture"
-                                                    (click)="downloadImage(bed.bed_QR_Img)"><i
+                                                   (click)="printDiv('qrToPdf')"><i
                                                       class="pi pi-download"></i> Download</button>
                                                   <!-- <p>{{bed.bed_QR_Img}}</p> -->
                                                   <button class="btn-share"><i class="pi pi-share"></i> Share</button>
@@ -948,21 +948,21 @@
         <div class="row text-center justify-content-center " id="qrToPdf">
 
 
-          <div class="d-flex justify-content-center  fw-bold">
-            <div class="mr-3">{{roomType}}.R</div>
+          <div class="d-flex justify-content-between fs-6 fw-bold">
+            <div class="mr-3">{{roomType}}.R<div>R/{{roomNo}}</div></div>
             <div style="width:170px"></div>
-            <div>ID-{{aprtCode}}</div>
+            <div>ID-{{aprtCode}} </div>
           </div>
-          <p class="mt-4">Scan this code</p>
+          <p class="mt-4 fs-6 text-center">Scan this code</p>
           <img id="qr_image_e" [src]="qrCodeImg" class="qrfix">
-          <div class="fw-semibold">QR Code : <span class="fw-normal" style="color:#B3261E;">{{qrCode}}</span> </div>
+          <div class="fw-bold text-center fs-6 mt-4">QR Code : <span class="fw-normal" style="color:#B3261E;">{{qrCode}}</span> </div>
 
         </div>
         <div class="row text-center justify-content-center">
           <p class="mt-4 text-center">Or enter the number manually</p>
-          <div class="custom-apartment-buttons mt-1">
+          <div class="custom-apartment-buttons mt-1" >
             <button class="custom-btn-delete">{{qrCode}}</button>
-            <button class="custom-btn-rented mt-4" (click)="convertHtmlToPdf(qrCodeImg)">Download</button>
+            <button class="custom-btn-rented mt-4" (click)="printDiv('qrToPdf')">Download</button>
           </div>
         </div>
 
