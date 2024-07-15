@@ -554,6 +554,18 @@ this.ID= Guid.create();
     if(this.sharedBed){
       this.bedroomsToApi.push(this.sharedBed)
     }
+    if(this.studioShow)
+    {
+      this.bedroomsToApi=[];
+     let studio={
+        room_Type: "custom",
+        beds_No: this.generalInfoForm.value['beds_No'],
+        bed_Price: this.generalInfoForm.value['bed_Price'],
+        bed_SecuirtyDeposit: this.generalInfoForm.value['bed_SecuirtyDeposit'],
+        bed_Service_Fees: this.generalInfoForm.value['bed_Service_Fees']
+      };
+      this.bedroomsToApi.push(studio)
+    }
   let apartment = {
     apartment_ID:this.ID.value,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
