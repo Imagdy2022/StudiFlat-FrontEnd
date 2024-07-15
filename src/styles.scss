@@ -21,3 +21,34 @@ main {
 
 
 
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #qrToPdf, #qrToPdf * {
+    visibility: visible;
+  }
+
+  #qrToPdf {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+    page-break-before: avoid;
+    page-break-after: avoid;
+  }
+
+  #qrToPdf img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+
+
+
+
+

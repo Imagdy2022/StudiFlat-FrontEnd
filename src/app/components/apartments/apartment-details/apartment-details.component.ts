@@ -182,13 +182,14 @@ export class ApartmentDetailsComponent implements OnInit {
       )
     );
   }
-
-  onOpenQrModal(imgLink: string, qrCode: string, roomType: string, apartCode: string) {
+  roomNo:any;
+  onOpenQrModal(imgLink: string, qrCode: string, roomType: string, apartCode: string ,roomNo:any)  {
     this.qrCodeImg = imgLink;
     this.displayQr = 'block';
     this.qrCode = qrCode;
     this.roomType = roomType.substring(0, 1);
     this.aprtCode = apartCode;
+    this.roomNo=roomNo;
   }
 
   onCloseQrModal() {
@@ -438,6 +439,51 @@ export class ApartmentDetailsComponent implements OnInit {
         a.remove();
       });
   }
+
+  // printDiv(divId: string) {
+  //   const printContents = document.getElementById(divId)?.innerHTML;
+  //   const originalContents = document.body.innerHTML;
+
+  //   if (printContents) {
+  //     document.body.innerHTML = printContents;
+  //     window.print();
+  //     document.body.innerHTML = originalContents;
+  //   } else {
+  //     console.error('Div not found');
+  //   }
+  // }
+
+  printDiv(divId: string) {
+    const printContents = document.getElementById(divId)?.innerHTML;
+
+
+    if (printContents) {
+      const newWindow = window.open('', '_blank', 'height=600,width=800');
+      if (newWindow) {
+        newWindow.document.write('<html><head> ');
+        newWindow.document.write('  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"><style>@media print { body * { visibility: hidden; } #qrToPdf, #qrToPdf * { visibility: visible; } #qrToPdf { position: absolute; left: 0; top: 0 ;bottom:0; width: 100%; height:100% ; page-break-inside: avoid; page-break-before: avoid; page-break-after: avoid; font-size:50px; font-weight:800;  } #qrToPdf img { max-width: 100%; height: 70%; margin-bottom:15px; } }</style>');
+        newWindow.document.write('</head><body>');
+        newWindow.document.write(`<div id="qrToPdf">${printContents}</div>`);
+        newWindow.document.write('</body></html>');
+        newWindow.document.close();
+
+        // Wait for the content to load and then print
+        newWindow.onload = () => {
+          newWindow.focus();
+          newWindow.print();
+          newWindow.close();
+        };
+      } else {
+        console.error('Failed to open new window');
+      }
+    } else {
+      console.error('Div not found');
+    }
+  }
+
+
+
+
 
   qrToPdf() {
     // Example HTML content
