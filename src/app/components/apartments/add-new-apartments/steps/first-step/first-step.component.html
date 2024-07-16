@@ -620,7 +620,7 @@
 
         <div class="mb-3 col-6 col-md-6">
           <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Security Deposit</label>
-          <input formControlName="bed_SecuirtyDeposit" min="0" type="number" [class.is-invalid]="generalInfoForm.get('bed_SecuirtyDeposit')!.invalid && generalInfoForm.get('bed_SecuirtyDeposit')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit"
+          <input formControlName="bed_SecuirtyDeposit" min="0" type="number"  [class.is-invalid]="generalInfoForm.get('bed_SecuirtyDeposit')!.invalid && generalInfoForm.get('bed_SecuirtyDeposit')!.touched " class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit"
           />
           <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_SecuirtyDeposit')?.getError('required') && generalInfoForm.get('bed_SecuirtyDeposit')?.touched ">
              this field is required
