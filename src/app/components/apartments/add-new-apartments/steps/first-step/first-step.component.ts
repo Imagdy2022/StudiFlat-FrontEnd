@@ -134,6 +134,7 @@ export class FirstStepComponent implements OnInit {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id'];
 this.ID= Guid.create();
 
+// console.log(this.ID);
     if (this.addApartment != 'add new apartments') {
 
       this.getAowners();
@@ -256,7 +257,7 @@ this.ID= Guid.create();
          this.bedPrice=this.bedroomsToApi[i].bed_Price;
          this.ServiceFees=this.bedroomsToApi[i].bed_Service_Fees;
          this.SecurityDeposit=this.bedroomsToApi[i].bed_SecuirtyDeposit;
-         this.isShow=true; 
+         this.isShow=true;
          this.showBedSection=true;
          this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
            }
@@ -554,26 +555,8 @@ this.ID= Guid.create();
     if(this.sharedBed){
       this.bedroomsToApi.push(this.sharedBed)
     }
-    if(this.studioShow)
-    {
-      this.bedroomsToApi=[];
-     let studio={
-        room_Type: "custom",
-        beds_No: this.generalInfoForm.value['beds_No'],
-        bed_Price: this.generalInfoForm.value['bed_Price'],
-        bed_SecuirtyDeposit: this.generalInfoForm.value['bed_SecuirtyDeposit'],
-        bed_Service_Fees: this.generalInfoForm.value['bed_Service_Fees']
-      };
-      this.bedroomsToApi.push(studio)
-    }
-    let id=null;
-   
-    if(this.idParamterEdit)
-      id=this.idParamterEdit; 
-    else if(JSON.parse(localStorage.getItem('apartmentResponse')!))
-      id=JSON.parse(localStorage.getItem('apartmentResponse')!).uuid;
   let apartment = {
-    apartment_ID:id,
+    apartment_ID:this.ID.value,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
     apartment_Floor:Number(this.generalInfoForm.value['apartment_Floor']),
     apartment_Name: this.generalInfoForm.value['apartment_Name'],
@@ -949,7 +932,7 @@ this.display11=false
   }
   setBedRoom(key:any,value:any,id:number)
   {
-    this.bedroomsToApi[id][key]=value.target?.value;
+    this.bedroomsToApi[id][key]=value.target.value;
   }
   setBedNo(key:any,value:any,id:number)
   {

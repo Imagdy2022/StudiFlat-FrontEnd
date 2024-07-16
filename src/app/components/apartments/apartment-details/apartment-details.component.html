@@ -22,7 +22,7 @@
     <div class="bg-white border rounded-3 mt-3 p-3 p-4">
       <div class="row">
         <div class="col-12 col-md-7">
-          <ng-container>
+          <!-- <ng-container>
             <div class="container testimonial-group">
               <div class="row mb-3 vcrr">
                 <div class="image-gallery" style="max-width: 1500px;">
@@ -41,7 +41,33 @@
                 </div>
               </div>
             </div>
+          </ng-container> -->
+          <ng-container>
+            <div class="container testimonial-group">
+              <div class="row mb-3 vcrr">
+                <div class="image-gallery" style="max-width: 1500px;">
+                  <div class="main-image">
+                    <img
+                      [src]="currentImage"
+                      style="width: 100%; height: 500px; border-radius: 13px;" />
+                  </div>
+                  <div class="thumbnail-container" style="display: flex; justify-content: start; margin-top: 20px; ">
+                    <div *ngFor="let img of displayedThumbnails; let i = index" style="cursor: pointer;" (click)="changeMainImage(img)">
+                      <img *ngIf="i > 0"
+                        [src]="img?.includes('https') ? img : '../../../assets/images/apartmentImages/default_apartment.jpg'"
+                        [class.selected-thumbnail]="img === currentImage"
+                        style="height: 120px; width: 95%; border-radius: 13px;" />
+                    </div>
+                  </div>
+                  <div *ngIf="aprt_Imgs.length > 5" class="navigation-buttons" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <button class="btn btn-secondary" style="border-radius:10px; background-color:#D2D9E1; color: #1F4068;" (click)="previous()" [disabled]="currentIndex === 0">Previous</button>
+                    <button class="btn btn-secondary" style="border-radius:10px; background-color:#D2D9E1; color: #1F4068;" (click)="next()" [disabled]="currentIndex + 5 >= aprt_Imgs.length">Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </ng-container>
+
           <div class="d-flex align-items-center mb-2">
             <p class="fw-1000 mt-3 mr-3 mb-3 fs-6 fw-semibold">Rating ({{ rating_count }})</p>
             <div class="ms-2">
@@ -68,7 +94,7 @@
               </div>
               <div class="custom-info-item d-flex align-items-center me-4">
                 <img src="assets/images/apartmentImages/room_bed.svg" alt="Bedrooms">
-                <p>{{ aprt.apartment_BedRoomsNo }}</p>
+                <p>{{noAllbed}}</p>
               </div>
               <div class="custom-info-item d-flex align-items-center">
                 <img src="assets/images/apartmentImages/user.svg" alt="Guests">

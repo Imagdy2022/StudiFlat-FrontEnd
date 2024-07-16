@@ -67,7 +67,7 @@ gotopage( ){
   let url: string = "unlegal";
     this.router.navigateByUrl(url);
 }
-  statusinquire:any=""
+  statusinquire:string="All"
   pageNumber=1;
   pagesize=10;
   totalofPages=0;;
@@ -97,12 +97,13 @@ gotopage( ){
     this.getAllInquires(this.statusinquire);
 
   }
-  date="All"
+  date=""
   totalRecords=0;
   getAllInquires(  statusinquires:any) {
     this.Inquires=[]
     this.numberInquires=0
-    this.subscriptions.push(this._inquiresService.getAllInquires(statusinquires,this.pageNumber,this.pagesize,this.date,this.searchText).subscribe((res:any) => {
+    this.subscriptions.push(this._inquiresService.getAllInquires( this.pageNumber,this.pagesize,statusinquires,this.date,this.searchText).subscribe((res:any) => {
+      console.log(res)
       this.Inquires = res["data"];
       this.numberInquires = this.Inquires.length;
       this.totalofPages=res["totalPages"]
@@ -202,7 +203,7 @@ event.stopPropagation()
 
     this.InquireFillterSelected[index?.target?.value] = true
     if(index?.target?.value == 0){
-      this.statusinquire=""
+      this.statusinquire="All"
       this.getAllInquires(this.statusinquire);
     }
     if(index?.target?.value == 1){
