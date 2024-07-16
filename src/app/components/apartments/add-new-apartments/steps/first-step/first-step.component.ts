@@ -566,14 +566,15 @@ this.ID= Guid.create();
       };
       this.bedroomsToApi.push(studio)
     }
-    let id=null;
-   
-    if(this.idParamterEdit)
-      id=this.idParamterEdit; 
-    else if(JSON.parse(localStorage.getItem('apartmentResponse')!))
-      id=JSON.parse(localStorage.getItem('apartmentResponse')!).uuid;
+    // let id;
+    // if(this.idParamterEdit)
+    //   id=this.idParamterEdit; 
+    // else if(JSON.parse(localStorage.getItem('apartmentResponse')!))
+    //   id=JSON.parse(localStorage.getItem('apartmentResponse')!).uuid;
+    // else if(id=='add-new-apartments')
+    //   id=null;
   let apartment = {
-    apartment_ID:id,
+    apartment_ID:this.idParamterEdit?JSON.parse(localStorage.getItem('apartmentResponse')!)?.uuid:null,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
     apartment_Floor:Number(this.generalInfoForm.value['apartment_Floor']),
     apartment_Name: this.generalInfoForm.value['apartment_Name'],
