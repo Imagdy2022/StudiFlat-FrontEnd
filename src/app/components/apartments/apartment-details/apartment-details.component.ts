@@ -31,6 +31,9 @@ interface ApartmentDetails {
   encapsulation: ViewEncapsulation.None,
 })
 export class ApartmentDetailsComponent implements OnInit {
+  currentImage: string;
+  currentIndex: number = 0;
+
   showSide: string = '';
   value: number = 3;
   bedNumber: number = 0;
@@ -82,6 +85,7 @@ export class ApartmentDetailsComponent implements OnInit {
   center: any = {};
   display22: any = 'none';
   imageSize: string = '';
+  noAllbed:number;
 
   constructor(
     public _ApartmentService: ApartmentService,
@@ -99,6 +103,26 @@ export class ApartmentDetailsComponent implements OnInit {
     this.GetApartmentReview();
     this.scrollTop();
     this.checkRole();
+    this.currentImage = this.aprt_Imgs[0].includes('https') ? this.aprt_Imgs[0] : '../../../assets/images/apartmentImages/default_apartment.jpg';
+  }
+  get displayedThumbnails() {
+    return this.aprt_Imgs.slice(this.currentIndex, this.currentIndex + 5);
+  }
+
+  changeMainImage(img: string) {
+    this.currentImage = img.includes('https') ? img : '../../../assets/images/apartmentImages/default_apartment.jpg';
+  }
+
+  next() {
+    if (this.currentIndex + 5 < this.aprt_Imgs.length) {
+      this.currentIndex += 1;
+    }
+  }
+
+  previous() {
+    if (this.currentIndex > 0) {
+      this.currentIndex -= 1;
+    }
   }
 
   getApartmentDetails() {
@@ -131,8 +155,10 @@ export class ApartmentDetailsComponent implements OnInit {
           this.apartmentsEquipment = res.apartment_Equipments || {};
           this.apartmentsContract = res.apartment_Contract || {};
           this.apartmentsCheckRules = res.apartment_Check_Rules || {};
+          this.currentImage = this.aprt_Imgs[0].includes('https') ? this.aprt_Imgs[0] : '../../../assets/images/apartmentImages/default_apartment.jpg';
           if (Array.isArray(this.aprt.apartment_Rooms)) {
             let bedno = 0;
+
             for (let i = 0; i < this.aprt.apartment_Rooms.length; i++) {
               // if (this.aprt.apartment_Rooms[i].room_Type === 'Bedroom') {
               // bedno++;
@@ -159,6 +185,8 @@ export class ApartmentDetailsComponent implements OnInit {
                 this.roomsLiving.push(this.aprt.apartment_Rooms[i]);
               }
             }
+            this.noAllbed=bedno;
+
           } else {
             console.warn('apartment_Rooms is not an array:', this.aprt.apartment_Rooms);
           }

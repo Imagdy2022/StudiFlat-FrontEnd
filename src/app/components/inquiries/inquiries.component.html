@@ -127,8 +127,8 @@
 
                             {{ inquire?.request_Code }}
                         </td> -->
-                        <td routerLink="/inquiries/view-inquire/{{ inquire.request_ID }}">
-                            {{ inquire?.request_Code }}
+                        <td routerLink="/inquiries/view-inquire/{{ inquire.booking_ID }}">
+                            {{ inquire?.booking_Code }}
                         </td>
                         <td class="d-flex align-items-center">
 
@@ -140,12 +140,12 @@
                             <img *ngIf="!inquire.profileImg" routerLink="/users/app-edite-user-details/{{ inquire.user_ID }}"
                                 src="../../../assets/images/Frame 1261154899.svg"
                                 style="height: 50px;width: 50px;border-radius: 50%;margin-right: 9px;cursor: pointer;">
-                            {{ inquire?.userName }}
+                            {{ inquire?.requested_By_Name }}
 
                         </td>
 
                         <td routerLink="/inquiries/view-inquire/{{ inquire.request_ID }}">
-                            {{ inquire?.requested_Apt }}
+                            {{ inquire?.request_Apartment }}
                         </td>
                         <td routerLink="/inquiries/view-inquire/{{ inquire.request_ID }}">
                             {{ inquire?.contact_No }}

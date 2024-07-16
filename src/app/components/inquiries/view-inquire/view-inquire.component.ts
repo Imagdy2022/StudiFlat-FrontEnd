@@ -32,7 +32,7 @@ export class ViewInquireComponent implements OnInit {
 
 
 
-  param: any;
+  param: string;
   constructor(
     private _inquiresService: InquiresService,
     private _ActivatedRoute: ActivatedRoute,
@@ -40,7 +40,8 @@ export class ViewInquireComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public router: Router
   ) {
-    this.param = _ActivatedRoute.snapshot.paramMap.get('id');
+    this.param = _ActivatedRoute.snapshot.paramMap.get('id') ?? '';
+    console.log(this.param);
   }
 
   ngOnInit() {
@@ -154,6 +155,31 @@ export class ViewInquireComponent implements OnInit {
   );
 }
 
+
+handleActionSelfi(isApproved: boolean, bookingId: string, guestId: string) {
+  let rejectReason = '';
+  if (!isApproved) {
+    rejectReason = this.rejectReason;
+  }
+
+  this._inquiresService.validateSelfie(bookingId, guestId, isApproved, rejectReason).subscribe(
+    response => {
+      if (isApproved) {
+        console.log('Selfie approval confirmed', response);
+        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Selfie approval confirmed' });
+        this.showConfirmDialog = false;
+      } else {
+        console.log('Selfie approval rejected with reason:', this.rejectReason, response);
+        this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Selfie approval rejected with reason: ${this.rejectReason}` });
+        this.showRejectReasonDialog = false;
+      }
+    },
+    error => {
+      console.error('Error processing request', error);
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Request failed' });
+    }
+  );
+}
  /**888888888 */
  displayQr: any;
   qrCodeImg!: string;
@@ -277,16 +303,18 @@ onCloseQrModal() {
     this.showSide = value;
   }
   GetRequestDetails() {
-    this.subscriptions.push(    this._inquiresService.GetRequestDetails(this.param).subscribe(
+
+    this.subscriptions.push(this._inquiresService.GetRequestDetails(this.param).subscribe(
       (res) => {
-        console.log(res);
+
+        console.log(`booking details response : ${res}`);
         // console.log(res.booking_ID);
         // this.inquire_details = res[0];
         // this.selectedContractImg = res[0].contract_Path;
         // this.prop_imgs = res[0].apt_Imgs;
         // this.hidepassport = res[0].paid;
 
-        this.reqId=res.booking_ID;
+        this.reqId=res.booking_ID ||'';
         // this.passportId=res.booking_Beds.guest_Passport.
         this.inquire_details = res;
         this.selectedContractImg = res.apartment_Pictures[0];
@@ -301,6 +329,8 @@ onCloseQrModal() {
     ))
 
   }
+
+
   UploadReqContract() {
     this.subscriptions.push(this._inquiresService
       .UploadReqContract(this.param, this.convertFileToFormData(this.ListFiles))
