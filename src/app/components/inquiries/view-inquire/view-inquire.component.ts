@@ -127,15 +127,15 @@ export class ViewInquireComponent implements OnInit {
     this.showConfirmDialog = false;
   }
  /****888888888 */
-passportId:string='';
 
- handleAction(isValid: boolean) {
+
+ handleAction(isValid: boolean, id:string) {
   let rejectReason = '';
   if (!isValid) {
     rejectReason = this.rejectReason;
   }
 
-  this._inquiresService.validatePassport(this.passportId, isValid, rejectReason).subscribe(
+  this._inquiresService.validatePassport(id, isValid, rejectReason).subscribe(
     response => {
       if (isValid) {
         console.log('Approval confirmed', response);
@@ -155,7 +155,24 @@ passportId:string='';
 }
 
  /**888888888 */
+ displayQr: any;
+  qrCodeImg!: string;
+  qrCode: string;
+  roomType: string;
+  aprtCode: string;
+ onOpenQrModal(imgLink: string, qrCode: string, roomType: string) {
+  this.qrCodeImg = imgLink;
+  this.displayQr = 'block';
+  this.qrCode = qrCode;
+  this.roomType = roomType.substring(0, 1);
+  // this.aprtCode = apartCode;
+}
 
+onCloseQrModal() {
+  this.qrCodeImg = '';
+  this.displayQr = 'none';
+}
+/**88888888 */
 
 
 

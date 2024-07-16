@@ -554,8 +554,26 @@ this.ID= Guid.create();
     if(this.sharedBed){
       this.bedroomsToApi.push(this.sharedBed)
     }
+    if(this.studioShow)
+    {
+      this.bedroomsToApi=[];
+     let studio={
+        room_Type: "custom",
+        beds_No: this.generalInfoForm.value['beds_No'],
+        bed_Price: this.generalInfoForm.value['bed_Price'],
+        bed_SecuirtyDeposit: this.generalInfoForm.value['bed_SecuirtyDeposit'],
+        bed_Service_Fees: this.generalInfoForm.value['bed_Service_Fees']
+      };
+      this.bedroomsToApi.push(studio)
+    }
+    let id=null;
+   
+    if(this.idParamterEdit)
+      id=this.idParamterEdit; 
+    else if(JSON.parse(localStorage.getItem('apartmentResponse')!))
+      id=JSON.parse(localStorage.getItem('apartmentResponse')!).uuid;
   let apartment = {
-    apartment_ID:this.ID.value,
+    apartment_ID:id,
     apartment_Area: this.generalInfoForm.value['apartment_Area'],
     apartment_Floor:Number(this.generalInfoForm.value['apartment_Floor']),
     apartment_Name: this.generalInfoForm.value['apartment_Name'],
@@ -931,7 +949,7 @@ this.display11=false
   }
   setBedRoom(key:any,value:any,id:number)
   {
-    this.bedroomsToApi[id][key]=value.target.value;
+    this.bedroomsToApi[id][key]=value.target?.value;
   }
   setBedNo(key:any,value:any,id:number)
   {

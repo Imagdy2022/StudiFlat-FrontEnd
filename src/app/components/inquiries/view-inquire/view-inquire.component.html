@@ -772,7 +772,7 @@
         <div class="row text-center justify-content-center">
           <p>Are you sure you want to approve this passport?</p>
           <div class="ui-g-12 text-center mt-4">
-            <button type="button" class="btn btn-primary" (click)="handleAction(true)">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="handleAction(true,bed.guest_Passport.passport_ID)">Yes</button>
           </div>
         </div>
       </div>
@@ -795,7 +795,7 @@
             <input type="text" [(ngModel)]="rejectReason" placeholder="Enter reason" class="form-control w-full"/>
           </div>
           <div class="ui-g-12 text-center mt-4">
-            <button type="button" class="btn btn-primary" (click)="handleAction(false)">Submit</button>
+            <button type="button" class="btn btn-primary" (click)="handleAction(false,bed.guest_Passport.passport_ID)">Submit</button>
           </div>
         </div>
       </div>
@@ -816,14 +816,17 @@
                   <p-accordionTab  class="custom-accordion-tab" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
+                        <img *ngIf="bed.secuirty_Deposit_Invoices.status === 'Unpaid'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.secuirty_Deposit_Invoices.status === 'Paid'" src="assets/img/check.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Security Deposit</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge unpaid">Unpaid</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt="">  {{ bed.secuirty_Deposit_Invoices.secuirty_Date }} </span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt="">{{ bed.secuirty_Deposit_Invoices.secuirty_Time }}</span>
+                          <span class="badge unpaid" *ngIf="bed.secuirty_Deposit_Invoices.status === 'Unpaid'">Unpaid</span>
+                          <span class="badge approve" *ngIf="bed.secuirty_Deposit_Invoices.status === 'Paid'">Paid</span>
                       </div>
 
 
@@ -842,22 +845,22 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Invoice435</td>
-                            <td>April 27 - May 27, 2023</td>
-                            <td>$35.00</td>
-                            <td>Visa</td>
-                            <td><span class="badge approve">paid</span></td>
+                          <tr *ngFor="let invoice of bed.secuirty_Deposit_Invoices.invoices">
+                            <td>{{ invoice.invoice_Code }}</td>
+                            <td>{{ invoice.invoice_Duration }}</td>
+                            <td>{{ invoice.invoice_Amount }}</td>
+                            <td>{{ invoice.payment_Method }}</td>
+                            <td><span class="badge" [ngClass]="{'approve': invoice.payment_Is_Paid, 'unpaid': !invoice.payment_Is_Paid}">{{ invoice.payment_Is_Paid ? 'Paid' : 'Unpaid' }}</span></td>
                             <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
-                          <tr>
+                          <!-- <tr>
                             <td>Invoice435</td>
                             <td>April 27 - May 27, 2023</td>
                             <td>$35.00</td>
                             <td>Apple Pay</td>
                             <td><span class="badge unpaid">unpaid</span></td>
                             <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
-                          </tr>
+                          </tr> -->
                         </tbody>
                       </table>
                     </div>
@@ -867,14 +870,15 @@
                   <p-accordionTab [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                   <ng-template pTemplate="header"  >
                     <div class="d-flex align-items-center justify-content-start">
-                      <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                      <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                      <img *ngIf="bed.contract.status === 'Signed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.contract.status === 'Unsigned'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                       <span class="ml-2">Sign Contract</span>
                     </div>
                     <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                      <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                        <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                      <span class="badge approve">signed</span>
+                      <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt="">{{ bed.contract.contract_Date }}</span>
+                        <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt="">  {{ bed.contract.contract_Time }}</span>
+                        <span class="badge approve" *ngIf="bed.contract.status === 'Signed'">Signed</span>
+                        <span class="badge reject" *ngIf="bed.contract.status === 'Unsigned'">Unsigned</span>
                     </div>
 
 
@@ -901,14 +905,18 @@
                   <p-accordionTab  [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
+                        <img *ngIf="bed.arriving_Details.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.arriving_Details.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Arriving Details</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt="">{{ bed.arriving_Details.date }}</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt="">{{ bed.arriving_Details.time }}</span>
+                        <!-- <span class="badge approve">Completed</span> -->
+                        <span class="badge approve" *ngIf="bed.arriving_Details.status === 'Completed'">Completed</span>
+                        <span class="badge reject" *ngIf="bed.arriving_Details.status === 'Pending'">Pending</span>
                       </div>
 
 
@@ -922,23 +930,23 @@
                         <div class="row">
                           <div class="col border-start">
                             <div class="text-muted">Check In Date</div>
-                            <div class="font-weight-bold">12 Jun, 2024</div>
+                            <div class="font-weight-bold">{{ bed.arriving_Details.check_In_Date }}</div>
                           </div>
                           <div class="col border-start">
                             <div class="text-muted">Check In Time</div>
-                            <div class="font-weight-bold">10:35 PM</div>
+                            <div class="font-weight-bold">{{ bed.arriving_Details.check_In_Time }}</div>
                           </div>
                           <div class="col border-start">
                             <div class="text-muted">Transportation</div>
-                            <div class="font-weight-bold">Yes</div>
+                            <div class="font-weight-bold">{{ bed.arriving_Details.is_Transportation ? 'Yes' : 'No' }}</div>
                           </div>
                           <div class="col border-start">
                             <div class="text-muted">Airport</div>
-                            <div class="font-weight-bold">Berlin Airport</div>
+                            <div class="font-weight-bold">{{ bed.arriving_Details.airport_Name }}</div>
                           </div>
                           <div class="col border-start">
                             <div class="text-muted">Flight Number</div>
-                            <div class="font-weight-bold">#1525335</div>
+                            <div class="font-weight-bold">{{ bed.arriving_Details.flight_No }}</div>
                           </div>
                         </div>
                       </div>
@@ -949,14 +957,18 @@
                   <p-accordionTab  [selected]="true" [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
+                        <img *ngIf="bed.check_In_Process.scanning_QR.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process.scanning_QR.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Check In Process</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.check_In_Process.scanning_QR.date }}</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process.scanning_QR.time }}</span>
+                        <!-- <span class="badge approve">Completed</span> -->
+                        <span class="badge approve" *ngIf="bed.check_In_Process.scanning_QR.status === 'Completed'">Completed</span>
+                        <span class="badge reject" *ngIf="bed.check_In_Process.scanning_QR.status === 'Pending'">Pending</span>
                       </div>
 
 
@@ -973,14 +985,18 @@
                           <!-- <hr class="m-0"/> -->
                           <ng-template pTemplate="header"  >
                             <div class="d-flex align-items-center justify-content-start">
-                              <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                              <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                              <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                              <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
+                              <img *ngIf="bed.check_In_Process.scanning_QR.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                              <img *ngIf="bed.check_In_Process.scanning_QR.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                               <span class="ml-2">Scanning Bed QR Code</span>
                             </div>
                             <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                              <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                                <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                              <span class="badge approve">Completed</span>
+                              <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.check_In_Process.scanning_QR.date }}</span>
+                                <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process.scanning_QR.time }}</span>
+                              <!-- <span class="badge approve">Completed</span> -->
+                              <span class="badge approve" *ngIf="bed.check_In_Process.scanning_QR.status === 'Completed'">Completed</span>
+                              <span class="badge reject" *ngIf="bed.check_In_Process.scanning_QR.status === 'Pending'">Pending</span>
                             </div>
 
 
@@ -988,9 +1004,9 @@
                         </ng-template>
                           <div class="container mt-3 mb-3">
                             <div class="d-flex justify-content-between align-items-center p-3 rounded bg-light">
-                              <div><strong>Bed QR code:</strong> 363401</div>
+                              <div><strong>Bed QR code:</strong> {{ bed.check_In_Process.scanning_QR.qr_Code }}</div>
                               <div class="d-flex align-items-center">
-                                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+                                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center" (click)="onOpenQrModal(bed.check_In_Process.scanning_QR.qr_Image ,bed.check_In_Process.scanning_QR.qr_Code,bed.room_Type)" >
                                   <img src="/assets/images/view.svg" class="me-1" alt=""> View
                                 </a>
                                 <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
@@ -1008,14 +1024,18 @@
                   <p-accordionTab [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
+                        <img *ngIf="bed.check_In_Process.confirm_Identity.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process.confirm_Identity.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Confirm Identity</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt="">  {{ bed.check_In_Process.confirm_Identity.date }}</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process.confirm_Identity.time }}</span>
+                        <!-- <span class="badge approve">Completed</span> -->
+                        <span class="badge approve" *ngIf="bed.check_In_Process.confirm_Identity.status === 'Completed'">Completed</span>
+                        <span class="badge reject" *ngIf="bed.check_In_Process.confirm_Identity.status === 'Pending'">Pending</span>
                       </div>
 
 
@@ -1027,10 +1047,10 @@
                       <p class="text-muted">Please review passport and tenant image then confirm or reject it</p>
                       <div class="row mb-3">
                         <div class="col-md-6">
-                          <img src="https://via.placeholder.com/300x200" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Passport Image">
+                          <img [src]="bed.check_In_Process.confirm_Identity.guest_Passport || 'https://via.placeholder.com/300x200'" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Passport Image">
                         </div>
                         <div class="col-md-6">
-                          <img src="https://via.placeholder.com/300x200" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Tenant Image">
+                          <img [src]="bed.check_In_Process.confirm_Identity.guest_Selife || 'https://via.placeholder.com/300x200'" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Tenant Image">
                           <div class="d-flex mt-3">
                             <button type="button" class="btn btn-primary btn-block mb-0 fs-6 m-1" style="width: 44%; border-radius: 10px; padding: 10px;">Confirm</button>
                             <button type="button" class="btn btn-block fs-6 m-1" style="width: 44%; border-radius: 10px; background-color: #D2D9E1; color: #1F4068; padding: 10px;">Reject</button>
@@ -1045,14 +1065,15 @@
                     <!-- <hr class="m-0"/> -->
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process.payments.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process.payments.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Payments</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.check_In_Process.payments.date }}</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process.payments.time }}</span>
+                          <span class="badge approve" *ngIf="bed.check_In_Process.payments.status === 'Completed'">Completed</span>
+                                <span class="badge reject" *ngIf="bed.check_In_Process.payments.status === 'Pending'">Pending</span>
                       </div>
 
 
@@ -1072,16 +1093,15 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Invoice435</td>
-                            <td>April 27 - May 27, 2023</td>
-                            <td>Security Deposit</td>
-                            <td>$35.00</td>
-                            <td>Visa</td>
-                            <td><span class="badge approve">paid</span></td>
+                          <tr *ngFor="let invoice of bed.check_In_Process.payments.invoices">
+                            <td>{{ invoice.invoice_Code }}</td>
+                            <td>{{ invoice.invoice_Duration }}</td>
+                            <td>{{ invoice.invoice_Amount }}</td>
+                            <td>{{ invoice.payment_Method }}</td>
+                            <td><span class="badge" [ngClass]="{'approve': invoice.payment_Is_Paid, 'unpaid': !invoice.payment_Is_Paid}">{{ invoice.payment_Is_Paid ? 'Paid' : 'Unpaid' }}</span></td>
                             <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
-                          <tr>
+                          <!-- <tr>
                             <td>Invoice435</td>
                             <td>April 27 - May 27, 2023</td>
                             <td>Monthly Rent</td>
@@ -1089,7 +1109,7 @@
                             <td>Apple Pay</td>
                             <td><span class="badge approve">paid</span></td>
                             <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
-                          </tr>
+                          </tr> -->
                         </tbody>
                       </table>
                     </div>
@@ -1100,14 +1120,16 @@
                     <!-- <hr class="m-0"/> -->
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process.handover.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process.handover.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Handover Protocols</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt="">{{ bed.check_In_Process.handover.date }}</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process.handover.time }}</span>
+                        <!-- <span class="badge approve">Completed</span> -->
+                        <span class="badge approve" *ngIf="bed.check_In_Process.handover.status === 'Completed'">Completed</span>
+                        <span class="badge reject" *ngIf="bed.check_In_Process.handover.status === 'Pending'">Pending</span>
                       </div>
 
 
@@ -1136,14 +1158,16 @@
                     <!-- <hr class="m-0"/> -->
                      <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process.apartment_Rules.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process.apartment_Rules.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Apartment Rules</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> 12 Jun,2024</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> 10:35 PM</span>
-                        <span class="badge approve">Completed</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.check_In_Process.apartment_Rules.date }}</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process.apartment_Rules.time }}</span>
+                        <!-- <span class="badge approve">Completed</span> -->
+                        <span class="badge approve" *ngIf="bed.check_In_Process.apartment_Rules.status === 'Completed'">Completed</span>
+                        <span class="badge reject" *ngIf="bed.check_In_Process.apartment_Rules.status === 'Pending'">Pending</span>
                       </div>
 
 
@@ -1231,6 +1255,41 @@
 
 
 
+
+<div *ngIf="qrCodeImg !== ''" class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayQr}"
+  style="background-color: rgb(23 22 22 / 50%);">
+  <div class="modal-dialog" role="document" style="max-width: 371px;">
+    <div class="modal-content" style="margin-top: 150px;">
+      <button type="button" aria-label="Close" class="close"
+        style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;">
+        <span aria-hidden="true" style="color: #000000; font-size: 35px;" (click)="onCloseQrModal()">×</span>
+      </button>
+      <div class="modal-body">
+        <div class="row text-center justify-content-center " id="qrToPdf">
+
+
+          <div class="d-flex justify-content-center  fw-bold">
+            <div class="mr-3">{{roomType}}.R</div>
+            <div style="width:170px"></div>
+            <div>ID-{{aprtCode}}</div>
+          </div>
+          <p class="mt-4">Scan this code</p>
+          <img id="qr_image_e" [src]="qrCodeImg" class="qrfix">
+          <div class="fw-semibold">QR Code : <span class="fw-normal" style="color:#B3261E;">{{qrCode}}</span> </div>
+
+        </div>
+        <div class="row text-center justify-content-center">
+          <p class="mt-4 text-center">Or enter the number manually</p>
+          <div class="custom-apartment-buttons mt-1">
+            <button class="custom-btn-delete">{{qrCode}}</button>
+            <button class="custom-btn-rented mt-4"  >Download</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

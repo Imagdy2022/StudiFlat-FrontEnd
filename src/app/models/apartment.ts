@@ -1,4 +1,4 @@
- 
+
 
 
 export class IApartments {
@@ -10,6 +10,7 @@ export class IApartments {
   errors: string;
   message: string;
   data: Array<{
+    apartment_Price:number;
     apartment_ID: string;
     apartment_Name: string;
     apartment_Image: string;
