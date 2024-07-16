@@ -384,7 +384,7 @@
     </span> -->
           </div>
           <div class="row">
-            <div class="mb-3 col-12 col-md-6 " *ngIf="addApartment != 'Edit Apartment Name'">
+            <div class="mb-3 col-12 col-md-6 ">
                 <label class="form-label gray fw-bold">Apartment type </label>
                 <!-- start dropdown button  -->
                 <!-- <app-dropdown [list]="listDropDownApartmentType" [holder]="apartmenttype" (selected)="selectedfromDropDownApartmentType($event)"></app-dropdown> -->
@@ -452,7 +452,7 @@
 
               <div class="mb-3 col-6 col-md-6">
                 <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Security Deposit</label>
-                <input f min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit" [ngModelOptions]="{standalone: true}" [(ngModel)]="SecurityDeposit" (ngModelChange)="checkAndSaveSharedBed()"/>
+                <input min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit" [ngModelOptions]="{standalone: true}" [(ngModel)]="SecurityDeposit" (ngModelChange)="checkAndSaveSharedBed()"/>
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_SecuirtyDeposit')?.getError('required') && generalInfoForm.get('bed_SecuirtyDeposit')?.touched ">
                    this field is required
                  </span>
@@ -518,7 +518,7 @@
                     <select formControlName="beds_No"  class="form-select rounded-2 py-2 fs-6"
                     (click)="changeBedNo('beds_No',$event,i)">
                       <option value="null" disabled hidden selected> {{bedroomsToApi[i]?.beds_No}}</option>
-                      <ng-container *ngIf="bedroomsToApi[i].room_Type=='Custom'"><option value="1">1</option>
+                      <ng-container *ngIf="bedroomsToApi[i]?.room_Type=='Custom'"><option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
@@ -570,29 +570,7 @@
               </div>
              </ng-container>
           </div>
-          <div class="row">
-              <div class="mb-3 col-12 col-md-6" *ngIf="edit=='EditForm'&&aprt_details_Edit?.apartment_Type=='Apartment'">
-                  <label class="form-label gray fw-bold">No. of Bedrooms</label>
-                  <input formControlName="apartment_BedRoomsNo" type="number" [class.is-invalid]="generalInfoForm.get('apartment_BedRoomsNo')!.invalid && generalInfoForm.get('apartment_BedRoomsNo')!.touched " class="form-control rounded-2 py-2 fs-6" />
-                  <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apartment_BedRoomsNo')?.getError('required') && generalInfoForm.get('apartment_BedRoomsNo')?.touched ">
-        this field is required
-      </span>
-      <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apartment_BedRoomsNo')?.getError('pattern')" >
-        No. of Bedrooms should be greater than 0
-      </span>
-              </div>
-              <div class="mb-3 col-12 col-md-6" *ngIf="edit=='EditForm'&&aprt_details_Edit?.apartment_Type=='Apartment'">
-                  <label class="form-label gray fw-bold">No. of Bathrooms</label>
-                  <input formControlName="apartment_BathroomNo" type="number" [class.is-invalid]="generalInfoForm.get('apartment_BathroomNo')!.invalid && generalInfoForm.get('apartment_BathroomNo')!.touched " class="form-control rounded-2 py-2 fs-6" />
-                  <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apartment_BathroomNo')?.getError('required') && generalInfoForm.get('apartment_BathroomNo')?.touched ">
-        this field is required
-      </span>
-      <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('apartment_BathroomNo')?.getError('pattern')" >
-        No. of Bathrooms should be greater than 0
-      </span>
 
-              </div>
-          </div>
           <!-- <div class="row">
               <div class="mb-3 col-12 col-md-6" [class.none]="showNone" *ngIf="isShow">
                   <label class="form-label gray fw-bold">No. of Livingroom</label>

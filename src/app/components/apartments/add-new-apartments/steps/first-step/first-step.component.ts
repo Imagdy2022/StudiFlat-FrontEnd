@@ -218,6 +218,7 @@ this.ID= Guid.create();
         this.aprt_details_Edit = res.apartment_Basic_Info;
         this.apt_imgs = res.apartment_Basic_Info['apartment_Images'];
         this.billinclude = res.apartment_Basic_Info['apartment_All_Bill_Included'];
+        this.bedroomsToApi = res.apartment_Basic_Info['apartment_Rooms']
         this.generalInfoForm
           .get('apartment_Images')
           ?.patchValue(res.apartment_Basic_Info['property_Imgs']);
@@ -256,7 +257,7 @@ this.ID= Guid.create();
          this.bedPrice=this.bedroomsToApi[i].bed_Price;
          this.ServiceFees=this.bedroomsToApi[i].bed_Service_Fees;
          this.SecurityDeposit=this.bedroomsToApi[i].bed_SecuirtyDeposit;
-         this.isShow=true; 
+         this.isShow=true;
          this.showBedSection=true;
          this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
            }
@@ -568,7 +569,7 @@ this.ID= Guid.create();
     }
     // let id;
     // if(this.idParamterEdit)
-    //   id=this.idParamterEdit; 
+    //   id=this.idParamterEdit;
     // else if(JSON.parse(localStorage.getItem('apartmentResponse')!))
     //   id=JSON.parse(localStorage.getItem('apartmentResponse')!).uuid;
     // else if(id=='add-new-apartments')
