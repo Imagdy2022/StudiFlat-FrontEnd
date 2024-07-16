@@ -14,32 +14,57 @@ export class InquiresService {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${this.token}`,
   });
+  // getAllInquires(
+  //   status: any,
+  //   pageNumber: any,
+  //   pageSize: any,
+  //   Date: any,
+  //   keysearch: any
+  // ): Observable<any[]> {
+  //   const url =
+  //     environment.apiUrl +
+  //     '/Requests/GetAllRequests?status=' +
+  //     status +
+  //     '&PageNo=' +
+  //     pageNumber +
+  //     '&PageSize=' +
+  //     pageSize +
+  //     '&Date=' +
+  //     Date +
+  //     '&Key=' +
+  //     keysearch;
+  //   return this.http.get<any[]>(url, { headers: this.headers });
+  // }
   getAllInquires(
-    status: any,
-    pageNumber: any,
-    pageSize: any,
-    Date: any,
-    keysearch: any
+    pageNo: number,
+    pageSize: number,
+    bookingStatus: string,
+    searchKey: string,
+    dateFilter: string
   ): Observable<any[]> {
     const url =
       environment.apiUrl +
-      '/Requests/GetAllRequests?status=' +
-      status +
-      '&PageNo=' +
-      pageNumber +
-      '&PageSize=' +
-      pageSize +
-      '&Date=' +
-      Date +
-      '&Key=' +
-      keysearch;
+      '/ApartmentV2/GetBookings?' +
+      'Page_No=' + pageNo +
+      '&Page_Size=' + pageSize +
+      '&bookingStatus=' + bookingStatus +
+      '&Search_Key=' + searchKey +
+      '&Date_Filter=' + dateFilter;
+
     return this.http.get<any[]>(url, { headers: this.headers });
   }
 
-  GetRequestDetails(id: any): Observable<any> {
-    const url = environment.apiUrl + '/ApartmentV2/Booking_InDetails?Booking_ID=' + id;
+
+  // GetRequestDetails(id: string): Observable<any> {
+  //   const url = environment.apiUrl + '/ApartmentV2/Booking_InDetails?Booking_ID=' + id;
+  //   return this.http.get<any>(url, { headers: this.headers });
+  // }
+  GetRequestDetails(id: string): Observable<any> {
+    const url = `${environment.apiUrl}/ApartmentV2/Booking_InDetails?Booking_ID=${id}`;
+    console.log(` Booking details url :${url}`)
     return this.http.get<any>(url, { headers: this.headers });
   }
+
 
   UploadReqContract(id: any, file: any): Observable<any> {
     let headerss = new HttpHeaders({
@@ -114,6 +139,18 @@ validatePassport(passportId: string, isValid: boolean, rejectReason: string = ''
     }
   ];
   const url = environment.apiUrl + '/ApartmentV2/ValidatePassport';
+
+  return this.http.post(url, body);
+}
+
+validateSelfie(bookingId: string, guestId: string, isApproved: boolean, rejectReason: string = ''): Observable<any> {
+  const body = {
+    Booking_ID: bookingId,
+    Guest_ID: guestId,
+    Approved: isApproved,
+    Reject_Reason: rejectReason
+  };
+  const url = environment.apiUrl + '/ApartmentV2/SelfieApproval';
 
   return this.http.post(url, body);
 }
