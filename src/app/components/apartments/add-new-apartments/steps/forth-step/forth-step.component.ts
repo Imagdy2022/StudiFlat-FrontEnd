@@ -95,6 +95,7 @@ export class ForthStepComponent {
       this.initializeRooms();
        this.PostBackupInfo.patchValue(res.apartment_Backup_Info);
        this.inputField=res.apartment_Backup_Info["apartment_Addons_Fields"]
+
       //  if(res.backup_Info["payment_Methods"][0].payment_Method_Name=='false'){
       //   this.checkedOnline=false
       //  }else{
