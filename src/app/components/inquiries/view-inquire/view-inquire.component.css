@@ -1,5 +1,7 @@
 
-
+.selected-thumbnail {
+  border: 3px solid #007bff;
+}
 
 /* :host ::ng-deep .p-accordion .p-accordion-content .bed {
   background: none !important;
@@ -304,6 +306,10 @@
   color: #EF2011;
   background-color: #FCEEEE;
 }
+.reject {
+  color: #EF2011;
+  background-color: #FCEEEE;
+}
   ::ng-deep .p-accordion-toggle-icon {
     position: absolute;
     right: 5px;
@@ -316,4 +322,3 @@
     ::ng-deep .p-accordion-header-link {
             box-shadow: none !important;
           }
-        

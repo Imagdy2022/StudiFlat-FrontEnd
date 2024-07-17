@@ -366,7 +366,7 @@
       </div>
     -->
 
-      <div class="row m-0">
+      <div *ngIf="showRoomDesign" class="row m-0">
         <div class="col-lg-12">
           <div class="mt-4">
             <div class="card bookingdetails">
@@ -541,7 +541,7 @@
                     </div> -->
 
 
-                      <div class="row m-0">
+                      <div *ngIf="showRoomDesign" class="row m-0">
                         <div class="col-lg-12">
                           <div class="mt-4">
                             <div class="card bookingdetails">
@@ -748,6 +748,10 @@
 
 
 
+
+
+
+
                     </p-accordionTab>
 
                   </p-accordion>
@@ -758,7 +762,210 @@
         </div>
       </div>
 
+      <div *ngIf="!showRoomDesign" class="row m-0">
+        <div class="col-lg-12">
+          <div class="mt-4">
+            <div class="card bookingdetails">
+              <div class="card-header">
+                <h4 class="fs-5 fw-bold">Beds Details</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 mb-3">
+                    <div class="d-flex justify-content-between px-2">
+                      <div class="fw-bold">Bed No</div>
+                      <!-- <div class="fw-bold">Room type</div> -->
+                      <!-- <div class="fw-bold">Bed price</div> -->
+                      <div class="fw-bold">Check In</div>
+                      <div class="fw-bold">Check Out</div>
+                      <div class="fw-bold">Status</div>
+                    </div>
+                  </div>
+                </div>
 
+                <div class="mb-4">
+                  <p-accordion id="bed" [multiple]="true" [activeIndex]="[]">
+                    <ng-container *ngFor="let bed of aprt?.apartment_Rooms[0]?.room_Beds">
+                      <p-accordionTab [selected]="true" [headerStyle]="{'background-color': '#fff' }">
+                        <ng-template pTemplate="header">
+                          <div
+                            class="d-flex justify-content-between align-items-center m-0  rounded w-100">
+                            <div class="fw-bold">{{ bed.bed_No }} </div>
+                            <!-- <div> Tenant Name</div> -->
+                            <div>11/2/2024</div>
+                            <div>22/3/2024</div>
+                            <!-- <div>€ {{ room.bed_Service_Fees }}</div> -->
+                            <div class="badge rented" *ngIf="!bed.bed_Available">Rented <img
+                                src="/assets/images/expand_more.svg" alt=""></div>
+                            <div class="badge rented" *ngIf="bed.bed_Available">Available <img
+                                src="/assets/images/expand_more.svg" alt=""></div>
+                          </div>
+                        </ng-template>
+
+                        <div class="row bg-white m-0 p-4 mb-3">
+                          <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
+                            <div class="row align-items-center ">
+                              <div class="col-auto">
+                                <img src="https://via.placeholder.com/50" class="rounded-circle"
+                                  alt="Profile Image">
+                              </div>
+                              <div class="col-lg-3 border-end">
+                                <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
+                                <p class="m-0 text-muted">osman2025&#64;gmail.com</p>
+                              </div>
+                              <!-- <div class="col-lg-3 text-right border-end">
+                                <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
+                              </div>
+                              <div class="col-lg-3 text-right border-end">
+                                <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
+                              </div> -->
+                              <div class="col-lg-2 text-right">
+                                <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="tenant-documents m-0 mb-3">
+
+                          <div class="header">
+                            <h3>bed {{bed.bed_No}}</h3>
+                            <hr />
+                            <h3>Tenant Documents</h3>
+                            <p>View tenant Documents</p>
+                          </div>
+                          <div class="documents-container row">
+                            <div class="col-md-6">
+                              <div class="document-header">QR Details</div>
+                              <div class="document-content">
+                                <div class="doc-info">
+                                  <p>Qr Code:{{ bed.bed_QRCode }}</p>
+                                </div>
+                                <div class="doc-actions">
+                                  <button class="btn-view"
+                                    (click)="onOpenQrModal(bed.bed_QR_Img, bed.bed_QRCode,aprt.apartment_Rooms.room_Type,aprt.apartment_Code,1)"><i
+                                      class="pi pi-eye"></i> View</button>
+                                  <button class="btn-download capture"
+                                   (click)="printDiv('qrToPdf')"><i
+                                      class="pi pi-download"></i> Download</button>
+                                  <!-- <p>{{bed.bed_QR_Img}}</p> -->
+                                  <button class="btn-share"><i class="pi pi-share"></i> Share</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="document-header">Contract</div>
+                              <div class="document-content">
+                                <div class="doc-info">
+                                  <img src="assets/images/document.svg" alt="Contract" />
+                                  <p>Contract.pdf</p>
+                                </div>
+                                <div class="doc-actions">
+                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                  <button class="btn-download"><i class="pi pi-download"></i>
+                                    Download</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="document-header">Handover protocols</div>
+                              <div class="document-content">
+                                <div class="doc-info">
+                                  <img src="assets/images/document.svg" alt="Handover protocols" />
+                                  <p>Handover protocols.pdf</p>
+                                </div>
+                                <div class="doc-actions">
+                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                  <button class="btn-download"><i class="pi pi-download"></i>
+                                    Download</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="document-header">Rental Rules</div>
+                              <div class="document-content">
+                                <!-- <div class="doc-info">
+                              <p>Qr Code:{{ room.room_QRCode }}</p>
+                            </div>
+                            <div class="doc-actions">
+                              <button class="btn-view" (click)="onOpenQrModal(room.room_QR_Img)"><i class="pi pi-eye"></i> View</button>
+                              <button class="btn-download"><i class="pi pi-download"></i> Download</button>
+                            </div> -->
+                                <div class="doc-info">
+                                  <img src="assets/images/document.svg" alt="Handover protocols" />
+                                  <p>Rental Rules.pdf</p>
+                                </div>
+                                <div class="doc-actions">
+                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
+                                  <button class="btn-download"><i class="pi pi-download"></i>
+                                    Download</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row bg-white m-0 p-4" id="more-details">
+                          <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
+                            <div class="row align-items-center">
+                              <div class="container mt-3">
+                                <h6 class="fw-bold text-lowercase">More details</h6>
+                                <p class="text-muted">View tenant passport and reported problems,
+                                  invoices</p>
+                                <div class="accordion" id="accordionExample">
+                                  <div class="container mt-3">
+                                    <div
+                                      class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                      <div><strong>Passport of tenent</strong></div>
+                                      <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                    </div>
+                                  </div>
+                                  <div class="container mt-3">
+                                    <div
+                                      class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                      <div><strong>Problem reports (2)</strong></div>
+                                      <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                    </div>
+                                  </div>
+                                  <div class="container mt-3">
+                                    <div
+                                      class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                      <div><strong>Fixed problem (0)</strong></div>
+                                      <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                    </div>
+                                  </div>
+                                  <div class="container mt-3">
+                                    <div
+                                      class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                      <div><strong>Pending Invoices</strong></div>
+                                      <div><i class="fas fa-chevron-down text-muted"></i></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="d-flex justify-content-end mt-3">
+                                  <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
+                                  <button class="btn btn-primary"
+                                    style="border-radius: 10px; font-size: 14px;">Mark as
+                                    Available</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </p-accordionTab>
+                    </ng-container>
+                  </p-accordion>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
