@@ -131,7 +131,7 @@
                   <!-- start dropdown button  -->
                   <!-- <app-dropdown [list]="listDropDownFloor" [holder]="selectFloor" (selected)="selectedfromDropDownFloor($event)"></app-dropdown> -->
                   <select class="s-cont form-select form-select-sm" name="apartment_Floor" id="apartment_Floor" formControlName="apartment_Floor">
-                    <option value="0"    disabled  selected>  &nbsp; Select Floor Number   </option>
+                    <option value="null"  disabled  selected>  &nbsp; Select Floor Number   </option>
 
                   <option *ngFor="let type of listDropDownFloor" value="{{type.name}}"> {{type.name}} </option>
                   </select>
