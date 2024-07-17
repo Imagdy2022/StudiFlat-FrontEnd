@@ -91,8 +91,8 @@ export class ForthStepComponent {
 
       this.aprt_details_Edit = res.apartment_Backup_Info
       this.wifi = res.rent_Rules
-
-
+      this.selectedRooms=res.apartment_Basic_Info.apartment_Rooms.length
+      this.initializeRooms();
        this.PostBackupInfo.patchValue(res.apartment_Backup_Info);
        this.inputField=res.apartment_Backup_Info["apartment_Addons_Fields"]
       //  if(res.backup_Info["payment_Methods"][0].payment_Method_Name=='false'){
