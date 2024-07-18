@@ -248,6 +248,12 @@ export class ForthStepComponent {
         room_Devices: []
       });
     }
+
+    // this._ApartmentService.getRoomDevices(JSON.parse(localStorage.getItem('apartmentResponse')!).uuid).subscribe({
+    //   next:(res)=>{
+    //     this.rooms = res
+    //   }
+    // })
   }
 
   toggleSelectAll(event: any, roomIndex: number) {
