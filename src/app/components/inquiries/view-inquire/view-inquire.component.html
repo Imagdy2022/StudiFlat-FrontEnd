@@ -394,8 +394,8 @@
                             <!-- <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 80%; border-radius:10px; padding:11px">Confirm</button>
                             <button type="button" class="btn btn-block fs-6" style="width: 80%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px">Reject</button> -->
                            <!-- Buttons to trigger approval and rejection -->
-<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirmPass('confirm')">Approve Passport</button>
-<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirmPass('reject')">Reject Passport</button>
+<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirmPass('confirm',bed.guest_Passport?.passport_ID)">Approve Passport</button>
+<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirmPass('reject',bed.guest_Passport?.passport_ID)">Reject Passport</button>
 
 <!-- Confirm Dialog -->
 <div *ngIf="showConfirmDialogP" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
@@ -410,7 +410,7 @@
         <div class="row text-center justify-content-center">
           <p>Are you sure you want to approve this passport?</p>
           <div class="ui-g-12 text-center mt-4">
-            <button type="button" class="btn btn-primary" (click)="handleAction(true,bed.guest_Passport.passport_ID)">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="handleAction(inquire_details?.booking_ID,true,passID)">Yes</button>
           </div>
         </div>
       </div>
@@ -430,10 +430,11 @@
       <div class="modal-body">
         <div class="row text-center justify-content-center">
           <div class="ui-g-12">
-            <input type="text" [(ngModel)]="rejectReason" placeholder="Enter reason" class="form-control w-full"/>
+            <!-- <input type="text" [(ngModel)]="rejectReason" placeholder="Enter reason" class="form-control w-full"/> -->
+            <textarea type="text" pInputText  [(ngModel)]="rejectReasonP" name="rejectReasonP" placeholder="Enter reason" class="form-control w-full"  ></textarea>
           </div>
           <div class="ui-g-12 text-center mt-4">
-            <button type="button" class="btn btn-primary" (click)="handleAction(false,bed.guest_Passport.passport_ID)">Submit</button>
+            <button type="button" class="btn btn-primary" (click)="handleAction(inquire_details?.booking_ID,false,passID)">Submit</button>
           </div>
         </div>
       </div>

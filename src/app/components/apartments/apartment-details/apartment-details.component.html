@@ -86,7 +86,7 @@
           <div class="custom-apartment-details bg-white rounded-3 p-3">
             <h3 class="custom-apartment-title">{{ aprt.apartment_Name }}</h3>
             <p class="custom-apartment-type">{{ aprt.apartment_Type }}</p>
-            <h4 class="custom-apartment-price">€{{ aprt.apartment_Price }} <span>/ month</span></h4>
+            <h4 class="custom-apartment-price">€{{ bedsPrice }} <span>/ month</span></h4>
             <div class="custom-apartment-info d-flex mb-0">
               <div class="custom-info-item d-flex align-items-center me-4">
                 <img src="assets/images/apartmentImages/location.svg" alt="Location">
@@ -120,6 +120,8 @@
             </div>
 
             <p-accordion class="mt-3">
+
+
               <p-accordionTab header="Public transport" [headerStyle]="{'background-color': '#fff' }">
                 <div class="custom-transport-info">
                   <div class="custom-transport-item" *ngFor="let item of aprt.apartment_Transports">
@@ -128,32 +130,248 @@
                   </div>
                 </div>
               </p-accordionTab>
-              <p-accordionTab header="Other detail" [headerStyle]="{'background-color': '#fff' }">
+              <p-accordionTab header="Apartment Equipments" [headerStyle]="{'background-color': '#fff' }">
+                <div class="custom-property-item"><span class="custom-property-label">bathroom details</span>
+                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.bathroom_Details">
+                    <p class="custom-property-label">  {{ item.bathroom_Name }}</p>
+                    <div class="custom-property-box" *ngFor="let item of aprt.apartment_Equipments?.bathroom_Details?.bathroom_Details"> detail</div>
+                  </div>
+                </div>
+                <div class="custom-property-item"><span class="custom-property-label">kitchen details</span>
+                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.kitchen_Details">
+                    <div class="custom-property-box" >  {{ item }}</div>
+                  </div>
+                </div>
+                <div class="custom-property-item"><span class="custom-property-label">Apartment Features</span>
+                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.apartment_Features">
+                    <div class="custom-property-box" >  {{ item }}</div>
+                  </div>
+                </div>
+                <div class="custom-property-item"><span class="custom-property-label">Apartment Facilites</span>
+                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.apartment_Facilites">
+                    <div class="custom-property-box" >  {{ item }}</div>
+                  </div>
+                </div>
+                <div class="custom-property-item"><span class="custom-property-label">Rooms Details</span>
+                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.rooms_Details">
+                    <p class="custom-property-label">  {{ item.room_Name }}</p>
+                    <div class="custom-property-box" *ngFor="let item of aprt.apartment_Equipments?.rooms_Details?.room_Details"> detail</div>
+                  </div>
+                </div>
+              </p-accordionTab>
+              <p-accordionTab header="apartment Backup Info" [headerStyle]="{'background-color': '#fff' }">
+
+                  <div class="custom-property-item" >
+                    <p class="custom-property-label">Electricity meter no</p>
+                    <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Electricity_Meter_No }}</div>
+                </div>
+                <div class="custom-property-item" >
+                  <p class="custom-property-label">Electricity meter consumption</p>
+                  <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Electricity_Meter_Consumption }}</div>
+              </div>
+              <div class="custom-property-item" >
+                <p class="custom-property-label">Water meter no</p>
+                <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Water_Meter_No}}</div>
+            </div>
+            <div class="custom-property-item" >
+              <p class="custom-property-label">Water meter consumption</p>
+              <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Water_Meter_Consumption}}</div>
+          </div>
+          <div class="custom-property-item" >
+            <p class="custom-property-label">Gas meter no</p>
+            <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Gas_Meter_No}}</div>
+        </div>
+        <div class="custom-property-item" >
+          <p class="custom-property-label">Gas meter consumption</p>
+          <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Gas_Meter_Consumption}}</div>
+      </div>
+      <div class="custom-property-item"><span class="custom-property-label">apartment_Addons_Fields</span>
+        <div class="custom-property-item" *ngFor="let item of aprt.apartment_Backup_Info?.apartment_Addons_Fields">
+          <p class="custom-property-label">  {{ item.field_Name }}</p>
+          <div class="custom-property-box" > {{ item.field_Content }}</div>
+        </div>
+      </div>
+      <div class="custom-property-item">
+        <span class="custom-property-label">Room Devices</span>
+        <div class="custom-property-item" *ngFor="let room of aprt.apartment_Backup_Info?.apartment_Rooms_Devices">
+          <p class="custom-property-label">{{ room.room_Name }}</p>
+          <div class="custom-property-box" *ngFor="let device of room.room_Devices">
+            <p class="custom-property-label">{{ device.device_Name }}</p>
+            <p>{{ device.device_Description }}</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="custom-property-item">
+        <span class="custom-property-label">Apartment damages images</span>
+        <div class="row">
+          <div class="col-6" *ngFor="let item of aprt.apartment_Backup_Info?.apartment_Damages_Imgs">
+            <img [src]="item ? item : 'https://via.placeholder.com/100x100'" class="img-fluid img-thumbnail" alt="damage Image" (click)="openImagePopup(item)">
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="currentImagee" class="popup" >
+        <span class="close"  style="color:#c8d6e7" (click)="closePopup()">&times;</span>
+        <div class="popup-content align-content-center justify-content-center">
+
+          <img [src]="currentImagee" class="popup-image">
+        </div>
+      </div>
+              </p-accordionTab>
+              <!-- <p-accordionTab header="Apartment Damages" [headerStyle]="{'background-color': '#fff' }"  >
+
+                <div class="custom-property-item">
+                  <span class="custom-property-label">Apartment damages images</span>
+                  <div class="row">
+                    <div class="col-6" *ngFor="let item of aprt.apartment_Images">
+                      <img [src]="item ? item : 'https://via.placeholder.com/100x100'" class="img-fluid img-thumbnail" alt="damage Image" (click)="openImagePopup(item)">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div *ngIf="currentImagee" class="popup" >
+                  <span class="close"  style="color:#c8d6e7" (click)="closePopup()">&times;</span>
+                  <div class="popup-content align-content-center justify-content-center">
+
+                    <img [src]="currentImagee" class="popup-image">
+                  </div>
+                </div>
+
+
+
+
+              </p-accordionTab> -->
+
+
+              <p-accordionTab header="Check Rules" [headerStyle]="{'background-color': '#fff' }">
+                <div class="custom-property-item">
+                  <span class="custom-property-label">Check Rules</span>
+                  <div class="custom-property-label">
+                    <p class="custom-property-label"> Type:  {{ aprt.apartment_Check_Rules?.checkType }}</p>
+                    <p class="custom-property-label"> WiFi Name:  {{ aprt.apartment_Check_Rules?.wifi_Name }}</p>
+                    <p class="custom-property-label"> WiFi Password:  {{ aprt.apartment_Check_Rules?.wifi_Password }}</p>
+                    <p class="custom-property-label"> Number of Doors:  {{ aprt.apartment_Check_Rules?.numof_Doors }}</p>
+                    <p class="custom-property-label"> Mail Box Number:  {{ aprt.apartment_Check_Rules?.mailBox_Num }}</p>
+                    <p class="custom-property-label"> Trash Location: {{ aprt.apartment_Check_Rules?.trash_Location }}</p>
+                    <p class="custom-property-label"> Apartment Location:  {{ aprt.apartment_Check_Rules?.apt_Location }}</p>
+                    <p class="custom-property-label"> Safe Code: {{ aprt.apartment_Check_Rules?.safe_Code }}</p>
+
+                    <!-- <div *ngIf="aprt.apartment_Check_Rules?.safe_Img"> -->
+                      <div *ngIf="aprt.apartment_Check_Rules?.safe_Img">
+                      <img [src]="aprt.apartment_Check_Rules?.safe_Img" class="img-fluid img-thumbnail" alt="Safe Image" (click)="openImagePopup(aprt.apartment_Check_Rules.safe_Img)">
+                    </div>
+                    <div *ngIf="aprt.apartment_Check_Rules?.door_Img">
+                      <img [src]="aprt.apartment_Check_Rules?.door_Img" class="img-fluid img-thumbnail" alt="Door Image" (click)="openImagePopup(aprt.apartment_Check_Rules.door_Img)">
+                    </div>
+                    <div *ngIf="aprt.apartment_Check_Rules?.building_Img">
+                      <img [src]="aprt.apartment_Check_Rules?.building_Img" class="img-fluid img-thumbnail" alt="Building Image" (click)="openImagePopup(aprt.apartment_Check_Rules.building_Img)">
+                    </div>
+
+                    <div *ngFor="let rule of aprt.apartment_Check_Rules?.apt_rules">
+                      <p class="custom-property-label">{{ rule.rule_Desc }}</p>
+                    </div>
+                  </div>
+
+                  <div class="custom-property-item">
+                    <span class="custom-property-label">Trash bin images</span>
+                    <div class="row">
+                      <div class="col-6" *ngFor="let item of aprt.apartment_Check_Rules?.tarsh_Pin_Imgs">
+                        <img [src]="item.pic_URL ? item.pic_URL : 'https://via.placeholder.com/100x100'" class="img-fluid img-thumbnail" alt="trash bin Image" (click)="openImagePopup(item.pic_URL)">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div *ngIf="currentImage" class="popup">
+                  <span class="close" style="color:#c8d6e7" (click)="closePopup()">&times;</span>
+                  <div class="popup-content align-content-center justify-content-center">
+                    <img [src]="currentImage" class="popup-image">
+                  </div>
+                </div> -->
+              </p-accordionTab>
+
+              <!-- <p-accordionTab header="Rooms Devices" [headerStyle]="{'background-color': '#fff' }">
+                <div class="custom-property-item">
+                  <span class="custom-property-label">Room Devices</span>
+                  <div class="custom-property-item" *ngFor="let room of aprt.apartment_Rooms_Devices">
+                    <p class="custom-property-label">{{ room.room_Name }}</p>
+                    <div class="custom-property-box" *ngFor="let device of room.room_Devices">
+                      <p class="custom-property-label">{{ device.device_Name }}</p>
+                      <p>{{ device.device_Description }}</p>
+                    </div>
+                  </div>
+                </div>
+              </p-accordionTab> -->
+              <p-accordionTab header="Basic apartment details" [headerStyle]="{'background-color': '#fff' }">
                 <div class="custom-property-info">
                   <div class="custom-property-item">
-                    <p class="custom-property-label">Property square feet</p>
-                    <div class="custom-property-box">{{ aprt.apartment_Area_Square }} sq ft</div>
+                    <p class="custom-property-label">apartment number</p>
+                    <div class="custom-property-box">{{ aprt.apartment_No }} </div>
                   </div>
                   <div class="custom-property-item">
-                    <p class="custom-property-label">Laundry type</p>
-                    <div class="custom-property-box">Laundry in building</div>
+                    <p class="custom-property-label">apartment floor</p>
+                    <div class="custom-property-box">{{ aprt.apartment_Floor }}</div>
                   </div>
                   <div class="custom-property-item">
-                    <p class="custom-property-label">Date available</p>
-                    <div class="custom-property-box">{{ aprt.date_Available }}</div>
+                    <p class="custom-property-label">apartment street</p>
+                    <div class="custom-property-box">{{ aprt.apartment_StreetName }} </div>
                   </div>
                   <div class="custom-property-item">
-                    <p class="custom-property-label">Parking type</p>
-                    <div class="custom-property-box">{{ aprt.parking_Type }}</div>
+                    <p class="custom-property-label">apartment building</p>
+                    <div class="custom-property-box">{{ aprt.apartment_BuildingName }}</div>
                   </div>
                   <div class="custom-property-item">
-                    <p class="custom-property-label">Air conditioning type</p>
-                    <div class="custom-property-box">{{ aprt.air_Conditioning_Type }}</div>
+                    <p class="custom-property-label">apartment city</p>
+                    <div class="custom-property-box">{{ aprt.apartment_City }}</div>
                   </div>
                   <div class="custom-property-item">
-                    <p class="custom-property-label">Heating type</p>
-                    <div class="custom-property-box">{{ aprt.heating_Type }}</div>
+                    <p class="custom-property-label">apartment_Area</p>
+                    <div class="custom-property-box">{{ aprt.apartment_Area }}</div>
                   </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">apartment area square</p>
+                    <div class="custom-property-box">{{ aprt.apartment_Area_Square }}</div>
+                  </div>
+
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">apartment video link</p>
+                    <div class="custom-property-box fs-6" style="font-size: 12px; word-wrap: break-word;"><a href="{{ aprt.apartment_GoogleLocation }}" target="_blank">{{ aprt.apartment_VideoLink }}</a> </div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">apartment google location</p>
+                    <div class="custom-property-box " style="font-size: 12px; word-wrap: break-word;"> <a href="{{ aprt.apartment_GoogleLocation }}" target="_blank">{{ aprt.apartment_GoogleLocation }}</a> </div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">apartment 360DLink</p>
+                    <div class="custom-property-box" style="font-size: 12px; word-wrap: break-word;"> <a href="{{ aprt.apartment_GoogleLocation }}" target="_blank">{{ aprt.apartment_360DLink }}</a> </div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">apartment bedRooms No</p>
+                    <div class="custom-property-box">{{ aprt.apartment_BedRoomsNo }}</div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">apartment bathroom No</p>
+                    <div class="custom-property-box">{{ aprt.apartment_BathroomNo }}</div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">apartment shared area</p>
+                    <div *ngIf="aprt.apartment_SharedArea" class="custom-property-box">Yes</div>
+                    <div *ngIf="!aprt.apartment_SharedArea" class="custom-property-box">No</div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">apartment sleeping area</p>
+                    <div class="custom-property-box">{{ aprt.apartment_SleepingArea }}</div>
+                  </div>
+                  <div class="custom-property-item">
+                    <p class="custom-property-label">apartment elevator</p>
+                    <div *ngIf="aprt.apartment_Elevator" class="custom-property-box">Yes</div>
+                    <div *ngIf="!aprt.apartment_Elevator" class="custom-property-box">No</div>
+                  </div>
+
                 </div>
               </p-accordionTab>
             </p-accordion>
