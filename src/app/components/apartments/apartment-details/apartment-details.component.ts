@@ -124,12 +124,17 @@ export class ApartmentDetailsComponent implements OnInit {
       this.currentIndex -= 1;
     }
   }
-
+  showRoomDesign :boolean;
   getApartmentDetails() {
     this.subscriptions.push(
       this._ApartmentService.getApartDetail(this.apt_UUID).subscribe(
         (res) => {
           this.aprt = res.apartment_Basic_Info || {};
+          // if(this.aprt.apartment_Type==='Studio'){
+          //   this.showRoomDesign=false;
+          // }else{
+          //   this.showRoomDesign=true;
+          // }
           this.aprt_details = this.aprt || {};
           this.aprt_Imgs = this.aprt.apartment_Images || [];
           this.trasponrts = this.aprt.apartment_Transports || [];
@@ -190,6 +195,14 @@ export class ApartmentDetailsComponent implements OnInit {
           } else {
             console.warn('apartment_Rooms is not an array:', this.aprt.apartment_Rooms);
           }
+
+
+          if(this.aprt.apartment_Type==='Studio'){
+            this.showRoomDesign=false;
+          }else{
+            this.showRoomDesign=true;
+          }
+          // console.log(this.aprt.apartment_Rooms);
         },
         (error) => {
           console.error('Error fetching apartment details:', error);

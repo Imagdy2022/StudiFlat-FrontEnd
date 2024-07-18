@@ -35,34 +35,35 @@
 
 
 
-                                <!-- <p-galleria [value]="prop_imgs" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5" class="px-0">
-                                    <ng-template pTemplate="item" let-item>
-                                        <a (click)="viewImage(item.apt_imgs)" style="cursor: pointer;">
-
-                                            <img [src]="item.apt_imgs" style="width: 640px; max-height: 480px;max-width:640px" />
-                                        </a>
-                                    </ng-template>
 
 
-                                    <ng-template pTemplate="thumbnail" let-item>
-                                        <div class="grid  grid-nogutter justify-content-center">
-                                            <img [src]="item.apt_imgs" style="height:80px;width: 100px;" />
-                                        </div>
-                                    </ng-template>
-
-                                </p-galleria> -->
 
 
-                              <div class="image-gallery" style="max-width: 1500px;">
-                                <div class="main-image">
-                                    <img [src]="prop_imgs[0]?.apt_imgs" style="width: 100%; height:500px; border-radius:13px" />
-                                </div>
-                                <div class="thumbnail-container" style="display: flex; justify-content: space-evenly;gap:20px; margin-top: 20px;">
-                                    <div *ngFor="let item of prop_imgs.slice(1, 5); let i = index" (click)="viewImage(item.apt_imgs)" style="   cursor: pointer;">
-                                        <img [src]="item.apt_imgs" style="height: 120px; width: 360px; border-radius:13px;" />
+                            <ng-container>
+                              <div class="container testimonial-group">
+                                <div class="row mb-3 vcrr">
+                                  <div class="image-gallery" style="max-width: 1500px;">
+                                    <div class="main-image">
+                                      <img
+                                        [src]="currentImage"
+                                        style="width: 100%; height: 500px; border-radius: 13px;" />
                                     </div>
+                                    <div class="thumbnail-container" style="display: flex; justify-content: start; margin-top: 20px; ">
+                                      <div *ngFor="let img of displayedThumbnails; let i = index" style="cursor: pointer;" (click)="changeMainImage(img)">
+                                        <img *ngIf="i > 0"
+                                          [src]="img?.includes('https') ? img : '../../../assets/images/apartmentImages/default_apartment.jpg'"
+                                          [class.selected-thumbnail]="img === currentImage"
+                                          style="height: 120px; width: 95%; border-radius: 13px;" />
+                                      </div>
+                                    </div>
+                                    <div *ngIf="inquire_details.apartment_Pictures.length > 5" class="navigation-buttons" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                                      <button class="btn btn-secondary" style="border-radius:10px; background-color:#D2D9E1; color: #1F4068;" (click)="previous()" [disabled]="currentIndex === 0">Previous</button>
+                                      <button class="btn btn-secondary" style="border-radius:10px; background-color:#D2D9E1; color: #1F4068;" (click)="next()" [disabled]="currentIndex + 5 >= inquire_details.apartment_Pictures.length">Next</button>
+                                    </div>
+                                  </div>
                                 </div>
-                            </div>
+                              </div>
+                            </ng-container>
 
 
 
@@ -141,7 +142,7 @@
                         <h4 class="fw-bold my-0">{{ inquire_details?.apartment_Name }}</h4>
                         <!-- <p class="gray mt-0">{{ inquire_details?.apartment_Location }}</p> -->
                         <h5 class="blue fw-bold my-0">
-                            {{ inquire_details?.apartment_Price}} / month
+                            {{ bookingPrice}} / month
                         </h5>
                         <div class="d-flex">
                             <div class="d-flex justify-content-between me-3">
@@ -171,7 +172,7 @@
 
                         <img  style="     width: 64px; height: 64px;  border-radius: 50%" class="w-10 h-10 rounded-full" [src]="inquire_details?.requested_By_Img!=''?inquire_details?.requested_By_Img:'assets/images/Frame 1261154899.svg'" />
                         <div class="flex-col justify-start items-start inline-flex">
-                            <div class="text-zinc-800 text-sm font-semibold font-['Montserrat'] leading-tight">{{ inquire_details?.requested_By }} </div>
+                            <div class="text-zinc-800 text-sm font-semibold font-['Montserrat'] leading-tight">{{ inquire_details?.requested_by }} </div>
                             <div class="text-neutral-400 text-sm font-normal font-['Montserrat'] leading-tight"></div>
                         </div>
                     </div>
@@ -192,11 +193,13 @@
                           <div class="row g-3 mb-3">
                               <div class="col-md-6">
                                   <label for="startDate" class="form-label">Start Date</label>
-                                  <input type="text" class="form-control" id="startDate"  value="{{ inquire_details?.booking_Start_Date }}" >
+                                  <!-- <input type="text" class="form-control" id="startDate"  value="{{ inquire_details?.booking_Start_Date }}" > -->
+                                  <input type="text" class="form-control" id="startDate" [value]="inquire_details?.booking_Start_Date | date: 'dd/MM/yyyy'" >
+
                               </div>
                               <div class="col-md-6">
                                   <label for="endDate" class="form-label">End Date</label>
-                                  <input type="text" class="form-control" id="endDate" value="{{ inquire_details?.booking_End_Date }}">
+                                  <input type="text" class="form-control" id="endDate" [value]="inquire_details?.booking_End_Date | date: 'dd/MM/yyyy'" >
                               </div>
                           </div>
                           <div class="row g-3 mb-3">
@@ -217,37 +220,10 @@
                               <label for="universityName" class="form-label">University Name</label>
                               <input type="text" class="form-control" id="universityName" value="{{ inquire_details?.booking_University}}">
                           </div>
-<!--
-                          <p-confirmPopup #confirmPopup>
-                            <ng-template pTemplate="content" let-message>
-                                <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
-                                    <i [class]="message.icon" class="text-6xl text-primary-500"></i>
-                                    <p>{{ message.message }}</p>
-                                    <div *ngIf="message.showReasonInput">
-                                        <input type="text" pInputText placeholder="Enter reason" [(ngModel)]="rejectReason"/>
-                                    </div>
-                                </div>
-                                <button type="button" (click)="onSubmit(message.action)" class="btn btn-primary">Submit</button>
-                            </ng-template>
-                        </p-confirmPopup> -->
+
                         <p-confirmPopup></p-confirmPopup>
 
-                              <!-- <button type="button" class="btn btn-primary btn-block mb-0  fs-6" style=" width: 100%; border-radius:10px; padding:11px">Confirm</button>
-                              <button type="button" class="btn btn-block fs-6  " style="width: 100%; border-radius:10px; background-color:#D2D9E1;    color: #1F4068; padding:11px">Reject</button> -->
-                              <!-- <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirm('confirm')">Confirm</button>
-                              <button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirm('reject')">Reject</button>
 
-                              <p-dialog header="Provide Reject Reason" [(visible)]="showRejectReasonDialog" [modal]="true" [closable]="false">
-                                <div class="ui-g">
-                                  <div class="ui-g-12">
-                                    <input type="text" pInputText placeholder="Enter reason" [(ngModel)]="rejectReason" class="w-full"/>
-                                  </div>
-                                  <div class="ui-g-12 text-center mt-4">
-                                    <button type="button" pButton label="Submit" (click)="rejectApproval()"></button>
-                                  </div>
-                                </div>
-                              </p-dialog> -->
-                 <!-- Buttons to trigger confirmation and rejection -->
 <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirm('confirm')">Confirm</button>
 <button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirm('reject')">Reject</button>
 
@@ -264,7 +240,7 @@
         <div class="row text-center justify-content-center">
           <p>Are you sure you want to confirm?</p>
           <div class="ui-g-12 text-center mt-4">
-            <button type="button" pButton label="Yes" (click)="confirmApproval()"></button>
+            <button type="button" pButton label="Yes"  (click)="confirmApproval()"></button>
           </div>
         </div>
       </div>
@@ -308,231 +284,7 @@
 
 
 
-                    <!-- <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1transport" aria-expanded="false" aria-controls="flush-collapseOne1transport">
-                            Request Details
-                        </button>
-                            </h2>
-                            <div id="flush-collapseOne1transport" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">start Date</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{ inquire_details?.start_Date }}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">End Date</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{ inquire_details?.end_Date }}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Number of Guests</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{ inquire_details?.req_GuestNo }}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Role</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{ inquire_details?.role}}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Agency / broker code</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{ inquire_details?.agency_Code}}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">Purpose of Coming to Germany</p>
-                                    <div style="    height: 90px;" class="form-control w-100 fs-6 pt-2">{{ inquire_details?.purpose_Coming}}</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne2Video" aria-expanded="false" aria-controls="flush-collapseOne2Video">
-                                  Passport of tenants
-                        </button>
-                            </h2>
-                            <div id="flush-collapseOne2Video" *ngFor="let item of inquire_details?.tenant_Passport " class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="w-96 h-96   pb-4 flex-col justify-start items-center gap-4 inline-flex" style="margin-top:10px;">
-
-                                    <div class="bg-white rounded shadow flex-col justify-start items-start flex">
-                                        <div class="w-96 p-4 bg-white border-b border-gray-200 justify-start items-center gap-16 inline-flex">
-                                            <div class="w-80 text-zinc-800 text-sm font-semibold font-['Montserrat'] leading-tight"> {{item?.guest_Name}}</div>
-                                        </div>
-                                        <div class="w-96 h-44 flex-col justify-start items-start gap-4 flex text-center">
-
-                                            <a [href]="'#'+item?.pS_ID" type="" class="" data-bs-toggle="modal" [attr.data-bs-target]="'#'+item?.pS_ID" *ngIf="item. isFile==false">
-                                                <img style="width:100%" class="self-stretch grow shrink basis-0 border border-stone-300" *ngIf="item.passport_Img" [src]="item?.passport_Img" />
-                                                <img style="width:100%;height: 200px;" class="self-stretch grow shrink basis-0 border border-stone-300" *ngIf="item.passport_Img==''||item.passport_Img==null" src="../../../../assets/images/passport not uploaded.png" />
-                                            </a>
-
-                                            <div class="modal fade" id="{{ item?.pS_ID }}" tabindex="-1" [attr.aria-labelledby]=" item?.pS_ID" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="{{ item?.pS_ID }}">Passport of : {{ item?.guest_Name }}</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-
-                                                            <img style="width:100%" class="self-stretch grow shrink basis-0 border border-stone-300 img-thumbnail" *ngIf="item.passport_Img" [src]="item?.passport_Img" />
-                                                            <img style="width:100%;height: 200px;" class="self-stretch grow shrink basis-0 border border-stone-300" *ngIf="item.passport_Img==''||item.passport_Img==null" src="../../../../assets/images/passport not uploaded.png" />
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <a target="_blank" href="{{ item.passport_Img }}" *ngIf="item. isFile==true" style="text-align: center;font-size: xx-large">
-                                              Show Passport
-                                          </a>
-
-
-
-                                        </div>
-
-
-                                        <div class="w-96 p-4 bg-white border-b border-gray-200 justify-start items-center gap-36 inline-flex" *ngIf="hidepassport==false">
-                                            <div class="d-flex justify-content-center">
-
-                                                <a  (click)="onOpenModal1(item)" style="     border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
-                                                  Not Valid
-                              </a>
-                                                <button [hidden]="item.valid_Passport==true" (click)="NewPassportsValidation(item)" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
-                                                   Valid
-                              </button>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="accordion-item" *ngIf="inquire_details?.check_Date!=null">
-                            <h2 class="accordion-header" id="flush-headingOne1">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1transport1" aria-expanded="false" aria-controls="flush-collapseOne1transport1">
-                          Check in
-                      </button>
-                            </h2>
-                            <div id="flush-collapseOne1transport1" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne1" data-bs-parent="#accordionFlushExample1">
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;"> Arrival Date</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{ inquire_details?.check_Date }}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;"> Arrival Time</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{ inquire_details?.check_Time }}</div>
-                                </div>
-                                <div class="mb-3">
-                                    <p class="fw-bold" style="color: #605D62 !important;">need a moving service</p>
-                                    <div class="form-control w-100 fs-6 pt-2">{{ inquire_details?.move_Service=="true"?"Yes":"No" }}</div>
-                                </div>
-
-
-
-
-                            </div>
-                        </div>
-
-                        <div class="accordion-item" *ngIf=" inquire_details?.rejected==true">
-                            <h2 class="accordion-header" id="flush-headingOne2">
-                                <button class="accordion-button ps-0  collapsed text-black fw-bold bg-transparent border-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1transport2" aria-expanded="false" aria-controls="flush-collapseOne1transport2">
-                          Reject Reason
-                      </button>
-                            </h2>
-                            <div id="flush-collapseOne1transport2" class="accordion-collapse collapse mt-3" aria-labelledby="flush-headingOne2" data-bs-parent="#accordionFlushExample">
-                                <div class="mb-3">
-
-                                    <div class="form-control w-100 fs-6 pt-2">{{ inquire_details?.reject_Reason }}</div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
-
-
-
-                    </div>
-                    <div class="row" *ngIf="inquire_details?.cancel_Side==null||inquire_details.cancel_Side=='Admin'||inquire_details.cancel_Side==''">
-                        <button *ngIf="inquire_details?.approved==false" (click)="ApproveRequest()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
-                        Confirm</button>
-
-                    </div>
-
-                    <div class="row" *ngIf="inquire_details?.rejected==false" style="margin-top: 15px;">
-                        <button  (click)="onOpenModal2()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="color: #1F4068 !important;background-color: #D2D9E1 !important">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M6.6665 10.8332H13.3332C13.5693 10.8332 13.7672 10.7533 13.9269 10.5936C14.0866 10.4339 14.1665 10.2359 14.1665 9.99984C14.1665 9.76373 14.0866 9.56581 13.9269 9.40609C13.7672 9.24637 13.5693 9.1665 13.3332 9.1665H6.6665C6.43039 9.1665 6.23248 9.24637 6.07275 9.40609C5.91303 9.56581 5.83317 9.76373 5.83317 9.99984C5.83317 10.2359 5.91303 10.4339 6.07275 10.5936C6.23248 10.7533 6.43039 10.8332 6.6665 10.8332ZM9.99984 18.3332C8.84706 18.3332 7.76373 18.1144 6.74984 17.6769C5.73595 17.2394 4.854 16.6457 4.104 15.8957C3.354 15.1457 2.76025 14.2637 2.32275 13.2498C1.88525 12.2359 1.6665 11.1526 1.6665 9.99984C1.6665 8.84706 1.88525 7.76373 2.32275 6.74984C2.76025 5.73595 3.354 4.854 4.104 4.104C4.854 3.354 5.73595 2.76025 6.74984 2.32275C7.76373 1.88525 8.84706 1.6665 9.99984 1.6665C11.1526 1.6665 12.2359 1.88525 13.2498 2.32275C14.2637 2.76025 15.1457 3.354 15.8957 4.104C16.6457 4.854 17.2394 5.73595 17.6769 6.74984C18.1144 7.76373 18.3332 8.84706 18.3332 9.99984C18.3332 11.1526 18.1144 12.2359 17.6769 13.2498C17.2394 14.2637 16.6457 15.1457 15.8957 15.8957C15.1457 16.6457 14.2637 17.2394 13.2498 17.6769C12.2359 18.1144 11.1526 18.3332 9.99984 18.3332ZM9.99984 16.6665C11.8609 16.6665 13.4373 16.0207 14.729 14.729C16.0207 13.4373 16.6665 11.8609 16.6665 9.99984C16.6665 8.13873 16.0207 6.56234 14.729 5.27067C13.4373 3.979 11.8609 3.33317 9.99984 3.33317C8.13873 3.33317 6.56234 3.979 5.27067 5.27067C3.979 6.56234 3.33317 8.13873 3.33317 9.99984C3.33317 11.8609 3.979 13.4373 5.27067 14.729C6.56234 16.0207 8.13873 16.6665 9.99984 16.6665Z" fill="#1F4068"/>
-                            </svg>
-                          Reject
-
-        </button>
-
-                    </div>
-                    <div class="row" *ngIf="inquire_details?.approved!=false">
-                        <div>
-                            <div class="  position-relative h-124px mb-3" style="margin-top: 22px;padding:0px">
-
-                                <div *ngIf="inquire_details?.paid==true">
-                                    <ng-container>
-
-                                        <div class="row rounded-3 my-4 p-2 pt-3 pb-0" style="border: 1px solid #8fa0b4">
-                                            <div class="col-12 col-md-6">
-                                                <h6>Tenant Contract</h6>
-                                                <p>This contract includes all the necessary information.</p>
-                                            </div>
-                                            <div class="col-12 col-md-5 d-flex align-items-center">
-                                                <div class="row">
-                                                    <div class="col-5">
-                                                        <a class="me-3 cursor " (click)="CreateContractPDF()"><img src="assets/images/apartmentImages/delete.svg" /></a>
-
-                                                    </div>
-                                                    <div class="col-2"></div>
-                                                    <div class="col-5">
-                                                        <a class="me-3 cursor">
-                                                            <input type="file" accept="image/*" multiple="multiple" (change)="selectFile($event)" style="width: 8%;cursor:pointer;top: 59px;height: 34%;" class="ng-star-inserted d-block  file position-absolute">
-
-                                                            <img src="../../../../assets/images/Featured icon.svg" /></a>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                    </ng-container>
-                                </div>
-                                <div>
-                                    <ng-container *ngIf="selectedContractImg">
-
-
-                                    </ng-container>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="inquire_details?.paid==true">
-                        <div class="row" *ngIf="inquire_details?.approved!=false">
-                            <button *ngIf="inquire_details?.contract_Created==false" routerLink="/inquiries/create-contract/{{param}}" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important;">
-                    &nbsp;&nbsp;   Create Contract
-      </button>
-                            <button *ngIf="inquire_details?.contract_Created==true" routerLink="/inquiries/create-contract/{{param}}" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important;">
-         &nbsp;&nbsp;   Edit Contract
-</button>
-<button  (click)="ResignContract()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4 mt-3" style="background-color: #1f4068 !important;">
-  &nbsp;&nbsp;   Re-Sign Contract
-</button>
-                        </div>
-                    </div> -->
                 </div>
             </div>
 
@@ -540,121 +292,6 @@
     </main>
 
 </div>
-<!-- <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}" style=" background-color: rgb(23 22 22 / 50%);;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="    margin-top: 150px;">
-            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;position: relative;">
-                <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
-                    <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
-                    Passport Invalid
-            </span>
-                </p>
-                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal1()">
-<span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
-</button>
-
-
-
-            </div>
-
-            <div class="modal-body">
-
-
-                <div class="row">
-                    <div class="mb-3 col-12 col-md-12">
-                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Reason</label>
-                        <textarea class="border p-3 pt-3 rounded-2 w-100" rows="4" style="resize: inherit" placeholder="please enter reason  " [(ngModel)]="Reason"></textarea>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-
-            <div class="modal-footer">
-
-                <div class="d-flex justify-content-between">
-                    <div class="py-2 px-3 fw-bold"></div>
-                    <div class="d-flex justify-content-between">
-                        <a (click)=" onCloseModal1()" style=" margin-right: 271px !important;cursor: pointer;   border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
-                      Cancel
-        </a>
-                        <button (click)="NewPassportsNotValidation()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
-                      confirm
-        </button>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}" style=" background-color: rgb(23 22 22 / 50%);;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="    margin-top: 150px;">
-            <div class="modal-header" style="background-color:#ffffff; border-bottom: none !important;position: relative;">
-                <p class="modal-title" style="color: #1C1B1F; font-size: 20px;   font-weight: 600; line-height: 24px; word-wrap: break-word">
-                    <span class="form-label gray fw-bold" style="vertical-align: middle; padding-left:8px">
-                    Reject inquire
-          </span>
-                </p>
-                <button type="button" style="border:none;background-color: #ffffff;width: 68px;height: 50px;" class="close" aria-label="Close" (click)="onCloseModal2()">
-<span aria-hidden="true" style="color: #000000;font-size: 35px;">&times;</span>
-</button>
-
-
-
-            </div>
-
-            <div class="modal-body">
-
-
-                <div class="row">
-                    <div class="mb-3 col-12 col-md-12">
-                        <label for="exampleInputPricepermonth" class="form-label gray fw-bold">Reason</label>
-                        <textarea class="border p-3 pt-3 rounded-2 w-100" rows="4" style="resize: inherit" placeholder="please enter reason  " [(ngModel)]="Reason2"></textarea>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-
-            <div class="modal-footer">
-
-                <div class="d-flex justify-content-between">
-                    <div class="py-2 px-3 fw-bold"></div>
-                    <div class="d-flex justify-content-between">
-                        <a (click)=" onCloseModal2()" style=" margin-right: 271px !important;cursor: pointer;   border: 1px solid;" class="backcancel text-decoration-none cursor bg-white rounded-2 py-2 px-3 fw-bold mx-2 xcvdd">
-                    Cancel
-      </a>
-                        <button (click)="CancelRequest()" class="rounded-2 text-white rounded-2 border-0 py-2 px-4" style="background-color: #1f4068 !important">
-                    confirm
-      </button>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</div> -->
 
 
 <div class="row m-0">
@@ -679,10 +316,10 @@
             </div>
           </div>
 
-        <div class="mb-4" *ngFor="let bed of inquire_details?.booking_Beds">
-          <p-accordion id="bed">
+        <div class="mb-4"  >
+          <p-accordion id="bed"  >
             <!-- Bed 1 Section -->
-            <p-accordionTab   [selected]="true" [headerStyle]="{'background-color': '#fff' }">
+            <p-accordionTab   [selected]="true" [headerStyle]="{'background-color': '#fff' }" *ngFor="let bed of inquire_details?.booking_Beds" >
               <ng-template pTemplate="header"  >
                 <div class="d-flex justify-content-between align-items-center m-0  rounded w-100 px-2">
                   <div class="fw-bold">{{ bed.bed_No }}</div>
@@ -705,10 +342,11 @@
                       <p class="m-0 text-muted">{{ bed.guest_Data.guest_Mail }}</p>
                     </div>
                     <div class="col-lg-3 text-right border-end">
-                      <p class="m-0"><strong>Check In Date</strong><br>{{ bed.guest_Data.check_In }}</p>
+                      <p class="m-0"><strong>Check In Date</strong><br>{{ bed.guest_Data.check_In | date: 'dd/MM/yyyy' }}</p>
+
                     </div>
                     <div class="col-lg-3 text-right border-end">
-                      <p class="m-0"><strong>Check Out Date</strong><br>{{ bed.guest_Data.check_Out }}</p>
+                      <p class="m-0"><strong>Check Out Date</strong><br>{{ bed.guest_Data.check_Out | date: 'dd/MM/yyyy'}}</p>
                     </div>
                     <div class="col-lg-2 text-right">
                       <p class="m-0"><strong>Phone Number</strong><br>{{ bed.guest_Data.phone_Number }}</p>
@@ -731,16 +369,16 @@
                         <div class="d-flex align-items-center justify-content-start">
                           <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                           <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
-                          <img *ngIf="bed.guest_Passport.passport_Approved" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                          <img *ngIf="!bed.guest_Passport.passport_Approved" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                          <img   *ngIf=" bed.guest_Passport?.passport_Approved" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                          <img *ngIf=" !bed.guest_Passport?.passport_Approved" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                           <span class="ml-2">Passport</span>
                         </div>
                         <div class="d-flex align-items-center justify-content-end w-100 pe-3">
                           <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.guest_Passport.passport_Date }}</span>
                             <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.guest_Passport.passport_Time }}</span>
                           <!-- <span class="badge approve">Approved</span> -->
-                          <span class="badge approve" *ngIf="bed.guest_Passport.passport_Approved">Approved</span>
-                          <span class="badge reject" *ngIf="!bed.guest_Passport.passport_Approved">Rejected</span>
+                          <span class="badge approve" *ngIf="bed.guest_Passport?.passport_Approved">Approved</span>
+                          <span class="badge reject" *ngIf="!bed.guest_Passport?.passport_Approved">Rejected</span>
                         </div>
 
 
@@ -756,11 +394,11 @@
                             <!-- <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 80%; border-radius:10px; padding:11px">Confirm</button>
                             <button type="button" class="btn btn-block fs-6" style="width: 80%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px">Reject</button> -->
                            <!-- Buttons to trigger approval and rejection -->
-<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirm('confirm')">Approve Passport</button>
-<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirm('reject')">Reject Passport</button>
+<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirmPass('confirm')">Approve Passport</button>
+<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirmPass('reject')">Reject Passport</button>
 
 <!-- Confirm Dialog -->
-<div *ngIf="showConfirmDialog" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
+<div *ngIf="showConfirmDialogP" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
   <div class="modal-dialog" role="document" style="max-width: 371px;">
     <div class="modal-content" style="margin-top: 150px;">
       <button type="button" aria-label="Close" class="close"
@@ -781,7 +419,7 @@
 </div>
 
 <!-- Reject Reason Dialog -->
-<div *ngIf="showRejectReasonDialog" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
+<div *ngIf="showRejectReasonDialogP" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
   <div class="modal-dialog" role="document" style="max-width: 371px;">
     <div class="modal-content" style="margin-top: 150px;">
       <button type="button" aria-label="Close" class="close"
@@ -818,15 +456,15 @@
                       <div class="d-flex align-items-center justify-content-start">
                         <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
-                        <img *ngIf="bed.secuirty_Deposit_Invoices.status === 'Unpaid'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="bed.secuirty_Deposit_Invoices.status === 'Paid'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf=" bed.secuirty_Deposit_Invoices?.status === 'Not Completed'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf=" bed.secuirty_Deposit_Invoices?.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Security Deposit</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt="">  {{ bed.secuirty_Deposit_Invoices.secuirty_Date }} </span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt="">{{ bed.secuirty_Deposit_Invoices.secuirty_Time }}</span>
-                          <span class="badge unpaid" *ngIf="bed.secuirty_Deposit_Invoices.status === 'Unpaid'">Unpaid</span>
-                          <span class="badge approve" *ngIf="bed.secuirty_Deposit_Invoices.status === 'Paid'">Paid</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt="">  {{ bed.secuirty_Deposit_Invoices?.secuirty_Date }} </span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt="">{{ bed.secuirty_Deposit_Invoices?.secuirty_Time }}</span>
+                          <span class="badge unpaid" *ngIf="bed.secuirty_Deposit_Invoices?.status === 'Not Completed'">Not Completed</span>
+                          <span class="badge approve" *ngIf="bed.secuirty_Deposit_Invoices?.status === 'Completed'">Completed</span>
                       </div>
 
 
@@ -845,12 +483,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let invoice of bed.secuirty_Deposit_Invoices.invoices">
-                            <td>{{ invoice.invoice_Code }}</td>
-                            <td>{{ invoice.invoice_Duration }}</td>
-                            <td>{{ invoice.invoice_Amount }}</td>
-                            <td>{{ invoice.payment_Method }}</td>
-                            <td><span class="badge" [ngClass]="{'approve': invoice.payment_Is_Paid, 'unpaid': !invoice.payment_Is_Paid}">{{ invoice.payment_Is_Paid ? 'Paid' : 'Unpaid' }}</span></td>
+                          <tr *ngFor="let invoice of bed.secuirty_Deposit_Invoices?.invoices">
+                            <td>{{ invoice?.invoice_Code }}</td>
+                            <td>{{ invoice?.invoice_Duration }}</td>
+                            <td>{{ invoice?.invoice_Amount }}</td>
+                            <td>{{ invoice?.payment_Method }}</td>
+                            <td><span class="badge" [ngClass]="{'approve': invoice?.payment_Is_Paid, 'reject': !invoice?.payment_Is_Paid}">{{ invoice?.payment_Is_Paid ? 'Completed' : 'Not Completed' }}</span></td>
                             <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
                           <!-- <tr>
@@ -870,15 +508,15 @@
                   <p-accordionTab [headerStyle]="{'background-color': '#fff' }" (onOpen)="isAccordionOpen = true" (onClose)="isAccordionOpen = false">
                   <ng-template pTemplate="header"  >
                     <div class="d-flex align-items-center justify-content-start">
-                      <img *ngIf="bed.contract.status === 'Signed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="bed.contract.status === 'Unsigned'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                      <img *ngIf=" bed.contract.status === 'Not Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf=" bed.contract.status === 'Completed'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                       <span class="ml-2">Sign Contract</span>
                     </div>
                     <div class="d-flex align-items-center justify-content-end w-100 pe-3">
                       <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt="">{{ bed.contract.contract_Date }}</span>
                         <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt="">  {{ bed.contract.contract_Time }}</span>
-                        <span class="badge approve" *ngIf="bed.contract.status === 'Signed'">Signed</span>
-                        <span class="badge reject" *ngIf="bed.contract.status === 'Unsigned'">Unsigned</span>
+                        <span class="badge approve" *ngIf="bed.contract.status === 'Completed'">Signed</span>
+                        <span class="badge reject" *ngIf="bed.contract.status === 'Not Completed'">Unsigned</span>
                     </div>
 
 
@@ -895,7 +533,7 @@
                         <div class="d-flex align-items-center">
                           <a href="#" class="text-decoration-none text-primary mx-2"><img src="/assets/images/view.svg" class="me-1" alt="">View</a>
                           <a href="#" class="text-decoration-none text-primary mx-2"> <img src="/assets/images/download.svg" alt="" class="me-1" >Download</a>
-                          <button class="btn custom-btn-outline-primary ml-3">Reassign Contract</button>
+                          <button class="btn custom-btn-outline-primary ml-3">Resign Contract</button>
                         </div>
                       </div>
                     </div>
@@ -907,8 +545,8 @@
                       <div class="d-flex align-items-center justify-content-start">
                         <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
-                        <img *ngIf="bed.arriving_Details.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="bed.arriving_Details.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf=" bed.arriving_Details?.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf=" bed.arriving_Details?.status === 'Not Completed'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Arriving Details</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
@@ -916,7 +554,7 @@
                           <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt="">{{ bed.arriving_Details.time }}</span>
                         <!-- <span class="badge approve">Completed</span> -->
                         <span class="badge approve" *ngIf="bed.arriving_Details.status === 'Completed'">Completed</span>
-                        <span class="badge reject" *ngIf="bed.arriving_Details.status === 'Pending'">Pending</span>
+                        <span class="badge reject" *ngIf="bed.arriving_Details.status === 'Not Completed'">Pending</span>
                       </div>
 
 
@@ -959,16 +597,16 @@
                       <div class="d-flex align-items-center justify-content-start">
                         <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
-                        <img *ngIf="bed.check_In_Process.scanning_QR.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="bed.check_In_Process.scanning_QR.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf=" bed.check_In_Process?.scanning_QR?.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf=" bed.check_In_Process?.scanning_QR?.status === 'Not Completed'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Check In Process</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.check_In_Process.scanning_QR.date }}</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process.scanning_QR.time }}</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.check_In_Process?.scanning_QR?.date }}</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process?.scanning_QR?.time }}</span>
                         <!-- <span class="badge approve">Completed</span> -->
-                        <span class="badge approve" *ngIf="bed.check_In_Process.scanning_QR.status === 'Completed'">Completed</span>
-                        <span class="badge reject" *ngIf="bed.check_In_Process.scanning_QR.status === 'Pending'">Pending</span>
+                        <span class="badge approve" *ngIf="bed.check_In_Process?.scanning_QR?.status === 'Completed'">Completed</span>
+                        <span class="badge reject" *ngIf="bed.check_In_Process?.scanning_QR?.status === 'Not Completed'">Pending</span>
                       </div>
 
 
@@ -987,8 +625,8 @@
                             <div class="d-flex align-items-center justify-content-start">
                               <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                               <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
-                              <img *ngIf="bed.check_In_Process.scanning_QR.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                              <img *ngIf="bed.check_In_Process.scanning_QR.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                              <img *ngIf=" bed.check_In_Process.scanning_QR.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                              <img *ngIf=" bed.check_In_Process.scanning_QR.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                               <span class="ml-2">Scanning Bed QR Code</span>
                             </div>
                             <div class="d-flex align-items-center justify-content-end w-100 pe-3">
@@ -1026,8 +664,8 @@
                       <div class="d-flex align-items-center justify-content-start">
                         <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
-                        <img *ngIf="bed.check_In_Process.confirm_Identity.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="bed.check_In_Process.confirm_Identity.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf=" bed.check_In_Process.confirm_Identity.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf=" bed.check_In_Process.confirm_Identity.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Confirm Identity</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
@@ -1052,15 +690,15 @@
                         <div class="col-md-6">
                           <img [src]="bed.check_In_Process.confirm_Identity.guest_Selife || 'https://via.placeholder.com/300x200'" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Tenant Image">
                           <div class="d-flex mt-3">
-                            <button type="button" class="btn btn-primary btn-block mb-0 fs-6 m-1" style="width: 44%; border-radius: 10px; padding: 10px;">Confirm</button>
-                            <button type="button" class="btn btn-block fs-6 m-1" style="width: 44%; border-radius: 10px; background-color: #D2D9E1; color: #1F4068; padding: 10px;">Reject</button>
+                            <button type="button" class="btn btn-primary btn-block mb-0 fs-6 m-1" style="width: 44%; border-radius: 10px; padding: 10px;" (click)="showConfirmSelfi('confirm')">Confirm</button>
+                            <button type="button" class="btn btn-block fs-6 m-1" style="width: 44%; border-radius: 10px; background-color: #D2D9E1; color: #1F4068; padding: 10px;" (click)="showConfirmSelfi('reject')">Reject</button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </p-accordionTab>
 
-                  <div *ngIf="showConfirmDialog" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
+                  <div *ngIf="showConfirmDialogS" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
                     <div class="modal-dialog" role="document" style="max-width: 371px;">
                       <div class="modal-content" style="margin-top: 150px;">
                         <button type="button" aria-label="Close" class="close"
@@ -1070,7 +708,7 @@
                         </button>
                         <div class="modal-body">
                           <div class="row text-center justify-content-center">
-                            <p>Are you sure you want to approve this passport?</p>
+                            <p>Are you sure you want to approve this image?</p>
                             <div class="ui-g-12 text-center mt-4">
                               <button type="button" class="btn btn-primary" (click)="handleActionSelfi(true,inquire_details?.booking_ID,bed.guest_Data.guest_ID) ">Yes</button>
                             </div>
@@ -1081,7 +719,7 @@
                   </div>
 
                   <!-- Reject Reason Dialog -->
-                  <div *ngIf="showRejectReasonDialog" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
+                  <div *ngIf="showRejectReasonDialogS" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
                     <div class="modal-dialog" role="document" style="max-width: 371px;">
                       <div class="modal-content" style="margin-top: 150px;">
                         <button type="button" aria-label="Close" class="close"
@@ -1108,15 +746,15 @@
                     <!-- <hr class="m-0"/> -->
                     <ng-template pTemplate="header"  >
                       <div class="d-flex align-items-center justify-content-start">
-                        <img *ngIf="bed.check_In_Process.payments.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                        <img *ngIf="bed.check_In_Process.payments.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process?.payments?.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                        <img *ngIf="bed.check_In_Process?.payments?.status === 'Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                         <span class="ml-2">Payments</span>
                       </div>
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
-                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.check_In_Process.payments.date }}</span>
-                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process.payments.time }}</span>
-                          <span class="badge approve" *ngIf="bed.check_In_Process.payments.status === 'Completed'">Completed</span>
-                                <span class="badge reject" *ngIf="bed.check_In_Process.payments.status === 'Pending'">Pending</span>
+                        <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt=""> {{ bed.check_In_Process?.payments?.date }}</span>
+                          <span class="mx-4"><img src="/assets/images/clock.svg" class="me-1" alt=""> {{ bed.check_In_Process?.payments?.time }}</span>
+                          <span class="badge approve" *ngIf="bed.check_In_Process?.payments?.status === 'Completed'">Completed</span>
+                                <span class="badge reject" *ngIf="bed.check_In_Process?.payments?.status === 'Pending'">Pending</span>
                       </div>
 
 
@@ -1136,12 +774,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let invoice of bed.check_In_Process.payments.invoices">
-                            <td>{{ invoice.invoice_Code }}</td>
-                            <td>{{ invoice.invoice_Duration }}</td>
-                            <td>{{ invoice.invoice_Amount }}</td>
-                            <td>{{ invoice.payment_Method }}</td>
-                            <td><span class="badge" [ngClass]="{'approve': invoice.payment_Is_Paid, 'unpaid': !invoice.payment_Is_Paid}">{{ invoice.payment_Is_Paid ? 'Paid' : 'Unpaid' }}</span></td>
+                          <tr *ngFor="let invoice of bed.check_In_Process?.payments?.invoices">
+                            <td>{{ invoice?.invoice_Code }}</td>
+                            <td>{{ invoice?.invoice_Duration }}</td>
+                            <td>{{ invoice?.invoice_Amount }}</td>
+                            <td>{{ invoice?.payment_Method }}</td>
+                            <td><span class="badge" [ngClass]="{'approve': invoice?.payment_Is_Paid, 'unpaid': !invoice?.payment_Is_Paid}">{{ invoice?.payment_Is_Paid ? 'Paid' : 'Unpaid' }}</span></td>
                             <td><img src="/assets/images/download.svg" alt="" class="me-1" ></td>
                           </tr>
                           <!-- <tr>
@@ -1241,7 +879,7 @@
 
 
                 </p-accordion>
-
+              <!-- </p-accordionTab> -->
 
             </p-accordion>
 
@@ -1282,6 +920,11 @@
           </p-accordion>
 
         </div>
+
+
+
+
+
 
 
 

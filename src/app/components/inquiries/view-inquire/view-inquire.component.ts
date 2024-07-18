@@ -25,14 +25,26 @@ export class ViewInquireComponent implements OnInit {
   rejectReason: string = '';
   showRejectReasonDialog: boolean = false;
   currentAction: string = '';
-
-
   showConfirmDialog: boolean = false;
+
+  rejectReasonP: string = '';
+  showRejectReasonDialogP: boolean = false;
+  currentActionP: string = '';
+  showConfirmDialogP: boolean = false;
+
+  rejectReasonS: string = '';
+  showRejectReasonDialogS: boolean = false;
+  currentActionS: string = '';
+  showConfirmDialogS: boolean = false;
+
   reqId: string = '';
 
 
 
   param: string;
+
+  currentImage: string;
+  currentIndex: number = 0;
   constructor(
     private _inquiresService: InquiresService,
     private _ActivatedRoute: ActivatedRoute,
@@ -59,11 +71,32 @@ export class ViewInquireComponent implements OnInit {
     this.gfg?.push({ label: 'View Inquiry Details' }); */
 
     this.GetRequestDetails();
+    this.currentImage = this.inquire_details.apartment_Pictures[0].includes('https') ? this.inquire_details.apartment_Pictures[0] : '../../../assets/images/apartmentImages/default_apartment.jpg';
     this.checkRole();
   }
 
 
   /****888888888 */
+
+  get displayedThumbnails() {
+    return this.inquire_details.apartment_Pictures.slice(this.currentIndex, this.currentIndex + 5);
+  }
+
+  changeMainImage(img: string) {
+    this.currentImage = img.includes('https') ? img : '../../../assets/images/apartmentImages/default_apartment.jpg';
+  }
+
+  next() {
+    if (this.currentIndex + 5 < this.inquire_details.apartment_Pictures.length) {
+      this.currentIndex += 1;
+    }
+  }
+
+  previous() {
+    if (this.currentIndex > 0) {
+      this.currentIndex -= 1;
+    }
+  }
 
 
   showConfirm(action: string) {
@@ -72,6 +105,23 @@ export class ViewInquireComponent implements OnInit {
       this.showConfirmDialog = true;
     } else if (action === 'reject') {
       this.showRejectReasonDialog = true;
+    }
+  }
+
+  showConfirmPass(action: string) {
+    this.currentActionP = action;
+    if (action === 'confirm') {
+      this.showConfirmDialogP = true;
+    } else if (action === 'reject') {
+      this.showRejectReasonDialogP = true;
+    }
+  }
+  showConfirmSelfi(action: string) {
+    this.currentActionS = action;
+    if (action === 'confirm') {
+      this.showConfirmDialogS = true;
+    } else if (action === 'reject') {
+      this.showRejectReasonDialogS = true;
     }
   }
 
@@ -133,7 +183,7 @@ export class ViewInquireComponent implements OnInit {
  handleAction(isValid: boolean, id:string) {
   let rejectReason = '';
   if (!isValid) {
-    rejectReason = this.rejectReason;
+    rejectReason = this.rejectReasonP;
   }
 
   this._inquiresService.validatePassport(id, isValid, rejectReason).subscribe(
@@ -141,11 +191,11 @@ export class ViewInquireComponent implements OnInit {
       if (isValid) {
         console.log('Approval confirmed', response);
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Approval confirmed' });
-        this.showConfirmDialog = false;
+        this.showConfirmDialogP = false;
       } else {
-        console.log('Approval rejected with reason:', this.rejectReason, response);
-        this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReason}` });
-        this.showRejectReasonDialog = false;
+        console.log('Approval rejected with reason:', this.rejectReasonP, response);
+        this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReasonP}` });
+        this.showRejectReasonDialogP = false;
       }
     },
     error => {
@@ -159,7 +209,7 @@ export class ViewInquireComponent implements OnInit {
 handleActionSelfi(isApproved: boolean, bookingId: string, guestId: string) {
   let rejectReason = '';
   if (!isApproved) {
-    rejectReason = this.rejectReason;
+    rejectReason = this.rejectReasonS;
   }
 
   this._inquiresService.validateSelfie(bookingId, guestId, isApproved, rejectReason).subscribe(
@@ -167,11 +217,11 @@ handleActionSelfi(isApproved: boolean, bookingId: string, guestId: string) {
       if (isApproved) {
         console.log('Selfie approval confirmed', response);
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Selfie approval confirmed' });
-        this.showConfirmDialog = false;
+        this.showConfirmDialogS = false;
       } else {
-        console.log('Selfie approval rejected with reason:', this.rejectReason, response);
-        this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Selfie approval rejected with reason: ${this.rejectReason}` });
-        this.showRejectReasonDialog = false;
+        console.log('Selfie approval rejected with reason:', this.rejectReasonS, response);
+        this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Selfie approval rejected with reason: ${this.rejectReasonS}` });
+        this.showRejectReasonDialogS = false;
       }
     },
     error => {
@@ -180,6 +230,8 @@ handleActionSelfi(isApproved: boolean, bookingId: string, guestId: string) {
     }
   );
 }
+
+
  /**888888888 */
  displayQr: any;
   qrCodeImg!: string;
@@ -302,12 +354,13 @@ onCloseQrModal() {
   addItem(value: string): void {
     this.showSide = value;
   }
+  bookingPrice :number=0;
   GetRequestDetails() {
 
     this.subscriptions.push(this._inquiresService.GetRequestDetails(this.param).subscribe(
       (res) => {
 
-        console.log(`booking details response : ${res}`);
+        console.log(`booking details response :`,res);
         // console.log(res.booking_ID);
         // this.inquire_details = res[0];
         // this.selectedContractImg = res[0].contract_Path;
@@ -317,10 +370,17 @@ onCloseQrModal() {
         this.reqId=res.booking_ID ||'';
         // this.passportId=res.booking_Beds.guest_Passport.
         this.inquire_details = res;
+        this.currentImage = this.inquire_details.apartment_Pictures[0].includes('https') ? this.inquire_details.apartment_Pictures[0] : '../../../assets/images/apartmentImages/default_apartment.jpg';
         this.selectedContractImg = res.apartment_Pictures[0];
         this.prop_imgs = res.apartment_Pictures;
         this.hidepassport = res.booking_Beds[0]?.guest_Passport?.passport_Approved;
         this.value = res.apartment_Rating;
+        for(let i=0; i< res.booking_Beds.length ; i++){
+            this.bookingPrice += res?.booking_Beds[i]?.bed_Price;
+
+        }
+
+
 
       },
       (error) => {

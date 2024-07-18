@@ -236,11 +236,15 @@ export class ApartmentsComponent implements OnInit {
 
   xx: any;
   showEdit: Array<boolean> = [];
+  // detailperson(event: any, id: any): void {
+  //   this.xx = id;
+  //   this.showEdit = [];
+  //   event.stopPropagation();
+  //   this.showEdit[id] = !this.showEdit[id];
+  // }
   detailperson(event: any, id: any): void {
-    this.xx = id;
-    this.showEdit = [];
+    this.xx = this.xx === id ? null : id;
     event.stopPropagation();
-    this.showEdit[id] = !this.showEdit[id];
   }
 
   hidecard() {
