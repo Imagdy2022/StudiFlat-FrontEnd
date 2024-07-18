@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ApartmentService } from '../../../_services/apartments/apartment.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnwerService } from 'src/app/_services/Onwers/onwer.service';
@@ -124,6 +124,17 @@ export class ApartmentDetailsComponent implements OnInit {
       this.currentIndex -= 1;
     }
   }
+
+  currentImagee: string | null = null;
+
+  openImagePopup(imageUrl: string) {
+    this.currentImagee = imageUrl;
+  }
+
+  closePopup() {
+    this.currentImagee = null;
+  }
+  bedsPrice:number=0;
   showRoomDesign :boolean;
   getApartmentDetails() {
     this.subscriptions.push(
@@ -191,6 +202,24 @@ export class ApartmentDetailsComponent implements OnInit {
               }
             }
             this.noAllbed=bedno;
+
+          //   for(let i=0; i< this.aprt.apartment_Rooms.length ; i++){
+
+          //     for(let x=0; x< this.aprt.apartment_Rooms[i].room_Beds.length ; x++){
+
+          //       this.bedsPrice += this.aprt.apartment_Rooms[i]?.room_Beds[x]?.bed_Price;
+
+          //   }
+
+          // }
+          if (this.aprt && this.aprt.apartment_Rooms) {
+            for (let i = 0; i < this.aprt.apartment_Rooms.length; i++) {
+
+                  this.bedsPrice += this.aprt.apartment_Rooms[i].bed_Price * this.aprt.apartment_Rooms[i].beds_No ?? 0;
+
+            }
+          }
+
 
           } else {
             console.warn('apartment_Rooms is not an array:', this.aprt.apartment_Rooms);

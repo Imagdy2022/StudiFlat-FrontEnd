@@ -107,13 +107,15 @@ export class ViewInquireComponent implements OnInit {
       this.showRejectReasonDialog = true;
     }
   }
-
-  showConfirmPass(action: string) {
+  passID:any;
+  showConfirmPass(action: string,passID:any) {
     this.currentActionP = action;
     if (action === 'confirm') {
       this.showConfirmDialogP = true;
+      this.passID=passID;
     } else if (action === 'reject') {
       this.showRejectReasonDialogP = true;
+      this.passID=passID;
     }
   }
   showConfirmSelfi(action: string) {
@@ -180,13 +182,14 @@ export class ViewInquireComponent implements OnInit {
  /****888888888 */
 
 
- handleAction(isValid: boolean, id:string) {
+ handleAction(reqId:any,isValid: boolean, id:string) {
   let rejectReason = '';
   if (!isValid) {
     rejectReason = this.rejectReasonP;
   }
+  console.log(id);
 
-  this._inquiresService.validatePassport(id, isValid, rejectReason).subscribe(
+  this._inquiresService.validatePassport(reqId, id, isValid, rejectReason).subscribe(
     response => {
       if (isValid) {
         console.log('Approval confirmed', response);

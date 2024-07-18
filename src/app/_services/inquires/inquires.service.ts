@@ -130,7 +130,7 @@ requestApproval(reqId: string, valid: boolean, rejectReason: string = ''): Obser
   return this.http.post(url, {}, { params });
 }
 
-validatePassport(passportId: string, isValid: boolean, rejectReason: string = ''): Observable<any> {
+validatePassport(id:any,passportId: string, isValid: boolean, rejectReason: string = ''): Observable<any> {
   const body = [
     {
       passport_ID: passportId,
@@ -138,7 +138,7 @@ validatePassport(passportId: string, isValid: boolean, rejectReason: string = ''
       reject_Reason: rejectReason
     }
   ];
-  const url = environment.apiUrl + '/ApartmentV2/ValidatePassport';
+  const url = environment.apiUrl + '/ApartmentV2/ValidatePassport?Req_ID=' + id;
 
   return this.http.post(url, body);
 }
