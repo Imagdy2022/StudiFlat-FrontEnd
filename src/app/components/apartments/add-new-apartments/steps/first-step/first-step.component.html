@@ -596,7 +596,7 @@
 
       </div>
       <div class="row" *ngIf="studioShow">
-        <ng-container *ngIf="addApartment != 'Edit Apartment Name' ">
+        <ng-container *ngIf="bedroomsToApi.length == 0 ">
           <div class="mb-3 col-12 col-md-6">
             <label class="form-label gray fw-bold">No. of beds</label>
             <input formControlName="beds_No" type="number"  [class.is-invalid]="generalInfoForm.get('beds_No')!.invalid && generalInfoForm.get('beds_No')!.touched " class="form-control rounded-2 py-2 fs-6" />
@@ -642,7 +642,7 @@
         </div>
       </ng-container>
 
-     <ng-container *ngIf="addApartment == 'Edit Apartment Name' ">
+     <ng-container *ngIf="bedroomsToApi.length > 0 ">
         <div class="mb-3 col-12 col-md-6">
           <label class="form-label gray fw-bold">No. of beds</label>
           <input formControlName="beds_No" type="number"  [(ngModel)]="bedroomsToApi[0]!.beds_No"  [class.is-invalid]="generalInfoForm.get('beds_No')!.invalid && generalInfoForm.get('beds_No')!.touched " class="form-control rounded-2 py-2 fs-6" />

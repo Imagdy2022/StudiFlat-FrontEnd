@@ -249,7 +249,10 @@ this.n_ofToilets=numOfBath;
       this.arrNamesbedroom.push(parsedData?.rooms_Details[i].room_Name);
       if(parsedData?.rooms_Details[i].room_Details.length>0)
       for (let j = 0; j < parsedData?.rooms_Details[i].room_Details.length; j++) {
-        arrRoom.push(parsedData?.rooms_Details[i].room_Details[j]);
+        arrRoom.push(
+            parsedData?.rooms_Details[i].room_Details
+            [j],
+        );
       }
       this.arraynewFieldRoomDetails.push(arrRoom);
       arrRoom = [];

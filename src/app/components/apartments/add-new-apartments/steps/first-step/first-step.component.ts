@@ -248,6 +248,11 @@ this.ID= Guid.create();
       } else {
         this.isShow = false;
       }
+      if (parsedData.apartment_Type == 'Studio') {
+        this.studioShow = true;
+      } else {
+        this.studioShow = false;
+      }
       if(parsedData.apartment_Rooms){
         this.bedroomsToApi = parsedData.apartment_Rooms;
         for(let i=0;i<this.bedroomsToApi.length;i++)
