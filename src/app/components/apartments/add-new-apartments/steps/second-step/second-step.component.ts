@@ -129,7 +129,7 @@ export class SecondStepComponent {
     this._ApartmentService
       .getApartDetail(this.idParamterEdit)
       .subscribe((res) => {
-        this.aprt_details_Edit = res.general_Info;
+        this.aprt_details_Edit = res.apartment_Basic_Info;
         this.getDataFromEdit(res);
       });
   }

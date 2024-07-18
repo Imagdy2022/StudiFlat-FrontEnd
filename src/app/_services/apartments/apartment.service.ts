@@ -115,6 +115,13 @@ export class ApartmentService {
     );
   }
 
+  getRoomDevices(id: any): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl + '/ApartmentV2/GetRoomDevices?' + `Apartment_ID=${id}`}`,
+      { headers: this.headers }
+    );
+  }
+
   MarkRented(id: string): Observable<any> {
     return this.http.put(
       `${environment.apiUrl + '/Apartment/MarkRented?' + `Apt_ID=${id}`}`,
