@@ -47,7 +47,7 @@ export class ForthStepComponent {
   @Output() jumbToPrevSteb = new EventEmitter<void>();
 
   apt_UUID: any;
- Rooms_Devices : Array<any> = [];
+ Rooms_Devices : any;
  Devices: Array<any> = [];
  selectedRooms: any;
 
@@ -71,15 +71,17 @@ export class ForthStepComponent {
   idParamterEdit:any=""
   ngOnInit() {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id']
-    this.initializeRooms();
+   
      if(this.addApartment !="add new apartments" ){
       this.edit="EditForm"
       this.bindCreatePostBackupInfo();
       this.getApartmentDetails();
+      this.initializeRooms();
 
      }else{
       this.bindCreatePostBackupInfo();
       this.getLocalStorage();
+      this.initializeRooms();
      }
 
   }
@@ -92,7 +94,6 @@ export class ForthStepComponent {
       this.aprt_details_Edit = res.apartment_Backup_Info
       this.wifi = res.rent_Rules
       this.selectedRooms=res.apartment_Basic_Info.apartment_Rooms.length
-      this.initializeRooms();
        this.PostBackupInfo.patchValue(res.apartment_Backup_Info);
        this.inputField=res.apartment_Backup_Info["apartment_Addons_Fields"]
 
@@ -232,28 +233,13 @@ export class ForthStepComponent {
 
 
   initializeRooms() {
-    for (let i = 0; i < this.selectedRooms; i++) {
-      this.rooms.push({
-        items:  [
-          { device_Name: 'Heater', device_Description: ''},
-          { device_Name: 'Mold', device_Description: '' },
-          { device_Name: 'Devices', device_Description: ''},
-          { device_Name: 'Walls', device_Description: '' },
-          { device_Name: 'Shower', device_Description: ''},
-          { device_Name: 'Floor', device_Description: '' },
-          { device_Name: 'Cleaning', device_Description: ''},
-          { device_Name: 'Mold', device_Description: '' },
-          { device_Name: 'Mold', device_Description: '' },
-        ],
-        room_Devices: []
-      });
-    }
-
-    // this._ApartmentService.getRoomDevices(JSON.parse(localStorage.getItem('apartmentResponse')!).uuid).subscribe({
-    //   next:(res)=>{
-    //     this.rooms = res
-    //   }
-    // })
+    this._ApartmentService.getRoomDevices(JSON.parse(localStorage.getItem('apartmentResponse')!).uuid).subscribe({
+      next:(res)=>{
+       this.Rooms_Devices=res;
+      }
+    })
+   
+    
   }
 
   toggleSelectAll(event: any, roomIndex: number) {
@@ -304,24 +290,23 @@ export class ForthStepComponent {
     }
   }
   Create_PostBackupInfo(data: any) {
-    this.Rooms_Devices=[];
-    for(let i=0;i<this.rooms.length;i++)
-    {
-      let itemDevices=[];
-      for(let j=0;j<this.Devices.length;j++)
-      {if(this.Devices[j]?.roomIndex===i)
-      {
-        let device=this.Devices[j]?.item;
-        delete device?.checked;
-        itemDevices.push(device) }
-      }
-    this.Rooms_Devices.push({
-      room_ID:JSON.parse(localStorage.getItem('apartmentResponse')!).rooms_IDs[i],
-      room_Name: JSON.parse(localStorage.getItem('apartmentResponse')!).rooms_Names[i],
-      room_Devices: itemDevices
-      });
-      itemDevices=[]
-    }
+//     this.Rooms_Devices=[];
+//     for(let i=0;i<this.rooms.length;i++)
+//     {
+//       let itemDevices=[];
+//       for(let j=0;j<this.Devices.length;j++)
+//       {if(this.Devices[j]?.roomIndex===i)
+//       {
+//         let device=this.Devices[j]?.item;
+//         itemDevices.push(device) }
+//       }
+//     this.Rooms_Devices.push({
+//       room_ID:JSON.parse(localStorage.getItem('apartmentResponse')!).rooms_IDs[i],
+//       room_Name: JSON.parse(localStorage.getItem('apartmentResponse')!).rooms_Names[i],
+//       room_Devices: itemDevices
+//       });
+//       itemDevices=[]
+//     }
 
 
     const payloadData: any = {

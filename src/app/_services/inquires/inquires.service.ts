@@ -61,7 +61,6 @@ export class InquiresService {
   // }
   GetRequestDetails(id: string): Observable<any> {
     const url = `${environment.apiUrl}/ApartmentV2/Booking_InDetails?Booking_ID=${id}`;
-    console.log(` Booking details url :${url}`)
     return this.http.get<any>(url, { headers: this.headers });
   }
 

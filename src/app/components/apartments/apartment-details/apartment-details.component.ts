@@ -231,7 +231,6 @@ export class ApartmentDetailsComponent implements OnInit {
           }else{
             this.showRoomDesign=true;
           }
-          // console.log(this.aprt.apartment_Rooms);
         },
         (error) => {
           console.error('Error fetching apartment details:', error);

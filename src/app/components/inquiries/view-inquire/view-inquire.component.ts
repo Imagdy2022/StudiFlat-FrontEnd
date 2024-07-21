@@ -53,7 +53,6 @@ export class ViewInquireComponent implements OnInit {
     public router: Router
   ) {
     this.param = _ActivatedRoute.snapshot.paramMap.get('id') ?? '';
-    console.log(this.param);
   }
 
   ngOnInit() {
@@ -129,7 +128,6 @@ export class ViewInquireComponent implements OnInit {
 
   // confirmApproval() {
 
-  //   console.log('Approval confirmed');
   //   this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Approval confirmed' });
   //   this.showConfirmDialog = false;
   // }
@@ -138,7 +136,6 @@ export class ViewInquireComponent implements OnInit {
   confirmApproval() {
     this._inquiresService.requestApproval(this.reqId, true).subscribe(
       response => {
-        console.log('Approval confirmed', response);
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Approval confirmed' });
         this.showConfirmDialog = false;
       },
@@ -151,9 +148,7 @@ export class ViewInquireComponent implements OnInit {
 
   // rejectApproval() {
 
-  //   console.log('Approval rejected with reason:', this.rejectReason);
   //   this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReason}` });
-  //   console.log(this.rejectReason)
   //   this.showRejectReasonDialog = false;
   // }
 
@@ -161,7 +156,6 @@ export class ViewInquireComponent implements OnInit {
   rejectApproval() {
     this._inquiresService.requestApproval(this.reqId, false, this.rejectReason).subscribe(
       response => {
-        console.log('Approval rejected with reason:', this.rejectReason, response);
         this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReason}` });
         this.showRejectReasonDialog = false;
       },
@@ -187,16 +181,13 @@ export class ViewInquireComponent implements OnInit {
   if (!isValid) {
     rejectReason = this.rejectReasonP;
   }
-  console.log(id);
 
   this._inquiresService.validatePassport(reqId, id, isValid, rejectReason).subscribe(
     response => {
       if (isValid) {
-        console.log('Approval confirmed', response);
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Approval confirmed' });
         this.showConfirmDialogP = false;
       } else {
-        console.log('Approval rejected with reason:', this.rejectReasonP, response);
         this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReasonP}` });
         this.showRejectReasonDialogP = false;
       }
@@ -218,11 +209,9 @@ handleActionSelfi(isApproved: boolean, bookingId: string, guestId: string) {
   this._inquiresService.validateSelfie(bookingId, guestId, isApproved, rejectReason).subscribe(
     response => {
       if (isApproved) {
-        console.log('Selfie approval confirmed', response);
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Selfie approval confirmed' });
         this.showConfirmDialogS = false;
       } else {
-        console.log('Selfie approval rejected with reason:', this.rejectReasonS, response);
         this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Selfie approval rejected with reason: ${this.rejectReasonS}` });
         this.showRejectReasonDialogS = false;
       }
@@ -363,8 +352,6 @@ onCloseQrModal() {
     this.subscriptions.push(this._inquiresService.GetRequestDetails(this.param).subscribe(
       (res) => {
 
-        console.log(`booking details response :`,res);
-        // console.log(res.booking_ID);
         // this.inquire_details = res[0];
         // this.selectedContractImg = res[0].contract_Path;
         // this.prop_imgs = res[0].apt_Imgs;

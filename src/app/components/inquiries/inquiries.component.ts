@@ -103,7 +103,6 @@ gotopage( ){
     this.Inquires=[]
     this.numberInquires=0
     this.subscriptions.push(this._inquiresService.getAllInquires( this.pageNumber,this.pagesize,statusinquires,this.date,this.searchText).subscribe((res:any) => {
-      console.log(res)
       this.Inquires = res["data"];
       this.numberInquires = this.Inquires.length;
       this.totalofPages=res["totalPages"]

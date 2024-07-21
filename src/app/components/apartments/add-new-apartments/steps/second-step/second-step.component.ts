@@ -240,7 +240,6 @@ this.n_ofToilets=numOfBath;
   getDataFromEdit(data: any) {
     //  const data =JSON.parse(localStorage.getItem("create_Apart_Equ")!);
     let parsedData = data.apartment_Equipments;
-    console.log(parsedData)
     this.roomType = [];
     // section of room
     this.arraynewFieldRoomDetails = [];
