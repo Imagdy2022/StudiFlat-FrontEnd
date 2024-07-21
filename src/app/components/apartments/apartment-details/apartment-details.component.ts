@@ -136,10 +136,13 @@ export class ApartmentDetailsComponent implements OnInit {
   }
   bedsPrice:number=0;
   showRoomDesign :boolean;
+  allResponse:any;
   getApartmentDetails() {
     this.subscriptions.push(
       this._ApartmentService.getApartDetail(this.apt_UUID).subscribe(
         (res) => {
+          console.log(res)
+          this.allResponse=res;
           this.aprt = res.apartment_Basic_Info || {};
           // if(this.aprt.apartment_Type==='Studio'){
           //   this.showRoomDesign=false;

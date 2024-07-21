@@ -16,6 +16,15 @@ import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 })
 export class ViewInquireComponent implements OnInit {
   @ViewChild('confirmPopup') confirmPopup: ElementRef;
+  isConfirmDisabled = false;
+  isRejectDisabled = false;
+  isConfirmDisabledp = false;
+  isRejectDisabledp = false;
+  isConfirmDisableds = false;
+  isRejectDisableds = false;
+
+  beds: any[] = [];
+  status: { [key: number]: 'loading' | 'pending' | 'approved' | 'rejected' } = {};
 
   home: MenuItem | undefined;
   gfg: MenuItem[] | undefined;
@@ -72,10 +81,56 @@ export class ViewInquireComponent implements OnInit {
     this.GetRequestDetails();
     this.currentImage = this.inquire_details.apartment_Pictures[0].includes('https') ? this.inquire_details.apartment_Pictures[0] : '../../../assets/images/apartmentImages/default_apartment.jpg';
     this.checkRole();
+    this.loadButtonState();
+
+
   }
 
 
   /****888888888 */
+
+
+  saveButtonState() {
+    localStorage.setItem('isConfirmDisabled', JSON.stringify(this.isConfirmDisabled));
+    localStorage.setItem('isRejectDisabled', JSON.stringify(this.isRejectDisabled));
+    localStorage.setItem('isConfirmDisabledp', JSON.stringify(this.isConfirmDisabledp));
+    localStorage.setItem('isRejectDisabledp', JSON.stringify(this.isRejectDisabledp));
+    localStorage.setItem('isConfirmDisableds', JSON.stringify(this.isConfirmDisableds));
+    localStorage.setItem('isRejectDisableds', JSON.stringify(this.isRejectDisableds));
+  }
+
+  loadButtonState() {
+    const confirmState = localStorage.getItem('isConfirmDisabled');
+    const rejectState = localStorage.getItem('isRejectDisabled');
+    const confirmStatep = localStorage.getItem('isConfirmDisabledp');
+    const rejectStatep = localStorage.getItem('isRejectDisabledp');
+    const confirmStates = localStorage.getItem('isConfirmDisableds');
+    const rejectStates = localStorage.getItem('isRejectDisableds');
+
+    if (confirmState !== null) {
+      this.isConfirmDisabled = JSON.parse(confirmState);
+    }
+
+    if (rejectState !== null) {
+      this.isRejectDisabled = JSON.parse(rejectState);
+    }
+
+    if (confirmStatep !== null) {
+      this.isConfirmDisabledp = JSON.parse(confirmStatep);
+    }
+
+    if (rejectStatep !== null) {
+      this.isRejectDisabledp = JSON.parse(rejectStatep);
+    }
+
+    if (confirmStates !== null) {
+      this.isConfirmDisableds = JSON.parse(confirmStates);
+    }
+
+    if (rejectStates !== null) {
+      this.isRejectDisableds = JSON.parse(rejectStates);
+    }
+  }
 
   get displayedThumbnails() {
     return this.inquire_details.apartment_Pictures.slice(this.currentIndex, this.currentIndex + 5);
@@ -107,14 +162,17 @@ export class ViewInquireComponent implements OnInit {
     }
   }
   passID:any;
-  showConfirmPass(action: string,passID:any) {
+  bedId:any;
+  showConfirmPass(action: string,passID:any,bedId:any) {
     this.currentActionP = action;
     if (action === 'confirm') {
       this.showConfirmDialogP = true;
       this.passID=passID;
+      this.bedId=bedId;
     } else if (action === 'reject') {
       this.showRejectReasonDialogP = true;
       this.passID=passID;
+      this.bedId=bedId;
     }
   }
   showConfirmSelfi(action: string) {
@@ -138,6 +196,11 @@ export class ViewInquireComponent implements OnInit {
       response => {
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Approval confirmed' });
         this.showConfirmDialog = false;
+
+        this.isConfirmDisabled = true;
+
+        this.saveButtonState();
+
       },
       error => {
         console.error('Error confirming approval', error);
@@ -158,6 +221,9 @@ export class ViewInquireComponent implements OnInit {
       response => {
         this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReason}` });
         this.showRejectReasonDialog = false;
+
+        this.isRejectDisabled = true;
+        this.saveButtonState();
       },
       error => {
         console.error('Error rejecting approval', error);
@@ -176,7 +242,7 @@ export class ViewInquireComponent implements OnInit {
  /****888888888 */
 
 
- handleAction(reqId:any,isValid: boolean, id:string) {
+ handleAction(reqId:any,isValid: boolean, id:string,bedId:any) {
   let rejectReason = '';
   if (!isValid) {
     rejectReason = this.rejectReasonP;
@@ -187,9 +253,24 @@ export class ViewInquireComponent implements OnInit {
       if (isValid) {
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Approval confirmed' });
         this.showConfirmDialogP = false;
+        this.status[bedId] = 'approved';
+        this.passApproved[bedId]=true;
+        this.saveStatus(bedId);
+        console.log(this.passApproved)
+        this.isConfirmDisabledp = true;
+        this.saveButtonState();
+
+
       } else {
         this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Approval rejected with reason: ${this.rejectReasonP}` });
         this.showRejectReasonDialogP = false;
+        this.status[bedId] = 'rejected';
+        this.passApproved[bedId]=false;
+        this.saveStatus(bedId);
+        console.log(this.passApproved)
+
+        this.isRejectDisabledp = true;
+        this.saveButtonState();
       }
     },
     error => {
@@ -211,9 +292,15 @@ handleActionSelfi(isApproved: boolean, bookingId: string, guestId: string) {
       if (isApproved) {
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Selfie approval confirmed' });
         this.showConfirmDialogS = false;
+       this.isConfirmDisableds = true;
+       this.saveButtonState();
+
       } else {
         this.messageService.add({ severity: 'warn', summary: 'Rejected', detail: `Selfie approval rejected with reason: ${this.rejectReasonS}` });
         this.showRejectReasonDialogS = false;
+
+        this.isRejectDisableds = true;
+        this.saveButtonState();
       }
     },
     error => {
@@ -222,6 +309,11 @@ handleActionSelfi(isApproved: boolean, bookingId: string, guestId: string) {
     }
   );
 }
+
+
+
+
+
 
 
  /**888888888 */
@@ -347,6 +439,7 @@ onCloseQrModal() {
     this.showSide = value;
   }
   bookingPrice :number=0;
+
   GetRequestDetails() {
 
     this.subscriptions.push(this._inquiresService.GetRequestDetails(this.param).subscribe(
@@ -370,6 +463,15 @@ onCloseQrModal() {
 
         }
 
+        setTimeout(() => {
+          this.beds =res.booking_Beds;
+
+          this.loadStatuses();
+          this.fetchPassportStatuses();
+        }, 1000);
+
+
+
 
 
       },
@@ -378,6 +480,41 @@ onCloseQrModal() {
       }
     ))
 
+  }
+  passApproved: { [key: number]: any } = {};
+  fetchPassportStatuses() {
+    this.beds.forEach(bed => {
+      if (this.status[bed.bed_ID] !== 'rejected') {
+        this.status[bed.bed_ID] = bed.guest_Passport.passport_Approved ? 'approved' : 'pending';
+        this.passApproved[bed.bed_ID]=bed.guest_Passport.passport_Approved ;
+        this.saveStatus(bed.bed_ID);
+      }
+      this.passApproved[bed.bed_ID]=bed.guest_Passport.passport_Approved ;
+      this.saveStatus(bed.bed_ID);
+    });
+    console.log(this.passApproved)
+  }
+
+
+  loadStatuses() {
+    this.beds.forEach(bed => {
+      const savedStatus = localStorage.getItem(`passportStatus_${bed.bed_ID}`);
+      const savedpass = localStorage.getItem(`passbool_${bed.bed_ID}`);
+      if (savedStatus) {
+        this.status[bed.bed_ID] = savedStatus as 'pending' | 'approved' | 'rejected';
+
+      } else {
+        this.status[bed.bed_ID] = 'loading';
+
+      }
+      this.passApproved[bed.bed_ID] =savedpass ;
+    });
+
+  }
+
+  saveStatus(bedId: number) {
+    localStorage.setItem(`passportStatus_${bedId}`, this.status[bedId]);
+    localStorage.setItem(`passbool_${bedId}`, this.passApproved[bedId]);
   }
 
 

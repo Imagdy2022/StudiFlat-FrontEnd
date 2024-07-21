@@ -132,30 +132,30 @@
               </p-accordionTab>
               <p-accordionTab header="Apartment Equipments" [headerStyle]="{'background-color': '#fff' }">
                 <div class="custom-property-item"><span class="custom-property-label">bathroom details</span>
-                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.bathroom_Details">
+                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.bathroom_Details let x=index">
                     <p class="custom-property-label">  {{ item.bathroom_Name }}</p>
-                    <div class="custom-property-box" *ngFor="let item of aprt.apartment_Equipments?.bathroom_Details?.bathroom_Details"> detail</div>
+                    <div class="custom-property-box" *ngFor="let i of allResponse.apartment_Equipments?.bathroom_Details[x]?.bathroom_Details">{{ i}}</div>
                   </div>
                 </div>
                 <div class="custom-property-item"><span class="custom-property-label">kitchen details</span>
-                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.kitchen_Details">
+                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.kitchen_Details">
                     <div class="custom-property-box" >  {{ item }}</div>
                   </div>
                 </div>
                 <div class="custom-property-item"><span class="custom-property-label">Apartment Features</span>
-                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.apartment_Features">
+                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.apartment_Features">
                     <div class="custom-property-box" >  {{ item }}</div>
                   </div>
                 </div>
                 <div class="custom-property-item"><span class="custom-property-label">Apartment Facilites</span>
-                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.apartment_Facilites">
+                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.apartment_Facilites">
                     <div class="custom-property-box" >  {{ item }}</div>
                   </div>
                 </div>
                 <div class="custom-property-item"><span class="custom-property-label">Rooms Details</span>
-                  <div class="custom-property-item" *ngFor="let item of aprt.apartment_Equipments?.rooms_Details">
+                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.rooms_Details let x=index">
                     <p class="custom-property-label">  {{ item.room_Name }}</p>
-                    <div class="custom-property-box" *ngFor="let item of aprt.apartment_Equipments?.rooms_Details?.room_Details"> detail</div>
+                    <div class="custom-property-box" *ngFor="let i of allResponse.apartment_Equipments?.rooms_Details[x]?.room_Details"> {{i}}</div>
                   </div>
                 </div>
               </p-accordionTab>
@@ -163,37 +163,37 @@
 
                   <div class="custom-property-item" >
                     <p class="custom-property-label">Electricity meter no</p>
-                    <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Electricity_Meter_No }}</div>
+                    <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Electricity_Meter_No }}</div>
                 </div>
                 <div class="custom-property-item" >
                   <p class="custom-property-label">Electricity meter consumption</p>
-                  <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Electricity_Meter_Consumption }}</div>
+                  <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Electricity_Meter_Consumption }}</div>
               </div>
               <div class="custom-property-item" >
                 <p class="custom-property-label">Water meter no</p>
-                <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Water_Meter_No}}</div>
+                <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Water_Meter_No}}</div>
             </div>
             <div class="custom-property-item" >
               <p class="custom-property-label">Water meter consumption</p>
-              <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Water_Meter_Consumption}}</div>
+              <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Water_Meter_Consumption}}</div>
           </div>
           <div class="custom-property-item" >
             <p class="custom-property-label">Gas meter no</p>
-            <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Gas_Meter_No}}</div>
+            <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Gas_Meter_No}}</div>
         </div>
         <div class="custom-property-item" >
           <p class="custom-property-label">Gas meter consumption</p>
-          <div class="custom-property-box"> {{  aprt.apartment_Backup_Info?.apartment_Gas_Meter_Consumption}}</div>
+          <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Gas_Meter_Consumption}}</div>
       </div>
       <div class="custom-property-item"><span class="custom-property-label">apartment_Addons_Fields</span>
-        <div class="custom-property-item" *ngFor="let item of aprt.apartment_Backup_Info?.apartment_Addons_Fields">
+        <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Backup_Info?.apartment_Addons_Fields">
           <p class="custom-property-label">  {{ item.field_Name }}</p>
           <div class="custom-property-box" > {{ item.field_Content }}</div>
         </div>
       </div>
       <div class="custom-property-item">
         <span class="custom-property-label">Room Devices</span>
-        <div class="custom-property-item" *ngFor="let room of aprt.apartment_Backup_Info?.apartment_Rooms_Devices">
+        <div class="custom-property-item" *ngFor="let room of allResponse.apartment_Backup_Info?.apartment_Rooms_Devices">
           <p class="custom-property-label">{{ room.room_Name }}</p>
           <div class="custom-property-box" *ngFor="let device of room.room_Devices">
             <p class="custom-property-label">{{ device.device_Name }}</p>
@@ -206,7 +206,7 @@
       <div class="custom-property-item">
         <span class="custom-property-label">Apartment damages images</span>
         <div class="row">
-          <div class="col-6" *ngFor="let item of aprt.apartment_Backup_Info?.apartment_Damages_Imgs">
+          <div class="col-6" *ngFor="let item of allResponse.apartment_Backup_Info?.apartment_Damages_Imgs">
             <img [src]="item ? item : 'https://via.placeholder.com/100x100'" class="img-fluid img-thumbnail" alt="damage Image" (click)="openImagePopup(item)">
           </div>
         </div>
@@ -251,35 +251,48 @@
                 <div class="custom-property-item">
                   <span class="custom-property-label">Check Rules</span>
                   <div class="custom-property-label">
-                    <p class="custom-property-label"> Type:  {{ aprt.apartment_Check_Rules?.checkType }}</p>
-                    <p class="custom-property-label"> WiFi Name:  {{ aprt.apartment_Check_Rules?.wifi_Name }}</p>
-                    <p class="custom-property-label"> WiFi Password:  {{ aprt.apartment_Check_Rules?.wifi_Password }}</p>
-                    <p class="custom-property-label"> Number of Doors:  {{ aprt.apartment_Check_Rules?.numof_Doors }}</p>
-                    <p class="custom-property-label"> Mail Box Number:  {{ aprt.apartment_Check_Rules?.mailBox_Num }}</p>
-                    <p class="custom-property-label"> Trash Location: {{ aprt.apartment_Check_Rules?.trash_Location }}</p>
-                    <p class="custom-property-label"> Apartment Location:  {{ aprt.apartment_Check_Rules?.apt_Location }}</p>
-                    <p class="custom-property-label"> Safe Code: {{ aprt.apartment_Check_Rules?.safe_Code }}</p>
+                    <p class="custom-property-label"> Type: </p>
+                    <div class="custom-property-box" > {{allResponse.apartment_Check_Rules?.checkType }}</div>
+                    <p class="custom-property-label"> WiFi Name:  </p>
+                    <div class="custom-property-box" >  {{ allResponse.apartment_Check_Rules?.wifi_Name }}</div>
+                    <p class="custom-property-label"> WiFi Password:  </p>
+                    <div class="custom-property-box" >   {{ allResponse.apartment_Check_Rules?.wifi_Password }}</div>
+                    <p class="custom-property-label"> Number of Doors:  </p>
+                    <div class="custom-property-box" >    {{ allResponse.apartment_Check_Rules?.numof_Doors }}</div>
+                    <p class="custom-property-label"> Mail Box Number:   </p>
+                    <div class="custom-property-box" > {{ allResponse.apartment_Check_Rules?.mailBox_Num }}</div>
+                    <p class="custom-property-label"> Trash Location:  </p>
+                    <div class="custom-property-box" > {{ allResponse.apartment_Check_Rules?.trash_Location }}</div>
+                    <p class="custom-property-label"> Apartment Location:  </p>
+                    <div class="custom-property-box" >  {{ allResponse.apartment_Check_Rules?.apt_Location }}</div>
+                    <p class="custom-property-label"> Safe Code:  </p>
+                    <div class="custom-property-box" >{{ allResponse.apartment_Check_Rules?.safe_Code }}</div>
 
                     <!-- <div *ngIf="aprt.apartment_Check_Rules?.safe_Img"> -->
-                      <div *ngIf="aprt.apartment_Check_Rules?.safe_Img">
-                      <img [src]="aprt.apartment_Check_Rules?.safe_Img" class="img-fluid img-thumbnail" alt="Safe Image" (click)="openImagePopup(aprt.apartment_Check_Rules.safe_Img)">
+                      <div *ngIf="allResponse.apartment_Check_Rules?.safe_Img">
+                        <p class="custom-property-label">safe image</p>
+                      <img [src]="allResponse.apartment_Check_Rules?.safe_Img" class="img-fluid img-thumbnail" alt="Safe Image" (click)="openImagePopup(aprt.apartment_Check_Rules.safe_Img)">
                     </div>
-                    <div *ngIf="aprt.apartment_Check_Rules?.door_Img">
-                      <img [src]="aprt.apartment_Check_Rules?.door_Img" class="img-fluid img-thumbnail" alt="Door Image" (click)="openImagePopup(aprt.apartment_Check_Rules.door_Img)">
+                    <div *ngIf="allResponse.apartment_Check_Rules?.door_Img">
+                      <p class="custom-property-label">door image</p>
+                      <img [src]="allResponse.apartment_Check_Rules?.door_Img" class="img-fluid img-thumbnail" alt="Door Image" (click)="openImagePopup(aprt.apartment_Check_Rules.door_Img)">
                     </div>
-                    <div *ngIf="aprt.apartment_Check_Rules?.building_Img">
-                      <img [src]="aprt.apartment_Check_Rules?.building_Img" class="img-fluid img-thumbnail" alt="Building Image" (click)="openImagePopup(aprt.apartment_Check_Rules.building_Img)">
+                    <div *ngIf="allResponse.apartment_Check_Rules?.building_Img">
+                      <p class="custom-property-label">building image</p>
+                      <img [src]="allResponse.apartment_Check_Rules?.building_Img" class="img-fluid img-thumbnail" alt="Building Image" (click)="openImagePopup(aprt.apartment_Check_Rules.building_Img)">
                     </div>
 
-                    <div *ngFor="let rule of aprt.apartment_Check_Rules?.apt_rules">
-                      <p class="custom-property-label">{{ rule.rule_Desc }}</p>
+                    <div *ngFor="let rule of allResponse.apartment_Check_Rules?.apt_rules">
+
+                      <p class="custom-property-label">rule description:  </p>
+                      <div class="custom-property-box " style="font-size: 12px; word-wrap: break-word;" >{{ rule.rule_Desc }}</div>
                     </div>
                   </div>
 
                   <div class="custom-property-item">
                     <span class="custom-property-label">Trash bin images</span>
                     <div class="row">
-                      <div class="col-6" *ngFor="let item of aprt.apartment_Check_Rules?.tarsh_Pin_Imgs">
+                      <div class="col-6" *ngFor="let item of allResponse.apartment_Check_Rules?.tarsh_Pin_Imgs">
                         <img [src]="item.pic_URL ? item.pic_URL : 'https://via.placeholder.com/100x100'" class="img-fluid img-thumbnail" alt="trash bin Image" (click)="openImagePopup(item.pic_URL)">
                       </div>
                     </div>

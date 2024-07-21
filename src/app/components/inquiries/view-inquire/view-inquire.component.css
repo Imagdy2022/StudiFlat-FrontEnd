@@ -310,6 +310,10 @@
   color: #EF2011;
   background-color: #FCEEEE;
 }
+.pending{
+  color: #61980f;
+  background-color: #eef391;
+}
   ::ng-deep .p-accordion-toggle-icon {
     position: absolute;
     right: 5px;
