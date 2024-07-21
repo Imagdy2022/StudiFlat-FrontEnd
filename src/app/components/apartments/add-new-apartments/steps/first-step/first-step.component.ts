@@ -37,7 +37,7 @@ export class FirstStepComponent implements OnInit {
   apartmentSharedArea: Array<string> = ['Yes', 'No'];
   sleepingArea: Array<string> = ['No sleeping area', 'Bed','Sofa bed'];
   defaultSleepingArea="No sleeping area";
-  defaultapartmentSharedArea="Yes";
+  defaultapartmentSharedArea="No";
   SharedAreaInclude: any = false;
   /** listDropDownArea */
   listDropDownArea: any = [];
@@ -604,7 +604,7 @@ this.ID= Guid.create();
     apartment_Lat:  0,
     apartment_Long:  0,
     apartment_360DLink: this.generalInfoForm.value['apartment_360DLink'],
-    apartment_SharedArea:this.generalInfoForm.value['apartment_SharedArea'],
+    apartment_SharedArea: this.defaultapartmentSharedArea == 'Yes' ? true : false,
     apartment_SleepingArea: this.sectionName,
     apartment_Elevator: this.generalInfoForm.value['apartment_Elevator'],
     apartment_Type: this.generalInfoForm.value['apartment_Type'],

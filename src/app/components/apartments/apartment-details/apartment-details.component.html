@@ -111,7 +111,7 @@
               <p>Published: {{ apartmentsContract?.contractDate_Start | date: 'dd/MM/yyyy - hh:mm a' }}</p>
             </div>
             <div class="custom-apartment-actions d-flex justify-content-between mb-5">
-              <button class="custom-btn custom-btn-edit w-75">
+              <button class="custom-btn custom-btn-edit w-75" routerLink="/apartments/page/{{aprt?.apartment_ID}}">
                 <img src="assets/images/apartmentImages/edit.svg" alt="Edit" class="custom-btn-icon">Edit
               </button>
               <button class="custom-btn custom-btn-share w-25">
@@ -1008,14 +1008,14 @@
                         <ng-template pTemplate="header">
                           <div
                             class="d-flex justify-content-between align-items-center m-0  rounded w-100">
-                            <div class="fw-bold">{{ bed.bed_No }} </div>
+                            <div class="fw-bold">{{ bed?.bed_No }} </div>
                             <!-- <div> Tenant Name</div> -->
                             <div>11/2/2024</div>
                             <div>22/3/2024</div>
                             <!-- <div>€ {{ room.bed_Service_Fees }}</div> -->
-                            <div class="badge rented" *ngIf="!bed.bed_Available">Rented <img
+                            <div class="badge rented" *ngIf="!bed?.bed_Available">Rented <img
                                 src="/assets/images/expand_more.svg" alt=""></div>
-                            <div class="badge rented" *ngIf="bed.bed_Available">Available <img
+                            <div class="badge rented" *ngIf="bed?.bed_Available">Available <img
                                 src="/assets/images/expand_more.svg" alt=""></div>
                           </div>
                         </ng-template>
