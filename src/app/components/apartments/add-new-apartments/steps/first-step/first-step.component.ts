@@ -249,7 +249,7 @@ this.ID= Guid.create();
         this.isShow = false;
       }
       if (parsedData.apartment_Type == 'Studio') {
-        this.studioShow = true;
+        this.studioShow = false;
       } else {
         this.studioShow = false;
       }
@@ -917,6 +917,8 @@ checkAndSaveSharedBed(): void {
   isShow = false;
   studioShow = false;
   onChange(deviceValue: any) {
+    this.bedroomsToApi=[];
+    this.bedrooms=[];
     if (deviceValue == 'Apartment') {
       this.isShow = true;
       this.studioShow = false;
