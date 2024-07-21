@@ -887,7 +887,7 @@ this.ID= Guid.create();
 
     this.showBedSection = (this.sectionName === 'Bed' || this.sectionName === 'Sofa bed');
   if (this.showBedSection) {
-    this.sharedBed = {};
+    this.sharedBed = null;
   }
   this.checkAndSaveSharedBed();
 }
@@ -902,7 +902,7 @@ checkAndSaveSharedBed(): void {
       bed_Service_Fees: Number(this.ServiceFees)
     };
   } else if (!this.showBedSection) {
-    this.sharedBed = {};
+    this.sharedBed = null;
   }
 }
 
