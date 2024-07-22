@@ -917,8 +917,6 @@ checkAndSaveSharedBed(): void {
   isShow = false;
   studioShow = false;
   onChange(deviceValue: any) {
-    this.bedroomsToApi=[];
-    this.bedrooms=[];
     if (deviceValue == 'Apartment') {
       this.isShow = true;
       this.studioShow = false;
@@ -927,6 +925,10 @@ checkAndSaveSharedBed(): void {
     } else if (deviceValue == 'Studio') {
       this.isShow = false;
       this.studioShow = true;
+      this.bedroomsToApi=[];
+      this.bedrooms=[];
+      this.generalInfoForm.get('apartment_BedRoomsNo')?.patchValue(0);
+      
       // this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
       this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
     } else {
