@@ -142,17 +142,27 @@ validatePassport(id:any,passportId: string, isValid: boolean, rejectReason: stri
   return this.http.post(url, body);
 }
 
-validateSelfie(bookingId: string, guestId: string, isApproved: boolean, rejectReason: string = ''): Observable<any> {
-  const body = {
-    Booking_ID: bookingId,
-    Guest_ID: guestId,
-    Approved: isApproved,
-    Reject_Reason: rejectReason
-  };
-  const url = environment.apiUrl + '/ApartmentV2/SelfieApproval';
+// validateSelfie(bookingId: string, guestId: string, isApproved: boolean, rejectReason: string = ''): Observable<any> {
+//   const body = {
+//     Booking_ID: bookingId,
+//     Guest_ID: guestId,
+//     Approved: isApproved,
+//     Reject_Reason: rejectReason
+//   };
+//   const url = environment.apiUrl + '/ApartmentV2/SelfieApproval';
 
-  return this.http.post(url, body);
+//   return this.http.post(url, body);
+// }
+validateSelfie(bookingId: string, guestId: string, isApproved: boolean, rejectReason: string = ''): Observable<any> {
+  let url = `${environment.apiUrl}/ApartmentV2/SelfieApproval?Booking_ID=${bookingId}&Guest_ID=${guestId}&Approved=${isApproved}`;
+
+  if (!isApproved && rejectReason) {
+    url += `&Reject_Reason=${rejectReason}`;
+  }
+
+  return this.http.post(url, {});
 }
+
 /** */
 
 

@@ -224,8 +224,8 @@
                         <p-confirmPopup></p-confirmPopup>
 
 
-<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirm('confirm')"  [disabled]="isConfirmDisabled ">Confirm</button>
-<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirm('reject')" [disabled]=" isRejectDisabled">Reject</button>
+<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirm('confirm')" [disabled]="isAcceptDisabled(inquire_details?.booking_Status,statusfb)" >Confirm</button>
+<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirm('reject')"   >Reject</button>
 
 <!-- Confirm Dialog -->
 <div *ngIf="showConfirmDialog" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
@@ -415,8 +415,8 @@
                             <!-- <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 80%; border-radius:10px; padding:11px">Confirm</button>
                             <button type="button" class="btn btn-block fs-6" style="width: 80%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px">Reject</button> -->
                            <!-- Buttons to trigger approval and rejection -->
-<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirmPass('confirm',bed.guest_Passport?.passport_ID,bed.bed_ID)"  [disabled]="isConfirmDisabledp ">Approve Passport</button>
-<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirmPass('reject',bed.guest_Passport?.passport_ID,bed.bed_ID)"  [disabled]="  isRejectDisabledp">Reject Passport</button>
+<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirmPass('confirm',bed.guest_Passport?.passport_ID,bed.bed_ID)"  [disabled]="isAcceptDisabledPass(bed.guest_Passport?.passport_Approved,statusfp)">Approve Passport</button>
+<button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirmPass('reject',bed.guest_Passport?.passport_ID,bed.bed_ID)"   >Reject Passport</button>
 
 <!-- Confirm Dialog -->
 <div *ngIf="showConfirmDialogP" class="modal" tabindex="-1" role="dialog" style="background-color: rgb(23 22 22 / 50%); display: block;">
@@ -738,8 +738,8 @@
                         <div class="col-md-6">
                           <img [src]="bed.check_In_Process?.confirm_Identity?.guest_Selife || 'https://via.placeholder.com/300x200'" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Tenant Image">
                           <div class="d-flex mt-3">
-                            <button type="button" class="btn btn-primary btn-block mb-0 fs-6 m-1" style="width: 44%; border-radius: 10px; padding: 10px;" (click)="showConfirmSelfi('confirm')"  [disabled]="isConfirmDisableds ">Confirm</button>
-                            <button type="button" class="btn btn-block fs-6 m-1" style="width: 44%; border-radius: 10px; background-color: #D2D9E1; color: #1F4068; padding: 10px;" (click)="showConfirmSelfi('reject')"  [disabled]=" isRejectDisableds">Reject</button>
+                            <button type="button" class="btn btn-primary btn-block mb-0 fs-6 m-1" style="width: 44%; border-radius: 10px; padding: 10px;" (click)="showConfirmSelfi('confirm')"  [disabled]="isAcceptDisabledSelfi(bed.check_In_Process?.confirm_Identity?.status,statusfs)">Confirm</button>
+                            <button type="button" class="btn btn-block fs-6 m-1" style="width: 44%; border-radius: 10px; background-color: #D2D9E1; color: #1F4068; padding: 10px;" (click)="showConfirmSelfi('reject')"  >Reject</button>
                           </div>
                         </div>
                       </div>
