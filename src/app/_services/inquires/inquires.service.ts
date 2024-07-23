@@ -163,6 +163,11 @@ validateSelfie(bookingId: string, guestId: string, isApproved: boolean, rejectRe
   return this.http.post(url, {});
 }
 
+resignContract(bookingID: string, signID: string): Observable<any> {
+  const url = `${environment.apiUrl}/ApartmentV2/Ressign-Files?Booking_ID=${bookingID}&Sign_ID=${signID}`;
+  return this.http.get(url);
+}
+
 /** */
 
 
