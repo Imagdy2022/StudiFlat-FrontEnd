@@ -253,15 +253,11 @@ export class ForthStepComponent {
   }
 
 
-  updateCheckedItems(item: any, roomIndex: number) {
-    if (item.is_Checked) {
-      if (!this.Devices.find((device: any) => device.item === item && device.roomIndex === roomIndex)) {
-        this.Devices.push({ roomIndex: roomIndex, item: item });
-        console.log(this.Devices)
-      }
-    } else {
-      this.Devices = this.Devices.filter((device: any) => !(device.item === item && device.roomIndex === roomIndex));
-    }
+  updateCheckedItems(item: any, roomIndex: number,deviceIndex:number) {
+    if (!item.is_Checked) {
+      this.Rooms_Devices[roomIndex].room_Devices[deviceIndex].is_Checked=false;
+      this.Rooms_Devices[roomIndex].room_Devices[deviceIndex].device_Description='';
+    }     
   }
 
 
