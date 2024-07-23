@@ -238,7 +238,9 @@ export class ApartmentsComponent implements OnInit {
     localStorage.removeItem('BathroomNo');
     localStorage.removeItem('apartmentResponse');
     localStorage.removeItem('generalInfoForm');
-    localStorage.removeItem('Createtransport')
+    localStorage.removeItem('Createtransport');
+    localStorage.removeItem('apartment_Manager');
+    localStorage.removeItem('apartment_ID')
     this.router.navigateByUrl('apartments/page/add-new-apartments');
 
   }
