@@ -71,7 +71,7 @@ export class ForthStepComponent {
   idParamterEdit:any=""
   ngOnInit() {
     this.idParamterEdit = this._ActivatedRoute.snapshot.params['id']
-   
+
      if(this.addApartment !="add new apartments" ){
       this.edit="EditForm"
       this.bindCreatePostBackupInfo();
@@ -238,46 +238,49 @@ export class ForthStepComponent {
        this.Rooms_Devices=res;
       }
     })
-   
-    
   }
 
   toggleSelectAll(event: any, roomIndex: number) {
     const checked = event.target.checked;
-    this.rooms[roomIndex].items.forEach((item:any) => item.checked = checked);
-    this.updateSelectedItems(roomIndex);
+    this.Rooms_Devices[roomIndex].room_Devices.forEach((item: any) => {
+      item.is_Checked = checked;
+      if (checked) {
+        if (!this.Devices.find((device: any) => device.item === item && device.roomIndex === roomIndex)) {
+          this.Devices.push({ roomIndex: roomIndex, item: item });
+        }
+      }
+    });
   }
 
+
   updateCheckedItems(item: any, roomIndex: number) {
-    this.roomIndexValue = roomIndex;
-    if (item.checked) {
-      if (!this.Devices.includes({roomIndex:roomIndex,item:item})) {
-        this.Devices.push({roomIndex:roomIndex,item:item});
+    if (item.is_Checked) {
+      if (!this.Devices.find((device: any) => device.item === item && device.roomIndex === roomIndex)) {
+        this.Devices.push({ roomIndex: roomIndex, item: item });
+        console.log(this.Devices)
       }
     } else {
-      const index = this.Devices.indexOf({roomIndex:roomIndex,item:item});
-      if (index > -1) {
-        this.Devices.splice(index, 1);
-      }
+      this.Devices = this.Devices.filter((device: any) => !(device.item === item && device.roomIndex === roomIndex));
     }
   }
 
+
   updateSelectedItems(roomIndex: number) {
-    this.rooms[roomIndex].room_Devices = this.rooms[roomIndex].items.filter((item:any) => item.checked);
+    this.Rooms_Devices[roomIndex].room_Devices = this.Rooms_Devices[roomIndex].room_Devices.filter((item: any) => item.is_Checked);
   }
+
 
   createNewField(roomIndex: number) {
     const newItem: any = { device_Name: 'New Field', device_Description: '' };
-    this.rooms[roomIndex].items.push(newItem);
+    this.Rooms_Devices[roomIndex].room_Devices.push(newItem);
   }
 
+
   removeField(roomIndex: number, itemIndex: number) {
-    const removedItem = this.rooms[roomIndex].items.splice(itemIndex, 1)[0];
-    const selectedIndex = this.rooms[roomIndex].room_Devices.indexOf(removedItem);
-    if (selectedIndex > -1) {
-      this.rooms[roomIndex].room_Devices.splice(selectedIndex, 1);
-    }
+    const removedItem = this.Rooms_Devices[roomIndex].room_Devices.splice(itemIndex, 1)[0];
+    this.Devices = this.Devices.filter((device: any) => !(device.item === removedItem && device.roomIndex === roomIndex));
   }
+
 
   checkValidData() {
     if (this.PostBackupInfo.invalid) {

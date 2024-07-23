@@ -233,6 +233,15 @@ export class ApartmentsComponent implements OnInit {
     }
     this.getAllApartment();
   }
+  navigateToAddAppartment(){
+    localStorage.removeItem('create_Apart_Equ');
+    localStorage.removeItem('BathroomNo');
+    localStorage.removeItem('apartmentResponse');
+    localStorage.removeItem('generalInfoForm');
+    localStorage.removeItem('Createtransport')
+    this.router.navigateByUrl('apartments/page/add-new-apartments');
+
+  }
 
   xx: any;
   showEdit: Array<boolean> = [];
