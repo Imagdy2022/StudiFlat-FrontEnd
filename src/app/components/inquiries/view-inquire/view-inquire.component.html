@@ -369,8 +369,10 @@
                         <div class="d-flex align-items-center justify-content-start">
                           <!-- <img *ngIf="isAccordionOpen" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                           <img *ngIf="!isAccordionOpen" src="assets/img/check.svg" alt="icon" class="img-fluid"> -->
-                          <img   *ngIf=" passApproved[bed.bed_ID]" src="assets/img/check.svg" alt="icon" class="img-fluid">
-                          <img *ngIf=" !passApproved[bed.bed_ID]" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
+                          <!-- <img   *ngIf=" passApproved[bed.bed_ID]" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                          <img *ngIf=" !passApproved[bed.bed_ID]" src="assets/img/checkgray.svg" alt="icon" class="img-fluid"> -->
+                          <img   *ngIf="bed.guest_Passport.status==='Approved'" src="assets/img/check.svg" alt="icon" class="img-fluid">
+                          <img *ngIf=" bed.guest_Passport.status==='Rejected'  || bed.guest_Passport.status==='Pending'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                           <span class="ml-2">Passport</span>
                         </div>
                         <div class="d-flex align-items-center justify-content-end w-100 pe-3">
@@ -379,10 +381,15 @@
                           <!-- <span class="badge approve">Approved</span> -->
                           <!-- <span class="badge approve" *ngIf="bed.guest_Passport?.passport_Approved">Approved</span>
                           <span class="badge reject" *ngIf="!bed.guest_Passport?.passport_Approved">Pending</span> -->
-                          <span class="badge pending" *ngIf="status[bed.bed_ID] === 'loading'">Pending</span>
+
+
+                          <!-- <span class="badge pending" *ngIf="status[bed.bed_ID] === 'loading'">Pending</span>
                            <span class="badge approve" *ngIf="status[bed.bed_ID] === 'approved'">Approved</span>
                            <span class="badge pending" *ngIf="status[bed.bed_ID] === 'pending'">Pending</span>
-                           <span class="badge reject" *ngIf="status[bed.bed_ID] === 'rejected'">Rejected</span>
+                           <span class="badge reject" *ngIf="status[bed.bed_ID] === 'rejected'">Rejected</span> -->
+                           <span class="badge pending" *ngIf="bed.guest_Passport.status==='Pending'">Pending</span>
+                           <span class="badge approve" *ngIf="bed.guest_Passport.status==='Approved'">Approved</span>
+                           <span class="badge reject" *ngIf="bed.guest_Passport.status==='Rejected' ">Rejected</span>
 
                         </div>
 
@@ -393,29 +400,35 @@
                       <div class="row">
                         <!-- <img [src]="bed.guest_Passport.passport_Photo || 'https://via.placeholder.com/150'" class="img-fluid col-6 imgpass" alt="Passport Image"> -->
                         <ng-container *ngIf="bed.guest_Passport?.passport_Photo as passportUrl">
-                          <ng-container *ngIf="passportUrl.endsWith('.jpeg') || passportUrl.endsWith('.jpg') || passportUrl.endsWith('.gif') || passportUrl.endsWith('.png'); else pdfTemplate">
-                            <img [src]="passportUrl" class="img-fluid col-6 imgpass" alt="Passport Image">
+                          <ng-container *ngIf="passportUrl.endsWith('.jpeg') || passportUrl.endsWith('.jpg') || passportUrl.endsWith('.gif') || passportUrl.endsWith('.png') || passportUrl.endsWith('.heic'); else pdfTemplate">
+                            <!-- <img [src]="passportUrl" class="img-fluid col-6 imgpass" alt="Passport Image"> -->
+                            <img [src]="passportUrl" class="img-fluid col imgpass" alt="Passport Image" style="object-fit: fill; width: 70%; ">
+
+
+
                           </ng-container>
                           <ng-template #pdfTemplate>
-                            <div class="rounded-circle bg-light p-2">
+                            <div class="col">
+                            <span class="rounded-circle bg-light p-2">
                               <img src="/assets/images/_File upload icon.svg" alt="">
-                            </div>
+                            </span>
                             <div class="ml-2 mr-3">Passport.pdf</div>
                             <a [href]="passportUrl" target="_blank" class="btn btn-primary">View PDF</a>
+                          </div>
                           </ng-template>
                         </ng-container>
                         <ng-container *ngIf="!bed.guest_Passport?.passport_Photo">
                           <img src="https://via.placeholder.com/150" class="img-fluid col-6 imgpass" alt="Placeholder Image">
                         </ng-container>
 
-                        <div class="col-5 border-start">
+                        <div class="col-7 border-start">
                           <div class="paddingpass">
                             <h5 class="card-title">Passport of tenant</h5>
                             <p class="card-text">Please review passport then confirm or reject it</p>
                             <!-- <button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 80%; border-radius:10px; padding:11px">Confirm</button>
                             <button type="button" class="btn btn-block fs-6" style="width: 80%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px">Reject</button> -->
                            <!-- Buttons to trigger approval and rejection -->
-<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirmPass('confirm',bed.guest_Passport?.passport_ID,bed.bed_ID,i)"  [disabled]="isAcceptDisabledPass(bed.guest_Passport?.passport_Approved)">Approve Passport</button>
+<button type="button" class="btn btn-primary btn-block mb-0 fs-6" style="width: 100%; border-radius:10px; padding:11px" (click)="showConfirmPass('confirm',bed.guest_Passport?.passport_ID,bed.bed_ID,i)"  [disabled]="bed.guest_Passport?.status==='Approved'">Approve Passport</button>
 <button type="button" class="btn btn-block fs-6" style="width: 100%; border-radius:10px; background-color:#D2D9E1; color: #1F4068; padding:11px" (click)="showConfirmPass('reject',bed.guest_Passport?.passport_ID,bed.bed_ID,i)"   >Reject Passport</button>
 
 <!-- Confirm Dialog -->
@@ -533,6 +546,7 @@
                       <img *ngIf=" bed.contract.status === 'Completed'" src="assets/img/check.svg" alt="icon" class="img-fluid">
                         <img *ngIf=" bed.contract.status === 'Not Completed'" src="assets/img/checkgray.svg" alt="icon" class="img-fluid">
                       <span class="ml-2">Sign Contract</span>
+
                     </div>
                     <div class="d-flex align-items-center justify-content-end w-100 pe-3">
                       <span class="mx-2"><img src="/assets/images/date.svg" class="me-1" alt="">{{ bed.contract.contract_Date }}</span>
@@ -553,9 +567,10 @@
                           <div class="ml-2 mr-3">Contract.pdf</div>
                         </div>
                         <div class="d-flex align-items-center">
-                          <a href="#" class="text-decoration-none text-primary mx-2"><img src="/assets/images/view.svg" class="me-1" alt="">View</a>
+
+                          <a [href]="bed.contract.contract_File" target="_blank" class="text-decoration-none text-primary mx-2"><img src="/assets/images/view.svg" class="me-1" alt="">View</a>
                           <a href="#" class="text-decoration-none text-primary mx-2"> <img src="/assets/images/download.svg" alt="" class="me-1" >Download</a>
-                          <button class="btn custom-btn-outline-primary ml-3">Resign Contract</button>
+                          <button class="btn custom-btn-outline-primary ml-3" (click)="resignContract(inquire_details?.booking_ID, bed.contract.sign_ID,i)" [disabled]="bed.contract.status==='Not Completed'">Resign Contract</button>
                         </div>
                       </div>
                     </div>
@@ -692,13 +707,13 @@
                             <div class="d-flex justify-content-between align-items-center p-3 rounded bg-light">
                               <div><strong>Bed QR code:</strong> {{ bed.check_In_Process.scanning_QR.qr_Code }}</div>
                               <div class="d-flex align-items-center">
-                                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center" (click)="onOpenQrModal(bed.check_In_Process.scanning_QR.qr_Image ,bed.check_In_Process.scanning_QR.qr_Code,bed.room_Type)" >
+                                <a   class="text-decoration-none text-primary mx-2 d-flex align-items-center" (click)="onOpenQrModal(bed.check_In_Process?.scanning_QR?.qr_Image ,bed.check_In_Process?.scanning_QR?.qr_Code,bed.room_Type,inquire_details.apartment_QR)" >
                                   <img src="/assets/images/view.svg" class="me-1" alt=""> View
                                 </a>
-                                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+                                <a   class="text-decoration-none text-primary mx-2 d-flex align-items-center">
                                   <img src="/assets/images/download.svg" alt="" class="me-1" > Download
                                 </a>
-                                <a href="#" class="text-decoration-none text-primary mx-2 d-flex align-items-center">
+                                <a   class="text-decoration-none text-primary mx-2 d-flex align-items-center">
                                   <img src="/assets/images/share.svg" alt="" class="me-1" > Share
                                 </a>
                               </div>
@@ -733,7 +748,28 @@
                       <p class="text-muted">Please review passport and tenant image then confirm or reject it</p>
                       <div class="row mb-3">
                         <div class="col-md-6">
-                          <img [src]="bed.check_In_Process?.confirm_Identity?.guest_Passport || 'https://via.placeholder.com/300x200'" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Passport Image">
+                          <!-- <img [src]="bed.check_In_Process?.confirm_Identity?.guest_Passport || 'https://via.placeholder.com/300x200'" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Passport Image"> -->
+                          <ng-container *ngIf="bed.check_In_Process?.confirm_Identity?.guest_Passport as passporttUrl">
+                            <ng-container *ngIf="passporttUrl.endsWith('.jpeg') || passporttUrl.endsWith('.jpg') || passporttUrl.endsWith('.gif') || passporttUrl.endsWith('.png') || passporttUrl.endsWith('.heic'); else pdfTemplate">
+                              <!-- <img [src]="passportUrl" class="img-fluid col-6 imgpass" alt="Passport Image"> -->
+                              <img [src]="passporttUrl" class="img-fluid col imgpass" alt="Passport Image" style="object-fit: fill; width: 70%; ">
+
+
+
+                            </ng-container>
+                            <ng-template #pdfTemplate>
+                              <div class="col">
+                              <span class="rounded-circle bg-light p-2">
+                                <img src="/assets/images/_File upload icon.svg" alt="">
+                              </span>
+                              <div class="ml-2 mr-3">Passport.pdf</div>
+                              <a [href]="passporttUrl" target="_blank" class="btn btn-primary">View PDF</a>
+                            </div>
+                            </ng-template>
+                          </ng-container>
+                          <ng-container *ngIf="!bed.check_In_Process?.confirm_Identity?.guest_Passport">
+                            <img src="https://via.placeholder.com/150" class="img-fluid col-6 imgpass" alt="Placeholder Image">
+                          </ng-container>
                         </div>
                         <div class="col-md-6">
                           <img [src]="bed.check_In_Process?.confirm_Identity?.guest_Selife || 'https://via.placeholder.com/300x200'" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Tenant Image">
@@ -1075,27 +1111,36 @@
     <div class="modal-content" style="margin-top: 150px;">
       <button type="button" aria-label="Close" class="close"
         style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;">
-        <span aria-hidden="true" style="color: #000000; font-size: 35px;" (click)="onCloseQrModal()">×</span>
+        <button aria-hidden="true" style="color: #000000; font-size: 35px; border:none ; background:#fff;" (click)="onCloseQrModal()">×</button>
       </button>
       <div class="modal-body">
         <div class="row text-center justify-content-center " id="qrToPdf">
 
 
-          <div class="d-flex justify-content-center  fw-bold">
+          <!-- <div class="d-flex justify-content-center  fw-bold">
             <div class="mr-3">{{roomType}}.R</div>
             <div style="width:170px"></div>
             <div>ID-{{aprtCode}}</div>
+          </div> -->
+          <div class="d-flex justify-content-between fs-6 fw-bold">
+            <div class="mr-3">{{roomType}}.R </div>
+            <div style="width:170px"></div>
+            <div>ID-{{aprtCode}} </div>
           </div>
-          <p class="mt-4">Scan this code</p>
+          <!-- <p class="mt-4">Scan this code</p> -->
+          <p class="mt-4 fs-6 text-center">Scan this code</p>
           <img id="qr_image_e" [src]="qrCodeImg" class="qrfix">
-          <div class="fw-semibold">QR Code : <span class="fw-normal" style="color:#B3261E;">{{qrCode}}</span> </div>
+          <!-- <div class="fw-semibold">QR Code : <span class="fw-normal" style="color:#B3261E;">{{qrCode}}</span> </div> -->
+          <div class="fw-bold text-center fs-6 mt-4">QR Code : <span class="fw-normal" style="color:#B3261E;">{{qrCode}}</span> </div>
 
         </div>
         <div class="row text-center justify-content-center">
           <p class="mt-4 text-center">Or enter the number manually</p>
           <div class="custom-apartment-buttons mt-1">
+            <!-- <button class="custom-btn-delete">{{qrCode}}</button>
+            <button class="custom-btn-rented mt-4"  >Download</button> -->
             <button class="custom-btn-delete">{{qrCode}}</button>
-            <button class="custom-btn-rented mt-4"  >Download</button>
+            <button class="custom-btn-rented mt-4" (click)="printDiv('qrToPdf')">Download</button>
           </div>
         </div>
 
