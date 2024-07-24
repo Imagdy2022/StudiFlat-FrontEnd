@@ -2,6 +2,31 @@
 .selected-thumbnail {
   border: 3px solid #007bff;
 }
+.custom-btn-rented {
+  background-color: #1f4068;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.custom-btn-delete {
+  background-color: #d2d9e1;
+  color: #1f4068;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 100%;
+}
 
 /* :host ::ng-deep .p-accordion .p-accordion-content .bed {
   background: none !important;
