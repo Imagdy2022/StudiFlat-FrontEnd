@@ -25,6 +25,180 @@ import { AdminsService } from 'src/app/_services/admins/admins.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class FirstStepComponent implements OnInit {
+
+
+  sleepingAreaRadio: string = 'No sleeping area';
+  sleepingAreaCheckbox: Array<string> = ['Bed', 'Sofa bed'];
+  selectedSleepingArea: string = 'No sleeping area';
+  selectedCheckboxes: Array<string> = [];
+  showBedSectionSofa:boolean=false;
+
+  onChangeSleepingArea(event: any) {
+    this.selectedSleepingArea = event.target.value;
+    if (this.selectedSleepingArea === 'No sleeping area') {
+      this.selectedCheckboxes = [];
+      this.showBedSection=false;
+      this.showBedSectionSofa=false;
+    }
+
+
+  }
+
+  onCheckboxChange(event: any, option: string) {
+    if (event.target.checked) {
+
+      this.selectedCheckboxes.push(option);
+      if(option=='Bed'){
+      const index = this.selectedCheckboxes.indexOf(option);
+      this.sectionName=this.selectedCheckboxes[index];
+      console.log(this.sectionName)
+      this.showBedSection=true;
+      // this.sharedBed = null;
+      // this.checkAndSaveSharedBed();
+      this.selectedSleepingArea = '';
+      }else if('Sofa bed'){
+      const index = this.selectedCheckboxes.indexOf(option);
+      this.sectionName=this.selectedCheckboxes[index];
+      console.log(this.sectionName)
+      this.showBedSectionSofa=true;
+      // this.sharedBed = null;
+      // this.checkAndSaveSharedBed();
+      this.selectedSleepingArea = '';
+      }
+
+    } else {
+      const index = this.selectedCheckboxes.indexOf(option);
+      if (index > -1) {
+        this.selectedCheckboxes.splice(index, 1);
+
+      }
+      if (this.selectedCheckboxes.length === 0) {
+        this.selectedSleepingArea = 'No sleeping area';
+        this.showBedSection=false;
+      }
+    }
+
+
+
+  }
+
+
+  // onChangeNoOfSharedArea(event: any): void {
+  //   this.bedroomsToApi=[];
+  //   const selectedValue = parseInt(event.target?.value, 10);
+  //   if (!isNaN(selectedValue) && selectedValue > 0) {
+  //     this.bedrooms = Array(selectedValue).fill(0).map((x, i) => i);
+  //   }
+  //   for (let i = 0; i < selectedValue; i++) {
+  //     this.bedroomsToApi.push({
+  //       room_Type: "",
+  //       beds_No: 0,
+  //       bed_Price: 0,
+  //       bed_SecuirtyDeposit: 0,
+  //       bed_Service_Fees: 0
+  //     });
+  //   }
+  // }
+ sharedNumber:any;
+ sharedNumbersofa:any;
+
+  sharedSofaBed: any;
+  // onChangeNoOfSharedArea(event: any,type:string): void {
+
+
+  //   if(type==='bed'){
+  //     const selectedValue = parseInt(event.target?.value, 10);
+  //     if (!isNaN(selectedValue) && selectedValue > 0) {
+  //       this.sharedNumber = Array(selectedValue).fill(0).map((x, i) => i);
+  //     }
+  //     for (let i = 0; i < selectedValue; i++) {
+  //       this.sharedBed.push({
+  //         room_Type: "shared_area",
+  //         beds_No: `bed ${i}`,
+  //         bed_Price: 0,
+  //         bed_SecuirtyDeposit: 0,
+  //         bed_Service_Fees: 0
+  //       });
+  //     }
+  //   }else if('sofa'){
+  //     const selectedValue = parseInt(event.target?.value, 10);
+  //     if (!isNaN(selectedValue) && selectedValue > 0) {
+  //       this.sharedNumbersofa = Array(selectedValue).fill(0).map((x, i) => i);
+  //     }
+  //     for (let i = 0; i < selectedValue; i++) {
+  //       this.sharedBed.push({
+  //         room_Type: "shared_area",
+  //         beds_No: `sofa${i}`,
+  //         bed_Price:0,
+  //         bed_SecuirtyDeposit: 0,
+  //         bed_Service_Fees: 0
+  //       });
+  //     }
+  //   }
+
+  // }
+  onChangeNoOfSharedArea(event: any, type: string): void {
+    if (type === 'bed') {
+      const selectedValue = parseInt(event.target?.value, 10);
+      this.sharedBed = [];
+      if (!isNaN(selectedValue) && selectedValue > 0) {
+        this.sharedNumber = Array(selectedValue).fill(0).map((x, i) => i);
+      }
+      for (let i = 0; i < selectedValue; i++) {
+        this.sharedBed.push({
+          room_Type: "shared_area",
+          beds_No: `bed ${i}`,
+          bed_Price: 0,
+          bed_SecuirtyDeposit: 0,
+          bed_Service_Fees: 0
+        });
+      }
+    } else if (type === 'sofa') {
+      const selectedValue = parseInt(event.target?.value, 10);
+      this.sharedSofaBed = [];
+      if (!isNaN(selectedValue) && selectedValue > 0) {
+        this.sharedNumbersofa = Array(selectedValue).fill(0).map((x, i) => i);
+      }
+      for (let i = 0; i < selectedValue; i++) {
+        this.sharedSofaBed.push({
+          room_Type: "shared_area",
+          beds_No: `sofa ${i}`,
+          bed_Price: 0,
+          bed_SecuirtyDeposit: 0,
+          bed_Service_Fees: 0
+        });
+      }
+    }
+  }
+
+
+  checkAndSaveSharbedBed(index:any): void {
+    if (this.showBedSection && this.bedPrice != null && this.SecurityDeposit !=null && this.ServiceFees !=null) {
+      this.sharedBed[index] = {
+        room_Type: "shared_area",
+        beds_No: 1,
+        bed_Price: Number(this.bedPrice),
+        bed_SecuirtyDeposit: Number(this.SecurityDeposit),
+        bed_Service_Fees: Number(this.ServiceFees)
+      };
+    } else if (!this.showBedSection) {
+      this.sharedBed = null;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /** CreateContract */
   CreateContract: string = '';
   /** Createapartmentcurre */
@@ -558,7 +732,12 @@ this.ID= Guid.create();
       bed_Service_Fees: this.ServiceFees
     }
     if(this.sharedBed){
-      this.bedroomsToApi.push(this.sharedBed)
+      this.bedroomsToApi.push(...this.sharedBed)
+
+    }
+    if(this.sharedSofaBed){
+
+      this.bedroomsToApi.push(...this.sharedSofaBed)
     }
     if(this.studioShow)
     {
@@ -874,27 +1053,27 @@ this.ID= Guid.create();
   }
 
   showBedSection:boolean = false;
-  sectionName:string ="";
+  sectionName:string="";
 
   onChangesArea(event:any){
     this.defaultapartmentSharedArea = event.target.value;
     this.SharedAreaInclude = event.target.value == 'Yes' ? true : false;
   }
 
-  onChangesleepingArea(event: any): void {
-    const selectedValue = event.target.value;
-    this.sectionName = selectedValue;
+//   onChangesleepingArea(event: any): void {
+//     const selectedValue = event.target.value;
+//     this.sectionName = selectedValue;
 
-    this.showBedSection = (this.sectionName === 'Bed' || this.sectionName === 'Sofa bed');
-  if (this.showBedSection) {
-    this.sharedBed = null;
-  }
-  this.checkAndSaveSharedBed();
-}
+//     this.showBedSection = (this.sectionName === 'Bed' || this.sectionName === 'Sofa bed');
+//   if (this.showBedSection) {
+//     this.sharedBed = null;
+//   }
+//   this.checkAndSaveSharedBed();
+// }
 
-checkAndSaveSharedBed(): void {
+checkAndSaveSharedBed(index:any): void {
   if (this.showBedSection && this.bedPrice != null && this.SecurityDeposit !=null && this.ServiceFees !=null) {
-    this.sharedBed = {
+    this.sharedBed[index] = {
       room_Type: "shared_area",
       beds_No: 1,
       bed_Price: Number(this.bedPrice),
@@ -928,7 +1107,7 @@ checkAndSaveSharedBed(): void {
       this.bedroomsToApi=[];
       this.bedrooms=[];
       this.generalInfoForm.get('apartment_BedRoomsNo')?.patchValue(0);
-      
+
       // this.generalInfoForm.get('apartment_BedRoomsNo')?.setValue(1);
       this.generalInfoForm.get('apartment_BathroomNo')?.setValue(1);
     } else {
