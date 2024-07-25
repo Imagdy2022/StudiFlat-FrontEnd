@@ -129,8 +129,8 @@
                     <span class="text-muted small">Remove</span>
                   </div>
                 </div>
-                <div class="data">
-                  <textarea name="Description" [id]="'description' + i + '-' + j" placeholder="Description" class="form-control" rows="4" [(ngModel)]="item.device_Description" [ngModelOptions]="{standalone: true}"></textarea>
+                <div class="data">  <textarea name="Description" [id]="'description' + i + '-' + j" placeholder="Description" class="form-control" rows="4" [(ngModel)]="item.device_Description"  (ngModelChange)="onDescriptionChange(item.device_Description)"  [ngModelOptions]="{standalone: true}"></textarea>
+
                 </div>
               </div>
             </div>
@@ -139,7 +139,7 @@
           <hr>
         </div>
 
-        <div>
+        <div *ngIf="Qdamage">
             <p class="d-md-inline-block gray fw-bold mb-0 me-3">Does apartment currently have any existing damage?</p>
             <div class="form-check d-inline-block mb-2" *ngFor="let data of apartmentCurrentlyExisting">
                 <input class="form-check-input " [checked]="CreateapartmentCurrentlyExisting === data" type="radio" name="createContract" value="{{data}}" id="createContract" (change)="DoyouapartmentCurrentlyExisting($event)">

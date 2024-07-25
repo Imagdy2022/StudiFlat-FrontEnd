@@ -68,13 +68,18 @@ export class FirstStepComponent implements OnInit {
 
     } else {
       const index = this.selectedCheckboxes.indexOf(option);
-      if (index > -1) {
+      if (index > -1 && option==='Bed') {
         this.selectedCheckboxes.splice(index, 1);
-
+        this.showBedSection=false;
+      }
+      if (index > -1 && option==='Sofa bed') {
+        this.selectedCheckboxes.splice(index, 1);
+        this.showBedSectionSofa=false;
       }
       if (this.selectedCheckboxes.length === 0) {
         this.selectedSleepingArea = 'No sleeping area';
         this.showBedSection=false;
+        this.showBedSectionSofa=false;
       }
     }
 
@@ -744,11 +749,11 @@ this.ID= Guid.create();
       bed_SecuirtyDeposit : this.SecurityDeposit,
       bed_Service_Fees: this.ServiceFees
     }
-    if(this.sharedBed){
+    if(this.sharedBed.beds_No!==null){
       this.bedroomsToApi.push(this.sharedBed)
 
     }
-    if(this.sharedSofaBed){
+    if(this.sharedSofaBed.beds_No!==null){
 
       this.bedroomsToApi.push(this.sharedSofaBed)
     }

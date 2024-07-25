@@ -11,6 +11,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./forth-step.component.scss']
 })
 export class ForthStepComponent {
+  Qdamage:boolean=true;
+  onDescriptionChange(description: string): void {
+    this.Qdamage = description.length===0;
+  }
   /** apartmentCurrentlyExisting */
   apartmentCurrentlyExisting: Array<string> = ['Yes', 'No']
   /** CreateapartmentCurrentlyExisting */
@@ -66,7 +70,9 @@ export class ForthStepComponent {
       this.selectedRooms = parsedData.apartment_BedRoomsNo
     }
 
+
    }
+
 
   idParamterEdit:any=""
   ngOnInit() {
@@ -83,6 +89,8 @@ export class ForthStepComponent {
       this.getLocalStorage();
       this.initializeRooms();
      }
+
+     this.Qdamage=true;
 
   }
   edit =""
@@ -257,7 +265,7 @@ export class ForthStepComponent {
     if (!item.is_Checked) {
       this.Rooms_Devices[roomIndex].room_Devices[deviceIndex].is_Checked=false;
       this.Rooms_Devices[roomIndex].room_Devices[deviceIndex].device_Description='';
-    }     
+    }
   }
 
 
