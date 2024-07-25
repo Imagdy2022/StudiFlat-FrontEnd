@@ -467,7 +467,7 @@
 
           <div class="card bedSecton p-3" *ngIf="isShow && showBedSection">
 
-            <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
+            <!-- <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
               <label class="form-label gray fw-bold">No. of Beds</label>
 
               <select   class="form-select rounded-2 py-2 fs-6" (change)="onChangeNoOfSharedArea($event,'bed')" name="apartment_BedRoomsNo"  formControlName="apartment_BedRoomsNo">
@@ -477,16 +477,34 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
               </select>
-          </div>
-            <div class="card bedSecton p-3 mt-3" *ngFor="let shared of sharedNumber; let i = index">
-              <p class="fw-bold mb-0 me-3 pt-0 mt-0">Bed {{ i + 1 }}</p>
+          </div> -->
+            <div class="card bedSecton p-3 mt-3"  >
+              <p class="fw-bold mb-0 me-3 pt-0 mt-0">Bed Shared area</p>
             <!-- <p class="fw-bold mb-0 me-3 pt-0 mt-0">Bed 1</p> -->
             <span class="text-muted">Please add bed info</span>
 
             <div class="row pt-3" *ngIf="showBedSection">
+
+              <div class="mb-3 col-12 col-md-6">
+                <label class="form-label gray fw-bold">No of beds</label>
+                <select formControlName="beds_No"  class="form-select rounded-2 py-2 fs-6"
+                (change)="onChangeNoOfSharedArea($event,'bed')">
+                  <option value="null" disabled hidden selected> {{sharedBed?.beds_No}}</option>
+                  <ng-container  ><option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option></ng-container>
+
+                </select>
+
+            </div>
+
+
               <div class="mb-3 col-12 col-md-6">
                 <label class="form-label gray fw-bold">Bed price</label>
-                <input  type="number"class="form-control rounded-2 py-2 fs-6" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedBed[i].bed_Price"  />
+                <input  type="number"class="form-control rounded-2 py-2 fs-6" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedBed.bed_Price"  />
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Price')?.getError('required') && generalInfoForm.get('bed_Price')?.touched ">
         this field is required
       </span>
@@ -497,7 +515,7 @@
 
               <div class="mb-3 col-6 col-md-6">
                 <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Security Deposit</label>
-                <input min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedBed[i].bed_SecuirtyDeposit"  />
+                <input min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedBed.bed_SecuirtyDeposit"  />
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_SecuirtyDeposit')?.getError('required') && generalInfoForm.get('bed_SecuirtyDeposit')?.touched ">
                    this field is required
                  </span>
@@ -507,7 +525,7 @@
             </div>
               <div class="mb-3 col-6 col-md-6">
                 <label for="exampleInputService_Fees" class="form-label gray fw-bold">Service Fees</label>
-                <input  min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees" [ngModelOptions]="{standalone: true}" [(ngModel)]=" sharedBed[i].bed_Service_Fees"  />
+                <input  min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees" [ngModelOptions]="{standalone: true}" [(ngModel)]=" sharedBed.bed_Service_Fees"  />
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Service_Fees')?.getError('required') && generalInfoForm.get('bed_Service_Fees')?.touched ">
                    this field is required
                  </span>
@@ -527,7 +545,7 @@
           <div class="card bedSecton p-3" *ngIf="isShow && showBedSectionSofa">
             <!-- <p class="fw-bold mb-0 me-3 pt-0 mt-0">{{sectionName}} 1</p> -->
 
-            <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
+            <!-- <div class="mb-3 col-12 col-md-6" *ngIf="isShow">
               <label class="form-label gray fw-bold">No. of Sofa beds</label>
 
               <select   class="form-select rounded-2 py-2 fs-6" (change)="onChangeNoOfSharedArea($event,'sofa')" name="apartment_BedRoomsNo"  formControlName="apartment_BedRoomsNo">
@@ -537,16 +555,32 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
               </select>
-          </div>
-            <div class="card bedSecton p-3 mt-3" *ngFor="let shared of sharedNumbersofa; let i = index">
-              <p class="fw-bold mb-0 me-3 pt-0 mt-0">Sofa bed {{ i + 1 }}</p>
+          </div> -->
+            <div class="card bedSecton p-3 mt-3"  >
+              <p class="fw-bold mb-0 me-3 pt-0 mt-0">Sofa Shared Area</p>
 
             <span class="text-muted">Please add bed info</span>
 
-            <div class="row pt-3" *ngIf="showBedSectionSofa">
+            <div class="row pt-3"  >
+
+              <div class="mb-3 col-12 col-md-6">
+                <label class="form-label gray fw-bold">No of sofa</label>
+                <select formControlName="beds_No"  class="form-select rounded-2 py-2 fs-6"
+                (change)="onChangeNoOfSharedArea($event,'sofa')">
+                  <option value="null" disabled hidden selected> {{sharedNumbersofa?.beds_No}}</option>
+                  <ng-container  ><option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option></ng-container>
+
+                </select>
+
+            </div>
               <div class="mb-3 col-12 col-md-6">
                 <label class="form-label gray fw-bold">Bed price</label>
-                <input  type="number"class="form-control rounded-2 py-2 fs-6" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedSofaBed[i].bed_Price"  />
+                <input  type="number"class="form-control rounded-2 py-2 fs-6" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedSofaBed.bed_Price"  />
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Price')?.getError('required') && generalInfoForm.get('bed_Price')?.touched ">
         this field is required
       </span>
@@ -557,7 +591,7 @@
 
               <div class="mb-3 col-6 col-md-6">
                 <label for="exampleInputSecuritydeposit" class="form-label gray fw-bold">Security Deposit</label>
-                <input min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedSofaBed[i].bed_SecuirtyDeposit" />
+                <input min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputSecuritydeposit" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedSofaBed.bed_SecuirtyDeposit" />
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_SecuirtyDeposit')?.getError('required') && generalInfoForm.get('bed_SecuirtyDeposit')?.touched ">
                    this field is required
                  </span>
@@ -567,7 +601,7 @@
             </div>
               <div class="mb-3 col-6 col-md-6">
                 <label for="exampleInputService_Fees" class="form-label gray fw-bold">Service Fees</label>
-                <input  min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedSofaBed[i].bed_Service_Fees"  />
+                <input  min="0" type="number"  class="form-control rounded-2 py-2 fs-6" id="exampleInputService_Fees" [ngModelOptions]="{standalone: true}" [(ngModel)]="sharedSofaBed.bed_Service_Fees"  />
                 <!-- <span class="text-danger d-block m-2 " *ngIf="generalInfoForm.get('bed_Service_Fees')?.getError('required') && generalInfoForm.get('bed_Service_Fees')?.touched ">
                    this field is required
                  </span>

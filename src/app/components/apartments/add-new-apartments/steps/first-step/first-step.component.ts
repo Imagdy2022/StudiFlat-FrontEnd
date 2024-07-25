@@ -48,7 +48,7 @@ export class FirstStepComponent implements OnInit {
     if (event.target.checked) {
 
       this.selectedCheckboxes.push(option);
-      if(option=='Bed'){
+      if(option==='Bed'){
       const index = this.selectedCheckboxes.indexOf(option);
       this.sectionName=this.selectedCheckboxes[index];
       console.log(this.sectionName)
@@ -56,7 +56,7 @@ export class FirstStepComponent implements OnInit {
       // this.sharedBed = null;
       // this.checkAndSaveSharedBed();
       this.selectedSleepingArea = '';
-      }else if('Sofa bed'){
+      }else if(option==='Sofa bed'){
       const index = this.selectedCheckboxes.indexOf(option);
       this.sectionName=this.selectedCheckboxes[index];
       console.log(this.sectionName)
@@ -102,7 +102,15 @@ export class FirstStepComponent implements OnInit {
  sharedNumber:any;
  sharedNumbersofa:any;
 
-  sharedSofaBed: any;
+  // sharedSofaBed: any;
+
+  sharedSofaBed: any = {
+    room_Type: "shared_area",
+    beds_No: null,
+    bed_Price: 0,
+    bed_SecuirtyDeposit: 0,
+    bed_Service_Fees: 0
+  };
   // onChangeNoOfSharedArea(event: any,type:string): void {
 
 
@@ -140,34 +148,33 @@ export class FirstStepComponent implements OnInit {
   onChangeNoOfSharedArea(event: any, type: string): void {
     if (type === 'bed') {
       const selectedValue = parseInt(event.target?.value, 10);
-      this.sharedBed = [];
-      if (!isNaN(selectedValue) && selectedValue > 0) {
-        this.sharedNumber = Array(selectedValue).fill(0).map((x, i) => i);
-      }
-      for (let i = 0; i < selectedValue; i++) {
-        this.sharedBed.push({
-          room_Type: "shared_area",
-          beds_No: `bed ${i}`,
-          bed_Price: 0,
-          bed_SecuirtyDeposit: 0,
-          bed_Service_Fees: 0
-        });
-      }
+      // this.sharedBed = [];
+      // if (!isNaN(selectedValue) && selectedValue > 0) {
+      //   this.sharedNumber = Array(selectedValue).fill(0).map((x, i) => i);
+      // }
+    this.sharedBed.beds_No=selectedValue;
+      // this.sharedBed.push({
+      //   room_Type: "shared_area",
+      //   beds_No: selectedValue,
+      //   bed_Price: 0,
+      //   bed_SecuirtyDeposit: 0,
+      //   bed_Service_Fees: 0
+      // });
+
     } else if (type === 'sofa') {
       const selectedValue = parseInt(event.target?.value, 10);
-      this.sharedSofaBed = [];
-      if (!isNaN(selectedValue) && selectedValue > 0) {
-        this.sharedNumbersofa = Array(selectedValue).fill(0).map((x, i) => i);
-      }
-      for (let i = 0; i < selectedValue; i++) {
-        this.sharedSofaBed.push({
-          room_Type: "shared_area",
-          beds_No: `sofa ${i}`,
-          bed_Price: 0,
-          bed_SecuirtyDeposit: 0,
-          bed_Service_Fees: 0
-        });
-      }
+      // this.sharedSofaBed =[];
+      // if (!isNaN(selectedValue) && selectedValue > 0) {
+      //   this.sharedNumbersofa = Array(selectedValue).fill(0).map((x, i) => i);
+      // }
+      this.sharedSofaBed.beds_No=selectedValue;
+      // this.sharedSofaBed.push({
+      //   room_Type: "shared_area",
+      //   beds_No:selectedValue,
+      //   bed_Price: 0,
+      //   bed_SecuirtyDeposit: 0,
+      //   bed_Service_Fees: 0
+      // });
     }
   }
 
@@ -293,7 +300,13 @@ export class FirstStepComponent implements OnInit {
   SecurityDeposit:number = 0;
   ServiceFees:number = 0;
   bedroomsToApi:any[]=[];
-  sharedBed:any;
+  sharedBed: any = {
+    room_Type: "shared_area",
+    beds_No: null,
+    bed_Price: 0,
+    bed_SecuirtyDeposit: 0,
+    bed_Service_Fees: 0
+  };
   bedNumber :number = 0;
   constructor(
     private _ApartmentService: ApartmentService,
@@ -732,12 +745,12 @@ this.ID= Guid.create();
       bed_Service_Fees: this.ServiceFees
     }
     if(this.sharedBed){
-      this.bedroomsToApi.push(...this.sharedBed)
+      this.bedroomsToApi.push(this.sharedBed)
 
     }
     if(this.sharedSofaBed){
 
-      this.bedroomsToApi.push(...this.sharedSofaBed)
+      this.bedroomsToApi.push(this.sharedSofaBed)
     }
     if(this.studioShow)
     {
@@ -1034,8 +1047,9 @@ this.ID= Guid.create();
   }
 
   apartmentRooms : any[]=[]
-
+  showBed:boolean=false;
   onChangeNoOfBedrooms(event: any): void {
+    this.showBed=true;
     this.bedroomsToApi=[];
     const selectedValue = parseInt(event.target?.value, 10);
     if (!isNaN(selectedValue) && selectedValue > 0) {
