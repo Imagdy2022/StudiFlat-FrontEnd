@@ -399,6 +399,7 @@ this.ID= Guid.create();
   Address: any = '';
   aprt_details_Edit: any = {};
   apt_types_show: any = '';
+  sharedareaedit:boolean;
   getApartmentDetails() {
     this.subscriptions.push(this._ApartmentService
       .getApartDetail(this.idParamterEdit)
@@ -411,6 +412,21 @@ this.ID= Guid.create();
         this.apt_imgs = res.apartment_Basic_Info['apartment_Images'];
         this.billinclude = res.apartment_Basic_Info['apartment_All_Bill_Included'];
         this.bedroomsToApi = res.apartment_Basic_Info['apartment_Rooms']
+
+        for(let i=0;i<this.bedroomsToApi.length;i++)
+          {
+            if(this.bedroomsToApi[i].room_Type=='shared_area')
+            {
+            // res.apartment_Basic_Info.apartment_SharedArea=true;
+            // this.sharedareaedit=res.apartment_Basic_Info.apartment_SharedArea;
+           this.bedPrice=this.bedroomsToApi[i].bed_Price;
+           this.ServiceFees=this.bedroomsToApi[i].bed_Service_Fees;
+           this.SecurityDeposit=this.bedroomsToApi[i].bed_SecuirtyDeposit;
+           this.isShow=true;
+           this.showBedSection=true;
+           this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
+             }
+          }
         this.generalInfoForm
           .get('apartment_Images')
           ?.patchValue(res.apartment_Basic_Info['property_Imgs']);
@@ -744,16 +760,24 @@ this.ID= Guid.create();
   }
   Create_Apart_General(data: any) {
 
+    for(let i=0;i<this.bedroomsToApi.length;i++)
+      {
+        if(this.bedroomsToApi[i].room_Type=='shared_area')
+        {
+       this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
+         }
+      }
+
     let  SleepingAreaDetails ={
       bed_Price : this.bedPrice,
       bed_SecuirtyDeposit : this.SecurityDeposit,
       bed_Service_Fees: this.ServiceFees
     }
-    if(this.sharedBed.beds_No!==null){
+    if(this.sharedBed.bed_Price!==0){
       this.bedroomsToApi.push(this.sharedBed)
 
     }
-    if(this.sharedSofaBed.beds_No!==null){
+    if(this.sharedBed.bed_Price!==0){
 
       this.bedroomsToApi.push(this.sharedSofaBed)
     }
