@@ -337,6 +337,7 @@ this.ID= Guid.create();
       this.getArea();
       this.edit = 'EditForm';
       this.getApartmentDetails();
+      this.getLocalStorage();
     } else {
       this.edit = '';
       this.apartment_ID = localStorage.getItem('apartment_ID');
@@ -346,6 +347,7 @@ this.ID= Guid.create();
       this.bindCreateGeneral();
       this.getAowners();
       this.getAllworkers();
+      this.getLocalStorage();
 
 
       this.getArea();
@@ -399,7 +401,7 @@ this.ID= Guid.create();
   Address: any = '';
   aprt_details_Edit: any = {};
   apt_types_show: any = '';
-  sharedareaedit:boolean;
+  sharedareaedit:string;
   getApartmentDetails() {
     this.subscriptions.push(this._ApartmentService
       .getApartDetail(this.idParamterEdit)
@@ -417,14 +419,15 @@ this.ID= Guid.create();
           {
             if(this.bedroomsToApi[i].room_Type=='shared_area')
             {
-            // res.apartment_Basic_Info.apartment_SharedArea=true;
-            // this.sharedareaedit=res.apartment_Basic_Info.apartment_SharedArea;
-           this.bedPrice=this.bedroomsToApi[i].bed_Price;
-           this.ServiceFees=this.bedroomsToApi[i].bed_Service_Fees;
-           this.SecurityDeposit=this.bedroomsToApi[i].bed_SecuirtyDeposit;
-           this.isShow=true;
-           this.showBedSection=true;
-           this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
+              this.defaultapartmentSharedArea='Yes';
+              this.SharedAreaInclude=true;
+          //  this.bedPrice=this.bedroomsToApi[i].bed_Price;
+          //  this.ServiceFees=this.bedroomsToApi[i].bed_Service_Fees;
+          //  this.SecurityDeposit=this.bedroomsToApi[i].bed_SecuirtyDeposit;
+          //  this.isShow=true;
+          //  this.showBedSection=true;
+          //  this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
+
              }
           }
         this.generalInfoForm
@@ -447,6 +450,7 @@ this.ID= Guid.create();
     const data = localStorage.getItem('generalInfoForm');
     const data2 = localStorage.getItem('Createtransport');
     const bedroomsToApi = localStorage.getItem('bedroomsToApi');
+    this.shared_area_fix=true;
 
     if (data !== null) {
       let parsedData = JSON.parse(data);
@@ -467,15 +471,19 @@ this.ID= Guid.create();
         {
           if(this.bedroomsToApi[i].room_Type=='shared_area')
           {
-         this.bedPrice=this.bedroomsToApi[i].bed_Price;
-         this.ServiceFees=this.bedroomsToApi[i].bed_Service_Fees;
-         this.SecurityDeposit=this.bedroomsToApi[i].bed_SecuirtyDeposit;
-         this.isShow=true;
-         this.showBedSection=true;
-         this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
+            this.defaultapartmentSharedArea='Yes';
+            this.SharedAreaInclude=true;
+
+        //  this.bedPrice=this.bedroomsToApi[i].bed_Price;
+        //  this.ServiceFees=this.bedroomsToApi[i].bed_Service_Fees;
+        //  this.SecurityDeposit=this.bedroomsToApi[i].bed_SecuirtyDeposit;
+        //  this.isShow=true;
+        //  this.showBedSection=true;
+        //  this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
            }
         }
         this.bedrooms= this.bedroomsToApi;
+        console.log(this.bedrooms)
       }
       this.generalInfoForm.patchValue(parsedData);
       this.generalInfoForm.get('apartment_Images')?.patchValue(parsedData.apartment_Images);
@@ -758,11 +766,12 @@ this.ID= Guid.create();
       return;
     }
   }
+  shared_area_fix:boolean;
   Create_Apart_General(data: any) {
 
     for(let i=0;i<this.bedroomsToApi.length;i++)
       {
-        if(this.bedroomsToApi[i].room_Type=='shared_area')
+        if(this.bedroomsToApi[i].room_Type=='shared_area' && this.shared_area_fix!==true)
         {
        this.bedroomsToApi=this.bedroomsToApi.filter((item:any) => item.room_Type !=='shared_area');
          }
@@ -777,7 +786,7 @@ this.ID= Guid.create();
       this.bedroomsToApi.push(this.sharedBed)
 
     }
-    if(this.sharedBed.bed_Price!==0){
+    if(this.sharedSofaBed.bed_Price!==0){
 
       this.bedroomsToApi.push(this.sharedSofaBed)
     }
@@ -853,6 +862,7 @@ this.ID= Guid.create();
         )
         .subscribe(
           (res) => {
+            this.shared_area_fix=true;
             localStorage.removeItem('create_Apart_Equ');
       localStorage.removeItem('BathroomNo');
             localStorage.setItem('apartmentResponse', JSON.stringify(res));
@@ -888,6 +898,7 @@ this.ID= Guid.create();
         )
         .subscribe(
           (res) => {
+            this.shared_area_fix=true;
             localStorage.removeItem('create_Apart_Equ');
       localStorage.removeItem('BathroomNo');
             localStorage.setItem('apartmentResponse', JSON.stringify(res));
@@ -1099,6 +1110,7 @@ this.ID= Guid.create();
   sectionName:string="";
 
   onChangesArea(event:any){
+
     this.defaultapartmentSharedArea = event.target.value;
     this.SharedAreaInclude = event.target.value == 'Yes' ? true : false;
   }
@@ -1209,12 +1221,17 @@ this.display11=false
         this.bedroomsToApi[id]['beds_No']=0;
 
       }
+      else if(this.generalInfoForm.value[key]=='shared_area')
+        { this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
+
+
+        }
 
   }
   changeBedNo(key:any,value:any,id:number)
   {
 
-    if(this.generalInfoForm.value['room_Type']=='Custom')
+    if(this.generalInfoForm.value['room_Type']=='Custom'||this.generalInfoForm.value['room_Type']=='shared_area')
       {this.bedroomsToApi[id][key]=this.generalInfoForm.value[key]
       }
       else if(this.generalInfoForm.value['room_Type']!='Custom')
