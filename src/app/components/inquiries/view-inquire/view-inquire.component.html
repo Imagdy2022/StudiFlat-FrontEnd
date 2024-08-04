@@ -322,7 +322,7 @@
             <p-accordionTab   [selected]="true" [headerStyle]="{'background-color': '#fff' }" *ngFor="let bed of inquire_details?.booking_Beds let i=index" >
               <ng-template pTemplate="header"  >
                 <div class="d-flex justify-content-between align-items-center m-0  rounded w-100 px-2">
-                  <div class="fw-bold">{{ bed.bed_No }}</div>
+                  <div class="fw-bold">{{ bed.bed_No }}  </div>
                   <div>{{ bed.room_Type }}</div>
                   <div>€ {{ bed.bed_Price }}</div>
                   <div>€ {{ bed.secuirty_Deposit }}</div>
@@ -774,8 +774,8 @@
                         <div class="col-md-6">
                           <img [src]="bed.check_In_Process?.confirm_Identity?.guest_Selife || 'https://via.placeholder.com/300x200'" style="width: 90%; height: 220px; border-radius: 10px;" class="img-fluid rounded" alt="Tenant Image">
                           <div class="d-flex mt-3">
-                            <button type="button" class="btn btn-primary btn-block mb-0 fs-6 m-1" style="width: 44%; border-radius: 10px; padding: 10px;" (click)="showConfirmSelfi('confirm',i)"  [disabled]="isAcceptDisabledSelfi(bed.check_In_Process?.confirm_Identity?.status )">Confirm</button>
-                            <button type="button" class="btn btn-block fs-6 m-1" style="width: 44%; border-radius: 10px; background-color: #D2D9E1; color: #1F4068; padding: 10px;" (click)="showConfirmSelfi('reject',i)"  >Reject</button>
+                            <button type="button" class="btn btn-primary btn-block mb-0 fs-6 m-1" style="width: 44%; border-radius: 10px; padding: 10px;" (click)="showConfirmSelfi('confirm',i,bed.guest_Data?.guest_ID)"  [disabled]="isAcceptDisabledSelfi(bed.check_In_Process?.confirm_Identity?.status )">Confirm</button>
+                            <button type="button" class="btn btn-block fs-6 m-1" style="width: 44%; border-radius: 10px; background-color: #D2D9E1; color: #1F4068; padding: 10px;" (click)="showConfirmSelfi('reject',i,bed.guest_Data?.guest_ID)"  >Reject</button>
                           </div>
                         </div>
                       </div>
@@ -794,7 +794,7 @@
                           <div class="row text-center justify-content-center">
                             <p>Are you sure you want to approve this image?</p>
                             <div class="ui-g-12 text-center mt-4">
-                              <button type="button" class="btn btn-primary" (click)="handleActionSelfi(true,inquire_details?.booking_ID,bed.guest_Data.guest_ID,indexselfi) ">Yes</button>
+                              <button type="button" class="btn btn-primary" (click)="handleActionSelfi(true,inquire_details?.booking_ID, guestID,indexselfi) ">Yes</button>
                             </div>
                           </div>
                         </div>
@@ -878,7 +878,7 @@
                       <div class="d-flex align-items-center justify-content-start">
                         <!-- Overall Check for All Payments -->
                         <ng-container *ngIf="bed.check_In_Process?.payments?.invoices?.length > 0; else noInvoices">
-                          <ng-container *ngFor="let invoice of bed.check_In_Process.payments.invoices; let last = last">
+                          <ng-container *ngFor="let invoice of bed.check_In_Process?.payments?.invoices; let last = last">
                             <ng-container *ngIf="!invoice.payment_Is_Paid; then unpaidTemplate else checkIfLast">
                             </ng-container>
                             <ng-template #checkIfLast>
@@ -901,11 +901,11 @@
                       <div class="d-flex align-items-center justify-content-end w-100 pe-3">
                         <span class="mx-2">
                           <img src="/assets/images/date.svg" class="me-1" alt="">
-                          {{ bed.check_In_Process?.payments?.date }}
+                          {{ bed.check_In_Process?.payments?.rent_Date }}
                         </span>
                         <span class="mx-4">
                           <img src="/assets/images/clock.svg" class="me-1" alt="">
-                          {{ bed.check_In_Process?.payments?.time }}
+                          {{ bed.check_In_Process?.payments?.rent_Time }}
                         </span>
                         <ng-container *ngFor="let invoice of bed.check_In_Process?.payments?.invoices; let last = last">
                           <ng-container *ngIf="!invoice.payment_Is_Paid; then notAllPaid else checkIfLastStatus">

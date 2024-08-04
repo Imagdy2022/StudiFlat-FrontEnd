@@ -346,9 +346,10 @@ loadButtonStatesPass() {
     }
   }
   indexselfi:any;
-  showConfirmSelfi(action: string,indexselfi:any) {
+  showConfirmSelfi(action: string,indexselfi:any, guestID:any) {
     this.currentActionS = action;
     this.indexselfi=indexselfi;
+    this.guestID=guestID;
     if (action === 'confirm') {
       this.showConfirmDialogS = true;
     } else if (action === 'reject') {
@@ -487,6 +488,7 @@ fixdisable:any;
   );
 }
 
+guestID:any;
 
 handleActionSelfi(isApproved: boolean, bookingId: string, guestId: any,indexselfi:any) {
   let rejectReason = '';
