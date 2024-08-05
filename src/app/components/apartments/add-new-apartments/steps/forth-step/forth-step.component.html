@@ -99,8 +99,12 @@
             <!-- <app-input-field [labelinputs]="Labelfield" (inputField)="saveInputField($event)" [textButton]="'Create New Field'"></app-input-field> -->
             <app-input-create-field [labelinputs]="Labelfield" (inputField)="saveInputField($event)" [textButton]="'Create new field'"></app-input-create-field>
 
+
         </div>
         <hr>
+
+
+
 
         <div class="room" *ngFor="let room of Rooms_Devices ; let i = index">
           <div class="d-flex justify-content-between">
@@ -112,6 +116,9 @@
               </div>
               <a class="bg-transparent outline-0 text-decoration-none border-0 blue fw-bold" style="cursor: pointer;" (click)="createNewField(i)">
                 <img src="assets/images/apartmentImages/ic_baseline-add.svg"> Create new field
+              </a>
+              <a (click)="addRoom(room.room_Name)" *ngIf="room.room_Name==='Kitchen' || room.room_Name==='Bathroom' " class="bg-transparent outline-0 text-decoration-none border-0 blue fw-bold" style="cursor: pointer;" (click)="createNewField(i)">
+                <img src="assets/images/apartmentImages/ic_baseline-add.svg"> Add new {{room.room_Name}}
               </a>
             </div>
           </div>
@@ -134,10 +141,24 @@
                 </div>
               </div>
             </div>
+
           </div>
 
           <hr>
         </div>
+
+        <div class="d-flex justify-content-between" *ngIf="shouldDisplay()" >
+          <p class="fw-bold"> </p>
+          <div class="buttons d-flex align-items-center">
+
+            <a (click)="addRoom('Bathroom')" class="bg-transparent outline-0 text-decoration-none border-0 blue fw-bold" style="cursor: pointer;" >
+              <img src="assets/images/apartmentImages/ic_baseline-add.svg">Add New Bathroom
+            </a>
+            <a (click)="addRoom('Kitchen')" class="bg-transparent outline-0 text-decoration-none border-0 blue fw-bold" style="cursor: pointer;" >
+              <img src="assets/images/apartmentImages/ic_baseline-add.svg">Add New Kitchen
+            </a>
+          </div>
+          </div>
 
         <div *ngIf="Qdamage">
             <p class="d-md-inline-block gray fw-bold mb-0 me-3">Does apartment currently have any existing damage?</p>

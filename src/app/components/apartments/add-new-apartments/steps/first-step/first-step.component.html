@@ -568,7 +568,8 @@
                 <select formControlName="beds_No"  class="form-select rounded-2 py-2 fs-6"
                 (change)="onChangeNoOfSharedArea($event,'sofa')">
                   <option value="null" disabled hidden selected> {{sharedNumbersofa?.beds_No}}</option>
-                  <ng-container  ><option value="1">1</option>
+                  <ng-container  >
+                    <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
@@ -620,10 +621,10 @@
 
                   <select   class="form-select rounded-2 py-2 fs-6" (change)="onChangeNoOfBedrooms($event)" name="apartment_BedRoomsNo"  formControlName="apartment_BedRoomsNo">
                     <option value="null"  disabled  selected> Select No. of Bedrooms </option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                    <option *ngFor="let option of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]" [value]="option">
+                      {{ option }}
+                    </option>
+
                   </select>
               </div>
               <div class="mb-3 col-12 col-md-6" *ngIf="isShow">

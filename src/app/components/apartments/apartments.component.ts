@@ -33,7 +33,7 @@ export class ApartmentsComponent implements OnInit {
   apartmentList: IApartments['data'] = [];
   subscriptions: Subscription[] = [];
   first: number = 1;
-  rows: number = 10;
+  rows: number = 8;
   monthButton: boolean = true;
   weekButton: boolean = false;
   constructor(private apartmentSer: ApartmentService, public router: Router, private messageService: MessageService) { }
@@ -181,7 +181,10 @@ export class ApartmentsComponent implements OnInit {
   tiggerPageChange(event: any) {
     this.first = event.first;
     this.rows = event.rows;
+    console.log(this.rows)
+
     let calcPageNumber = Math.floor(this.first / this.rows) + 1;
+
     this.pageNumber = calcPageNumber;
     this.getAllApartment();
   }

@@ -5,6 +5,13 @@ import { MessageService } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UploadFileService } from 'src/app/_services/UploadFile/upload-file.service';
 import { Subscription } from 'rxjs';
+import { Guid } from 'guid-typescript';
+
+interface Room {
+  room_ID: string;
+  room_Name: string;
+  room_Devices: [];
+}
 @Component({
   selector: 'app-forth-step',
   templateUrl: './forth-step.component.html',
@@ -98,7 +105,7 @@ export class ForthStepComponent {
   wifi:any
   getApartmentDetails() {
     this.subscriptions.push(this._ApartmentService.getApartDetail(this.idParamterEdit).subscribe((res) => {
-
+console.log(res)
       this.aprt_details_Edit = res.apartment_Backup_Info
       this.wifi = res.rent_Rules
       this.selectedRooms=res.apartment_Basic_Info.apartment_Rooms.length
@@ -241,11 +248,104 @@ export class ForthStepComponent {
 
 
   initializeRooms() {
+
     this._ApartmentService.getRoomDevices(JSON.parse(localStorage.getItem('apartmentResponse')!).uuid).subscribe({
       next:(res)=>{
-       this.Rooms_Devices=res;
+        console.log(res)
+      //  this.Rooms_Devices=res;
+       const kitchen = {
+        room_ID: Guid.create().toString(),
+        room_Name: 'Kitchen',
+        room_Devices: [
+          { device_Name: 'Fridge', is_Checked: false, device_Description: '' },
+          { device_Name: 'Oven ', is_Checked: false, device_Description: '' },
+          { device_Name: 'Microwave', is_Checked: false, device_Description: '' },
+          { device_Name: 'kitchen cabinet', is_Checked: false, device_Description: '' },
+
+        { device_Name: 'Mold', is_Checked: false, device_Description: '' },
+        { device_Name: 'Devices', is_Checked: false, device_Description: '' },
+        { device_Name: 'Walls', is_Checked: false, device_Description: 'mold' },
+
+        { device_Name: 'Floor', is_Checked: false, device_Description: '' },
+        { device_Name: 'Cleaning', is_Checked: false, device_Description: '' }
+        ]
+      };
+      const Bathroom = {
+        room_ID: Guid.create().toString(),
+        room_Name: 'Bathroom',
+        room_Devices: [
+          { device_Name: 'Sink', is_Checked: false, device_Description: '' },
+        { device_Name: 'Toilet', is_Checked: false, device_Description: '' },
+        { device_Name: 'Shower', is_Checked: false, device_Description: '' },
+        { device_Name: 'Mirror', is_Checked: false, device_Description: '' },
+        { device_Name: 'Towel Rack', is_Checked: false, device_Description: '' },
+
+        { device_Name: 'Mold', is_Checked: false, device_Description: '' },
+        { device_Name: 'Devices', is_Checked: false, device_Description: '' },
+        { device_Name: 'Walls', is_Checked: false, device_Description: 'mold' },
+
+        { device_Name: 'Floor', is_Checked: false, device_Description: '' },
+        { device_Name: 'Cleaning', is_Checked: false, device_Description: '' }
+        ]
+      };
+      if(this.addApartment !="add new apartments" ){
+
+        this.Rooms_Devices=res;
+
+       }else{
+
+        this.Rooms_Devices=[...res,kitchen,Bathroom];
+       }
+
+
       }
     })
+  }
+  addRoom(roomName: string): void {
+    if(roomName==='Kitchen'){
+      this.Rooms_Devices.push({
+        room_ID: Guid.create().toString(),
+        room_Name: 'Kitchen',
+        room_Devices: [
+          { device_Name: 'Fridge', is_Checked: false, device_Description: '' },
+          { device_Name: 'Oven ', is_Checked: false, device_Description: '' },
+          { device_Name: 'Microwave', is_Checked: false, device_Description: '' },
+          { device_Name: 'kitchen cabinet', is_Checked: false, device_Description: '' },
+
+        { device_Name: 'Mold', is_Checked: false, device_Description: '' },
+        { device_Name: 'Devices', is_Checked: false, device_Description: '' },
+        { device_Name: 'Walls', is_Checked: false, device_Description: 'mold' },
+
+        { device_Name: 'Floor', is_Checked: false, device_Description: '' },
+        { device_Name: 'Cleaning', is_Checked: false, device_Description: '' }
+        ]
+      });
+    }else if(roomName==='Bathroom'){
+      this.Rooms_Devices.push({
+      room_ID: Guid.create().toString(),
+      room_Name: 'Bathroom',
+      room_Devices: [
+        { device_Name: 'Sink', is_Checked: false, device_Description: '' },
+      { device_Name: 'Toilet', is_Checked: false, device_Description: '' },
+      { device_Name: 'Shower', is_Checked: false, device_Description: '' },
+      { device_Name: 'Mirror', is_Checked: false, device_Description: '' },
+      { device_Name: 'Towel Rack', is_Checked: false, device_Description: '' },
+
+      { device_Name: 'Mold', is_Checked: false, device_Description: '' },
+      { device_Name: 'Devices', is_Checked: false, device_Description: '' },
+      { device_Name: 'Walls', is_Checked: false, device_Description: 'mold' },
+
+      { device_Name: 'Floor', is_Checked: false, device_Description: '' },
+      { device_Name: 'Cleaning', is_Checked: false, device_Description: '' }
+      ]
+    });
+    }
+
+  }
+
+   shouldDisplay(): boolean {
+    const roomNames = this.Rooms_Devices.map((room:Room) => room.room_Name);
+    return !roomNames.includes('Kitchen') || !roomNames.includes('Bathroom');
   }
 
   toggleSelectAll(event: any, roomIndex: number) {
