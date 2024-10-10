@@ -171,7 +171,7 @@ export class HeadComponent {
       }
     );
   }
-  navigateToRoute(actionRoute: string, actionID: string) {
+  navigateToRoute(actionRoute: string, actionID: string,itemID:any) {
     // alert(actionRoute);
     // alert(actionID);
     switch (actionRoute) {
@@ -203,6 +203,7 @@ export class HeadComponent {
           this.router.navigate([`/apartments/booking/${actionID}`]);
           break;
     }
+    this.MarkReaded(itemID)
   }
 
 }

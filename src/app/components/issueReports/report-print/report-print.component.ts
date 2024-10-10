@@ -16,7 +16,7 @@ import saveAs from 'file-saver';
 import { Subscription } from 'rxjs';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 // import * as htmlToPdfmake from 'html-to-pdfmake';
-
+let popupWindow: Window | null = null;
  @Component({
   selector: 'app-report-print',
   templateUrl: './report-print.component.html',
@@ -110,7 +110,12 @@ export class ReportPrintComponent implements OnInit {
   blob:any
   CreateIssuePDF( ) {
     var mediaType = 'application/pdf';
-    this.subscriptions.push(this._adminservices.CreateIssuePDF(this.paramid).subscribe(data => saveAs(data, 'Example.pdf')))
+    this.subscriptions.push(this._adminservices.CreateIssuePDF(this.paramid).subscribe((data) => {
+      saveAs(data, 'Example.pdf')
+      console.log('pdf',data)
+    }
+
+    ))
 
 
       // this.blob = new Blob([res], {type: 'application/pdf'});
@@ -240,18 +245,338 @@ export class ReportPrintComponent implements OnInit {
 
   //   doc.save('tableToPdf.pdf');
   // }
-  exportAsPDF(divId:any)
-  {
+  // exportAsPDF(divId:any)
+  // {
 
-      let data = document.getElementById(divId)!;
-      html2canvas(data,{useCORS: true}).then(canvas => {
-      const contentDataURL = canvas.toDataURL('image/jpeg')  // 'image/jpeg' for lower quality output.
-      let pdf = new jsPDF('l', 'cm', 'a4'); //Generates PDF in landscape mode
-      // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
-      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
-      pdf.save('Filename.pdf');
+  //   let data = document.getElementById(divId);
+  //   console.log('Element found!',data);
+  //   if (!data) {
+  //     console.error('Element not found!');
+  //     return;
+  //   }
+  //     html2canvas(data,{useCORS: true}).then(canvas => {
+  //     const contentDataURL = canvas.toDataURL('image/jpeg')
+  //     let pdf = new jsPDF('l', 'cm', 'a4');
+
+  //     pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
+  //     pdf.save('Filename.pdf');
+  //   });
+  // }
+  isLoading: boolean = false;  // Loading flag
+
+  exportAsPDFf(divId: any) {
+    this.isLoading = true;
+    setTimeout(() => {
+      let data = document.getElementById(divId);
+
+      if (!data) {
+        console.error('Element not found!');
+        this.isLoading = false;
+        return;
+      }
+
+      html2canvas(data, { useCORS: true }).then(canvas => {
+        const contentDataURL = canvas.toDataURL('image/jpeg');
+        let pdf = new jsPDF('l', 'cm', 'a4'); // Landscape mode with cm unit
+
+        pdf.addImage(contentDataURL, 'JPEG', 0, 0, 29.7, 21.0);
+
+        pdf.save('Filename.pdf');
+
+        this.isLoading = false;  // Hide the loading indicator when done
+      }).catch((error) => {
+        console.error('Error generating PDF:', error);
+        this.isLoading = false;
+      });
+
+    }, 100);
+  }
+
+  ensureImagesLoaded() {
+    return new Promise<void>((resolve) => {
+      const images = document.images;
+      let loadedImages = 0;
+      const totalImages = images.length;
+
+      if (totalImages === 0) {
+        resolve();
+      }
+
+      for (let i = 0; i < totalImages; i++) {
+        if (images[i].complete) {
+          loadedImages++;
+        } else {
+          images[i].addEventListener('load', () => {
+            loadedImages++;
+            if (loadedImages === totalImages) {
+              resolve();
+            }
+          });
+        }
+      }
     });
   }
+
+  exportAsPDFff(divId: string) {
+    this.isLoading = true;  // Show loading indicator
+
+    // Use setTimeout to allow UI updates before PDF generation
+    setTimeout(() => {
+      const data = document.getElementById(divId);
+
+      if (!data) {
+        console.error('Element not found!');
+        this.isLoading = false;
+        return;
+      }
+
+      // Capture the div as a canvas using html2canvas
+      html2canvas(data, {
+        useCORS: true,  // Enable cross-origin images
+        scale: 2  // Higher scale for better quality
+      }).then((canvas) => {
+        const contentDataURL = canvas.toDataURL('image/jpeg');  // Convert the canvas to a base64 image
+
+        // Create a new jsPDF instance in landscape mode with A4 size
+        const pdf = new jsPDF('l', 'cm', 'a4');
+
+        // Add the image to the PDF with full-page size
+        pdf.addImage(contentDataURL, 'JPEG', 0, 0, 29.7, 21.0);
+
+        // Save the generated PDF file
+        pdf.save('GeneratedFile.pdf');
+
+        // Hide loading indicator after the PDF is generated
+        this.isLoading = false;
+      }).catch((error) => {
+        console.error('Error generating PDF:', error);
+        this.isLoading = false;
+      });
+    }, 100);  // Small delay to ensure UI updates
+  }
+
+  exportAsPDFfff(divId: string) {
+    this.isLoading = true;  // Show loading indicator
+
+    setTimeout(() => {
+      const data = document.getElementById(divId);
+
+      if (!data) {
+        console.error('Element not found!');
+        this.isLoading = false;
+        return;
+      }
+
+      // Capture the div as a canvas using html2canvas
+      html2canvas(data, {
+        useCORS: true,  // Enable cross-origin images
+        scale: 2  // Higher scale for better quality
+      }).then((canvas) => {
+        const imgWidth = 29.7;
+        const pageHeight = 30.0;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        const pdf = new jsPDF('l', 'cm', 'a4');  // Landscape mode
+
+        let position = 0;  // Starting position on the first page
+        if (imgHeight > pageHeight) {
+          // If the content overflows beyond one page, create new pages
+          let heightLeft = imgHeight;
+
+          while (heightLeft > 0) {
+            pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            position = heightLeft > 0 ? -pageHeight : 0;
+            if (heightLeft > 0) pdf.addPage();
+          }
+        } else {
+          // If content fits on one page, add it directly
+          pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, imgWidth, imgHeight);
+        }
+
+        // Save the generated PDF
+        pdf.save('GeneratedFile.pdf');
+
+        this.isLoading = false;  // Hide loading indicator after the PDF is generated
+      }).catch((error) => {
+        console.error('Error generating PDF:', error);
+        this.isLoading = false;
+      });
+    }, 100);  // Small delay to ensure UI updates
+  }
+
+  exportAsPDFffff(divId: string) {
+    this.isLoading = true; // Show loading indicator
+
+    setTimeout(() => {
+      const data = document.getElementById(divId);
+
+      if (!data) {
+        console.error('Element not found!');
+        this.isLoading = false;
+        return;
+      }
+
+      const pdf = new jsPDF('l', 'cm', 'a4'); // A4 Landscape
+
+      // Calculate dimensions and scaling
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      // const pageWidth = 29.7;
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      // Use html2canvas to capture the content
+      html2canvas(data, {
+        useCORS: true,
+        scale: 2, // Increase scale for higher quality rendering
+      }).then((canvas) => {
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+
+        // Calculate scale ratio to fit everything on a single page
+        const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+
+        // Get the scaled width and height for the image
+        const scaledWidth = imgWidth * ratio;
+        const scaledHeight = imgHeight * ratio;
+
+        // Convert the canvas to an image
+        const contentDataURL = canvas.toDataURL('image/jpeg');
+
+        // Add image to the PDF at the scaled dimensions
+        pdf.addImage(contentDataURL, 'JPEG', 0, 0, scaledWidth, scaledHeight);
+
+        // Save the generated PDF
+        pdf.save('GeneratedFile.pdf');
+
+        this.isLoading = false; // Hide loading indicator when done
+      }).catch((error) => {
+        console.error('Error generating PDF:', error);
+        this.isLoading = false;
+      });
+
+    }, 100); // Small delay to ensure UI updates
+  }
+
+  exportAsPDFfffff(divId: string) {
+    this.isLoading = true; // Show loading indicator
+
+    setTimeout(() => {
+      const data = document.getElementById(divId);
+
+      if (!data) {
+        console.error('Element not found!');
+        this.isLoading = false;
+        return;
+      }
+
+      const pdf = new jsPDF('l', 'cm', 'a4'); // A4 Landscape
+
+      // Calculate dimensions and scaling
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      // Use html2canvas to capture the content
+      html2canvas(data, {
+        useCORS: true,
+        scale: 2, // Increase scale for higher quality rendering
+      }).then((canvas) => {
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+
+        // Calculate scale ratio to fit everything on a single page
+        const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+
+        // Get the scaled width and height for the image
+        const scaledWidth = imgWidth * ratio;
+        const scaledHeight = imgHeight * ratio;
+
+        // Convert the canvas to an image
+        const contentDataURL = canvas.toDataURL('image/jpeg');
+
+        // Add image to the PDF at the scaled dimensions
+        pdf.addImage(contentDataURL, 'JPEG', 0, 0, scaledWidth, scaledHeight);
+
+        // Save the generated PDF
+        pdf.save('GeneratedFile.pdf');
+
+        this.isLoading = false; // Hide loading indicator when done
+      }).catch((error) => {
+        console.error('Error generating PDF:', error);
+        this.isLoading = false;
+      });
+
+    }, 100); // Small delay to ensure UI updates
+  }
+
+  exportAsPDF(divId: string) {
+    this.isLoading = true;  // Show loading indicator
+
+    setTimeout(() => {
+      const data = document.getElementById(divId);
+
+      if (!data) {
+        console.error('Element not found!');
+        this.isLoading = false;
+        return;
+      }
+
+      // Capture the div as a canvas using html2canvas
+      html2canvas(data, {
+        useCORS: true,  // Enable cross-origin images
+        scale: 2  // Higher scale for better quality
+      }).then((canvas) => {
+        const imgWidth = 29.7;  // PDF page width in cm for A4
+        const pageHeight = 21.0;  // PDF page height in cm for A4 landscape
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;  // Calculate image height to maintain aspect ratio
+
+        const pdf = new jsPDF('l', 'cm', 'a4');  // Landscape mode
+
+        let position = 0;  // Starting position on the first page
+        if (imgHeight > pageHeight) {
+          // If the content overflows beyond one page, create new pages
+          let heightLeft = imgHeight;
+
+          while (heightLeft > 0) {
+            pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            position = heightLeft > 0 ? -pageHeight : 0;
+            if (heightLeft > 0) pdf.addPage();
+          }
+        } else {
+          // If content fits on one page, add it directly
+          pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, imgWidth, imgHeight);
+        }
+
+        // Save the generated PDF
+        pdf.save('GeneratedFile.pdf');
+
+        this.isLoading = false;  // Hide loading indicator after the PDF is generated
+      }).catch((error) => {
+        console.error('Error generating PDF:', error);
+        this.isLoading = false;
+      });
+    }, 100);  // Small delay to ensure UI updates
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   generatePdf(data:any) {
 
     html2canvas(data, { allowTaint: true }).then(canvas => {
@@ -279,8 +604,8 @@ export class ReportPrintComponent implements OnInit {
   let doc: any = document;
   doc.printJs();
 }
- print(){
-  let data = document.getElementById("MyDIv")!;
+ printt(){
+  let data = document.getElementById("pdf")!;
   html2canvas(data).then(canvas => {
   const contentDataURL = canvas.toDataURL('image/jpeg')  // 'image/jpeg' for lower quality output.
   let pdf = new jsPDF('l', 'cm', 'a4'); //Generates PDF in landscape mode
@@ -302,6 +627,145 @@ export class ReportPrintComponent implements OnInit {
   // WindowPrt.close();
   });
 }
+
+printtt() {
+  // Find the div element by its ID
+  let printContents = document.getElementById('pdf')?.innerHTML;
+  if (!printContents) {
+    console.error('Element not found!');
+    return;
+  }
+
+  // Open a new window
+  let originalContents = document.body.innerHTML;
+  let popupWindow = window.open('' , 'top=0,left=0,height=100%,width=auto');
+
+  if (popupWindow) {
+    popupWindow.document.open();
+    popupWindow.document.write(`
+      <html>
+        <head>
+          <title>Print</title>
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <style>
+            /* Add any custom styles you want for the printed content here */
+            body { font-family: Arial, sans-serif; margin: 20px; }
+          </style>
+        </head>
+        <body>
+          ${printContents}
+        </body>
+      </html>
+    `);
+    popupWindow.document.close();
+
+    // Wait for the content to load and then print
+    popupWindow.focus();
+    popupWindow.print();
+    popupWindow.close();
+  }
+}
+printttt() {
+  // Find the div element by its ID
+  let printContents = document.getElementById('pdf')?.innerHTML;
+  if (!printContents) {
+    console.error('Element not found!');
+    return;
+  }
+
+  // Open a new window
+  let popupWindow = window.open('', 'top=0,left=0,height=100%,width=auto');
+
+  if (popupWindow) {
+    popupWindow.document.open();
+    popupWindow.document.write(`
+      <html>
+        <head>
+          <title>Print</title>
+          <link id="bootstrap-link" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+          </style>
+        </head>
+        <body>
+          ${printContents}
+        </body>
+      </html>
+    `);
+    popupWindow.document.close();
+
+    // Wait for the stylesheet to load before printing
+    const bootstrapLink = popupWindow.document.getElementById('bootstrap-link');
+    bootstrapLink!.onload = function() {
+      popupWindow!.focus();
+      popupWindow!.print();
+      popupWindow!.close();
+    };
+  }
+}
+
+
+
+
+print() {
+  // Find the div element by its ID
+  let printContents = document.getElementById('pdf')?.innerHTML;
+  if (!printContents) {
+    console.error('Element not found!');
+    return;
+  }
+
+  // Check if the popup window is already open
+  if (popupWindow && !popupWindow.closed) {
+    // Reuse the existing popup window and refresh its content
+    popupWindow.document.body.innerHTML = `
+      <html>
+        <head>
+          <title>Print</title>
+          <link id="bootstrap-link" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+          </style>
+        </head>
+        <body>
+          ${printContents}
+        </body>
+      </html>
+    `;
+  } else {
+    // Create a new popup window
+    popupWindow = window.open('', 'top=0,left=0,height=100%,width=auto');
+
+    if (popupWindow) {
+      popupWindow.document.open();
+      popupWindow.document.write(`
+        <html>
+          <head>
+            <title>Print</title>
+            <link id="bootstrap-link" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+            <style>
+              body { font-family: Arial, sans-serif; margin: 20px; }
+            </style>
+          </head>
+          <body>
+            ${printContents}
+          </body>
+        </html>
+      `);
+      popupWindow.document.close();
+    }
+  }
+
+  // Wait for the stylesheet to load before printing
+  const bootstrapLink = popupWindow?.document.getElementById('bootstrap-link');
+  bootstrapLink!.onload = function() {
+    popupWindow!.focus();
+    popupWindow!.print();
+  };
+}
+
+
+
    debugBase64(base64URL:any){
     var win = window.open()!;
     win.document.write('<iframe src="' + base64URL  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');

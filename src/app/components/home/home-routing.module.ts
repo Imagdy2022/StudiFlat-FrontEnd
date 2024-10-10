@@ -118,6 +118,14 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'landlord',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('../../components/land-lord/land-lord.module').then(
+            (p) => p.LandLordModule
+          ),
+      },
+      {
         path: 'faq',
         canActivate: [AuthGuard],
         loadChildren: () =>

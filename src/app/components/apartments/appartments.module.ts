@@ -16,7 +16,7 @@ import { DialogModule } from 'primeng/dialog';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
-
+import { GalleriaModule } from 'primeng/galleria';
 
 
 
@@ -90,6 +90,7 @@ import { AccordionModule } from 'primeng/accordion';
     CheckboxModule,
     InputTextModule,
     CardModule,
+    GalleriaModule,
   ],
   providers: [HttpClientModule, MessageService]
 })

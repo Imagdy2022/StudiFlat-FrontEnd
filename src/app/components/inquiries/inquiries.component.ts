@@ -99,11 +99,34 @@ gotopage( ){
   }
   date=""
   totalRecords=0;
-  getAllInquires(  statusinquires:any) {
+  no: number = 0; // Initialize the starting index
+
+  displayedInquiries = [];
+  getAllInquires(statusinquires:any) {
     this.Inquires=[]
     this.numberInquires=0
-    this.subscriptions.push(this._inquiresService.getAllInquires( this.pageNumber,this.pagesize,statusinquires,this.date,this.searchText).subscribe((res:any) => {
-      this.Inquires = res["data"];
+    this.subscriptions.push(this._inquiresService.getAllInquires(  1, 20000,statusinquires,this.date,this.searchText).subscribe((res:any) => {
+      // this.Inquires = res["data"];*****
+      this.displayedInquiries = res["data"];
+
+      // console.log(this.Inquires)
+      const sortedData = this.displayedInquiries.sort((a:any, b:any) => {
+        // Extract the numeric part from booking_Code, remove 'R#' and parse as number
+        const numA = parseInt(a.booking_Code.replace('R#', ''), 10);
+        const numB = parseInt(b.booking_Code.replace('R#', ''), 10);
+
+        // Sort in descending order
+        return numB - numA;
+      });
+      console.log(sortedData);
+      if(this.searchText!==""){
+        this.Inquires=sortedData
+      }else{
+        this.displayedInquiries=sortedData;
+        this.displayNextInquiries()
+      }
+
+
       this.numberInquires = this.Inquires.length;
       this.totalofPages=res["totalPages"]
       this.totalRecords=res["totalRecords"]
@@ -126,6 +149,33 @@ gotopage( ){
     }))
 
   }
+
+    // Function to splice the next 8 records
+    look:boolean;
+    displayNextInquiries() {
+
+      console.log(this.first,this.rows)
+      // if( this.look){
+      //   this.pageNumber=this.no-1;
+      // }else{
+      //   this.pageNumber=this.no+1;
+      // }
+
+      // this.pageNumber=this.no+1;
+      this.no=this.pageNumber-1;
+      // Splice the next 8 records from the allInquiries array
+      const start = this.no * this.pagesize;
+      const end = start + this.pagesize;
+
+      // Check if there are enough records left to splice
+      if (start < this.displayedInquiries.length) {
+        this.Inquires = this.displayedInquiries.slice(start, end);
+        this.no++; // Increment the number for the next batch
+        console.log('Displaying inquiries:', this.Inquires);
+      } else {
+        console.log('No more inquiries to display.');
+      }
+    }
   tiggerPageChange(event: any) {
 
     this.first = event.first;
@@ -282,10 +332,11 @@ event.stopPropagation()
   }
   searchTextChange:any
   searchAction(event: KeyboardEvent) {
-    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
-      event.preventDefault();
-      return;
-  }
+  //   if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+  //     event.preventDefault();
+  //     return;
+  // }
+   console.log('search', this.searchText)
     this.getAllInquires(this.statusinquire)
 
   }

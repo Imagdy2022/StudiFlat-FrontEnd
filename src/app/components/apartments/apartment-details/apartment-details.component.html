@@ -132,30 +132,30 @@
               </p-accordionTab>
               <p-accordionTab header="Apartment Equipments" [headerStyle]="{'background-color': '#fff' }">
                 <div class="custom-property-item"><span class="custom-property-label">bathroom details</span>
-                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.bathroom_Details let x=index">
+                  <div class="custom-property-item" *ngFor="let item of allResponse?.apartment_Equipments?.bathroom_Details let x=index">
                     <p class="custom-property-label">  {{ item.bathroom_Name }}</p>
                     <div class="custom-property-box" *ngFor="let i of allResponse.apartment_Equipments?.bathroom_Details[x]?.bathroom_Details">{{ i}}</div>
                   </div>
                 </div>
                 <div class="custom-property-item"><span class="custom-property-label">kitchen details</span>
-                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.kitchen_Details">
+                  <div class="custom-property-item" *ngFor="let item of allResponse?.apartment_Equipments?.kitchen_Details">
                     <div class="custom-property-box" >  {{ item }}</div>
                   </div>
                 </div>
                 <div class="custom-property-item"><span class="custom-property-label">Apartment Features</span>
-                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.apartment_Features">
+                  <div class="custom-property-item" *ngFor="let item of allResponse?.apartment_Equipments?.apartment_Features">
                     <div class="custom-property-box" >  {{ item }}</div>
                   </div>
                 </div>
                 <div class="custom-property-item"><span class="custom-property-label">Apartment Facilites</span>
-                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.apartment_Facilites">
+                  <div class="custom-property-item" *ngFor="let item of allResponse?.apartment_Equipments?.apartment_Facilites">
                     <div class="custom-property-box" >  {{ item }}</div>
                   </div>
                 </div>
                 <div class="custom-property-item"><span class="custom-property-label">Rooms Details</span>
-                  <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Equipments?.rooms_Details let x=index">
+                  <div class="custom-property-item" *ngFor="let item of allResponse?.apartment_Equipments?.rooms_Details let x=index">
                     <p class="custom-property-label">  {{ item.room_Name }}</p>
-                    <div class="custom-property-box" *ngFor="let i of allResponse.apartment_Equipments?.rooms_Details[x]?.room_Details"> {{i}}</div>
+                    <div class="custom-property-box" *ngFor="let i of allResponse?.apartment_Equipments?.rooms_Details[x]?.room_Details"> {{i}}</div>
                   </div>
                 </div>
               </p-accordionTab>
@@ -163,27 +163,27 @@
 
                   <div class="custom-property-item" >
                     <p class="custom-property-label">Electricity meter no</p>
-                    <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Electricity_Meter_No }}</div>
+                    <div class="custom-property-box"> {{  allResponse?.apartment_Backup_Info?.apartment_Electricity_Meter_No }}</div>
                 </div>
                 <div class="custom-property-item" >
                   <p class="custom-property-label">Electricity meter consumption</p>
-                  <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Electricity_Meter_Consumption }}</div>
+                  <div class="custom-property-box"> {{  allResponse?.apartment_Backup_Info?.apartment_Electricity_Meter_Consumption }}</div>
               </div>
               <div class="custom-property-item" >
                 <p class="custom-property-label">Water meter no</p>
-                <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Water_Meter_No}}</div>
+                <div class="custom-property-box"> {{  allResponse?.apartment_Backup_Info?.apartment_Water_Meter_No}}</div>
             </div>
             <div class="custom-property-item" >
               <p class="custom-property-label">Water meter consumption</p>
-              <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Water_Meter_Consumption}}</div>
+              <div class="custom-property-box"> {{  allResponse?.apartment_Backup_Info?.apartment_Water_Meter_Consumption}}</div>
           </div>
           <div class="custom-property-item" >
             <p class="custom-property-label">Gas meter no</p>
-            <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Gas_Meter_No}}</div>
+            <div class="custom-property-box"> {{  allResponse?.apartment_Backup_Info?.apartment_Gas_Meter_No}}</div>
         </div>
         <div class="custom-property-item" >
           <p class="custom-property-label">Gas meter consumption</p>
-          <div class="custom-property-box"> {{  allResponse.apartment_Backup_Info?.apartment_Gas_Meter_Consumption}}</div>
+          <div class="custom-property-box"> {{  allResponse?.apartment_Backup_Info?.apartment_Gas_Meter_Consumption}}</div>
       </div>
       <div class="custom-property-item"><span class="custom-property-label">apartment_Addons_Fields</span>
         <div class="custom-property-item" *ngFor="let item of allResponse.apartment_Backup_Info?.apartment_Addons_Fields">
@@ -193,7 +193,7 @@
       </div>
       <div class="custom-property-item">
         <span class="custom-property-label">Room Devices</span>
-        <div class="custom-property-item" *ngFor="let room of allResponse.apartment_Backup_Info?.apartment_Rooms_Devices">
+        <div class="custom-property-item" *ngFor="let room of allResponse?.apartment_Backup_Info?.apartment_Rooms_Devices">
           <p class="custom-property-label">{{ room.room_Name }}</p>
           <div class="custom-property-box" *ngFor="let device of room.room_Devices">
             <p class="custom-property-label">{{ device.device_Name }}</p>
@@ -206,7 +206,7 @@
       <div class="custom-property-item">
         <span class="custom-property-label">Apartment damages images</span>
         <div class="row">
-          <div class="col-6" *ngFor="let item of allResponse.apartment_Backup_Info?.apartment_Damages_Imgs">
+          <div class="col-6" *ngFor="let item of allResponse?.apartment_Backup_Info?.apartment_Damages_Imgs">
             <img [src]="item ? item : 'https://via.placeholder.com/100x100'" class="img-fluid img-thumbnail" alt="damage Image" (click)="openImagePopup(item)">
           </div>
         </div>
@@ -456,9 +456,9 @@
           <a class="qr-action">
             <i class="pi pi-download"></i> Download
           </a>
-          <a class="qr-action">
+          <!-- <a class="qr-action">
             <i class="pi pi-share-alt"></i> Share
-          </a>
+          </a> -->
           <button class="btn-assign">Assign worker</button>
         </div>
       </div>
@@ -907,7 +907,7 @@
                                                    (click)="printDiv('qrToPdf')"><i
                                                       class="pi pi-download"></i> Download</button>
                                                   <!-- <p>{{bed.bed_QR_Img}}</p> -->
-                                                  <button class="btn-share"><i class="pi pi-share"></i> Share</button>
+                                                  <!-- <button class="btn-share"><i class="pi pi-share"></i> Share</button> -->
                                                 </div>
                                               </div>
                                             </div>
@@ -963,14 +963,48 @@
                                           </div>
                                         </div>
 
+
+                                        <!--//////////////////////-->
+
+
                                         <div class="row bg-white m-0 p-4" id="more-details">
                                           <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
                                             <div class="row align-items-center">
                                               <div class="container mt-3">
                                                 <h6 class="fw-bold text-lowercase">More details</h6>
-                                                <p class="text-muted">View tenant passport and reported problems,
+                                                <p class="text-muted">View tenant passport and
                                                   invoices</p>
-                                                <div class="accordion" id="accordionExample">
+
+
+                                                  <p-accordion [multiple]="true"  >
+                                                    <p-accordionTab header="Passport of tenent">
+                                                      <div class="flex-container">
+                                                        <img *ngFor="let item of images" [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+                                                      </div>
+
+
+                                                    </p-accordionTab>
+                                                    <p-accordionTab header="Pending Invoices">
+                                                      <p-table class="more-d" [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '0px !important' }">
+                                                        <ng-template pTemplate="header" let-columns>
+                                                            <tr>
+                                                                <th *ngFor="let col of columns">
+                                                                    {{ col.header }}
+                                                                </th>
+                                                            </tr>
+                                                        </ng-template>
+                                                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                                            <tr>
+                                                                <td *ngFor="let col of columns">
+                                                                    {{ rowData[col.field] }}
+                                                                </td>
+                                                            </tr>
+                                                        </ng-template>
+                                                    </p-table>
+                                                    </p-accordionTab>
+
+                                                </p-accordion>
+                                                <!-- <div class="accordion" id="accordionExample">
                                                   <div class="container mt-3">
                                                     <div
                                                       class="d-flex justify-content-between align-items-center border-bottom py-2">
@@ -999,7 +1033,7 @@
                                                       <div><i class="fas fa-chevron-down text-muted"></i></div>
                                                     </div>
                                                   </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="d-flex justify-content-end mt-3">
                                                   <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
                                                   <button class="btn btn-primary"
@@ -1014,6 +1048,8 @@
                                     </ng-container>
                                   </p-accordion>
                                 </div>
+
+
                               </div>
                             </div>
                           </div>
@@ -1189,9 +1225,39 @@
                             <div class="row align-items-center">
                               <div class="container mt-3">
                                 <h6 class="fw-bold text-lowercase">More details</h6>
-                                <p class="text-muted">View tenant passport and reported problems,
+                                <p class="text-muted">View tenant passport and
                                   invoices</p>
-                                <div class="accordion" id="accordionExample">
+
+
+                                  <p-accordion [multiple]="true"  >
+                                    <p-accordionTab header="Passport of tenent">
+                                      <div class="flex-container">
+                                        <img *ngFor="let item of images" [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+                                      </div>
+
+
+                                    </p-accordionTab>
+                                    <p-accordionTab header="Pending Invoices">
+                                      <p-table class="more-d" [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '0px !important' }">
+                                        <ng-template pTemplate="header" let-columns>
+                                            <tr>
+                                                <th *ngFor="let col of columns">
+                                                    {{ col.header }}
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                            <tr>
+                                                <td *ngFor="let col of columns">
+                                                    {{ rowData[col.field] }}
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                    </p-accordionTab>
+
+                                </p-accordion>
+                                <!-- <div class="accordion" id="accordionExample">
                                   <div class="container mt-3">
                                     <div
                                       class="d-flex justify-content-between align-items-center border-bottom py-2">
@@ -1220,7 +1286,7 @@
                                       <div><i class="fas fa-chevron-down text-muted"></i></div>
                                     </div>
                                   </div>
-                                </div>
+                                </div> -->
                                 <div class="d-flex justify-content-end mt-3">
                                   <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
                                   <button class="btn btn-primary"
@@ -1429,7 +1495,80 @@
         </div>
       </div> -->
 
+      <div class="row bg-white m-0 p-4" id="more-details">
+        <div class="col-12 m-0 p-3 rounded pl-4 pr-4">
+          <div class="row align-items-center">
+            <div class="container mt-3">
+              <h6 class="fw-bold text-lowercase">More details</h6>
+              <p class="text-muted">View Problem reports</p>
 
+
+                <p-accordion [multiple]="true"  >
+                  <p-accordionTab header="Problem Reports">
+                    <p-table class="more-d" [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '0px !important' }">
+                      <ng-template pTemplate="header" let-columns>
+                          <tr>
+                              <th *ngFor="let col of columns">
+                                  {{ col.header }}
+                              </th>
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-rowData let-columns="columns">
+                          <tr>
+                              <td *ngFor="let col of columns">
+                                  {{ rowData[col.field] }}
+                              </td>
+                          </tr>
+                      </ng-template>
+                  </p-table>
+                  </p-accordionTab>
+                  <!-- <p-accordionTab header="Pending Invoices">
+                      <p>
+                          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium...
+                      </p>
+                  </p-accordionTab> -->
+
+              </p-accordion>
+              <!-- <div class="accordion" id="accordionExample">
+                <div class="container mt-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center border-bottom py-2">
+                    <div><strong>Passport of tenent</strong></div>
+                    <div><i class="fas fa-chevron-down text-muted"></i></div>
+                  </div>
+                </div>
+                <div class="container mt-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center border-bottom py-2">
+                    <div><strong>Problem reports (2)</strong></div>
+                    <div><i class="fas fa-chevron-down text-muted"></i></div>
+                  </div>
+                </div>
+                <div class="container mt-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center border-bottom py-2">
+                    <div><strong>Fixed problem (0)</strong></div>
+                    <div><i class="fas fa-chevron-down text-muted"></i></div>
+                  </div>
+                </div>
+                <div class="container mt-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center border-bottom py-2">
+                    <div><strong>Pending Invoices</strong></div>
+                    <div><i class="fas fa-chevron-down text-muted"></i></div>
+                  </div>
+                </div>
+              </div> -->
+              <div class="d-flex justify-content-end mt-3">
+                <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
+                <button class="btn btn-primary"
+                  style="border-radius: 10px; font-size: 14px;">Mark as
+                  Available</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 

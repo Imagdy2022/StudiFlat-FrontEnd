@@ -1088,22 +1088,70 @@ this.ID= Guid.create();
 
   apartmentRooms : any[]=[]
   showBed:boolean=false;
+  // onChangeNoOfBedrooms(event: any): void {
+  //   this.showBed=true;
+  //   this.bedroomsToApi=[];
+  //   const selectedValue = parseInt(event.target?.value, 10);
+  //   if (!isNaN(selectedValue) && selectedValue > 0) {
+  //     this.bedrooms = Array(selectedValue).fill(0).map((x, i) => i);
+  //   }
+  //   for (let i = 0; i < selectedValue; i++) {
+  //     this.bedroomsToApi.push({
+  //       room_Type: "",
+  //       beds_No: 0,
+  //       bed_Price: 0,
+  //       bed_SecuirtyDeposit: 0,
+  //       bed_Service_Fees: 0
+  //     });
+  //   }
+  // }
+  oldvalue_bedrooms:any;
+  difference_bedrooms:any;
   onChangeNoOfBedrooms(event: any): void {
+
     this.showBed=true;
-    this.bedroomsToApi=[];
+    this
     const selectedValue = parseInt(event.target?.value, 10);
     if (!isNaN(selectedValue) && selectedValue > 0) {
       this.bedrooms = Array(selectedValue).fill(0).map((x, i) => i);
     }
-    for (let i = 0; i < selectedValue; i++) {
-      this.bedroomsToApi.push({
-        room_Type: "",
-        beds_No: 0,
-        bed_Price: 0,
-        bed_SecuirtyDeposit: 0,
-        bed_Service_Fees: 0
-      });
+    if(this.edit != 'EditForm')
+    {
+      this.bedroomsToApi=[];
+
+      for (let i = 0; i < selectedValue; i++) {
+        this.bedroomsToApi.push({
+          room_Type: "",
+          beds_No: 0,
+          bed_Price: 0,
+          bed_SecuirtyDeposit: 0,
+          bed_Service_Fees: 0
+        });
+
+      }
     }
+    else
+    {
+      this.oldvalue_bedrooms=this.bedroomsToApi.length;
+      this.difference_bedrooms=selectedValue-this.oldvalue_bedrooms;
+      if(this.difference_bedrooms>0)
+      {
+        for (let i=0;i<this.difference_bedrooms;i++)
+          {
+            this.bedroomsToApi.push({
+              room_Type: "",
+              beds_No: 0,
+              bed_Price: 0,
+              bed_SecuirtyDeposit: 0,
+              bed_Service_Fees: 0
+            });
+          }
+      }
+    }
+
+
+
+
   }
 
   showBedSection:boolean = false;

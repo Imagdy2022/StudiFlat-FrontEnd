@@ -18,18 +18,25 @@
             </div>
             <div>
                 <button class="outline-0 border-0 rounded-3 py-2 px-3 me-2 fw-bold" style="background-color: #EBEBEB; color:#1F4068"><img src="assets/images/user/share.png"> Share</button>
-                <button (click)="OnPrint()" class="outline-0 border-0 rounded-3 py-2 px-3 me-2 fw-bold " *ngIf="param != 'Edit Reports View'" style="background-color: #EBEBEB; color:#1F4068"> <img src="assets/images/print.svg"> Print </button>
+                <button (click)="print()" class="outline-0 border-0 rounded-3 py-2 px-3 me-2 fw-bold " *ngIf="param != 'Edit Reports View'" style="background-color: #EBEBEB; color:#1F4068"> <img src="assets/images/print.svg"> Print </button>
                 <!-- <button class="outline-0 border-0 rounded-3 py-2 px-3 me-2 fw-bold" style="background-color: #EBEBEB; color:#1F4068" *ngIf="param == 'Edit Reports View'"> <img src="assets/images/report.svg"> Edit </button> -->
                 <!--
               <button class="outline-0 border-0 rounded-3 py-2 px-3 text-white fw-bold" *ngIf="param == 'Edit Reports View'" style="background-color:#1F4068">
           <img src="assets/images/pdf.svg">  Generate PDF </button> -->
 
-                <button (click)="CreateIssuePDF( );" class="outline-0 border-0 rounded-3 py-2 px-3 text-white fw-bold" style="background-color:#1F4068">
+                <button (click)="exportAsPDF('pdf');" class="outline-0 border-0 rounded-3 py-2 px-3 text-white fw-bold" style="background-color:#1F4068">
           <img src="assets/images/Vector.svg">  Download PDF </button>
             </div>
         </div>
+
+        <!-- Spinner for loading -->
+<div *ngIf="isLoading" class="spinner-container">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
         <!-- id="MyDIv" -->
-        <div class="mt-3 pt-4 row border bg-white rounded-3 py-3 xxcprint" id="contentToConvert">
+        <div id="pdf" class="mt-3 pt-4 row border bg-white rounded-3 py-3 xxcprint"  >
             <!-- <aside class="col-2 p-0 ps-1 position-fixed d-none d-md-block">
                 <div class="ms-4">
                     <p class="fw-bold mb-0 ">Issue report details</p>
@@ -40,7 +47,7 @@
             </aside> -->
             <!-- <form [formGroup]="createissue" (ngSubmit)="createissuepost(createissue)"> -->
 
-            <div class="col-md-12 content-details ">
+            <div   class="col-md-12 content-details ">
 
                 <div class="d-flex justify-content-between mb-4">
                     <img src="assets/images/logo.svg" alt="">

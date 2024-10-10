@@ -99,11 +99,56 @@ export class ApartmentDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.images = [
+      {
+        itemImageSrc: 'https://via.placeholder.com/150?text=Image+1',
+        thumbnailImageSrc: 'https://via.placeholder.com/150?text=Image+1',
+        alt: 'Image 1',
+        title: 'Image 1'
+      },
+      {
+        itemImageSrc: 'https://via.placeholder.com/150?text=Image+2',
+        thumbnailImageSrc: 'https://via.placeholder.com/150?text=Image+2',
+        alt: 'Image 2',
+        title: 'Image 2'
+      },
+      {
+        itemImageSrc: 'https://via.placeholder.com/150?text=Image+3',
+        thumbnailImageSrc: 'https://via.placeholder.com/150?text=Image+3',
+        alt: 'Image 3',
+        title: 'Image 3'
+      },
+      {
+        itemImageSrc: 'https://via.placeholder.com/150?text=Image+4',
+        thumbnailImageSrc: 'https://via.placeholder.com/150?text=Image+4',
+        alt: 'Image 4',
+        title: 'Image 4'
+      },
+
+    ];
+
+    // Initialize columns
+    this.cols = [
+      { field: 'code', header: 'Code' },
+      { field: 'name', header: 'Name' },
+      { field: 'category', header: 'Category' },
+      { field: 'quantity', header: 'Quantity' }
+    ];
+
+    // Initialize products data
+    this.products = [
+      { code: 'P001', name: 'Product 1', category: 'Category 1', quantity: 10 },
+      { code: 'P002', name: 'Product 2', category: 'Category 2', quantity: 15 },
+      { code: 'P003', name: 'Product 3', category: 'Category 3', quantity: 25 },
+      { code: 'P004', name: 'Product 4', category: 'Category 1', quantity: 50 }
+    ];
+
     this.getApartmentDetails();
     this.GetApartmentReview();
     this.scrollTop();
     this.checkRole();
-    this.currentImage = this.aprt_Imgs[0].includes('https') ? this.aprt_Imgs[0] : '../../../assets/images/apartmentImages/default_apartment.jpg';
+    this.currentImage = this.aprt_Imgs[0]?.includes('https') ? this.aprt_Imgs[0] : '../../../assets/images/apartmentImages/default_apartment.jpg';
+
   }
   get displayedThumbnails() {
     return this.aprt_Imgs.slice(this.currentIndex, this.currentIndex + 5);
@@ -702,6 +747,35 @@ export class ApartmentDetailsComponent implements OnInit {
     a.click();
   }
 
+
+
+
+
+
+
+
+
+
+
+  ////////////////update more details/////////////
+  images: any[] = [];
+  displayCustom: boolean = false;
+  activeIndex: number = 0;
+
+  responsiveOptions: any[] = [];
+  // Method to open the gallery in fullscreen mode when an image is clicked
+  onImageClick(item: any) {
+    const index = this.images.findIndex(i => i.itemImageSrc === item.itemImageSrc);
+    this.activeIndex = index; // Set the clicked image as active
+    this.displayCustom = true; // Open the gallery in full-screen
+  }
+  onValueChange(event: any) {
+    console.log('Galleria value changed', event);
+    // You can update the images or handle any other changes here
+  }
+
+  products: any[] = []; // Array to hold the product data
+  cols: any[] = [];
   ngOnDestroy() {
     for (let i = 0; i < this.subscriptions.length; i++) this.subscriptions[i].unsubscribe();
   }

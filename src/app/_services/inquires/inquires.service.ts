@@ -39,8 +39,9 @@ export class InquiresService {
     pageNo: number,
     pageSize: number,
     bookingStatus: string,
-    searchKey: string,
-    dateFilter: string
+
+    dateFilter: string,
+    searchKey: string
   ): Observable<any[]> {
     const url =
       environment.apiUrl +
@@ -48,8 +49,8 @@ export class InquiresService {
       'Page_No=' + pageNo +
       '&Page_Size=' + pageSize +
       '&bookingStatus=' + bookingStatus +
-      '&Search_Key=' + searchKey +
-      '&Date_Filter=' + dateFilter;
+        '&Date_Filter=' + dateFilter+
+       '&Search_Key=' + searchKey;
 
     return this.http.get<any[]>(url, { headers: this.headers });
   }

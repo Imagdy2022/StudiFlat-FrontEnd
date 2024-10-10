@@ -27,7 +27,8 @@ export class SidebarComponent implements OnInit {
     { text: "statistics", img: "assets/images/navigation/stats.svg" },
     { text: "inquiries", img: "assets/images/navigation/help.svg" },
 
-    { text: "Issue_Reports", img: "assets/images/navigation/reports.svg" }];
+    { text: "Issue_Reports", img: "assets/images/navigation/reports.svg" },
+    { text: "Landlord Requests", img: "assets/images/navigation/landlord.svg" }];
 
   listAnchorsOther: Array<any> = [
     { text: "Help", img: "assets/images/navigation/help.svg" },
@@ -55,6 +56,7 @@ export class SidebarComponent implements OnInit {
   Payments:any={}
   Inquiries:any={}
   Dashboard:any={}
+  LandLord:any={}
   is_Super:any
   ngOnInit(): void {
 
@@ -112,6 +114,9 @@ for(let i=0; i<this.permissions.length;i++){
   }
   else if(this.permissions[i].page_Name=="Dashboard"){
     this.Dashboard=this.permissions[i];
+  }
+  else if(this.permissions[i].page_Name=="Landlord Requests"){
+    this.LandLord=this.permissions[i];
   }
 }}
   }

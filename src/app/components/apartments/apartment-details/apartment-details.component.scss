@@ -1,4 +1,7 @@
 
+
+
+
 .popup {
   display: flex;
   justify-content: center;
@@ -823,4 +826,30 @@
 }
 ::ng-deep .p-accordion-header-link {
   box-shadow: none !important;
+}
+
+
+:host ::ng-deep .p-galleria {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+
+.flex-container {
+  display: flex;
+  justify-content: space-between; /* Add space between images */
+  align-items: center; /* Align images to the center */
+  flex-wrap: wrap; /* If you want images to wrap on smaller screens */
+  gap: 10px; /* Adjust gap between the images */
+}
+
+.flex-container img {
+  flex-basis: 23%; /* Each image will take about 23% of the container width */
+  max-width: 100%;
+}
+:host ::ng-deep .more-d .p-datatable .p-datatable-wrapper {
+  display: flex;
+   min-height:0% !important;
+  flex-direction: column;
 }
