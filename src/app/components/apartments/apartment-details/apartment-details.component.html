@@ -857,24 +857,46 @@
 
                                         <div class="row bg-white m-0 p-4 mb-3">
                                           <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
-                                            <div class="row align-items-center ">
-                                              <div class="col-auto">
-                                                <img src="https://via.placeholder.com/50" class="rounded-circle"
-                                                  alt="Profile Image">
+                                            <img [src]="bed.guest?.guest_Image || 'https://via.placeholder.com/50'"  class="rounded-circle" style="cursor: pointer; width: 100px; height: 100px;"
+                                            (click)="openImageModal(bed.guest?.guest_Image)"
+                                            alt="Profile Image">
+                                            <div class="row align-items-center   ">
+                                              <div class="col-6 border-end">
+                                                <!-- <img [src]="bed.guest?.guest_Image || 'https://via.placeholder.com/50'" class="rounded-circle"
+                                                  alt="Profile Image"> -->
+                                                  <div class="">
+                                                    <h6 class="fw-bold m-0 text-lowercase">{{ bed.guest?.guest_Name || 'No Tenant' }}</h6>
+                                                    <p class="m-0 text-muted">{{ bed.guest?.guest_Mail || 'No Email' }}</p>
+                                                  </div>
+                                                  <div>
+                                                <p class="m-0"><strong>Phone Number</strong><br>{{ bed.guest?.guest_Phone || '-' }}</p>
+
+                                                  </div>
                                               </div>
-                                              <div class="col-lg-3 border-end">
-                                                <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
-                                                <p class="m-0 text-muted">osman2025&#64;gmail.com</p>
+                                              <!-- <div class="col-6 bor6der-end">
+                                                <h6 class="fw-bold text-lowercase">{{ bed.guest?.guest_Name || 'No Tenant' }}</h6>
+                                                <p class="m-0 text-muted">{{ bed.guest?.guest_Mail || 'No Email' }}</p>
+                                              </div> -->
+                                              <div class="col-6 text-right">
+                                                <p class="m-0"><strong>Check In Date</strong><br>{{ bed.guest?.guest_CheckIn || '-' }}</p>
+                                                <p class="m-0"><strong>Check Out Date</strong><br>{{ bed.guest?.guest_CheckOut || '-' }}</p>
+
                                               </div>
+                                              <!-- <div class="col-6 text-right border-end">
+                                                <p class="m-0"><strong>Check Out Date</strong><br>{{ bed.guest?.guest_CheckOut || '-' }}</p>
+                                              </div> -->
+                                              <!-- <div class="col-6 text-right mt-2">
+                                                <p class="m-0"><strong>Phone Number</strong><br>{{ bed.guest?.guest_Phone || '-' }}</p>
+                                              </div> -->
                                               <!-- <div class="col-lg-3 text-right border-end">
                                                 <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
                                               </div>
                                               <div class="col-lg-3 text-right border-end">
                                                 <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
                                               </div> -->
-                                              <div class="col-lg-2 text-right">
+                                              <!-- <div class="col-lg-2 text-right">
                                                 <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
-                                              </div>
+                                              </div> -->
                                             </div>
                                           </div>
                                         </div>
@@ -919,9 +941,16 @@
                                                   <p>Contract.pdf</p>
                                                 </div>
                                                 <div class="doc-actions">
-                                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
-                                                  <button class="btn-download"><i class="pi pi-download"></i>
-                                                    Download</button>
+                                                  <a class="text-decoration-none" href="{{ bed.guest?.guest_Contract || '##' }}" target="_blank">
+                                                    <button class="btn-view">
+                                                      <i class="pi pi-eye"></i> View
+                                                    </button>
+                                                  </a>
+                                                  <a class="text-decoration-none" href="{{ bed.guest?.guest_Contract || '##'}}" download>
+                                                    <button class="btn-download">
+                                                      <i class="pi pi-download"></i> Download
+                                                    </button>
+                                                  </a>
                                                 </div>
                                               </div>
                                             </div>
@@ -933,9 +962,16 @@
                                                   <p>Handover protocols.pdf</p>
                                                 </div>
                                                 <div class="doc-actions">
-                                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
-                                                  <button class="btn-download"><i class="pi pi-download"></i>
-                                                    Download</button>
+                                                  <a class="text-decoration-none" href="{{ bed.guest?.guest_Handover|| '##' }}" target="_blank">
+                                                    <button class="btn-view">
+                                                      <i class="pi pi-eye"></i> View
+                                                    </button>
+                                                  </a>
+                                                  <a class="text-decoration-none" href="{{ bed.guest?.guest_Handover || '##'}}" download>
+                                                    <button class="btn-download">
+                                                      <i class="pi pi-download"></i> Download
+                                                    </button>
+                                                  </a>
                                                 </div>
                                               </div>
                                             </div>
@@ -954,9 +990,17 @@
                                                   <p>Rental Rules.pdf</p>
                                                 </div>
                                                 <div class="doc-actions">
-                                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
-                                                  <button class="btn-download"><i class="pi pi-download"></i>
-                                                    Download</button>
+                                                  <a class="text-decoration-none" [href]="bed.guest?.guest_RentalRules || '#'">
+                                                    <button class="btn-view" [disabled]="!bed.guest?.guest_RentalRules">
+                                                      <i class="pi pi-eye"></i> View
+                                                    </button>
+                                                  </a>
+                                                  <a class="text-decoration-none" [href]="bed.guest?.guest_RentalRules || '#'" download>
+                                                    <button class="btn-download" [disabled]="!bed.guest?.guest_RentalRules">
+                                                      <i class="pi pi-download"></i> Download
+                                                    </button>
+                                                  </a>
+
                                                 </div>
                                               </div>
                                             </div>
@@ -979,13 +1023,15 @@
                                                   <p-accordion [multiple]="true"  >
                                                     <p-accordionTab header="Passport of tenent">
                                                       <div class="flex-container">
-                                                        <img *ngFor="let item of images" [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+                                                        <!-- <img *ngFor="let item of images" [src]="item.itemImageSrc" style="width: 100%; display: block;" /> -->
+                                                        <img   [src]="bed.guest?.guest_Passport_Image" style="width: 100%; display: block;" />
+
                                                       </div>
 
 
                                                     </p-accordionTab>
                                                     <p-accordionTab header="Pending Invoices">
-                                                      <p-table class="more-d" [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '0px !important' }">
+                                                      <p-table class="more-d" [columns]="cols" [value]="bed.guest?.invoices" [tableStyle]="{ 'min-width': '0px !important' }">
                                                         <ng-template pTemplate="header" let-columns>
                                                             <tr>
                                                                 <th *ngFor="let col of columns">
@@ -995,8 +1041,19 @@
                                                         </ng-template>
                                                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                                                             <tr>
-                                                                <td *ngFor="let col of columns">
+                                                                <!-- <td *ngFor="let col of columns">
                                                                     {{ rowData[col.field] }}
+                                                                </td> -->
+                                                                <td *ngFor="let col of columns">
+                                                                  <!-- Check if the current column is 'inv_Paid' and conditionally display 'Yes' or 'No' -->
+                                                                  <span *ngIf="col.field === 'inv_Paid'">
+                                                                    {{ rowData[col.field] ? 'Yes' : 'No' }}
+                                                                  </span>
+
+                                                                  <!-- Display the value as usual for other columns -->
+                                                                  <span *ngIf="col.field !== 'inv_Paid'">
+                                                                    {{ rowData[col.field] }}
+                                                                  </span>
                                                                 </td>
                                                             </tr>
                                                         </ng-template>
@@ -1114,24 +1171,46 @@
 
                         <div class="row bg-white m-0 p-4 mb-3">
                           <div class="col-12 m-0 p-3 rounded pl-4 pr-4 bginfo">
-                            <div class="row align-items-center ">
-                              <div class="col-auto">
-                                <img src="https://via.placeholder.com/50" class="rounded-circle"
-                                  alt="Profile Image">
+                            <img [src]="bed.guest?.guest_Image || 'https://via.placeholder.com/50'" class="rounded-circle" sstyle="cursor: pointer; width: 100px; height: 100px;"
+                            (click)="openImageModal(bed.guest?.guest_Image)"
+                            alt="Profile Image">
+                            <div class="row align-items-center   ">
+                              <div class="col-6 border-end">
+                                <!-- <img [src]="bed.guest?.guest_Image || 'https://via.placeholder.com/50'" class="rounded-circle"
+                                  alt="Profile Image"> -->
+                                  <div class="">
+                                    <h6 class="fw-bold m-0 text-lowercase">{{ bed.guest?.guest_Name || 'No Tenant' }}</h6>
+                                    <p class="m-0 text-muted">{{ bed.guest?.guest_Mail || 'No Email' }}</p>
+                                  </div>
+                                  <div>
+                                <p class="m-0"><strong>Phone Number</strong><br>{{ bed.guest?.guest_Phone || '-' }}</p>
+
+                                  </div>
                               </div>
-                              <div class="col-lg-3 border-end">
-                                <h6 class="fw-bold text-lowercase">Osman Ahmed</h6>
-                                <p class="m-0 text-muted">osman2025&#64;gmail.com</p>
+                              <!-- <div class="col-6 bor6der-end">
+                                <h6 class="fw-bold text-lowercase">{{ bed.guest?.guest_Name || 'No Tenant' }}</h6>
+                                <p class="m-0 text-muted">{{ bed.guest?.guest_Mail || 'No Email' }}</p>
+                              </div> -->
+                              <div class="col-6 text-right">
+                                <p class="m-0"><strong>Check In Date</strong><br>{{ bed.guest?.guest_CheckIn || '-' }}</p>
+                                <p class="m-0"><strong>Check Out Date</strong><br>{{ bed.guest?.guest_CheckOut || '-' }}</p>
+
                               </div>
+                              <!-- <div class="col-6 text-right border-end">
+                                <p class="m-0"><strong>Check Out Date</strong><br>{{ bed.guest?.guest_CheckOut || '-' }}</p>
+                              </div> -->
+                              <!-- <div class="col-6 text-right mt-2">
+                                <p class="m-0"><strong>Phone Number</strong><br>{{ bed.guest?.guest_Phone || '-' }}</p>
+                              </div> -->
                               <!-- <div class="col-lg-3 text-right border-end">
                                 <p class="m-0"><strong>Check In Date</strong><br>12 Jun, 2024</p>
                               </div>
                               <div class="col-lg-3 text-right border-end">
                                 <p class="m-0"><strong>Check Out Date</strong><br>12 Jun, 2025</p>
                               </div> -->
-                              <div class="col-lg-2 text-right">
+                              <!-- <div class="col-lg-2 text-right">
                                 <p class="m-0"><strong>Phone Number</strong><br>+20 1154652523</p>
-                              </div>
+                              </div> -->
                             </div>
                           </div>
                         </div>
@@ -1211,9 +1290,17 @@
                                   <p>Rental Rules.pdf</p>
                                 </div>
                                 <div class="doc-actions">
-                                  <button class="btn-view"><i class="pi pi-eye"></i> View</button>
-                                  <button class="btn-download"><i class="pi pi-download"></i>
-                                    Download</button>
+                                  <a class="text-decoration-none" [href]="bed.guest?.guest_RentalRules || '#'">
+                                    <button class="btn-view" [disabled]="!bed.guest?.guest_RentalRules">
+                                      <i class="pi pi-eye"></i> View
+                                    </button>
+                                  </a>
+                                  <a class="text-decoration-none" [href]="bed.guest?.guest_RentalRules || '#'" download>
+                                    <button class="btn-download" [disabled]="!bed.guest?.guest_RentalRules">
+                                      <i class="pi pi-download"></i> Download
+                                    </button>
+                                  </a>
+
                                 </div>
                               </div>
                             </div>
@@ -1232,13 +1319,13 @@
                                   <p-accordion [multiple]="true"  >
                                     <p-accordionTab header="Passport of tenent">
                                       <div class="flex-container">
-                                        <img *ngFor="let item of images" [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+                                        <img   [src]="bed.guest?.guest_Passport_Image" style="width: 100%; display: block;" />
                                       </div>
 
 
                                     </p-accordionTab>
                                     <p-accordionTab header="Pending Invoices">
-                                      <p-table class="more-d" [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '0px !important' }">
+                                      <p-table class="more-d" [columns]="cols" [value]="bed.guest?.invoices" [tableStyle]="{ 'min-width': '0px !important' }">
                                         <ng-template pTemplate="header" let-columns>
                                             <tr>
                                                 <th *ngFor="let col of columns">
@@ -1248,8 +1335,19 @@
                                         </ng-template>
                                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                                             <tr>
-                                                <td *ngFor="let col of columns">
+                                                <!-- <td *ngFor="let col of columns">
                                                     {{ rowData[col.field] }}
+                                                </td> -->
+                                                <td *ngFor="let col of columns">
+                                                  <!-- Check if the current column is 'inv_Paid' and conditionally display 'Yes' or 'No' -->
+                                                  <span *ngIf="col.field === 'inv_Paid'">
+                                                    {{ rowData[col.field] ? 'Yes' : 'No' }}
+                                                  </span>
+
+                                                  <!-- Display the value as usual for other columns -->
+                                                  <span *ngIf="col.field !== 'inv_Paid'">
+                                                    {{ rowData[col.field] }}
+                                                  </span>
                                                 </td>
                                             </tr>
                                         </ng-template>
@@ -1288,9 +1386,9 @@
                                   </div>
                                 </div> -->
                                 <div class="d-flex justify-content-end mt-3">
-                                  <button class="btn custom-btn-outline-primary ml-3" >Unpublish</button>
+                                  <button class="btn custom-btn-outline-primary ml-3" *ngIf="bed.bed_Available==true" (click)="MarkBedAvailability(bed.bed_ID)">Unpublish</button>
                                   <button class="btn btn-primary"
-                                    style="border-radius: 10px; font-size: 14px;" >Mark as
+                                    style="border-radius: 10px; font-size: 14px;" *ngIf="bed.bed_Available==false" (click)="MarkBedAvailability(bed.bed_ID)">Mark as
                                     Available</button>
                                 </div>
                               </div>
@@ -1614,5 +1712,17 @@
 
       </div>
     </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal Popup -->
+<div class="image-modall" *ngIf="isModalOpen">
+  <div class="modal-contentt">
+    <span class="closee" (click)="closeImageModal()">&times;</span>
+    <img [src]="selectedImage" alt="Profile Image" class="modal-imagee" />
   </div>
 </div>

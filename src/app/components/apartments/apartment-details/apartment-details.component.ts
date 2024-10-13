@@ -129,10 +129,11 @@ export class ApartmentDetailsComponent implements OnInit {
 
     // Initialize columns
     this.cols = [
-      { field: 'code', header: 'Code' },
-      { field: 'name', header: 'Name' },
-      { field: 'category', header: 'Category' },
-      { field: 'quantity', header: 'Quantity' }
+      { field: 'inv_Code', header: 'Code' },
+      { field: 'inv_Issue_Date', header: 'Date' },
+      { field: 'inv_Desc', header: 'Description' },
+      { field: 'inv_Paid', header: 'Paid' },
+      { field: 'inv_Total', header: 'Total' }
     ];
 
     // Initialize products data
@@ -237,14 +238,32 @@ export class ApartmentDetailsComponent implements OnInit {
                 for (let x = 0; x < this.roomsBedRoom[i].room_Beds.length; x++) {
                   bedno++;
 
-                  this.roomsBedRoom[i].room_Beds[x] = { ...this.roomsBedRoom[i].room_Beds[x], "bed_number": bedno };
+                  // this.roomsBedRoom[i].room_Beds[x] = { ...this.roomsBedRoom[i].room_Beds[x], "bed_number": bedno };
+                    // Find the corresponding guest (if any)
+        const guest = this.allResponse.guests?.find((g:any) => g.bed_ID === this.roomsBedRoom[i].room_Beds[x].bed_ID) || null;
+
+        // Assign bed number and guest info
+        this.roomsBedRoom[i].room_Beds[x] = {
+          ...this.roomsBedRoom[i].room_Beds[x],
+          "bed_number": bedno,
+          "guest": guest // Attach guest info to the bed
+        };
 
                 }
               } else {
 
                 for (let x = 0; x < this.aprt.apartment_Rooms[i].room_Beds.length; x++) {
                   bedno++;
-                  this.aprt.apartment_Rooms[i].room_Beds[x] = { ...this.aprt.apartment_Rooms[i].room_Beds[x], "bed_number": bedno };
+                  // this.aprt.apartment_Rooms[i].room_Beds[x] = { ...this.aprt.apartment_Rooms[i].room_Beds[x], "bed_number": bedno };
+                      // Find the corresponding guest (if any)
+        const guest = this.allResponse.guests?.find((g:any) => g.bed_ID === this.aprt.apartment_Rooms[i].room_Beds[x].bed_ID) || null;
+
+        // Assign bed number and guest info
+        this.aprt.apartment_Rooms[i].room_Beds[x] = {
+          ...this.aprt.apartment_Rooms[i].room_Beds[x],
+          "bed_number": bedno,
+          "guest": guest // Attach guest info to the bed
+        };
                 }
                 this.roomsLiving.push(this.aprt.apartment_Rooms[i]);
               }
@@ -799,5 +818,20 @@ export class ApartmentDetailsComponent implements OnInit {
   cols: any[] = [];
   ngOnDestroy() {
     for (let i = 0; i < this.subscriptions.length; i++) this.subscriptions[i].unsubscribe();
+  }
+
+
+  isModalOpen = false;  // Track modal state
+  selectedImage: string | null = null;  // Store selected image URL
+
+  // Open the modal and set the image URL
+  openImageModal(imageUrl: string) {
+    this.selectedImage = imageUrl || 'assets/images/placeholder.jpg'; // Fallback to placeholder if no image
+    this.isModalOpen = true;
+  }
+
+  // Close the modal
+  closeImageModal() {
+    this.isModalOpen = false;
   }
 }
