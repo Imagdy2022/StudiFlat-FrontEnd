@@ -263,7 +263,7 @@ export class ApartmentDetailsComponent implements OnInit {
           if (this.aprt && this.aprt.apartment_Rooms) {
             for (let i = 0; i < this.aprt.apartment_Rooms.length; i++) {
 
-                  this.bedsPrice += this.aprt.apartment_Rooms[i].bed_Price * this.aprt.apartment_Rooms[i].beds_No ?? 0;
+              this.bedsPrice += (this.aprt.apartment_Rooms[i].bed_Price ?? 0) * (this.aprt.apartment_Rooms[i].beds_No ?? 0);
 
             }
           }
@@ -480,6 +480,27 @@ export class ApartmentDetailsComponent implements OnInit {
   MarkAvaliablePublish() {
     this.subscriptions.push(
       this._ApartmentService.MarkAvaliablePublish(this.apt_UUID).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.message}`,
+          });
+        }
+      )
+    );
+  }
+
+  MarkBedAvailability(Bed_ID:any) {
+    this.subscriptions.push(
+      this._ApartmentService.MarkBedAvailable(this.apt_UUID,Bed_ID).subscribe(
         (res) => {
           this.messageService.add({
             severity: 'success',

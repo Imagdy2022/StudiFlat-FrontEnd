@@ -1035,9 +1035,9 @@
                                                   </div>
                                                 </div> -->
                                                 <div class="d-flex justify-content-end mt-3">
-                                                  <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
+                                                  <button class="btn custom-btn-outline-primary ml-3" *ngIf="bed.bed_Available==true" (click)="MarkBedAvailability(bed.bed_ID)">Unpublish</button>
                                                   <button class="btn btn-primary"
-                                                    style="border-radius: 10px; font-size: 14px;">Mark as
+                                                    style="border-radius: 10px; font-size: 14px;" *ngIf="bed.bed_Available==false" (click)="MarkBedAvailability(bed.bed_ID)">Mark as
                                                     Available</button>
                                                 </div>
                                               </div>
@@ -1288,9 +1288,9 @@
                                   </div>
                                 </div> -->
                                 <div class="d-flex justify-content-end mt-3">
-                                  <button class="btn custom-btn-outline-primary ml-3">Unpublish</button>
+                                  <button class="btn custom-btn-outline-primary ml-3" >Unpublish</button>
                                   <button class="btn btn-primary"
-                                    style="border-radius: 10px; font-size: 14px;">Mark as
+                                    style="border-radius: 10px; font-size: 14px;" >Mark as
                                     Available</button>
                                 </div>
                               </div>

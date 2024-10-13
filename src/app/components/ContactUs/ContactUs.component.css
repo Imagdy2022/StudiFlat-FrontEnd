@@ -1,0 +1,59 @@
+@media (min-width: 776px) {
+  .modal-dialog {
+      max-width: 800px;
+      margin-right: auto;
+      margin-left: auto;
+  }
+  .xcvddmodel {
+      margin-right: 535px !important;
+  }
+}
+
+.file {
+  z-index: 3 !important;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.h-124px {
+  height: 124px !important;
+}
+
+.w-145px {
+  width: 145px;
+}
+
+@media (min-width: 768px) {
+  .marmodify {
+      margin-left: 520px;
+  }
+}
+
+td {
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+  font-family: 'Poppins';
+  height: 72px;
+  border-bottom: 1px solid #F6F6F6 !important;
+
+}
+
+th {
+  font-size: 14px !important;
+  font-family: 'Poppins';
+  border-bottom: 1px solid #F6F6F6 !important;
+  background: #F6F6F6 !important  ;
+}
+tr{
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+}
+tr .Actions{
+  width: 150px;
+  z-index: 999;
+  right: 70px;
+  top: 50px;
+}
+tr:last-child .Actions{
+    top: 10px;
+}

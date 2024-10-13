@@ -156,6 +156,16 @@ export class ApartmentService {
     );
   }
 
+  MarkBedAvailable(Apartment_ID: any,Bed_ID:any): Observable<any> {
+    return this.http.put(
+      `${
+        environment.apiUrl + '/ApartmentV2/SetBed_Available?' + `Apartment_ID=${Apartment_ID}`+ `&Bed_ID=${Bed_ID}`
+      }`,
+      Apartment_ID,
+      { headers: this.headers }
+    );
+  }
+
   ApproveReview(id: string, approve: boolean): Observable<any> {
     return this.http.put(
       `${

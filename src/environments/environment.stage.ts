@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   Staging: true,
-  apiUrl: 'https://stageapi.studiflats.com/api',
+  apiUrl: 'https://localhost:44368/api',
   //apiUrl: 'https://localhost:57345/api',
 
   outputPath: 'dist/Production',
