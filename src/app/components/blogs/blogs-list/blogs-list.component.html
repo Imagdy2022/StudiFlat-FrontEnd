@@ -1,0 +1,512 @@
+<!-- <app-edite-user-details></app-edite-user-details> -->
+<!-- start header  -->
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'LandLords'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+
+
+
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'partners'"></app-sidebar>
+  <!-- end sidebar  -->
+
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10 ">
+      <div class="d-md-flex justify-content-between align-items-center" style="margin-top: 6px; margin-bottom: 24px;">
+        <p-breadcrumb class="max-w-full" [model]="items">
+          <ng-template pTemplate="item" let-item>
+              <a [routerLink]="item.routerLink" class="p-menuitem-link" routerLinkActive="text-primary font-semibold">
+                  <span *ngIf="item.icon" [ngClass]="item.icon" class="mr-2"></span>
+                  <span>{{ item.label }}</span>
+              </a>
+          </ng-template>
+        </p-breadcrumb>
+          <div class="d-flex justify-content-lg-between ">
+              <div class="d-flex justify-content-between ">
+                  <!-- <button class="month rounded-start px-3 py-1 outline-none">This Month</button>
+              <button class="week rounded-end px-3 py-1 outline-none">Last Week</button> -->
+              </div>
+              <!-- start dropdown button  -->
+              <app-dropdown class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
+              <!-- end dropdown button  -->
+              <!-- start addUserButton  -->
+              <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
+              <!-- end addUserButton  -->
+              <a *ngIf="partnersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/partner/add-partner" style="background-color:#1F4068; cursor: pointer;">
+                  <img src="assets/images/plus.svg" class="me-2 ">Add New
+              </a>
+          </div>
+      </div>
+
+
+
+
+
+ <div class="main-div" >
+
+
+
+<div class="containerr">
+  <div class="box">
+    <div style="cursor: pointer;" class="img" (click)="openMenu()">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;"  [routerLink]="['details' ]">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+       <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+
+
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card    >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card   >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card  >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card   >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card  >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card  >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card >
+      <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+  <div class="box">
+    <div class="img">
+      <img src="../../../../assets/images/blogs/threeDot.svg"/>
+    </div>
+    <div class="menu" [ngStyle]="{'display': displayMenu}">
+      <div>
+        <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;">View Blog Details</li>
+          <li style="cursor: pointer;">Update Blog</li>
+        </ul>
+      </div>
+    </div>
+    <p-card >
+      <ng-template pTemplate="header">
+          <img  routerLink="/blog-details" alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+      </ng-template>
+
+      <div class="text">
+        <div class="head">Plan for the Future</div>
+        <div class="info">
+          Think about your long-term plans when signing a lease. If you’re considering buying a home in the near future or relocating for work, look for a lease that offers flexibility, such as a month-to-month option. This way, you won’t be locked into a long-term commitment if your circumstances change.
+      </div>
+      <div class="foot">
+        <p-chip
+          label="Amy Elsner"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          alt="Avatar image" />
+
+        <div class="date">30/6/2024</div>
+       </div>
+      </div>
+  </p-card>
+  </div>
+</div>
+
+
+<p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="120"
+    [rowsPerPageOptions]="[10, 20, 30]" />
+
+
+</div>
+
+
+
+
+  </main>
+  <!-- end content page  -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

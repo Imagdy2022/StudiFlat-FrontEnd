@@ -126,6 +126,14 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'blogs',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('../../components/blogs/blog.module').then(
+            (p) => p.BlogModule
+          ),
+      },
+      {
         path: 'faq',
         canActivate: [AuthGuard],
         loadChildren: () =>

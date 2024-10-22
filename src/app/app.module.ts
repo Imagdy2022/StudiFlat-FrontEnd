@@ -58,12 +58,12 @@ import { ContractModule } from './components/configurations/contract/contract.mo
 
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { LandLordComponent } from './components/land-lord/land-lord.component';
+
 
 initializeApp(environment.firebase);
 
 @NgModule({
-  declarations: [AppComponent, StatisticsComponent ],
+  declarations: [AppComponent, StatisticsComponent  ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,

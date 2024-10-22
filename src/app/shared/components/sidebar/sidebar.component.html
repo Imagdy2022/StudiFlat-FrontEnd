@@ -57,6 +57,10 @@
       <img src="../../../../assets/images/navigation/landlord.svg"> Landlord Requests
   </a>
 
+  <a tabindex="1" *ngIf="LandLord.p_View==true||is_Super==true" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/blogs">
+    <img src="../../../../assets/images/blog.svg"> Manage Blogs
+</a>
+
 
 
     <a tabindex="1" class="text-decoration-none d-block px-2 mb-2 py-1 rounded-1" routerLinkActive="active" :routerLink="/configurations">

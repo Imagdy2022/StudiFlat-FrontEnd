@@ -1,0 +1,300 @@
+<!-- <app-edite-user-details></app-edite-user-details> -->
+<!-- start header  -->
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'blog details'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+
+
+
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'partners'"></app-sidebar>
+  <!-- end sidebar  -->
+
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10 ">
+      <div class="d-md-flex justify-content-between align-items-center" style="margin-top: 6px; margin-bottom: 24px;">
+        <p-breadcrumb class="max-w-full" [model]="items">
+          <ng-template pTemplate="item" let-item>
+              <a [routerLink]="item.routerLink" class="p-menuitem-link" routerLinkActive="text-primary font-semibold">
+                  <span *ngIf="item.icon" [ngClass]="item.icon" class="mr-2"></span>
+                  <span>{{ item.label }}</span>
+              </a>
+          </ng-template>
+        </p-breadcrumb>
+          <div class="d-flex justify-content-lg-between ">
+              <div class="d-flex justify-content-between ">
+                  <!-- <button class="month rounded-start px-3 py-1 outline-none">This Month</button>
+              <button class="week rounded-end px-3 py-1 outline-none">Last Week</button> -->
+              </div>
+              <!-- start dropdown button  -->
+              <app-dropdown class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
+              <!-- end dropdown button  -->
+              <!-- start addUserButton  -->
+              <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
+              <!-- end addUserButton  -->
+              <a  class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/partner/add-partner" style="background-color:#1F4068; cursor: pointer;">
+                  <img src="assets/images/plus.svg" class="me-2 ">Add New
+              </a>
+          </div>
+      </div>
+
+
+
+      <div class="main">
+
+        <p-toolbar>
+          <div class="p-toolbar-group-left" routerLink="/my-bookings">
+            <button pButton type="button" icon="pi pi-arrow-left" class="p-button-text"  [ngStyle]="{'color': '#313033'}"></button>
+            <span class="p-toolbar-text"> Add new blog</span>
+          </div>
+
+
+        </p-toolbar>
+
+
+
+
+      <div class="parent">
+        <div class="firstSection">
+          <div class="flex flex-column gap-2 w-50">
+            <label for="username">main title*</label>
+            <input
+                pInputText
+                id="username"
+                aria-describedby="username-help"
+                placeholder="Enter Main Title"
+                [(ngModel)]="title" />
+
+        </div>
+        <div class="flex flex-column gap-2 w-50">
+          <label for="username">Blog category*</label>
+          <app-dropdown aria-describedby="username-help" id="username" class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
+
+      </div>
+    </div>
+
+      <!------------------------------->
+
+        <div class="secondSection">
+          <div class="form-group">
+            <label for="keywords">Key words</label>
+            <p-chips [(ngModel)]="keywords" placeholder="Enter a keyword" [addOnTab]="true"></p-chips>
+          </div>
+
+          <div class="chip-container">
+            <p-chip *ngFor="let keyword of keywords" [label]="keyword" [removable]="true" (onRemove)="removeKeyword(keyword)"></p-chip>
+          </div>
+        </div>
+
+
+            <!------------------------------->
+
+
+
+      <div class="thirdSection">
+        <div class="flex flex-column gap-2 mb-3">
+          <label for="username">Meta Description*</label>
+          <textarea
+          rows="5"
+          cols="30"
+          pInputTextarea
+          placeholder="Enter Your Description"
+          [(ngModel)]="metaDes">
+      </textarea>
+
+      </div>
+      <div class="flex flex-column gap-2">
+        <label for="username">Description*</label>
+        <textarea
+        rows="5"
+        cols="30"
+        pInputTextarea
+        placeholder="Enter Your Description"
+
+        [(ngModel)]="desc">
+    </textarea>
+
+    </div>
+
+
+
+
+      </div>
+
+            <!------------------------------->
+
+
+        <div class="fourthSection">
+
+          <div class="flex flex-column gap-2 mb-3">
+            <label for="username">alt image*</label>
+            <input
+                pInputText
+                id="username"
+                aria-describedby="username-help"
+                [(ngModel)]="altImg" />
+
+        </div>
+
+
+          <p-fileUpload
+          mode="advanced"
+          name="demo[]"
+          accept="image/*"
+
+          (onSelect)="onImageSelect($event)">
+
+          <ng-template pTemplate="content">
+            <div style=" width:100%;text-align: center; padding: 20px; margin-top: 10px; padding-bottom:0;">
+              <!-- Cloud Icon -->
+              <!-- <i class="pi pi-cloud-upload" style="font-size: 48px; color: #b3b3b3;"></i> -->
+               <img src="cloud-add.svg"/>
+
+              <!-- Text -->
+              <p class="choosep">Choose a file or drag & drop it here</p>
+
+              <!-- Supported Formats -->
+              <p class="imgtypes">
+                JPEG, PNG, PDG, and MP4 formats, up to 50MB
+              </p>
+            </div>
+          </ng-template>
+          <!-- <ng-template pTemplate="chooseButtonLabel">
+            <span>Browse File</span>
+          </ng-template> -->
+        </p-fileUpload>
+
+        <!-- Galleria Display -->
+        <p-galleria
+          [value]="images"
+          [circular]="true"
+          [showThumbnails]="false"
+          [responsiveOptions]="responsiveOptions"
+          [containerStyle]="{'max-width': '640px'}"
+          [numVisible]="5">
+          <ng-template pTemplate="item" let-item>
+            <img [src]="item.src" [alt]="item.alt" style="width: 100%;">
+          </ng-template>
+          <ng-template pTemplate="thumbnail" let-item>
+            <img [src]="item.src" [alt]="item.alt" style="width: 50px; height: 50px;">
+          </ng-template>
+        </p-galleria>
+
+        <!-- Drag and Drop to Reorder -->
+        <!-- <h5>Reorder Images</h5> -->
+        <div class="image-list">
+          <div
+            *ngFor="let img of images; let i = index"
+            class="item"
+            pDraggable="true"
+            (onDragStart)="onDragStart($event, img)"
+            (onDragEnd)="onDragEnd($event)">
+
+            <div pDroppable="true" (onDrop)="onDrop($event, i)" (onDragEnter)="onDragEnter($event, i)">
+              <img class="image-item" [src]="img.src" [alt]="img.alt"  >
+              <div class="bin" (click)="removeImage(i)"><img src="bin.svg"/></div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+<!----------------------------------------------------->
+        <div class="fivthSection">
+          <div class="form-group mb-5" [ngStyle]="{'display': displayEditor}">
+
+            <div #editorContainer id="editor-container"  ></div>
+          </div>
+          <p-button (click)="viewEditor()" class="add-text" label="Add Content Blog" />
+          <!-- <button pButton label="Save Content" (click)="getEditorContent()"></button> -->
+        </div>
+
+
+
+
+      </div>
+
+
+      <div class="divider"></div>
+
+      <div class="actions">
+
+        <p-button   class=" reject " label="Cancel" />
+        <p-button  class="accept"  label="Save" (click)="saveBlog()" />
+
+
+    </div>
+
+
+
+
+
+       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+  <!-- end content page  -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
