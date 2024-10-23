@@ -101,6 +101,13 @@ line-height: 24px !important; /* 150% */
   padding: 10px;
   justify-content: center;
 }
+.containerr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+
 .box{
   text-align: center;
   position: relative;
@@ -130,7 +137,11 @@ line-height: 24px !important; /* 150% */
 :host ::ng-deep .p-card{
   border-radius: 8px;
 border: 1px solid var(--Gray-200, #E4E7EC);
+height: 475px;
 
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 }
 
 :host ::ng-deep .p-card img{
@@ -169,6 +180,7 @@ border: 1px solid var(--Gray-200, #E4E7EC);
   line-height: 24px; /* 171.429% */
   text-align: start;
   padding-bottom: 10px;
+  word-break:break-all;
 
 }
 .date{

@@ -1,19 +1,17 @@
-<!-- <app-edite-user-details></app-edite-user-details> -->
-<!-- start header  -->
+<!--
 <header>
   <app-head (newItemEvent)="addItem($event)" [titleModule]="'blog details'"></app-head>
 </header>
-<!-- end header  -->
+
 
 <div class="row m-0">
 
 
 
-  <!-- start sidebar  -->
   <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'partners'"></app-sidebar>
-  <!-- end sidebar  -->
 
-  <!-- start content page  -->
+
+
   <main class="p-4 col-lg-10 ">
       <div class="d-md-flex justify-content-between align-items-center" style="margin-top: 6px; margin-bottom: 24px;">
         <p-breadcrumb class="max-w-full" [model]="items">
@@ -26,15 +24,11 @@
         </p-breadcrumb>
           <div class="d-flex justify-content-lg-between ">
               <div class="d-flex justify-content-between ">
-                  <!-- <button class="month rounded-start px-3 py-1 outline-none">This Month</button>
-              <button class="week rounded-end px-3 py-1 outline-none">Last Week</button> -->
+
               </div>
-              <!-- start dropdown button  -->
+
               <app-dropdown class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
-              <!-- end dropdown button  -->
-              <!-- start addUserButton  -->
-              <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
-              <!-- end addUserButton  -->
+
               <a  class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/partner/add-partner" style="background-color:#1F4068; cursor: pointer;">
                   <img src="assets/images/plus.svg" class="me-2 ">Add New
               </a>
@@ -114,14 +108,76 @@
 
 
   </main>
-  <!-- end content page  -->
+
+</div> -->
+
+
+
+
+
+
+
+<!-- Blog Details Header -->
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'blog details'"></app-head>
+</header>
+
+<div class="row m-0">
+  <!-- Sidebar -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="'partners'"></app-sidebar>
+
+  <!-- Content Area -->
+  <main class="p-4 col-lg-10">
+    <div class="d-md-flex justify-content-between align-items-center" style="margin-top: 6px; margin-bottom: 24px;">
+      <p-breadcrumb class="max-w-full" [model]="items">
+        <ng-template pTemplate="item" let-item>
+          <a [routerLink]="item.routerLink" class="p-menuitem-link" routerLinkActive="text-primary font-semibold">
+            <span *ngIf="item.icon" [ngClass]="item.icon" class="mr-2"></span>
+            <span>{{ item.label }}</span>
+          </a>
+        </ng-template>
+      </p-breadcrumb>
+      <div class="d-flex justify-content-lg-between">
+        <!-- <app-dropdown
+          class="ms-3"
+          [list]="listDropDown"
+          style="margin-right: 24px;margin-top: 2px;"
+          (selected)="selectedfromDropDown($event)"
+        ></app-dropdown>
+        <a class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/partner/add-partner" style="background-color:#1F4068; cursor: pointer;">
+          <img src="assets/images/plus.svg" class="me-2">Add New
+        </a> -->
+      </div>
+    </div>
+
+    <!-- Blog Details Content -->
+    <div class="main">
+      <p-toolbar>
+        <div class="p-toolbar-group-left" routerLink="/my-bookings">
+          <button pButton type="button" icon="pi pi-arrow-left" class="p-button-text" [ngStyle]="{'color': '#313033'}"></button>
+          <span class="p-toolbar-text">{{ title }}</span>
+        </div>
+      </p-toolbar>
+      <p class="date">
+        <i class="pi pi-calendar"></i>
+        The publication date is {{ blogDate | date: 'MMMM d, yyyy' }}.
+      </p>
+
+      <img
+        class="mainImg"
+        [src]="images"
+        [alt]="altImg"
+        style="width:100%; height: 500px; margin-bottom: 40px;"
+      />
+
+      <!-- Blog Description -->
+      <p class="first" *ngIf="desc">{{ desc }}</p>
+
+      <!-- Blog Content rendered as HTML (if it's safe) -->
+      <div class="blog-content" [innerHTML]="blogContent"></div>
+    </div>
+  </main>
 </div>
-
-
-
-
-
-
 
 
 

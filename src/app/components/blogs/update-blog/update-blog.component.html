@@ -48,7 +48,7 @@
         <p-toolbar>
           <div class="p-toolbar-group-left" routerLink="/my-bookings">
             <button pButton type="button" icon="pi pi-arrow-left" class="p-button-text"  [ngStyle]="{'color': '#313033'}"></button>
-            <span class="p-toolbar-text"> Add new blog</span>
+            <span class="p-toolbar-text"> Update blog</span>
           </div>
 
 
@@ -71,7 +71,7 @@
         </div>
         <div class="flex flex-column gap-2 w-50">
           <label for="username">Blog category*</label>
-          <app-dropdown aria-describedby="username-help" id="username" class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown>
+          <app-dropdown aria-describedby="username-help" id="username" class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;"  (selected)="selectedfromDropDown($event)"></app-dropdown>
 
       </div>
     </div>
@@ -167,7 +167,7 @@
           </ng-template> -->
         </p-fileUpload>
 
-        <!-- Galleria Display -->
+        <!-- Galleria Display
         <p-galleria
           [value]="images"
           [circular]="true"
@@ -181,21 +181,22 @@
           <ng-template pTemplate="thumbnail" let-item>
             <img [src]="item.src" [alt]="item.alt" style="width: 50px; height: 50px;">
           </ng-template>
-        </p-galleria>
+        </p-galleria> -->
 
         <!-- Drag and Drop to Reorder -->
         <!-- <h5>Reorder Images</h5> -->
+         <!-- *ngFor="let img of images; let i = index"-->
         <div class="image-list">
           <div
-            *ngFor="let img of images; let i = index"
+
             class="item"
             pDraggable="true"
-            (onDragStart)="onDragStart($event, img)"
+            (onDragStart)="onDragStart($event, images)"
             (onDragEnd)="onDragEnd($event)">
 
-            <div pDroppable="true" (onDrop)="onDrop($event, i)" (onDragEnter)="onDragEnter($event, i)">
-              <img class="image-item" [src]="img.src" [alt]="img.alt"  >
-              <div class="bin" (click)="removeImage(i)"><img src="bin.svg"/></div>
+            <div pDroppable="true"  >
+              <img class="image-item" [src]="images" [alt]="altImg"  >
+              <div class="bin" (click)="removeImage()"><img src="../../../../assets/images/bin.svg"/></div>
             </div>
           </div>
         </div>
@@ -208,7 +209,7 @@
 
             <div #editorContainer id="editor-container"  ></div>
           </div>
-          <p-button (click)="viewEditor()" class="add-text" label="Add Content Blog" />
+          <!-- <p-button (click)="viewEditor()" class="add-text" label="Add Content Blog" /> -->
           <!-- <button pButton label="Save Content" (click)="getEditorContent()"></button> -->
         </div>
 

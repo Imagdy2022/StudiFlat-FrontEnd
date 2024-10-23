@@ -53,6 +53,7 @@ import { ChipModule } from 'primeng/chip';
 import { ToolbarModule } from 'primeng/toolbar';
 import { AddBlogComponent } from './add-blog/add-blog.component';
 import { ChipsModule } from 'primeng/chips';
+import { UpdateBlogComponent } from './update-blog/update-blog.component';
 
 
 
@@ -61,8 +62,10 @@ import { ChipsModule } from 'primeng/chips';
 
 const routes: Routes = [
   { path: '', component: BlogsListComponent },
-  { path: 'details', component: BlogDetailsComponent },
-  { path: 'add-blog', component: AddBlogComponent }
+  { path: 'details/:slug', component: BlogDetailsComponent },
+  { path: 'add-blog', component: AddBlogComponent },
+  { path: 'update/:slug', component: UpdateBlogComponent }
+
 
 
 ];
@@ -96,7 +99,7 @@ imports: [
 providers: [MessageService],
 schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
-declarations: [BlogsListComponent, BlogDetailsComponent, AddBlogComponent]
+declarations: [BlogsListComponent, BlogDetailsComponent, AddBlogComponent, UpdateBlogComponent]
 })
 export class BlogModule { }
 
