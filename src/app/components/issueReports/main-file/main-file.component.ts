@@ -86,15 +86,17 @@ export class MainFileComponent {
     this.router.navigateByUrl(url);
   }
   Date = 'All';
+  no: number = 0; // Initialize the starting index
 
+  displayedInquiries = [];
   getAllIssues() {
     this.issues = [];
     this.numberissues = 0;
     this.subscriptions.push(
       this._adminservices
         .ListAllIssues(
-          this.pageNumber,
-          this.pagesize,
+           1,
+          20000,
           this.Date,
           this.statusinquire,
           this.searchText
@@ -102,10 +104,34 @@ export class MainFileComponent {
         .subscribe(
           (res: any) => {
             this.issues = res['data'];
+            this.displayedInquiries=res['data'];
             this.totalRecords = res['totalRecords'];
 
             this.numberissues = this.issues.length;
             this.totalofPages = res['totalPages'];
+
+
+
+
+
+
+            console.log(this.issues)
+      const sortedData = this.displayedInquiries.sort((a:any, b:any) => {
+
+        const numA = parseInt(a.issue_Code.replace('P-', ''), 10);
+        const numB = parseInt(b.issue_Code.replace('P-', ''), 10);
+
+
+        return numB - numA;
+      });
+      console.log(sortedData);
+      if(this.searchText!==""){
+        this.issues=sortedData
+        console.log(this.issues)
+      }else{
+        this.displayedInquiries=sortedData;
+        this.displayNextInquiries()
+      }
           },
           (error) => {
             console.error('Error fetching owners:', error);
@@ -113,6 +139,40 @@ export class MainFileComponent {
         )
     );
   }
+
+
+
+   // Function to splice the next 8 records
+   look:boolean;
+   displayNextInquiries() {
+
+     console.log(this.first,this.rows)
+     // if( this.look){
+     //   this.pageNumber=this.no-1;
+     // }else{
+     //   this.pageNumber=this.no+1;
+     // }
+
+     // this.pageNumber=this.no+1;
+     this.no=this.pageNumber-1;
+     // Splice the next 8 records from the allInquiries array
+     const start = this.no * this.pagesize;
+     const end = start + this.pagesize;
+
+     // Check if there are enough records left to splice
+     if (start < this.displayedInquiries.length) {
+       this.issues = this.displayedInquiries.slice(start, end);
+       this.no++; // Increment the number for the next batch
+       console.log('Displaying inquiries:', this.issues);
+     } else {
+       console.log('No more inquiries to display.');
+     }
+   }
+
+
+
+
+
   detailperson(event: any, id: any): void {
     this.showEdit = [];
     event.stopPropagation();
@@ -182,6 +242,11 @@ export class MainFileComponent {
     let calcPageNumber = Math.floor(this.first / this.rows) + 1;
     this.pageNumber = calcPageNumber;
     this.getAllIssues();
+    // if(this.searchText===''){
+    //    this.statusinquire='All'
+    //    this.getAllIssues();
+
+    // }
   }
 
   addItem(value: string): void {
@@ -417,10 +482,10 @@ export class MainFileComponent {
   }
   searchTextChange: any;
   searchAction(event: KeyboardEvent) {
-    if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
-      event.preventDefault();
-      return;
-  }
+  //   if (this.searchText.trim() === '' && (event.key === 'Backspace' || event.key === ' ')) {
+  //     event.preventDefault();
+  //     return;
+  // }
     this.getAllIssues();
   }
   selectedContractImg: any;
