@@ -1,0 +1,870 @@
+<!-- <app-edite-user-details></app-edite-user-details> -->
+<!-- start header  -->
+<header>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Appointments'"></app-head>
+</header>
+<!-- end header  -->
+
+<div class="row m-0">
+
+
+
+  <!-- start sidebar  -->
+  <app-sidebar class="col-lg-2" [showSide]="showSide" [titlepage]="''"></app-sidebar>
+  <!-- end sidebar  -->
+
+  <!-- start content page  -->
+  <main class="p-4 col-lg-10 ">
+      <div class="d-md-flex justify-content-between align-items-center" style="margin-top: 6px; margin-bottom: 24px;">
+          <p class="fw-bold ms-1" style="color: #6c6a6a;">Appointments : {{number}}</p>
+          <div class="d-flex justify-content-lg-between ">
+              <div class="d-flex justify-content-between ">
+                  <!-- <button class="month rounded-start px-3 py-1 outline-none">This Month</button>
+              <button class="week rounded-end px-3 py-1 outline-none">Last Week</button> -->
+              </div>
+              <!-- start dropdown button  -->
+              <!-- <app-dropdown class="ms-3" [list]="listDropDown" style="margin-right: 24px;margin-top: 2px;" (selected)="selectedfromDropDown($event)"></app-dropdown> -->
+              <!-- end dropdown button  -->
+              <!-- start addUserButton  -->
+              <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
+              <!-- end addUserButton  -->
+              <!-- <a   class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/partner/add-partner" style="background-color:#1F4068; cursor: pointer;">
+                  <img src="assets/images/plus.svg" class="me-2 ">Add New
+              </a> -->
+              <p-button  class=" accept" icon="pi pi-plus" (onClick)="showDialog()" label="Add New" />
+          </div>
+      </div>
+
+
+
+
+      <p-toast></p-toast>
+
+      <p-card  >
+
+        <p-tabView styleClass="tabview-custom">
+          <p-tabPanel>
+              <ng-template pTemplate="header">
+                  <div class="flex align-items-center gap-2">
+
+                      <span class=" white-space-nowrap m-0">
+                        All Appointments
+                      </span>
+                      <p-badge [value]="number" />
+
+                  </div>
+              </ng-template>
+                   <p-table
+                          #dt2
+                          [value]="appointments"
+                          dataKey="apartment_ID"
+                          [rows]="10"
+                          [rowsPerPageOptions]="[10, 25, 50]"
+                          [loading]="loading"
+                          [paginator]="true"
+                          [globalFilterFields]="['appo_Code','appo_Title', 'apartment_Name', 'apartment_Manager','apartment_Location','appo_Date','appo_Desc','appo_From','appo_To']"
+                          [tableStyle]="{ 'min-width': '160rem'  }"
+                          selectionMode="single"
+                          [(selection)]="selectedAppointment"
+                          (onRowSelect)="onRowSelect($event)"
+                      >
+                          <ng-template pTemplate="caption">
+                              <div class="flex">
+                                  <p-iconField iconPosition="left" class="ml-auto">
+                                      <p-inputIcon>
+                                          <!-- <i class="pi pi-search"></i> -->
+                                      </p-inputIcon>
+                                      <input
+                                          pInputText
+                                          type="text"
+                                          (input)="onFilter($event)"
+                                          placeholder="Search keyword" />
+                                  </p-iconField>
+                              </div>
+                          </ng-template>
+                          <ng-template pTemplate="header">
+                              <tr class="headInfo">
+                                <!-- <th *ngIf="selectMode" ></th> -->
+                                  <th style="width:22%">Code</th>
+                                  <th style="width:22%">Appointment Title</th>
+                                  <th style="width:22%">Appointment Description</th>
+                                  <th style="width:22%">Appointment Location</th>
+                                  <th style="width:22%">Apartment Name</th>
+                                  <th style="width:22%">Apartment Manager</th>
+                                  <th style="width:22%">Appointment Date</th>
+                                  <th style="width:22%">Appointment From</th>
+                                  <th style="width:22%">Appointment To</th>
+
+
+
+
+                              </tr>
+                              <tr>
+                                 <!-- <th *ngIf="selectMode" ></th> -->
+                                  <th>
+                                      <p-columnFilter
+                                          type="text"
+                                          field="appo_Code"
+                                          placeholder="Search by Code"
+                                          ariaLabel="Filter code" />
+                                  </th>
+                                  <th>
+                                      <p-columnFilter
+                                          type="text"
+                                          field="appo_Title"
+                                          placeholder="Search by title"
+                                          ariaLabel="Filter Title" />
+                                  </th>
+                                  <th>
+                                      <p-columnFilter
+                                          type="text"
+                                          field="appo_Desc"
+                                          placeholder="Search by desc"
+                                          ariaLabel="Filter desc" />
+                                  </th>
+                                  <th>
+                                    <p-columnFilter
+                                        type="text"
+                                        field="apartment_Location"
+                                        placeholder="Search by location"
+                                        ariaLabel="Filter Location" />
+                                    </th>
+                                    <th>
+                                        <p-columnFilter
+                                            type="text"
+                                            field="apartment_Name"
+                                            placeholder="Search by name"
+                                            ariaLabel="Filter name" />
+                                    </th>
+
+                                      <th>
+                                          <p-columnFilter
+                                              type="text"
+                                              field=" apartment_Manager"
+                                              placeholder="Search by manager"
+                                              ariaLabel="Filter manager" />
+                                      </th>
+                                      <th>
+                                        <p-columnFilter
+                                            type="text"
+                                            field="appo_Date"
+                                            placeholder="Search by Date"
+                                            ariaLabel="Filter Date" />
+                                        </th>
+                                        <th>
+                                            <p-columnFilter
+                                                type="text"
+                                                field="appo_From"
+                                                placeholder="Search by  from"
+                                                ariaLabel="Filter from" />
+                                        </th>
+                                        <th>
+                                          <p-columnFilter
+                                              type="text"
+                                              field="appo_To"
+                                              placeholder="Search by to"
+                                              ariaLabel="Filter to" />
+                                      </th>
+                                    <!-- <th>
+                                      <p-columnFilter
+                                          type="text"
+                                          field="skills"
+                                          placeholder="Search by Skills"
+                                          ariaLabel="Filter Skills" />
+                                  </th> -->
+                                  <!-- <th>
+                                      <p-columnFilter field="representative" matchMode="in" [showMenu]="false">
+                                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                              <p-multiSelect
+                                                  [ngModel]="value"
+                                                  [options]="representatives"
+                                                  placeholder="Any"
+                                                  (onChange)="filter($event.value)"
+                                                  optionLabel="name">
+                                                      <ng-template let-option pTemplate="item">
+                                                          <div class="inline-block vertical-align-middle">
+                                                              <img
+                                                                  [alt]="option.label"
+                                                                  src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}"
+                                                                  width="24"
+                                                                  class="vertical-align-middle" />
+                                                              <span class="ml-1 mt-1">{{ option.name }}</span>
+                                                          </div>
+                                                      </ng-template>
+                                              </p-multiSelect>
+                                          </ng-template>
+                                      </p-columnFilter>
+                                  </th> -->
+                                  <!-- <th>
+                                      <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+                                          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                              <p-dropdown
+                                                  [ngModel]="value"
+                                                  [options]="statuses"
+                                                  (onChange)="filter($event.value)"
+                                                  placeholder="Select One"
+                                                  [showClear]="true">
+                                                      <ng-template let-option pTemplate="item">
+                                                          <p-tag
+                                                              [value]="option.value"
+                                                              [ngClass]="getSeverity(option.label)" />
+                                                      </ng-template>
+                                              </p-dropdown>
+                                          </ng-template>
+                                      </p-columnFilter>
+                                  </th> -->
+                                  <!-- <th>
+                                      <p-columnFilter type="boolean" field="verified"></p-columnFilter>
+                                  </th> -->
+                              </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-appointment>
+                              <tr  style="cursor: pointer;" [pSelectableRow]="appointment">
+                                <!-- <td> -->
+                                <!-- <p-tableRadioButton (click)="assignApartment(apartment)" class="mt-20" *ngIf="selectMode"   [value]="apartment"  ></p-tableRadioButton> -->
+                                <!-- </td> -->
+                                 <td  >
+                                  <!-- <p-tableRadioButton  class="mt-20 mr-3"    [value]="appointment"  ></p-tableRadioButton> -->
+                                  {{appointment.appo_Code }}
+                                 </td>
+                                 <!-- <td (click)="onRowSelect({ data: apartment })">
+                                  <img
+                                      [alt]="apartment.apartment_Name"
+                                      [src]="apartment.apartment_Thumb_Image"
+                                      width="32"
+                                      style="vertical-align: middle;width:32px; height:32px;" />
+                                  <span class="ml-1 vertical-align-middle">
+                                      {{ apartment.apartment_Name }}
+                                  </span>
+                                 </td> -->
+                                  <td (click)="onRowSelect({ data: appointment })">
+                                    {{ appointment.appo_Title }}
+                                  </td>
+                                  <td (click)="onRowSelect({ data: appointment })">
+                                    {{ appointment.appo_Desc | slice:0:15 }}...
+                                 </td>
+                                 <td (click)="onRowSelect({ data: appointment })">
+                                  {{ appointment.apartment_Location }}
+                               </td>
+                                 <td (click)="onRowSelect({ data:  appointment })">
+                                  {{  appointment.apartment_Name}}
+                                 </td>
+                                 <td (click)="onRowSelect({ data:  appointment })">
+                                  {{  appointment.apartment_Manager}}
+                                 </td>
+                                 <td (click)="onRowSelect({ data:  appointment })">
+                                  {{  appointment.appo_Date| date: 'yyyy/MM/dd'}}
+                                 </td>
+                                 <td (click)="onRowSelect({ data:  appointment })">
+                                  {{  appointment.appo_From  }}
+                                 </td>
+                                 <td (click)="onRowSelect({ data:  appointment })">
+                                  {{  appointment.appo_To  }}
+                                 </td>
+
+                                  <!-- <td>
+                                      <img
+                                          src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                                          [class]="'flag flag-' + customer.country.code"
+                                          style="width: 20px" />
+                                      <span class="ml-1 vertical-align-middle">
+                                          {{ worker.name }}
+                                      </span>
+                                  </td> -->
+
+                                  <td>
+                                    <p-toast />
+                                    <p-menu #menu [model]="items" appendTo="body" [popup]="true" />
+
+                                    <p-button  (onClick)="selectAppointment(appointment.appo_ID); menu.toggle($event)" icon="pi pi-ellipsis-v"/>
+
+                                  </td>
+                              </tr>
+                          </ng-template>
+                          <ng-template pTemplate="emptymessage">
+                              <tr>
+                                  <td colspan="5">No appointments found.</td>
+                              </tr>
+                          </ng-template>
+                </p-table>
+          </p-tabPanel>
+
+
+
+      </p-tabView>
+    </p-card>
+  </main>
+  <!-- end content page  -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p-dialog
+
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <p-tabView styleClass="tabview-custom">
+      <p-tabPanel  [selected]="!selected">
+          <ng-template pTemplate="header">
+              <div (click)="reset()" class=" flex align-items-center gap-2">
+
+                  <span class=" white-space-nowrap m-0">
+                    Apartment List
+                  </span>
+                  <p-badge [value]="numberApart" />
+
+              </div>
+          </ng-template>
+               <p-table
+                      #dt2
+                      [value]="apartments"
+                      dataKey="apartment_ID"
+                      [rows]="10"
+                      [rowsPerPageOptions]="[10, 25, 50]"
+                      [loading]="loading"
+                      [paginator]="true"
+                      [globalFilterFields]="['apartment_Code', 'apartment_Name', 'apartment_Location','apartment_Manager']"
+                      [tableStyle]="{ 'min-width': '90rem'  }"
+                      selectionMode="single"
+                      [(selection)]="selectedApartment"
+                      (onRowSelect)="onRowSelect($event)"
+                  >
+                      <ng-template pTemplate="caption">
+                          <div class="flex">
+                              <p-iconField iconPosition="left" class="ml-auto">
+                                  <p-inputIcon>
+                                      <!-- <i class="pi pi-search"></i> -->
+                                  </p-inputIcon>
+                                  <input
+                                      pInputText
+                                      type="text"
+                                      (input)="onFilter($event)"
+                                      placeholder="Search keyword" />
+                              </p-iconField>
+                          </div>
+                      </ng-template>
+                      <ng-template pTemplate="header">
+                          <tr class="headInfo">
+
+                              <th style="width:22%">Code</th>
+                              <th style="width:22%">Apartment Name</th>
+                              <th style="width:22%">Apartment Location</th>
+                              <th style="width:22%">Apartment Manager</th>
+
+
+
+
+
+                          </tr>
+                          <tr>
+
+                              <th>
+                                  <p-columnFilter
+                                      type="text"
+                                      field="apartment_Code"
+                                      placeholder="Search by ID"
+                                      ariaLabel="Filter code" />
+                              </th>
+                              <th>
+                                  <p-columnFilter
+                                      type="text"
+                                      field="apartment_Name"
+                                      placeholder="Search by name"
+                                      ariaLabel="Filter Name" />
+                              </th>
+                              <th>
+                                  <p-columnFilter
+                                      type="text"
+                                      field=" apartment_Location"
+                                      placeholder="Search by address"
+                                      ariaLabel="Filter address" />
+                              </th>
+                              <th>
+                                <p-columnFilter
+                                    type="text"
+                                    field=" apartment_Manager"
+                                    placeholder="Search by Manager"
+                                    ariaLabel="Filter Manager" />
+                                </th>
+
+
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-apartment>
+                          <tr  style="cursor: pointer;" [pSelectableRow]="apartment">
+                            <!-- <td> -->
+                            <!-- <p-tableRadioButton (click)="assignApartment(apartment)" class="mt-20" *ngIf="selectMode"   [value]="apartment"  ></p-tableRadioButton> -->
+                            <!-- </td> -->
+                             <td  >
+                              <p-tableRadioButton (click)="assignApartment(apartment)" class="mt-20 mr-3"    [value]="apartment"  ></p-tableRadioButton>
+                              {{ apartment.apartment_Code }}
+                             </td>
+                             <td (click)="onRowSelect({ data: apartment })">
+                              <!-- <img
+                                  [alt]="apartment.apartment_Name"
+                                  [src]="apartment.apartment_Thumb_Image"
+                                  width="32"
+                                  style="vertical-align: middle;width:32px; height:32px;" />
+                              <span class="ml-1 vertical-align-middle"> -->
+                                  {{ apartment.apartment_Name }}
+                              <!-- </span> -->
+                             </td>
+                              <td (click)="onRowSelect({ data: apartment })">
+                                {{ apartment.apartment_Location }}
+                              </td>
+                              <td (click)="onRowSelect({ data: apartment })">
+                                {{ apartment.apartment_Manager }}
+                             </td>
+
+
+                              <!-- <td>
+                                  <img
+                                      src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                                      [class]="'flag flag-' + customer.country.code"
+                                      style="width: 20px" />
+                                  <span class="ml-1 vertical-align-middle">
+                                      {{ worker.name }}
+                                  </span>
+                              </td> -->
+
+                              <!-- <td>
+                                <p-toast />
+                                <p-menu #menu [model]="items" appendTo="body" [popup]="true" />
+
+                                <p-button  (onClick)="selectApartment(apartment.apartment_ID); menu.toggle($event)" icon="pi pi-ellipsis-v"/>
+
+                              </td> -->
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="emptymessage">
+                          <tr>
+                              <td colspan="5">No apartments found.</td>
+                          </tr>
+                      </ng-template>
+            </p-table>
+      </p-tabPanel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p-tabPanel [disabled]="notDisable" [selected]="!notDisable">
+  <ng-template pTemplate="header">
+    <div class="flex align-items-center gap-2">
+
+        <span class=" white-space-nowrap m-0">
+          Create Appointment
+        </span>
+        <!-- <p-badge [value]="numberApart" /> -->
+
+    </div>
+</ng-template>
+  <div class="">
+
+          <div class="div">
+                <div class="flex flex-column gap-2 w-50">
+                  <label for="appo_Title">Appointment Title</label>
+                  <input
+                      pInputText
+                      id="appo_Title"
+                      aria-describedby="appo_Title"
+                      [(ngModel)]="appo_Title"
+                        />
+
+              </div>
+              <div class="flex flex-column gap-2 w-50">
+                <label for="appo_Date">Appointment Date</label>
+                <p-calendar
+                  [(ngModel)]="appo_Date"
+                  [showIcon]="true"
+
+                  placeholder="Write Date"
+                  inputId="appo_Date">
+                </p-calendar>
+           </div>
+
+          </div>
+
+
+
+
+
+
+
+
+          <div class="div">
+            <div class="flex flex-column gap-2 w-100 desc">
+              <label for="desc">Appointment Description</label>
+
+                    <textarea
+                    rows="5"
+                    cols="30"
+                    id="desc"
+                    pInputTextarea
+                    [(ngModel)]="appo_Desc">
+                   </textarea>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="div">
+        <div class="flex flex-column gap-2 w-50">
+         <label for="appo_From">Appointment From</label>
+         <p-calendar
+           [(ngModel)]="appo_From"
+           [showIcon]="true"
+           [timeOnly]="true"
+
+           placeholder="00:00:00"
+           inputId="appo_From">
+         </p-calendar>
+         </div>
+         <div class="flex flex-column gap-2 w-50">
+          <label for="appo_To">Appointment To</label>
+          <p-calendar
+            [(ngModel)]="appo_To"
+            [showIcon]="true"
+            [timeOnly]="true"
+
+            placeholder="00:00:00"
+            inputId="appo_To">
+          </p-calendar>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+          <div class="divider"></div>
+
+          <div class="actions">
+
+            <!-- <button pButton label="Accept" class="accept p-button"></button> -->
+            <p-button (onClick)="createAppointment()" class="accept"  label="Create" />
+             <p-button (onClick)="showSuccess=false" class=" reject " label="Cancel" />
+
+        </div>
+
+
+        </div>
+
+
+  </p-tabPanel>
+
+
+
+  </p-tabView>
+</p-dialog>
+
+
+
+
+<p-dialog header="Appointment Details" [modal]="true" [(visible)]="detailDialog" [style]="{ width: '65rem' }">
+
+
+
+
+
+
+
+  <div class="appointment-details-card" *ngIf="appointmentDetails">
+    <h3>{{ appointmentDetails.appo_Title }}</h3>
+    <p class="description">{{ appointmentDetails.appo_Desc }}</p>
+
+    <div class="detail-item">
+      <label>Code:</label>
+      <span>{{ appointmentDetails.appo_Code }}</span>
+    </div>
+    <div class="detail-item">
+      <label>Apartment:</label>
+      <span>{{ appointmentDetails.apartment_Name }}</span>
+    </div>
+    <div class="detail-item">
+      <label>Location:</label>
+      <span>{{ appointmentDetails.apartment_Location }}</span>
+    </div>
+    <div class="detail-item">
+      <label>Manager:</label>
+      <span>{{ appointmentDetails.apartment_Manager }}</span>
+    </div>
+    <div class="detail-item">
+      <label>Date:</label>
+      <span>{{ appointmentDetails.appo_Date | date: 'yyyy/MM/dd' }}</span>
+    </div>
+    <div class="detail-item">
+      <label>From:</label>
+      <span>{{ this.formatTime(appointmentDetails.appo_From) }}</span>
+    </div>
+    <div class="detail-item">
+      <label>To:</label>
+      <span>{{ this.formatTime(appointmentDetails.appo_To) }}</span>
+    </div>
+  </div>
+
+
+</p-dialog>
+
+
+<p-dialog
+
+    [modal]="true"
+    [(visible)]="updateDialog"
+    [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <p-tabView styleClass="tabview-custom">
+
+
+
+
+
+<p-tabPanel >
+  <ng-template pTemplate="header">
+    <div class="flex align-items-center gap-2">
+
+        <span class=" white-space-nowrap m-0">
+          Update Appointment
+        </span>
+        <!-- <p-badge [value]="numberApart" /> -->
+
+    </div>
+</ng-template>
+  <div class="">
+
+          <div class="div">
+                <div class="flex flex-column gap-2 w-50">
+                  <label for="appo_Title">Appointment Title</label>
+                  <input
+                      pInputText
+                      id="appo_Title"
+                      aria-describedby="appo_Title"
+                      [(ngModel)]="appo_Title"
+                        />
+
+              </div>
+              <div class="flex flex-column gap-2 w-50">
+                <label for="appo_Date">Appointment Date</label>
+                <p-calendar
+                  [(ngModel)]="appo_Date"
+                  [showIcon]="true"
+
+                  [placeholder]="appo_Date"
+                  inputId="appo_Date">
+                </p-calendar>
+           </div>
+
+          </div>
+
+
+
+
+
+
+
+
+          <div class="div">
+            <div class="flex flex-column gap-2 w-100 desc">
+              <label for="desc">Appointment Description</label>
+
+                    <textarea
+                    rows="5"
+                    cols="30"
+                    id="desc"
+                    pInputTextarea
+                    [(ngModel)]="appo_Desc">
+                   </textarea>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="div">
+        <div class="flex flex-column gap-2 w-50">
+         <label for="appo_From">Appointment From</label>
+         <p-calendar
+           [(ngModel)]="appo_From"
+           [showIcon]="true"
+           [timeOnly]="true"
+
+           placeholder="00:00:00"
+           inputId="appo_From">
+         </p-calendar>
+         </div>
+         <div class="flex flex-column gap-2 w-50">
+          <label for="appo_To">Appointment To</label>
+          <p-calendar
+            [(ngModel)]="appo_To"
+            [showIcon]="true"
+            [timeOnly]="true"
+
+            placeholder="00:00:00"
+            inputId="appo_To">
+          </p-calendar>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+          <div class="divider"></div>
+
+          <div class="actions">
+
+            <!-- <button pButton label="Accept" class="accept p-button"></button> -->
+            <p-button (onClick)="updateAppointment() " class="accept"  label="Update" />
+             <p-button (onClick)="updateDialog=false" class=" reject " label="Cancel" />
+
+        </div>
+
+
+        </div>
+
+
+  </p-tabPanel>
+
+
+
+  </p-tabView>
+</p-dialog>
+
+
+
+
+
+<p-dialog class="DS"  [modal]="true" [(visible)]="sureDelete" [style]="{ width: '25rem' }">
+
+  <div class="successs">
+    <div class="featured-icon">
+      <!-- <img src="tick_done.svg"/> -->
+      <i class="pi pi-check"></i>
+    </div>
+      <div class="textS"> Are You sure to delete this Appointment</div>
+      <!-- <div class="textS2">rejection reason has been sent successfully.</div> -->
+
+
+      <p-button (click)="deleteAppointment()" class="accept" label="yes" />
+
+  </div>
+</p-dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

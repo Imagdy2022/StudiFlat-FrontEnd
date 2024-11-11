@@ -134,6 +134,14 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'appointments',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('../../components/appointments/appointments.module').then(
+            (p) => p.AppointmentsModule
+          ),
+      },
+      {
         path: 'faq',
         canActivate: [AuthGuard],
         loadChildren: () =>

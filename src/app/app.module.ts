@@ -58,6 +58,7 @@ import { ContractModule } from './components/configurations/contract/contract.mo
 
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+// import { AppointmentsComponent } from './components/appointments/appointments.component';
 
 
 initializeApp(environment.firebase);

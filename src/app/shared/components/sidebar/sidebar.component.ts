@@ -28,7 +28,8 @@ export class SidebarComponent implements OnInit {
     { text: "inquiries", img: "assets/images/navigation/help.svg" },
 
     { text: "Issue_Reports", img: "assets/images/navigation/reports.svg" },
-    { text: "Landlord Requests", img: "assets/images/navigation/landlord.svg" }];
+    { text: "Landlord Requests", img: "assets/images/navigation/landlord.svg" },
+    { text: "Appointments", img: "assets/images/navigation/landlord.svg" }];
 
   listAnchorsOther: Array<any> = [
     { text: "Help", img: "assets/images/navigation/help.svg" },
@@ -116,6 +117,9 @@ for(let i=0; i<this.permissions.length;i++){
     this.Dashboard=this.permissions[i];
   }
   else if(this.permissions[i].page_Name=="Landlord Requests"){
+    this.LandLord=this.permissions[i];
+  }
+  else if(this.permissions[i].page_Name=="Appointments"){
     this.LandLord=this.permissions[i];
   }
 }}
