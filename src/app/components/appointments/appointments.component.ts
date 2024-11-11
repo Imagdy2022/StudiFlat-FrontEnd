@@ -290,12 +290,20 @@ console.log(this.appointmentDataUpdate)
   // console.log(this.dt2.filterGlobal(inputValue, 'contains'))
 }
 
-onRowSelect(event: any) {
+onRowSelectAppo(event: any) {
   console.log(event)
   const appoID = event.data.appo_ID;
   console.log('id',appoID);
   this.selectAppointment(appoID);
   this.getDetails('details')
+  // this.router.navigate(['/worker-details', workerId]);
+}
+onRowSelect(event: any) {
+  console.log(event)
+  const appoID = event.data.appo_ID;
+  console.log('id',appoID);
+  // this.selectAppointment(appoID);
+  // this.getDetails('details')
   // this.router.navigate(['/worker-details', workerId]);
 }
 detailDialog:boolean=false
