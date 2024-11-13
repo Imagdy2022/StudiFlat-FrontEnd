@@ -41,7 +41,7 @@ export class AppointmentsComponent {
   items!: any;
   appointments:any[]=[];
   selectedAppointment:any;
-  number:string='5';
+  number:string='0';
 
 
 
