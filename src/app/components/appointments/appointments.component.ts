@@ -98,7 +98,7 @@ export class AppointmentsComponent {
         apartment_Manager: appointment.apartment_Manager,
         apartment_Name: appointment.apartment_Name,
         appo_Code: appointment.appo_Code,
-        appo_Date: appointment.appo_Date,
+        appo_Date: this.datePipe.transform(appointment.appo_Date, 'yyyy/MM/dd') ,
         appo_Desc: appointment.appo_Desc,
         appo_From: this.formatTime(appointment.appo_From),
         appo_ID: appointment.appo_ID,
@@ -198,7 +198,7 @@ createAppointment() {
     apartment_ID: aprtID,
     appo_Title: this.appo_Title,
     appo_Desc: this.appo_Desc,
-    appo_Date: this.appo_Date.toString(),
+    appo_Date:this.appo_Date,
     appo_From: this.appo_From ,
     appo_To: this.appo_To
   };
@@ -250,14 +250,17 @@ setToValue(timeString: any): string {
   }
 }
 
-
+onDateSelect(event: Date): void {
+  const formattedDate = this.datePipe.transform(event, 'dd/MM/yyyy');
+  this.appo_Date = formattedDate!; // Non-null assertion
+}
 updateAppointment() {
 
   this.appointmentDataUpdate = {
     appo_ID: this.appoID,
     appo_Title: this.appo_Title,
     appo_Desc: this.appo_Desc,
-    appo_Date: this.appo_Date.toString(),
+    appo_Date: this.appo_Date,
     appo_From: this.setFromValue(this.appo_From),
     appo_To:  this.setToValue(this.appo_To)
   };

@@ -9,11 +9,17 @@ import * as FileSaver from 'file-saver';
 import { Guid } from 'guid-typescript';
 import { Reviews } from 'src/app/models/reviews';
 import { Subscription } from 'rxjs';
-
+import { TableRowCollapseEvent, TableRowExpandEvent } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
 
 import htmlToPdfmake from 'html-to-pdfmake';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { TagModule } from 'primeng/tag';
+import { ToastModule } from 'primeng/toast';
+import { RatingModule } from 'primeng/rating';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -28,7 +34,8 @@ interface ApartmentDetails {
   selector: 'app-apartment-details',
   templateUrl: './apartment-details.component.html',
   styleUrls: ['./apartment-details.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
+
 })
 export class ApartmentDetailsComponent implements OnInit {
   currentImage: string;
@@ -86,6 +93,7 @@ export class ApartmentDetailsComponent implements OnInit {
   display22: any = 'none';
   imageSize: string = '';
   noAllbed:number;
+  displayRoom: string;
 
   constructor(
     public _ApartmentService: ApartmentService,
@@ -183,6 +191,7 @@ export class ApartmentDetailsComponent implements OnInit {
   bedsPrice:number=0;
   showRoomDesign :boolean;
   allResponse:any;
+  Rooms_Details:any;
   getApartmentDetails() {
     this.subscriptions.push(
       this._ApartmentService.getApartDetail(this.apt_UUID).subscribe(
@@ -190,6 +199,7 @@ export class ApartmentDetailsComponent implements OnInit {
           console.log(res)
           this.allResponse=res;
           this.aprt = res.apartment_Basic_Info || {};
+          this.Rooms_Details=this.aprt.apartment_Rooms||{};
           // if(this.aprt.apartment_Type==='Studio'){
           //   this.showRoomDesign=false;
           // }else{
@@ -331,7 +341,20 @@ export class ApartmentDetailsComponent implements OnInit {
   onCloseQrModal() {
     this.qrCodeImg = '';
     this.displayQr = 'none';
+
   }
+  expandedRows={};
+  onOpenRoomsModal()  {
+
+    this.displayRoom = 'block';
+
+  }
+
+  onCloseRoomsModal() {
+
+    this.displayRoom = 'none';
+  }
+
 
   checkRole() {
     const data = localStorage.getItem('user');
@@ -834,4 +857,75 @@ export class ApartmentDetailsComponent implements OnInit {
   closeImageModal() {
     this.isModalOpen = false;
   }
+
+
+  // Region of New Update ( Rooms ( CURD ) & Bed ( CURD ))
+
+  DeleteBed(Apartment_ID:any,Room_ID:any,Bed_ID:any)
+  {
+    this.subscriptions.push(
+      this._ApartmentService.DeleteBed(Apartment_ID,Room_ID,Bed_ID).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+          this.getApartmentDetails();
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.message}`,
+          });
+        }
+      )
+    );
+  }
+  AddBed(Apartment_ID:any,Room_ID:any)
+  {
+    this.subscriptions.push(
+      this._ApartmentService.AddBed(Apartment_ID,Room_ID).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+          this.getApartmentDetails();
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.message}`,
+          });
+        }
+      )
+    );
+  }
+  DeleteRoom(Apartment_ID:any,Room_ID:any)
+  {
+    this.subscriptions.push(
+      this._ApartmentService.DeleteRoom(Apartment_ID,Room_ID).subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: `${res.message}`,
+          });
+          this.getApartmentDetails();
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: `${error.message}`,
+          });
+        }
+      )
+    );
+  }
+  // ---------------------End Region------------------- //
 }

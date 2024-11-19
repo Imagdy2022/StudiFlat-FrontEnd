@@ -253,7 +253,7 @@
                                   {{  appointment.apartment_Manager}}
                                  </td>
                                  <td (click)="onRowSelect({ data:  appointment })">
-                                  {{  appointment.appo_Date| date: 'yyyy/MM/dd'}}
+                                  {{  appointment.appo_Date| date: 'dd/MM/yy'}}
                                  </td>
                                  <td (click)="onRowSelect({ data:  appointment })">
                                   {{  appointment.appo_From  }}
@@ -322,7 +322,7 @@
 
     [modal]="true"
     [(visible)]="visible"
-    [style]="{ width: '50rem' }"
+    [style]="{ width: '75rem' }"
     [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
     <p-tabView styleClass="tabview-custom">
       <p-tabPanel  [selected]="!selected">
@@ -541,9 +541,9 @@
                 <p-calendar
                   [(ngModel)]="appo_Date"
                   [showIcon]="true"
-
+                  dateFormat="dd/MM/yy"
                   placeholder="Write Date"
-                  inputId="appo_Date">
+                  inputId="appo_Date" >
                 </p-calendar>
            </div>
 
@@ -618,7 +618,7 @@
 
             <!-- <button pButton label="Accept" class="accept p-button"></button> -->
             <p-button (onClick)="createAppointment()" class="accept"  label="Create" />
-             <p-button (onClick)="showSuccess=false" class=" reject " label="Cancel" />
+             <!-- <p-button (onClick)="showSuccess=false" class=" reject " label="Cancel" /> -->
 
         </div>
 
@@ -666,7 +666,7 @@
     </div>
     <div class="detail-item">
       <label>Date:</label>
-      <span>{{ appointmentDetails.appo_Date | date: 'yyyy/MM/dd' }}</span>
+      <span>{{ appointmentDetails.appo_Date | date: 'dd/MM/yy' }}</span>
     </div>
     <div class="detail-item">
       <label>From:</label>
@@ -723,9 +723,9 @@
                 <p-calendar
                   [(ngModel)]="appo_Date"
                   [showIcon]="true"
-
+                  dateFormat="dd/MM/yy"
                   [placeholder]="appo_Date"
-                  inputId="appo_Date">
+                  inputId="appo_Date" >
                 </p-calendar>
            </div>
 
