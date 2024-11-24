@@ -52,4 +52,28 @@ export class BlogService {
     const url = `${environment.apiUrl}/Basics/Update_Blog`;
     return this.http.post(url, blogData,{headers:this.headers});
   }
+
+  uploadImage(file: File) {
+    const url = `${environment.apiUrl}/Basics/UploadSingleFile`;
+
+      const formData = new FormData();
+      formData.append('fileData', file);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('tokenKey')}` // If authentication is required
+      });
+
+      return this.http.post(url, formData, { headers });
+    }
+
+
+  deleteBlog(blogId: string): Observable<string> {
+    const url = `${environment.apiUrl}/Basics/Delete_Blog`; // API endpoint
+    const params = new HttpParams().set('Blog_ID', blogId); // Set query parameter
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('tokenKey')}` // If authentication is required
+    });
+
+    return this.http.delete<string>(url, { params,headers });
+  }
 }

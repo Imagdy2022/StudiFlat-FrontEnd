@@ -45,6 +45,7 @@ export class InquiriesComponent implements OnInit {
 is_Super:any
 checkRole(){
   const data = localStorage.getItem("user");
+  console.log(data)
    if (data !== null) {
 
     let parsedData = JSON.parse(data);

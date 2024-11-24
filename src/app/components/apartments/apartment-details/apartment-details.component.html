@@ -111,8 +111,11 @@
               <p>Published: {{ apartmentsContract?.contractDate_Start | date: 'dd/MM/yyyy - hh:mm a' }}</p>
             </div>
             <div class="custom-apartment-actions d-flex justify-content-between mb-5">
-              <button class="custom-btn custom-btn-edit w-75" routerLink="/apartments/page/{{aprt?.apartment_ID}}">
+              <button class="custom-btn custom-btn-edit w-50" routerLink="/apartments/page/{{aprt?.apartment_ID}}">
                 <img src="assets/images/apartmentImages/edit.svg" alt="Edit" class="custom-btn-icon">Edit
+              </button>
+              <button class="custom-btn custom-btn-edit w-25" (click)="onOpenRoomsModal()">
+                <img src="assets/images/apartmentImages/bedrooms.svg" alt="Rooms" class="custom-btn-icon">Rooms
               </button>
               <button class="custom-btn custom-btn-share w-25">
                 <img src="assets/images/apartmentImages/share.svg" alt="Share" class="custom-btn-icon">Share
@@ -1709,6 +1712,104 @@
             <button class="custom-btn-rented mt-4" (click)="printDiv('qrToPdf')">Download</button>
           </div>
         </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayRoom}"
+  style="background-color: rgb(23 22 22 / 50%);">
+  <div class="modal-dialog" role="document" style="max-width: 80rem;">
+    <div class="modal-content" style="margin-top: 3rem;">
+      <button  type="button" aria-label="Close"
+        style="border: none; background-color: #ffffff; width:40px; height: 40px;margin-left: auto;margin-right:15px;">
+        <button aria-hidden="true" style="color: #000000; font-size: 35px; border: none; background-color: #ffffff;" (click)="onCloseRoomsModal()">×</button>
+      </button>
+      <div class="modal-body">
+        <div class="card">
+
+          <p-table [value]="Rooms_Details"   [scrollable]="true"
+          scrollHeight="400px"  dataKey="room_ID" [tableStyle]="{ 'min-width': '75rem' }" [expandedRowKeys]="expandedRows">
+
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th style="width: 5rem"></th>
+                      <th pSortableColumn="room_QRCode">Room QR <p-sortIcon field="room_QRCode" /></th>
+                      <th pSortableColumn="room_Type">Room Type <p-sortIcon field="room_Type" /></th>
+                      <th pSortableColumn="beds_No">Beds No <p-sortIcon field="beds_No" /></th>
+                      <th pSortableColumn="bed_Price">Bed Price <p-sortIcon field="bed_Price" /></th>
+                      <th pSortableColumn="bed_SecuirtyDeposit">Secuirty Deposit <p-sortIcon field="bed_SecuirtyDeposit" /></th>
+                      <th pSortableColumn="bed_Service_Fees">Service Fees <p-sortIcon field="bed_Service_Fees" /></th>
+                      <th>  <button class="custom-btn-newRoom"><span class="pi pi-plus"> </span> Add Room</button></th>
+
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-product let-expanded="expanded">
+                  <tr>
+                      <td>
+                          <p-button type="button" pRipple [pRowToggler]="product"  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+                      </td>
+                      <td>{{ product.room_QRCode }}</td>
+                      <td>{{ product.room_Type }}</td>
+                      <td>{{ product.beds_No }}</td>
+                      <td>{{ product.bed_Price }}</td>
+                      <td>{{ product.bed_SecuirtyDeposit }}</td>
+                      <td>{{ product.bed_Service_Fees }}</td>
+                      <td>
+                        <div class="flex align-items-center justify-content-center gap-2">
+                          <button pButton pRipple type="button" icon="pi pi-plus-circle" class="p-button-rounded p-button-text" (click)="AddBed(aprt?.apartment_ID,product.room_ID)">
+                          </button>
+                          <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text">
+                          </button>
+                          <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-text" (click)="DeleteRoom(aprt?.apartment_ID,product.room_ID)">
+                          </button>
+                        </div>
+                      </td>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="rowexpansion" let-product>
+                  <tr>
+                      <td colspan="7">
+                          <div class="p-3 text-center">
+                              <p-table [value]="product.room_Beds" dataKey="room_ID">
+                                  <ng-template pTemplate="header">
+                                      <tr>
+                                          <th pSortableColumn="bed_No">Bed No <p-sortIcon field="bed_No" /></th>
+                                          <th pSortableColumn="bed_QRCode">Bed QR Code <p-sortIcon field="bed_QRCode" /></th>
+                                          <th pSortableColumn="bed_Name">Bed Name <p-sortIcon field="bed_Name" /></th>
+                                          <th></th>
+
+                                      </tr>
+                                  </ng-template>
+                                  <ng-template pTemplate="body" let-beds>
+                                      <tr>
+                                          <td>{{ beds.bed_No }}</td>
+                                          <td>{{ beds.bed_QRCode }}</td>
+                                          <td>{{ beds.bed_Name }}</td>
+                                          <td>
+                                            <button pButton pRipple type="button"
+                                             icon="pi pi-times"
+                                             class="p-button-rounded p-button-text"
+                                             (click)="DeleteBed(aprt?.apartment_ID,product.room_ID,beds.bed_ID)">
+                                            </button>
+                                          </td>
+
+                                      </tr>
+                                  </ng-template>
+                                  <ng-template pTemplate="emptymessage">
+                                      <tr>
+                                          <td colspan="6">There are no order for this product yet.</td>
+                                      </tr>
+                                  </ng-template>
+                              </p-table>
+                          </div>
+                      </td>
+                  </tr>
+              </ng-template>
+          </p-table>
+      </div>
 
       </div>
     </div>

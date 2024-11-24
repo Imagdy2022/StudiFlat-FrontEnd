@@ -1,7 +1,7 @@
 <!-- <app-edite-user-details></app-edite-user-details> -->
 <!-- start header  -->
 <header>
-  <app-head (newItemEvent)="addItem($event)" [titleModule]="'blog details'"></app-head>
+  <app-head (newItemEvent)="addItem($event)" [titleModule]="'Add Blog'"></app-head>
 </header>
 <!-- end header  -->
 
@@ -168,7 +168,7 @@
         </p-fileUpload>
 
         <!-- Galleria Display -->
-        <p-galleria
+        <!-- <p-galleria
           [value]="images"
           [circular]="true"
           [showThumbnails]="false"
@@ -181,21 +181,27 @@
           <ng-template pTemplate="thumbnail" let-item>
             <img [src]="item.src" [alt]="item.alt" style="width: 50px; height: 50px;">
           </ng-template>
-        </p-galleria>
+        </p-galleria> -->
 
         <!-- Drag and Drop to Reorder -->
         <!-- <h5>Reorder Images</h5> -->
         <div class="image-list">
-          <div
+          <!-- <div
             *ngFor="let img of images; let i = index"
             class="item"
             pDraggable="true"
             (onDragStart)="onDragStart($event, img)"
-            (onDragEnd)="onDragEnd($event)">
+            (onDragEnd)="onDragEnd($event)"> -->
+            <div
+             *ngIf="images!==''"
+            class="item"
+           >
 
-            <div pDroppable="true" (onDrop)="onDrop($event, i)" (onDragEnter)="onDragEnter($event, i)">
-              <img class="image-item" [src]="img.src" [alt]="img.alt"  >
-              <div class="bin" (click)="removeImage(i)"><img src="bin.svg"/></div>
+            <!-- <div pDroppable="true" (onDrop)="onDrop($event, i)" (onDragEnter)="onDragEnter($event, i)"> -->
+            <div  >
+
+              <img class="image-item" [src]="images" alt="blog Image"  >
+              <div class="bin" (click)="removeImage()"> <i class="pi pi-trash"></i></div>
             </div>
           </div>
         </div>

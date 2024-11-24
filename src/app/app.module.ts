@@ -13,6 +13,7 @@ import { PaymentsModule } from './components/payments/payments.module';
 import { AdminsModule } from './components/admins/admins.module';
 import { RolesModule } from './components/roles/roles.module';
 import { WorkersModule } from './components/workers/workers.module';
+import { CommonModule } from '@angular/common';
 
 import { AuthorizationModule } from './components/authorization/authorization.module';
 import { CancelInquire2Module } from './components/cancel-inquire2/cancel-inquire2.module';
@@ -59,6 +60,11 @@ import { ContractModule } from './components/configurations/contract/contract.mo
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 // import { AppointmentsComponent } from './components/appointments/appointments.component';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+import { ToastModule } from 'primeng/toast';
+import { RatingModule } from 'primeng/rating';
 
 
 initializeApp(environment.firebase);
@@ -102,6 +108,12 @@ initializeApp(environment.firebase);
     PushmsgsModule,
     ConfirmDialogModule,
     NgbDatepickerModule,
+    TableModule,
+    ButtonModule,
+    TagModule,
+    CommonModule,
+   ToastModule,
+   RatingModule,
     BlockUIModule.forRoot({
       delayStart: 1,
       delayStop: 500,

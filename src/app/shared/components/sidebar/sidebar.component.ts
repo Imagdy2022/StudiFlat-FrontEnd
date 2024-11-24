@@ -58,6 +58,8 @@ export class SidebarComponent implements OnInit {
   Inquiries:any={}
   Dashboard:any={}
   LandLord:any={}
+  Appointment:any={}
+
   is_Super:any
   ngOnInit(): void {
 
@@ -120,7 +122,7 @@ for(let i=0; i<this.permissions.length;i++){
     this.LandLord=this.permissions[i];
   }
   else if(this.permissions[i].page_Name=="Appointments"){
-    this.LandLord=this.permissions[i];
+    this.Appointment=this.permissions[i];
   }
 }}
   }

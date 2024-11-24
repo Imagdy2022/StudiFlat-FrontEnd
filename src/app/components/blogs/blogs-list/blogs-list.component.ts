@@ -23,6 +23,7 @@ export class BlogsListComponent {
  search:boolean=false;
  partnerId:any;
  subscriptions:Subscription[] = [];
+ loadingList:boolean=true;
  listDropDown:Array<object>=[{name:'All'},{name:'Today'},{name:'Last Week'},{name:'This month'},{name:'This year'}]
 
  constructor( private blogService: BlogService,public _adminservices:AdminsService ,public router: Router,private messageService: MessageService,) {
@@ -54,7 +55,7 @@ items:any;
   * @param value string
   * @returns void
   */
- addItem(value: string): void {
+ addItem(value: any): void {
    this.showSide = value
  }
 
@@ -250,6 +251,7 @@ blogs: any[] = [];
         this.blogs = response.data; // Adjust this based on your API response structure.
         this.totalRecords = response.total_Records || 120; // Update this if the API returns total records.
         console.log(this.blogs)
+        this.loadingList=false;
       },
       (error) => {
         console.error('Error fetching blogs:', error);
@@ -271,5 +273,21 @@ blogs: any[] = [];
   viewBlogDetails(blog: any): void {
     this.blogService.setBlogId(blog.blog_ID);
     this.router.navigate(['blogs/details',blog.blog_Slug]);
+  }
+  deleteBlogId(blog:any){
+    console.log(blog.blog_ID)
+
+    this.blogService.deleteBlog(blog.blog_ID).subscribe(
+      (response) => {
+       this.fetchBlogs()
+       console.error(' deleting Success');
+      //  this.openMenuIndex='none'
+
+      },
+      (error) => {
+        console.error('Error deleting blog:', error);
+      }
+    );
+    // this.fetchBlogs();
   }
 }

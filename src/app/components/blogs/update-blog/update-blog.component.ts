@@ -23,12 +23,61 @@ export class UpdateBlogComponent {
 
   constructor(private blogService: BlogService) {}
 
+  // ngAfterViewInit() {
+  //   this.quill = new Quill(this.editorContainer.nativeElement, {
+  //     theme: 'snow',
+  //     placeholder: 'Write your blog content here...',
+  //     modules: {
+  //       toolbar: [
+  //         [{ header: [1, 2, 3, 4, 5, 6, false] }],
+  //         [{ font: [] }],
+  //         [{ size: ['small', false, 'large', 'huge'] }],
+  //         ['bold', 'italic', 'underline', 'strike'],
+  //         [{ color: [] }, { background: [] }],
+  //         [{ script: 'sub' }, { script: 'super' }],
+  //         [{ list: 'ordered' }, { list: 'bullet' }],
+  //         [{ indent: '-1' }, { indent: '+1' }],
+  //         [{ align: [] }],
+  //         ['link', 'image', 'video', 'blockquote', 'code-block'],
+  //         ['clean']
+  //       ]
+  //     }
+
+  //   });
+  // }
+
   ngAfterViewInit() {
+    // const Quill =(window as any)['Quill'];
+    // if (window && (window as any).ImageResize) {
+    //   Quill.register('modules/imageResize', (window as any).ImageResize);
+    //   console.log('done')
+    // } else {
+    //   console.error('ImageResize module is not defined. Make sure the CDN is loaded correctly.');
+    //   return;
+    // }
+    const Quill = (window as any)['Quill'];
+    const ImageResize = (window as any)['ImageResize'] ; // Use correct global reference
+    const ImageResizeModule = ImageResize.default || ImageResize;
+
+    console.log('Quill:', Quill);
+    console.log('ImageResize:', ImageResize);
+
+    if (  !ImageResize) {
+      console.error('Quill or ImageResize module not loaded properly');
+      return;
+    }
+
+    // Register the Image Resize module
+    Quill.register('modules/imageResize', ImageResizeModule );
+
     this.quill = new Quill(this.editorContainer.nativeElement, {
       theme: 'snow',
       placeholder: 'Write your blog content here...',
       modules: {
-        toolbar: [
+        imageResize: {
+          displaySize: true
+        },
+        toolbar:{container:[
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
           [{ font: [] }],
           [{ size: ['small', false, 'large', 'huge'] }],
@@ -37,11 +86,45 @@ export class UpdateBlogComponent {
           [{ script: 'sub' }, { script: 'super' }],
           [{ list: 'ordered' }, { list: 'bullet' }],
           [{ indent: '-1' }, { indent: '+1' }],
+          [{ 'color': [] }, { 'background': [] }],
           [{ align: [] }],
           ['link', 'image', 'video', 'blockquote', 'code-block'],
           ['clean']
-        ]
-      }
+        ] ,
+         handlers: {
+          image: () => this.customImageHandler()
+         }}
+        //  ,
+        //  imageResize: {
+        //   modules: ['Resize', 'DisplaySize', 'Toolbar'],
+        // },
+
+        // }} [
+        //   [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        //   [{ font: [] }],
+        //   [{ size: ['small', false, 'large', 'huge'] }],
+        //   ['bold', 'italic', 'underline', 'strike'],
+        //   [{ color: [] }, { background: [] }],
+        //   [{ script: 'sub' }, { script: 'super' }],
+        //   [{ list: 'ordered' }, { list: 'bullet' }],
+        //   [{ indent: '-1' }, { indent: '+1' }],
+        //   [{ align: [] }],
+        //   ['link', 'image', 'video', 'blockquote', 'code-block'],
+        //   ['clean']
+        // ] ,
+        //   handlers: {
+        //   image: this.customImageHandler.bind(this)
+        // }
+        // handlers: {
+        //   image: () => this.customImageHandler()
+        // }
+
+
+      },
+        // imageResize: {
+        //   modules: ['Resize', 'DisplaySize', 'Toolbar'],
+        // },
+
       // modules: {
       //   toolbar: [
       //     [{ header: [1, 2, 3, false] }],
@@ -52,6 +135,37 @@ export class UpdateBlogComponent {
       //   ]
       // }
     });
+    // this.quill.register('modules/imageResize', (window as any)['QuillImageResize']);
+
+  }
+
+  customImageHandler() {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = () => {
+      const file = input.files ? input.files[0] : null;
+
+      if (file) {
+        // Call the service to upload the image
+        this.blogService.uploadImage(file).subscribe(
+          (response: any) => {
+            const imageUrl = response[0]?.file_Path; // Adjust field based on your API response
+
+            if (imageUrl) {
+              // Insert the Image URL into Quill Editor
+              const range = this.quill.getSelection();
+              this.quill.insertEmbed(range?.index || 0, 'image', imageUrl);
+            }
+          },
+          (error) => {
+            console.error('Error uploading file:', error);
+          }
+        );
+      }
+    };
   }
 
   getEditorContent() {
@@ -87,7 +201,7 @@ export class UpdateBlogComponent {
   * @returns void
   */
  showSide:string='';
- addItem(value: string): void {
+ addItem(value: any): void {
   this.showSide = value
 }
 
@@ -117,7 +231,69 @@ addKeyword(keyword: string) {
 }
 
 //////////////////////////upload images////////////////////
-images: any;
+// images: any;
+// draggedImage: any;
+
+// responsiveOptions: any[] = [
+//   {
+//     breakpoint: '1024px',
+//     numVisible: 5
+//   },
+//   {
+//     breakpoint: '768px',
+//     numVisible: 3
+//   },
+//   {
+//     breakpoint: '560px',
+//     numVisible: 1
+//   }
+// ];
+
+// onImageSelect(event: any) {
+
+
+//     for (let file of event.files) {
+//     const reader = new FileReader();
+//     reader.onload = (e: any) => {
+//       this.images=e.target.result
+//     console.log(this.images)
+//     };
+//     reader.readAsDataURL(file);
+//   }
+
+
+
+
+
+// }
+
+// removeImage() {
+//   this.images='';
+//   this.altImg='';
+// }
+
+// onDragStart(event: any, img: any) {
+//   this.draggedImage = img;
+// }
+
+// onDrop(event: any, index: number) {
+//   if (this.draggedImage) {
+//     const draggedIndex = this.images.indexOf(this.draggedImage);
+//     this.images.splice(draggedIndex, 1);
+//     this.images.splice(index, 0, this.draggedImage);
+//     this.draggedImage = null;
+//   }
+// }
+
+// onDragEnd(event: any) {
+//   this.draggedImage = null;
+// }
+
+// onDragEnter(event: any, index: number) {
+
+// }
+images: string = '';
+
 draggedImage: any;
 
 responsiveOptions: any[] = [
@@ -135,50 +311,58 @@ responsiveOptions: any[] = [
   }
 ];
 
+// onImageSelect(event: any) {
+//   for (let file of event.files) {
+//     const reader = new FileReader();
+//     reader.onload = (e: any) => {
+//       this.images.push(e.target.result);
+//     };
+//     reader.readAsDataURL(file);
+//   }
+// }
+loading: boolean = false;
+
 onImageSelect(event: any) {
-  // for (let file of event.files) {
-  //   const reader = new FileReader();
-  //   reader.onload = (e: any) => {
-  //     this.images.push({
-  //       src: e.target.result,
-  //       alt: file.name,
-  //     });
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
+  this.loading=true;
+  for (let file of event.files) {
+    this.blogService.uploadImage(file).subscribe(
+      (response: any) => {
+        // Assuming the API returns a URL to the uploaded image
+        const imageUrl = response[0].file_Path;
+        console.log(imageUrl)
+        // this.images.push(imageUrl);
+        this.images=imageUrl;
 
-    for (let file of event.files) {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.images=e.target.result
-    console.log(this.images)
-    };
-    reader.readAsDataURL(file);
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error uploading file:', error);
+      }
+    );
   }
-
-
-
-
-
 }
 
+
+
+// removeImage(index: number) {
+//   this.images.splice(index, 1);
+// }
 removeImage() {
   this.images='';
-  this.altImg='';
 }
 
 onDragStart(event: any, img: any) {
   this.draggedImage = img;
 }
 
-onDrop(event: any, index: number) {
-  if (this.draggedImage) {
-    const draggedIndex = this.images.indexOf(this.draggedImage);
-    this.images.splice(draggedIndex, 1); // Remove from original position
-    this.images.splice(index, 0, this.draggedImage); // Insert at new position
-    this.draggedImage = null; // Reset
-  }
-}
+// onDrop(event: any, index: number) {
+//   if (this.draggedImage) {
+//     const draggedIndex = this.images.indexOf(this.draggedImage);
+//     this.images.splice(draggedIndex, 1);
+//     this.images.splice(index, 0, this.draggedImage);
+//     this.draggedImage = null;
+//   }
+// }
 
 onDragEnd(event: any) {
   this.draggedImage = null;
@@ -187,6 +371,8 @@ onDragEnd(event: any) {
 onDragEnter(event: any, index: number) {
   // Optional: Handle visual effects for drag over
 }
+
+/////////////////////////////////////////////////////////////////
 
 displayEditor:string='block';
 viewEditor(){

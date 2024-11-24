@@ -37,7 +37,7 @@ export class AuthenticationService {
         localStorage.clear();
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('tokenKey', user.token);
-        localStorage.setItem('permissions', user);
+        localStorage.setItem('permissions',JSON.stringify(user.permissions)  );
 
         this.userSubject.next(user);
         return user;

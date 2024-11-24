@@ -28,7 +28,7 @@ export class ApartmentService {
   }
 
   FilterApartmentsFront(FilterKey: any, PageNumber: number, PageSize: number, Apt_Statuss: any, SearchKey: any): Observable<any> {
-    const url = `${environment.apiUrl}/ApartmentV2/GetListApartments`;
+    const url = `${environment.apiUrl}/ApartmentV2/GetListApartments_DB`;
     const params = new HttpParams()
       .set('Filter', FilterKey)
       .set('Page_No', PageNumber.toString())
@@ -186,7 +186,55 @@ export class ApartmentService {
       { headers: this.headers }
     );
   }
+  DeleteBed(Apt_ID:any,Room_ID:any,Bed_ID:any): Observable<any> {
+    const params = new HttpParams()
+    .set('Apartment_ID', Apt_ID)
+    .set('Room_ID', Room_ID)
+    .set('Bed_ID', Bed_ID);
 
+  // Make the HTTP DELETE request with query parameters
+    return this.http.delete(
+      `${environment.apiUrl}/ApartmentV2/DeleteBed`,
+      {
+        headers: this.headers,
+        params: params // Attach query parameters
+      }
+    );
+  }
+  AddBed(Apt_ID:any,Room_ID:any): Observable<any> {
+    const params = new HttpParams()
+    .set('Apartment_ID', Apt_ID)
+    .set('Room_ID', Room_ID)
+    const headers = new HttpHeaders()
+    .set('Authorization', `Bearer ${this.token}`)
+    .set('Content-Type', 'application/json');
+
+  // Make the HTTP Post request with query parameters
+    return this.http.post(
+      `${environment.apiUrl}/ApartmentV2/AddNewBed`,{},
+      {
+        headers: headers,
+        params: params // Attach query parameters
+      }
+    );
+  }
+  DeleteRoom(Apt_ID:any,Room_ID:any): Observable<any> {
+    const params = new HttpParams()
+    .set('Apartment_ID', Apt_ID)
+    .set('Room_ID', Room_ID)
+    const headers = new HttpHeaders()
+    .set('Authorization', `Bearer ${this.token}`)
+    .set('Content-Type', 'application/json');
+
+  // Make the HTTP Post request with query parameters
+    return this.http.delete(
+      `${environment.apiUrl}/ApartmentV2/DeleteRoom`,
+      {
+        headers: headers,
+        params: params // Attach query parameters
+      }
+    );
+  }
   createContract(data: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl + '/Apartment/PostContract'}`,

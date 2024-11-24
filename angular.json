@@ -48,7 +48,8 @@
                         "scripts": [
                             "./node_modules/jquery/dist/jquery.min.js",
                             "./node_modules/popper.js/dist/umd/popper.min.js",
-                            "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+                            "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+                            "src/image-resize.min.js"
                         ]
                     },
                     "configurations": {
@@ -71,6 +72,25 @@
                             "outputHashing": "all",
                             "outputPath": "dist/Prod"
                         },
+                        "Islam": {
+                          "budgets": [{
+                                  "type": "initial",
+                                  "maximumWarning": "100mb",
+                                  "maximumError": "100mb"
+                              },
+                              {
+                                  "type": "anyComponentStyle",
+                                  "maximumWarning": "1024kb",
+                                  "maximumError": "1024kb"
+                              }
+                          ],
+                          "fileReplacements": [{
+                              "replace": "src/environments/environment.ts",
+                              "with": "src/environments/environment.Islam.ts"
+                          }],
+                          "outputHashing": "all",
+                          "outputPath": "dist/Islam"
+                      },
                         "local": {
                           "budgets": [{
                                   "type": "initial",
@@ -134,6 +154,9 @@
                     },
                         "development": {
                             "browserTarget": "StudiFlats:build:development"
+                        },
+                        "Islam": {
+                            "browserTarget": "StudiFlats:build:Islam"
                         }
                     },
                     "defaultConfiguration": "development"
