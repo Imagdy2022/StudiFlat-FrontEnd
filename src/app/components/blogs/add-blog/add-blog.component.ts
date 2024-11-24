@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
 import { BlogService } from '../blog.service';
+import { Router } from '@angular/router';
 
 
 declare var Quill: any;
@@ -22,7 +23,7 @@ export class AddBlogComponent implements AfterViewInit {
   quill: any;
   description: string = '';
 
-  constructor(private blogService: BlogService) {}
+  constructor(public router: Router,private blogService: BlogService) {}
   // Quill.register('modules/imageResize', window['ImageResize']);
   // Quill.register("modules/resize", window.QuillResizeImage);
 
@@ -387,6 +388,8 @@ saveBlog() {
     response => {
       console.log('Blog saved successfully:', response);
       // Optionally, navigate to another page or show a success message.
+    this.router.navigate(['/blogs']);
+
     },
     error => {
       console.error('Error saving blog:', error);
