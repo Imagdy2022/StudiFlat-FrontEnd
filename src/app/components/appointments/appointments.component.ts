@@ -52,7 +52,7 @@ export class AppointmentsComponent {
       label: 'View Details',
       icon: 'pi pi-eye',
       command: () =>  {
-
+           this.checkRole()
           this.getDetails('details');
 
       }
@@ -61,7 +61,7 @@ export class AppointmentsComponent {
       label: 'Update',
       icon: 'pi pi-pencil',
       command: () =>  {
-
+        this.checkRoleUpdate()
         this.getDetails('update');
 
     }
@@ -70,16 +70,120 @@ export class AppointmentsComponent {
       label: 'Delete',
       icon: 'pi pi-trash',
       command: () =>  {
+        this.checkRoleDelete()
          this.sureDeleteDialog()
     }
 
     },
 
   ];
+  this.checkRole();
 
   this. loadAppointments(1,20000,null);
   this.loadApartAppointments(1,20000,null);
  }
+
+
+ //////////////////permesions////////////////////////
+ appointmentRole:any
+ is_Super:any
+ checkRole(){
+   const data = localStorage.getItem("user");
+   console.log(data)
+    if (data !== null) {
+
+     let parsedData = JSON.parse(data);
+      this.is_Super=parsedData.is_Super
+     if(parsedData.is_Super==false) {
+ for(let i=0; i<parsedData.permissions.length;i++){
+   if(parsedData.permissions[i].page_Name=="Appointment"){
+     this.appointmentRole=parsedData.permissions[i];
+   }
+ }
+ if(this.appointmentRole.p_View==false &&this.is_Super==false) {
+   this.gotopage( )
+ }
+ }
+
+
+   }
+ }
+
+
+ checkRoleAdd(){
+  const data = localStorage.getItem("user");
+  console.log(data)
+   if (data !== null) {
+
+    let parsedData = JSON.parse(data);
+     this.is_Super=parsedData.is_Super
+    if(parsedData.is_Super==false) {
+for(let i=0; i<parsedData.permissions.length;i++){
+  if(parsedData.permissions[i].page_Name=="Appointment"){
+    this.appointmentRole=parsedData.permissions[i];
+  }
+}
+if(this.appointmentRole.p_Add==false &&this.is_Super==false) {
+  this.gotopage( )
+}
+}
+
+
+  }
+}
+
+
+checkRoleUpdate(){
+  const data = localStorage.getItem("user");
+  console.log(data)
+   if (data !== null) {
+
+    let parsedData = JSON.parse(data);
+     this.is_Super=parsedData.is_Super
+    if(parsedData.is_Super==false) {
+for(let i=0; i<parsedData.permissions.length;i++){
+  if(parsedData.permissions[i].page_Name=="Appointment"){
+    this.appointmentRole=parsedData.permissions[i];
+  }
+}
+if(this.appointmentRole.p_Update==false &&this.is_Super==false) {
+  this.gotopage( )
+}
+}
+
+
+  }
+}
+
+checkRoleDelete(){
+  const data = localStorage.getItem("user");
+  console.log(data)
+   if (data !== null) {
+
+    let parsedData = JSON.parse(data);
+     this.is_Super=parsedData.is_Super
+    if(parsedData.is_Super==false) {
+for(let i=0; i<parsedData.permissions.length;i++){
+  if(parsedData.permissions[i].page_Name=="Appointment"){
+    this.appointmentRole=parsedData.permissions[i];
+  }
+}
+if(this.appointmentRole.p_Delete==false &&this.is_Super==false) {
+  this.gotopage( )
+}
+}
+
+
+  }
+}
+
+
+
+ gotopage( ){
+   let url: string = "unlegal";
+     this.router.navigateByUrl(url);
+ }
+ ////////////////////////////////////////////////////
 
  formatTime(dateString: string): string {
   const date = new Date(dateString);
@@ -138,6 +242,7 @@ loadApartAppointments(pageNo: number, pageSize: number, search: any): void {
 visible:boolean=false;
 notDisable:boolean=true;
 showDialog(){
+  this.checkRoleAdd()
   this.appointmentData = {
     apartment_ID: '',
     appo_Title: '',
@@ -192,6 +297,7 @@ appo_To:any;
 
 showSuccess:boolean=false;
 createAppointment() {
+  this.checkRoleAdd();
   console.log('Selected Apartment:', this.selectedApartment);
   const aprtID=localStorage.getItem('aprtID') ||''
   this.appointmentData = {
@@ -255,7 +361,7 @@ onDateSelect(event: Date): void {
   this.appo_Date = formattedDate!; // Non-null assertion
 }
 updateAppointment() {
-
+this.checkRoleUpdate()
   this.appointmentDataUpdate = {
     appo_ID: this.appoID,
     appo_Title: this.appo_Title,
@@ -396,6 +502,7 @@ selectApartment(workerId:any) {
   console.log(this.selectedAprtId)
 }
 deleteAppointment(){
+  this.checkRoleDelete();
   this.appointmentsService.deleteAppointment(this.appoID).subscribe(
     (response) => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Appointment deleted successfully' });

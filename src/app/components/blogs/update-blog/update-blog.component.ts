@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
 import { BlogService } from '../blog.service';
+import { Router } from '@angular/router';
+
 
 declare var Quill: any;
 
@@ -21,7 +23,7 @@ export class UpdateBlogComponent {
   quill: any;
   description: string = '';
 
-  constructor(private blogService: BlogService) {}
+  constructor(public router: Router,private blogService: BlogService) {}
 
   // ngAfterViewInit() {
   //   this.quill = new Quill(this.editorContainer.nativeElement, {
@@ -45,6 +47,33 @@ export class UpdateBlogComponent {
 
   //   });
   // }
+
+  blogsRole:any
+  is_Super:any
+  checkRole(){
+   const data = localStorage.getItem("user");
+    if (data !== null) {
+
+     let parsedData = JSON.parse(data);
+      this.is_Super=parsedData.is_Super
+     if(parsedData.is_Super==false) {
+  for(let i=0; i<parsedData.permissions.length;i++){
+   if(parsedData.permissions[i].page_Name=="Blog"){
+     this.blogsRole=parsedData.permissions[i];
+   }
+  }
+  if(this.blogsRole.p_Add==false &&this.is_Super==false) {
+   this.gotopage( )
+  }
+  }
+
+
+   }
+  }
+  gotopage( ){
+   let url: string = "unlegal";
+     this.router.navigateByUrl(url);
+  }
 
   ngAfterViewInit() {
     // const Quill =(window as any)['Quill'];

@@ -185,6 +185,34 @@ export class AddBlogComponent implements AfterViewInit {
     ]
 
  }
+
+
+ blogsRole:any
+is_Super:any
+checkRole(){
+ const data = localStorage.getItem("user");
+  if (data !== null) {
+
+   let parsedData = JSON.parse(data);
+    this.is_Super=parsedData.is_Super
+   if(parsedData.is_Super==false) {
+for(let i=0; i<parsedData.permissions.length;i++){
+ if(parsedData.permissions[i].page_Name=="Blog"){
+   this.blogsRole=parsedData.permissions[i];
+ }
+}
+if(this.blogsRole.p_Add==false &&this.is_Super==false) {
+ this.gotopage( )
+}
+}
+
+
+ }
+}
+gotopage( ){
+ let url: string = "unlegal";
+   this.router.navigateByUrl(url);
+}
    /**
   * addItem
   * @param value string
@@ -369,6 +397,7 @@ viewEditor(){
 
 
 saveBlog() {
+  this.checkRole();
   this.getEditorContent();
 
   const blogData = {

@@ -31,12 +31,13 @@ export class BlogsListComponent {
  }
 items:any;
  ngOnInit() {
+  this.checkRole();
   this.fetchBlogs();
   this.items = [
     { label: 'manage blogs', routerLink: '/blogs' },
     ]
    this.getAllpartners(  )
-   this.checkRole();
+
  }
 
   /**
@@ -147,7 +148,7 @@ deletepartner() {
 }))
 
 }
-partnersRole:any
+blogsRole:any
 is_Super:any
 checkRole(){
  const data = localStorage.getItem("user");
@@ -157,21 +158,65 @@ checkRole(){
     this.is_Super=parsedData.is_Super
    if(parsedData.is_Super==false) {
 for(let i=0; i<parsedData.permissions.length;i++){
- if(parsedData.permissions[i].page_Name=="partners"){
-   this.partnersRole=parsedData.permissions[i];
+ if(parsedData.permissions[i].page_Name=="Blog"){
+   this.blogsRole=parsedData.permissions[i];
  }
 }
-if(this.partnersRole.p_View==false &&this.is_Super==false) {
+if(this.blogsRole.p_View==false &&this.is_Super==false) {
  this.gotopage( )
+
 }
 }
 
 
  }
 }
+checkRoleDelete(){
+  const data = localStorage.getItem("user");
+   if (data !== null) {
+
+    let parsedData = JSON.parse(data);
+     this.is_Super=parsedData.is_Super
+    if(parsedData.is_Super==false) {
+ for(let i=0; i<parsedData.permissions.length;i++){
+  if(parsedData.permissions[i].page_Name=="Blog"){
+    this.blogsRole=parsedData.permissions[i];
+  }
+ }
+ if(this.blogsRole.p_Delete==false &&this.is_Super==false) {
+  this.gotopage( )
+ }
+ }
+
+
+  }
+ }
+ checkRoleUpdate(){
+  const data = localStorage.getItem("user");
+   if (data !== null) {
+
+    let parsedData = JSON.parse(data);
+     this.is_Super=parsedData.is_Super
+    if(parsedData.is_Super==false) {
+ for(let i=0; i<parsedData.permissions.length;i++){
+  if(parsedData.permissions[i].page_Name=="Blog"){
+    this.blogsRole=parsedData.permissions[i];
+  }
+ }
+ if(this.blogsRole.p_Update==false &&this.is_Super==false) {
+  this.gotopage( )
+ }
+ }
+
+
+  }
+ }
+ unlegal:boolean=false;
 gotopage( ){
  let url: string = "unlegal";
+ this.unlegal=true;
    this.router.navigateByUrl(url);
+
 }
 searchText:any=""
 
@@ -260,8 +305,15 @@ blogs: any[] = [];
   }
 
   editBlog(blog: any): void {
-    this.blogService.setBlogId(blog.blog_ID);
-    this.router.navigate(['blogs/update', blog.blog_Slug]);
+    this.checkRoleUpdate()
+    if(this.unlegal===true){
+      return;
+    }
+    setTimeout(() => {
+      this.blogService.setBlogId(blog.blog_ID);
+      this.router.navigate(['blogs/update', blog.blog_Slug]);
+    },  500);
+
   }
 
   onPageChange(event: any): void {
@@ -271,10 +323,15 @@ blogs: any[] = [];
   }
 
   viewBlogDetails(blog: any): void {
+    this.checkRole()
     this.blogService.setBlogId(blog.blog_ID);
     this.router.navigate(['blogs/details',blog.blog_Slug]);
   }
   deleteBlogId(blog:any){
+    this.checkRoleDelete()
+    if(this.unlegal===true){
+      return;
+    }
     console.log(blog.blog_ID)
 
     this.blogService.deleteBlog(blog.blog_ID).subscribe(

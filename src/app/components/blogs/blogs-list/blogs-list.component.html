@@ -35,7 +35,7 @@
               <!-- start addUserButton  -->
               <!-- <app-add-new-button class="ms-3 mt-2" [id]="'app-user-details'"></app-add-new-button> -->
               <!-- end addUserButton  -->
-              <a *ngIf="partnersRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/blogs/add-blog" style="background-color:#1F4068; cursor: pointer;">
+              <a *ngIf="blogsRole?.p_Add==true || is_Super==true" class="px-3 py-2 rounded border text-white text-decoration-none" routerLink="/blogs/add-blog" style="background-color:#1F4068; cursor: pointer;">
                   <img src="assets/images/plus.svg" class="me-2 ">Add New
               </a>
           </div>
