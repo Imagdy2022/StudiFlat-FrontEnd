@@ -76,4 +76,13 @@ export class BlogService {
 
     return this.http.delete<string>(url, { params,headers });
   }
+  updateBlogPublish(blogId: string): Observable<any> {
+    const url = `${environment.apiUrl}/Basics/Update_Blog_Publish`;
+    const params = new HttpParams().set('Blog_ID', blogId);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('tokenKey')}` // If authentication is required
+    });
+
+    return this.http.post(url, null, { params,headers });
+  }
 }

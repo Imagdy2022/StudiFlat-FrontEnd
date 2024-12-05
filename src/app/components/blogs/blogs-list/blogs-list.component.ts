@@ -14,6 +14,7 @@ import { BlogService } from '../blog.service';
 })
 export class BlogsListComponent {
   @ViewChild('closebutton') closebutton: any;
+  publishBlog:string='';
   showEdit: Array<boolean> = [];
  showSide: string = '';
  products!: Array<object>;
@@ -293,6 +294,7 @@ blogs: any[] = [];
     const pageNo = this.first / this.rows + 1;
     this.blogService.getAllBlogs(pageNo, this.rows).subscribe(
       (response) => {
+        console.log(response)
         this.blogs = response.data; // Adjust this based on your API response structure.
         this.totalRecords = response.total_Records || 120; // Update this if the API returns total records.
         console.log(this.blogs)
@@ -303,6 +305,20 @@ blogs: any[] = [];
       }
     );
   }
+
+  updatePublishBlog(blog:any) {
+    // const blogId = '123e4567-e89b-12d3-a456-426614174000';  
+    this.blogService.updateBlogPublish(blog.blog_ID).subscribe({
+      next: (response) => {
+        console.log('Blog updated successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error updating blog:', error)
+
+     }
+       });
+     }
+   
 
   editBlog(blog: any): void {
     this.checkRoleUpdate()

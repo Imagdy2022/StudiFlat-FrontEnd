@@ -51,12 +51,26 @@
 
 <div class="containerr">
   <div class="box"  *ngFor="let blog of blogs; let i = index" style="max-width: 360px;">
+    <div 
+    class="status" 
+    [ngStyle]="{
+      'color': blog.is_Published === undefined 
+        ? '#605D62' 
+        : (blog.is_Published ? '#12B76A' : '#605D62')
+    }"
+  >
+    <span>
+      {{ blog.is_Published === undefined ? 'Status Unknown' : (blog.is_Published ? 'Published' : 'Unpublished') }}
+    </span>
+  </div>
+  
     <div style="cursor: pointer;" class="img" (click)="openMenu(i)">
       <img src="../../../../assets/images/blogs/threeDot.svg"/>
     </div>
     <div class="menu"  [ngStyle]="{ 'display': openMenuIndex === i ? 'block' : 'none' }">
       <div>
         <ul style="list-style: none; padding:0;">
+          <li class="mb-3" style="cursor: pointer;"  (click)=" updatePublishBlog(blog)"> {{ blog.is_Published !== undefined ? (blog.is_Published ? 'Unpublish' : 'Publish') : 'Publish' }}</li>
           <li class="mb-3" style="cursor: pointer;"  (click)="viewBlogDetails(blog)">View Blog Details</li>
           <li  class="mb-3" style="cursor: pointer;" (click)="editBlog(blog)">Update Blog</li>
           <li style="cursor: pointer;" (click)="deleteBlogId(blog)">Delete Blog</li>

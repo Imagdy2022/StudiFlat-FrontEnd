@@ -148,6 +148,21 @@ line-height: 24px !important; /* 150% */
   top: 5px;
   right: 5px;
 }
+.box .status{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: inline-flex;
+height: 24px;
+padding: 0px 16px;
+justify-content: flex-end;
+align-items: flex-end;
+gap: 10px;
+flex-shrink: 0;
+
+border-radius: 20px;
+background: var(--White-100, #FFF);
+}
 .box h2{
 
   font-weight: 800;
